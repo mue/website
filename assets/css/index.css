@@ -1,0 +1,12 @@
+i {
+    margin-right: 5px;
+}
+
+a i {
+    margin-left: 10px;
+}
+
+iframe {
+    height: 300px;
+    width: 100%;
+}
