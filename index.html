@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Mue - Browser Extension</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+  <link rel='stylesheet' href='https://unpkg.com/bulma@0.7.5/css/bulma.min.css' />
+  <script src='assets/js/index.js'></script>
+  <script src='https://kit.fontawesome.com/4d9912ac41.js'></script>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css'>
+  <style>
+    i {
+      margin-right: 5px;
+    }
+
+    a i {
+      margin-left: 10px;
+    }
+    iframe {
+      height: 300px;
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <section class='hero is-fullheight is-default is-bold'>
+    <div class='hero-head'>
+      <nav class='navbar' role='navigation' aria-label='main navigation'>
+        <div class='navbar-brand'>
+          <a class='navbar-item' href='https://bulma.io'>
+            <img src='./assets/imgs/mue-just-logo.png' width='112' height='28'>
+          </a>
+
+          <a role='button' class='navbar-burger burger' aria-label='menu' aria-expanded='false'
+            data-target='navbarBasicExample'>
+            <span aria-hidden='true'></span>
+            <span aria-hidden='true'></span>
+            <span aria-hidden='true'></span>
+          </a>
+        </div>
+
+        <div id='navbarBasicExample' class='navbar-menu'>
+          <div class='navbar-start'>
+            <a class='navbar-item'>
+              <i class='fab fa-github'></i> Github
+            </a>
+            <div class='navbar-item has-dropdown is-hoverable'>
+              <a class='navbar-link'>
+                More
+              </a>
+              <div class='navbar-dropdown'>
+                <a class='navbar-item'>
+                  <i class='fab fa-discord'></i> Discord
+                </a>
+                <a class='navbar-item'>
+                  <i class='fab fa-chrome'></i> Chrome
+                </a>
+                <a class='navbar-item'>
+                  <i class='fab fa-firefox'></i> Firefox
+                </a>
+                <hr class='navbar-divider'>
+                <a class='navbar-item'>
+                  Report an issue
+                </a>
+                <a class='navbar-item'>
+                  Privacy
+                </a>
+              </div>
+
+            </div>
+          </div>
+          <div class='navbar-end'>
+              <div class='navbar-item has-dropdown is-hoverable '>
+                <a class='navbar-link'>
+                    <i class='fas fa-globe-americas'></i>
+                </a>
+        
+                <div class='navbar-dropdown is-right'>
+                  <a class='navbar-item'>
+                    English
+                  </a>
+                  <a class='navbar-item'>
+                    Italian
+                  </a>
+                  <a class='navbar-item'>
+                    French
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+    </nav>
+    </nav>
+    </div>
+    <div class='hero-body'>
+      <div class='container'>
+        <div class='columns is-v-centered'>
+          <div class='column'>
+             <!-- <youtube :video-id="video1"></youtube> -->
+             <iframe src="https://www.youtube.com/embed/j0ratk7eZTI?controls=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class='column is-6 is-offset-1'>
+            <h1 class='title is-2'>
+              Mue
+            </h1>
+            <h2 class='subtitle is-4'>
+              A modern open-source, customisable new tab for modern browsers.
+            </h2>
+            <br>
+            <p class='has-text-centered'>
+              <a id='cheese' class='button is-medium is-info is-outlined'>
+                Add To <i class='fab fa-chrome'></i>
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section class='hero is-primary is-fullheight'>
+      <div class='hero-body'>
+        <div class='container'>
+            <h1 class='title'>
+                <h1 class='title is-1'>Example of tab</h1>
+              </h1>
+          <img src='assets/imgs/unknown.png' />
+        </div>
+      </div>
+    </section>
+  <section class='section'>
+    <div class='tile is-ancestor'>
+      <div class='tile is-parent'>
+        <article class='tile is-child box'>
+          <p class='title'>Performance</p>
+          <p>Mue provides an amazing customisable user experience, while using the least amount of CPU
+            usage as possible! In all tests conducted Mue used less than 2% of the CPU.</p>
+        </article>
+      </div>
+      <div class='tile is-parent'>
+        <article class='tile is-child box'>
+          <p class='title'>Features</p>
+          <p>Mue gives you a random quote and background image. It also allows you to customise which
+            of these you wish to see, for example if you did not want the greeting you can easily hide it. </p>
+        </article>
+      </div>
+      <div class='tile is-parent'>
+        <article class='tile is-child box'>
+          <p class='title'>About devs</p>
+          <div class='content'>
+            <p>Mue is a project on Github started all the way back in 2017, it was originally created by David R. But since then, many people have joined forces to create Mue as it is today.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  
+  <footer class='footer'>
+    <div class='content has-text-centered'>
+      <p>
+        <strong>Mue</strong> &copy; <a href='https://derpyenterprises.org'>Derpy Enterprises</a>.
+        <a><i class='fab fa-twitter'></i></a>
+        <a><i class='fab fa-discord'></i></a>
+      </p>
+    </div>
+  </footer>
+</body>
+
+</html>
