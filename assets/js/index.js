@@ -25,11 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 if (window.chrome) {
-  const a = document.getElementById("cheese");
+  const a = document.getElementById("mafiaworks");
   a.setAttribute("href", "https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid/related");
   //document.getElementById('browser').classList.add('fab fa-chrome');
 }
 
 if (typeof InstallTrigger !== 'undefined') {
-  //document.getElementById('browser').classList.add('fab fa-firefox');
+  document.getElementById('browser').classList.add('fab fa-firefox');
 }
