@@ -1,87 +1,102 @@
 <!DOCTYPE html>
+<!-- Marshmello, ur code real spaghet :? -->
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
-    <title>Mue - Browser Extension
-    </title>
-    <meta name='title' content='Mue - New Tab'>
-    <meta name='description' content='Mue is a fast, open source and free-to-use new tab page for most modern browsers.'>
-    <meta name="image" src='./assets/img/mue-just-logo.png' />
-    <meta name='keywords' content='mue, new tab, ohlookitsderpy, mello'>
-    <meta name='robots' content='index, follow'>
-    <meta name="author" content="Derpy Enterprises">
-    <meta name="og:title" content="Mue - New Tab" />
-    <meta name="og:image" src='./assets/img/largetile.png' />
-    <meta name="og:site_name" content="Mue" />
-    <meta name="og:description" content="Mue is a fast, open source and free-to-use new tab page for most modern browsers." />
-    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
-    <meta name='language' content='English'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css'>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css'>
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css'>
-    <link rel='stylesheet' href='assets/css/index.css'>
-  </head>
-  <body>
-    <section class='hero is-fullheight is-default is-bold'>
-      <div class='hero-head'>
-        <nav class='navbar' role='navigation' aria-label='main navigation'>
-          <div class='navbar-brand'>
-            <a class='navbar-item' href='https://bulma.io'>
-              <img src='./assets/img/mue-just-logo.png' width='112' height='28'>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <title>Mue - Browser Extension</title>
+  <meta name='title' content='Mue - New Tab'>
+  <meta name='description' content='Mue is a fast, open source and free-to-use new tab page for most modern browsers.'>
+  <meta name='image' src='./assets/img/mue-just-logo.png' />
+  <meta name='keywords' content='mue, new tab, ohlookitsderpy, mello'>
+  <meta name='robots' content='index, follow'>
+  <meta name='author' content='Derpy Enterprises'>
+  <meta name='og:title' content='Mue - New Tab' />
+  <meta name='og:image' src='./assets/img/largetile.png' />
+  <meta name='og:site_name' content='Mue' />
+  <meta name='og:description'
+    content='Mue is a fast, open source and free-to-use new tab page for most modern browsers.' />
+  <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
+  <meta name='language' content='English'>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.min.css'>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css'>
+  <link rel='stylesheet' href='assets/css/index.css'>
+</head>
+
+<body>
+  <section class='hero is-fullheight is-default is-bold'>
+    <div class='hero-head'>
+      <nav class='navbar' role='navigation' aria-label='main navigation'>
+        <div class='navbar-brand'>
+          <a class='navbar-item' href='https://bulma.io'>
+            <img src='./assets/img/mue-just-logo.png' width='112' height='28'>
+          </a>
+          <a role='button' class='navbar-burger burger' aria-label='menu' aria-expanded='false'
+            data-target='navbarBasicExample'>
+            <span aria-hidden='true'>
+            </span>
+            <span aria-hidden='true'>
+            </span>
+            <span aria-hidden='true'>
+            </span>
+          </a>
+        </div>
+        <div id='navbarBasicExample' class='navbar-menu'>
+          <div class='navbar-start'>
+            <a href='https://github.com/ohlookitsderpy/Mue' class='navbar-item'>
+              <i class='fab fa-github'>
+              </i> GitHub
             </a>
-            <a role='button' class='navbar-burger burger' aria-label='menu' aria-expanded='false'
-               data-target='navbarBasicExample'>
-              <span aria-hidden='true'>
-              </span>
-              <span aria-hidden='true'>
-              </span>
-              <span aria-hidden='true'>
-              </span>
-            </a>
-          </div>
-          <div id='navbarBasicExample' class='navbar-menu'>
-            <div class='navbar-start'>
-              <a href='https://github.com/ohlookitsderpy/Mue' class='navbar-item'>
-                <i class='fab fa-github'>
-                </i> GitHub
+            <div class='navbar-item has-dropdown is-hoverable'>
+              <a id='extra-dropdown' class='navbar-link'>
+                More
               </a>
-              <div class='navbar-item has-dropdown is-hoverable'>
-                <a id='extra-dropdown' class='navbar-link'>
-                  More
+              <div class='navbar-dropdown'>
+                <a href='https://discord.gg/ZSAzxtg' class='navbar-item'>
+                  <i class='fab fa-discord'>
+                  </i> Discord
                 </a>
-                <div class='navbar-dropdown'>
-                  <a href='https://discord.gg/ZSAzxtg' class='navbar-item'>
-                    <i class='fab fa-discord'>
-                    </i> Discord
-                  </a>
-                  <a href='https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid'
-                     class='navbar-item'>
-                    <i class='fab fa-chrome'>
-                    </i> Chrome
-                  </a>
-                  <a href='https://addons.mozilla.org/firefox/addon/mue' class='navbar-item'>
-                    <i class='fab fa-firefox'>
-                    </i> Firefox
-                  </a>
-                  <hr class='navbar-divider'>
-                  <a id="report-issue" href='https://github.com/ohlookitsderpy/Mue/issues/new?assignees=&labels=bug&template=bug-report.md&title=%5BBUG%5D'
-                     class='navbar-item'>
-                    Report an issue
-                  </a>
-                  <a id="suggest-feature" href='https://github.com/ohlookitsderpy/Mue/issues/new?assignees=&labels=enhancement&template=feature-request.md&title=%5BFeature+Request%5DD'
-                     class='navbar-item'>
-                    Suggest a feature
-                  </a>
-                  <a id="privacy" class='navbar-item'>
-                    Privacy
-                  </a>
-                </div>
+                <a href='https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid'
+                  class='navbar-item'>
+                  <i class='fab fa-chrome'>
+                  </i> Chrome
+                </a>
+                <a href='https://addons.mozilla.org/firefox/addon/mue' class='navbar-item'>
+                  <i class='fab fa-firefox'>
+                  </i> Firefox
+                </a>
+                <a href='https://github.com/ohlookitsderpy/Mue/releases' class='navbar-item'>
+                  <i class='far fa-question-circle'>
+                  </i> Other
+                </a>
+                <hr class='navbar-divider'>
+                <a id='report-issue'
+                  href='https://github.com/ohlookitsderpy/Mue/issues/new?assignees=&labels=bug&template=bug-report.md&title=%5BBUG%5D'
+                  class='navbar-item'>
+                  <i class='fas fa-bug'>
+                  </i>
+                  Report an issue
+                </a>
+                <a id='suggest-feature'
+                  href='https://github.com/ohlookitsderpy/Mue/issues/new?assignees=&labels=enhancement&template=feature-request.md&title=%5BFeature+Request%5DD'
+                  class='navbar-item'>
+                  <i class='fas fa-copy'>
+                  </i>
+                  Suggest a feature
+                </a>
+                <a id='privacy' class='navbar-item'>
+                  <i class='fas fa-user-secret'>
+                  </i>
+                  Privacy
+                </a>
               </div>
             </div>
-            <!--
+          </div>
+          <!--
             <div class='navbar-end'>
               <div class='navbar-item has-dropdown is-hoverable '>
                 <a class='navbar-link'>
@@ -101,117 +116,123 @@
                 </div>
               </div>
 -->
-            </div>
-          </div>
-          </div>
-      </div>
-      </nav>
-    </nav>
-  </div>
-<div class='hero-body'>
-  <div class='container'>
-    <div class='columns is-v-centered'>
-      <div class='column'>
-        <iframe src='https://www.youtube.com/embed/j0ratk7eZTI?controls=0' frameborder='0'
-                allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen>
-        </iframe>
-      </div>
-      <div class='column is-6 is-offset-1'>
-        <h1 id='mue-title' class='title is-2'>
-          Mue
-        </h1>
-        <h2 id='description' class='subtitle is-4'>
-          Fast, open and free-to-use new tab page for most modern browsers.
-        </h2>
-        <br>
-        <p class='has-text-centered'>
-          <a id='add-to-chrome' class='button is-medium is-info is-outlined' href='ttps://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid'>
-            Add To 
-            <i class='fab fa-chrome'>
-            </i>
-          </a>
-          <a id='add-to-firefox' class='button is-medium is-info is-outlined' href='https://addons.mozilla.org/firefox/addon/mue'>
-            Add To 
-            <i class='fab fa-firefox'>
-            </i>
-          </a>
-          <a id='add-to-else' class='button is-medium is-info is-outlined' href='https://github.com/ohlookitsderpy/mue/releases'>
-            Add To 
-            <i class='far fa-question-circle'>
-            </i>
-          </a>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-<section class='hero is-primary is-fullheight'>
-  <div class='hero-body'>
-    <div class='container'>
-      <h1 class='title'>
-        <h1 id="example-tab" class='title is-1'>Example of tab
-        </h1>
-      </h1>
-      <img src='assets/img/unknown.png' />
-    </div>
-  </div>
-</section>
-<section class='section'>
-  <div class='tile is-ancestor'>
-    <div class='tile is-parent'>
-      <article class='tile is-child box'>
-        <p class='title'>Performance
-        </p>
-        <p>Mue provides an amazing customisable user experience, while using the least amount of CPU
-          usage as possible! In all tests conducted Mue used less than 2% of the CPU.
-        </p>
-      </article>
-    </div>
-    <div class='tile is-parent'>
-      <article class='tile is-child box'>
-        <p class='title'>Features
-        </p>
-        <p>Mue gives you a random quote and background image. It also allows you to customise which
-          of these you wish to see, for example if you did not want the greeting you can easily hide it. 
-        </p>
-      </article>
-    </div>
-    <div class='tile is-parent'>
-      <article class='tile is-child box'>
-        <p class='title'>About devs
-        </p>
-        <div class='content'>
-          <p>Mue is a project on GitHub started all the way back in 2018; it was originally created by David Ralph as
-            a continuation of another project (Blobbit by TurboMarshmello) but
-            since then many people have joined forces to create Mue as it is today.
-          </p>
         </div>
-      </article>
     </div>
-  </div>
-</section>
-<footer class='footer'>
-  <div class='content has-text-centered'>
-    <p>
-      <strong>Mue
-      </strong> &copy; 2019
-      <a href='https://derpyenterprises.org'>Derpy Enterprises
-      </a><br>
-      <a href='https://twitter.com/getmue'>
-        <i class='fab fa-twitter'>
-        </i>
-      </a>
-      <a>
-        <i class='fab fa-discord'>
-        </i>
-      </a>
-    </p>
-  </div>
-</footer>
-<script src='assets/js/index.js'>
-</script>
-<script>
-</script>
+    </div>
+    </div>
+    </nav>
+    </nav>
+    </div>
+    <div class='hero-body'>
+      <div class='container'>
+        <div class='columns is-v-centered'>
+          <div class='column'>
+            <iframe src='https://www.youtube.com/embed/j0ratk7eZTI?controls=0' frameborder='0'
+              allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture' allowfullscreen>
+            </iframe>
+          </div>
+          <div class='column is-6 is-offset-1'>
+            <h1 id='mue-title' class='title is-2'>
+              Mue
+            </h1>
+            <h2 id='description' class='subtitle is-4'>
+              Fast, open and free-to-use new tab page for most modern browsers.
+            </h2>
+            <br>
+            <p class='has-text-centered'>
+              <a id='add-to-chrome' class='button is-medium is-info is-outlined'
+                href='ttps://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid'>
+                Add To
+                <i class='fab fa-chrome'>
+                </i>
+              </a>
+              <a id='add-to-firefox' class='button is-medium is-info is-outlined'
+                href='https://addons.mozilla.org/firefox/addon/mue'>
+                Add To
+                <i class='fab fa-firefox'>
+                </i>
+              </a>
+              <a id='add-to-else' class='button is-medium is-info is-outlined'
+                href='https://github.com/ohlookitsderpy/Mue/releases'>
+                Add To
+                <i class='far fa-question-circle'>
+                </i>
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class='hero is-primary is-fullheight'>
+    <div class='hero-body'>
+      <div class='container'>
+        <h1 class='title'>
+          <h1 id='example-tab' class='title is-1'>Example of tab
+          </h1>
+        </h1>
+        <img src='assets/img/unknown.png' />
+      </div>
+    </div>
+  </section>
+  <section class='section'>
+    <div class='tile is-ancestor'>
+      <div class='tile is-parent'>
+        <article class='tile is-child box'>
+          <p class='title'>Performance
+          </p>
+          <p>Mue provides an amazing customisable user experience, while only using a very small amount of your system's
+            resources when open! In most tests conducted Mue used less than 2% of the CPU.
+          </p>
+        </article>
+      </div>
+      <div class='tile is-parent'>
+        <article class='tile is-child box'>
+          <p class='title'>Features
+          </p>
+          <p>Mue gives you a random quote and background image. It also allows you to customise which
+            of these you wish to see, for example if you did not want the greeting you can easily hide it.
+          </p>
+        </article>
+      </div>
+      <div class='tile is-parent'>
+        <article class='tile is-child box'>
+          <p class='title'>About
+          </p>
+          <div class='content'>
+            <p>Mue is a project on GitHub started all the way back in 2018; it was originally created by David Ralph as
+              a continuation of another project (Blobbit by TurboMarshmello) but
+              since then many people have joined forces to create Mue as it is today.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <footer class='footer'>
+    <div class='content has-text-centered'>
+      <p>
+        <strong>Mue
+        </strong> &copy; 2019
+        <a href='https://derpyenterprises.org'>Derpy Enterprises
+        </a><br>
+        <a href='https://twitter.com/getmue'>
+          <i class='fab fa-twitter'>
+          </i>
+        </a>
+        <a>
+          <i class='fab fa-discord'>
+          </i>
+        </a>
+        <a href='https://github.com/TurboMarshmello/muetab.xyz'>
+          <i class='fab fa-github'>
+          </i>
+        </a>
+      </p>
+    </div>
+  </footer>
+  <script src='assets/js/index.js'>
+  </script>
 </body>
+
 </html>
