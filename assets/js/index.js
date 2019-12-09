@@ -1,12 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
-      $navbarBurgers.forEach(el => {
-        el.addEventListener('click', () => {
-          const $target = document.getElementById(el.dataset.target);
-          el.classList.toggle('is-active');
-          $target.classList.toggle('is-active');
-        });
+  Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0).forEach(el => {
+      el.addEventListener('click', () => {
+        el.classList.toggle('is-active');
+        document.getElementById(el.dataset.target).classList.toggle('is-active');
       });
+    });
 });
 
 function insertText() {
@@ -14,6 +12,7 @@ function insertText() {
   document.getElementById('description').innerHTML = 'A modern open-source, customiable new tab for modern browsers.';
   document.getElementById('extra-dropdown').innerHTML = 'More';
 }
+
 function french() {
   document.getElementById('mue-title').innerHTML = 'Mue';
   document.getElementById('description').innerHTML = 'Un nouvel onglet moderne open-source et personnalisable pour les navigateurs modernes.';
@@ -32,14 +31,32 @@ function french() {
   console.log(cookie);
   console.log('New cookie with key: ');
 }
+
+let data; 
+const getImg = async () => {
+  try {
+    data = await fetch('https://api.muetab.xyz/getImage?category=Outdoors');
+    data = await data.json();
+
+
+  } catch (e) {
+    data = null;
+  }
+  if (data) {
+  document.getElementById('main').style.backgroundImage = `url(${data.file})`; // Set the background
+  document.head.insertAdjacentHTML('beforeend', '<link rel="stylesheet" href="assets/css/text.css " id="theme">');
+  }
+}
+
+getImg();
 //function readCookie(name) {
- // var key = name + '=';
- // var cookies = document.cookie.split(';');
- // for (var i = 0; i < cookies.length; i++) {
- //   var cookie = cookies[i];
- //   while (cookie.charAt(0) === ' ') cookie = cookie.substring(1, cookie.length);
- //   if (cookie.indexOf(key) === 0) return cookie.substring(key.length, cookie.length);
- // }
+// var key = name + '=';
+// var cookies = document.cookie.split(';');
+// for (var i = 0; i < cookies.length; i++) {
+//   var cookie = cookies[i];
+//   while (cookie.charAt(0) === ' ') cookie = cookie.substring(1, cookie.length);
+//   if (cookie.indexOf(key) === 0) return cookie.substring(key.length, cookie.length);
+// }
 //  return null;
 // }
 //createCookie('sport', 'basketball', Date.UTC(2017, 8, 1));
