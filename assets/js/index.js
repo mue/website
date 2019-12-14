@@ -48,7 +48,7 @@ const getImg = async () => {
   }
 }
 
-getImg();
+//getImg();
 //function readCookie(name) {
 // var key = name + '=';
 // var cookies = document.cookie.split(';');
