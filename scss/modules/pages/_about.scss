@@ -1,0 +1,35 @@
+.card {
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 250px;
+    margin: auto;
+    text-align: center;
+    background-color: white;
+}
+
+.title {
+    color: grey;
+    font-size: 18px;
+}
+
+.cardlink {
+    text-decoration: none;
+    font-size: 22px;
+    color: black;
+}
+
+.cardlink:hover {
+    opacity: 0.7;
+}
+
+.cardavatar {
+    width: 128px;
+    height: auto;
+    border-radius: 50%;
+}
+
+.padding {
+    display: inline-block;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
