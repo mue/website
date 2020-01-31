@@ -1,0 +1,21 @@
+footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    text-align: center;
+    box-shadow: 0 25px 0 rgba(0, 0, 0, .3);
+}
+
+a.footer {
+    background: -webkit-linear-gradient(#FF4278, #FF620F);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+a.footer:hover,
+a.footer:active {
+    color: #000000;
+}

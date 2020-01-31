@@ -1,0 +1,65 @@
+.navbar {
+    overflow: hidden;
+    background-color: #fff;
+    font-size: 32px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, .3);
+
+
+    a {
+        float: left;
+        display: block;
+        color: #576574;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+    }
+
+    a:hover {
+        background: -webkit-linear-gradient(#FF4278, #FF620F);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .icon {
+        display: none;
+        cursor: pointer;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .navbar {
+        a:not(:first-child) {
+            display: none;
+        }
+
+        a.icon {
+            float: right;
+            display: block;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .navbar.responsive {
+        position: relative;
+
+        .icon {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        a {
+            float: none;
+            display: block;
+            text-align: left;
+        }
+    }
+}
+
+.mue-logo {
+    height: 24px;
+    width: auto;
+}

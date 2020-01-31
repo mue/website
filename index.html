@@ -4,233 +4,51 @@
 <head>
   <meta charset='utf-8'>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <title>Mue - New Tab Browser Extension</title>
+  <title>Mue</title>
   <meta name='title' content='Mue - New Tab'>
   <meta name='description' content='Mue is a fast, open source and free-to-use new tab page for most modern browsers.'>
   <meta name='image' src='./assets/img/mue-just-logo.png' />
   <meta name='keywords' content='mue, new tab, ohlookitsderpy, mello'>
-  <meta name='robots' content='index, follow'>
   <meta name='author' content='Mue Tab'>
+  <meta name='language' content='English'>
   <meta name='og:title' content='Mue - New Tab' />
   <meta name='og:image' src='./assets/img/largetile.png' />
   <meta name='og:site_name' content='Mue' />
   <meta name='og:description'
     content='Mue is a fast, open source and free-to-use new tab page for most modern browsers.' />
-  <meta name='language' content='English'>
   <link href='https://fonts.googleapis.com/css?family=Lexend+Deca' rel='stylesheet'>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css'>
   <link rel='stylesheet' href='assets/css/index.css'>
 </head>
 
 <body>
-  <section class='hero is-fullheight is-default is-bold'>
-    <div class='hero-head'>
-      <nav class='navbar' role='navigation' aria-label='main navigation'>
-        <div class='navbar-brand'>
-          <a class='navbar-item' href='https://muetab.xyz'>
-            <img src='./assets/img/mue-just-logo.png' width='112' height='28'>
-          </a>
-          <a role='button' class='navbar-burger burger' aria-label='menu' aria-expanded='false'
-            data-target='navbarBasicExample'>
-            <span aria-hidden='true'>
-            </span>
-            <span aria-hidden='true'>
-            </span>
-            <span aria-hidden='true'>
-            </span>
-          </a>
-        </div>
-        <div id='navbarBasicExample' class='navbar-menu'>
-          <div class='navbar-start'>
-            <a href='https://github.com/muetab/mue' class='navbar-item'>
-              <i class='fab fa-github'>
-              </i> GitHub
-            </a>
-            <div class='navbar-item has-dropdown is-hoverable'>
-              <a id='extra-dropdown' class='navbar-link'>
-                More
-              </a>
-              <div class='navbar-dropdown'>
-                <a href='https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid'
-                  class='navbar-item'>
-                  <i class='fab fa-chrome'>
-                  </i> Chrome
-                </a>
-                <a href='https://addons.mozilla.org/firefox/addon/mue' class='navbar-item'>
-                  <i class='fab fa-firefox'>
-                  </i> Firefox
-                </a>
-                <a href='https://github.com/muetab/mue/releases' class='navbar-item'>
-                  <i class='far fa-question-circle'>
-                  </i> Other
-                </a>
-                <hr class='navbar-divider'>
-                <a id='report-issue'
-                  href='https://github.com/muetab/mue/issues/new?assignees=&labels=bug&template=bug-report.md&title=%5BBUG%5D'
-                  class='navbar-item'>
-                  <i class='fas fa-bug'>
-                  </i>
-                  Report an issue
-                </a>
-                <a id='suggest-feature'
-                  href='https://github.com/muetab/mue/issues/new?assignees=&labels=enhancement&template=feature-request.md&title=%5BFeature+Request%5DD'
-                  class='navbar-item'>
-                  <i class='fas fa-copy'>
-                  </i>
-                  Suggest a feature
-                </a>
-                <a id='privacy' href='privacy.html' class='navbar-item'>
-                  <i class='fas fa-user-secret'>
-                  </i>
-                  Privacy
-                </a>
-              </div>
-            </div>
-          </div>
-          <!--
-            <div class='navbar-end'>
-              <div class='navbar-item has-dropdown is-hoverable '>
-                <a class='navbar-link'>
-                  <i class='fas fa-globe-americas'>
-                  </i>
-                </a>
-                <div class='navbar-dropdown is-right'>
-                  <a onclick='languageEN()' class='navbar-item'>
-                    English
-                  </a>
-                  <a onclick='languageIT()' class='navbar-item'>
-                    Italian
-                  </a>
-                  <a onclick='french()' class='navbar-item'>
-                    French
-                  </a>
-                </div>
-              </div>
--->
-        </div>
-    </div>
-    <div class='hero-body' id='main'>
-      <div class='container'>
-        <div class='columns is-v-centered'>
-          <div class='column'>
-            Insert video here
-          </div>
-          <div class='column is-6 is-offset-1'>
-            <h1 id='mue-title' class='title is-2'>
-              Mue
-            </h1>
-            <h2 id='description' class='subtitle is-4'>
-              Fast, open and free-to-use new tab page for most modern browsers.
-            </h2>
-            <br>
-            <p class='has-text-centered'>
-              <a id='add-to-chrome' class='button is-medium is-info'
-                href='https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid'>
-                Add To
-                <i class='fab fa-chrome'>
-                </i>
-              </a>
-              <a id='add-to-firefox' class='button is-medium is-info'
-                href='https://addons.mozilla.org/firefox/addon/mue'>
-                Add To
-                <i class='fab fa-firefox'>
-                </i>
-              </a>
-              <a id='add-to-else' class='button is-medium is-info'
-                href='https://github.com/muetab/mue/releases'>
-                Add To
-                <i class='far fa-question-circle'>
-                </i>
-              </a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class='hero is-primary is-fullheight'>
-    <div class='hero-body'>
-      <div class='container'>
-        <h1 class='title'>
-          <h1 id='example-tab' class='title is-1'>Example of tab
-          </h1>
-          <h2 class='subtitle is-3'>Here is what the new tab looks like</h2>
-        </h1>
-        <img src='assets/img/unknown.png' />
-      </div>
-    </div>
-  </section>
-  <section class='section'>
-    <h1 class='title'>Why should I use?</h1>
-    <div class='tile is-ancestor'>
-      <div class='tile is-parent'>
-        <article class='tile is-child box'>
-          <p class='title'><i class="fas fa-cogs"></i> Performance
-          </p>
-          <p>Mue provides an amazing customisable user experience, while only using a very small amount of your system's
-            resources when open! We use the latest technology to keep it as low as possible.
-          </p>
-        </article>
-      </div>
-      <div class='tile is-parent'>
-        <article class='tile is-child box'>
-          <p class='title'><i class="fas fa-list-alt"></i> Features 
-          </p>
-          <p>Mue gives you a random quote and background image from our automatically updating API. It also has offline
-            images and a search bar!
-          </p>
-        </article>
-      </div>
-      <div class='tile is-parent'>
-        <article class='tile is-child box'>
-          <p class='title'><i class="fas fa-check-circle"></i> Commitment
-          </p>
-          <div class='content'>
-            <p>We are committed to bringing you a great experience. The original idea for Mue began in 2017 and we have
-              been actively working on it ever since.
-            </p>
-          </div>
-        </article>
-      </div>
-      <div class='tile is-parent'>
-        <article class='tile is-child box'>
-          <p class='title'><i class="fas fa-user-secret"></i> Privacy
-          </p>
-          <div class='content'>
-            <p>Unlike many, we actually care. The community version of Mue is <it>entirely</it> opensource. Extension,
-              API, you name it. Check out our GitHub organisation at https://github.com/getmue
-            </p>
-          </div>
-        </article>
-      </div>
-    </div>
-    <div class='has-text-centered'>
-      <h1 class='title'>Want to contribute? Mue (and this website) is opensource!</h1>
-      <a class='subtitle muelink' href='https://github.com/muetab/website'>Website Repository</a> •
-      <a class='subtitle muelink' href='https://github.com/muetab/mue'>Main Repository</a>
-    </div>
-  </section>
-  <footer class='footer'>
-    <div class='content has-text-centered'>
-      <p>
-        <strong>Mue
-        </strong> &copy; 2019
-        <a href='https://github.com/muetab'>Mue Tab
-        </a><br>
-        <a href='https://twitter.com/getmue'>
-          <i class='fab fa-twitter'>
-          </i>
-        </a>
-        <a href='https://github.com/muetab/website'>
-          <i class='fab fa-github'>
-          </i>
-        </a>
-      </p>
-    </div>
+  <!-- Navbar -->
+  <div class='navbar' id='navbar'>
+    <a href='index.html' class='active'>
+      <img class='mue-logo' src='https://raw.githubusercontent.com/mue/branding/master/logo/logo_horizontal.png' />
+    </a>
+    <a href='features.html'>Features</a>
+    <a href='about.html'>About</a>
+    <a href='contact.html'>Contact</a>
+    <a href='javascript:void(0);' class='icon' onclick='navbar();'>
+      <i class='fa fa-bars'></i>
+    </a>
+  </div>
+  <!-- Title -->
+  <div class='main' align='center'>
+    <h1>Mue Tab</h1>
+    <h2>A fast, open-source and free to use new tab page for your browser.</h2>
+    <h2>Download for</h2>
+    <button class='button' id='download' href='https://github.com/mue/mue'>Other</button>
+    <!-- Demo -->
+    <h2>Or try it out, interactively!</h2>
+    <iframe src='https://mue.now.sh'></iframe>
+  </div>
+  <footer>
+    <p>Copyright 2018-2020 <a class='footer' href='https://muetab.xyz'>Mue Tab</a></p>
   </footer>
-  <script src='assets/js/index.js'>
-  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Detect.js/2.2.2/detect.min.js'></script>
+  <script src='assets/js/index.js'></script>
 </body>
 
 </html>
