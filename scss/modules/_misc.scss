@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  font-family: 'Lexend Deca', sans-serif;
+  background: #eaf4f4;
+}
+
+.button {
+  padding: 10px;
+  background-color: #ffffff;
+  color: #000000;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  font-family: 'Lexend Deca', sans-serif;
+}
+
+iframe {
+  width: 50%;
+  height: 66.67vh;
+  border: none;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.img {
+  height: 128px;
+  width: auto;
+}
+
+.about {
+  word-wrap: break-word;
+  width: 50%;
+  
+  a {
+    color: black;
+  }
+}
