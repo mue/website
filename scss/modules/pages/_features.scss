@@ -1,0 +1,30 @@
+%feature {
+    padding: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    width: 250px;
+    background-color: white;
+}
+
+.featureleftmain {
+    padding-left: 10px;
+}
+
+.featurerightmain {
+    padding-right: 10px;
+}
+
+.featureleft {
+    @extend %feature;
+    float: left;
+}
+
+.featureright {
+    @extend %feature;
+    float: right;
+}
+
+.features {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
