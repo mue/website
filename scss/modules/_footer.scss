@@ -6,17 +6,16 @@ footer {
     background-color: #fff;
     text-align: center;
     box-shadow: 0 25px 0 rgba(0, 0, 0, .3);
-}
+    
+    a {
+        background: -webkit-linear-gradient(#FF4278, #FF620F);
+        background-clip: text;
+        text-decoration: none;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
 
-a.footer {
-    background: -webkit-linear-gradient(#FF4278, #FF620F);
-    background-clip: text;
-    text-decoration: none;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-a.footer:hover,
-a.footer:active {
-    color: #000000;
+    a:hover {
+        color: #000000;   
+    }
 }
