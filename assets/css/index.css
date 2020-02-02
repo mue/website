@@ -76,6 +76,8 @@ body {
   margin: 0;
   font-family: "Lexend Deca", sans-serif;
   background: #eaf4f4;
+  min-height: 400px;
+  margin-bottom: 75px;
 }
 
 .button {
