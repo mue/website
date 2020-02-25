@@ -25,7 +25,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  .navbar a:not(:first-child) {
+  .navbar a:not(:first-child), .navbar .dropdown:not(:first-child) {
     display: none;
   }
   .navbar a.icon {
@@ -46,10 +46,63 @@
     display: block;
     text-align: left;
   }
+  .navbar.responsive .dropdown {
+    float: none;
+    display: block;
+  }
+  .navbar.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+  .navbar.responsive .dropdown-content {
+    position: relative;
+  }
 }
 .mue-logo {
   height: 24px;
   width: auto;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+.dropdown .dropbtn {
+  font-size: 17px;
+  border: none;
+  outline: none;
+  color: #576574;
+  display: block;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 footer {
@@ -117,6 +170,10 @@ iframe {
 
 #iframe {
   border: 2.5px black solid;
+}
+
+a:hover {
+  color: #808080;
 }
 
 .card {
