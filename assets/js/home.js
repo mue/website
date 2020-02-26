@@ -20,6 +20,3 @@ switch (ua.browser.family) {
         button.innerHTML = '<i class="fa fa-question"</i> Other';
     }
 }
-
-// Iframe Refresh
-const refreshIframe = () => document.getElementById('iframe').src = 'https://mue.now.sh';
