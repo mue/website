@@ -1,3 +1,1 @@
-const downloadFile = (url) => {
-    download(url);
-}
+const downloadFile = (url) => download(url);
