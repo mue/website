@@ -67,6 +67,7 @@
 
         .dropdown-content {
             position: relative;
+            display: block;
         }
     }
 }
@@ -109,10 +110,6 @@
         text-decoration: none;
         display: block;
         text-align: left;
-    }
-
-    a:hover {
-        background-color: #ddd;
     }
 }
 
