@@ -73,17 +73,23 @@
       <label>Email</label>
       <br>
       <input type='text' maxlength='255' name='Email' value='' fieldType=9 />
-      <br><br>
+      <br>
+      <span id='emailWarning'></span>
+      <br>
       <label>Message</label>
       <br>
       <textarea name='MultiLine' maxlength='65535'></textarea>
-      <br><br>
-      <button class='submitbtn formbutton' type='submit'>Submit</button>
+      <br>
+      <span id='messageWarning'></span>
+      <br>
+      <button class='submitbtn formbutton' type='button' onclick='javascript:validateForm()'>Submit</button>
     </form>
   </div>
   <footer>
     <p>Copyright © 2018-2020 <a class='footer' href='https://muetab.xyz'>Mue Tab</a></p>
   </footer>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/validator/13.1.0/validator.min.js'></script>
+  <script src='assets/js/contact.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/egg.js/1.0/egg.min.js'></script>
   <script src='assets/js/index.js'></script>
 </body>
