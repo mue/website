@@ -1,6 +1,59 @@
 @import 'modules/navbar';
 @import 'modules/footer';
-@import 'modules/misc';
 @import 'modules/forms';
 @import 'modules/pages/about';
 @import 'modules/pages/features';
+
+body {
+    margin: 0;
+    font-family: 'Lexend Deca', sans-serif;
+    background: #eaf4f4;
+    min-height: 400px;
+    margin-bottom: 75px;
+}
+
+.button {
+    padding: 10px;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    text-decoration: none;
+
+    &:hover {
+        color: #576574;
+    }
+}
+
+iframe {
+    width: 50%;
+    height: 66.67vh;
+    border: none;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.img {
+    height: 128px;
+    width: auto;
+}
+
+.contact {
+    color: black;
+}
+
+#iframe {
+    border: 2.5px black solid;
+}
+
+a:hover {
+    color: #808080;
+}
+
+.gradient {
+    background: linear-gradient(90deg, rgba(255, 176, 50, 1) 0%, rgba(221, 59, 103, 1) 100%);
+}

@@ -12,13 +12,13 @@
         padding: 14px 16px;
         text-decoration: none;
         font-size: 17px;
-    }
 
-    a:hover {
-        background: -webkit-linear-gradient(#FF4278, #FF620F);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        &:hover {
+            background: -webkit-linear-gradient(#FF4278, #FF620F);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     }
 
     .icon {
@@ -93,6 +93,10 @@
         margin: 0;
         cursor: pointer;
     }
+
+    &:hover .dropdown-content {
+        display: block;
+    }
 }
 
 .dropdown-content {
@@ -111,8 +115,4 @@
         display: block;
         text-align: left;
     }
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
 }

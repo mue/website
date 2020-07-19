@@ -13,9 +13,9 @@ footer {
         text-decoration: none;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-    }
 
-    a:hover {
-        color: #000000;   
+        &:hover {
+            color: #000000;   
+        }
     }
 }
