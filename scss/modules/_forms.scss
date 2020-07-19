@@ -25,11 +25,11 @@ form {
     padding: 12px 20px;
     border: none;
     font-style: normal;
-}
 
-.formbutton:hover {
-    opacity: 0.9;
-    cursor: pointer;
+    &:hover {
+        opacity: 0.9;
+        cursor: pointer;
+    }
 }
 
 p.small {
