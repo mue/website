@@ -14,7 +14,7 @@
         "sizes": "512x512"
       }
     ],
-    "start_url": "/?source=pwa",
+    "start_url": "https://muetab.xyz",
     "background_color": "#ffb032",
     "display": "standalone",
     "scope": "/",
