@@ -1,0 +1,22 @@
+{
+    "short_name": "Mue",
+    "name": "Mue Website",
+    "description": "The website for Mue Tab",
+    "icons": [
+      {
+        "src": "assets/img/android-chrome-192x192.png",
+        "type": "image/png",
+        "sizes": "192x192"
+      },
+      {
+        "src": "assets/img/android-chrome-512x512.png",
+        "type": "image/png",
+        "sizes": "512x512"
+      }
+    ],
+    "start_url": "/?source=pwa",
+    "background_color": "#ffb032",
+    "display": "standalone",
+    "scope": "/",
+    "theme_color": "#ffb032"
+}
