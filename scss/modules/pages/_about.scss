@@ -1,10 +1,24 @@
 .card {
-    padding: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    border-radius: 12px;
     width: 250px;
-    margin: auto;
     text-align: center;
+    cursor: pointer;
     background-color: white;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+    transition: ease-out 0.25s;
+    margin: 40px;
+    &:hover {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: ease-in 0.25s;
+        transform: translateY(-5px);
+    }
+}
+
+
+i,
+p.location {
+    display: inline;
 }
 
 .title {
@@ -22,14 +36,214 @@
     }
 }
 
-.cardavatar {
-    width: 128px;
-    height: auto;
-    border-radius: 50%;
+.cardContent {
+    padding: 10px;
+    line-height: 12px;
+
+    h1 {
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    i {
+        padding: 0 10px 0 10px;
+        justify-content: center;
+    }
 }
 
-.padding {
-    display: inline-block;
-    padding-right: 10px;
-    padding-bottom: 10px;
+.cardavatar {
+    width: 100%;
+    height: auto;
+    border-radius: 12px 12px 0 0;
+}
+
+.cards {
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    margin-bottom: 40px;
+}
+
+.stats {
+    width: 100vw;
+    background: linear-gradient(90deg, #ffb032 0%, #dd3b67 100%);
+    text-align: center;
+
+    h1 {
+        padding: 10px;
+        letter-spacing: 0.5px;
+        font-size: 75px;
+        opacity: .6;
+    }
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 1rem;
+    place-items: center;
+
+    >div {
+        padding: 1rem;
+        display: grid;
+        place-items: center;
+
+        &::before {
+            content: "";
+            display: block;
+            padding-bottom: 100%;
+            grid-area: 1 / 1 / 2 / 2;
+        }
+
+        img {
+            width: 100%;
+            grid-area: 1 / 1 / 2 / 2;
+            transition: ease-out 0.25s;
+            cursor: pointer;
+
+            &:hover {
+                transform: translateY(-10px);
+                transition: ease-in 0.25s;
+            }
+        }
+    }
+}
+
+.thetimeline {
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+h1.team {
+    font-size: 40px;
+    text-align: center;
+}
+
+.timeline {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    background-color: #000;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    width: 2px;
+}
+
+.timelinebox {
+    box-sizing: border-box;
+    padding: 10px 40px;
+    position: relative;
+    background-color: inherit;
+    width: 50%;
+
+    >.content {
+        padding: 20px 30px;
+        background-color: white;
+        position: relative;
+        border-radius: 6px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, .3);
+    }
+
+    h2 {
+        font-weight: 600;
+    }
+
+    &:after {
+        content: '';
+        position: absolute;
+        width: 29px;
+        height: 29px;
+        right: -13px;
+        background: linear-gradient(90deg, #ffb032 0%, #dd3b67 100%);
+        top: 15px;
+        border-radius: 50%;
+        z-index: 1;
+    }
+}
+
+.left {
+    left: 0;
+
+    &:before {
+        content: " ";
+        height: 0;
+        position: absolute;
+        top: 22px;
+        width: 0;
+        z-index: 1;
+        right: 30px;
+        border: medium solid white;
+        border-width: 10px 0 10px 10px;
+        border-color: transparent transparent transparent white;
+    }
+}
+
+.right {
+    left: 50%;
+    &:before {
+        content: " ";
+        height: 0;
+        position: absolute;
+        top: 22px;
+        width: 0;
+        z-index: 1;
+        left: 30px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent white transparent transparent;
+    }
+
+    &:after {
+        left: -16px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .timeline::after {
+        left: 31px;
+    }
+
+    .timelinebox {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+
+        &:before {
+            left: 60px;
+            border: medium solid white;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent white transparent transparent;
+        }
+    }
+
+    .left::after,
+    .right::after {
+        left: 15px;
+    }
+
+    .right {
+        left: 0%;
+    }
+}
+
+.explanation {
+    height: auto;
+    width: 100vw;
+    background: #fff;
+    margin: 0;
+    z-index: -1;
+    h2 {
+        padding: 0 40px 0 40px;
+        font-size: 40px;
+        font-weight: 550;
+    }
 }

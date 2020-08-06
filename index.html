@@ -1,6 +1,6 @@
-<!-- 
+<!--
   Mue Website
-  Special thanks to W3schools for their excellent tutorials and Font Awesome for an amazing font library~ 
+  Special thanks to W3schools for their excellent tutorials and Font Awesome for an amazing font library
   This site is licensed under MIT, and you can find the repository for it at https://github.com/mue/website
 -->
 <!DOCTYPE html>
@@ -8,12 +8,13 @@
 
 <head>
   <meta charset='utf-8'>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
   <title>Mue</title>
   <meta name='title' content='Mue - New Tab'>
   <meta name='description' content='Mue is a fast, open source and free-to-use new tab page for most modern browsers.'>
   <meta name='image' content='https://raw.githubusercontent.com/mue/branding/master/logo/logo_horizontal.png' />
-  <meta name='keywords' content='mue, new tab, mue tab, settings, tab, extension, new page, ohlookitsderpy, mello, turbomarshmello'>
+  <meta name='keywords'
+    content='mue, new tab, mue tab, settings, tab, extension, new page, ohlookitsderpy, mello, turbomarshmello'>
   <meta name='author' content='Mue Tab'>
   <meta name='language' content='English'>
   <meta name='og:title' content='Mue - New Tab' />
@@ -21,49 +22,161 @@
   <meta name='og:site_name' content='Mue' />
   <meta name='og:description'
     content='Mue is a fast, open source and free-to-use new tab page for most modern browsers.' />
-  <meta name="theme-color" content="#ffb032" />
-
+  <meta name='theme-color' content='#ffb032' />
   <link href='https://fonts.googleapis.com/css?family=Lexend+Deca' rel='stylesheet'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>
   <link rel='stylesheet' href='assets/css/index.css'>
-  <link rel='icon' href='favicon.ico' type='image/x-icon'>
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon/mue-final-final.svg">
+  <link rel="manifest" href="/site.webmanifest">
 </head>
 
 <body>
-  <!-- Navbar -->
   <div class='navbar' id='navbar'>
     <a href='/' class='active'>
       <img class='mue-logo' src='https://raw.githubusercontent.com/mue/branding/master/logo/logo_horizontal.png' />
     </a>
-    <a href='/features'>Features</a>
-    <a href='/about'>About</a>
-    <a href='/contact'>Contact</a>
+    <a href='/features.html'>Features</a>
+    <a href='/about.html'>About</a>
+    <a href='/contact.html'>Contact</a>
     <div class='dropdown'>
-      <button class='dropbtn'>More
-        <i class='fa fa-caret-down'></i>
-      </button>
-      <div class='dropdown-content'>
-        <a href='https://apidocs.muetab.xyz'>API Docs</a>
-        <a href='/branding'>Branding</a>
-        <a href='https://discord.gg/zv8C9F8'>Discord Server</a>
-        <a href='https://blog.muetab.xyz'>Blog</a>
-        <a style='cursor: not-allowed;'>Photographer Application (soon!)</a>
-      </div>
+        <button class='dropbtn'>More
+            <i class='fa fa-caret-down'></i>
+        </button>
+        <div class='dropdown-content'>
+            <a href='https://apidocs.muetab.xyz'>API Docs</a>
+            <a href='/branding.html'>Branding</a>
+            <a href='https://discord.gg/zv8C9F8'>Discord Server</a>
+            <a href='https://blog.muetab.xyz'>Blog</a>
+            <a style='cursor: not-allowed;'>Photographer Application (soon!)</a>
+        </div>
     </div>
     <a href='javascript:void(0);' class='icon' onclick='navbar();'>
       <i class='fa fa-bars'></i>
     </a>
   </div>
+  <div class="wave-container"></div>
+  <svg class="wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+    <defs>
+      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#ffb032;stop-opacity:1" />
+        <stop offset="100%" style="stop-color:#dd3b67;stop-opacity:1" />
+      </linearGradient>
+    </defs>
+    <path fill="url(#gradient)" fill-opacity="1"
+      d="M0,96L48,80C96,64,192,32,288,58.7C384,85,480,171,576,192C672,213,768,171,864,144C960,117,1056,107,1152,122.7C1248,139,1344,181,1392,202.7L1440,224L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z">
+    </path>
+  </svg>
+  </div>
+  <div class='row'>
+    <div class='column sixty'>
+      <div class="text">
+        <h2>Mue, for the modern web.</h2>
+        <p>Mue Tab is a transparent, fast and free new tab made for the modern web.</p>
+        <p id='unsupported'></p>
+        <a class='downloadbutton' id='download' href='https://github.com/mue/mue'>Download</a>
+      </div>
+      <section class="features">
+        <div class="feature">
+          <i class="fas fa-tachometer-alt"></i>
+          <h1>Fast</h1>
+          <p>Mue Tab utilises many technologies, to increase it's effiency and overall speed and smoothness for the
+            user, while remaining non-intrusive and with low resource usage.</p>
+        </div>
+        <div class="feature">
+          <i class="fas fa-user-secret"></i>
+          <h1>Transparent</h1>
+          <p>At Mue, transparency is key. We strive for complete end to end transparency, we collect no personal data
+            and if you would like to check yourself, all the code is open source on GitHub.</p>
+        </div>
+        <div class="feature">
+          <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
+          <h1>Customisable</h1>
+          <p>Mue has settings inside the new tab, which allow it to be customised such as background blur and toggling
+            whether elements should appear or not. All of this is locally stored and not shared with a server.</p>
+        </div>
+      </section>
+      <!--<h1 class="checklistText">Fast</h1><i class="fas fa-check checklistIcon"></i>
+      <br>
+      <h1 class="checklistText">Transparent</h1><i class="fas fa-check checklistIcon"></i>
+      <br>
+      <h1 class="checklistText">Free</h1><i class="fas fa-check checklistIcon"></i>-->
+
+      <div class="tryit">
+        <h1>Try it below</h1><i class="fa fa-angle-down" aria-hidden="true"></i>
+      </div>
+    </div>
+  </div>
+  <iframe id='iframe' src='https://mue.now.sh'></iframe>
+  </div>
+  <!--
   <div class='main' align='center'>
     <h2>Download for</h2>
     <a class='button' id='download' href='https://github.com/mue/mue'>Other</a>
-    <!-- Demo -->
+     Demo 
     <h2>Or try it out, interactively!</h2>
     <iframe id='iframe' src='https://mue.now.sh'></iframe>
-  </div>
+  </div> -->
   <footer>
-    <p>Copyright © 2018-2020 <a class='footer' href='https://muetab.xyz'>Mue Tab</a></p>
+    <div>
+      <ul class='logo'>
+        <li><img src='assets/img/mue_big.png' /> </li>
+        <li>&copy; 2018-2020 Mue</li>
+        <li class='icons'><a href='https://twitter.com/getmue'><i class='fab fa-twitter' aria-hidden='true'></i></a></li>
+        <li class='icons'><a href='https://producthunt.com/posts/mue'><i class='fab fa-product-hunt' aria-hidden='true'></i></a></li>
+        <li class='icons'><a href='https://www.facebook.com/muetab'><i class='fab fa-facebook' aria-hidden='true'></i></a></li>
+      </ul>
+      <ul>
+        <li class='title'>Website</li>
+        <a href='/features'>
+          <li>Features</li>
+        </a>
+        <a href='/about'>
+          <li>About</li>
+        </a>
+        <a href='/contact'>
+          <li>Contact</li>
+        </a>
+        <a href='/branding'>
+          <li>Branding</li>
+        </a>
+        <a href='https://apidocs.muetab.xyz'>
+          <li>API Documentation</li>
+        </a>
+        <a href='https://blog.muetab.xyz'>
+          <li>Blog</li>
+        </a>
+      </ul>
+      <ul>
+        <li class='title'>Links</li>
+        <a href='https://github.com/mue'>
+          <li>Source Code</li>
+        </a>
+        <a href='https://github.com/mue/mue/projects/2'>
+          <li>Roadmap</li>
+        </a>
+        <a href='https://discord.gg/zv8C9F8'>
+          <li>Discord Server</li>
+        </a>
+        <a href='https://github.com/sponsors/ohlookitsderpy'>
+          <li>Support Us</li>
+        </a>
+        <a href='https://github.com/mue/mue/issues'>
+          <li>Issues</li>
+        </a>
+        <a href='https://mue.statuspage.io'>
+          <li>Status</li>
+        </a>
+      </ul>
+      <ul>
+        <li class='title'>Legal</li>
+        <a href='/license'>
+          <li>License</li>
+        </a>
+      </ul>
+    </div>
   </footer>
+  <button onclick='topFunction()' id='scroll' title='Go to top'><i class='fa fa-angle-up'
+      aria-hidden='true'></i></button>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/egg.js/1.0/egg.min.js'></script>
   <script src='assets/js/index.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/Detect.js/2.2.2/detect.min.js'></script>
