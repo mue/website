@@ -1,6 +1,6 @@
-<!-- 
+<!--
   Mue Website
-  Special thanks to W3schools for their excellent tutorials and Font Awesome for an amazing font library~ 
+  Special thanks to W3schools for their excellent tutorials and Font Awesome for an amazing font library
   This site is licensed under MIT, and you can find the repository for it at https://github.com/mue/website
 -->
 <!DOCTYPE html>
@@ -8,22 +8,22 @@
 
 <head>
     <meta charset='utf-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0" />
     <title>About | Mue</title>
     <meta name='title' content='Mue - New Tab'>
-    <meta name='description' content='Mue is a fast, open source and free-to-use new tab page for most modern browsers.'>
+    <meta name='description'
+        content='Mue is a fast, open source and free-to-use new tab page for most modern browsers.'>
     <meta name='image' content='https://raw.githubusercontent.com/mue/branding/master/logo/logo_horizontal.png' />
-    <meta name='keywords' content='mue, new tab, mue tab, settings, tab, extension, new page, ohlookitsderpy, mello, turbomarshmello'>
+    <meta name='keywords'
+        content='mue, new tab, mue tab, settings, tab, extension, new page, ohlookitsderpy, mello, turbomarshmello'>
     <meta name='author' content='Mue Tab'>
     <meta name='language' content='English'>
     <meta name='og:title' content='Mue - New Tab' />
     <meta name='og:image' content='https://raw.githubusercontent.com/mue/branding/master/logo/logo_tile_large.png' />
     <meta name='og:site_name' content='Mue' />
     <meta name='og:description'
-      content='Mue is a fast, open source and free-to-use new tab page for most modern browsers.' />
-    <meta name="theme-color" content="#ffb032" />
-
-
+        content='Mue is a fast, open source and free-to-use new tab page for most modern browsers.' />
+    <meta name='theme-color' content='#ffb032' />
     <link href='https://fonts.googleapis.com/css?family=Lexend+Deca' rel='stylesheet'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css'>
     <link rel='stylesheet' href='assets/css/index.css'>
@@ -37,16 +37,16 @@
             <img class='mue-logo'
                 src='https://raw.githubusercontent.com/mue/branding/master/logo/logo_horizontal.png' />
         </a>
-        <a href='/features'>Features</a>
-        <a href='/about'>About</a>
-        <a href='/contact'>Contact</a>
+        <a href='/features.html'>Features</a>
+        <a href='/about.html'>About</a>
+        <a href='/contact.html'>Contact</a>
         <div class='dropdown'>
             <button class='dropbtn'>More
                 <i class='fa fa-caret-down'></i>
             </button>
             <div class='dropdown-content'>
                 <a href='https://apidocs.muetab.xyz'>API Docs</a>
-                <a href='/branding'>Branding</a>
+                <a href='/branding.html'>Branding</a>
                 <a href='https://discord.gg/zv8C9F8'>Discord Server</a>
                 <a href='https://blog.muetab.xyz'>Blog</a>
                 <a style='cursor: not-allowed;'>Photographer Application (soon!)</a>
@@ -58,64 +58,173 @@
     </div>
     <!-- Title -->
     <div class='main' align='center'>
-        <h1>About</h1>
-        <h3>Mue's goal is to provide a clean, customisable and trustworthy new tab to improve your browsing experience
-        </h3>
-        <br>
-        <h2>Team</h2>
-        <!-- Team cards -->
-        <div class='padding'>
+        <section class='gradientHeader'>
+            <h1>Mue is where...<br> <span id='typewriterText'>the team is</span></h1>
+            <a href='#extrainfo' class='downbutton'>
+                <i class='fa fa-angle-down' aria-hidden='true'></i>
+            </a>
+        </section>
+        <!--
+        <h2>Donators</h2>
+        <p>August (https://github.com/auguwu)</p>
+        <p>ven (https://github.com/venoras)</p>
+        <p>MrSheldon (https://github.com/MrSheldon)</p> -->
+    </div>
+    <section class='explanation' id='extrainfo'>
+        <h2>
+            <hr>
+            'Here at Mue, our employees have the freedom to program anytime and anywhere in the world. This work ethic
+            and the power of team communications allow us to keep connected and release updates on time to a good
+            standard' - David Ralph
+            <hr>
+        </h2>
+        <h1 class='team'>The Team</h1>
+        <div class='cards'>
             <div class='card'>
                 <img src='https://avatars0.githubusercontent.com/u/14052956' class='cardavatar' draggable='false'>
-                <h1>David Ralph</h1>
-                <p class='title'>CEO, Lead Developer</p>
-                <a href='https://twitter.com/ohlookitsderpy'><i class='fab fa-twitter cardlink'></i></a>
-                <a href='https://github.com/ohlookitsderpy'><i class='fab fa-github cardlink'></i></a>
-                <a href='https://patreon.com/ohlookitsderpy'><i class='fab fa-patreon cardlink'></i></a>
-                <a href='https://derpyenterprises.org'><i class='fas fa-home cardlink'></i></a>
+                <div class='cardContent'>
+                    <h1>David Ralph</h1>
+                    <p class='title'>CEO, Lead Developer</p>
+                    <a href='https://twitter.com/ohlookitsderpy'><i class='fab fa-twitter cardlink'></i></a>
+                    <a href='https://github.com/ohlookitsderpy'><i class='fab fa-github cardlink'></i></a>
+                    <a href='https://patreon.com/ohlookitsderpy'><i class='fab fa-patreon cardlink'></i></a>
+                    <a href='https://derpyenterprises.org'><i class='fas fa-home cardlink'></i></a>
+                </div>
             </div>
-        </div>
-        <div class='padding'>
             <div class='card'>
                 <img src='https://avatars0.githubusercontent.com/u/25852280' class='cardavatar' draggable='false'>
-                <h1>Alex Sparkes</h1>
-                <p class='title'>COO, Lead Designer</p>
-                <a href='https://twitter.com/IWS_Mello'><i class='fab fa-twitter cardlink'></i></a>
-                <a href='https://github.com/TurboMarshmello'><i class='fab fa-github cardlink'></i></a>
-                <a href='https://patreon.com/iws_mello'><i class='fab fa-patreon cardlink'></i></a>
+                <div class='cardContent'>
+                    <h1>Alex Sparkes</h1>
+                    <p class='title'>COO, Lead Designer</p>
+                    <a href='https://twitter.com/IWS_Mello'><i class='fab fa-twitter cardlink'></i></a>
+                    <a href='https://github.com/TurboMarshmello'><i class='fab fa-github cardlink'></i></a>
+                    <a href='https://patreon.com/iws_mello'><i class='fab fa-patreon cardlink'></i></a>
+                </div>
             </div>
-        </div>
-        <div class='padding'>
             <div class='card'>
                 <img src='https://avatars0.githubusercontent.com/u/20905071' class='cardavatar' draggable='false'>
-                <h1>Isaac Saunders</h1>
-                <p class='title'>Developer, QA</p>
-                <a href='https://twitter.com/eartharoid'><i class='fab fa-twitter cardlink'></i></a>
-                <a href='https://github.com/eartharoid'><i class='fab fa-github cardlink'></i></a>
-                <a href='https://patreon.com/eartharoid'><i class='fab fa-patreon cardlink'></i></a>
-                <a href='https://eartharoid.me'><i class='fas fa-home cardlink'></i></a>
+                <div class='cardContent'>
+                    <h1>Isaac Saunders</h1>
+                    <p class='title'>Developer, QA</p>
+                    <a href='https://twitter.com/eartharoid'><i class='fab fa-twitter cardlink'></i></a>
+                    <a href='https://github.com/eartharoid'><i class='fab fa-github cardlink'></i></a>
+                    <a href='https://patreon.com/eartharoid'><i class='fab fa-patreon cardlink'></i></a>
+                    <a href='https://eartharoid.me'><i class='fas fa-home cardlink'></i></a>
+                </div>
             </div>
-        </div>
-        <div class='padding'>
             <div class='card'>
                 <img src='https://avatars0.githubusercontent.com/u/29184334' class='cardavatar' draggable='false'>
-                <h1>Wessel Tip</h1>
-                <p class='title'>Developer</p>
-                <a href='https://twitter.com/wessel_tip'><i class='fab fa-twitter cardlink'></i></a>
-                <a href='https://github.com/Wessel'><i class='fab fa-github cardlink'></i></a>
-                <a href='https://patreon.com/wessel'><i class='fab fa-patreon cardlink'></i></a>
-                <a href='https://wessel.meek.moe'><i class='fas fa-home cardlink'></i></a>
+                <div class='cardContent'>
+                    <h1>Wessel Tip</h1>
+                    <p class='title'>Developer</p>
+                    <a href='https://twitter.com/wessel_tip'><i class='fab fa-twitter cardlink'></i></a>
+                    <a href='https://github.com/Wessel'><i class='fab fa-github cardlink'></i></a>
+                    <a href='https://patreon.com/wessel'><i class='fab fa-patreon cardlink'></i></a>
+                    <a href='https://wessel.meek.moe'><i class='fas fa-home cardlink'></i></a>
+                </div>
             </div>
         </div>
-        <h3>Have a look at our GitHub repositories <a href='https://github.com/mue' style='color: black;'>here</a> if you want to see some code.</h3>
-      <h2>Donators</h2>
-      <p>August (https://github.com/auguwu)</p>
-      <p>ven (https://github.com/venoras)</p>
-      <p>MrSheldon (https://github.com/MrSheldon)</p>
-    </div>
+    </section>
+    <!--
+    <section class='stats'>
+        <h1 id='users'>??? users</h1>
+        <div class='grid'>
+            <div><img src='' alt=''></div>
+            <div><img src='' alt=''></div>
+        </div>
+    </section>
+-->
+    <section class='thetimeline'>
+        <h1 class='team'>Timeline</h1>
+        <div class='timeline'>
+            <div class='timelinebox left'>
+                <div class='content'>
+                    <h2>2020</h2>
+                    <p>ProductHunt and settings launch</p>
+                </div>
+            </div>
+            <div class='timelinebox right'>
+                <div class='content'>
+                    <h2>2019</h2>
+                    <p>Rewrite of Mue into React, and launch of the website</p>
+                </div>
+            </div>
+            <div class='timelinebox left'>
+                <div class='content'>
+                    <h2>2018</h2>
+                    <p>Mue officially begins!</p>
+                </div>
+            </div>
+            <div class='timelinebox right'>
+                <div class='content'>
+                    <h2>2017</h2>
+                    <p>Initial planning...</p>
+                </div>
+            </div>
+        </div>
+    </section>
     <footer>
-        <p>Copyright © 2018-2020 <a class='footer' href='https://muetab.xyz'>Mue Tab</a></p>
+        <div>
+            <ul class='logo'>
+                <li><img src='assets/img/mue_big.png' /> </li>
+                <li>&copy; 2018-2020 Mue</li>
+                <li class='icons'><a href='https://twitter.com/getmue'><i class='fab fa-twitter' aria-hidden='true'></i></a></li>
+                <li class='icons'><a href='https://producthunt.com/posts/mue'><i class='fab fa-product-hunt' aria-hidden='true'></i></a></li>
+                <li class='icons'><a href='https://www.facebook.com/muetab'><i class='fab fa-facebook' aria-hidden='true'></i></a></li>
+            </ul>
+            <ul>
+                <li class='title'>Website</li>
+                <a href='/features'>
+                    <li>Features</li>
+                </a>
+                <a href='/about'>
+                    <li>About</li>
+                </a>
+                <a href='/contact'>
+                    <li>Contact</li>
+                </a>
+                <a href='/branding'>
+                    <li>Branding</li>
+                </a>
+                <a href='https://apidocs.muetab.xyz'>
+                    <li>API Documentation</li>
+                </a>
+                <a href='https://blog.muetab.xyz'>
+                    <li>Blog</li>
+                </a>
+            </ul>
+            <ul>
+                <li class='title'>Links</li>
+                <a href='https://github.com/mue'>
+                    <li>Source Code</li>
+                </a>
+                <a href='https://github.com/mue/mue/projects/2'>
+                    <li>Roadmap</li>
+                </a>
+                <a href='https://discord.gg/zv8C9F8'>
+                    <li>Discord Server</li>
+                </a>
+                <a href='https://github.com/sponsors/ohlookitsderpy'>
+                    <li>Support Us</li>
+                </a>
+                <a href='https://github.com/mue/mue/issues'>
+                    <li>Issues</li>
+                </a>
+                <a href='https://mue.statuspage.io'>
+                    <li>Status</li>
+                </a>
+            </ul>
+            <ul>
+                <li class='title'>Legal</li>
+                <a href='/license'>
+                    <li>License</li>
+                </a>
+            </ul>
+        </div>
     </footer>
+    <button onclick='topFunction()' id='scroll' title='Go to top'><i class='fa fa-angle-up' aria-hidden='true'></i></button>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/TypewriterJS/2.13.1/core.min.js'></script>
+    <script src='assets/js/about.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/egg.js/1.0/egg.min.js'></script>
     <script src='assets/js/index.js'></script>
 </body>

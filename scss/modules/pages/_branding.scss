@@ -1,0 +1,137 @@
+.brandingContainer {
+    margin-bottom: -40px;
+    margin: 0;
+    background: #222f3e;
+    color: #fff;
+    padding-bottom: 50px;
+    h2 {
+        font-size: 40px;
+        font-weight: 600;
+        padding: 50px 50px 0 50px;
+    }
+    p {
+        padding: 0 50px 0 50px;
+    }
+    h2,p {
+        line-height: 30px;
+        max-width: 80%;
+    }
+}
+
+#toast {
+    visibility: hidden;
+    text-align: center;
+    position: fixed;
+    z-index: 999;
+    bottom: 30px;
+    padding: 10px;
+    box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .2);
+    // backdrop-filter: blur(20px);  stupid firefox :(
+    border-radius: 10px;
+    background: #fff;
+    color: #000;
+    text-align: left;
+    font-size: 16px;
+    width: auto;
+    bottom: 30px;
+    right: 110px;
+
+    &.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    > img {
+        height: 20px;
+        width: auto;
+        float: left;
+    }
+
+    > hr {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+.copyButton, hr {
+    display: inline;
+    vertical-align: middle;
+}
+
+hr {
+    height: 20px;
+    width: 1px;
+    margin: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+.colour {
+    background: #57606f;
+    margin-bottom: 0px;
+}
+
+.logos {
+    display: flex;
+    flex-flow: wrap;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    .logo {
+        transition: ease-out 0.25s;
+        margin: 20px;
+        &:hover {
+            transition: ease-in 0.25s;
+            transform: translateY(-5px);
+        }
+    }
+}
