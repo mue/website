@@ -1,2 +1,2 @@
-# muetab.xyz
+# muetab.com
 Website for Mue, a new tab extension
