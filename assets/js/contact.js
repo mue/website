@@ -1,5 +1,5 @@
 const validateForm = () => {
-    let form = document.forms['form'];
+    const form = document.forms['form'];
     if (!validator.isEmail(form['Email'].value)) document.getElementById('emailWarning').textContent = 'Invalid email';
     else document.getElementById('emailWarning').textContent = '';
     if (form['MultiLine'].value === '') return document.getElementById('messageWarning').textContent = 'Message box must be filled';
@@ -8,8 +8,8 @@ const validateForm = () => {
 }
 
 const toggleAnswer = (number) => {
-    let x = document.getElementById('answer' + number);
-    let y = document.getElementById('dwnBtn' + number);
+    const x = document.getElementById('answer' + number);
+    const y = document.getElementById('dwnBtn' + number);
     if (x.style.display === 'none') {
       x.style.display = 'block';
       y.style.transform = 'rotate(180deg)';
