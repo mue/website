@@ -3,11 +3,9 @@ const ua = detect.parse(navigator.userAgent);
 const button = document.getElementById('download');
 
 if (ua.device.type === 'Mobile') {
-    const unsupported = document.getElementById('unsupported');
+    document.getElementById('unsupported').style.display = 'block';
     button.href = '';
     button.innerHTML = 'View Supported Browsers';
-    unsupported.innerText = 'You are using an unsupported device';
-    unsupported.style.display = 'block';
 } else switch (ua.browser.family) {
     case 'Chrome': {
         button.href = 'https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid';
