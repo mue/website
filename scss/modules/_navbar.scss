@@ -30,7 +30,9 @@
 
 @media screen and (max-width: 600px) {
     .navbar {
-        a:not(:first-child), .dropdown:not(:first-child) {
+
+        a:not(:first-child),
+        .dropdown:not(:first-child) {
             display: none;
         }
 

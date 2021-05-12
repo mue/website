@@ -7,20 +7,17 @@ if (ua.device.type === 'Mobile') {
     button.href = '';
     button.innerHTML = 'View Supported Browsers';
 } else switch (ua.browser.family) {
-    case 'Chrome': {
+    case 'Chrome':
         button.href = 'https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid';
         button.innerHTML = '<i class="fab fa-chrome"></i> Add to Chrome';
         break;
-    }
 
-    case 'Firefox': {
-        button.href = 'https://addons.mozilla.org/en-GB/firefox/addon/mue/';
+    case 'Firefox':
+        button.href = 'https://addons.mozilla.org/firefox/addon/mue/';
         button.innerHTML = '<i class="fab fa-firefox"></i> Add to Firefox';
         break;
-    }
 
-    default: {
+    default:
         button.href = 'https://github.com/mue/mue';
         button.innerHTML = '<i class="fab fa-github"</i> Download from GitHub';
-    }
 }

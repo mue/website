@@ -4,15 +4,19 @@
     background: #222f3e;
     color: #fff;
     padding-bottom: 50px;
+
     h2 {
         font-size: 40px;
         font-weight: 600;
         padding: 50px 50px 0 50px;
     }
+
     p {
         padding: 0 50px 0 50px;
     }
-    h2,p {
+
+    h2,
+    p {
         line-height: 30px;
         max-width: 80%;
     }
@@ -42,19 +46,20 @@
         animation: fadein 0.5s, fadeout 0.5s 2.5s;
     }
 
-    > img {
+    >img {
         height: 20px;
         width: auto;
         float: left;
     }
 
-    > hr {
+    >hr {
         margin-left: 10px;
         margin-right: 10px;
     }
 }
 
-.copyButton, hr {
+.copyButton,
+hr {
     display: inline;
     vertical-align: middle;
 }
@@ -126,9 +131,11 @@ hr {
     align-items: center;
     justify-content: center;
     cursor: pointer;
+
     .logo {
         transition: ease-out 0.25s;
         margin: 20px;
+
         &:hover {
             transition: ease-in 0.25s;
             transform: translateY(-5px);
