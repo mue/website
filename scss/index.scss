@@ -15,7 +15,8 @@ body {
     height: 100vh;
 }
 
-.checklistText, .checklistIcon {
+.checklistText,
+.checklistIcon {
     display: inline;
     font-size: 60px;
 }
@@ -35,10 +36,12 @@ body {
     font-size: 15px;
     text-decoration: none;
     transition: 0.5s;
-    box-shadow: 0 0 15px rgba(0,0,0,.3);
+    box-shadow: 0 0 15px rgba(0, 0, 0, .3);
+
     i {
         margin-right: 5px;
     }
+
     &:hover {
         background-color: #fff;
         border-image-source: linear-gradient(90deg, #ffb032 0%, #dd3b67 100%);
@@ -52,11 +55,13 @@ body {
 
 .text {
     max-width: 500px;
+
     h2 {
         font-size: 60px;
         font-weight: bold;
         opacity: .8;
     }
+
     p {
         margin-top: -30px;
         line-height: 20px;
@@ -84,7 +89,7 @@ html {
         cursor: pointer;
     }
 
-    a.downbutton > i.fa {
+    a.downbutton>i.fa {
         font-size: 40px;
         position: absolute;
         bottom: 80px;
@@ -122,7 +127,8 @@ html {
     text-decoration: none;
     border-radius: 12px;
     transition: 0.5s;
-    box-shadow: 0 0 15px rgba(0,0,0,.3);
+    box-shadow: 0 0 15px rgba(0, 0, 0, .3);
+
     &:hover {
         background-color: #fff;
         background: linear-gradient(90deg, rgba(255, 176, 50, 1) 0%, rgba(221, 59, 103, 1) 100%);
@@ -155,7 +161,7 @@ iframe {
 }
 
 #iframe {
-    box-shadow: 0 0 25px rgba(0,0,0,.3);
+    box-shadow: 0 0 25px rgba(0, 0, 0, .3);
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -174,7 +180,8 @@ h2 {
     font-weight: 300;
 }
 
-.errorbutton, .errorbutton:hover {
+.errorbutton,
+.errorbutton:hover {
     text-decoration: none;
     color: white;
 }
@@ -201,7 +208,8 @@ h2 {
     transition: ease-out 0.25s;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
     background: linear-gradient(90deg, rgba(255, 176, 50, 1) 0%, rgba(221, 59, 103, 1) 100%);
-    > i {
+
+    >i {
         margin: 0;
     }
 
@@ -219,10 +227,12 @@ h2 {
 .blurb {
     padding: 50px;
     max-width: 80vh;
+
     h2 {
         font-size: 70px;
         line-height: 60px;
     }
+
     overflow-wrap: break-word;
     word-wrap: break-word;
     hyphens: auto;
@@ -235,6 +245,7 @@ h2 {
 .theme {
     color: #000;
     text-align: center;
+
     p {
         max-width: 100%;
     }
@@ -250,10 +261,13 @@ h2 {
 
 .tryit {
     text-align: center;
-    h1, i {
+
+    h1,
+    i {
         display: inline;
         font-size: calc(2.0vh + 1.0vw);
     }
+
     i {
         margin-left: 20px;
     }

@@ -8,13 +8,13 @@
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
     transition: ease-out 0.25s;
     margin: 40px;
+
     &:hover {
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         transition: ease-in 0.25s;
         transform: translateY(-5px);
     }
 }
-
 
 i,
 p.location {
@@ -189,6 +189,7 @@ h1.team {
 
 .right {
     left: 50%;
+
     &:before {
         content: " ";
         height: 0;
@@ -241,6 +242,7 @@ h1.team {
     background: #fff;
     margin: 0;
     z-index: -1;
+
     h2 {
         padding: 0 40px 0 40px;
         font-size: 40px;

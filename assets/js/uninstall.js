@@ -1,6 +1,12 @@
 const validateForm = () => {
     const form = document.forms['form'];
-    if (form['MultiLine'].value === '') return document.getElementById('messageWarning').textContent = 'Message box must be filled';
-    else document.getElementById('messageWarning').textContent = '';
+    const messageWarning = document.getElementById('messageWarning');
+
+    if (form['MultiLine'].value === '') {
+        return messageWarning.textContent = 'Message box must be filled';
+    } else {
+        messageWarning.textContent = '';
+    }
+
     document.forms['form'].submit();
 }

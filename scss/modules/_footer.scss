@@ -30,6 +30,7 @@ footer {
         div {
             display: flex;
         }
+
         ul.logo {
             margin-right: 20vw;
         }
@@ -40,7 +41,7 @@ footer {
         width: auto;
     }
 
-    ul.logo > li.icons {
+    ul.logo>li.icons {
         display: inline-block;
         cursor: pointer;
         margin-right: 20px;
@@ -50,6 +51,7 @@ footer {
         position: relative;
         top: 0;
         transition: top ease 0.5s;
+
         &:hover {
             top: -4px;
         }
