@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='user-scalable=no, width=device-width, initial-scale=1.0' />
+    <title>Privacy | Mue</title>
+    <meta name='title' content='Mue - New Tab'>
+    <meta name='description' content='Mue is a fast, open source and free-to-use new tab page for modern browsers'>
+    <meta name='image' content='https://raw.githubusercontent.com/mue/branding/main/logo/logo_horizontal.png' />
+    <meta name='keywords'
+        content='mue, new tab, mue tab, settings, tab, extension, new page, ohlookitsderpy, david ralph, davidjcralph, alex sparkes, productivity, chrome extension, firefox extension, extension, start page, opensource'>
+    <meta name='author' content='Mue Tab'>
+    <meta name='language' content='English'>
+    <meta name='og:title' content='Mue - New Tab' />
+    <meta name='og:image' content='https://raw.githubusercontent.com/mue/branding/main/logo/logo_tile_large.png' />
+    <meta name='og:site_name' content='Mue' />
+    <meta name='og:description' content='Mue is a fast, open source and free-to-use new tab page for modern browsers' />
+    <meta name='theme-color' content='#ffb032' />
+    <link href='https://fonts.googleapis.com/css?family=Lexend+Deca' rel='stylesheet'>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <link rel='stylesheet' href='assets/css/index.css'>
+    <link rel='icon' href='favicon.ico' type='image/x-icon'>
+    <link rel='manifest' href='/manifest.webmanifest'>
+    <script async defer data-website-id='f24748bf-5553-4773-bcbe-568e6c7ffdef' src='https://umami.muetab.com/umami.js'>
+    </script>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class='navbar' id='navbar'>
+        <a href='/' class='active'>
+            <img class='mue-logo' src='https://raw.githubusercontent.com/mue/branding/main/logo/logo_horizontal.png'
+                alt='Mue Logo' draggable='false' />
+        </a>
+        <a href='/about'>About</a>
+        <a href='/contact'>Contact</a>
+        <div class='dropdown'>
+            <button class='dropbtn'>More
+                <i class='fa fa-caret-down'></i>
+            </button>
+            <div class='dropdown-content'>
+                <a href='https://apidocs.muetab.com'>API Docs</a>
+                <a href='/branding'>Branding</a>
+                <a href='https://discord.gg/zv8C9F8'>Discord Server</a>
+                <a href='https://blog.muetab.com'>Blog</a>
+            </div>
+        </div>
+        <a href='javascript:void(0);' class='icon' onclick='navbar();'>
+            <i class='fa fa-bars'></i>
+        </a>
+    </div>
+    <!-- Title -->
+    <div class='main'>
+        <div class='row'>
+            <div class='column sixty'>
+                <h1>Privacy</h1>
+                <p>The following privacy policy is for the Mue Tab extension:</p>
+                <ul style='max-width: 50%'>
+                    <li>No data of any kind is collected. Your settings and backgrounds are only stored locally.</li>
+                    <li>No identifying information is sent via any API request.</li>
+                    <li>Mue may connect to external image services (Cloudinary, Unsplash) in order to display background
+                        images.
+                        You may turn this off in settings or enable the "Use DuckDuckGo image proxy" option in order to
+                        load images from there instead.</li>
+                    <li>The about tab will connect to the GitHub API but only to get update information, contributors
+                        and supporters with images.</li>
+                    <li>Offline mode can be utilised to prevent any requests to websites.</li>
+                    <li>Various features of Mue (weather, changelog, about, quote, background) will request to domains
+                        owned by muetab.com (weather.muetab.com, blog.muetab.com, sponsors.muetab.com, api.muetab.com,
+                        pexels.muetab.com, unsplash.muetab.com) in order to get the required information to display.</li>
+                    <li>We may update this privacy policy here without notice at any time.</li>
+                </ul>
+                <p>If you have any questions, please <a href='/contact'>contact us</a>.</p>
+                <p>Last Updated: 13th May 2021</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div>
+            <ul class='logo'>
+                <li><img src='assets/img/mue_big.png' alt='Mue Logo' /> </li>
+                <li>&copy; 2018-2021 The Mue Authors</li>
+                <li class='icons'><a href='https://twitter.com/getmue'><i class='fab fa-twitter'
+                            aria-hidden='true'></i></a>
+                </li>
+                <li class='icons'><a href='https://producthunt.com/posts/mue'><i class='fab fa-product-hunt'
+                            aria-hidden='true'></i></a></li>
+                <li class='icons'><a href='https://www.facebook.com/muetab'><i class='fab fa-facebook'
+                            aria-hidden='true'></i></a></li>
+            </ul>
+            <ul>
+                <li class='title'>Website</li>
+                <a href='/features'>
+                    <li>Features</li>
+                </a>
+                <a href='/about'>
+                    <li>About</li>
+                </a>
+                <a href='/contact'>
+                    <li>Contact</li>
+                </a>
+                <a href='/branding'>
+                    <li>Branding</li>
+                </a>
+                <a href='/privacy'>
+                  <li>Privacy</li>
+                </a>
+                <a href='https://blog.muetab.com'>
+                    <li>Blog</li>
+                </a>
+            </ul>
+            <ul>
+                <li class='title'>Links</li>
+                <a href='https://github.com/mue'>
+                    <li>Source Code</li>
+                </a>
+                <a href='https://github.com/mue/mue/projects/2'>
+                    <li>Roadmap</li>
+                </a>
+                <a href='https://discord.gg/zv8C9F8'>
+                    <li>Discord Server</li>
+                </a>
+                <a href='https://github.com/sponsors/davidjcralph'>
+                    <li>Support Us</li>
+                </a>
+                <a href='https://github.com/mue/mue/issues'>
+                    <li>Issues</li>
+                </a>
+                <a href='https://status.muetab.com'>
+                    <li>Status</li>
+                </a>
+            </ul>
+        </div>
+    </footer>
+    <button onclick='topFunction()' id='scroll' title='Go to top'><i class='fa fa-angle-up'
+            aria-hidden='true'></i></button>
+    <script src='assets/js/index.js'></script>
+</body>
+
+</html>
