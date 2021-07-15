@@ -30,15 +30,15 @@
 
 @media screen and (max-width: 600px) {
     .navbar {
-
         a:not(:first-child),
         .dropdown:not(:first-child) {
             display: none;
         }
 
-        a.icon {
-            float: right;
-            display: block;
+        .icon {
+            position: absolute;
+            margin-left: 325px;
+            display: block !important;
         }
     }
 
@@ -47,7 +47,6 @@
 
         .icon {
             position: absolute;
-            right: 0;
             top: 0;
         }
 
