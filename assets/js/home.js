@@ -1,10 +1,9 @@
 // Detect Browser
 const ua = new UAParser(navigator.userAgent);
 const button = document.getElementById('download');
-
-if (ua.getDevice() === 'Mobile' || ua.getDevice() === 'Tablet') {
+if (ua.getDevice().type === 'mobile' || ua.getDevice().type === 'tablet') {
     document.getElementById('unsupported').style.display = 'block';
-    button.href = '';
+    button.href = 'https://github.com/mue/mue#installation';
     button.innerHTML = 'View Supported Browsers';
 } else switch (ua.getBrowser().name) {
     case 'Chrome':
