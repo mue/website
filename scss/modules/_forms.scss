@@ -136,6 +136,18 @@ textarea {
     .column {
         width: 100%;
         height: auto;
+
+        p {
+            margin-right: 50px;
+        }
+    }
+
+    form {
+        width: auto;
+    }
+
+    .faq h1 {
+        margin-right: 50px;
     }
 }
 
