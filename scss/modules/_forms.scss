@@ -149,6 +149,18 @@ textarea {
     .faq h1 {
         margin-right: 50px;
     }
+
+    .gradientHeader h1 {
+        font-size: 15vw !important;
+    }
+
+    .privacy footer {
+        position: inherit;
+    }
+
+    .privacy ul {
+        max-width: 100% !important;
+    }
 }
 
 .faq {

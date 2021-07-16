@@ -123,6 +123,10 @@ hr {
 .colour {
     background: #57606f;
     margin-bottom: 0px;
+
+    .cards {
+        cursor: pointer;
+    }
 }
 
 .logos {
