@@ -3,31 +3,36 @@
 
 <head>
     <meta charset='utf-8'>
-    <meta name='viewport' content='user-scalable=no, width=device-width, initial-scale=1.0' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
     <title>Privacy | Mue</title>
+
+    <meta name='robots' content='index, follow'>
     <meta name='title' content='Mue - New Tab'>
     <meta name='description' content='Mue is a fast, open source and free-to-use new tab page for modern browsers'>
-    <meta name='image' content='https://raw.githubusercontent.com/mue/branding/main/logo/logo_horizontal.png' />
+    <meta name='image' content='https://raw.githubusercontent.com/mue/branding/main/logo/logo_horizontal.png'>
     <meta name='keywords'
-        content='mue, new tab, mue tab, settings, tab, extension, new page, ohlookitsderpy, david ralph, davidjcralph, alex sparkes, productivity, chrome extension, firefox extension, extension, start page, opensource'>
+        content='mue, new tab, mue tab, settings, tab, extension, new page, david ralph, davidjcralph, alex sparkes, productivity, chrome extension, firefox extension, extension, start page, opensource'>
     <meta name='author' content='Mue Tab'>
     <meta name='language' content='English'>
-    <meta name='og:title' content='Mue - New Tab' />
-    <meta name='og:image' content='https://raw.githubusercontent.com/mue/branding/main/logo/logo_tile_large.png' />
-    <meta name='og:site_name' content='Mue' />
-    <meta name='og:description' content='Mue is a fast, open source and free-to-use new tab page for modern browsers' />
-    <meta name='theme-color' content='#ffb032' />
-    <link href='https://fonts.googleapis.com/css?family=Lexend+Deca' rel='stylesheet'>
+    <meta name='theme-color' content='#ffb032'>
+
+    <meta property='og:type' content='Website'>
+    <meta property='og:site_name' content='Mue'>
+    <meta property='og:title' content='Mue - New Tab'>
+    <meta property='og:description' content='Mue is a fast, open source and free-to-use new tab page for modern browsers'>
+    <meta property='og:image' content='https://raw.githubusercontent.com/mue/branding/main/logo/logo_tile_large.png'>
+    <meta property='og:image:alt' content='Mue logo'>
+
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lexend+Deca'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
     <link rel='stylesheet' href='assets/css/index.css'>
     <link rel='icon' href='favicon.ico' type='image/x-icon'>
     <link rel='manifest' href='/manifest.webmanifest'>
-    <script async defer data-website-id='f24748bf-5553-4773-bcbe-568e6c7ffdef' src='https://umami.muetab.com/umami.js'>
-    </script>
+
+    <script async defer data-website-id='f24748bf-5553-4773-bcbe-568e6c7ffdef' src='https://umami.muetab.com/umami.js'></script>
 </head>
 
 <body>
-    <!-- Navbar -->
     <div class='navbar' id='navbar'>
         <a href='/' class='active'>
             <img class='mue-logo' src='https://raw.githubusercontent.com/mue/branding/main/logo/logo_horizontal.png'
@@ -50,7 +55,6 @@
             <i class='fa fa-bars'></i>
         </a>
     </div>
-    <!-- Title -->
     <div class='main'>
         <div class='row'>
             <div class='column sixty'>
@@ -59,7 +63,8 @@
                 <ul style='max-width: 50%'>
                     <li>No data of any kind is collected. Your settings and backgrounds are only stored locally.</li>
                     <li>No identifying information is sent via any API request.</li>
-                    <li>Mue may connect to external image services (Cloudinary, Unsplash, Pexels) in order to display background
+                    <li>Mue may connect to external image services (Cloudinary, Unsplash, Pexels) in order to display
+                        background
                         images.
                         You may turn this off in settings or enable the "Use DuckDuckGo image proxy" option in order to
                         load images from there instead.</li>
@@ -68,11 +73,13 @@
                     <li>Offline mode can be utilised to prevent any requests to websites.</li>
                     <li>Various features of Mue (weather, changelog, about, quote, background) will request to domains
                         owned by muetab.com (weather.muetab.com, blog.muetab.com, sponsors.muetab.com, api.muetab.com,
-                        pexels.muetab.com, unsplash.muetab.com) in order to get the required information to display.</li>
+                        pexels.muetab.com, unsplash.muetab.com) in order to get the required information to display. The
+                        source code for the servers running all of these domains is available on our <a
+                            href='https://github.com/mue'>GitHub</a>.</li>
                     <li>We may update this privacy policy here without notice at any time.</li>
                 </ul>
                 <p>If you have any questions, please <a href='/contact'>contact us</a>.</p>
-                <p>Last Updated: 2nd July 2021</p>
+                <p>Last Updated: 16th July 2021</p>
             </div>
         </div>
     </div>
@@ -91,9 +98,6 @@
             </ul>
             <ul>
                 <li class='title'>Website</li>
-                <a href='/features'>
-                    <li>Features</li>
-                </a>
                 <a href='/about'>
                     <li>About</li>
                 </a>
@@ -104,7 +108,7 @@
                     <li>Branding</li>
                 </a>
                 <a href='/privacy'>
-                  <li>Privacy</li>
+                    <li>Privacy</li>
                 </a>
                 <a href='https://blog.muetab.com'>
                     <li>Blog</li>
