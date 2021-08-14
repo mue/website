@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Uninstall | Mue</title>
+
+  <meta name='robots' content='index, follow'>
+  <meta name='title' content='Mue - New Tab'>
+  <meta name='description' content='Mue is a fast, open source and free-to-use new tab page for modern browsers'>
+  <meta name='image' content='https://raw.githubusercontent.com/mue/branding/main/logo/logo_horizontal.png'>
+  <meta name='keywords'
+      content='mue, new tab, mue tab, settings, tab, extension, new page, david ralph, davidjcralph, alex sparkes, productivity, chrome extension, firefox extension, extension, start page, opensource'>
+  <meta name='author' content='Mue Tab'>
+  <meta name='language' content='English'>
+  <meta name='theme-color' content='#ffb032'>
+
+  <meta property='og:type' content='Website'>
+  <meta property='og:site_name' content='Mue'>
+  <meta property='og:title' content='Mue - New Tab'>
+  <meta property='og:description' content='Mue is a fast, open source and free-to-use new tab page for modern browsers'>
+  <meta property='og:image' content='https://raw.githubusercontent.com/mue/branding/main/logo/logo_tile_large.png'>
+  <meta property='og:image:alt' content='Mue logo'>
+
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lexend+Deca'>
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+  <link rel='stylesheet' href='assets/css/index.css'>
+  <link rel='icon' href='favicon.ico' type='image/x-icon'>
+  <link rel='manifest' href='/manifest.webmanifest'>
+
+</head>
+
+<body>
+  <div class='navbar' id='navbar'>
+    <a href='/' class='active'>
+      <img class='mue-logo' src='https://raw.githubusercontent.com/mue/branding/main/logo/logo_horizontal.png'
+        alt='Mue Logo' draggable='false' />
+    </a>
+    <a href='/about'>About</a>
+    <a href='/contact'>Contact</a>
+    <div class='dropdown'>
+      <button class='dropbtn'>More
+        <i class='fa fa-caret-down'></i>
+      </button>
+      <div class='dropdown-content'>
+        <a href='https://docs.muetab.com'>Documentation</a>
+        <a href='/branding'>Branding</a>
+        <a href='https://discord.gg/zv8C9F8'>Discord Server</a>
+        <a href='https://blog.muetab.com'>Blog</a>
+      </div>
+    </div>
+    <a href='javascript:void(0);' class='icon' onclick='navbar();'>
+      <i class='fa fa-bars'></i>
+    </a>
+  </div>
+  <div class='row' align='center'>
+    <div class='column sixty'>
+      <h1>Uninstalled Succesfully</h1>
+      <p>Mue has been uninstalled. If you would like to help us improve in the future, feel free to fill out this short form.</p>
+      <form action='https://api.formcake.com/api/form/a4f0846a-6d70-42d0-9f43-f2585a6d2273/submission' name='form'
+        id='form' method='POST' accept-charset='UTF-8' enctype='multipart/form-data'>
+        <br>
+        <label>Why did you uninstall Mue?</label>
+        <br>
+        <select name='reason' id='reason'>
+          <option value='slow'>Too slow</option>
+          <option value='old'>Going back to old new tab page</option>
+          <option value='broken'>Didn't work properly</option>
+          <option value='features'>Missing features</option>
+          <option value='notexpected'>Not what I expected</option>
+          <option value='privacy'>Privacy concerns</option>
+          <option value='language'>Not available in my language</option>
+          <option value='temp'>Temporarily uninstalled</option>
+          <option value='other'>Other</option>
+        </select>
+        <input type='text' name='reasonOther' id='otherReason'>
+        <br>
+        <span id='reasonWarning'></span>
+        <br>
+        <label>What can we do to make Mue better for you?</label>
+        <br>
+        <textarea name='MultiLine' maxlength='65535'></textarea>
+        <br>
+        <span id='betterWarning'></span>
+        <br>
+        <label>How likely are you to try Mue in the future?</label>
+        <br>
+        <label>0</label>
+        <input class='range' type='range' min='0' max='10' name='likelyToTry' id='likelyToTry' value='5'>
+        <label>10 <span id='likelyValue'>(5)</span></label>
+        <br>
+        <button class='submitbtn formbutton' type='button' onclick='javascript:validateForm()'>Submit</button>
+        <br><br>
+      </form>
+    </div>
+  </div>
+  <footer>
+    <div>
+      <ul class='logo'>
+        <li><img src='assets/img/mue_big.png' alt='Mue Logo' /> </li>
+        <li>&copy; 2018-2021 The Mue Authors</li>
+        <li class='icons'><a href='https://twitter.com/getmue'><i class='fab fa-twitter' aria-hidden='true'></i></a>
+        </li>
+        <li class='icons'><a href='https://producthunt.com/posts/mue'><i class='fab fa-product-hunt'
+              aria-hidden='true'></i></a></li>
+        <li class='icons'><a href='https://www.facebook.com/muetab'><i class='fab fa-facebook'
+              aria-hidden='true'></i></a></li>
+      </ul>
+      <ul>
+        <li class='title'>Mue</li>
+        <a href='/download'>
+          <li>Download</li>
+        </a>
+    </ul>
+      <ul>
+        <li class='title'>Website</li>
+        <a href='/about'>
+          <li>About</li>
+        </a>
+        <a href='/contact'>
+          <li>Contact</li>
+        </a>
+        <a href='/branding'>
+          <li>Branding</li>
+        </a>
+        <a href='/privacy'>
+          <li>Privacy</li>
+        </a>
+        <a href='https://blog.muetab.com'>
+          <li>Blog</li>
+        </a>
+      </ul>
+      <ul>
+        <li class='title'>Links</li>
+        <a href='https://github.com/mue'>
+          <li>Source Code</li>
+        </a>
+        <a href='https://github.com/mue/mue/projects/2'>
+          <li>Roadmap</li>
+        </a>
+        <a href='https://github.com/sponsors/davidjcralph'>
+          <li>Support Us</li>
+        </a>
+        <a href='https://github.com/mue/mue/issues'>
+          <li>Issues</li>
+        </a>
+        <a href='https://status.muetab.com'>
+          <li>Status</li>
+        </a>
+      </ul>
+    </div>
+  </footer>
+  <button onclick='topFunction()' id='scroll' title='Go to top'><i class='fa fa-angle-up'
+      aria-hidden='true'></i></button>
+      <script></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/validator/13.6.0/validator.min.js'></script>
+  <script src='assets/js/uninstall.js'></script>
+  <script src='assets/js/index.js'></script>
+</body>
+
+</html>
