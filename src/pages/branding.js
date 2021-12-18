@@ -11,6 +11,8 @@ import { MdDownload } from "react-icons/md";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
+import * as Constants from "../modules/constants";
+
 export async function getServerSideProps(context) {
   return {
     props: {
@@ -102,7 +104,7 @@ export default function Branding() {
         <div className="content">
           <span className="title">{t("getstarted.title")}</span>
           <span className="desc">{t("getstarted.description")}</span>
-          <Link href="https://www.dropbox.com/s/rwi61drgu74ywch/mue-branding.pdf?dl=1">
+          <Link href={Constants.branding_pdf}>
             <a>
               <button className="hollow">
                 <MdDownload /> {t("getstarted.download")}

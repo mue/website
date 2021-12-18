@@ -25,7 +25,7 @@ export default function SourceCard(props) {
     <div className="card">
       <div className="circle">{getIcon(props.name)}</div>
       <span className="card-title">{props.title}</span>
-      <span className="card-desc">Version {props.version}</span>
+      <span className="card-desc">{t("version")} {props.version}</span>
       <Link href={props.url}>
         <a>
           <button className="filled" type="button">

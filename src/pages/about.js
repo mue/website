@@ -15,9 +15,11 @@ import { MdGroups, MdOutlineKeyboardArrowRight } from "react-icons/md";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
+import * as Constants from "../modules/constants";
+
 export async function getServerSideProps(context) {
   const sponsors = (
-    await (await fetch("https://mue-sponsors.vercel.app/list")).json()
+    await (await fetch(Constants.sponsors_api)).json()
   ).sponsors;
   return {
     props: {

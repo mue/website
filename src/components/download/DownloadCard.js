@@ -16,7 +16,7 @@ export default function DownloadCard(props) {
         alt={"Download on " + props.name}
       />
       <span className="card-title">{props.name}</span>
-      <span className="card-desc">Version {props.version}</span>
+      <span className="card-desc">{t("version")} {props.version}</span>
       <Link href={props.url}>
         <a>
           <button className="submitbtn filled" type="button">

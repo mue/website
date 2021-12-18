@@ -8,6 +8,8 @@ import Image from "next/image";
 
 import { useTranslation } from "next-i18next";
 
+import * as Constants from "../modules/constants";
+
 export default function Navbar() {
   // scroll animation
   useEffect(() => {
@@ -49,7 +51,7 @@ export default function Navbar() {
         src="https://umami.muetab.com/umami.js"
         async
         defer
-        data-website-id="f24748bf-5553-4773-bcbe-568e6c7ffdef"
+        data-website-id={Constants.umami_id}
       />
       <div className="navbarContent">
         <ul>
