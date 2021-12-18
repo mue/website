@@ -1,0 +1,27 @@
+{
+    "subtitle": "For the modern web.",
+    "product": {
+        "title": "Product",
+        "download": "Download",
+        "features": "Features",
+        "privacy": "Privacy",
+        "documentation": "Documentation"
+    },
+    "company": {
+        "title": "Company",
+        "about": "About",
+        "contact": "Contact",
+        "branding": "Branding",
+        "blog": "Blog"
+    },
+    "links": {
+        "title": "Links",
+        "privacy": "Privacy",
+        "source": "Source Code",
+        "roadmap": "Roadmap",
+        "support": "Support Us",
+        "issues": "Issues",
+        "status": "Status"
+    },
+    "social": "Social"
+}

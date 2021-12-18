@@ -1,0 +1,91 @@
+.download-cards {
+  display: flex;
+  flex-flow: wrap;
+  align-items: center;
+  justify-content: center;
+
+  .card {
+    display: flex;
+
+    img {
+      width: 90px;
+      height: auto;
+    }
+  }
+}
+
+.githubDownload {
+  display: flex;
+
+  .card {
+    display: flex;
+
+    svg {
+      color: var(--text-color);
+    }
+  }
+}
+
+.github {
+  background: var(--secondary-background-color);
+  padding: 100px 0 100px 0;
+
+  .desc {
+    color: var(--text-color);
+    padding: 10px;
+    width: 500px;
+    display: flex;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+      font-size: 34px;
+    }
+
+    p {
+      font-size: 16px;
+      color: var(--secondary-text);
+    }
+  }
+
+  .content {
+    display: flex;
+  }
+
+  .faq-item {
+    padding: 20px 0 20px 0;
+  }
+
+  .questions {
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .github .content {
+    flex-flow: column;
+
+    .desc {
+      text-align: center;
+      width: auto;
+
+      .circle {
+        margin: 0 auto;
+      }
+
+      p {
+        width: auto;
+      }
+    }
+  }
+
+  .githubDownload {
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .form {
+    width: 78vw;
+  }
+}

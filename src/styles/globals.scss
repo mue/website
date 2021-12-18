@@ -1,0 +1,155 @@
+@import "modules/header";
+@import "modules/navbar";
+@import "modules/footer";
+@import "modules/button";
+@import "modules/banner";
+@import "modules/carousel";
+
+@import "pages/privacy";
+@import "pages/content";
+@import "pages/contact";
+@import "pages/download";
+@import "pages/about";
+@import "pages/uninstall";
+@import "pages/branding";
+
+
+:root {
+  --width: 1280px;
+
+  --text-color: #fff;
+  --secondary-text: #bdbdbd;
+  --link: #ffbdc6;
+
+  --background-color: #131a22;
+  --secondary-background-color: #131111;
+  --team-background-color: #1d2029;
+  --card-background: #2f3542;
+  --branding-color-background: #222f3e;
+  --get-started-color: #201d1d;
+
+  --header-gradient: linear-gradient(90deg, #b13854 37%, #b94825 60%);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --text-color: #000;
+    --secondary-text: #565656;
+    --link: #d6a0a7;
+
+    --background-color: #fafbfc;
+    --secondary-background-color: #eaeaea;
+    --team-background-color: #818fb8;
+    --card-background: #a6b8df;
+    --branding-color-background: #dfeeff;
+    --get-started-color: #dfd0d0;
+
+    --header-gradient: linear-gradient(90deg, rgba(255, 92, 39, 0.7) 37%, rgba(255, 70, 110, 0.67) 60%);
+  }
+
+  .press-logos, .top {
+    .invert {
+      filter: invert(1);
+    }
+  }
+
+  .getstarted {
+    .hollow {
+      background-color: #fbbebe;
+      color: var(--text-color);
+    }
+  }
+
+  .scroll {
+    ul.dropdownButton {
+      svg {
+        color: black;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  :root {
+    --width: 100%;
+  }
+}
+
+body,
+html {
+  margin: 0;
+  font-family: "Lexend Deca", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  scroll-behavior: smooth;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 0.3;
+  }
+
+  60% {
+    opacity: 0.5;
+  }
+
+  80% {
+    opacity: 0.9;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.content {
+  width: var(--width);
+  margin: 0 auto;
+
+  h2 {
+    font-size: 38px;
+    transition: fade 0.7s ease-in-out;
+  }
+
+  p {
+    font-size: 18px;
+  }
+}
+
+.quickRow {
+  margin-top: 50vh;
+  align-content: center;
+  justify-content: space-around;
+  align-items: center;
+  height: 50vh;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  div {
+    height: 220px;
+    background: #eaeaea;
+    width: 350px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    padding: 15px;
+    align-items: flex-end;
+    font-size: 35px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .content {
+    width: 100%;
+  }
+}

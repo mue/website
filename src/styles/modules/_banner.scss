@@ -1,0 +1,18 @@
+.banner {
+  text-align: center;
+  background-color: orange;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: calc(100% - 40px);
+  z-index: 1; /* this was 1*/
+}
+
+.bannerSpace {
+  top: 45px;
+}
+
+.banner-close {
+  float: right;
+}
