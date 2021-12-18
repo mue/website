@@ -1,0 +1,22 @@
+{
+    "title": "Contact",
+    "description": "Get in touch",
+    "description_two": "Contact us via social media or contact form.",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send",
+    "invalid_email": "Invalid email",
+    "invalid_message": "Message box must be filled",
+    "faq": {
+        "title": "Freqently Asked Questions (FAQ)",
+        "description": "Here are the answers to some questions we get asked often.",
+        "branding": "Can I use the branding assets?",
+        "branding_desc_start": "Sure! Checkout the page",
+        "branding_desc_here": "here",
+        "branding_desc_end": "for downloads.",
+        "api": "Can I use the API in my own projects?",
+        "api_desc": "The quote endpoints are open to all, but due to licensing agreements with our photographers we cannot give approval for using the image endpoints.",
+        "feature": "Can we feature Mue on our website?",
+        "feature_desc": "Sure! We welcome all reviews and articles to be created about Mue, you don't need to ask us for permission. If you want, you can email us a link to the page when you're finished!"
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "title": "About",
+    "description": "Learn more about Mue and the team behind it",
+    "vision": "Mue originated as an admin homepage designed to motivate article writers for a news site. Built in 2017, it had features such as beautiful backgrounds and inspirational quotes. A year later, we turned it into a standalone product in the form of a new tab page browser extension. We made it open-source to encourage contributions and provide transparency into how the extension works in case there were privacy concerns. Over the years, we have added many new features to it and it has gathered attention from websites that have written about it as well as growing to over 1000 users.",
+    "team": {
+        "title": "The Team",
+        "description": "The people who design and develop Mue.",
+        "lead_dev": "Lead Developer",
+        "lead_design": "Lead Designer",
+        "qa_dev": "QA, Developer",
+        "dev": "Developer"
+    },
+    "statistics": {
+        "title": "Statistics",
+        "users": "users",
+        "stars": "stars",
+        "updates": "updates"
+    },
+    "supporters": {
+        "title": "Supporters",
+        "description": "These are very generous individuals who support Mue's development and associated costs.",
+        "support_us": "Support Us",
+        "none": "There are no current Mue supporters. Become the first!"
+    }
+}

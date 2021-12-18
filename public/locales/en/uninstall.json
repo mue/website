@@ -1,0 +1,22 @@
+{
+    "title": "Uninstall",
+    "title_two": "Uninstalled successfully",
+    "description": "If you would like to help us improve in the future, feel free to fill out this short form.",
+    "reason": {
+        "title": "Why did you uninstall Mue",
+        "slow": "Too slow",
+        "old": "Going back to old new tab page",
+        "broken": "Didn't work properly",
+        "features": "Missing features",
+        "notexpected": "Not what I expected",
+        "privacy": "Privacy concerns",
+        "language": "Not available in my language",
+        "temp": "Temporarily uninstalled",
+        "other": "Other"
+    },
+    "better": "What can we do to make Mue better for you?",
+    "likely": "How likely are you to try Mue in the future?",
+    "submit": "Submit",
+    "better_error": "Message box must be filled",
+    "reason_error": "Reason must be provided"
+}

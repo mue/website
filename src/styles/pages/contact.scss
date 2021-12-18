@@ -1,0 +1,166 @@
+.form {
+  width: 400px;
+  position: relative;
+  background: var(--secondary-background-color);
+  margin: 0 auto;
+  margin-bottom: 50px;
+  color: var(--text-color);
+  padding: 40px;
+  border-radius: 37px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    gap: 15px;
+
+    label {
+      display: block;
+    }
+
+    input,
+    textarea {
+      background: none;
+      border: 2px solid #505050;
+      color: var(--text-color);
+      width: 100% !important;
+      font-family: "Lexend Deca", sans-serif;
+      box-sizing: border-box;
+      padding: 12px 20px;
+      resize: none;
+    }
+
+    #emailWarning,
+    #messageWarning,
+    #reasonWarning,
+    #betterWarning,
+    .required {
+      color: rgb(247, 157, 172);
+    }
+
+    textarea {
+      min-height: 200px;
+    }
+  }
+}
+
+.faq {
+  h1 {
+    color: var(--text-color);
+    font-size: 48px;
+  }
+}
+
+.faq-item {
+  .faq-question {
+    font-size: 36px;
+    display: block;
+    color: var(--text-color);
+  }
+
+  .faq-answer {
+    font-size: 18px;
+    color: var(--secondary-text);
+
+    a {
+      color: var(--secondary-text);
+      text-decoration: underline;
+
+      &:hover {
+        color: var(--text-color);
+      }
+    }
+  }
+}
+
+.socialCircles {
+  padding-top: 20px;
+  width: 200px !important;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  div {
+    margin-right: 5px;
+  }
+
+  a {
+    text-decoration: none;
+    color: var(--text-color);
+
+    .circle {
+      width: 50px;
+    }
+
+    svg {
+      &:hover {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.faq {
+  background: var(--secondary-background-color);
+  padding: 100px 0 100px 0;
+
+  .desc {
+    color: var(--text-color);
+    padding: 10px;
+    width: 270px;
+
+    h1 {
+      font-size: 34px;
+    }
+
+    p {
+      font-size: 16px;
+      color: var(--text-color);
+    }
+  }
+
+  .content {
+    display: flex;
+  }
+
+  .faq-item {
+    padding: 20px 0 20px 0;
+  }
+
+  .questions {
+    padding: 10px;
+  }
+}
+
+@media only screen and (max-width: 1000px) {
+  .faq .content {
+    flex-flow: column;
+
+    .desc {
+      text-align: center;
+      width: auto;
+
+      .circle {
+        margin: 0 auto;
+      }
+
+      p {
+        width: auto;
+      }
+    }
+  }
+
+  .form {
+    width: 78vw;
+  }
+}
+
+
+@media only screen and (max-width: 1400px) and (min-width: 600px) {
+  .faq {
+    padding: 100px 80px 100px 80px;
+  }
+}
