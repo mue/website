@@ -143,7 +143,7 @@ export default function Contact() {
             <div className="faq-item">
               <span className="faq-question">{t("faq.branding")}</span>
               <span className="faq-answer">
-                {t("faq.branding_desc_start")}
+                {t("faq.branding_desc_start") + " "}
                 <Link href="/branding">
                   <a title="Go to branding page">
                     {t("faq.branding_desc_here")}
