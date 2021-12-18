@@ -10,6 +10,8 @@ import GetStarted from "../components/GetStarted";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
+import * as Constants from "../modules/constants";
+
 const validateForm = (t) => {
   const form = document.forms["form"];
   const reasonWarning = document.getElementById("reasonWarning");
@@ -78,7 +80,7 @@ export default function Uninstall() {
       <div style={{ marginTop: "350pt" }} className="content">
         <div className="form" data-aos="fade-up">
           <form
-            action="https://forms.muetab.com/uninstall"
+            action={Constants.form_api + "/uninstall"}
             name="form"
             id="form"
             method="POST"

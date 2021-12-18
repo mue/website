@@ -17,6 +17,8 @@ import validator from "validator";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
+import * as Constants from "../modules/constants";
+
 const validateForm = (t) => {
   const form = document.forms["form"];
   const emailWarning = document.getElementById("emailWarning");
@@ -98,7 +100,7 @@ export default function Contact() {
       <div style={{ marginTop: "350pt" }} className="content">
         <div className="form" data-aos="fade-up">
           <form
-            action="https://forms.muetab.com/contact"
+            action={Constants.form_api + "/contact"}
             name="form"
             id="form"
             method="POST"
@@ -117,7 +119,7 @@ export default function Contact() {
             <textarea name="MultiLine" maxLength="65535"></textarea>
             <div
               className="h-captcha"
-              data-sitekey="3d43c94a-55a7-45be-87ce-5c6cd8de801e"
+              data-sitekey={Constants.hcaptcha_key}
               data-theme={captchaTheme}
             ></div>
             <button
