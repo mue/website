@@ -27,6 +27,7 @@ export default function Navbar() {
           }
           nav.className = "navbar scroll";
         }
+        setCloseIcon(false);
       }
     };
   });
