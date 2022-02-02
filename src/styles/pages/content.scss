@@ -131,6 +131,19 @@
   }
 }
 
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .getstarted {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
+
 @media only screen and (max-width: 1280px) and (min-width: 600px) {
   .feature {
     justify-content: space-around !important;

@@ -51,6 +51,8 @@ export default function Carousel() {
   );
 
   const url = "https://res.cloudinary.com/mue/website/shareyourmue";
+  const alt_url =
+    "https://res.cloudinary.com/mue/website/fallback/shareyourmue";
   const count = 4;
 
   return (
@@ -60,12 +62,20 @@ export default function Carousel() {
           {[...Array(count)].map((e, index) => (
             <div className="carousel-slide" key={index}>
               <div className="carousel-slideinner">
-                <img
-                  className="carousel-slideimg"
-                  src={url + (index + 1) + ".webp"}
-                  alt={"#shareyourmue setup " + (index + 1)}
-                  draggable="false"
-                />
+                <picture>
+                  <source
+                    type="image/webp"
+                    className="carousel-slideimg"
+                    srcSet={url + (index + 1) + ".webp"}
+                    draggable="false"
+                  />
+                  <img
+                    className="carousel-slideimg"
+                    src={alt_url + (index + 1) + ".jpg"}
+                    alt={"#shareyourmue setup " + (index + 1)}
+                    draggable="false"
+                  />
+                </picture>
               </div>
             </div>
           ))}

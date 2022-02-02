@@ -5,5 +5,6 @@ module.exports = {
   i18n,
   images: {
     domains: ["res.cloudinary.com", "avatars.githubusercontent.com"],
+    format: ["image/webp", "image/png", "image/jpeg"],
   },
 };

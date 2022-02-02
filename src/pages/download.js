@@ -74,6 +74,7 @@ export default function Download(props) {
           <DownloadCard
             name="Whale"
             image="https://res.cloudinary.com/mue/website/whale.webp"
+            fallbackImage="https://res.cloudinary.com/mue/website/fallback/whale.png"
             version="6.0.4"
             url="https://store.whale.naver.com/detail/ecllekeilcmicbfkkiknfdddbogibbnc"
           />

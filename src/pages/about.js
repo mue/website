@@ -96,6 +96,7 @@ export default function About({ sponsors }) {
               name="David Ralph"
               title={t("team.lead_dev")}
               image="https://res.cloudinary.com/mue/image/upload/v1639311162/website/davidcralph.webp"
+              fallbackImage="https://res.cloudinary.com/mue/website/fallback/davidcralph.png"
               twitter="davidcralph"
               github="davidcralph"
               website="https://davidcralph.co.uk"
@@ -104,6 +105,7 @@ export default function About({ sponsors }) {
               name="Alex Sparkes"
               title={t("team.lead_design")}
               image="https://res.cloudinary.com/mue/website/alexsparkes.webp"
+              fallbackImage="https://res.cloudinary.com/mue/website/fallback/alexsparkes.png"
               twitter="AlexmSparkes"
               github="alexsparkes"
             />
@@ -111,6 +113,7 @@ export default function About({ sponsors }) {
               name="Isaac Saunders"
               title={t("team.qa_dev")}
               image="https://res.cloudinary.com/mue/image/upload/v1639159068/website/eartharoid.webp"
+              fallbackImage="https://res.cloudinary.com/mue/website/fallback/eartharoid.png"
               twitter="eartharoid"
               github="eartharoid"
               website="https:///eartharoid.me"
@@ -119,6 +122,7 @@ export default function About({ sponsors }) {
               name="Wessel Tip"
               title={t("team.dev")}
               image="https://res.cloudinary.com/mue/image/upload/v1639505831/website/wesseltip.webp"
+              fallbackImage="https://res.cloudinary.com/mue/website/fallback/wesseltip.png"
               twitter="wessel_tip"
               github="Wessel"
               website="https:///wessel.meek.moe"

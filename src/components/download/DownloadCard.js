@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import ImageWithFallback from "../ImageWithFallback";
 import { useTranslation } from "next-i18next";
 
 export default function DownloadCard(props) {
@@ -7,8 +7,9 @@ export default function DownloadCard(props) {
 
   return (
     <div className="card">
-      <Image
+      <ImageWithFallback
         src={props.image}
+        fallbackSrc={props.fallbackImage || props.image}
         className="cardavatar"
         draggable="false"
         height="80"
