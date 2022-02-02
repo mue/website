@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 import Link from "next/link";
-import Image from "next/image";
+import ImageWithFallback from "../components/ImageWithFallback";
 
 import { MdDownload } from "react-icons/md";
 
@@ -47,8 +47,9 @@ export default function Branding() {
           <p>{t("logos.description")}</p>
           <div className="logos">
             <div className="logo">
-              <Image
+              <ImageWithFallback
                 src="https://res.cloudinary.com/mue/website/logo_horizontal.webp"
+                fallbackSrc="https://res.cloudinary.com/mue/website/fallback/logo_horizontal.png"
                 width="256"
                 height="70"
                 draggable="false"
@@ -56,8 +57,9 @@ export default function Branding() {
               />
             </div>
             <div className="logo">
-              <Image
+              <ImageWithFallback
                 src="https://res.cloudinary.com/mue/website/logo_round.webp"
+                fallbackSrc="https://res.cloudinary.com/mue/website/fallback/logo_round.png"
                 height="80"
                 width="80"
                 draggable="false"
@@ -65,8 +67,9 @@ export default function Branding() {
               />
             </div>
             <div className="logo">
-              <Image
+              <ImageWithFallback
                 src="https://res.cloudinary.com/mue/website/logo_square.webp"
+                fallbackSrc="https://res.cloudinary.com/mue/website/fallback/logo_square.png"
                 height="80"
                 width="80"
                 draggable="false"
@@ -74,8 +77,9 @@ export default function Branding() {
               />
             </div>
             <div className="logo">
-              <Image
+              <ImageWithFallback
                 src="https://res.cloudinary.com/mue/website/logo_tile.webp"
+                fallbackSrc="https://res.cloudinary.com/mue/website/fallback/logo_tile.png"
                 height="80"
                 width="120"
                 draggable="false"

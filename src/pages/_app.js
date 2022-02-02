@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import AOS from "aos";
 import { appWithTranslation } from "next-i18next";
+import cssVars from "css-vars-ponyfill";
 
 import "../styles/globals.scss";
 
@@ -14,6 +15,8 @@ function MueWebsite({ Component, pageProps }) {
       once: true,
       offset: 50,
     });
+
+    cssVars();
   }, []);
   return <Component {...pageProps} />;
 }

@@ -1,12 +1,13 @@
 import { FaTwitter, FaGithub, FaHome } from "react-icons/fa";
 import Link from "next/link";
-import Image from "next/image";
+import ImageWithFallback from "../ImageWithFallback";
 
 export default function TeamCard(props) {
   return (
     <div className="card">
-      <Image
+      <ImageWithFallback
         src={props.image}
+        fallbackSrc={props.fallbackImage}
         alt={props.name + " avatar"}
         width="180"
         height="180"
