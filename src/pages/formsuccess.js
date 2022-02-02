@@ -11,7 +11,11 @@ import Footer from "../components/Footer";
 export async function getServerSideProps(context) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["formsuccess", "navbar", "footer"])),
+      ...(await serverSideTranslations(context.locale, [
+        "formsuccess",
+        "navbar",
+        "footer",
+      ])),
     },
   };
 }
@@ -36,7 +40,7 @@ export default function FormSuccess() {
           </Link>
         </div>
       </header>
-      <div style={{ marginTop: "775pt" }} className="content"></div>
+      <div style={{ marginTop: "775pt" }} className="content"/>
       <Footer />
     </>
   );

@@ -9,8 +9,6 @@ export default function Banner() {
     localStorage.setItem("banner" + bannerName, false);
   };
 
-  return null;
-
   return (
     <div className="banner">
       <span>not finished</span>

@@ -7,7 +7,7 @@ import "../styles/globals.scss";
 import "aos/dist/aos.css";
 import "@fontsource/lexend-deca";
 
-function MyApp({ Component, pageProps }) {
+function MueWebsite({ Component, pageProps }) {
   useEffect(() => {
     AOS.init({
       easing: "ease-out-cubic",
@@ -18,4 +18,4 @@ function MyApp({ Component, pageProps }) {
   return <Component {...pageProps} />;
 }
 
-export default appWithTranslation(MyApp);
+export default appWithTranslation(MueWebsite);

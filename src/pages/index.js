@@ -4,7 +4,7 @@ import { useTranslation } from "next-i18next";
 
 import Head from "../components/Head";
 
-import Banner from "../components/Banner";
+//import Banner from "../components/Banner";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -26,7 +26,12 @@ export async function getServerSideProps(context) {
   return {
     props: {
       data,
-      ...(await serverSideTranslations(context.locale, ["home", "navbar", "footer", "getstarted"])),
+      ...(await serverSideTranslations(context.locale, [
+        "home",
+        "navbar",
+        "footer",
+        "getstarted",
+      ])),
     },
   };
 }
@@ -37,7 +42,7 @@ export default function Home(props) {
   return (
     <>
       <Head title={t("title")} />
-      <Banner />
+      {/* <Banner /> */}
       <header>
         <div className="promotion">
           <div>

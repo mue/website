@@ -21,7 +21,12 @@ export async function getServerSideProps(context) {
   return {
     props: {
       data,
-      ...(await serverSideTranslations(context.locale, ["download", "navbar", "footer", "getstarted"])),
+      ...(await serverSideTranslations(context.locale, [
+        "download",
+        "navbar",
+        "footer",
+        "getstarted",
+      ])),
     },
   };
 }
@@ -51,25 +56,25 @@ export default function Download(props) {
           <DownloadCard
             name="Chrome"
             image="https://res.cloudinary.com/mue/website/chrome.svg"
-            version="6.0.3"
+            version="6.0.4"
             url="https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid"
           />
           <DownloadCard
             name="Edge"
             image="https://res.cloudinary.com/mue/website/edge.svg"
-            version="6.0.3"
+            version="6.0.4"
             url="https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja"
           />
           <DownloadCard
             name="Firefox"
             image="https://res.cloudinary.com/mue/website/firefox.svg"
-            version="6.0.3"
+            version="6.0.4"
             url="https://addons.mozilla.org/firefox/addon/mue/"
           />
           <DownloadCard
             name="Whale"
             image="https://res.cloudinary.com/mue/website/whale.webp"
-            version="6.0.3"
+            version="6.0.4"
             url="https://store.whale.naver.com/detail/ecllekeilcmicbfkkiknfdddbogibbnc"
           />
         </div>
@@ -92,7 +97,7 @@ export default function Download(props) {
             <SourceCard
               name="extension"
               title="Extension"
-              version="6.0.3"
+              version="6.0.4"
               url="https://github.com/mue/mue"
             />
             <SourceCard
