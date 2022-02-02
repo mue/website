@@ -39,7 +39,7 @@ export default function Error(props) {
             </Link>
           </div>
         </header>
-        <div style={{ marginTop: "775pt" }} className="content"></div>
+        <div style={{ marginTop: "775pt" }} className="content" />
         <Footer />
       </main>
     </>

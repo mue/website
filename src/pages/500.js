@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Error() {
   return (
     <>
-      <Head title='500' />
+      <Head title="500" />
       <main>
         <Navbar />
         <header className="full">
@@ -19,7 +19,7 @@ export default function Error() {
             <br />
             <Link href="/">
               <a>
-                <button className="filled">Go to home</button>
+                <button className="filled">Go back to the homepage</button>
               </a>
             </Link>
           </div>

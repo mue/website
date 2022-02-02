@@ -13,7 +13,12 @@ import { useTranslation } from "next-i18next";
 export async function getServerSideProps(context) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["features", "navbar", "footer", "getstarted"])),
+      ...(await serverSideTranslations(context.locale, [
+        "features",
+        "navbar",
+        "footer",
+        "getstarted",
+      ])),
     },
   };
 }
@@ -38,10 +43,7 @@ export default function Features() {
             title={t("motivated.title")}
             image="https://res.cloudinary.com/mue/website/motivated.webp"
             description={t("motivated.description")}
-            list={[
-              t("motivated.list_one"),
-              t("motivated.list_two")
-            ]}
+            list={[t("motivated.list_one"), t("motivated.list_two")]}
           />
           <Feature
             reverse
@@ -51,7 +53,7 @@ export default function Features() {
             list={[
               t("customise.list_one"),
               t("customise.list_two"),
-              t("customise.list_three")
+              t("customise.list_three"),
             ]}
           />
           <Feature
@@ -61,7 +63,7 @@ export default function Features() {
             list={[
               t("optimise.list_one"),
               t("optimise.list_two"),
-              t("optimise.list_three")
+              t("optimise.list_three"),
             ]}
           />
           <Feature
@@ -69,10 +71,7 @@ export default function Features() {
             title={t("secure.title")}
             image="https://res.cloudinary.com/mue/image/upload/v1639345701/website/secure.webp"
             description={t("secure.description")}
-            list={[
-              t("secure.list_one"),
-              t("secure.list_two")
-            ]}
+            list={[t("secure.list_one"), t("secure.list_two")]}
           />
         </div>
       </div>

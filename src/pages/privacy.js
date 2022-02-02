@@ -11,7 +11,12 @@ import { useTranslation } from "next-i18next";
 export async function getServerSideProps(context) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["privacy", "navbar", "footer", "getstarted"])),
+      ...(await serverSideTranslations(context.locale, [
+        "privacy",
+        "navbar",
+        "footer",
+        "getstarted",
+      ])),
     },
   };
 }

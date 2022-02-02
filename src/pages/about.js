@@ -18,13 +18,17 @@ import { useTranslation } from "next-i18next";
 import * as Constants from "../modules/constants";
 
 export async function getServerSideProps(context) {
-  const sponsors = (
-    await (await fetch(Constants.sponsors_api)).json()
-  ).sponsors;
+  const sponsors = (await (await fetch(Constants.sponsors_api)).json())
+    .sponsors;
   return {
     props: {
       sponsors,
-      ...(await serverSideTranslations(context.locale, ["about", "navbar", "footer", "getstarted"])),
+      ...(await serverSideTranslations(context.locale, [
+        "about",
+        "navbar",
+        "footer",
+        "getstarted",
+      ])),
     },
   };
 }
@@ -46,7 +50,7 @@ export default function About({ sponsors }) {
       <div style={{ marginTop: "500pt" }} className="aboutUs vision">
         <div className="content">
           <h1>
-            A little about <b>us</b>.
+            {t("vision_title_start")} <b>{t("vision_title_end")}</b>.
           </h1>
           <p data-aos="fade-up">{t("vision")}</p>
           <Link href="#team">

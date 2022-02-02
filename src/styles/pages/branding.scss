@@ -49,7 +49,9 @@
   background: #fff !important;
 }
 
-.pink, .orange, .white {
+.pink,
+.orange,
+.white {
   p {
     color: black;
   }
@@ -103,8 +105,8 @@
   }
 }
 
-  @media only screen and (max-width: 1280px) and (min-width: 600px) {
-    .aboutUs {
-      padding: 100px;
-    }
+@media only screen and (max-width: 1280px) and (min-width: 600px) {
+  .aboutUs {
+    padding: 100px;
   }
+}

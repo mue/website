@@ -16,7 +16,12 @@ import * as Constants from "../modules/constants";
 export async function getServerSideProps(context) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ["branding", "navbar", "footer", "getstarted"])),
+      ...(await serverSideTranslations(context.locale, [
+        "branding",
+        "navbar",
+        "footer",
+        "getstarted",
+      ])),
     },
   };
 }

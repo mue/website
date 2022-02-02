@@ -8,23 +8,23 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <>
-      <Head title='404' />
+      <Head title="404" />
       <main>
         <Navbar />
         <header className="full">
-          <div className='promotion'>
+          <div className="promotion">
             <span>404</span>
             <br />
             <span className="two">PAGE NOT FOUND</span>
             <br />
             <Link href="/">
               <a>
-                <button className="filled">Go to home</button>
+                <button className="filled">Go back to the homepage</button>
               </a>
             </Link>
-            </div>
+          </div>
         </header>
-        <div style={{ marginTop: "100vh" }} className="content"></div>
+        <div style={{ marginTop: "100vh" }} className="content"/>
         <Footer />
       </main>
     </>

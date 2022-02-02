@@ -1,43 +1,43 @@
 {
-    "title": "Home",
-    "promotion": {
-        "title": "Be",
-        "productive": "productive",
-        "inspired": "inspired",
-        "organised": "organised",
-        "yourself": "yourself",
-        "subtitle": "...with Mue, a fast, open, and free-to-use new tab page for modern browsers.",
-        "demo": "Try the demo"
+  "title": "Home",
+  "promotion": {
+    "title": "Be",
+    "productive": "productive",
+    "inspired": "inspired",
+    "organised": "organised",
+    "yourself": "yourself",
+    "subtitle": "...with Mue, a fast, open, and free-to-use new tab page for modern browsers.",
+    "demo": "Try the demo"
+  },
+  "features": {
+    "widgets": {
+      "title": "Widgets",
+      "description": "Mue comes with many widgets for easy access to information on your new tab page to improve productivity and motivation."
     },
-    "features": {
-        "widgets": {
-            "title": "Widgets",
-            "description": "Mue comes with many widgets for easy access to information on your new tab page to improve productivity and motivation."
-        },
-        "opensource": {
-            "title": "Open-source",
-            "description": "Mue is open source and available on GitHub. Feel free to contribute!",
-            "link": "Open GitHub"
-        },
-        "privacy": {
-            "title": "Privacy",
-            "description": "Mue is built with privacy in mind. No data is tracked or stored, and the API code is open source.",
-            "link": "Read policy"
-        },
-        "extensible": {
-            "title": "Extensible",
-            "description": "More content like photo packs and preset settings can be downloaded from the Mue marketplace."
-        }
+    "opensource": {
+      "title": "Open-source",
+      "description": "Mue is open source and available on GitHub. Feel free to contribute!",
+      "link": "Open GitHub"
     },
-    "shareyourmue": {
-        "title": "Mue is for",
-        "work": "work",
-        "students": "students",
-        "productivity": "productivity",
-        "fun": "fun",
-        "everyone": "everyone",
-        "description_start": "Use the hashtag",
-        "description_end": "on social media to share your Mue with the world and have the chance of appearing below."
+    "privacy": {
+      "title": "Privacy",
+      "description": "Mue is built with privacy in mind. No data is tracked or stored, and the API code is open source.",
+      "link": "Read policy"
     },
-    "press": "As seen on"
+    "extensible": {
+      "title": "Extensible",
+      "description": "More content like photo packs and preset settings can be downloaded from the Mue marketplace."
+    }
+  },
+  "shareyourmue": {
+    "title": "Mue is for",
+    "work": "work",
+    "students": "students",
+    "productivity": "productivity",
+    "fun": "fun",
+    "everyone": "everyone",
+    "description_start": "Use the hashtag",
+    "description_end": "on social media to share your Mue with the world and have the chance of appearing below."
+  },
+  "press": "As seen on"
 }

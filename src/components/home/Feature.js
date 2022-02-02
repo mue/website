@@ -33,7 +33,12 @@ export default function Feature(props) {
   return (
     <div className={classList}>
       <div style={{ position: "relative", height: "200px" }}>
-        <img data-aos="fade-right" src={props.image} alt={props.title} draggable="false" />
+        <img
+          data-aos="fade-right"
+          src={props.image}
+          alt={props.title}
+          draggable="false"
+        />
       </div>
       <div
         className="feature-content"

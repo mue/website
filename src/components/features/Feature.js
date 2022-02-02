@@ -7,7 +7,12 @@ export default function Feature(props) {
 
   return (
     <div className={classList}>
-      <img src={props.image} alt={props.title} data-aos="fade-right" draggable="false"  />
+      <img
+        src={props.image}
+        alt={props.title}
+        data-aos="fade-right"
+        draggable="false"
+      />
       <div className="feature-content" data-aos="fade-up">
         <span className="feature-title">{props.title}</span>
         <span className="feature-description">{props.description}</span>
