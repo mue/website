@@ -150,17 +150,6 @@
   }
 }
 
-.statistics {
-  background: var(--secondary-background-color);
-
-  .content {
-    display: flex;
-    flex-direction: column;
-    align-content: center;
-    justify-content: center;
-  }
-}
-
 .shareyourmue {
   background: var(--header-gradient);
   color: white;
@@ -190,14 +179,6 @@
 
     span {
       font-size: 45px;
-    }
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .statistics {
-    .content {
-      padding: 20px;
     }
   }
 }
