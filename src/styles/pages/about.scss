@@ -17,9 +17,24 @@
 }
 
 .statistics {
+  background: var(--secondary-background-color);
+
   .content {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+
     hr {
       height: 30pt;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .statistics {
+    .content {
+      padding: 20px;
     }
   }
 }

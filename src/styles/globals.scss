@@ -2,17 +2,16 @@
 @import "modules/navbar";
 @import "modules/footer";
 @import "modules/button";
-@import "modules/banner";
+/*@import "modules/banner";*/
 @import "modules/carousel";
 
 @import "pages/privacy";
-@import "pages/content";
+@import "pages/home";
 @import "pages/contact";
 @import "pages/download";
 @import "pages/about";
 @import "pages/uninstall";
 @import "pages/branding";
-
 
 :root {
   --width: 1280px;
