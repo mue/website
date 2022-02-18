@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import Head from "../components/Head";
 import Link from "next/link";
-import Script from "next/script";
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -13,6 +12,7 @@ import { MdEmail, MdQuestionAnswer } from "react-icons/md";
 import { FaTwitter, FaDiscord } from "react-icons/fa";
 
 import validator from "validator";
+import HCaptchaWrapper from "../components/HCaptchaWrapper";
 
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
@@ -68,7 +68,6 @@ export default function Contact() {
   return (
     <>
       <Head title={t("title")} />
-      <Script src="https://js.hcaptcha.com/1/api.js" async defer />
       <Navbar />
       <header>
         <div className="promotion">
@@ -122,11 +121,10 @@ export default function Contact() {
               <span id="messageWarning"></span>
             </label>
             <textarea name="MultiLine" maxLength="65535"></textarea>
-            <div
-              className="h-captcha"
-              data-sitekey={Constants.hcaptcha_key}
-              data-theme={captchaTheme}
-            ></div>
+            <HCaptchaWrapper
+              sitekey={Constants.hcaptcha_key}
+              theme={captchaTheme}
+            />
             <button
               className="filled"
               type="button"

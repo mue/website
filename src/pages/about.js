@@ -155,6 +155,7 @@ export default function About({ sponsors }) {
                           alt={sponsor.handle + " avatar"}
                           height="100"
                           width="100"
+                          draggable="false"
                         />
                         <span className="card-title">{sponsor.handle}</span>
                         <div className="circles">

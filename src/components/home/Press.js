@@ -18,10 +18,10 @@ export default function Press() {
       </Link>
 
       <Link href="https://sspai.com/post/69035">
-        <a title="sspai">
+        <a title="少数派">
           <Image
             src="https://res.cloudinary.com/mue/website/sspai.svg"
-            alt="sspai Logo"
+            alt="少数派 Logo"
             width="123"
             height="44"
             draggable="false"
