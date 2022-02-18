@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fontsource/lexend-deca": "^4.5.5",
+    "@hcaptcha/react-hcaptcha": "^1.1.0",
     "aos": "^2.3.4",
     "css-vars-ponyfill": "^2.4.7",
     "embla-carousel-autoplay": "^6.2.0",
