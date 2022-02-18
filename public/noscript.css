@@ -28,6 +28,10 @@ ul.links {
   content: "everyone.";
 }
 
+.carousel-button {
+  display: none !important;
+}
+
 /* about */
 [data-aos="fade-right"],
 [data-aos="fade-left"] {
