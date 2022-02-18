@@ -151,7 +151,7 @@ export default function About({ sponsors }) {
                     return (
                       <div className="card" key={sponsor.handle}>
                         <Image
-                          src={sponsor.avatar}
+                          src={sponsor.avatar.split('?')[0] + '?size=100&v=4'}
                           alt={sponsor.handle + " avatar"}
                           height="100"
                           width="100"

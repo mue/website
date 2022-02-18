@@ -89,6 +89,13 @@ header.full {
       &:first-child {
         display: flex;
         flex-direction: column;
+      }
+    }
+  }
+  
+  .home-promotion {
+    span {
+      &:first-child {
         height: 137px;
       }
     }
