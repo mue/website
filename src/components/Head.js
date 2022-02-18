@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-css-tags */
 import Head from "next/head";
 
 export default function WebsiteHead(props) {
@@ -59,6 +60,11 @@ export default function WebsiteHead(props) {
       <meta name="twitter:image:alt" content="Mue" />
       <meta name="twitter:image:width" content="1200" />
       <meta name="twitter:image:height" content="630" />
+
+      {/* noscript */}
+      <noscript>
+        <link rel="stylesheet" href="noscript.css" />
+      </noscript>
     </Head>
   );
 }

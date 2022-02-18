@@ -44,7 +44,7 @@ export default function Home(props) {
       <Head title={t("title")} />
       {/* <Banner /> */}
       <header>
-        <div className="promotion">
+        <div className="promotion home-promotion">
           <div>
             <span>
               {t("promotion.title")}
