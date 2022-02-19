@@ -19,15 +19,10 @@ select {
 
 .form input[type="range"] {
   width: 70% !important;
-  margin-right: 20px;
 }
 
 .slider {
-  display: inline-flex;
-  float: left;
-
-  label {
-    margin-right: 20px;
-    margin-top: 5px;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
