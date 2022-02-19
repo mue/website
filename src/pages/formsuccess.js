@@ -40,7 +40,7 @@ export default function FormSuccess() {
           </Link>
         </div>
       </header>
-      <div style={{ marginTop: "775pt" }} className="content"/>
+      <div style={{ marginTop: "100vh" }} className="content"/>
       <Footer />
     </>
   );
