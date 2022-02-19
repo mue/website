@@ -7,6 +7,7 @@
   "send": "Send",
   "invalid_email": "Invalid email",
   "invalid_message": "Message box must be filled",
+  "invalid_captcha": "Invalid captcha",
   "faq": {
     "title": "Freqently Asked Questions (FAQ)",
     "description": "Here are the answers to some questions we get asked often.",

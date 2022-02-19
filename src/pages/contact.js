@@ -7,37 +7,15 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 import GetStarted from "../components/GetStarted";
+import ContactForm from "../components/contact/ContactForm";
 
 import { MdEmail, MdQuestionAnswer } from "react-icons/md";
 import { FaTwitter, FaDiscord } from "react-icons/fa";
 
 import validator from "validator";
-import HCaptchaWrapper from "../components/HCaptchaWrapper";
 
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
-
-import * as Constants from "../modules/constants";
-
-const validateForm = (t) => {
-  const form = document.forms["form"];
-  const emailWarning = document.getElementById("emailWarning");
-  const messageWarning = document.getElementById("messageWarning");
-
-  if (!validator.isEmail(form["Email"].value)) {
-    emailWarning.textContent = "• " + t("invalid_email");
-  } else {
-    emailWarning.textContent = "";
-  }
-
-  if (form["MultiLine"].value === "") {
-    return (messageWarning.textContent = "•" + t("invalid_message"));
-  } else {
-    messageWarning.textContent = "";
-  }
-
-  document.forms["form"].submit();
-};
 
 export async function getServerSideProps(context) {
   return {
@@ -53,16 +31,6 @@ export async function getServerSideProps(context) {
 }
 
 export default function Contact() {
-  const [captchaTheme, setCaptchaTheme] = useState("light");
-  useEffect(() => {
-    if (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      setCaptchaTheme("dark");
-    }
-  }, []);
-
   const { t } = useTranslation("contact");
 
   return (
@@ -103,36 +71,7 @@ export default function Contact() {
       </header>
       <div style={{ marginTop: "350pt" }} className="content">
         <div className="form" data-aos="fade-up">
-          <form
-            action={Constants.form_api + "/contact"}
-            name="form"
-            id="form"
-            method="POST"
-            acceptCharset="UTF-8"
-            encType="multipart/form-data"
-          >
-            <label htmlFor="Email">
-              {t("email")} <span className="required">*</span>{" "}
-              <span id="emailWarning"></span>
-            </label>
-            <input type="text" maxLength="255" name="Email" fieldtype={9} />
-            <label htmlFor="MultiLine">
-              {t("message")} <span className="required">*</span>{" "}
-              <span id="messageWarning"></span>
-            </label>
-            <textarea name="MultiLine" maxLength="65535"></textarea>
-            <HCaptchaWrapper
-              sitekey={Constants.hcaptcha_key}
-              theme={captchaTheme}
-            />
-            <button
-              className="filled"
-              type="button"
-              onClick={() => validateForm(t)}
-            >
-              {t("send")}
-            </button>
-          </form>
+          <ContactForm/>
         </div>
       </div>
       <div className="faq">
