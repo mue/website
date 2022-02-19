@@ -16,11 +16,15 @@ import getBrowser from "../modules/getBrowser";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
+import * as Constants from "../modules/constants";
+
 export async function getServerSideProps(context) {
   const data = getBrowser(context.req.headers["user-agent"]);
+  const versions = await (await fetch(Constants.mue_api + '/versions')).json() || {};
   return {
     props: {
       data,
+      versions,
       ...(await serverSideTranslations(context.locale, [
         "download",
         "navbar",
@@ -56,26 +60,26 @@ export default function Download(props) {
           <DownloadCard
             name="Chrome"
             image="https://res.cloudinary.com/mue/website/chrome.svg"
-            version="6.0.4"
+            version={props.versions.browsers.chrome}
             url="https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid"
           />
           <DownloadCard
             name="Edge"
             image="https://res.cloudinary.com/mue/website/edge.svg"
-            version="6.0.4"
+            version={props.versions.browsers.edge}
             url="https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja"
           />
           <DownloadCard
             name="Firefox"
             image="https://res.cloudinary.com/mue/website/firefox.svg"
-            version="6.0.4"
+            version={props.versions.browsers.firefox}
             url="https://addons.mozilla.org/firefox/addon/mue/"
           />
           <DownloadCard
             name="Whale"
             image="https://res.cloudinary.com/mue/website/whale.webp"
             fallbackImage="https://res.cloudinary.com/mue/website/fallback/whale.png"
-            version="6.0.4"
+            version={props.versions.browsers.whale}
             url="https://store.whale.naver.com/detail/ecllekeilcmicbfkkiknfdddbogibbnc"
           />
         </div>
@@ -98,19 +102,19 @@ export default function Download(props) {
             <SourceCard
               name="extension"
               title="Extension"
-              version="6.0.4"
+              version={props.versions.browsers.chrome}
               url="https://github.com/mue/mue"
             />
             <SourceCard
               name="website"
               title="Website"
-              version="2.0.0"
+              version={Constants.version}
               url="https://github.com/mue/website"
             />
             <SourceCard
               name="api"
               title="API"
-              version="1.6.1"
+              version={props.versions.api}
               url="https://github.com/mue/api"
             />
           </div>

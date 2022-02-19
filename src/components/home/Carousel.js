@@ -1,8 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState, useEffect, useCallback, useRef } from "react";
+
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+
 import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+
+import * as Constants from "../../modules/constants";
 
 export default function Carousel() {
   const autoplay = useRef(
@@ -50,10 +54,9 @@ export default function Carousel() {
     [emblaApi]
   );
 
-  const url = "https://res.cloudinary.com/mue/website/shareyourmue";
-  const alt_url =
-    "https://res.cloudinary.com/mue/website/fallback/shareyourmue";
-  const count = 4;
+  const url = Constants.shareyourmue_url;
+  const alt_url = Constants.shareyourmue_alt_url;
+  const count = Constants.shareyourmue_count;
 
   return (
     <div className="carousel">

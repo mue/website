@@ -225,6 +225,13 @@
   }
 }
 
+@media only screen and (max-height: 1024px) {
+  .aboutUs {
+    height: auto;
+    padding: 10px;
+  }
+}
+
 @media only screen and (max-width: 1400px) {
   .aboutUs {
     padding: 90px;
