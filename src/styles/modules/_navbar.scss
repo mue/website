@@ -107,7 +107,7 @@ ul.dropdownButton {
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 764px) {
   .navbar {
     button {
       display: none;
@@ -119,13 +119,13 @@ ul.dropdownButton {
   }
 }
 
-@media only screen and (max-width: 1280px) and (min-width: 600px) {
+@media only screen and (max-width: 1280px) and (min-width: 764px) {
   .navbarContent {
     justify-content: space-around !important;
   }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 764px) {
   .navbarContent {
     display: none;
   }
@@ -155,7 +155,7 @@ ul.dropdownButton {
   }
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 764px) {
   ul.dropdownButton {
     display: none;
   }

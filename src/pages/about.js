@@ -19,10 +19,12 @@ import * as Constants from "../modules/constants";
 
 export async function getServerSideProps(context) {
   const sponsors = (await (await fetch(Constants.sponsors_api)).json())
-    .sponsors;
+    .sponsors || [];
+  const stats = await (await fetch(Constants.mue_api + '/stats')).json() || {};
   return {
     props: {
       sponsors,
+      stats,
       ...(await serverSideTranslations(context.locale, [
         "about",
         "navbar",
@@ -33,7 +35,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function About({ sponsors }) {
+export default function About({ sponsors, stats }) {
   const { t } = useTranslation("about");
 
   return (
@@ -66,17 +68,17 @@ export default function About({ sponsors }) {
           <h1>{t("statistics.title")}</h1>
           <div className="press-logos">
             <div className="statistics-content" data-aos="fade-right">
-              <span>1000+</span>
+              <span>{stats.users || 1000}+</span>
               <span>{t("statistics.users")}</span>
             </div>
             <hr />
             <div className="statistics-content" data-aos="fade-right">
-              <span>200+</span>
+              <span>{stats.stars || 200}+</span>
               <span>{t("statistics.stars")}</span>
             </div>
             <hr />
             <div className="statistics-content" data-aos="fade-right">
-              <span>20+</span>
+              <span>{stats.releases || 20}+</span>
               <span>{t("statistics.updates")}</span>
             </div>
           </div>

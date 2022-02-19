@@ -81,6 +81,7 @@ html {
   background-color: var(--background-color);
   color: var(--text-color);
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 @keyframes fade {
