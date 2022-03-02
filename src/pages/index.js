@@ -4,8 +4,6 @@ import { useTranslation } from "next-i18next";
 
 import Head from "../components/Head";
 
-//import Banner from "../components/Banner";
-
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -21,12 +19,12 @@ import getBrowser from "../modules/getBrowser";
 
 import Carousel from "../components/home/Carousel";
 
-export async function getServerSideProps(context) {
-  const data = getBrowser(context.req.headers["user-agent"]);
+export async function getServerSideProps({ locale, req }) {
+  const data = getBrowser(req.headers["user-agent"]);
   return {
     props: {
       data,
-      ...(await serverSideTranslations(context.locale, [
+      ...(await serverSideTranslations(locale, [
         "home",
         "navbar",
         "footer",
@@ -36,13 +34,12 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function Home(props) {
+export default function Home({ data }) {
   const { t } = useTranslation("home");
 
   return (
     <>
       <Head title={t("title")} />
-      {/* <Banner /> */}
       <header>
         <div className="promotion home-promotion">
           <div>
@@ -63,10 +60,10 @@ export default function Home(props) {
             <span className="two">{t("promotion.subtitle")}</span>
           </div>
           <div className="buttons">
-            <Link href={props.data.link}>
+            <Link href={data.link}>
               <a>
                 <button className="filled">
-                  {props.data.text}
+                  {data.text}
                   <MdOutlineKeyboardArrowRight />
                 </button>
               </a>

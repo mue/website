@@ -30,6 +30,10 @@
       padding: 12px 20px;
       resize: none;
       border-radius: 12px;
+
+      &:focus {
+        outline: 2px ridge #767676;
+      }
     }
 
     .warning,

@@ -1,9 +1,8 @@
 import { useState } from "react";
 import Image from "next/image";
 
-export default function ImageWithFallback(props) {
-  const { fallbackSrc, alt, ...rest } = props;
-  const [imgSrc, setImgSrc] = useState(props.src);
+export default function ImageWithFallback({ src, fallbackSrc, alt, ...rest }) {
+  const [imgSrc, setImgSrc] = useState(src);
 
   return (
     <Image

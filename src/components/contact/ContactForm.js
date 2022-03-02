@@ -53,7 +53,6 @@ export default function UninstallForm() {
     <form
       action={Constants.form_api + "/contact"}
       name="form"
-      id="form"
       method="POST"
       acceptCharset="UTF-8"
       encType="multipart/form-data"

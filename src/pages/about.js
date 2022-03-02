@@ -17,7 +17,7 @@ import { useTranslation } from "next-i18next";
 
 import * as Constants from "../modules/constants";
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ locale }) {
   const sponsors = (await (await fetch(Constants.sponsors_api)).json())
     .sponsors || [];
   const stats = await (await fetch(Constants.mue_api + '/stats')).json() || {};
@@ -25,7 +25,7 @@ export async function getServerSideProps(context) {
     props: {
       sponsors,
       stats,
-      ...(await serverSideTranslations(context.locale, [
+      ...(await serverSideTranslations(locale, [
         "about",
         "navbar",
         "footer",

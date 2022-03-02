@@ -2,37 +2,37 @@ import { FaTwitter, FaGithub, FaHome } from "react-icons/fa";
 import Link from "next/link";
 import ImageWithFallback from "../ImageWithFallback";
 
-export default function TeamCard(props) {
+export default function TeamCard({ image, fallbackImage, name, title, twitter, github, website }) {
   return (
     <div className="card">
       <ImageWithFallback
-        src={props.image}
-        fallbackSrc={props.fallbackImage}
-        alt={props.name + " avatar"}
+        src={image}
+        fallbackSrc={fallbackImage}
+        alt={name + " avatar"}
         width="180"
         height="180"
         draggable="false"
       />
-      <span className="card-title">{props.name}</span>
-      <span className="card-desc">{props.title}</span>
+      <span className="card-title">{name}</span>
+      <span className="card-desc">{title}</span>
       <div className="circles">
-        <Link href={"https://twitter.com/" + props.twitter}>
-          <a title={props.name + " on Twitter"}>
+        <Link href={"https://twitter.com/" + twitter}>
+          <a title={name + " on Twitter"}>
             <div className="circle">
               <FaTwitter />
             </div>
           </a>
         </Link>
-        <Link href={"https://github.com/" + props.github}>
-          <a title={props.name + " on GitHub"}>
+        <Link href={"https://github.com/" + github}>
+          <a title={name + " on GitHub"}>
             <div className="circle">
               <FaGithub />
             </div>
           </a>
         </Link>
-        {props.website ? (
-          <Link href={props.website}>
-            <a title={props.name + "'s website"}>
+        {website ? (
+          <Link href={website}>
+            <a title={name + "'s website"}>
               <div className="circle">
                 <FaHome />
               </div>

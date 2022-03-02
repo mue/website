@@ -8,10 +8,10 @@ import Head from "../components/Head";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, [
+      ...(await serverSideTranslations(locale, [
         "formsuccess",
         "navbar",
         "footer",

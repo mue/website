@@ -24,9 +24,9 @@ const getIcon = (name) => {
   }
 };
 
-export default function Feature(props) {
+export default function Feature({ reverse, image, title, name, description, link, linkText}) {
   let classList = "feature";
-  if (props.reverse) {
+  if (reverse) {
     classList += " reverse";
   }
 
@@ -35,8 +35,8 @@ export default function Feature(props) {
       <div style={{ position: "relative", height: "200px" }}>
         <img
           data-aos="fade-right"
-          src={props.image}
-          alt={props.title}
+          src={image}
+          alt={title}
           draggable="false"
         />
       </div>
@@ -45,13 +45,13 @@ export default function Feature(props) {
         data-aos="fade-up"
         data-aos-duration="1000"
       >
-        <div className="circle">{getIcon(props.name)}</div>
-        <span className="feature-title">{props.title}</span>
-        <span className="feature-description">{props.description}</span>
-        {props.link ? (
-          <Link href={props.link}>
+        <div className="circle">{getIcon(name)}</div>
+        <span className="feature-title">{title}</span>
+        <span className="feature-description">{description}</span>
+        {link ? (
+          <Link href={link}>
             <a className="openlink">
-              {props.linkText}
+              {linkText}
               <MdOutlineKeyboardArrowRight />
             </a>
           </Link>

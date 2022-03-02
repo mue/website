@@ -4,9 +4,9 @@ import Head from "next/head";
 export default function WebsiteHead(props) {
   return (
     <Head>
-      <title>{props.title} | Mue</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta charSet="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>{props.title} | Mue</title>
 
       {/* meta tags */}
       <meta name="theme-color" content="#ffb032" />
@@ -26,7 +26,6 @@ export default function WebsiteHead(props) {
       />
       <meta name="author" content="Mue Tab" />
       <meta name="language" content="English" />
-      <meta name="theme-color" content="#ffb032" />
 
       {/* og */}
       <meta property="og:type" content="website" />

@@ -17,10 +17,10 @@ import validator from "validator";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, [
+      ...(await serverSideTranslations(locale, [
         "contact",
         "navbar",
         "footer",

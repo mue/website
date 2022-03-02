@@ -2,25 +2,25 @@ import Link from "next/link";
 import ImageWithFallback from "../ImageWithFallback";
 import { useTranslation } from "next-i18next";
 
-export default function DownloadCard(props) {
+export default function DownloadCard({ fallbackImage, image, name, version, url }) {
   const { t } = useTranslation("download");
 
   return (
     <div className="card">
       <ImageWithFallback
-        src={props.image}
-        fallbackSrc={props.fallbackImage || props.image}
+        src={image}
+        fallbackSrc={fallbackImage || image}
         className="cardavatar"
         draggable="false"
         height="80"
         width="80"
-        alt={"Download on " + props.name}
+        alt={"Download on " + name}
       />
-      <span className="card-title">{props.name}</span>
+      <span className="card-title">{name}</span>
       <span className="card-desc">
-        {t("version")} {props.version}
+        {t("version")} {version}
       </span>
-      <Link href={props.url}>
+      <Link href={url}>
         <a>
           <button className="submitbtn filled" type="button">
             {t("add_card")}
