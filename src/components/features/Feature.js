@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-export default function Feature(props) {
+export default function Feature({ reverse, image, fallbackImage, title, description, list }) {
   let classList = "feature";
-  if (props.reverse) {
+  if (reverse) {
     classList += " reverse";
   }
 
@@ -10,23 +10,23 @@ export default function Feature(props) {
       <picture>
         <source
           type="image/webp"
-          srcSet={props.image}
+          srcSet={image}
           data-aos="fade-right"
           draggable="false"
         />
         <img
-          src={props.fallbackImage}
-          alt={props.title}
+          src={fallbackImage}
+          alt={title}
           data-aos="fade-right"
           draggable="false"
         />
       </picture>
       <div className="feature-content" data-aos="fade-up">
-        <span className="feature-title">{props.title}</span>
-        <span className="feature-description">{props.description}</span>
-        {props.list ? (
+        <span className="feature-title">{title}</span>
+        <span className="feature-description">{description}</span>
+        {list ? (
           <ul>
-            {props.list.map((item, index) => (
+            {list.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>

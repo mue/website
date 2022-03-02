@@ -10,10 +10,10 @@ import { useTranslation } from "next-i18next";
 
 import UninstallForm from "../components/uninstall/UninstallForm";
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, [
+      ...(await serverSideTranslations(locale, [
         "uninstall",
         "navbar",
         "footer",

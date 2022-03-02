@@ -45,14 +45,13 @@ export default function UninstallForm() {
     <form
       action={Constants.form_api + "/uninstall"}
       name="form"
-      id="form"
       method="POST"
       acceptCharset="UTF-8"
       encType="multipart/form-data"
       ref={form}
     >
       <label htmlFor="reason">{t("reason.title")}</label>
-      <select name="reason" onChange={updateReason} ref={reason}>
+      <select name="reason" id="reason" onChange={updateReason} ref={reason}>
         <option value="slow">{t("reason.slow")}</option>
         <option value="old">{t("reason.old")}</option>
         <option value="broken">{t("reason.broken")}</option>

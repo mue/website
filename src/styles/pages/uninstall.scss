@@ -17,6 +17,12 @@ select {
   font-family: "Lexend Deca";
 }
 
+@supports (-moz-appearance: none) {
+  option {
+    font: -moz-pull-down-menu !important;
+  }
+}
+
 .form input[type="range"] {
   width: 70% !important;
 }
@@ -25,4 +31,31 @@ select {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #767676;
+  cursor: pointer;
+
+  &:hover {
+    background: #616161;
+  }
+}
+
+.range::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #767676;
+  cursor: pointer;
+  border: none;
+
+  &:hover {
+    background: #616161;
+  }
 }

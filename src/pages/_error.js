@@ -18,17 +18,17 @@ export async function getServerSideProps({ res, err, locale }) {
   };
 }
 
-export default function Error(props) {
+export default function Error({ statusCode }) {
   const { t } = useTranslation("error");
 
   return (
     <>
-      <Head title={props.statusCode} />
+      <Head title={statusCode} />
       <main>
         <Navbar />
         <header className="full">
           <div className="promotion">
-            <span>{props.statusCode}</span>
+            <span>{statusCode}</span>
             <br />
             <span className="two">{t("message")}</span>
             <br />

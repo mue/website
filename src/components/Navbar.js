@@ -17,14 +17,8 @@ export default function Navbar() {
       const nav = document.querySelector(".navbar");
       if (nav) {
         if (window.scrollY <= 10) {
-          if (nav.classList.contains("bannerSpace")) {
-            return (nav.className = "navbar bannerSpace");
-          }
           nav.className = "navbar";
         } else {
-          if (nav.classList.contains("bannerSpace")) {
-            return (nav.className = "navbar scroll bannerSpace");
-          }
           nav.className = "navbar scroll";
         }
         setCloseIcon(false);

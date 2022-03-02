@@ -18,14 +18,14 @@ import { useTranslation } from "next-i18next";
 
 import * as Constants from "../modules/constants";
 
-export async function getServerSideProps(context) {
-  const data = getBrowser(context.req.headers["user-agent"]);
+export async function getServerSideProps({ locale, req }) {
+  const data = getBrowser(req.headers["user-agent"]);
   const versions = await (await fetch(Constants.mue_api + '/versions')).json() || {};
   return {
     props: {
       data,
       versions,
-      ...(await serverSideTranslations(context.locale, [
+      ...(await serverSideTranslations(locale, [
         "download",
         "navbar",
         "footer",
@@ -35,7 +35,7 @@ export async function getServerSideProps(context) {
   };
 }
 
-export default function Download(props) {
+export default function Download({ data, versions }) {
   const { t } = useTranslation("download");
 
   return (
@@ -48,9 +48,9 @@ export default function Download(props) {
           <br />
           <span className="two">{t("description")}</span>
           <br />
-          <Link href={props.data.link}>
+          <Link href={data.link}>
             <a>
-              <button className="hollow">{props.data.text}</button>
+              <button className="hollow">{data.text}</button>
             </a>
           </Link>
         </div>
@@ -60,26 +60,26 @@ export default function Download(props) {
           <DownloadCard
             name="Chrome"
             image="https://res.cloudinary.com/mue/website/chrome.svg"
-            version={props.versions.browsers.chrome}
+            version={versions.browsers.chrome}
             url="https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid"
           />
           <DownloadCard
             name="Edge"
             image="https://res.cloudinary.com/mue/website/edge.svg"
-            version={props.versions.browsers.edge}
+            version={versions.browsers.edge}
             url="https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja"
           />
           <DownloadCard
             name="Firefox"
             image="https://res.cloudinary.com/mue/website/firefox.svg"
-            version={props.versions.browsers.firefox}
+            version={versions.browsers.firefox}
             url="https://addons.mozilla.org/firefox/addon/mue/"
           />
           <DownloadCard
             name="Whale"
             image="https://res.cloudinary.com/mue/website/whale.webp"
             fallbackImage="https://res.cloudinary.com/mue/website/fallback/whale.png"
-            version={props.versions.browsers.whale}
+            version={versions.browsers.whale}
             url="https://store.whale.naver.com/detail/ecllekeilcmicbfkkiknfdddbogibbnc"
           />
         </div>
@@ -102,7 +102,7 @@ export default function Download(props) {
             <SourceCard
               name="extension"
               title="Extension"
-              version={props.versions.browsers.chrome}
+              version={versions.browsers.chrome}
               url="https://github.com/mue/mue"
             />
             <SourceCard
@@ -114,7 +114,7 @@ export default function Download(props) {
             <SourceCard
               name="api"
               title="API"
-              version={props.versions.api}
+              version={versions.api}
               url="https://github.com/mue/api"
             />
           </div>

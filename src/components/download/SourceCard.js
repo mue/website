@@ -18,17 +18,17 @@ const getIcon = (name) => {
   }
 };
 
-export default function SourceCard(props) {
+export default function SourceCard({ name, title, version, url }) {
   const { t } = useTranslation("download");
 
   return (
     <div className="card">
-      <div className="circle">{getIcon(props.name)}</div>
-      <span className="card-title">{props.title}</span>
+      <div className="circle">{getIcon(name)}</div>
+      <span className="card-title">{title}</span>
       <span className="card-desc">
-        {t("version")} {props.version}
+        {t("version")} {version}
       </span>
-      <Link href={props.url}>
+      <Link href={url}>
         <a>
           <button className="filled" type="button">
             {t("title")}

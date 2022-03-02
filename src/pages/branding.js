@@ -13,10 +13,10 @@ import { useTranslation } from "next-i18next";
 
 import * as Constants from "../modules/constants";
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, [
+      ...(await serverSideTranslations(locale, [
         "branding",
         "navbar",
         "footer",
