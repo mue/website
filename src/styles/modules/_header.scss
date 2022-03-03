@@ -10,10 +10,8 @@ header {
   flex-direction: column;
   background: var(--header-gradient);
   clip-path: ellipse(90% 100% at 50% 0%);
-  display: flex;
 
   span:nth-child(1) {
-    font-weight: normal;
     color: #fff;
     font-weight: 600;
     font-size: 72px;
@@ -21,9 +19,7 @@ header {
   }
 
   .two {
-    font-size: 36px !important;
     color: #e7e7e7 !important;
-    font-weight: normal !important;
     font-weight: 300 !important;
     font-size: 24px !important;
     width: 500px !important;
@@ -48,8 +44,7 @@ header.full {
   text-align: center;
 
   button {
-    margin: 20px;
-    margin-top: 40px;
+    margin: 40px 20px 20px;
   }
 
   div {

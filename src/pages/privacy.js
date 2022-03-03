@@ -32,36 +32,24 @@ export default function Privacy() {
         <div className="promotion">
           <span>{t("title_two")}</span>
           <br />
-          <span className="two">{t("updated")} 26.11.21</span>
+          <span className="two">{t("updated")} 26TH NOVEMBER 2021</span>
         </div>
       </header>
       <div className="content" style={{ marginTop: "550pt" }}>
         <div className="privacy">
           <ul>
             <li>{t("one")}</li>
-            <br />
             <li>{t("two")}</li>
-            <br />
             <li>{t("three")}</li>
-            <br />
             <li>{t("four")}</li>
-            <br />
             <li>{t("five")}</li>
-            <br />
             <li>{t("six")}</li>
-            <br />
             <li>{t("seven")}</li>
-            <br />
             <li>{t("eight")}</li>
-            <br />
             <li>{t("nine")}</li>
-            <br />
             <li>{t("ten")}</li>
-            <br />
             <li>{t("eleven")}</li>
-            <br />
             <li>{t("twelve")}</li>
-            <br />
             <li>{t("notice")}</li>
           </ul>
         </div>
