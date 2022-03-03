@@ -54,27 +54,23 @@ export default function Carousel() {
     [emblaApi]
   );
 
-  const url = Constants.shareyourmue_url;
-  const alt_url = Constants.shareyourmue_alt_url;
-  const count = Constants.shareyourmue_count;
-
   return (
     <div className="carousel">
       <div className="carousel-viewport" ref={emblaRef}>
         <div className="carousel-container">
-          {[...Array(count)].map((e, index) => (
+          {[...Array(Constants.shareyourmue_count)].map((e, index) => (
             <div className="carousel-slide" key={index}>
               <div className="carousel-slideinner">
                 <picture>
                   <source
                     type="image/webp"
                     className="carousel-slideimg"
-                    srcSet={url + (index + 1) + ".webp"}
+                    srcSet={Constants.shareyourmue_url + (index + 1) + ".webp"}
                     draggable="false"
                   />
                   <img
                     className="carousel-slideimg"
-                    src={alt_url + (index + 1) + ".jpg"}
+                    src={Constants.shareyourmue_alt_url + (index + 1) + ".jpg"}
                     alt={"#shareyourmue setup " + (index + 1)}
                     draggable="false"
                   />

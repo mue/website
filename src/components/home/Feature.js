@@ -24,7 +24,7 @@ const getIcon = (name) => {
   }
 };
 
-export default function Feature({ reverse, image, title, name, description, link, linkText}) {
+export default function Feature({ reverse, image, title, name, description, link, linkText }) {
   let classList = "feature";
   if (reverse) {
     classList += " reverse";

@@ -39,7 +39,7 @@ export default function Uninstall() {
       </header>
       <div style={{ marginTop: "350pt" }} className="content">
         <div className="form" data-aos="fade-up">
-          <UninstallForm/>
+          <UninstallForm />
         </div>
       </div>
       <GetStarted />

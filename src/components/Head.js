@@ -1,12 +1,12 @@
 /* eslint-disable @next/next/no-css-tags */
 import Head from "next/head";
 
-export default function WebsiteHead(props) {
+export default function WebsiteHead({ title }) {
   return (
     <Head>
       <meta charSet="utf-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>{props.title} | Mue</title>
+      <title>{title} | Mue</title>
 
       {/* meta tags */}
       <meta name="theme-color" content="#ffb032" />
