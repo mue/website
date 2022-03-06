@@ -2,8 +2,6 @@ import { useState, useRef, useEffect } from "react";
 
 import HCaptchaWrapper from "../HCaptchaWrapper";
 
-import validator from "validator";
-
 import * as Constants from "../../modules/constants";
 
 import { useTranslation } from "next-i18next";
@@ -30,23 +28,32 @@ export default function UninstallForm() {
   const form = useRef(null);
 
   const validateForm = () => {
-    if (!validator.isEmail(email.current.value)) {
+    let error = false;
+    // based on https://ihateregex.io/expr/email-2/
+    if (!/(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))/.test(email.current.value)) {
+      error = true;
       setEmailWarning("• " + t("invalid_email"));
     } else {
       setEmailWarning("");
     }
 
     if (multiline.current.value === "") {
-      setMessageWarning("•" + t("invalid_message"));
+      error = true;
+      setMessageWarning("• " + t("invalid_message"));
     } else {
       setMessageWarning("");
     }
 
     if (captchaVerified === false) {
-      return setCaptchaWarning(t("invalid_captcha"));
+      error = true;
+      setCaptchaWarning(t("invalid_captcha"));
+    } else {
+      setCaptchaWarning("");
     }
 
-    form.current.submit();
+    if (error === false) {
+      form.current.submit();
+    }
   };
 
   return (

@@ -26,19 +26,24 @@ export default function UninstallForm() {
   };
 
   const validateForm = () => {
+    let error = false;
     if (reason.current.value === "other" && otherReason.current.value === "") {
-      return setReasonWarning(t("reason_error"));
+      error = true;
+      setReasonWarning(t("reason_error"));
     } else {
       setReasonWarning("");
     }
 
     if (multiline.current.value === "") {
-      return setBetterWarning(t("better_error"));
+      error = true;
+      setBetterWarning(t("better_error"));
     } else {
       setBetterWarning("");
     }
 
-    form.current.submit();
+    if (error === false) {
+      form.current.submit();
+    }
   };
 
   return (
