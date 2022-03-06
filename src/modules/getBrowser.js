@@ -3,7 +3,7 @@ import UAParser from "ua-parser-js";
 export default function getBrowser(userAgent) {
   const ua = new UAParser(userAgent);
 
-  let data = {};
+  let data;
   if (ua.getDevice().type === "mobile" || ua.getDevice().type === "tablet") {
     data = {
       text: "Unsupported browser",

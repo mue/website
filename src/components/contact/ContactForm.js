@@ -62,7 +62,7 @@ export default function UninstallForm() {
         {t("email")} <span className="required">*</span>{" "}
         <span className="warning">{emailWarning}</span>
       </label>
-      <input type="text" maxLength="255" name="Email" fieldtype={9} ref={email} />
+      <input type="text" maxLength="255" name="Email" ref={email} />
       <label htmlFor="MultiLine">
         {t("message")} <span className="required">*</span>{" "}
         <span className="warning">{messageWarning}</span>
