@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useTranslation } from "next-i18next";
 
 import * as Constants from "../modules/constants";
+import catchTranslationError from "../modules/catchTranslationError";
 
 export default function Navbar() {
   // scroll animation
@@ -67,29 +68,29 @@ export default function Navbar() {
         <ul className="links">
           <li>
             <Link href="/features">
-              <a>{t("features")}</a>
+              <a>{catchTranslationError(t("features"), "Features")}</a>
             </Link>
           </li>
           <li>
             <Link href="/about">
-              <a>{t("about")}</a>
+              <a>{catchTranslationError(t("about"), "About")}</a>
             </Link>
           </li>
           <li>
             <Link href="/contact">
-              <a>{t("contact")}</a>
+              <a>{catchTranslationError(t("contact"), "Contact")}</a>
             </Link>
           </li>
           <li>
             <Link href="https://blog.muetab.com">
-              <a>{t("blog")}</a>
+              <a>{catchTranslationError(t("blog"), "Blog")}</a>
             </Link>
           </li>
         </ul>
         <Link href="/download">
           <a>
             <button className="filled">
-              {t("get_started")}
+              {catchTranslationError(t("get_started"), "Get started")}
               <MdOutlineKeyboardArrowRight />
             </button>
           </a>
