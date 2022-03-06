@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-
 import Head from "../components/Head";
 import Link from "next/link";
 
@@ -11,8 +9,6 @@ import ContactForm from "../components/contact/ContactForm";
 
 import { MdEmail, MdQuestionAnswer } from "react-icons/md";
 import { FaTwitter, FaDiscord } from "react-icons/fa";
-
-import validator from "validator";
 
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";

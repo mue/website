@@ -15,7 +15,7 @@ export default function Error() {
           <div className="promotion">
             <span>500</span>
             <br />
-            <span className="two">AN ERROR OCCURED</span>
+            <span className="two">AN ERROR OCCURRED</span>
             <br />
             <Link href="/">
               <a>
@@ -24,7 +24,7 @@ export default function Error() {
             </Link>
           </div>
         </header>
-        <div style={{ marginTop: "100vh" }} className="content"></div>
+        <div style={{ marginTop: "100vh" }} className="content"/>
         <Footer />
       </main>
     </>

@@ -9,7 +9,7 @@
   "invalid_message": "Message box must be filled",
   "invalid_captcha": "Invalid captcha",
   "faq": {
-    "title": "Freqently Asked Questions (FAQ)",
+    "title": "Frequently Asked Questions (FAQ)",
     "description": "Here are the answers to some questions we get asked often.",
     "branding": "Can I use the branding assets?",
     "branding_desc_start": "Sure! Checkout the page",

@@ -87,7 +87,6 @@ export default function Features() {
           <span className="desc">- Softpedia</span>
         </div>
       </div>
-      <div className="summary"></div>
       <GetStarted />
       <Footer />
     </>
