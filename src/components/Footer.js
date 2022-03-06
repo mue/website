@@ -5,6 +5,8 @@ import { FaDiscord, FaTwitter, FaFacebookF } from "react-icons/fa";
 
 import { useTranslation } from "next-i18next";
 
+import catchTranslationError from "../modules/catchTranslationError";
+
 export default function Footer() {
   const { t } = useTranslation("footer");
 
@@ -23,11 +25,11 @@ export default function Footer() {
             />
             <span>Mue</span>
           </div>
-          <span className="sub">{t("subtitle")}</span>
+          <span className="sub">{catchTranslationError(t("subtitle"), "For the modern web.")}</span>
           <span className="min">
             © 2018-{new Date().getFullYear()} The Mue Authors
           </span>
-          {/*<button className='language'>
+          {/*<button className="language">
             <MdLanguage />
             En
   </button>*/}
@@ -35,26 +37,26 @@ export default function Footer() {
         <div>
           <ul>
             <li>
-              <h2>{t("product.title")}</h2>
+              <h2>{catchTranslationError(t("product.title"), "Product")}</h2>
             </li>
             <li>
               <Link href="/download">
-                <a>{t("product.download")}</a>
+                <a>{catchTranslationError(t("product.download"), "Download")}</a>
               </Link>
             </li>
             <li>
               <Link href="/features">
-                <a>{t("product.features")}</a>
+                <a>{catchTranslationError(t("product.features"), "Features")}</a>
               </Link>
             </li>
             <li>
               <Link href="/privacy">
-                <a>{t("product.privacy")}</a>
+                <a>{catchTranslationError(t("product.privacy"), "Privacy")}</a>
               </Link>
             </li>
             <li>
               <Link href="https://docs.muetab.com">
-                <a>{t("product.documentation")}</a>
+                <a>{catchTranslationError(t("product.documentation"), "Documentation")}</a>
               </Link>
             </li>
           </ul>
@@ -63,26 +65,26 @@ export default function Footer() {
         <div>
           <ul>
             <li>
-              <h2>{t("company.title")}</h2>
+              <h2>{catchTranslationError(t("company.title"), "Company")}</h2>
             </li>
             <li>
               <Link href="/about">
-                <a>{t("company.about")}</a>
+                <a>{catchTranslationError(t("company.about"), "About")}</a>
               </Link>
             </li>
             <li>
               <Link href="/contact">
-                <a>{t("company.contact")}</a>
+                <a>{catchTranslationError(t("company.contact"), "Contact")}</a>
               </Link>
             </li>
             <li>
               <Link href="/branding">
-                <a>{t("company.branding")}</a>
+                <a>{catchTranslationError(t("company.branding"), "Branding")}</a>
               </Link>
             </li>
             <li>
               <Link href="https://blog.muetab.com">
-                <a>{t("company.blog")}</a>
+                <a>{catchTranslationError(t("company.blog"), "Blog")}</a>
               </Link>
             </li>
           </ul>
@@ -91,31 +93,31 @@ export default function Footer() {
         <div>
           <ul>
             <li>
-              <h2>{t("links.title")}</h2>
+              <h2>{catchTranslationError(t("links.title"), "Links")}</h2>
             </li>
             <li>
               <Link href="https://github.com/mue">
-                <a>{t("links.source")}</a>
+                <a>{catchTranslationError(t("links.source"), "Source Code")}</a>
               </Link>
             </li>
             <li>
               <Link href="/privacy">
-                <a>{t("links.privacy")}</a>
+                <a>{catchTranslationError(t("links.privacy"), "Privacy")}</a>
               </Link>
             </li>
             <li>
               <Link href="https://github.com/sponsors/davidcralph/">
-                <a>{t("links.support")}</a>
+                <a>{catchTranslationError(t("links.support"), "Donate")}</a>
               </Link>
             </li>
             <li>
               <Link href="https://github.com/mue/mue/issues">
-                <a>{t("links.issues")}</a>
+                <a>{catchTranslationError(t("links.issues"), "Issues")}</a>
               </Link>
             </li>
             <li>
               <Link href="https://status.muetab.com">
-                <a>{t("links.status")}</a>
+                <a>{catchTranslationError(t("links.status"), "Status")}</a>
               </Link>
             </li>
           </ul>
@@ -124,7 +126,7 @@ export default function Footer() {
         <div>
           <ul className="social">
             <li>
-              <h2>{t("social")}</h2>
+              <h2>{catchTranslationError(t("social"), "Social")}</h2>
             </li>
             <li>
               <Link href="https://discord.gg/zv8C9F8">
