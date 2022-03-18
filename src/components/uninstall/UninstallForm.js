@@ -95,7 +95,7 @@ export default function UninstallForm() {
           10 <span>({likelyToTry})</span>
         </label>
       </div>
-      <button className="filled" type="button" onClick={() => validateForm(t)}>
+      <button className="filled umami--click--uninstall-submit" type="button" onClick={() => validateForm(t)}>
         {t("submit")}
       </button>
     </form>

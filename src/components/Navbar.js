@@ -53,7 +53,7 @@ export default function Navbar() {
         <ul>
           <li>
             <Link href="/">
-              <a title="Home">
+              <a title="Home" className="umami--click--navbar-logo">
                 <Image
                   src="https://res.cloudinary.com/mue/website/logo_navbar.svg"
                   alt="Mue Logo"
@@ -68,34 +68,34 @@ export default function Navbar() {
         <ul className="links">
           <li>
             <Link href="/features">
-              <a>{catchTranslationError(t("features"), "Features")}</a>
+              <a className="umami--click--navbar-features">{catchTranslationError(t("features"), "Features")}</a>
             </Link>
           </li>
           <li>
             <Link href="/about">
-              <a>{catchTranslationError(t("about"), "About")}</a>
+              <a className="umami--click--navbar-about">{catchTranslationError(t("about"), "About")}</a>
             </Link>
           </li>
           <li>
             <Link href="/contact">
-              <a>{catchTranslationError(t("contact"), "Contact")}</a>
+              <a className="umami--click--navbar-contact">{catchTranslationError(t("contact"), "Contact")}</a>
             </Link>
           </li>
           <li>
             <Link href="https://blog.muetab.com">
-              <a>{catchTranslationError(t("blog"), "Blog")}</a>
+              <a className="umami--click--navbar-blog" target="_blank">{catchTranslationError(t("blog"), "Blog")}</a>
             </Link>
           </li>
         </ul>
         <Link href="/download">
           <a>
-            <button className="filled">
+            <button className="filled umami--click--navbar-getstarted">
               {catchTranslationError(t("get_started"), "Get started")}
               <MdOutlineKeyboardArrowRight />
             </button>
           </a>
         </Link>
-        <ul className="dropdownButton" onClick={() => changeClassList()}>
+        <ul className="dropdownButton umami--click--navbar-mobile" onClick={() => changeClassList()}>
           {closeIcon ? <AiOutlineClose /> : <AiOutlineMenu />}
         </ul>
       </div>

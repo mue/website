@@ -141,7 +141,7 @@ export default function About({ sponsors, stats }) {
             <h1>{t("supporters.title")}</h1>
             <p>{t("supporters.description")}</p>
             <Link href="https://github.com/sponsors/davidcralph">
-              <a className="openlink">
+              <a className="openlink umami--click--about-supportus">
                 {t("supporters.support_us")} <MdOutlineKeyboardArrowRight />
               </a>
             </Link>
@@ -163,7 +163,7 @@ export default function About({ sponsors, stats }) {
                         <div className="circles">
                           <Link href={"https://github.com/" + sponsor.handle}>
                             <a title={sponsor.handle + " on GitHub"}>
-                              <div className="circle">
+                              <div className="circle umami--click--about-sponsor">
                                 <FaGithub />
                               </div>
                             </a>

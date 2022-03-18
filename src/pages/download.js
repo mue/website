@@ -50,7 +50,7 @@ export default function Download({ data, versions }) {
           <br />
           <Link href={data.link}>
             <a>
-              <button className="hollow">{data.text}</button>
+              <button className="hollow umami--click--download-promotiondownload">{data.text}</button>
             </a>
           </Link>
         </div>

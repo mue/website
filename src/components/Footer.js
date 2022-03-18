@@ -56,7 +56,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="https://docs.muetab.com">
-                <a>{catchTranslationError(t("product.documentation"), "Documentation")}</a>
+                <a target="_blank">{catchTranslationError(t("product.documentation"), "Documentation")}</a>
               </Link>
             </li>
           </ul>
@@ -84,7 +84,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="https://blog.muetab.com">
-                <a>{catchTranslationError(t("company.blog"), "Blog")}</a>
+                <a target="_blank">{catchTranslationError(t("company.blog"), "Blog")}</a>
               </Link>
             </li>
           </ul>
@@ -97,7 +97,7 @@ export default function Footer() {
             </li>
             <li>
               <Link href="https://github.com/mue">
-                <a>{catchTranslationError(t("links.source"), "Source Code")}</a>
+                <a target="_blank">{catchTranslationError(t("links.source"), "Source Code")}</a>
               </Link>
             </li>
             <li>
@@ -107,17 +107,17 @@ export default function Footer() {
             </li>
             <li>
               <Link href="https://github.com/sponsors/davidcralph/">
-                <a>{catchTranslationError(t("links.support"), "Donate")}</a>
+                <a target="_blank">{catchTranslationError(t("links.support"), "Donate")}</a>
               </Link>
             </li>
             <li>
               <Link href="https://github.com/mue/mue/issues">
-                <a>{catchTranslationError(t("links.issues"), "Issues")}</a>
+                <a target="_blank">{catchTranslationError(t("links.issues"), "Issues")}</a>
               </Link>
             </li>
             <li>
               <Link href="https://status.muetab.com">
-                <a>{catchTranslationError(t("links.status"), "Status")}</a>
+                <a target="_blank">{catchTranslationError(t("links.status"), "Status")}</a>
               </Link>
             </li>
           </ul>
@@ -130,14 +130,14 @@ export default function Footer() {
             </li>
             <li>
               <Link href="https://discord.gg/zv8C9F8">
-                <a title="Mue on Discord">
+                <a title="Mue on Discord" target="_blank">
                   <div className="circle">
                     <FaDiscord />
                   </div>
                 </a>
               </Link>
               <Link href="https://twitter.com/getmue">
-                <a title="Mue on Twitter">
+                <a title="Mue on Twitter" target="_blank">
                   <div className="circle">
                     <FaTwitter />
                   </div>

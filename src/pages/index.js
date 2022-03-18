@@ -61,7 +61,7 @@ export default function Home({ data }) {
           </div>
           <div className="buttons">
             <Link href={data.link}>
-              <a>
+              <a className="umami--click--home-download" target="_blank">
                 <button className="filled">
                   {data.text}
                   <MdOutlineKeyboardArrowRight />
@@ -69,7 +69,7 @@ export default function Home({ data }) {
               </a>
             </Link>
             <Link href="https://demo.muetab.com">
-              <a className="hollow">
+              <a className="hollow umami--click--home-demo" target="_blank">
                 {t("promotion.demo")}
                 <MdOutlineKeyboardArrowRight />
               </a>

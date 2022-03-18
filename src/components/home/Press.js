@@ -5,7 +5,7 @@ export default function Press() {
   return (
     <div className="press-logos">
       <Link href="https://www.producthunt.com/posts/mue">
-        <a title="Product Hunt">
+        <a title="Product Hunt" target="_blank">
           <Image
             src="https://res.cloudinary.com/mue/website/producthunt.svg"
             alt="Product Hunt Logo"
@@ -18,7 +18,7 @@ export default function Press() {
       </Link>
 
       <Link href="https://sspai.com/post/69035">
-        <a title="少数派">
+        <a title="少数派" target="_blank">
           <Image
             src="https://res.cloudinary.com/mue/website/sspai.svg"
             alt="少数派 Logo"
@@ -31,7 +31,7 @@ export default function Press() {
       </Link>
 
       <Link href="https://www.softpedia.com/get/Internet/Internet-Applications-Addons/Chrome-Extensions/Mue-Tab-for-Chrome.shtml">
-        <a title="Softpedia">
+        <a title="Softpedia" target="_blank">
           <Image
             src="https://res.cloudinary.com/mue/website/softpedia.svg"
             alt="Softpedia Logo"
@@ -44,7 +44,7 @@ export default function Press() {
       </Link>
 
       <Link href="https://www.ghacks.net/2021/04/06/customize-your-new-tab-page-with-random-wallpapers-quotes-with-the-mue-extension-for-firefox-and-chrome/">
-        <a title="Ghacks">
+        <a title="Ghacks" target="_blank">
           <Image
             src="https://res.cloudinary.com/mue/website/ghacks.svg"
             alt="Ghacks Logo"

@@ -41,22 +41,22 @@ export default function Contact() {
             <span className="two">{t("description_two")}</span>
             <div className="socialCircles">
               <Link href="mailto:hello@muetab.com">
-                <a title="Contact Mue via email">
-                  <div className="circle">
+                <a title="Contact Mue via email" target="_blank">
+                  <div className="circle umami--click--contact-email">
                     <MdEmail />
                   </div>
                 </a>
               </Link>
               <Link href="https://twitter.com/getmue">
-                <a title="Contact Mue on Twitter">
-                  <div className="circle">
+                <a title="Contact Mue on Twitter" target="_blank">
+                  <div className="circle umami--click--contact-twitter">
                     <FaTwitter />
                   </div>
                 </a>
               </Link>
               <Link href="https://discord.gg/zv8C9F8">
-                <a title="Contact Mue on Discord">
-                  <div className="circle">
+                <a title="Contact Mue on Discord" target="_blank">
+                  <div className="circle umami--click--contact-discord">
                     <FaDiscord />
                   </div>
                 </a>
@@ -85,7 +85,7 @@ export default function Contact() {
               <span className="faq-answer">
                 {t("faq.branding_desc_start") + " "}
                 <Link href="/branding">
-                  <a title="Go to branding page">
+                  <a title="Go to branding page" className="umami--click--contact-branding">
                     {t("faq.branding_desc_here")}
                   </a>
                 </Link>{" "}

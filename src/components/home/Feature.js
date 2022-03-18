@@ -50,7 +50,7 @@ export default function Feature({ reverse, image, title, name, description, link
         <span className="feature-description">{description}</span>
         {link ? (
           <Link href={link}>
-            <a className="openlink">
+            <a className="openlink umami--click--home-featurelink" target={name === "opensource" ? "_blank" : "_self"}>
               {linkText}
               <MdOutlineKeyboardArrowRight />
             </a>

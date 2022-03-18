@@ -21,8 +21,8 @@ export default function DownloadCard({ fallbackImage, image, name, version, url 
         {t("version")} {version}
       </span>
       <Link href={url}>
-        <a>
-          <button className="submitbtn filled" type="button">
+        <a target="_blank">
+          <button className={"submitbtn filled umami--click--download-" + name.toLowerCase()} type="button">
             {t("add_card")}
           </button>
         </a>
