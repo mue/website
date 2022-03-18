@@ -13,7 +13,7 @@ export default function GetStarted() {
         <h1>{t("title")}</h1>
         <Link href="/download">
           <a>
-            <button className="hollow">
+            <button className="hollow umami--click--getstarted">
               <MdDownload /> {t("download")}
             </button>
           </a>

@@ -34,7 +34,7 @@ export default function Error({ statusCode }) {
             <br />
             <Link href="/">
               <a>
-                <button className="filled">{t("button")}</button>
+                <button className="filled umami--click--error-home">{t("button")}</button>
               </a>
             </Link>
           </div>

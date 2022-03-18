@@ -81,7 +81,7 @@ export default function UninstallForm() {
         onVerify={() => setCaptchaVerified(true)}
       />
       <span className="warning">{captchaWarning}</span>
-      <button className="filled" type="button" onClick={() => validateForm(t)}>
+      <button className="filled umami--click--contact-submit" type="button" onClick={() => validateForm(t)}>
         {t("send")}
       </button>
     </form>

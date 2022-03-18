@@ -34,7 +34,7 @@ export default function FormSuccess() {
           <span className="two">{t("message")}</span>
           <br />
           <Link href="/">
-            <a>
+            <a className="umami--click--formsuccess-home">
               <button className="filled">{t("button")}</button>
             </a>
           </Link>

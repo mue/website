@@ -115,7 +115,7 @@ export default function Branding() {
           <span className="desc">{t("getstarted.description")}</span>
           <Link href={Constants.branding_pdf}>
             <a>
-              <button className="hollow">
+              <button className="hollow umami--click--branding-download">
                 <MdDownload /> {t("getstarted.download")}
               </button>
             </a>

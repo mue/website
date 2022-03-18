@@ -16,24 +16,24 @@ export default function TeamCard({ image, fallbackImage, name, title, twitter, g
       <span className="card-title">{name}</span>
       <span className="card-desc">{title}</span>
       <div className="circles">
-        <Link href={"https://twitter.com/" + twitter}>
+        <Link href={"https://twitter.com/" + twitter} target="_blank">
           <a title={name + " on Twitter"}>
-            <div className="circle">
+            <div className="circle umami--click--about-teamlink">
               <FaTwitter />
             </div>
           </a>
         </Link>
         <Link href={"https://github.com/" + github}>
-          <a title={name + " on GitHub"}>
-            <div className="circle">
+          <a title={name + " on GitHub"} target="_blank">
+            <div className="circle umami--click--about-teamlink">
               <FaGithub />
             </div>
           </a>
         </Link>
         {website ? (
           <Link href={website}>
-            <a title={name + "'s website"}>
-              <div className="circle">
+            <a title={name + "'s website"} target="_blank">
+              <div className="circle umami--click--about-teamlink">
                 <FaHome />
               </div>
             </a>

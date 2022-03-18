@@ -29,8 +29,8 @@ export default function SourceCard({ name, title, version, url }) {
         {t("version")} {version}
       </span>
       <Link href={url}>
-        <a>
-          <button className="filled" type="button">
+        <a target="_blank">
+          <button className={"filled umami--click--source-" + name.toLowerCase()} type="button">
             {t("title")}
           </button>
         </a>

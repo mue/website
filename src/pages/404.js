@@ -19,7 +19,7 @@ export default function NotFound() {
             <br />
             <Link href="/">
               <a>
-                <button className="filled">Go back to the homepage</button>
+                <button className="filled umami--click--error-home">Go back to the homepage</button>
               </a>
             </Link>
           </div>
