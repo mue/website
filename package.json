@@ -13,23 +13,23 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@fontsource/lexend-deca": "^4.5.5",
-    "@hcaptcha/react-hcaptcha": "^1.1.1",
-    "aos": "^2.3.4",
-    "css-vars-ponyfill": "^2.4.7",
-    "embla-carousel-autoplay": "^6.2.0",
-    "embla-carousel-react": "^6.2.0",
+    "@fontsource/lexend-deca": "4.5.5",
+    "@hcaptcha/react-hcaptcha": "1.1.1",
+    "aos": "2.3.4",
+    "css-vars-ponyfill": "2.4.7",
+    "embla-carousel-autoplay": "6.2.0",
+    "embla-carousel-react": "6.2.0",
     "next": "12.1.0",
-    "next-i18next": "^10.5.0",
+    "next-i18next": "10.5.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-icons": "^4.3.1",
-    "react-simple-typewriter": "^3.0.1",
-    "ua-parser-js": "^1.0.2"
+    "react-icons": "4.3.1",
+    "react-simple-typewriter": "3.0.1",
+    "ua-parser-js": "1.0.2"
   },
   "devDependencies": {
     "eslint": "8.11.0",
     "eslint-config-next": "12.1.0",
-    "sass": "^1.49.9"
+    "sass": "1.49.9"
   }
 }

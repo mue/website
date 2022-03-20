@@ -37,6 +37,7 @@ export default function Privacy() {
       </header>
       <div className="content" style={{ marginTop: "550pt" }}>
         <div className="privacy">
+          <p>The following privacy policy is for the Mue browser extension:</p>
           <ul>
             <li>{t("one")}</li>
             <li>{t("two")}</li>
