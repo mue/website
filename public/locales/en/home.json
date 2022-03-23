@@ -21,7 +21,7 @@
     },
     "privacy": {
       "title": "Privacy",
-      "description": "Mue is built with privacy in mind. No data is tracked or stored, and the API code is open source.",
+      "description": "Mue is built with privacy in mind. No personal data is tracked or stored, and the API code is open source.",
       "link": "Read policy"
     },
     "extensible": {
