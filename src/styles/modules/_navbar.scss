@@ -51,7 +51,7 @@
   }
 }
 
-@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) { 
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
   .navbar {
     display: table;
   }
@@ -68,7 +68,7 @@ ul.links {
     color: #fff;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       bottom: 0;
       left: 0;

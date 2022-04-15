@@ -1,20 +1,20 @@
-import Link from "next/link";
+import Link from 'next/link';
 
-import { MdDownload } from "react-icons/md";
+import { MdDownload } from 'react-icons/md';
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next';
 
 export default function GetStarted() {
-  const { t } = useTranslation("getstarted");
+  const { t } = useTranslation('getstarted');
 
   return (
     <div className="getstarted">
       <div className="content">
-        <h1>{t("title")}</h1>
+        <h1>{t('title')}</h1>
         <Link href="/download">
           <a>
             <button className="hollow umami--click--getstarted">
-              <MdDownload /> {t("download")}
+              <MdDownload /> {t('download')}
             </button>
           </a>
         </Link>

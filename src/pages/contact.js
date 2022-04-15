@@ -1,44 +1,39 @@
-import Head from "../components/Head";
-import Link from "next/link";
+import Head from '../components/Head';
+import Link from 'next/link';
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
-import GetStarted from "../components/GetStarted";
-import ContactForm from "../components/contact/ContactForm";
+import GetStarted from '../components/GetStarted';
+import ContactForm from '../components/contact/ContactForm';
 
-import { MdEmail, MdQuestionAnswer } from "react-icons/md";
-import { FaTwitter, FaDiscord } from "react-icons/fa";
+import { MdEmail, MdQuestionAnswer } from 'react-icons/md';
+import { FaTwitter, FaDiscord } from 'react-icons/fa';
 
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
 export async function getServerSideProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, [
-        "contact",
-        "navbar",
-        "footer",
-        "getstarted",
-      ])),
+      ...(await serverSideTranslations(locale, ['contact', 'navbar', 'footer', 'getstarted'])),
     },
   };
 }
 
 export default function Contact() {
-  const { t } = useTranslation("contact");
+  const { t } = useTranslation('contact');
 
   return (
     <>
-      <Head title={t("title")} />
+      <Head title={t('title')} />
       <Navbar />
       <header>
         <div className="promotion">
           <div>
-            <span style={{ margin: "0" }}>{t("description")}</span>
+            <span style={{ margin: '0' }}>{t('description')}</span>
             <br />
-            <span className="two">{t("description_two")}</span>
+            <span className="two">{t('description_two')}</span>
             <div className="socialCircles">
               <Link href="mailto:hello@muetab.com">
                 <a title="Contact Mue via email" target="_blank">
@@ -65,9 +60,9 @@ export default function Contact() {
           </div>
         </div>
       </header>
-      <div style={{ marginTop: "350pt" }} className="content">
+      <div style={{ marginTop: '350pt' }} className="content">
         <div className="form" data-aos="fade-up">
-          <ContactForm/>
+          <ContactForm />
         </div>
       </div>
       <div className="faq">
@@ -76,29 +71,29 @@ export default function Contact() {
             <div className="circle">
               <MdQuestionAnswer />
             </div>
-            <h1>{t("faq.title")}</h1>
-            <p>{t("faq.description")}</p>
+            <h1>{t('faq.title')}</h1>
+            <p>{t('faq.description')}</p>
           </div>
           <div className="questions">
             <div className="faq-item">
-              <span className="faq-question">{t("faq.branding")}</span>
+              <span className="faq-question">{t('faq.branding')}</span>
               <span className="faq-answer">
-                {t("faq.branding_desc_start") + " "}
+                {t('faq.branding_desc_start') + ' '}
                 <Link href="/branding">
                   <a title="Go to branding page" className="umami--click--contact-branding">
-                    {t("faq.branding_desc_here")}
+                    {t('faq.branding_desc_here')}
                   </a>
-                </Link>{" "}
-                {t("faq.branding_desc_end")}
+                </Link>{' '}
+                {t('faq.branding_desc_end')}
               </span>
             </div>
             <div className="faq-item">
-              <span className="faq-question">{t("faq.api")}</span>
-              <span className="faq-answer">{t("faq.api_desc")}</span>
+              <span className="faq-question">{t('faq.api')}</span>
+              <span className="faq-answer">{t('faq.api_desc')}</span>
             </div>
             <div className="faq-item">
-              <span className="faq-question">{t("faq.feature")}</span>
-              <span className="faq-answer">{t("faq.feature_desc")}</span>
+              <span className="faq-question">{t('faq.feature')}</span>
+              <span className="faq-answer">{t('faq.feature_desc')}</span>
             </div>
           </div>
         </div>

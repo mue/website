@@ -1,16 +1,16 @@
-@import "modules/header";
-@import "modules/navbar";
-@import "modules/footer";
-@import "modules/button";
-@import "modules/carousel";
+@import 'modules/header';
+@import 'modules/navbar';
+@import 'modules/footer';
+@import 'modules/button';
+@import 'modules/carousel';
 
-@import "pages/privacy";
-@import "pages/home";
-@import "pages/contact";
-@import "pages/download";
-@import "pages/about";
-@import "pages/uninstall";
-@import "pages/branding";
+@import 'pages/privacy';
+@import 'pages/home';
+@import 'pages/contact';
+@import 'pages/download';
+@import 'pages/about';
+@import 'pages/uninstall';
+@import 'pages/branding';
 
 :root {
   --width: 1280px;
@@ -42,10 +42,15 @@
     --branding-color-background: #dfeeff;
     --get-started-color: #dfd0d0;
 
-    --header-gradient: linear-gradient(90deg, rgba(255, 92, 39, 0.7) 37%, rgba(255, 70, 110, 0.67) 60%);
+    --header-gradient: linear-gradient(
+      90deg,
+      rgba(255, 92, 39, 0.7) 37%,
+      rgba(255, 70, 110, 0.67) 60%
+    );
   }
 
-  .press-logos, .top {
+  .press-logos,
+  .top {
     .invert {
       filter: invert(1);
     }
@@ -76,7 +81,7 @@
 body,
 html {
   margin: 0;
-  font-family: "Lexend Deca", sans-serif;
+  font-family: 'Lexend Deca', sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
   scroll-behavior: smooth;

@@ -1,61 +1,58 @@
-import Head from "../components/Head";
+import Head from '../components/Head';
 
-import Link from "next/link";
+import Link from 'next/link';
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
-import DownloadCard from "../components/download/DownloadCard";
-import SourceCard from "../components/download/SourceCard";
+import DownloadCard from '../components/download/DownloadCard';
+import SourceCard from '../components/download/SourceCard';
 
-import { FaGithub } from "react-icons/fa";
-import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { FaGithub } from 'react-icons/fa';
+import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
 
-import getBrowser from "../modules/getBrowser";
+import getBrowser from '../modules/getBrowser';
 
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
-import * as Constants from "../modules/constants";
+import * as Constants from '../modules/constants';
 
 export async function getServerSideProps({ locale, req }) {
-  const data = getBrowser(req.headers["user-agent"]);
-  const versions = await (await fetch(Constants.mue_api + '/versions')).json() || {};
+  const data = getBrowser(req.headers['user-agent']);
+  const versions = (await (await fetch(Constants.mue_api + '/versions')).json()) || {};
   return {
     props: {
       data,
       versions,
-      ...(await serverSideTranslations(locale, [
-        "download",
-        "navbar",
-        "footer",
-        "getstarted",
-      ])),
+      ...(await serverSideTranslations(locale, ['download', 'navbar', 'footer', 'getstarted'])),
     },
   };
 }
 
 export default function Download({ data, versions }) {
-  const { t } = useTranslation("download");
+  const { t } = useTranslation('download');
 
   return (
     <>
-      <Head title={t("title")} />
+      <Head title={t('title')} />
       <Navbar />
       <header>
         <div className="promotion">
-          <span>{t("title")}</span>
+          <span>{t('title')}</span>
           <br />
-          <span className="two">{t("description")}</span>
+          <span className="two">{t('description')}</span>
           <br />
           <Link href={data.link}>
             <a>
-              <button className="hollow umami--click--download-promotiondownload">{data.text}</button>
+              <button className="hollow umami--click--download-promotiondownload">
+                {data.text}
+              </button>
             </a>
           </Link>
         </div>
       </header>
-      <div style={{ marginTop: "500pt" }} className="content">
+      <div style={{ marginTop: '500pt' }} className="content">
         <div className="download-cards">
           <DownloadCard
             name="Chrome"
@@ -90,11 +87,11 @@ export default function Download({ data, versions }) {
             <div className="circle">
               <FaGithub />
             </div>
-            <h1>{t("opensource")}</h1>
-            <p>{t("download_source")}</p>
+            <h1>{t('opensource')}</h1>
+            <p>{t('download_source')}</p>
             <Link href="https://github.com/mue">
               <a className="openlink">
-                {t("view_all")} <MdOutlineKeyboardArrowRight />
+                {t('view_all')} <MdOutlineKeyboardArrowRight />
               </a>
             </Link>
           </div>

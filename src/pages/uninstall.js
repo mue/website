@@ -1,43 +1,38 @@
-import Head from "../components/Head";
+import Head from '../components/Head';
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
-import GetStarted from "../components/GetStarted";
+import GetStarted from '../components/GetStarted';
 
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { useTranslation } from 'next-i18next';
 
-import UninstallForm from "../components/uninstall/UninstallForm";
+import UninstallForm from '../components/uninstall/UninstallForm';
 
 export async function getServerSideProps({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, [
-        "uninstall",
-        "navbar",
-        "footer",
-        "getstarted",
-      ])),
+      ...(await serverSideTranslations(locale, ['uninstall', 'navbar', 'footer', 'getstarted'])),
     },
   };
 }
 
 export default function Uninstall() {
-  const { t } = useTranslation("uninstall");
+  const { t } = useTranslation('uninstall');
 
   return (
     <>
-      <Head title={t("title")} />
+      <Head title={t('title')} />
       <Navbar />
       <header>
         <div className="promotion">
-          <span>{t("title_two")}</span>
+          <span>{t('title_two')}</span>
           <br />
-          <span className="two">{t("description")}</span>
+          <span className="two">{t('description')}</span>
         </div>
       </header>
-      <div style={{ marginTop: "350pt" }} className="content">
+      <div style={{ marginTop: '350pt' }} className="content">
         <div className="form" data-aos="fade-up">
           <UninstallForm />
         </div>
