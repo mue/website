@@ -1,44 +1,44 @@
-import { useState, useRef } from "react";
+import { useState, useRef } from 'react';
 
-import * as Constants from "../../modules/constants";
+import * as Constants from '../../modules/constants';
 
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next';
 
 export default function UninstallForm() {
-  const { t } = useTranslation("uninstall");
+  const { t } = useTranslation('uninstall');
 
   const [likelyToTry, setLikelyToTry] = useState(5);
-  const [otherReasonDisplay, setOtherReasonDisplay] = useState("none");
-  const [reasonWarning, setReasonWarning] = useState("");
-  const [betterWarning, setBetterWarning] = useState("");
+  const [otherReasonDisplay, setOtherReasonDisplay] = useState('none');
+  const [reasonWarning, setReasonWarning] = useState('');
+  const [betterWarning, setBetterWarning] = useState('');
   const reason = useRef(null);
   const otherReason = useRef(null);
   const multiline = useRef(null);
   const form = useRef(null);
 
   const updateReason = (e) => {
-    setReasonWarning("");
-    if (e.target.value === "other") {
-      setOtherReasonDisplay("block");
+    setReasonWarning('');
+    if (e.target.value === 'other') {
+      setOtherReasonDisplay('block');
     } else {
-      setOtherReasonDisplay("none");
+      setOtherReasonDisplay('none');
     }
   };
 
   const validateForm = () => {
     let error = false;
-    if (reason.current.value === "other" && otherReason.current.value === "") {
+    if (reason.current.value === 'other' && otherReason.current.value === '') {
       error = true;
-      setReasonWarning(t("reason_error"));
+      setReasonWarning(t('reason_error'));
     } else {
-      setReasonWarning("");
+      setReasonWarning('');
     }
 
-    if (multiline.current.value === "") {
+    if (multiline.current.value === '') {
       error = true;
-      setBetterWarning(t("better_error"));
+      setBetterWarning(t('better_error'));
     } else {
-      setBetterWarning("");
+      setBetterWarning('');
     }
 
     if (error === false) {
@@ -48,24 +48,24 @@ export default function UninstallForm() {
 
   return (
     <form
-      action={Constants.form_api + "/uninstall"}
+      action={Constants.form_api + '/uninstall'}
       name="form"
       method="POST"
       acceptCharset="UTF-8"
       encType="multipart/form-data"
       ref={form}
     >
-      <label htmlFor="reason">{t("reason.title")}</label>
+      <label htmlFor="reason">{t('reason.title')}</label>
       <select name="reason" id="reason" onChange={updateReason} ref={reason}>
-        <option value="slow">{t("reason.slow")}</option>
-        <option value="old">{t("reason.old")}</option>
-        <option value="broken">{t("reason.broken")}</option>
-        <option value="features">{t("reason.features")}</option>
-        <option value="notexpected">{t("reason.notexpected")}</option>
-        <option value="privacy">{t("reason.privacy")}</option>
-        <option value="language">{t("reason.language")}</option>
-        <option value="temp">{t("reason.temp")}</option>
-        <option value="other">{t("reason.other")}</option>
+        <option value="slow">{t('reason.slow')}</option>
+        <option value="old">{t('reason.old')}</option>
+        <option value="broken">{t('reason.broken')}</option>
+        <option value="features">{t('reason.features')}</option>
+        <option value="notexpected">{t('reason.notexpected')}</option>
+        <option value="privacy">{t('reason.privacy')}</option>
+        <option value="language">{t('reason.language')}</option>
+        <option value="temp">{t('reason.temp')}</option>
+        <option value="other">{t('reason.other')}</option>
       </select>
       <input
         type="text"
@@ -74,11 +74,11 @@ export default function UninstallForm() {
         style={{ display: otherReasonDisplay }}
       />
       <span className="warning">{reasonWarning}</span>
-      <label htmlFor="MultiLine">{t("better")}</label>
+      <label htmlFor="MultiLine">{t('better')}</label>
       <textarea name="MultiLine" maxLength="65535" ref={multiline} />
       <span className="warning">{betterWarning}</span>
 
-      <label htmlFor="likelyToTry">{t("likely")}</label>
+      <label htmlFor="likelyToTry">{t('likely')}</label>
       <div className="slider">
         <label>0</label>
         <input
@@ -95,8 +95,12 @@ export default function UninstallForm() {
           10 <span>({likelyToTry})</span>
         </label>
       </div>
-      <button className="filled umami--click--uninstall-submit" type="button" onClick={() => validateForm(t)}>
-        {t("submit")}
+      <button
+        className="filled umami--click--uninstall-submit"
+        type="button"
+        onClick={() => validateForm(t)}
+      >
+        {t('submit')}
       </button>
     </form>
   );

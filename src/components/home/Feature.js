@@ -4,20 +4,20 @@ import {
   MdWidgets,
   MdOutlineLock,
   MdShoppingBasket,
-} from "react-icons/md";
-import { AiFillGithub } from "react-icons/ai";
+} from 'react-icons/md';
+import { AiFillGithub } from 'react-icons/ai';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 const getIcon = (name) => {
   switch (name) {
-    case "widgets":
+    case 'widgets':
       return <MdWidgets />;
-    case "opensource":
+    case 'opensource':
       return <AiFillGithub />;
-    case "privacy":
+    case 'privacy':
       return <MdOutlineLock />;
-    case "marketplace":
+    case 'marketplace':
       return <MdShoppingBasket />;
     default:
       break;
@@ -25,32 +25,26 @@ const getIcon = (name) => {
 };
 
 export default function Feature({ reverse, image, title, name, description, link, linkText }) {
-  let classList = "feature";
+  let classList = 'feature';
   if (reverse) {
-    classList += " reverse";
+    classList += ' reverse';
   }
 
   return (
     <div className={classList}>
-      <div style={{ position: "relative", height: "200px" }}>
-        <img
-          data-aos="fade-right"
-          src={image}
-          alt={title}
-          draggable="false"
-        />
+      <div style={{ position: 'relative', height: '200px' }}>
+        <img data-aos="fade-right" src={image} alt={title} draggable="false" />
       </div>
-      <div
-        className="feature-content"
-        data-aos="fade-up"
-        data-aos-duration="1000"
-      >
+      <div className="feature-content" data-aos="fade-up" data-aos-duration="1000">
         <div className="circle">{getIcon(name)}</div>
         <span className="feature-title">{title}</span>
         <span className="feature-description">{description}</span>
         {link ? (
           <Link href={link}>
-            <a className="openlink umami--click--home-featurelink" target={name === "opensource" ? "_blank" : "_self"}>
+            <a
+              className="openlink umami--click--home-featurelink"
+              target={name === 'opensource' ? '_blank' : '_self'}
+            >
               {linkText}
               <MdOutlineKeyboardArrowRight />
             </a>

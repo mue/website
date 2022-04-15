@@ -1,9 +1,9 @@
-import Head from "../components/Head";
+import Head from '../components/Head';
 
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function NotFound() {
   return (
@@ -24,7 +24,7 @@ export default function NotFound() {
             </Link>
           </div>
         </header>
-        <div style={{ marginTop: "100vh" }} className="content"/>
+        <div style={{ marginTop: '100vh' }} className="content" />
         <Footer />
       </main>
     </>

@@ -14,7 +14,7 @@ select {
   border: none;
   padding: 10px 10px;
   border-radius: 5px;
-  font-family: "Lexend Deca", sans-serif;
+  font-family: 'Lexend Deca', sans-serif;
 }
 
 @supports (-moz-appearance: none) {
@@ -23,7 +23,7 @@ select {
   }
 }
 
-.form input[type="range"] {
+.form input[type='range'] {
   width: 70% !important;
 }
 

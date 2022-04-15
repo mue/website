@@ -1,19 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from 'react';
 
-import useEmblaCarousel from "embla-carousel-react";
-import Autoplay from "embla-carousel-autoplay";
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
 
-import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
+import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 
-import * as Constants from "../../modules/constants";
+import * as Constants from '../../modules/constants';
 
 export default function Carousel() {
   const autoplay = useRef(
-    Autoplay(
-      { delay: 2500, stopOnInteraction: false },
-      (emblaRoot) => emblaRoot.parentElement
-    )
+    Autoplay({ delay: 2500, stopOnInteraction: false }, (emblaRoot) => emblaRoot.parentElement),
   );
 
   const [emblaRef, emblaApi] = useEmblaCarousel({}, [autoplay.current]);
@@ -35,7 +32,7 @@ export default function Carousel() {
     }
 
     onSelect();
-    emblaApi.on("select", onSelect);
+    emblaApi.on('select', onSelect);
   }, [emblaApi, onSelect]);
 
   const scroll = useCallback(
@@ -44,14 +41,14 @@ export default function Carousel() {
         return;
       }
 
-      if (direction === "next") {
+      if (direction === 'next') {
         emblaApi.scrollNext();
       } else {
         emblaApi.scrollPrev();
       }
       autoplay.current.reset();
     },
-    [emblaApi]
+    [emblaApi],
   );
 
   return (
@@ -65,13 +62,13 @@ export default function Carousel() {
                   <source
                     type="image/webp"
                     className="carousel-slideimg"
-                    srcSet={Constants.shareyourmue_url + (index + 1) + ".webp"}
+                    srcSet={Constants.shareyourmue_url + (index + 1) + '.webp'}
                     draggable="false"
                   />
                   <img
                     className="carousel-slideimg"
-                    src={Constants.shareyourmue_alt_url + (index + 1) + ".jpg"}
-                    alt={"#shareyourmue setup " + (index + 1)}
+                    src={Constants.shareyourmue_alt_url + (index + 1) + '.jpg'}
+                    alt={'#shareyourmue setup ' + (index + 1)}
                     draggable="false"
                   />
                 </picture>
@@ -82,7 +79,7 @@ export default function Carousel() {
       </div>
       <button
         className="carousel-button carousel-prev"
-        onClick={() => scroll("prev")}
+        onClick={() => scroll('prev')}
         disabled={!prevBtnEnabled}
         title="Previous"
       >
@@ -90,7 +87,7 @@ export default function Carousel() {
       </button>
       <button
         className="carousel-button carousel-next"
-        onClick={() => scroll("next")}
+        onClick={() => scroll('next')}
         disabled={!nextBtnEnabled}
         title="Next"
       >
