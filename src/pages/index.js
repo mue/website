@@ -13,7 +13,7 @@ import Feature from '../components/home/Feature';
 import GetStarted from '../components/GetStarted';
 
 import Link from 'next/link';
-import { Typewriter } from 'react-simple-typewriter';
+import { useTypewriter } from 'react-simple-typewriter';
 
 import getBrowser from '../modules/getBrowser';
 
@@ -32,6 +32,29 @@ export async function getServerSideProps({ locale, req }) {
 export default function Home({ data }) {
   const { t } = useTranslation('home');
 
+  const promoTypewriter = useTypewriter({
+    words: [
+      t('promotion.productive'),
+      t('promotion.inspired'),
+      t('promotion.organised'),
+      t('promotion.yourself'),
+    ],
+    loop: 0,
+    delaySpeed: 2500,
+  });
+
+  const shareTypewriter = useTypewriter({
+    words: [
+      t('shareyourmue.work'),
+      t('shareyourmue.students'),
+      t('shareyourmue.productivity'),
+      t('shareyourmue.fun'),
+      t('shareyourmue.everyone'),
+    ],
+    loop: 0,
+    delaySpeed: 2500,
+  });
+
   return (
     <>
       <Head title={t('title')} />
@@ -40,16 +63,7 @@ export default function Home({ data }) {
           <div>
             <span>
               {t('promotion.title')}
-              <Typewriter
-                words={[
-                  t('promotion.productive'),
-                  t('promotion.inspired'),
-                  t('promotion.organised'),
-                  t('promotion.yourself'),
-                ]}
-                loop={0}
-                delaySpeed={2500}
-              />
+              <span>{promoTypewriter.text}</span>
             </span>
             <br />
             <span className="two">{t('promotion.subtitle')}</span>
@@ -111,17 +125,7 @@ export default function Home({ data }) {
         <div className="content">
           <span>
             {t('shareyourmue.title')}
-            <Typewriter
-              words={[
-                t('shareyourmue.work'),
-                t('shareyourmue.students'),
-                t('shareyourmue.productivity'),
-                t('shareyourmue.fun'),
-                t('shareyourmue.everyone'),
-              ]}
-              loop={0}
-              delaySpeed={2500}
-            />
+            {shareTypewriter.text}
           </span>
           <p>
             {t('shareyourmue.description_start')} <b>#shareyourmue</b>{' '}
