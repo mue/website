@@ -36,23 +36,23 @@ export default function Features() {
         <div className="features">
           <Feature
             title={t('motivated.title')}
-            image="https://res.cloudinary.com/mue/website/motivated.webp"
-            fallbackImage="https://res.cloudinary.com/mue/website/fallback/motivated.png"
+            image="img/motivated.webp"
+            fallbackImage="img/fallback/motivated.png"
             description={t('motivated.description')}
             list={[t('motivated.list_one'), t('motivated.list_two')]}
           />
           <Feature
             reverse
             title={t('customise.title')}
-            image="https://res.cloudinary.com/mue/website/customise.webp"
-            fallbackImage="https://res.cloudinary.com/mue/website/fallback/customise.jpg"
+            image="img/customise.webp"
+            fallbackImage="img/fallback/customise.jpg"
             description={t('customise.description')}
             list={[t('customise.list_one'), t('customise.list_two'), t('customise.list_three')]}
           />
           <Feature
             title={t('optimise.title')}
-            image="https://res.cloudinary.com/mue/website/workflow.webp"
-            fallbackImage="https://res.cloudinary.com/mue/website/fallback/workflow.png"
+            image="img/workflow.webp"
+            fallbackImage="img/fallback/workflow.png"
             description={t('optimise.description')}
             list={[t('optimise.list_one'), t('optimise.list_two'), t('optimise.list_three')]}
           />
@@ -60,7 +60,7 @@ export default function Features() {
             reverse
             title={t('secure.title')}
             image="https://res.cloudinary.com/mue/image/upload/v1639345701/website/secure.webp"
-            fallbackImage="https://res.cloudinary.com/mue/website/fallback/secure.png"
+            fallbackImage="img/fallback/secure.png"
             description={t('secure.description')}
             list={[t('secure.list_one'), t('secure.list_two')]}
           />

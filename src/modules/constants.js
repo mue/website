@@ -6,6 +6,6 @@ export const form_api = 'https://forms.muetab.com';
 export const branding_pdf = 'https://www.dropbox.com/s/rwi61drgu74ywch/mue-branding.pdf?dl=1';
 export const version = '2.0.0';
 
-export const shareyourmue_url = 'https://res.cloudinary.com/mue/website/shareyourmue';
-export const shareyourmue_alt_url = 'https://res.cloudinary.com/mue/website/fallback/shareyourmue';
+export const shareyourmue_url = 'img/shareyourmue';
+export const shareyourmue_alt_url = 'img/fallback/shareyourmue';
 export const shareyourmue_count = 4;

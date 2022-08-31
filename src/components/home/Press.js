@@ -1,13 +1,12 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Press() {
   return (
     <div className="press-logos">
       <Link href="https://www.producthunt.com/posts/mue">
         <a title="Product Hunt" target="_blank">
-          <Image
-            src="https://res.cloudinary.com/mue/website/producthunt.svg"
+          <img
+            src="img/producthunt.svg"
             alt="Product Hunt Logo"
             width="250"
             height="59"
@@ -19,8 +18,8 @@ export default function Press() {
 
       <Link href="https://sspai.com/post/69035">
         <a title="少数派" target="_blank">
-          <Image
-            src="https://res.cloudinary.com/mue/website/sspai.svg"
+          <img
+            src="img/sspai.svg"
             alt="少数派 Logo"
             width="123"
             height="44"
@@ -32,8 +31,8 @@ export default function Press() {
 
       <Link href="https://www.softpedia.com/get/Internet/Internet-Applications-Addons/Chrome-Extensions/Mue-Tab-for-Chrome.shtml">
         <a title="Softpedia" target="_blank">
-          <Image
-            src="https://res.cloudinary.com/mue/website/softpedia.svg"
+          <img
+            src="img/softpedia.svg"
             alt="Softpedia Logo"
             width="301"
             height="46"
@@ -45,8 +44,8 @@ export default function Press() {
 
       <Link href="https://www.ghacks.net/2021/04/06/customize-your-new-tab-page-with-random-wallpapers-quotes-with-the-mue-extension-for-firefox-and-chrome/">
         <a title="Ghacks" target="_blank">
-          <Image
-            src="https://res.cloudinary.com/mue/website/ghacks.svg"
+          <img
+            src="img/ghacks.svg"
             alt="Ghacks Logo"
             height="42"
             width="42"

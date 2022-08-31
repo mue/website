@@ -4,7 +4,6 @@ import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 
 import Link from 'next/link';
 import Script from 'next/script';
-import Image from 'next/image';
 
 import { useTranslation } from 'next-i18next';
 
@@ -54,8 +53,8 @@ export default function Navbar() {
           <li>
             <Link href="/">
               <a title="Home" className="umami--click--navbar-logo">
-                <Image
-                  src="https://res.cloudinary.com/mue/website/logo_navbar.svg"
+                <img
+                  src="img/logo_navbar.svg"
                   alt="Mue Logo"
                   width="80"
                   height="80"

@@ -3,6 +3,7 @@
 .next/
 .vercel/
 .vscode/
+.history/
 node_modules/
 
 # Files

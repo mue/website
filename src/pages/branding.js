@@ -43,8 +43,8 @@ export default function Branding() {
           <div className="logos">
             <div className="logo">
               <ImageWithFallback
-                src="https://res.cloudinary.com/mue/website/logo_horizontal.webp"
-                fallbackSrc="https://res.cloudinary.com/mue/website/fallback/logo_horizontal.png"
+                src="img/logo_horizontal.webp"
+                fallbackSrc="img/fallback/logo_horizontal.png"
                 width="256"
                 height="70"
                 draggable="false"
@@ -53,8 +53,8 @@ export default function Branding() {
             </div>
             <div className="logo">
               <ImageWithFallback
-                src="https://res.cloudinary.com/mue/website/logo_round.webp"
-                fallbackSrc="https://res.cloudinary.com/mue/website/fallback/logo_round.png"
+                src="img/logo_round.webp"
+                fallbackSrc="img/fallback/logo_round.png"
                 height="80"
                 width="80"
                 draggable="false"
@@ -63,8 +63,8 @@ export default function Branding() {
             </div>
             <div className="logo">
               <ImageWithFallback
-                src="https://res.cloudinary.com/mue/website/logo_square.webp"
-                fallbackSrc="https://res.cloudinary.com/mue/website/fallback/logo_square.png"
+                src="img/logo_square.webp"
+                fallbackSrc="img/fallback/logo_square.png"
                 height="80"
                 width="80"
                 draggable="false"
@@ -73,8 +73,8 @@ export default function Branding() {
             </div>
             <div className="logo">
               <ImageWithFallback
-                src="https://res.cloudinary.com/mue/website/logo_tile.webp"
-                fallbackSrc="https://res.cloudinary.com/mue/website/fallback/logo_tile.png"
+                src="img/logo_tile.webp"
+                fallbackSrc="img/fallback/logo_tile.png"
                 height="80"
                 width="120"
                 draggable="false"
