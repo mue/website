@@ -92,14 +92,14 @@ export default function Home({ data }) {
           <Feature
             name="widgets"
             title={t('features.widgets.title')}
-            image="https://res.cloudinary.com/mue/image/upload/v1639307577/website/widgets.svg"
+            image="img/widgets.svg"
             description={t('features.widgets.description')}
           />
           <Feature
             reverse
             name="opensource"
             title={t('features.opensource.title')}
-            image="https://res.cloudinary.com/mue/image/upload/v1639307577/website/opensource.svg"
+            image="img/opensource.svg"
             description={t('features.opensource.description')}
             link="https://github.com/mue"
             linkText={t('features.opensource.link')}
@@ -107,7 +107,7 @@ export default function Home({ data }) {
           <Feature
             name="privacy"
             title={t('features.privacy.title')}
-            image="https://res.cloudinary.com/mue/image/upload/v1639307577/website/privacy.svg"
+            image="img/privacy.svg"
             description={t('features.privacy.description')}
             link="/privacy"
             linkText={t('features.privacy.link')}
@@ -116,7 +116,7 @@ export default function Home({ data }) {
             reverse
             name="marketplace"
             title={t('features.extensible.title')}
-            image="https://res.cloudinary.com/mue/image/upload/v1639307577/website/marketplace.svg"
+            image="img/marketplace.svg"
             description={t('features.extensible.description')}
           />
         </div>

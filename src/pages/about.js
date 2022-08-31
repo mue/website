@@ -1,6 +1,5 @@
 import Head from '../components/Head';
 import Link from 'next/link';
-import Image from 'next/image';
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -92,7 +91,7 @@ export default function About({ sponsors, stats }) {
               name="David Ralph"
               title={t('team.lead_dev')}
               image="https://res.cloudinary.com/mue/image/upload/v1639311162/website/davidcralph.webp"
-              fallbackImage="https://res.cloudinary.com/mue/website/fallback/davidcralph.png"
+              fallbackImage="img/fallback/davidcralph.png"
               twitter="davidcralph"
               github="davidcralph"
               website="https://davidcralph.co.uk"
@@ -100,8 +99,8 @@ export default function About({ sponsors, stats }) {
             <TeamCard
               name="Alex Sparkes"
               title={t('team.lead_design')}
-              image="https://res.cloudinary.com/mue/website/alexsparkes.webp"
-              fallbackImage="https://res.cloudinary.com/mue/website/fallback/alexsparkes.png"
+              image="img/alexsparkes.webp"
+              fallbackImage="img/fallback/alexsparkes.png"
               twitter="AlexmSparkes"
               github="alexsparkes"
             />
@@ -109,7 +108,7 @@ export default function About({ sponsors, stats }) {
               name="Isaac Saunders"
               title={t('team.qa_dev')}
               image="https://res.cloudinary.com/mue/image/upload/v1639159068/website/eartharoid.webp"
-              fallbackImage="https://res.cloudinary.com/mue/website/fallback/eartharoid.png"
+              fallbackImage="img/fallback/eartharoid.png"
               twitter="eartharoid"
               github="eartharoid"
               website="https:///eartharoid.me"
@@ -118,7 +117,7 @@ export default function About({ sponsors, stats }) {
               name="Wessel Tip"
               title={t('team.dev')}
               image="https://res.cloudinary.com/mue/image/upload/v1639505831/website/wesseltip.webp"
-              fallbackImage="https://res.cloudinary.com/mue/website/fallback/wesseltip.png"
+              fallbackImage="img/fallback/wesseltip.png"
               twitter="wessel_tip"
               github="Wessel"
               website="https:///wessel.meek.moe"
@@ -146,7 +145,7 @@ export default function About({ sponsors, stats }) {
                 ? sponsors.map((sponsor) => {
                     return (
                       <div className="card" key={sponsor.handle}>
-                        <Image
+                        <img
                           src={sponsor.avatar.split('?')[0] + '?size=100&v=4'}
                           alt={sponsor.handle + ' avatar'}
                           height="100"

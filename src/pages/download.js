@@ -56,26 +56,26 @@ export default function Download({ data, versions }) {
         <div className="download-cards">
           <DownloadCard
             name="Chrome"
-            image="https://res.cloudinary.com/mue/website/chrome.svg"
+            image="img/chrome.svg"
             version={versions.browsers.chrome}
             url="https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid"
           />
           <DownloadCard
             name="Edge"
-            image="https://res.cloudinary.com/mue/website/edge.svg"
+            image="img/edge.svg"
             version={versions.browsers.edge}
             url="https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja"
           />
           <DownloadCard
             name="Firefox"
-            image="https://res.cloudinary.com/mue/website/firefox.svg"
+            image="img/firefox.svg"
             version={versions.browsers.firefox}
             url="https://addons.mozilla.org/firefox/addon/mue/"
           />
           <DownloadCard
             name="Whale"
-            image="https://res.cloudinary.com/mue/website/whale.webp"
-            fallbackImage="https://res.cloudinary.com/mue/website/fallback/whale.png"
+            image="img/whale.webp"
+            fallbackImage="img/fallback/whale.png"
             version={versions.browsers.whale}
             url="https://store.whale.naver.com/detail/ecllekeilcmicbfkkiknfdddbogibbnc"
           />

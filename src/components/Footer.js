@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 import { FaDiscord, FaTwitter, FaFacebookF } from 'react-icons/fa';
 
@@ -15,8 +14,8 @@ export default function Footer() {
       <div className="footerContent">
         <div>
           <div className="top">
-            <Image
-              src="https://res.cloudinary.com/mue/website/logo_footer.svg"
+            <img
+              src="img/logo_footer.svg"
               alt="Mue Logo"
               height="50"
               width="58.16"
