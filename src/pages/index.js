@@ -125,7 +125,7 @@ export default function Home({ data }) {
         <div className="content">
           <span>
             {t('shareyourmue.title')}
-            {shareTypewriter.text}
+            <span>{shareTypewriter.text}</span>
           </span>
           <p>
             {t('shareyourmue.description_start')} <b>#shareyourmue</b>{' '}
