@@ -50,7 +50,7 @@
   }
 
   .press-logos,
-  .top {
+  .top, .sponsor-logo {
     .invert {
       filter: invert(1);
     }
@@ -155,5 +155,12 @@ html {
 @media only screen and (max-width: 600px) {
   .content {
     width: 100%;
+  }
+}
+
+.sponsor-logo {
+  img {
+    height: 45px !important;
+    margin-top: 30px;
   }
 }
