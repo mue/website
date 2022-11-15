@@ -26,6 +26,15 @@ export default function Footer() {
           </div>
           <span className="sub">{catchTranslationError(t('subtitle'), 'For the modern web.')}</span>
           <span className="min">© 2018-{new Date().getFullYear()} The Mue Authors</span>
+          <div className="sponsor-logo">
+            <img
+              src="img/DO_Powered_by_Badge_blue.svg"
+              alt="Mue Logo"
+              height="20"
+              draggable="false"
+              className="invert"
+            />
+          </div>
           {/*<button className="language">
             <MdLanguage />
             En
