@@ -1,0 +1,18 @@
+{
+  "title": "Gizlilik",
+  "title_two": "Gizlilik Politikası",
+  "updated": "GÜNCELLENMİŞ",
+  "one": "Mue hiçbir kişisel bilgiyi üçüncü taraflarla paylaşmaz ve tüm ayarlarınız, geçmiş ve diğer verileriniz yerel olarak kendi bilgisyarınızda depolanır. Bu veriler Mue'deki gelişmiş ayarlarda JSON dosyası olarak dışarıya aktarılabilir.",
+  "two": "Hiçbir API isteği, gönderilen tanımlanabilir bilgileri saklamaz.",
+  "three": "Tüm istekler HTTPS ile güvenli bir şekilde gönderilir.",
+  "four": "İstek yapan tüm özellikler ayarlarda devre dışı bırakılabilir.",
+  "five": "Mue'nun hava durumu özelliği, yalnızca girdiğiniz konumu (veya 'Otomatik' tıklandığında tahmini) yerel olarak saklar ve yalnızca bölgenizdeki mevcut hava durumunu almak için konum bilginiz bir istek içerisinde gönderilir. Bu istek hiçbir şekilde sizinle ilişkilendirilemez ve açık kaynaklı proxy sunucumuz (proxy.muetab.com) aracılığıyla hava durumu sağlayıcımıza (OpenWeatherMap) gönderilir.",
+  "six": "Mue'nin fotoğraf haritası konum özelliği, gösterilen fotoğrafın bilgilerini içeren bir isteği Mapbox'a gönderir.",
+  "seven": "Mue rastgele bir alıntı alabilmek için API'mıza (api.muetab.com) istekte bulunur. Belirlemiş olduğunuz alıntı dili, kendi dilinizde alıntılar almanız için istek içerisinde gönderilir.",
+  "eight": "Mue'nun arka plan özelliği, rastgele bir görüntü elde etmek için API'mize istekte bulunur. Bu istekte gönderilen tek bilgi, arka plan kategorisi ve çözünürlüktür. Unsplash veya Pexels seçildiğinde, bu bilgiler açık kaynak proxy sunucumuz aracılığıyla API'larına gönderilir. Görseller Cloudinary, Unsplash ve Pexels'ten istenmekte ve yüklenmektedir. Ana modeldeki arka plan ayarlarında 'DuckDuckGo Proxy Kullan' seçeneğinin etkinleştirilmesi, bunun yerine tüm görüntüleri DuckDuckGo görüntü proxy'si aracılığıyla yükleyecektir.",
+  "nine": "Ayarlarda hakkında sekmesini açarken güncellemeleri kontrol etmek, Mue'da katkıda bulunanların, sponsorların ve fotoğrafçıların bir listesini almak için GitHub API'sine, API'mize ve açık kaynak sponsorlarımız proxy'sine istekler gönderilir.",
+  "ten": "Market sekmesi, belirli bir kategorinin yanı sıra bir kategorideki ürünlerin bir listesini almak için API'mize (marketplace.muetab.com) istekte bulunur. Bunun dışında herhangi bir bilgi gönderilmemektedir. Marketplace ve Eklentilerim sayfalarındaki resimler, DuckDuckGo Resim Proxy'si aracılığıyla yüklenir.",
+  "eleven": "Hızlı Bağlantılar etkinleştirildiğinde, site simgeleri DuckDuckGo site simgesi API'sinden alınır. Gönderilen tek bilgi belirttiğiniz URL'dir ve bu size bağlanamaz. Hızlı Bağlantılar sekmesinde 'DuckDuckGo Proxy Kullan' ayarını devre dışı bırakırsanız, resim bunun yerine Google'ın favicon API'si aracılığıyla alınır.",
+  "twelve": "Çevrimdışı mod, bu gizlilik politikasında belirtilen hizmetlerden herhangi birine yapılan talepleri önlemek için kullanılabilir.",
+  "notice": "Bu gizlilik politikasını herhangi bir zamanda bildirimde bulunmaksızın burada güncelleyebiliriz."
+}

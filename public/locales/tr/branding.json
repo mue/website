@@ -1,0 +1,20 @@
+{
+  "title": "Markalaşma",
+  "description": "Marka varlıklarımıza bir göz atın.",
+  "logos": {
+    "title": "Logolar",
+    "description": "Bu logo içerikleri yuvarlak, kare ve metin de dahil olmak üzere Mue'nun ana varlıklarıdır."
+  },
+  "colours": {
+    "title": "Renk Şeması",
+    "description": "Mue, ikisi degradede ve biri üstte olmak üzere 3 ana renkle çalışır.",
+    "orange": "Turuncu",
+    "pink": "Pembe",
+    "white": "Beyez"
+  },
+  "getstarted": {
+    "title": "Kullanmaya başlayın",
+    "description": "Logoların ve markanın kullanımına ilişkin tüm yönergeleri içerir.",
+    "download": "PAKETİ İNDİR"
+  }
+}

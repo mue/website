@@ -1,0 +1,30 @@
+{
+  "title": "Özellikler",
+  "description": "Mue'nun sunduğu her şeyi görün.",
+  "motivated": {
+    "title": "Motive olun",
+    "description": "Mue, sizi başarılı olmaya motive edecek widget'lara sahiptir.",
+    "list_one": "İlham verici alıntılar ve güzel arka planlar.",
+    "list_two": "Selamlaşmalar ile sizi güne hazırlar"
+  },
+  "customise": {
+    "title": "Sekmenizi özelleştirin",
+    "description": "Mue, sizin kullanımınız için en doğru hale gelebilmek amacıyla tonlarca özelleştirme seçeneğine sahiptir.",
+    "list_one": "Widget sırası ve yakınlaştırma, widget'larınızı mükemmel bir şekilde konumlandırmanıza olanak tanır.",
+    "list_two": "Özel arka planlar, alıntılar, selamlar ve daha fazlası",
+    "list_three": "Topluluktan paketleri indirmek için pazar içeriği."
+  },
+  "optimise": {
+    "title": "İş akışınızı optimize edin",
+    "description": "Gün içindeki verimliliğinizi en üst düzeye çıkarmak için Mue'yi ayarlayın.",
+    "list_one": "Web'den kolayca bilgi bulmak için arama widget'ını deneyin.",
+    "list_two": "Gününüzü planlamak için hava durumu.",
+    "list_three": "Notlar, daha sonra ne yapacağınızı takip etmenizi sağlar."
+  },
+  "secure": {
+    "title": "Güvenli ve emniyetli",
+    "description": "Mue, yeni sekmenizi güvenli ve gizli tutmak için gizlilik özellikleriyle birlikte gelir.",
+    "list_one": "IP adresinizi Mue'nin bağlandığı web sitelerinden gizlemek için DuckDuckGo proxy kullanın.",
+    "list_two": "Çevrimdışı mod ile tüm istekleri devre dışı bırakmakın."
+  }
+}

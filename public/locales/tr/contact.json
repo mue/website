@@ -1,0 +1,23 @@
+{
+  "title": "İletişim",
+  "description": "Temasa geçin",
+  "description_two": "Sosyal medya veya iletişim formu aracılığıyla bize ulaşın.",
+  "email": "E-posta",
+  "message": "Mesaj",
+  "send": "Gönder",
+  "invalid_email": "Geçersiz e-posta",
+  "invalid_message": "Mesaj kutusu doldurulmalıdır",
+  "invalid_captcha": "Geçersiz doğrulama",
+  "faq": {
+    "title": "Sık Sorulan Sorular (SSS)",
+    "description": "İşte bize sıkça sorulan bazı soruların cevapları.",
+    "branding": "Marka varlıklarını kullanabilir miyim?",
+    "branding_desc_start": "Tabii ki! İndirmeler için",
+    "branding_desc_here": "buradaki",
+    "branding_desc_end": "sayfaya göz atın.",
+    "api": "API'yi kendi projelerimde kullanabilir miyim?",
+    "api_desc": "Alıntılar için API tüm herkese açıktır, ancak fotoğrafçılarımızla yaptığımız lisans anlaşmaları nedeniyle görüntü API noktalarının kullanımına onay veremiyoruz.",
+    "feature": "Web sitemizde Mue'ya yer verebilir miyiz?",
+    "feature_desc": "Elbette! Mue hakkında oluşturulacak tüm inceleme ve makalelere açığız, bizden izin almanıza gerek yok. İsterseniz, işiniz bittiğinde sayfanın bağlantısını bize e-posta ile gönderebilirsiniz!"
+  }
+}

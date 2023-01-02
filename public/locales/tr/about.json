@@ -1,0 +1,27 @@
+{
+  "title": "Hakkında",
+  "description": "Mue ve arkasındaki ekip hakkında daha fazla bilgi edinin",
+  "vision_title_start": "Kısaca",
+  "vision_title_end": "hakkımızda",
+  "vision": "Mue, makale yazarlarını bir haber sitesi için motive etmek üzere tasarlanmış bir yönetici ana sayfası olarak ortaya çıktı. 2017 yılında inşa edilmiş, güzel arka planlar ve ilham verici sözler gibi özelliklere sahipti. Bir yıl sonra Mue, yeni sekme sayfası olarak bir tarayıcı uzantısı olmak üzere bağımsız bir ürüne dönüştü. Katkıları teşvik etmek ve gizlilik endişeleri olması durumunda uzantının nasıl çalıştığına dair şeffaflık sağlamak için açık kaynak yaptık. Yıllar geçtikçe birçok yeni özellik ekledik ve 1000'den fazla kullanıcıya ulaştık. Bu durum diğer web sitelerinin de ilgisini çekti.",
+  "team": {
+    "title": "Takım",
+    "description": "Mue'yu tasarlayan ve geliştiren insanlar.",
+    "lead_dev": "Geliştirici Takım Lideri",
+    "lead_design": "Baş Tasarımcı",
+    "qa_dev": "QA Test Mühendisi, Geliştirici",
+    "dev": "Geliştirici"
+  },
+  "statistics": {
+    "title": "İstatistik",
+    "users": "kullanıcılar",
+    "stars": "github yıldızları",
+    "updates": "güncellemeler"
+  },
+  "supporters": {
+    "title": "Destekçiler",
+    "description": "Bunlar, Mue'nun gelişimini ve ilgili maliyetleri destekleyen çok cömert kişilerdir.",
+    "support_us": "Bizi Destekle",
+    "none": "Şu anda Mue destekçisi yok. İlk ol!"
+  }
+}

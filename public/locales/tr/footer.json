@@ -1,0 +1,27 @@
+{
+  "subtitle": "Modern web için.",
+  "product": {
+    "title": "Ürün",
+    "download": "İndir",
+    "features": "Özellikler",
+    "privacy": "Gizlilik",
+    "documentation": "Dokümantasyon"
+  },
+  "company": {
+    "title": "Şirket",
+    "about": "Hakkında",
+    "contact": "İletişim",
+    "branding": "Markalaşma",
+    "blog": "Blog Yazıları"
+  },
+  "links": {
+    "title": "Bağlantılar",
+    "privacy": "Gizlilik",
+    "source": "Kaynak Kodu",
+    "roadmap": "Yol Haritası",
+    "support": "Bağış",
+    "issues": "Sorunlar",
+    "status": "Durum"
+  },
+  "social": "Sosyal Medya"
+}

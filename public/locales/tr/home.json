@@ -1,0 +1,45 @@
+{
+  "title": "Anasayfa",
+  "promotion": {
+    //When this part is written in Turkish, a problem occurs because the verb is at the end. For example "Üretken ol, Kendin ol"
+    "title": "Be",
+    "productive": "productive",
+    "inspired": "inspired",
+    "organised": "organised",
+    "yourself": "yourself",
+    "subtitle": "...with Mue, a fast, open, and free-to-use new tab page for modern browsers.",
+    "demo": "Try the demo"
+  },
+  "features": {
+    "widgets": {
+      "title": "Widgetlar",
+      "description": "Mue, üretkenliği ve motivasyonu artırmak için yeni sekme sayfanızdaki bilgilere kolay erişim için birçok widget ile birlikte gelir."
+    },
+    "opensource": {
+      "title": "Açık kaynak",
+      "description": "Mue açık kaynaktır ve GitHub'da mevcuttur. Katkıda bulunmaktan çekinmeyin!",
+      "link": "Github'ı aç"
+    },
+    "privacy": {
+      "title": "Gizlilik",
+      "description": "Mue gizlilik düşünülerek inşa edilmiştir. Hiçbir kişisel veri izlenmez, saklanmaz ve API kodu açık kaynaktır.",
+      "link": "Politikayı oku"
+    },
+    "extensible": {
+      "title": "Genişletilebilir",
+      "description": "Fotoğraf paketleri ve önceden ayarlanmış ayarlar gibi daha fazla içerik Mue marketplace'ten indirilebilir."
+    }
+  },
+  "shareyourmue": {
+    "title": "Mue",
+    "work": "iş içindir",
+    "students": "öğrenciler içindir",
+    "productivity": "verimlilik içindir",
+    "fun": "eğlence içindir",
+    "everyone": "herkes içindir <3",
+    //In Turkish, the verb is at the end. That's why I added it like this to fit the label view.
+    "description_start": "Mue içeriğinizi dünyayla paylaşmak ve aşağıda görünme şansına sahip olmak için sosyal medyada",
+    "description_end": "etiketini kullanın." 
+  },
+  "press": "Görüldüğü gibi"
+}

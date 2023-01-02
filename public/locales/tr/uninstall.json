@@ -1,0 +1,22 @@
+{
+  "title": "Kaldır",
+  "title_two": "Başarıyla kaldırıldı",
+  "description": "Gelecekte gelişmemize yardımcı olmak istiyorsanız, bu kısa formu doldurmaktan çekinmeyin.",
+  "reason": {
+    "title": "Mue'yi neden kaldırdınız?",
+    "slow": "Çok yavaş",
+    "old": "Eski yeni sekme sayfasına geri dönmek istiyorum",
+    "broken": "Düzgün çalışmadı",
+    "features": "Eksik özellikler var",
+    "notexpected": "Beklediğim gibi değil",
+    "privacy": "Gizlilik endişelerinden dolayı",
+    "language": "Benim dilimde mevcut değil",
+    "temp": "Geçici olarak kaldırmak istiyorum",
+    "other": "Diğer"
+  },
+  "better": "Mue eklentisini daha iyi hale getirmek için ne yapabiliriz?",
+  "likely": "Gelecekte Mue eklentisini deneme ihtimaliniz nedir?",
+  "submit": "Gönder",
+  "better_error": "Mesaj kutusu doldurulmalıdır",
+  "reason_error": "Neden sunulmalıdır"
+}
