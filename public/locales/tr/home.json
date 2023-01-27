@@ -1,14 +1,13 @@
 {
   "title": "Anasayfa",
   "promotion": {
-    //When this part is written in Turkish, a problem occurs because the verb is at the end. For example "Üretken ol, Kendin ol"
     "title": "Be",
     "productive": "productive",
     "inspired": "inspired",
     "organised": "organised",
     "yourself": "yourself",
     "subtitle": "...with Mue, a fast, open, and free-to-use new tab page for modern browsers.",
-    "demo": "Try the demo"
+    "demo": "Demoyu deneyin"
   },
   "features": {
     "widgets": {
@@ -16,7 +15,7 @@
       "description": "Mue, üretkenliği ve motivasyonu artırmak için yeni sekme sayfanızdaki bilgilere kolay erişim için birçok widget ile birlikte gelir."
     },
     "opensource": {
-      "title": "Açık kaynak",
+      "title": "Açık Kaynak",
       "description": "Mue açık kaynaktır ve GitHub'da mevcuttur. Katkıda bulunmaktan çekinmeyin!",
       "link": "Github'ı aç"
     },
@@ -37,9 +36,8 @@
     "productivity": "verimlilik içindir",
     "fun": "eğlence içindir",
     "everyone": "herkes içindir <3",
-    //In Turkish, the verb is at the end. That's why I added it like this to fit the label view.
     "description_start": "Mue içeriğinizi dünyayla paylaşmak ve aşağıda görünme şansına sahip olmak için sosyal medyada",
     "description_end": "etiketini kullanın." 
   },
-  "press": "Görüldüğü gibi"
+  "press": "Portfolyo ve Medya"
 }

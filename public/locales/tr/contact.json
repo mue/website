@@ -1,12 +1,12 @@
 {
   "title": "İletişim",
-  "description": "Temasa geçin",
+  "description": "İletişeme geçin",
   "description_two": "Sosyal medya veya iletişim formu aracılığıyla bize ulaşın.",
   "email": "E-posta",
   "message": "Mesaj",
   "send": "Gönder",
   "invalid_email": "Geçersiz e-posta",
-  "invalid_message": "Mesaj kutusu doldurulmalıdır",
+  "invalid_message": "Mesaj alanı doldurulmalıdır",
   "invalid_captcha": "Geçersiz doğrulama",
   "faq": {
     "title": "Sık Sorulan Sorular (SSS)",

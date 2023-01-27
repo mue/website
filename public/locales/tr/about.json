@@ -7,16 +7,16 @@
   "team": {
     "title": "Takım",
     "description": "Mue'yu tasarlayan ve geliştiren insanlar.",
-    "lead_dev": "Geliştirici Takım Lideri",
+    "lead_dev": "Baş Geliştirici",
     "lead_design": "Baş Tasarımcı",
     "qa_dev": "QA Test Mühendisi, Geliştirici",
     "dev": "Geliştirici"
   },
   "statistics": {
     "title": "İstatistik",
-    "users": "kullanıcılar",
-    "stars": "github yıldızları",
-    "updates": "güncellemeler"
+    "users": "Kullanıcılar",
+    "stars": "Github Yıldızları",
+    "updates": "Güncellemeler"
   },
   "supporters": {
     "title": "Destekçiler",
