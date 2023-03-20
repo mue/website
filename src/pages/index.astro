@@ -1,0 +1,93 @@
+---
+import Base from "@layouts/Base.astro";
+import Navbar from "@components/Navbar.astro";
+import Card from "@components/Card.astro";
+import { changeLanguage } from "i18next";
+import { localizePath } from "astro-i18next";
+
+changeLanguage("en");
+---
+
+<Base frontmatter={{ title: "Mue" }}>
+	<Navbar />
+
+	<main
+		class="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 my-0 mx-1 sm:mx-2 md:mx-3 lg:mx-4 p-2 sm:p-4 md:p-8 rounded-xl"
+	>
+		<h1>Welcome to <span class="text-gradient">Mue</span></h1>
+			<p class="instructions">
+				To get started, open the directory <code>src/pages</code> in your
+				project.<br />
+				<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message
+				above.
+			</p>
+			<ul role="list" class="link-card-grid">
+				<Card
+					href="https://docs.astro.build/"
+					title="Documentation"
+					body="Learn how Astro works and explore the official API docs."
+				/>
+				<Card
+					href="https://astro.build/integrations/"
+					title="Integrations"
+					body="Supercharge your project with new frameworks and libraries."
+				/>
+				<Card
+					href="https://astro.build/themes/"
+					title="Themes"
+					body="Explore a galaxy of community-built starter themes."
+				/>
+				<Card
+					href="https://astro.build/chat/"
+					title="Community"
+					body="Come say hi to our amazing Discord community. ❤️"
+				/>
+			</ul>
+
+			<a href={localizePath("/support")}>support</a>
+	</main>
+</Base>
+
+<style>
+	h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		margin: 0;
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		line-height: 1.6;
+		margin: 1rem 0;
+		border: 1px solid rgba(var(--accent), 25%);
+		background-color: white;
+		padding: 1rem;
+		border-radius: 0.4rem;
+	}
+	.instructions code {
+		font-size: 0.875em;
+		font-weight: bold;
+		background: rgba(var(--accent), 12%);
+		color: rgb(var(--accent));
+		border-radius: 4px;
+		padding: 0.3em 0.45em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 1rem;
+		padding: 0;
+	}
+
+	.animated-gradient {
+		background-image: linear-gradient(60deg, #dd3b67, #ffb032);
+	}
+</style>

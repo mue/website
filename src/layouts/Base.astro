@@ -1,0 +1,135 @@
+---
+export interface Props {
+	frontmatter;
+}
+
+import "@fontsource/lexend-deca";
+import i18next from "i18next";
+import { HeadHrefLangs } from "astro-i18next/components";
+
+const { frontmatter } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang={i18next.language} class="scroll-smooth">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+
+		<title>{frontmatter.title}</title>
+
+		<HeadHrefLangs />
+
+		<!-- TODO: SEO -->
+
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+		<script is:inline>
+			if (
+				localStorage.theme === "dark" ||
+				(!("theme" in localStorage) &&
+					window.matchMedia("(prefers-color-scheme: dark)").matches)
+			) {
+				document.documentElement.classList.add("dark");
+			} else {
+				document.documentElement.classList.remove("dark");
+			}
+		</script>
+		<script
+			{/*async
+			defer*/}
+			type="text/partytown"
+			data-website-id="f24748bf-5553-4773-bcbe-568e6c7ffdef"
+			src="https://umami.muetab.com/umami.js"
+		></script>
+
+	</head>
+	<body class="text-white bg-gradient-to-r from-mue-orange-light dark:from-mue-orange-dark to-mue-pink-light dark:to-mue-pink-dark font-sans">
+		<canvas id="gradient-canvas" style="width:100vw;height:100vh" class="absolute -z-10"></canvas>
+		<script>
+			import Gradient from '../js/gradient.js';
+            const gradient = new Gradient()
+            gradient.initGradient('#gradient-canvas');
+        </script>
+		<slot />
+		<style is:global>
+			:root {
+				--accent: 221, 59, 103;
+				--accent-gradient: linear-gradient(50deg, #ffb032, #dd3b67 30%);
+				/* --accent-gradient: linear-gradient(50deg, #dd3b67, #ffb032 30%); */
+			}
+
+			#gradient-canvas {
+				--gradient-color-1: #FF8C67;
+				--gradient-color-2: #FF829D;
+			}
+
+			body.dark #gradient-canvas {
+				--gradient-color-1: #b94825;
+				--gradient-color-2: #b13854;
+			}
+
+			/* body {
+				background: linear-gradient(
+					70deg,
+					rgba(255, 92, 39, 0.7),
+					rgba(255, 70, 110, 0.67),
+					rgba(255, 92, 39, 0.7),
+					rgba(255, 70, 110, 0.67)
+				);
+				background-size: 200% 200%;
+
+				-webkit-animation: AnimatedGradient 10s ease-in-out infinite;
+				-moz-animation: AnimatedGradient 10s ease-in-out infinite;
+				animation: AnimatedGradient 10s ease-in-out infinite;
+			}
+
+			body.dark {
+				background: linear-gradient(
+					70deg,
+					#b94825,
+					#b13854,
+					#b94825,
+					#b13854
+				);
+			}
+
+			@-webkit-keyframes AnimatedGradient {
+				0% {
+					background-position: 0% 50%;
+				}
+				50% {
+					background-position: 100% 50%;
+				}
+				100% {
+					background-position: 0% 50%;
+				}
+			}
+
+			@-moz-keyframes AnimatedGradient {
+				0% {
+					background-position: 0% 50%;
+				}
+				50% {
+					background-position: 100% 50%;
+				}
+				100% {
+					background-position: 0% 50%;
+				}
+			}
+
+			@keyframes AnimatedGradient {
+				0% {
+					background-position: 0% 50%;
+				}
+				50% {
+					background-position: 100% 50%;
+				}
+				100% {
+					background-position: 0% 50%;
+				}
+			} */
+		</style>
+	</body>
+</html>

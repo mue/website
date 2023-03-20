@@ -1,0 +1,17 @@
+---
+import Page from "@layouts/Page.astro";
+import { changeLanguage } from "i18next";
+import { localizePath } from "astro-i18next";
+
+changeLanguage("en");
+---
+
+<Page frontmatter={{ title: "Support" }}>
+	<main>
+		hello world
+	</main>
+	<script>
+		// TODO: lunr search
+	</script>
+</Page>
+
