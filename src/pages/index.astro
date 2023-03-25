@@ -1,74 +1,113 @@
 ---
-import Base from "@layouts/Base.astro";
-import Navbar from "@components/Navbar.astro";
-import Card from "@components/Card.astro";
-import { changeLanguage } from "i18next";
+import { changeLanguage, t } from "i18next";
 import { localizePath } from "astro-i18next";
+import getLocale from "@lib/getLocale";
+import Base from "@layouts/Base.astro";
+import Navbar from "@components/Navbar.svelte";
+import Card from "@components/Card.astro";
+import Footer from "@components/Footer.svelte";
+import HeroImage from "../img/hero.png";
+import ArrowRightIcon from "@components/heroicons/mini/ArrowRight.svelte";
+import Typewriter from "@components/Typewriter.svelte";
 
-changeLanguage("en");
+
+// the locale is static so can't be accessed via `Astro.params` like normal
+changeLanguage(getLocale(Astro.url.pathname));
 ---
 
 <Base frontmatter={{ title: "Mue" }}>
-	<Navbar />
+	<Navbar client:load />
+
+	<div
+		id="hero"
+		class="my-4 sm:my-8 md:my-12 lg:my-16 xl:my-24 mx-auto max-w-screen-lg text-center"
+	>
+		<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-24">
+			<div class="flex items-center justify-center">
+				<div class="grid grid-cols-1 gap-4 lg:gap-12">
+					<h1
+						class="text-5xl xl:text-7xl font-extrabold leading-snug"
+					>
+						<span
+							class="text-neutral-600 dark:text-neutral-700 mix-blend-difference"
+						>
+							{t('pages.home.hero.mue_is')}
+						</span>
+						<br />
+						<span class="text-mue-almond block h-[1em]">
+							<Typewriter client:load strings={[
+								t('pages.home.hero.beautiful'),
+								t('pages.home.hero.customisable'),
+								t('pages.home.hero.free'),
+							]} />
+						</span>
+					</h1>
+					<div>
+						<a href="#">
+							<button class="mue-button shadow-lg">
+								<span class="flex items-center gap-2">
+									add button
+									<ArrowRightIcon />
+								</span>
+							</button>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div>
+				<img src={HeroImage} />
+			</div>
+		</div>
+	</div>
 
 	<main
-		class="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 my-0 mx-1 sm:mx-2 md:mx-3 lg:mx-4 p-2 sm:p-4 md:p-8 rounded-xl"
+		class="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 my-0 mx-1 sm:mx-2 md:mx-3 lg:mx-4 p-4 sm:p-6 md:p-8 rounded-xl"
 	>
-		<h1>Welcome to <span class="text-gradient">Mue</span></h1>
-			<p class="instructions">
-				To get started, open the directory <code>src/pages</code> in your
-				project.<br />
-				<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message
-				above.
-			</p>
-			<ul role="list" class="link-card-grid">
-				<Card
-					href="https://docs.astro.build/"
-					title="Documentation"
-					body="Learn how Astro works and explore the official API docs."
-				/>
-				<Card
-					href="https://astro.build/integrations/"
-					title="Integrations"
-					body="Supercharge your project with new frameworks and libraries."
-				/>
-				<Card
-					href="https://astro.build/themes/"
-					title="Themes"
-					body="Explore a galaxy of community-built starter themes."
-				/>
-				<Card
-					href="https://astro.build/chat/"
-					title="Community"
-					body="Come say hi to our amazing Discord community. ❤️"
-				/>
-			</ul>
-
-			<a href={localizePath("/support")}>support</a>
+		<h1 class="text-4xl">
+			Welcome to
+			<span
+				class="bg-gradient-to-r from-mue-orange to-mue-pink bg-clip-text text-transparent"
+				>Mue</span
+			>.
+			{t('flag')}
+		</h1>
+		This is <span
+			class="text-mue-pink bg-mue-pink/10 text-[0.875em] font-medium rounded-md px-[0.3em] py-[0.45em]"
+			>code</span
+		>
+		<p class="instructions">
+			To get started, open the directory <code>src/pages</code> in your project.<br
+			/>
+			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message
+			above.
+		</p>
+		<ul role="list" class="link-card-grid">
+			<Card
+				href="https://docs.astro.build/"
+				title="Documentation"
+				body="Learn how Astro works and explore the official API docs."
+			/>
+			<Card
+				href="https://astro.build/integrations/"
+				title="Integrations"
+				body="Supercharge your project with new frameworks and libraries."
+			/>
+			<Card
+				href="https://astro.build/themes/"
+				title="Themes"
+				body="Explore a galaxy of community-built starter themes."
+			/>
+			<Card
+				href="https://astro.build/chat/"
+				title="Community"
+				body="Come say hi to our amazing Discord community. ❤️"
+			/>
+		</ul>
 	</main>
+	<Footer client:load />
 </Base>
 
 <style>
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-	}
 	.instructions code {
 		font-size: 0.875em;
 		font-weight: bold;
@@ -85,9 +124,5 @@ changeLanguage("en");
 		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
 		gap: 1rem;
 		padding: 0;
-	}
-
-	.animated-gradient {
-		background-image: linear-gradient(60deg, #dd3b67, #ffb032);
 	}
 </style>

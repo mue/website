@@ -2,16 +2,57 @@
 import Page from "@layouts/Page.astro";
 import { changeLanguage } from "i18next";
 import { localizePath } from "astro-i18next";
+import getLocale from "@lib/getLocale";
 
-changeLanguage("en");
+// the locale is static so can't be accessed via `Astro.params` like normal
+changeLanguage(getLocale(Astro.url.pathname));
 ---
 
 <Page frontmatter={{ title: "Support" }}>
 	<main>
+		<!-- <div
+			aria-hidden="true"
+			class="absolute inset-0 grid grid-cols-2 -space-x-64 mt-16 opacity-40 dark:opacity-20 max-w-xl mx-auto"
+		>
+			<div
+				class="blur-2xl h-20 bg-gradient-to-l from-mue-pink dark:from-mue-pink-dark to-mue-orange dark:to-mue-orange-dark ml-16"
+			>
+			</div>
+			<div
+				class="blur-2xl h-12 bg-gradient-to-bl from-mue-pink dark:from-mue-pink-dark to-mue-orange dark:to-mue-orange-dark mt-4"
+			>
+			</div>
+		</div> -->
+		<div class="p-4 text-4xl md:text-6xl font-bold text-center">
+			<h1 class="mue-title-shadow">
+				<span
+					class="bg-gradient-to-r from-mue-orange to-mue-pink bg-clip-text text-transparent"
+					>Support</span
+				>
+			</h1>
+		</div>
+		<br /><br /><br /><br /><br />
 		hello world
 	</main>
 	<script>
 		// TODO: lunr search
 	</script>
-</Page>
+	<style>
+		.mue-title-shadow {
+			--shadow-color-1: white;
+			--shadow-color-2: #dd3b67;
+			--shadow-color-3: #ffb032;
+			text-shadow: -60px -15px 75px var(--shadow-color-2),
+				40px 20px 75px var(--shadow-color-3);
+		}
 
+		html.dark .mue-title-shadow {
+			--shadow-color-1: black;
+			--shadow-color-2: #b13854;
+			--shadow-color-3: #b94825;
+			text-shadow: 0 0 75px var(--shadow-color-1),
+				-60px -15px 75px var(--shadow-color-2),
+				40px 20px 75px var(--shadow-color-3);
+		}
+	</style>
+</Page>

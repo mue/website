@@ -13,10 +13,12 @@ module.exports = {
 	theme: {
 		extend: {
 			colors: {
+				'mue-almond': 'BlanchedAlmond',
 				'mue-orange': '#ffb032',
 				'mue-orange-dark': '#b94825',
 				// 'mue-orange-light': 'rgba(255, 92, 39, 0.7)',
 				'mue-orange-light': '#FF8C67',
+				// 'mue-pale': '#FBBEBE',
 				'mue-pink': '#dd3b67',
 				'mue-pink-dark': '#b13854',
 				// 'mue-pink-light': 'rgba(255, 70, 110, 0.67)',

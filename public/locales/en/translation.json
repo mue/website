@@ -1,1 +1,13 @@
-{}
+{
+	"flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+	"pages": {
+		"home": {
+			"hero": {
+				"mue_is": "Mue is",
+				"beautiful": "beautiful",
+				"customisable": "customisable",
+				"free": "free"
+			}
+		}
+	}
+}

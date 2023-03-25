@@ -5,11 +5,11 @@ import {
 
 export const collections = {
 	'authors': defineCollection({ schema: {} }),
-	'blog': defineCollection({
+	'changelog': defineCollection({
 		schema: z.object({
+			date: z.string(),
 			image: z.string().optional(),
 			locale: z.string(),
-			tags: z.array(z.string()),
 			title: z.string(),
 		}),
 	}),
