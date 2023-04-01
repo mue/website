@@ -5,6 +5,7 @@ import astroI18next from 'astro-i18next';
 import svelte from '@astrojs/svelte';
 import sitemap from '@astrojs/sitemap';
 import partytown from '@astrojs/partytown';
+import { remarkReadingTime } from './plugins.mjs';
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,5 +17,6 @@ export default defineConfig({
 		sitemap(),
 		partytown(),
 	],
+	markdown: { remarkPlugins: [remarkReadingTime] },
 	site: 'https://muetab.com',
 });

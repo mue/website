@@ -5,6 +5,6 @@ import Page from "../../layouts/Page.astro";
 import { Debug } from 'astro/components';
 const allPosts = await getCollection("blog");
 ---
-<Page>
+<Page frontmatter={{}}>
 <Debug {allPosts} />
 </Page>

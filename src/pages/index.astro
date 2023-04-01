@@ -4,7 +4,6 @@ import { localizePath } from "astro-i18next";
 import getLocale from "@lib/getLocale";
 import Base from "@layouts/Base.astro";
 import Navbar from "@components/Navbar.svelte";
-import Card from "@components/Card.astro";
 import Footer from "@components/Footer.svelte";
 import HeroImage from "../img/hero.png";
 import ArrowRightIcon from "@components/heroicons/mini/ArrowRight.svelte";
@@ -72,8 +71,22 @@ const browsers = {
 							/>
 						</span>
 					</h1>
-					<div>
+					<div
+						class="flex flex-col text-center items-center justify-center gap-2"
+					>
 						<AddMueButton client:load {browsers} />
+						<div>
+							<a
+								class="text-white hover:opacity-80 transition duration-300 ease-in-out text-sm shadow-sm"
+								href="https://demo.muetab.com"
+								target="_blank"
+							>
+								<span class="flex items-center gap-2">
+									{t("pages.home.hero.demo")}
+									<ArrowRightIcon />
+								</span>
+							</a>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -92,60 +105,9 @@ const browsers = {
 				class="bg-gradient-to-r from-mue-orange to-mue-pink bg-clip-text text-transparent"
 				>Mue</span
 			>.
-			{t("flag")}
 		</h1>
-		This is <span
-			class="text-mue-pink bg-mue-pink/10 text-[0.875em] font-medium rounded-md px-[0.3em] py-[0.45em]"
-			>code</span
-		>
-		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br
-			/>
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message
-			above.
-		</p>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Themes"
-				body="Explore a galaxy of community-built starter themes."
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Community"
-				body="Come say hi to our amazing Discord community. ❤️"
-			/>
-		</ul>
+		{t("name")}
+		{t("flag")}
 	</main>
 	<Footer client:visible />
 </Base>
-
-<style>
-	.instructions code {
-		font-size: 0.875em;
-		font-weight: bold;
-		background: rgba(var(--accent), 12%);
-		color: rgb(var(--accent));
-		border-radius: 4px;
-		padding: 0.3em 0.45em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
-</style>

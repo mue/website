@@ -3,7 +3,7 @@
 	import { localizePath } from "astro-i18next";
 </script>
 
-<nav>
+<nav class="mt-12">
 	<span class="font-bold text-xl">I'm going to footer you</span>
 	<br />
 	<a href={localizePath("/support")}>support</a>

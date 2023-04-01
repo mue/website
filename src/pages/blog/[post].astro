@@ -1,21 +1,33 @@
 ---
-import type { CollectionEntry } from 'astro:content'
-import { getCollection } from 'astro:content'
-import Page from '../../layouts/Page.astro'
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import Page from "../../layouts/Page.astro";
+import getContributors from "@lib/getContributors";
+
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog')
-  return blogEntries.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
-  }))
+	const blogEntries = await getCollection("blog");
+	console.log(blogEntries);
+	return blogEntries.map((entry) => {
+		let slug = entry.slug.split("/");
+		slug.shift();
+		slug = slug.join("/");
+		return {
+			params: { post: slug },
+			props: { post: entry },
+		};
+	});
 }
 type Props = {
-  entry: CollectionEntry<'blog'>
-}
+	entry: CollectionEntry<"blog">;
+};
 // 2. When its time to render, you can get the entry directly from the prop
 const { post } = Astro.props;
-const { Content } = await post.render()
+const { Content } = await post.render();
+
+// const contributors = await getContributors(`src/content/${post.id}`);
 ---
-<Page>
-  <Content />
+
+<Page frontmatter={{ title: post.data.title }}>
+	<Content />
 </Page>

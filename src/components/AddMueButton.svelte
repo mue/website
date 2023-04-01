@@ -8,7 +8,6 @@
 	let browser = "default";
 
 	onMount(() => {
-		console.log('MOUNTED')
 		const ua = new UAParser(navigator.userAgent);
 		browser =
 			ua.getDevice().type === "mobile" || ua.getDevice().type === "tablet"
@@ -17,7 +16,7 @@
 	});
 </script>
 
-<a href={browsers[browser].url}>
+<a href={browsers[browser].url} target="_blank">
 	<button class="mue-button shadow-lg">
 		<span class="flex items-center gap-2">
 			{browsers[browser].text}
