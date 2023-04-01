@@ -1,12 +1,20 @@
 {
+	"components": {
+		"buttons": {
+			"add_to_browser": "Add to {{browser}}",
+			"download_from_github": "Download from GitHub",
+			"unsupported_browser": "Unsupported browser"
+		}
+	},
 	"flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+	"name": "English",
 	"pages": {
 		"home": {
 			"hero": {
-				"mue_is": "Mue is",
 				"beautiful": "beautiful",
 				"customisable": "customisable",
-				"free": "free"
+				"free": "free",
+				"mue_is": "Mue is"
 			}
 		}
 	}
