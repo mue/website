@@ -1,0 +1,10 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import Page from "../../layouts/Page.astro";
+import { Debug } from 'astro/components';
+const allPosts = await getCollection("blog");
+---
+<Page>
+<Debug {allPosts} />
+</Page>

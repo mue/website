@@ -1,1 +1,1 @@
-export default path => path.match(/\/(?<locale>[a-z]+)\/support/gi)?.groups.locale || 'en';
+export default path => path.match(/^\/(?<locale>[a-z]{2})\//)?.groups.locale || 'en';

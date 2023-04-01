@@ -8,5 +8,5 @@
 	<br />
 	<a href={localizePath("/support")}>support</a>
 	<br />
-	theme
+	theme <!-- TODO: https://tailwindcss.com/docs/dark-mode#supporting-system-preference-and-manual-selection -->
 </nav>

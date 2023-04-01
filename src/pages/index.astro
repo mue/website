@@ -9,10 +9,37 @@ import Footer from "@components/Footer.svelte";
 import HeroImage from "../img/hero.png";
 import ArrowRightIcon from "@components/heroicons/mini/ArrowRight.svelte";
 import Typewriter from "@components/Typewriter.svelte";
-
+import AddMueButton from "@components/AddMueButton.svelte";
 
 // the locale is static so can't be accessed via `Astro.params` like normal
 changeLanguage(getLocale(Astro.url.pathname));
+
+const browsers = {
+	default: {
+		text: t("components.buttons.download_from_github"),
+		url: "https://github.com/mue/mue/releases",
+	},
+	unsupported: {
+		text: t("components.buttons.unsupported_browser"),
+		url: "",
+	},
+	chrome: {
+		text: t("components.buttons.add_to_browser", { browser: "Chrome" }),
+		url: "https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid",
+	},
+	edge: {
+		text: t("components.buttons.add_to_browser", { browser: "Edge" }),
+		url: "https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja",
+	},
+	firefox: {
+		text: t("components.buttons.add_to_browser", { browser: "Firefox" }),
+		url: "https://addons.mozilla.org/firefox/addon/mue/",
+	},
+	whale: {
+		text: t("components.buttons.add_to_browser", { browser: "Whale" }),
+		url: "https://store.whale.naver.com/detail/ecllekeilcmicbfkkiknfdddbogibbnc",
+	},
+};
 ---
 
 <Base frontmatter={{ title: "Mue" }}>
@@ -31,26 +58,22 @@ changeLanguage(getLocale(Astro.url.pathname));
 						<span
 							class="text-neutral-600 dark:text-neutral-700 mix-blend-difference"
 						>
-							{t('pages.home.hero.mue_is')}
+							{t("pages.home.hero.mue_is")}
 						</span>
 						<br />
 						<span class="text-mue-almond block h-[1em]">
-							<Typewriter client:load strings={[
-								t('pages.home.hero.beautiful'),
-								t('pages.home.hero.customisable'),
-								t('pages.home.hero.free'),
-							]} />
+							<Typewriter
+								client:load
+								strings={[
+									t("pages.home.hero.beautiful"),
+									t("pages.home.hero.customisable"),
+									t("pages.home.hero.free"),
+								]}
+							/>
 						</span>
 					</h1>
 					<div>
-						<a href="#">
-							<button class="mue-button shadow-lg">
-								<span class="flex items-center gap-2">
-									add button
-									<ArrowRightIcon />
-								</span>
-							</button>
-						</a>
+						<AddMueButton client:load {browsers} />
 					</div>
 				</div>
 			</div>
@@ -69,7 +92,7 @@ changeLanguage(getLocale(Astro.url.pathname));
 				class="bg-gradient-to-r from-mue-orange to-mue-pink bg-clip-text text-transparent"
 				>Mue</span
 			>.
-			{t('flag')}
+			{t("flag")}
 		</h1>
 		This is <span
 			class="text-mue-pink bg-mue-pink/10 text-[0.875em] font-medium rounded-md px-[0.3em] py-[0.45em]"
@@ -104,7 +127,7 @@ changeLanguage(getLocale(Astro.url.pathname));
 			/>
 		</ul>
 	</main>
-	<Footer client:load />
+	<Footer client:visible />
 </Base>
 
 <style>

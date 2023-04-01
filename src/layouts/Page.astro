@@ -17,5 +17,5 @@ const { frontmatter } = Astro.props;
 		<Navbar client:load />
 		<slot />
 	</main>
-	<Footer client:load />
+	<Footer client:visible />
 </Base>

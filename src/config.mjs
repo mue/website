@@ -4,7 +4,7 @@ import {
 } from 'astro:content';
 
 export const collections = {
-	'authors': defineCollection({ schema: {} }),
+	'blog': defineCollection({ schema: {} }),
 	'changelog': defineCollection({
 		schema: z.object({
 			date: z.string(),
@@ -20,4 +20,10 @@ export const collections = {
 			title: z.string(),
 		}),
 	}),
+};
+
+export const github = {
+	branch: 'main',
+	organisation: 'mue',
+	repository: 'website',
 };
