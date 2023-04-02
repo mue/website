@@ -1,5 +1,6 @@
 # build output
 dist/
+src/pages/[a-z][a-z]/
 
 # generated types
 .astro/
