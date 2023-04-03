@@ -8,19 +8,19 @@ type BlogPost = Modify<CollectionEntry<"blog">, {
 }>
 
 export async function getStaticPaths() {
-	const parts = import.meta.url.split("/");
-	let locale = parts[parts.length - 3];
-	locale = locale === "pages" ? "en" : locale;
 	const posts: BlogPost[] = await getCollection("blog");
-	return posts
-		.filter((post) => post.slug.split("/").shift() === locale)
-		.map((post) => {
-			post.slug = post.slug.split("/").slice(1).join("/");
-			return {
-				params: { post: post.slug },
-				props: { post },
-			};
-		});
+	const locales = new Set(posts.map((post) => post.slug.split("/").shift()));
+	return [...locales].map((locale) => {
+		return posts
+			.filter((post) => post.slug.split("/").shift() === locale)
+			.map((post) => {
+				post.slug = post.slug.split("/").slice(1).join("/");
+				return {
+					params: { locale, post: post.slug },
+					props: { post },
+				};
+			});
+	});
 }
 
 export async function get(ctx: APIContext) {

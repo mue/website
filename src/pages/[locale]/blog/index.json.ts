@@ -8,10 +8,16 @@ type BlogPost = Modify<CollectionEntry<"blog">, {
 	slug: string;
 }>
 
+export async function getStaticPaths() {
+	const posts: BlogPost[] = await getCollection("blog");
+	const locales = new Set(posts.map((post) => post.slug.split("/").shift()));
+	return [...locales].map((locale) => ({ params: { locale } }));
+}
+
 export async function get(ctx: APIContext) {
 	let posts: BlogPost[] = await getCollection("blog");
 	posts = posts
-		.filter((post) => post.slug.split("/").shift() === getLocale(new URL(ctx.request.url).pathname))
+		.filter((post) => post.slug.split("/").shift() === ctx.params.locale)
 		.map((post) => {
 			post.slug = post.slug.split("/").slice(1).join("/");
 			return post;
