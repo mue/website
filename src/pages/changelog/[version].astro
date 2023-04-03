@@ -1,6 +1,53 @@
 ---
 import { changeLanguage } from "i18next";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import Page from "../../layouts/Page.astro";
+import getContributors from "@lib/getContributors";
 
 changeLanguage("en");
+
+type Modify<T, R> = Omit<T, keyof R> & R;
+type Changelog = Modify<
+	CollectionEntry<"changelog">,
+	{
+		slug: string;
+	}
+>;
+
+export async function getStaticPaths() {
+	const parts = import.meta.url.split("/");
+	let locale = parts[parts.length - 3];
+	locale = locale === "pages" ? "en" : locale;
+	const versions: Changelog[] = await getCollection("changelog");
+	return versions
+		.filter((version) => version.slug.split("/").shift() === locale)
+		.map((version, i, versions) => {
+			version.slug = version.slug.split("/").slice(1).join("/");
+			return {
+				params: { version: version.slug },
+				props: {
+					next: versions[i + 1],
+					prev: versions[i - 1],
+					version,
+				},
+			};
+		});
+}
+type Props = {
+	next: Changelog | undefined;
+	prev: Changelog | undefined;
+	version: Changelog;
+};
+const { version, next, prev } = Astro.props;
+const {
+	Content,
+	remarkPluginFrontmatter: { readingTime },
+} = await version.render();
+const contributors = await getContributors(`src/content/changelog/${version.id}`);
 ---
 
+<Page frontmatter={{ title: version.data.title }}>
+	{Math.ceil(readingTime.minutes)} mins
+	<Content />
+</Page>

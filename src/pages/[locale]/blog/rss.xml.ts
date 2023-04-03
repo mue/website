@@ -23,7 +23,6 @@ export async function get(ctx: APIContext) {
 			post.slug = post.slug.split("/").slice(1).join("/");
 			return post;
 		});
-		console.log(posts)
 	return rss({
 		title: 'Mue Blog',
 		description: '',

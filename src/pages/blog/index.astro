@@ -9,30 +9,43 @@ import { Debug } from "astro/components";
 changeLanguage("en");
 
 type Modify<T, R> = Omit<T, keyof R> & R;
-type BlogPost = Modify<CollectionEntry<"blog">, {
-    slug: string;
-}>;
+type BlogPost = Modify<
+	CollectionEntry<"blog">,
+	{
+		slug: string;
+	}
+>;
 const locale = getLocale(Astro.url.pathname);
 const files = await import.meta.glob("/src/content/blog/**/*.md");
 const assemble = (locale, name) => `/src/content/blog/${locale}/${name}`;
 for (const file in files) {
-    const name = file.split("/").slice(-1)[0];
-    if (files[assemble(locale, name)] === undefined &&
-        files[assemble("en", name)] !== undefined) {
-        console.warn(`WARNING: "/blog/${name}" has not been translated to "${locale}"!" Make sure you run "npm run i18n:copy" before you commit your changes.`);
-    }
-    else if (files[assemble(locale, name)] !== undefined &&
-        files[assemble("en", name)] === undefined) {
-        throw new Error(`Content MUST be written in English first. Please write your content in "${assemble("en", name)}" before translating it to ${locale}.`);
-    }
+	const name = file.split("/").slice(-1)[0];
+	if (
+		files[assemble(locale, name)] === undefined &&
+		files[assemble("en", name)] !== undefined
+	) {
+		console.warn(
+			`WARNING: "/blog/${name}" has not been translated to "${locale}"!" Make sure you run "npm run i18n:copy" before you commit your changes.`
+		);
+	} else if (
+		files[assemble(locale, name)] !== undefined &&
+		files[assemble("en", name)] === undefined
+	) {
+		throw new Error(
+			`Content MUST be written in English first. Please write your content in "${assemble(
+				"en",
+				name
+			)}" before translating it to ${locale}.`
+		);
+	}
 }
 let posts: BlogPost[] = await getCollection("blog");
 posts = posts
-    .filter((post) => post.slug.split("/").shift() === locale)
-    .map((post) => {
-    post.slug = post.slug.split("/").slice(1).join("/");
-    return post;
-});
+	.filter((post) => post.slug.split("/").shift() === locale)
+	.map((post) => {
+		post.slug = post.slug.split("/").slice(1).join("/");
+		return post;
+	});
 ---
 
 <Page frontmatter={{}}>
