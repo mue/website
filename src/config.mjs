@@ -4,20 +4,37 @@ import {
 } from 'astro:content';
 
 export const collections = {
-	'blog': defineCollection({ schema: {} }),
+	'blog': defineCollection({
+		schema: z.object({
+			draft: z.boolean(),
+			image: z.string().optional(),
+			publishedAt: z.string().datetime(),
+			tags: z.array(z.string()),
+			title: z.string(),
+			translated: z.boolean(),
+			updatedAt: z.string().datetime(),
+		}),
+	}),
 	'changelog': defineCollection({
 		schema: z.object({
-			date: z.string(),
+			draft: z.boolean(),
 			image: z.string().optional(),
-			locale: z.string(),
+			publishedAt: z.string().datetime(),
+			tags: z.array(z.string()),
 			title: z.string(),
+			translated: z.boolean(),
+			updatedAt: z.string().datetime(),
 		}),
 	}),
 	'knowledgebase': defineCollection({
 		schema: z.object({
+			draft: z.boolean(),
 			image: z.string().optional(),
+			publishedAt: z.string().datetime(),
 			tags: z.array(z.string()),
 			title: z.string(),
+			translated: z.boolean(),
+			updatedAt: z.string().datetime(),
 		}),
 	}),
 };

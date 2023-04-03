@@ -1,8 +1,91 @@
 {
-  "$schema": "https://frontmatter.codes/frontmatter.schema.json",
-  "frontMatter.framework.id": "other",
-  "frontMatter.content.publicFolder": "",
-  "frontMatter.content.pageFolders": [],
-  "frontMatter.taxonomy.tags": [],
-  "frontMatter.taxonomy.categories": []
+	"$schema": "https://frontmatter.codes/frontmatter.schema.json",
+	"frontMatter.preview.host": "http://localhost:3000",
+	"frontMatter.site.baseURL": "https://muetab.com",
+	"frontMatter.framework.id": "other",
+	"frontMatter.content.publicFolder": "public/img",
+	"frontMatter.content.pageFolders": [
+		{
+			"contentTypes": [
+				"default"
+			],
+			"title": "blog",
+			"path": "[[workspace]]/src/content/blog/en",
+			"previewPath": "/blog"
+		},
+		{
+			"contentTypes": [
+				"default"
+			],
+			"title": "changelog",
+			"path": "[[workspace]]/src/content/changelog/en",
+			"previewPath": "/changelog"
+		},
+		{
+			"contentTypes": [
+				"default"
+			],
+			"title": "knowledgebase",
+			"path": "[[workspace]]/src/content/knowledgebase/en",
+			"previewPath": "/support/kb"
+		}
+	],
+	"frontMatter.taxonomy.alignFilename": true,
+	"frontMatter.taxonomy.contentTypes": [
+		{
+			"name": "default",
+			"pageBundle": false,
+			"fields": [
+				{
+					"title": "Draft",
+					"name": "draft",
+					"type": "draft",
+					"default": true
+				},
+				{
+					"title": "Image",
+					"name": "image",
+					"type": "image",
+					"isPreviewImage": true
+				},
+				{
+					"title": "Published at",
+					"name": "publishedAt",
+					"type": "datetime",
+					"required": true,
+					"isPublishDate": true,
+					"default": "{{now}}"
+				},
+				{
+					"title": "Tags",
+					"name": "tags",
+					"type": "tags",
+					"taxonomyLimit": 5
+				},
+				{
+					"title": "Title",
+					"name": "title",
+					"required": true,
+					"type": "string"
+				},
+				{
+					"title": "Translated",
+					"name": "translated",
+					"type": "boolean",
+					"required": true,
+					"default": false
+				},
+				{
+					"title": "Updated at",
+					"name": "updatedAt",
+					"type": "datetime",
+					"required": true,
+					"isModifiedDate": true,
+					"default": "{{now}}"
+				}
+			]
+		}
+	],
+	"frontMatter.taxonomy.tags": [],
+	"frontMatter.taxonomy.categories": []
 }

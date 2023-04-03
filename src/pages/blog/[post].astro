@@ -1,33 +1,46 @@
 ---
+import { changeLanguage } from "i18next";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import Page from "../../layouts/Page.astro";
 import getContributors from "@lib/getContributors";
 
-// 1. Generate a new path for every collection entry
+changeLanguage("en");
+
+type Modify<T, R> = Omit<T, keyof R> & R;
+type BlogPost = Modify<CollectionEntry<"blog">, {
+    slug: string;
+}>;
 export async function getStaticPaths() {
-	const blogEntries = await getCollection("blog");
-	console.log(blogEntries);
-	return blogEntries.map((entry) => {
-		let slug = entry.slug.split("/");
-		slug.shift();
-		slug = slug.join("/");
-		return {
-			params: { post: slug },
-			props: { post: entry },
-		};
-	});
+    const parts = import.meta.url.split("/");
+    let locale = parts[parts.length - 3];
+    locale = locale === "pages" ? "en" : locale;
+    const posts: BlogPost[] = await getCollection("blog");
+    return posts
+        .filter((post) => post.slug.split("/").shift() === locale)
+        .map((post, i, posts) => {
+        post.slug = post.slug.split("/").slice(1).join("/");
+        return {
+            params: { post: post.slug },
+            props: {
+                next: posts[i + 1],
+                prev: posts[i - 1],
+                post,
+            },
+        };
+    });
 }
 type Props = {
-	entry: CollectionEntry<"blog">;
+    next: BlogPost | undefined;
+    prev: BlogPost | undefined;
+    post: BlogPost;
 };
-// 2. When its time to render, you can get the entry directly from the prop
-const { post } = Astro.props;
-const { Content } = await post.render();
-
-// const contributors = await getContributors(`src/content/${post.id}`);
+const { post, next, prev } = Astro.props;
+const { Content, remarkPluginFrontmatter: { readingTime }, } = await post.render();
+const contributors = await getContributors(`src/content/blog/${post.id}`);
 ---
 
 <Page frontmatter={{ title: post.data.title }}>
+	{Math.ceil(readingTime.minutes)} mins
 	<Content />
 </Page>

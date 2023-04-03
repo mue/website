@@ -1,8 +1,9 @@
 ---
+import { changeLanguage } from "i18next";
 import Base from "../layouts/Base.astro";
 import Navbar from "@components/Navbar.svelte";
 
-// this file can't be translated as it must be /404.html, not /fr/404.html etc
+changeLanguage("en");
 ---
 
 <Base frontmatter={{ title: "Error 404" }}>

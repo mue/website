@@ -1,7 +1,6 @@
 ---
 import { changeLanguage, t } from "i18next";
 import { localizePath } from "astro-i18next";
-import getLocale from "@lib/getLocale";
 import Base from "@layouts/Base.astro";
 import Navbar from "@components/Navbar.svelte";
 import Footer from "@components/Footer.svelte";
@@ -10,34 +9,33 @@ import ArrowRightIcon from "@components/heroicons/mini/ArrowRight.svelte";
 import Typewriter from "@components/Typewriter.svelte";
 import AddMueButton from "@components/AddMueButton.svelte";
 
-// the locale is static so can't be accessed via `Astro.params` like normal
-changeLanguage(getLocale(Astro.url.pathname));
+changeLanguage("en");
 
 const browsers = {
-	default: {
-		text: t("components.buttons.download_from_github"),
-		url: "https://github.com/mue/mue/releases",
-	},
-	unsupported: {
-		text: t("components.buttons.unsupported_browser"),
-		url: "",
-	},
-	chrome: {
-		text: t("components.buttons.add_to_browser", { browser: "Chrome" }),
-		url: "https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid",
-	},
-	edge: {
-		text: t("components.buttons.add_to_browser", { browser: "Edge" }),
-		url: "https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja",
-	},
-	firefox: {
-		text: t("components.buttons.add_to_browser", { browser: "Firefox" }),
-		url: "https://addons.mozilla.org/firefox/addon/mue/",
-	},
-	whale: {
-		text: t("components.buttons.add_to_browser", { browser: "Whale" }),
-		url: "https://store.whale.naver.com/detail/ecllekeilcmicbfkkiknfdddbogibbnc",
-	},
+    default: {
+        text: t("components.buttons.download_from_github"),
+        url: "https://github.com/mue/mue/releases",
+    },
+    unsupported: {
+        text: t("components.buttons.unsupported_browser"),
+        url: "",
+    },
+    chrome: {
+        text: t("components.buttons.add_to_browser", { browser: "Chrome" }),
+        url: "https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid",
+    },
+    edge: {
+        text: t("components.buttons.add_to_browser", { browser: "Edge" }),
+        url: "https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja",
+    },
+    firefox: {
+        text: t("components.buttons.add_to_browser", { browser: "Firefox" }),
+        url: "https://addons.mozilla.org/firefox/addon/mue/",
+    },
+    whale: {
+        text: t("components.buttons.add_to_browser", { browser: "Whale" }),
+        url: "https://store.whale.naver.com/detail/ecllekeilcmicbfkkiknfdddbogibbnc",
+    },
 };
 ---
 
@@ -103,8 +101,9 @@ const browsers = {
 			Welcome to
 			<span
 				class="bg-gradient-to-r from-mue-orange to-mue-pink bg-clip-text text-transparent"
-				>Mue</span
-			>.
+			>
+				Mue
+			</span>.
 		</h1>
 		{t("name")}
 		{t("flag")}

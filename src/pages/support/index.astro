@@ -2,10 +2,8 @@
 import Page from "@layouts/Page.astro";
 import { changeLanguage } from "i18next";
 import { localizePath } from "astro-i18next";
-import getLocale from "@lib/getLocale";
 
-// the locale is static so can't be accessed via `Astro.params` like normal
-changeLanguage(getLocale(Astro.url.pathname));
+changeLanguage("en");
 ---
 
 <Page frontmatter={{ title: "Support" }}>

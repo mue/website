@@ -5,7 +5,8 @@
 	import { UAParser } from "ua-parser-js";
 	import ArrowRightIcon from "./heroicons/mini/ArrowRight.svelte";
 
-	let browser = "default";
+	 // "default" (GitHub) would make more sense, but the layout shifts too much
+	let browser = "chrome";
 
 	onMount(() => {
 		const ua = new UAParser(navigator.userAgent);

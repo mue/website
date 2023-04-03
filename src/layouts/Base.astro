@@ -3,10 +3,22 @@ export interface Props {
 	frontmatter;
 }
 
-import '../styles/base.css'; // tailwind
+import "../styles/base.css"; // tailwind
 import "@fontsource/lexend-deca";
+import getLocale from "@lib/getLocale";
 import i18next from "i18next";
 import { HeadHrefLangs } from "astro-i18next/components";
+
+const canonical = () => {
+	let path = Astro.url.pathname;
+	const locale = getLocale(path);
+	if (locale !== "en") {
+		let parts = path.split("/");
+		parts.splice(1, 1);
+		path = parts.join("/");
+	}
+	return new URL(path, Astro.site).toString();
+};
 
 const { frontmatter } = Astro.props;
 ---
@@ -20,12 +32,13 @@ const { frontmatter } = Astro.props;
 
 		<title>{frontmatter.title}</title>
 
-		<HeadHrefLangs />
-
 		<!-- TODO: SEO -->
 
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="sitemap" href="/sitemap-index.xml">
+		<HeadHrefLangs />
+		<link rel="canonical" href={canonical()} />
+
+		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+		<link rel="sitemap" href="/sitemap-index.xml" />
 
 		<script is:inline>
 			if (
@@ -45,21 +58,24 @@ const { frontmatter } = Astro.props;
 			data-website-id="f24748bf-5553-4773-bcbe-568e6c7ffdef"
 			src="https://umami.muetab.com/umami.js"
 		></script>
-
 	</head>
 	{/* fallback gradient for when JS is disabled */}
-	<body class="relative font-sans text-white bg-gradient-to-r from-mue-orange-light dark:from-mue-orange-dark to-mue-pink-light dark:to-mue-pink-dark">
-		<canvas id="gradient-canvas" class="absolute w-full h-full min-h-screen -z-50"></canvas>
+	<body
+		class="relative font-sans text-white bg-gradient-to-r from-mue-orange-light dark:from-mue-orange-dark to-mue-pink-light dark:to-mue-pink-dark"
+	>
+		<canvas
+			id="gradient-canvas"
+			class="absolute w-full h-full min-h-screen -z-50"></canvas>
 		<script>
-			import Gradient from '../js/gradient.js';
-            const gradient = new Gradient()
-            gradient.initGradient('#gradient-canvas');
-        </script>
+			import Gradient from "../js/gradient.js";
+			const gradient = new Gradient();
+			gradient.initGradient("#gradient-canvas");
+		</script>
 		<slot />
 		<style is:global>
 			#gradient-canvas {
-				--gradient-color-1: #FF8C67;
-				--gradient-color-2: #FF829D;
+				--gradient-color-1: #ff8c67;
+				--gradient-color-2: #ff829d;
 			}
 
 			html.dark #gradient-canvas {
