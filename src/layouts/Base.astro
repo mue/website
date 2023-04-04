@@ -30,7 +30,13 @@ const { frontmatter } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 
-		<title>{frontmatter.title}</title>
+		<title>
+			{
+				frontmatter.title?.length > 0
+					? `${frontmatter.title} • Mue`
+					: "Mue"
+			}
+		</title>
 
 		<!-- TODO: SEO -->
 
@@ -71,6 +77,12 @@ const { frontmatter } = Astro.props;
 			const gradient = new Gradient();
 			gradient.initGradient("#gradient-canvas");
 		</script>
+		<noscript>
+			<div class="p-2 md:p-4  bg-rose-600 text-white border-rose-800 border-b-4 md:border-b-8 text-lg text-center">
+				<span class="font-bold">{i18next.t("no_script.title")}</span>
+				{i18next.t("no_script.message")}
+			</div>
+		</noscript>
 		<slot />
 		<style is:global>
 			#gradient-canvas {

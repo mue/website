@@ -2,7 +2,7 @@
 import { changeLanguage, t } from "i18next";
 import { localizePath } from "astro-i18next";
 import Base from "@layouts/Base.astro";
-import Navbar from "@components/Navbar.svelte";
+import Navbar from "@components/Navbar.astro";
 import Footer from "@components/Footer.svelte";
 import HeroImage from "../img/hero.png";
 import ArrowRightIcon from "@components/heroicons/mini/ArrowRight.svelte";
@@ -12,35 +12,35 @@ import AddMueButton from "@components/AddMueButton.svelte";
 changeLanguage("en");
 
 const browsers = {
-    default: {
-        text: t("components.buttons.download_from_github"),
-        url: "https://github.com/mue/mue/releases",
-    },
-    unsupported: {
-        text: t("components.buttons.unsupported_browser"),
-        url: "",
-    },
-    chrome: {
-        text: t("components.buttons.add_to_browser", { browser: "Chrome" }),
-        url: "https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid",
-    },
-    edge: {
-        text: t("components.buttons.add_to_browser", { browser: "Edge" }),
-        url: "https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja",
-    },
-    firefox: {
-        text: t("components.buttons.add_to_browser", { browser: "Firefox" }),
-        url: "https://addons.mozilla.org/firefox/addon/mue/",
-    },
-    whale: {
-        text: t("components.buttons.add_to_browser", { browser: "Whale" }),
-        url: "https://store.whale.naver.com/detail/ecllekeilcmicbfkkiknfdddbogibbnc",
-    },
+	default: {
+		text: t("components.buttons.download_from_github"),
+		url: "https://github.com/mue/mue/releases",
+	},
+	unsupported: {
+		text: t("components.buttons.unsupported_browser"),
+		url: "",
+	},
+	chrome: {
+		text: t("components.buttons.add_to_browser", { browser: "Chrome" }),
+		url: "https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid",
+	},
+	edge: {
+		text: t("components.buttons.add_to_browser", { browser: "Edge" }),
+		url: "https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja",
+	},
+	firefox: {
+		text: t("components.buttons.add_to_browser", { browser: "Firefox" }),
+		url: "https://addons.mozilla.org/firefox/addon/mue/",
+	},
+	whale: {
+		text: t("components.buttons.add_to_browser", { browser: "Whale" }),
+		url: "https://store.whale.naver.com/detail/ecllekeilcmicbfkkiknfdddbogibbnc",
+	},
 };
 ---
 
-<Base frontmatter={{ title: "Mue" }}>
-	<Navbar client:load />
+<Base frontmatter={{ title: "" }}>
+	<Navbar />
 
 	<div
 		id="hero"
@@ -52,22 +52,50 @@ const browsers = {
 					<h1
 						class="text-5xl xl:text-7xl font-extrabold leading-snug"
 					>
-						<span
-							class="text-neutral-600 dark:text-neutral-700 mix-blend-difference"
-						>
-							{t("pages.home.hero.mue_is")}
-						</span>
-						<br />
-						<span class="text-mue-almond block h-[1em]">
-							<Typewriter
-								client:load
-								strings={[
-									t("pages.home.hero.beautiful"),
-									t("pages.home.hero.customisable"),
-									t("pages.home.hero.free"),
-								]}
-							/>
-						</span>
+						{
+							t("pages.home.hero.title.reverse") === "true" ? (
+								<>
+									<span class="text-mue-almond block h-[1em]">
+										<Typewriter
+											client:load
+											strings={[
+												t(
+													"pages.home.hero.title.beautiful"
+												),
+												t(
+													"pages.home.hero.title.customisable"
+												),
+												t("pages.home.hero.title.free"),
+											]}
+										/>
+									</span>
+									<span class="text-neutral-600 dark:text-neutral-700 mix-blend-difference">
+										{t("pages.home.hero.title.mue_is")}
+									</span>
+								</>
+							) : (
+								<>
+									<span class="text-neutral-600 dark:text-neutral-700 mix-blend-difference">
+										{t("pages.home.hero.title.mue_is")}
+									</span>
+									<br />
+									<span class="text-mue-almond block h-[1em]">
+										<Typewriter
+											client:load
+											strings={[
+												t(
+													"pages.home.hero.title.beautiful"
+												),
+												t(
+													"pages.home.hero.title.customisable"
+												),
+												t("pages.home.hero.title.free"),
+											]}
+										/>
+									</span>
+								</>
+							)
+						}
 					</h1>
 					<div
 						class="flex flex-col text-center items-center justify-center gap-2"
@@ -101,12 +129,14 @@ const browsers = {
 			Welcome to
 			<span
 				class="bg-gradient-to-r from-mue-orange to-mue-pink bg-clip-text text-transparent"
-			>
-				Mue
-			</span>.
+				>Mue</span
+			>.
 		</h1>
-		{t("name")}
-		{t("flag")}
+		<iframe
+			src="https://demo.muetab.com/?nointro=true"
+			loading="lazy" {/* don't load all of Mue until the user scrolls */}
+			class="w-full h-[75vh] rounded-3xl p-1 bg-neutral-200 dark:bg-neutral-700 outline-0"
+		></iframe>
 	</main>
 	<Footer client:visible />
 </Base>

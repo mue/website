@@ -2,8 +2,9 @@
 import { changeLanguage } from "i18next";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
-import Page from "../../layouts/Page.astro";
+import Page from "@layouts/Page.astro";
 import getContributors from "@lib/getContributors";
+import { Debug } from "astro/components";
 
 changeLanguage("en");
 
@@ -50,4 +51,5 @@ const contributors = await getContributors(`src/content/blog/${post.id}`);
 <Page frontmatter={{ title: post.data.title }}>
 	{Math.ceil(readingTime.minutes)} mins
 	<Content />
+	<Debug data={{prev, next}} />
 </Page>

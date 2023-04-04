@@ -1,5 +1,6 @@
 ---
 import { changeLanguage } from "i18next";
+import { localizePath } from "astro-i18next";
 
 changeLanguage("en");
 ---
@@ -7,6 +8,6 @@ changeLanguage("en");
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="refresh" content="0; url=../" />
+		<meta http-equiv="refresh" content={`0; url=${localizePath('/support')}`} />
 	</head>
 </html>

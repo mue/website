@@ -1,0 +1,26 @@
+<div class="p-4 text-4xl md:text-6xl font-bold text-center">
+	<h1 class="mue-title-shadow">
+		<span
+			class="bg-gradient-to-r from-mue-orange to-mue-pink bg-clip-text text-transparent"
+			><slot /></span
+		>
+	</h1>
+</div>
+<style>
+	.mue-title-shadow {
+		--shadow-color-1: white;
+		--shadow-color-2: #dd3b67;
+		--shadow-color-3: #ffb032;
+		text-shadow: -60px -15px 75px var(--shadow-color-2),
+			40px 20px 75px var(--shadow-color-3);
+	}
+
+	html.dark .mue-title-shadow {
+		--shadow-color-1: black;
+		--shadow-color-2: #b13854;
+		--shadow-color-3: #b94825;
+		text-shadow: 0 0 75px var(--shadow-color-1),
+			-60px -15px 75px var(--shadow-color-2),
+			40px 20px 75px var(--shadow-color-3);
+	}
+</style>

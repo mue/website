@@ -1,6 +1,84 @@
 ---
-import { changeLanguage } from "i18next";
+import { changeLanguage, i18n } from "i18next";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import getContributors from "@lib/getContributors";
+import Base from "@layouts/Base.astro";
+import Navbar from "@/components/Navbar.astro";
+import SearchBar from "@/components/SearchBar.svelte";
+import Footer from "@/components/Footer.svelte";
+import { Debug } from "astro/components";
+import getSearchIndex from "@/lib/getSearchIndex";
+import getLocale from "@/lib/getLocale";
 
 changeLanguage("en");
+
+type Modify<T, R> = Omit<T, keyof R> & R;
+type KnowledgebaseArticle = Modify<
+	CollectionEntry<"knowledgebase">,
+	{
+		slug: string;
+	}
+>;
+
+export async function getStaticPaths() {
+	const parts = import.meta.url.split("/");
+	let locale = parts[parts.length - 5];
+	locale = locale === "pages" ? "en" : locale;
+	const articles: KnowledgebaseArticle[] = await getCollection(
+		"knowledgebase"
+	);
+	const categories = new Set(
+		articles.map((article) => article.slug.split("/")[1])
+	);
+	return [...categories].map((category) => {
+		return articles
+			.filter((article) => article.slug.split("/").shift() === locale)
+			.map((article, i, articles) => {
+				article.slug = article.slug.split("/").slice(2).join("/");
+				return {
+					params: { category, article: article.slug },
+					props: {
+						next: articles[i + 1],
+						prev: articles[i - 1],
+						article,
+					},
+				};
+			});
+	});
+}
+type Props = {
+	next: KnowledgebaseArticle | undefined;
+	prev: KnowledgebaseArticle | undefined;
+	article: KnowledgebaseArticle;
+};
+const { article, next, prev } = Astro.props;
+const {
+	Content,
+	remarkPluginFrontmatter: { readingTime },
+} = await article.render();
+const contributors = await getContributors(
+	`src/content/knowledgebase/${article.id}`
+);
+const searchIndex = JSON.parse(await getSearchIndex(getLocale(Astro.url.pathname)));
+const articles: KnowledgebaseArticle[] = await getCollection("knowledgebase");
 ---
 
+<Base frontmatter={{ title: article.data.title }}>
+	<Navbar />
+
+	<div class="flex w-full flex-col items-center justify-center">
+		<div>
+			<SearchBar client:idle {articles} index={searchIndex} />
+		</div>
+	</div>
+
+	<main
+		class="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 my-0 mx-1 sm:mx-2 md:mx-3 lg:mx-4 p-4 sm:p-6 md:p-8 rounded-xl"
+	>
+		{Math.ceil(readingTime.minutes)} mins
+		<Content />
+		<Debug data={{ prev, next }} />
+	</main>
+	<Footer client:visible />
+</Base>

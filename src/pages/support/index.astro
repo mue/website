@@ -1,56 +1,70 @@
 ---
-import Page from "@layouts/Page.astro";
-import { changeLanguage } from "i18next";
+import type { CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
+import getLocale from "@lib/getLocale";
+import { changeLanguage, t } from "i18next";
 import { localizePath } from "astro-i18next";
+import getSearchIndex from "@lib/getSearchIndex";
+import Page from "@layouts/Page.astro";
+import Title from "@components/Title.astro";
+import SearchBar from "@components/SearchBar.svelte";
 
 changeLanguage("en");
+
+type Modify<T, R> = Omit<T, keyof R> & R;
+type KnowledgebaseArticle = Modify<
+	CollectionEntry<"knowledgebase">,
+	{
+		slug: string;
+	}
+>;
+
+const locale = getLocale(Astro.url.pathname);
+const files = import.meta.glob("/src/content/knowledgebase/**/**/*.md");
+const assemble = (locale, name) =>
+	`/src/content/knowledgebase/${locale}/${name}`;
+
+for (const file in files) {
+	const name = file.split("/").slice(-2).join("/");
+	if (
+		files[assemble(locale, name)] === undefined &&
+		files[assemble("en", name)] !== undefined
+	) {
+		console.warn(
+			`WARNING: "/support/kb/${name}" has not been translated to "${locale}"!" Make sure you run "npm run i18n:copy" before you commit your changes.`
+		);
+	} else if (
+		files[assemble(locale, name)] !== undefined &&
+		files[assemble("en", name)] === undefined
+	) {
+		throw new Error(
+			`Content MUST be written in English first. Please write your content in "${assemble(
+				"en",
+				name
+			)}" before translating it to ${locale}.`
+		);
+	}
+}
+
+const searchIndex = JSON.parse(await getSearchIndex(locale));
+const articles: KnowledgebaseArticle[] = await getCollection("knowledgebase");
+const categories: { [key: string]: KnowledgebaseArticle[] } = articles
+	.filter((article) => article.slug.split("/").shift() === locale)
+	.reduce((acc, article) => {
+		const category = article.id.split("/")[1];
+		if (acc[category] === undefined) acc[category] = [];
+		article.slug = article.slug.split("/").slice(2).join("/");
+		acc[category].push(article);
+		return acc;
+	}, {});
 ---
 
-<Page frontmatter={{ title: "Support" }}>
+<Page frontmatter={{ title: t("pages.support.title") }}>
 	<main>
-		<!-- <div
-			aria-hidden="true"
-			class="absolute inset-0 grid grid-cols-2 -space-x-64 mt-16 opacity-40 dark:opacity-20 max-w-xl mx-auto"
-		>
-			<div
-				class="blur-2xl h-20 bg-gradient-to-l from-mue-pink dark:from-mue-pink-dark to-mue-orange dark:to-mue-orange-dark ml-16"
-			>
-			</div>
-			<div
-				class="blur-2xl h-12 bg-gradient-to-bl from-mue-pink dark:from-mue-pink-dark to-mue-orange dark:to-mue-orange-dark mt-4"
-			>
-			</div>
-		</div> -->
-		<div class="p-4 text-4xl md:text-6xl font-bold text-center">
-			<h1 class="mue-title-shadow">
-				<span
-					class="bg-gradient-to-r from-mue-orange to-mue-pink bg-clip-text text-transparent"
-					>Support</span
-				>
-			</h1>
-		</div>
-		<br /><br /><br /><br /><br />
-		hello world
-	</main>
-	<script>
-		// TODO: lunr search
-	</script>
-	<style>
-		.mue-title-shadow {
-			--shadow-color-1: white;
-			--shadow-color-2: #dd3b67;
-			--shadow-color-3: #ffb032;
-			text-shadow: -60px -15px 75px var(--shadow-color-2),
-				40px 20px 75px var(--shadow-color-3);
-		}
+		<Title>{t("pages.support.title")}</Title>
 
-		html.dark .mue-title-shadow {
-			--shadow-color-1: black;
-			--shadow-color-2: #b13854;
-			--shadow-color-3: #b94825;
-			text-shadow: 0 0 75px var(--shadow-color-1),
-				-60px -15px 75px var(--shadow-color-2),
-				40px 20px 75px var(--shadow-color-3);
-		}
-	</style>
+		<br /><br /><br />
+		<SearchBar client:idle {articles} index={searchIndex} />
+		<br /><br />
+	</main>
 </Page>

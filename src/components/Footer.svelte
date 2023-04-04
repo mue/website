@@ -1,5 +1,4 @@
 <script>
-	import { changeLanguage } from "i18next";
 	import { localizePath } from "astro-i18next";
 </script>
 

@@ -3,9 +3,10 @@ draft: true
 image: ""
 publishedAt: 2023-04-03T00:08:45.024Z
 tags: []
-title: Writing knowledgebase articles
+title: Translating Mue
 translated: false
 updatedAt: 2023-04-03T00:13:47.554Z
 ---
 
-welcome to my tutorial.
+how to translate the Mue extension.
+maybe articles should have descriptions rather than just a summary?

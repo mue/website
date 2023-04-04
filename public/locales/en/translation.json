@@ -1,4 +1,6 @@
 {
+	"flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
+	"name": "English",
 	"components": {
 		"buttons": {
 			"add_to_browser": "Add to {{browser}}",
@@ -6,16 +8,32 @@
 			"unsupported_browser": "Unsupported browser"
 		}
 	},
-	"flag": "🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-	"name": "English",
+	"no_script": {
+		"title": "Some features are disabled.",
+		"message": "Please allow JavaScript to enable dark mode, language switching, search, and other features."
+	},
 	"pages": {
 		"home": {
 			"hero": {
-				"beautiful": "beautiful",
-				"customisable": "customisable",
 				"demo": "Or try the demo",
-				"free": "free",
-				"mue_is": "Mue is"
+				"title": {
+					"beautiful": "beautiful",
+					"customisable": "customisable",
+					"free": "free",
+					"mue_is": "Mue is",
+					"reverse": "false"
+				}
+			}
+		},
+		"support": {
+			"title": "Support",
+			"search": {
+				"placeholder": "Search the knowledgebase"
+			},
+			"categories": {
+				"contributing": {
+					"title": "Contributing"
+				}
 			}
 		}
 	}

@@ -1,7 +1,6 @@
 import type { CollectionEntry } from "astro:content";
 import type { APIContext } from 'astro';
 import { getCollection } from "astro:content";
-import getLocale from "@lib/getLocale";
 
 type Modify<T, R> = Omit<T, keyof R> & R;
 type BlogPost = Modify<CollectionEntry<"blog">, {

@@ -18,5 +18,7 @@ export default defineConfig({
 		partytown(),
 	],
 	markdown: { remarkPlugins: [remarkReadingTime] },
-	site: 'https://muetab.com',
+	// site: 'https://muetab.com',
+	site: 'http://localhost:3000',
+	ssr: { noExternal: ['svelte-transition'] },
 });

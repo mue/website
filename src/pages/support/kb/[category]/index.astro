@@ -1,6 +1,46 @@
 ---
-import { changeLanguage } from "i18next";
+import type { CollectionEntry } from "astro:content";
+import { changeLanguage, t } from "i18next";
+import { collections } from "@/config.mjs";
+import Page from "@layouts/Page.astro";
+import getLocale from "@/lib/getLocale";
+import { getCollection } from "astro:content";
+import { Debug } from "astro/components";
 
 changeLanguage("en");
+
+type Modify<T, R> = Omit<T, keyof R> & R;
+type KnowledgebaseArticle = Modify<
+	CollectionEntry<"knowledgebase">,
+	{
+		slug: string;
+	}
+>;
+
+export async function getStaticPaths() {
+	const articles: KnowledgebaseArticle[] = await getCollection("knowledgebase");
+	const categories = new Set(articles.map((article) => article.slug.split("/")[1]));
+	return [...categories].map((category) => ({
+		params: { category },
+	}));
+}
+
+const { category } = Astro.params;
+let articles: KnowledgebaseArticle[] = await getCollection("knowledgebase");
+articles = articles
+	.filter((article) => {
+		const [locale, aCategory] = article.slug.split("/");
+		return (
+			locale === getLocale(Astro.url.pathname) && aCategory === category
+		);
+	})
+	.map((article) => {
+		article.slug = article.slug.split("/").slice(2).join("/");
+		return article;
+	});
 ---
 
+<Page frontmatter={{ title: t(`pages.support.categories.${category}.title`) }}>
+	{t(`pages.support.categories.${category}.title`)}
+	<Debug {articles} />
+</Page>

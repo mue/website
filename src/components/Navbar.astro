@@ -1,0 +1,28 @@
+---
+import { localizePath } from "astro-i18next";
+import LanguageIcon from "./heroicons/outline/Language.svelte";
+import { LanguageSelector } from "astro-i18next/components";
+import i18nConfig from "../../astro-i18next.config.mjs";
+import { t } from "i18next";
+
+// to replace US flag for English
+const languageMapping = i18nConfig.locales.reduce(
+	(acc, locale) => (
+		(acc[locale] = [
+			t("flag", { lng: locale }),
+			t("name", { lng: locale }),
+		].join(" ")),
+		acc
+	),
+	{}
+);
+---
+
+<nav>
+	<!-- <LanguageIcon /> -->
+	<LanguageSelector
+		showFlag={false}
+		{languageMapping}
+		class="py-1 px-5 rounded-full bg-white bg-opacity-50 dark:bg-black dark:bg-opacity-50 text-black dark:text-white border-1 border-neutral-400 dark:border-neutral-500 backdrop-blur-sm backdrop-saturate-200 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-rose-300 transition duration-300 ease-in-out cursor-pointer"
+	/>
+</nav>
