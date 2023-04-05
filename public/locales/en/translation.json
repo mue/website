@@ -28,7 +28,9 @@
 		"support": {
 			"title": "Support",
 			"search": {
-				"placeholder": "Search the knowledgebase"
+				"title": "How can we help?",
+				"placeholder": "Search the knowledgebase",
+				"no_results": "No results found"
 			},
 			"categories": {
 				"contributing": {

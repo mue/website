@@ -8,6 +8,7 @@ import getSearchIndex from "@lib/getSearchIndex";
 import Page from "@layouts/Page.astro";
 import Title from "@components/Title.astro";
 import SearchBar from "@components/SearchBar.svelte";
+import Splash from "@components/Splash.astro";
 
 changeLanguage("en");
 
@@ -63,8 +64,23 @@ const categories: { [key: string]: KnowledgebaseArticle[] } = articles
 	<main>
 		<Title>{t("pages.support.title")}</Title>
 
-		<br /><br /><br />
-		<SearchBar client:idle {articles} index={searchIndex} />
-		<br /><br />
+		<div
+			class="my-16 lg:my-16 max-w-md mx-auto text-center bg-neutral-100 dark:bg-neutral-800 rounded-lg p-2 sm:p-6"
+		>
+			<h2 class="text-3xl mb-6">{t("pages.support.search.title")}</h2>
+			<div
+				class="max-w-sm mx-auto flex flex-col items-center justify-center"
+			>
+				<SearchBar
+					client:idle
+					{articles}
+					index={searchIndex}
+					strings={{
+						placeholder: t("pages.support.search.placeholder"),
+						no_results: t("pages.support.search.no_results"),}}
+				/>
+			</div>
+		</div>
+		<br /><br /><br /><br /><br />
 	</main>
 </Page>

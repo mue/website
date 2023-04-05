@@ -3,10 +3,7 @@ import { changeLanguage, i18n } from "i18next";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import getContributors from "@lib/getContributors";
-import Base from "@layouts/Base.astro";
-import Navbar from "@/components/Navbar.astro";
-import SearchBar from "@/components/SearchBar.svelte";
-import Footer from "@/components/Footer.svelte";
+import Page from "@layouts/Page.astro";
 import { Debug } from "astro/components";
 import getSearchIndex from "@/lib/getSearchIndex";
 import getLocale from "@/lib/getLocale";
@@ -64,21 +61,8 @@ const searchIndex = JSON.parse(await getSearchIndex(getLocale(Astro.url.pathname
 const articles: KnowledgebaseArticle[] = await getCollection("knowledgebase");
 ---
 
-<Base frontmatter={{ title: article.data.title }}>
-	<Navbar />
-
-	<div class="flex w-full flex-col items-center justify-center">
-		<div>
-			<SearchBar client:idle {articles} index={searchIndex} />
-		</div>
-	</div>
-
-	<main
-		class="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 my-0 mx-1 sm:mx-2 md:mx-3 lg:mx-4 p-4 sm:p-6 md:p-8 rounded-xl"
-	>
-		{Math.ceil(readingTime.minutes)} mins
+<Page frontmatter={{ title: article.data.title }}>
+	{Math.ceil(readingTime.minutes)} mins
 		<Content />
 		<Debug data={{ prev, next }} />
-	</main>
-	<Footer client:visible />
-</Base>
+</Page>

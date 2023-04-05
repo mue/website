@@ -1,0 +1,13 @@
+---
+const { colour, size } = Astro.props;
+
+let colours =
+	colour === "orange"
+		? "mue-splash-mue-orange dark:mue-splash-mue-orange-dark"
+		: "mue-splash-mue-pink dark:mue-splash-mue-pink-dark";
+---
+
+<div
+	class={`mue-splash ${colours} z-10 opacity-20 absolute pointer-events-none ${size}`}
+>
+</div>

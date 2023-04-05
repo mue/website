@@ -15,6 +15,7 @@ const supported = ["ar", "da", "de", "du", "es", "fi", "fr", "hi", "hu", "it", "
 export default async (locale) => {
 	if (locale !== "en" && supported.includes(locale)) {
 		stemmer(lunr);
+		(await import(`../../node_modules/lunr-languages/lunr.multi.js` ))(lunr);
 		(await import(`../../node_modules/lunr-languages/lunr.${locale}.js` ))(lunr);
 	}
 	const articles: KnowledgebaseArticle[] = await getCollection("knowledgebase");
@@ -27,7 +28,9 @@ export default async (locale) => {
 		);
 	}
 	return JSON.stringify(lunr(function () {
-		if (locale !== "en" && supported.includes(locale)) this.use(lunr[locale]);
+		// if (locale !== "en" && supported.includes(locale)) this.use(lunr[locale]);
+		// some content may not have been translated, so search needs to work with English as well
+		if (locale !== "en" && supported.includes(locale)) this.use(lunr.multiLanguage("en", locale));
 		this.ref("id");
 		this.field("category");
 		this.field("tags");

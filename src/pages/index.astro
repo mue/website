@@ -44,9 +44,9 @@ const browsers = {
 
 	<div
 		id="hero"
-		class="my-4 sm:my-8 md:my-12 lg:my-16 xl:my-24 mx-auto max-w-screen-lg text-center"
+		class="my-4 sm:my-8 md:my-12 lg:my-16 xl:my-24 mx-auto container text-center"
 	>
-		<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-24">
+		<div class="xl:m-16 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24">
 			<div class="flex items-center justify-center">
 				<div class="grid grid-cols-1 gap-4 lg:gap-12">
 					<h1
@@ -116,7 +116,7 @@ const browsers = {
 					</div>
 				</div>
 			</div>
-			<div>
+			<div class="">
 				<img src={HeroImage} />
 			</div>
 		</div>
@@ -125,18 +125,21 @@ const browsers = {
 	<main
 		class="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 my-0 mx-1 sm:mx-2 md:mx-3 lg:mx-4 p-4 sm:p-6 md:p-8 rounded-xl"
 	>
-		<h1 class="text-4xl">
-			Welcome to
-			<span
-				class="bg-gradient-to-r from-mue-orange to-mue-pink bg-clip-text text-transparent"
-				>Mue</span
-			>.
-		</h1>
-		<iframe
-			src="https://demo.muetab.com/?nointro=true"
-			loading="lazy" {/* don't load all of Mue until the user scrolls */}
-			class="w-full h-[75vh] rounded-3xl p-1 bg-neutral-200 dark:bg-neutral-700 outline-0"
-		></iframe>
+		<div class="container mx-auto">
+			<h1 class="text-4xl">
+				Welcome to
+				<span
+					class="bg-gradient-to-r from-mue-orange to-mue-pink bg-clip-text text-transparent"
+					>Mue</span
+				>.
+			</h1>
+			<iframe
+				src="https://demo.muetab.com/?nointro=true"
+				loading="lazy"
+				{/* don't load all of Mue until the user scrolls */}
+				class="w-full h-[75vh] rounded-3xl p-1 bg-neutral-200 dark:bg-neutral-700 outline-0"
+			></iframe>
+		</div>
 	</main>
 	<Footer client:visible />
 </Base>
