@@ -19,12 +19,14 @@
 	<div
 		class="relative w-full hover:opacity-80 transition duration-300 ease-in-out sm:text-sm"
 	>
-		<span class="text-black/50 dark:text-white/50 flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+		<span
+			class="text-black/50 dark:text-white/50 flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"
+		>
 			<MagnifyingGlass />
 		</span>
 		<input
 			use:combobox.input
-			class="block p-2 pl-10 w-full rounded-lg  border-2 border-neutral-400 dark:border-neutral-500 text-sm leading-5 text-black placeholder:text-black/50 dark:text-white dark:placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-rose-300 bg-neutral-50 dark:bg-neutral-700"
+			class="block p-2 pl-10 w-full rounded-lg border-2 border-neutral-400 dark:border-neutral-500 text-sm leading-5 text-black placeholder:text-black/50 dark:text-white dark:placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-rose-300 bg-neutral-50 dark:bg-neutral-700"
 			placeholder={strings.placeholder}
 			type="search"
 			value={$combobox.selected?.title || ""}
@@ -46,18 +48,38 @@
 	>
 		<ul
 			use:combobox.items
-			class="absolute mt-1 max-h-60 w-full overflow-auto rounded-lg bg-neutal-200/20 dark:bg-neutral-700/20 text-black dark:text-white border border-neutral-400 dark:border-neutral-500 backdrop-blur-lg backdrop-saturate-200 focus:outline-none sm:text-sm"
+			class="absolute mt-1 max-h-60 w-full overflow-auto rounded-lg text-left bg-neutal-200/20 dark:bg-neutral-700/20 text-black dark:text-white border border-neutral-400 dark:border-neutral-500 backdrop-blur-lg backdrop-saturate-200 focus:outline-none text-sm"
 		>
 			{#each results as result}
 				{@const article = articles.find(
 					(article) => article.id === result.ref
 				)}
+				{@const position = Object.values(result.matchData.metadata)[0]
+					?.text?.position[0]}
 				<li
-					class="relative cursor-default select-none py-2 px-6 hover:bg-black/10 dark:hover:bg-white/10 transition duration-300 ease-in-out "
+					class="relative cursor-default select-none py-2 px-6 hover:bg-black/10 dark:hover:bg-white/10 transition duration-300 ease-in-out"
 				>
-					<span class="block truncate font-normal"
-						>{article.data.title}</span
+					<a
+						href={`./kb/${article.id.split("/")[1]}/${
+							article.slug
+						}`}
 					>
+						<span class="block truncate font-normal"
+							>{article.data.title}</span
+						>
+						<p
+							class="line-clamp-3 text-xs text-black/50 dark:text-white/50"
+						>
+							<!-- {#if position}
+							{article.text.substring(position[0] - 75, Math.min(position[1] + 75, article.text.length))}
+							...
+						{:else}
+							{article.text.substring(0, 150)}
+							...
+						{/if} -->
+							{article.text}
+						</p>
+					</a>
 				</li>
 			{:else}
 				<li

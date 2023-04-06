@@ -47,8 +47,9 @@ for (const file in files) {
 	}
 }
 
-const searchIndex = JSON.parse(await getSearchIndex(locale));
-const articles: KnowledgebaseArticle[] = await getCollection("knowledgebase");
+const { articles, index }: { articles: KnowledgebaseArticle[], index: any } = await getSearchIndex(locale);
+const searchIndex = JSON.parse(index);
+
 const categories: { [key: string]: KnowledgebaseArticle[] } = articles
 	.filter((article) => article.slug.split("/").shift() === locale)
 	.reduce((acc, article) => {
@@ -65,7 +66,7 @@ const categories: { [key: string]: KnowledgebaseArticle[] } = articles
 		<Title>{t("pages.support.title")}</Title>
 
 		<div
-			class="my-16 lg:my-16 max-w-md mx-auto text-center bg-neutral-100 dark:bg-neutral-800 rounded-lg p-2 sm:p-6"
+			class="my-16 lg:my-16 max-w-md mx-auto text-center bg-neutral-100 dark:bg-neutral-800 rounded-lg p-2 sm:p-6 shadow-xl"
 		>
 			<h2 class="text-3xl mb-6">{t("pages.support.search.title")}</h2>
 			<div

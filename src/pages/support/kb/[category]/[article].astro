@@ -1,12 +1,10 @@
 ---
-import { changeLanguage, i18n } from "i18next";
+import { changeLanguage } from "i18next";
 import type { CollectionEntry } from "astro:content";
 import { getCollection } from "astro:content";
 import getContributors from "@lib/getContributors";
 import Page from "@layouts/Page.astro";
 import { Debug } from "astro/components";
-import getSearchIndex from "@/lib/getSearchIndex";
-import getLocale from "@/lib/getLocale";
 
 changeLanguage("en");
 
@@ -57,8 +55,6 @@ const {
 const contributors = await getContributors(
 	`src/content/knowledgebase/${article.id}`
 );
-const searchIndex = JSON.parse(await getSearchIndex(getLocale(Astro.url.pathname)));
-const articles: KnowledgebaseArticle[] = await getCollection("knowledgebase");
 ---
 
 <Page frontmatter={{ title: article.data.title }}>
