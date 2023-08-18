@@ -23,4 +23,5 @@ export default defineConfig({
 	// site: 'https://muetab.com',
 	site: 'http://localhost:3000',
 	ssr: { noExternal: ['svelte-transition'] },
+	trailingSlash: 'always',
 });

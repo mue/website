@@ -9,6 +9,7 @@ import Page from "@layouts/Page.astro";
 import Title from "@components/Title.astro";
 import SearchBar from "@components/SearchBar.svelte";
 import Card from "@/components/GlassCard.astro";
+import ArrowRightIcon from "@components/heroicons/mini/ArrowRight.svelte";
 
 changeLanguage("en");
 
@@ -48,25 +49,31 @@ for (const file in files) {
   }
 }
 
-const { articles, index }: { articles: KnowledgebaseArticle[]; index: any } =
+let { articles, index }: { articles: KnowledgebaseArticle[]; index: any } =
   await getSearchIndex(locale);
 const searchIndex = JSON.parse(index);
+articles = articles.map((article) => {
+  article.body = "";
+  article.text = article.text.substring(0, 250);
+  return article;
+});
 
 const categories: { [key: string]: KnowledgebaseArticle[] } = articles
   .filter((article) => article.slug.split("/").shift() === locale)
   .reduce((acc, article) => {
     const category = article.id.split("/")[1];
     if (acc[category] === undefined) acc[category] = [];
-    article.slug = article.slug.split("/").slice(2).join("/");
+    // article.slug = article.slug.split("/").slice(2).join("/");
+    article.slug = article.slug.split("/").slice(1).join("/");
     acc[category].push(article);
     return acc;
   }, {});
 
 const popular = [
   "settings/clock.md",
-  "settings/clock.md",
-  "settings/clock.md",
-  "settings/clock.md",
+  "contributing/translating.md",
+  "contributing/translating-mue.md",
+  "contributing/translating-the-website.md",
 ];
 ---
 
@@ -113,11 +120,12 @@ const popular = [
                 const article = articles.find(
                   (article) => article.id.split("/").slice(1).join("/") === slug
                 );
+                const category = articles[0].id.split("/")[1];
                 return (
                   <Card
                     title={article.data.title}
-                    body={article.text}
-                    href={"./kb/" + slug.split(".")[0]}
+                    body={article.text.substring(0, 250)}
+                    href={`./kb/${slug.split(".")[0]}/`}
                   />
                 );
               })
@@ -127,43 +135,57 @@ const popular = [
       </div>
     </div>
 
-    <div class="my-8 grid lg:grid-cols-3 gap-8">
+    <div class="mt-8 grid lg:grid-cols-3 gap-8">
       <div class="lg:col-span-2">
-        <h2 class="text-3xl mb-6 text-center">{t("pages.support.all")}</h2>
+        <h2 class="text-3xl mt-4 mb-8 text-center">{t("pages.support.all")}</h2>
         <div class="grid sm:grid-cols-2 gap-2 lg:gap-4">
           {
             Object.values(categories).map((articles) => {
               const category = articles[0].id.split("/")[1];
               return (
-                <div class="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-2 sm:p-6 shadow-sm">
-                  <h3 class="text-2xl mb-4 font-bold text-neutral-500 dark:text-neutral-400">
+                <div class="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-4 sm:p-8 shadow-sm">
+                  <h3 class="text-2xl mb-2 font-bold text-neutral-500 dark:text-neutral-400">
                     {t(`pages.support.categories.${category}.title`)}
                   </h3>
                   <div class="flex flex-col">
                     {articles
                       .map((article) => {
-                        return <p>{article.data.title}</p>;
+                        return (
+                          <a href={`./kb/${article.slug}/`}>
+                            <p class="p-1 px-2 line-clamp-1 hover:text-mue-pink dark:hover:text-mue-orange hover:bg-neutral-200 dark:hover:bg-neutral-700 rounded-lg transition duration-300">
+                              {article.data.title}
+                            </p>
+                          </a>
+                        );
                       })
-                      .slice(0, 10)}
+                      .slice(0, 5)}
                   </div>
-                  view all
+                  {articles.length > 5 && (
+                    <a href={`./kb/${category}/`}>
+                      <p class="mt-2 flex items-center gap-2 text-mue-pink dark:text-mue-pink-light">
+                        {t(`pages.support.more`)}
+                        <ArrowRightIcon />
+                      </p>
+                    </a>
+                  )}
                 </div>
               );
             })
           }
         </div>
       </div>
-      <div
-        class="rounded-lg p-4 text-white bg-gradient-to-b from-mue-orange-light dark:from-mue-orange-dark to-mue-pink-light dark:to-mue-pink-dark"
-      >
-        <h4
-          class="text-xl text-neutral-600 dark:text-neutral-700 mix-blend-difference"
+      <div>
+        <div
+          class="rounded-lg p-4 text-black dark:text-white bg-gradient-to-br from-mue-orange/25 dark:from-mue-orange/25 to-mue-pink/25 dark:to-mue-pink/25"
         >
-          {t("pages.support.contact.questions")}
-        </h4>
-        <h3 class="text-5xl font-extrabold">
-          {t("pages.support.contact.title")}
-        </h3>
+          <!-- text-neutral-600 dark:text-neutral-700 mix-blend-difference -->
+          <h4 class="text-xl text-black/50 dark:text-white/50">
+            {t("pages.support.contact.questions")}
+          </h4>
+          <h3 class="text-5xl font-extrabold">
+            {t("pages.support.contact.title")}
+          </h3>
+        </div>
       </div>
     </div>
   </main>

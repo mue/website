@@ -1,4 +1,7 @@
 ---
+/*
+ * https://github.com/withastro/astro/blob/c7de971b10884ce788a1af98618a14d689576e1f/examples/basics/src/components/Card.astro
+ */
 interface Props {
   title: string;
   body: string;
@@ -12,10 +15,10 @@ const { href, title, body } = Astro.props;
   class="link-card group backdrop-brightness-75 backdrop-saturate-150 backdrop-blur-xl p-px rounded-lg bg-[length:400%]"
 >
   <a href={href} class="py-2 px-4 rounded-lg bg-white/80 dark:bg-black/80">
-    <h6 class="test-sm text-black dark:text-white group-hover:text-mue-pink dark:group-hover:text-mue-orange">
+    <h6 class="test-sm text-black dark:text-white group-hover:text-mue-pink dark:group-hover:text-mue-orange line-clamp-1">
       {title}
     </h6>
-    <p class="text-xs text-black/50 dark:text-white/50 line-clamp-2">
+    <p class="text-xs text-black/50 dark:text-white/50 line-clamp-1">
       {body}
     </p>
   </a>

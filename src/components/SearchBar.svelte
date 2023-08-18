@@ -46,7 +46,7 @@
 		leaveTo="opacity-0"
 		on:after-leave={() => combobox.reset()}
 	>
-	<!-- bg-neutal-200/90 dark:bg-neutral-700/90 -->
+		<!-- bg-neutal-200/90 dark:bg-neutral-700/90 -->
 		<ul
 			use:combobox.items
 			class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-lg text-left bg-white/75 dark:bg-neutral-900/75 text-black dark:text-white border border-neutral-400 dark:border-neutral-500 backdrop-blur-lg backdrop-saturate-150 focus:outline-none text-sm"
@@ -60,11 +60,7 @@
 				<li
 					class="relative cursor-default select-none py-2 px-6 hover:bg-black/10 dark:hover:bg-white/10 transition duration-300 ease-in-out"
 				>
-					<a
-						href={`./kb/${article.id.split("/")[1]}/${
-							article.slug
-						}`}
-					>
+					<a href={`./kb/${article.slug}/`}>
 						<span class="block truncate font-normal"
 							>{article.data.title}</span
 						>
