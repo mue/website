@@ -46,9 +46,10 @@
 		leaveTo="opacity-0"
 		on:after-leave={() => combobox.reset()}
 	>
+	<!-- bg-neutal-200/90 dark:bg-neutral-700/90 -->
 		<ul
 			use:combobox.items
-			class="absolute mt-1 max-h-60 w-full overflow-auto rounded-lg text-left bg-neutal-200/20 dark:bg-neutral-700/20 text-black dark:text-white border border-neutral-400 dark:border-neutral-500 backdrop-blur-lg backdrop-saturate-200 focus:outline-none text-sm"
+			class="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-lg text-left bg-white/75 dark:bg-neutral-900/75 text-black dark:text-white border border-neutral-400 dark:border-neutral-500 backdrop-blur-lg backdrop-saturate-150 focus:outline-none text-sm"
 		>
 			{#each results as result}
 				{@const article = articles.find(

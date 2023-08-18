@@ -8,80 +8,163 @@ import getSearchIndex from "@lib/getSearchIndex";
 import Page from "@layouts/Page.astro";
 import Title from "@components/Title.astro";
 import SearchBar from "@components/SearchBar.svelte";
-import Splash from "@components/Splash.astro";
+import Card from "@/components/GlassCard.astro";
 
 changeLanguage("en");
 
 type Modify<T, R> = Omit<T, keyof R> & R;
 type KnowledgebaseArticle = Modify<
-	CollectionEntry<"knowledgebase">,
-	{
-		slug: string;
-	}
+  CollectionEntry<"knowledgebase">,
+  {
+    slug: string;
+    text?: string;
+  }
 >;
 
 const locale = getLocale(Astro.url.pathname);
 const files = import.meta.glob("/src/content/knowledgebase/**/**/*.md");
 const assemble = (locale, name) =>
-	`/src/content/knowledgebase/${locale}/${name}`;
+  `/src/content/knowledgebase/${locale}/${name}`;
 
 for (const file in files) {
-	const name = file.split("/").slice(-2).join("/");
-	if (
-		files[assemble(locale, name)] === undefined &&
-		files[assemble("en", name)] !== undefined
-	) {
-		console.warn(
-			`WARNING: "/support/kb/${name}" has not been translated to "${locale}"!" Make sure you run "npm run i18n:copy" before you commit your changes.`
-		);
-	} else if (
-		files[assemble(locale, name)] !== undefined &&
-		files[assemble("en", name)] === undefined
-	) {
-		throw new Error(
-			`Content MUST be written in English first. Please write your content in "${assemble(
-				"en",
-				name
-			)}" before translating it to ${locale}.`
-		);
-	}
+  const name = file.split("/").slice(-2).join("/");
+  if (
+    files[assemble(locale, name)] === undefined &&
+    files[assemble("en", name)] !== undefined
+  ) {
+    console.warn(
+      `WARNING: "/support/kb/${name}" has not been translated to "${locale}"!" Make sure you run "npm run i18n:copy" before you commit your changes.`
+    );
+  } else if (
+    files[assemble(locale, name)] !== undefined &&
+    files[assemble("en", name)] === undefined
+  ) {
+    throw new Error(
+      `Content MUST be written in English first. Please write your content in "${assemble(
+        "en",
+        name
+      )}" before translating it to ${locale}.`
+    );
+  }
 }
 
-const { articles, index }: { articles: KnowledgebaseArticle[], index: any } = await getSearchIndex(locale);
+const { articles, index }: { articles: KnowledgebaseArticle[]; index: any } =
+  await getSearchIndex(locale);
 const searchIndex = JSON.parse(index);
 
 const categories: { [key: string]: KnowledgebaseArticle[] } = articles
-	.filter((article) => article.slug.split("/").shift() === locale)
-	.reduce((acc, article) => {
-		const category = article.id.split("/")[1];
-		if (acc[category] === undefined) acc[category] = [];
-		article.slug = article.slug.split("/").slice(2).join("/");
-		acc[category].push(article);
-		return acc;
-	}, {});
+  .filter((article) => article.slug.split("/").shift() === locale)
+  .reduce((acc, article) => {
+    const category = article.id.split("/")[1];
+    if (acc[category] === undefined) acc[category] = [];
+    article.slug = article.slug.split("/").slice(2).join("/");
+    acc[category].push(article);
+    return acc;
+  }, {});
+
+const popular = [
+  "settings/clock.md",
+  "settings/clock.md",
+  "settings/clock.md",
+  "settings/clock.md",
+];
 ---
 
 <Page frontmatter={{ title: t("pages.support.title") }}>
-	<main>
-		<Title>{t("pages.support.title")}</Title>
+  <main>
+    <Title>{t("pages.support.title")}</Title>
 
-		<div
-			class="my-16 lg:my-16 max-w-md mx-auto text-center bg-neutral-100 dark:bg-neutral-800 rounded-lg p-2 sm:p-6 shadow-xl"
-		>
-			<h2 class="text-3xl mb-6">{t("pages.support.search.title")}</h2>
-			<div
-				class="max-w-sm mx-auto flex flex-col items-center justify-center"
-			>
-				<SearchBar
-					client:idle
-					{articles}
-					index={searchIndex}
-					strings={{
-						placeholder: t("pages.support.search.placeholder"),
-						no_results: t("pages.support.search.no_results"),}}
-				/>
-			</div>
-		</div>
-		<br /><br /><br /><br /><br />
-	</main>
+    <div
+      class="container my-6 rounded-xl bg-cover bg-bottom bg-no-repeat shadow-xl"
+      style="background-image: url('https://cdn.muetab.com/img/hd/3042117ae21c8862c3a7a3b46d8643ac.webp?v=1668726310');"
+    >
+      <!-- backdrop-brightness-50 -->
+      <div
+        class="rounded-xl w-full h-full m-0 p-4"
+        style="background-image: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.7) 50%);"
+      >
+        <div
+          class="my-4 max-w-md mx-auto text-center bg-neutral-100 dark:bg-neutral-800 rounded-lg p-2 sm:p-6 shadow-xl"
+        >
+          <h2 class="text-3xl mb-6">{t("pages.support.search.title")}</h2>
+          <div
+            class="max-w-sm mx-auto flex flex-col items-center justify-center"
+          >
+            <SearchBar
+              client:idle
+              {articles}
+              index={searchIndex}
+              strings={{
+                placeholder: t("pages.support.search.placeholder"),
+                no_results: t("pages.support.search.no_results"),
+              }}
+            />
+          </div>
+        </div>
+        <div class="mt-10">
+          <h3
+            class="text-center text-white text-xl mb-4 shadow-black text-shadow-lg"
+          >
+            {t("pages.support.popular")}
+          </h3>
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-2">
+            {
+              popular.map((slug) => {
+                const article = articles.find(
+                  (article) => article.id.split("/").slice(1).join("/") === slug
+                );
+                return (
+                  <Card
+                    title={article.data.title}
+                    body={article.text}
+                    href={"./kb/" + slug.split(".")[0]}
+                  />
+                );
+              })
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="my-8 grid lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        <h2 class="text-3xl mb-6 text-center">{t("pages.support.all")}</h2>
+        <div class="grid sm:grid-cols-2 gap-2 lg:gap-4">
+          {
+            Object.values(categories).map((articles) => {
+              const category = articles[0].id.split("/")[1];
+              return (
+                <div class="bg-neutral-100 dark:bg-neutral-800 rounded-lg p-2 sm:p-6 shadow-sm">
+                  <h3 class="text-2xl mb-4 font-bold text-neutral-500 dark:text-neutral-400">
+                    {t(`pages.support.categories.${category}.title`)}
+                  </h3>
+                  <div class="flex flex-col">
+                    {articles
+                      .map((article) => {
+                        return <p>{article.data.title}</p>;
+                      })
+                      .slice(0, 10)}
+                  </div>
+                  view all
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+      <div
+        class="rounded-lg p-4 text-white bg-gradient-to-b from-mue-orange-light dark:from-mue-orange-dark to-mue-pink-light dark:to-mue-pink-dark"
+      >
+        <h4
+          class="text-xl text-neutral-600 dark:text-neutral-700 mix-blend-difference"
+        >
+          {t("pages.support.contact.questions")}
+        </h4>
+        <h3 class="text-5xl font-extrabold">
+          {t("pages.support.contact.title")}
+        </h3>
+      </div>
+    </div>
+  </main>
 </Page>

@@ -6,7 +6,8 @@
 		"node": true
 	},
 	"extends": [
-		"eslint:recommended"
+		"eslint:recommended",
+		"@unocss"
 	],
 	"parserOptions": {
 		"ecmaVersion": 12,

@@ -32,10 +32,19 @@
 				"placeholder": "Search the knowledgebase",
 				"no_results": "No results found"
 			},
+			"popular": "Popular topics",
+			"all": "All topics",
 			"categories": {
 				"contributing": {
 					"title": "Contributing"
+				},
+				"settings": {
+					"title": "Settings"
 				}
+			},
+			"contact": {
+				"questions": "Still have questions?",
+				"title": "Contact us"
 			}
 		}
 	}

@@ -24,6 +24,14 @@ module.exports = {
 				{ values: theme('colors') },
 			);
 		}),
+		plugin(({
+			matchUtilities, theme,
+		}) => {
+			matchUtilities(
+				{ 'text-shadow': value => ({ textShadow: value }) },
+				{ values: theme('textShadow') },
+			);
+		}),
 	],
 	theme: {
 		extend: {
@@ -32,14 +40,20 @@ module.exports = {
 				'mue-orange': '#ffb032',
 				'mue-orange-dark': '#b94825',
 				// 'mue-orange-light': 'rgba(255, 92, 39, 0.7)',
-				'mue-orange-light': '#FF8C67',
+				'mue-orange-light': '#ff8c67',
 				// 'mue-pale': '#FBBEBE',
 				'mue-pink': '#dd3b67',
 				'mue-pink-dark': '#b13854',
 				// 'mue-pink-light': 'rgba(255, 70, 110, 0.67)',
-				'mue-pink-light': '#FF829D',
+				'mue-pink-light': '#ff829d',
 			},
 			fontFamily: { 'sans': ['Lexend Deca', ...defaultTheme.fontFamily.sans] },
+			textShadow: {
+				sm: '0 1px 2px var(--tw-shadow-color)',
+				// eslint-disable-next-line sort-keys
+				DEFAULT: '0 2px 4px var(--tw-shadow-color)',
+				lg: '0 8px 16px var(--tw-shadow-color)',
+			},
 		},
 	},
 };

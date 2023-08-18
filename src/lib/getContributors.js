@@ -7,7 +7,7 @@ export default async path => {
 	try {
 		const res = await fetch(base + path);
 		if (!res.ok) {
-			console.warn(`Couldn't get contributors for ${path} (${res.status} ${res.statusText})`);
+			console.warn(`WARNING: Couldn't get contributors for ${path} (${res.status} ${res.statusText})`);
 			return [];
 		}
 		const html = await res.text();

@@ -12,134 +12,124 @@ import AddMueButton from "@components/AddMueButton.svelte";
 changeLanguage("en");
 
 const browsers = {
-	default: {
-		text: t("components.buttons.download_from_github"),
-		url: "https://github.com/mue/mue/releases",
-	},
-	unsupported: {
-		text: t("components.buttons.unsupported_browser"),
-		url: "",
-	},
-	chrome: {
-		text: t("components.buttons.add_to_browser", { browser: "Chrome" }),
-		url: "https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid",
-	},
-	edge: {
-		text: t("components.buttons.add_to_browser", { browser: "Edge" }),
-		url: "https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja",
-	},
-	firefox: {
-		text: t("components.buttons.add_to_browser", { browser: "Firefox" }),
-		url: "https://addons.mozilla.org/firefox/addon/mue/",
-	},
-	whale: {
-		text: t("components.buttons.add_to_browser", { browser: "Whale" }),
-		url: "https://store.whale.naver.com/detail/ecllekeilcmicbfkkiknfdddbogibbnc",
-	},
+  default: {
+    text: t("components.buttons.download_from_github"),
+    url: "https://github.com/mue/mue/releases",
+  },
+  unsupported: {
+    text: t("components.buttons.unsupported_browser"),
+    url: "",
+  },
+  chrome: {
+    text: t("components.buttons.add_to_browser", { browser: "Chrome" }),
+    url: "https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid",
+  },
+  edge: {
+    text: t("components.buttons.add_to_browser", { browser: "Edge" }),
+    url: "https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja",
+  },
+  firefox: {
+    text: t("components.buttons.add_to_browser", { browser: "Firefox" }),
+    url: "https://addons.mozilla.org/firefox/addon/mue/",
+  },
+  whale: {
+    text: t("components.buttons.add_to_browser", { browser: "Whale" }),
+    url: "https://store.whale.naver.com/detail/ecllekeilcmicbfkkiknfdddbogibbnc",
+  },
 };
 ---
 
 <Base frontmatter={{ title: "" }}>
-	<Navbar />
+  <Navbar />
 
-	<div
-		id="hero"
-		class="my-4 sm:my-8 md:my-12 lg:my-16 xl:my-24 mx-auto container text-center"
-	>
-		<div class="xl:m-16 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24">
-			<div class="flex items-center justify-center">
-				<div class="grid grid-cols-1 gap-4 lg:gap-12">
-					<h1
-						class="text-5xl xl:text-7xl font-extrabold leading-snug"
-					>
-						{
-							t("pages.home.hero.title.reverse") === "true" ? (
-								<>
-									<span class="text-mue-almond block h-[1em]">
-										<Typewriter
-											client:load
-											strings={[
-												t(
-													"pages.home.hero.title.beautiful"
-												),
-												t(
-													"pages.home.hero.title.customisable"
-												),
-												t("pages.home.hero.title.free"),
-											]}
-										/>
-									</span>
-									<span class="text-neutral-600 dark:text-neutral-700 mix-blend-difference">
-										{t("pages.home.hero.title.mue_is")}
-									</span>
-								</>
-							) : (
-								<>
-									<span class="text-neutral-600 dark:text-neutral-700 mix-blend-difference">
-										{t("pages.home.hero.title.mue_is")}
-									</span>
-									<br />
-									<span class="text-mue-almond block h-[1em]">
-										<Typewriter
-											client:load
-											strings={[
-												t(
-													"pages.home.hero.title.beautiful"
-												),
-												t(
-													"pages.home.hero.title.customisable"
-												),
-												t("pages.home.hero.title.free"),
-											]}
-										/>
-									</span>
-								</>
-							)
-						}
-					</h1>
-					<div
-						class="flex flex-col text-center items-center justify-center gap-2"
-					>
-						<AddMueButton client:load {browsers} />
-						<div>
-							<a
-								class="text-white hover:opacity-80 transition duration-300 ease-in-out text-sm shadow-sm"
-								href="https://demo.muetab.com"
-								target="_blank"
-							>
-								<span class="flex items-center gap-2">
-									{t("pages.home.hero.demo")}
-									<ArrowRightIcon />
-								</span>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="">
-				<img src={HeroImage} />
-			</div>
-		</div>
-	</div>
+  <div
+    id="hero"
+    class="my-4 sm:my-8 md:my-12 lg:my-16 xl:my-24 mx-auto container text-center"
+  >
+    <div class="xl:m-16 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24">
+      <div class="flex items-center justify-center">
+        <div class="grid grid-cols-1 gap-4 lg:gap-12">
+          <h1 class="text-5xl xl:text-7xl font-extrabold leading-snug">
+            {
+              t("pages.home.hero.title.reverse") === "true" ? (
+                <>
+                  <span class="text-mue-almond block h-[1em]">
+                    <Typewriter
+                      client:load
+                      strings={[
+                        t("pages.home.hero.title.beautiful"),
+                        t("pages.home.hero.title.customisable"),
+                        t("pages.home.hero.title.free"),
+                      ]}
+                    />
+                  </span>
+                  <span class="text-neutral-600 dark:text-neutral-700 mix-blend-difference">
+                    {t("pages.home.hero.title.mue_is")}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span class="text-neutral-600 dark:text-neutral-700 mix-blend-difference">
+                    {t("pages.home.hero.title.mue_is")}
+                  </span>
+                  <br />
+                  <span class="text-mue-almond block h-[1em]">
+                    <Typewriter
+                      client:load
+                      strings={[
+                        t("pages.home.hero.title.beautiful"),
+                        t("pages.home.hero.title.customisable"),
+                        t("pages.home.hero.title.free"),
+                      ]}
+                    />
+                  </span>
+                </>
+              )
+            }
+          </h1>
+          <div
+            class="flex flex-col text-center items-center justify-center gap-2"
+          >
+            <AddMueButton client:load {browsers} />
+            <div>
+              <a
+                class="text-white hover:opacity-80 transition duration-300 ease-in-out text-sm shadow-sm"
+                href="https://demo.muetab.com"
+                target="_blank"
+              >
+                <span class="flex items-center gap-2">
+                  {t("pages.home.hero.demo")}
+                  <ArrowRightIcon />
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <img src={HeroImage} />
+      </div>
+    </div>
+  </div>
 
-	<main
-		class="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 my-0 mx-1 sm:mx-2 md:mx-3 lg:mx-4 p-4 sm:p-6 md:p-8 rounded-xl"
-	>
-		<div class="container mx-auto">
-			<h1 class="text-4xl">
-				Welcome to
-				<span
-					class="bg-gradient-to-r from-mue-orange to-mue-pink bg-clip-text text-transparent"
-					>Mue</span
-				>.
-			</h1>
-			<iframe
-				src="https://demo.muetab.com/?nointro=true"
-				loading="lazy"
-				{/* don't load all of Mue until the user scrolls */}
-				class="w-full h-[75vh] rounded-3xl p-1 bg-neutral-200 dark:bg-neutral-700 outline-0"
-			></iframe>
-		</div>
-	</main>
-	<Footer client:visible />
+  <main
+    class="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 my-0 mx-1 sm:mx-2 md:mx-3 lg:mx-4 p-4 sm:p-6 md:p-8 rounded-xl"
+  >
+    <div class="container mx-auto">
+      <h1 class="text-4xl">
+        Welcome to
+        <span
+          class="bg-gradient-to-r from-mue-orange to-mue-pink bg-clip-text text-transparent"
+          >Mue</span
+        >.
+      </h1>
+      <!-- don't load all of Mue until the user scrolls -->
+      <iframe
+        src="https://demo.muetab.com/?nointro=true"
+        loading="lazy"
+        class="w-full h-[75vh] rounded-3xl p-1 bg-neutral-200 dark:bg-neutral-700 outline-0"
+      ></iframe>
+    </div>
+  </main>
+  <Footer client:visible />
 </Base>
