@@ -2,7 +2,7 @@
 import { changeLanguage, t } from "i18next";
 import { localizePath } from "astro-i18next";
 import Base from "@layouts/Base.astro";
-import Navbar from "@components/Navbar.astro";
+import Navbar from "@/components/Navbar.svelte";
 import Footer from "@components/Footer.svelte";
 import HeroImage from "../img/hero.png";
 import ArrowRightIcon from "@components/heroicons/mini/ArrowRight.svelte";
@@ -40,7 +40,7 @@ const browsers = {
 ---
 
 <Base frontmatter={{ title: "" }}>
-  <Navbar />
+  <Navbar client:load onPage={false} />
 
   <div
     id="hero"

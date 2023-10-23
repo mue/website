@@ -1,19 +1,19 @@
 ---
-import { changeLanguage } from "i18next";
+import { changeLanguage, t } from "i18next";
 import Base from "@layouts/Base.astro";
-import Navbar from "@components/Navbar.astro";
+import Navbar from "@/components/Navbar.svelte";
 
 changeLanguage("en");
 ---
-
+<!-- TODO: translate  -->
 <Base frontmatter={{ title: "Error 404" }}>
-	<Navbar />
+	<Navbar client:load onPage={false} />
 	<main class="grid h-screen place-items-center">
 		<div class="text-white text-center grid gap-12 md:gap-28 -mt-12">
 			<h1 class="text-2xl sm:text-4xl md:text-[12rem] tracking-wide font-black text-mue-almond">
 				404
 			</h1>
-			<p class="sm:text-lg md:text-3xl font-bold">Sorry, this page doesn't exist.</p>
+			<p class="sm:text-lg md:text-3xl font-bold">{t("pages.404.text")}</p>
 			<!-- TODO: contact, try another language -->
 		</div>
 	</main>

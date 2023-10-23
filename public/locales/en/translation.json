@@ -13,6 +13,9 @@
 		"message": "Please allow JavaScript to enable dark mode, language switching, search, and other features."
 	},
 	"pages": {
+		"404": {
+			"text": "Sorry, this page doesn't exist."
+		},
 		"home": {
 			"hero": {
 				"demo": "Or try the demo",

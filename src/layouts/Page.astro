@@ -4,7 +4,7 @@ export interface Props {
 }
 
 import Base from "./Base.astro";
-import Navbar from "@components/Navbar.astro";
+import Navbar from "@/components/Navbar.svelte";
 import Footer from "@components/Footer.svelte";
 
 const { frontmatter } = Astro.props;
@@ -12,11 +12,13 @@ const { frontmatter } = Astro.props;
 
 <Base {frontmatter}>
 	<main
-		class="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 my-0 mx-1 sm:mx-2 md:mx-3 lg:mx-4 p-4 sm:p-6 md:p-8 rounded-b-xl"
+		class="bg-white dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 my-0 mx-1 sm:mx-2 md:mx-3 lg:mx-4  rounded-b-xl"
 	>
-		<Navbar />
-		<div class="container mx-auto">
-			<slot />
+		<Navbar client:load onPage={true} />
+		<div class="p-4 sm:p-6 md:p-8">
+			<div class="container mx-auto">
+				<slot />
+			</div>
 		</div>
 	</main>
 	<Footer client:visible />

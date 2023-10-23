@@ -40,7 +40,8 @@ export const collections = {
 };
 
 export const github = {
-	branch: 'main',
+	// branch: 'main',
+	branch: 'astro', // TODO: main
 	organisation: 'mue',
 	repository: 'website',
 };
