@@ -1,0 +1,23 @@
+{
+	"title": "Support",
+	"search": {
+		"title": "How can we help?",
+		"placeholder": "Search the knowledgebase",
+		"no_results": "No results found"
+	},
+	"popular": "Popular topics",
+	"all": "All topics",
+	"more": "View more",
+	"categories": {
+		"contributing": {
+			"title": "Contributing"
+		},
+		"settings": {
+			"title": "Settings"
+		}
+	},
+	"contact": {
+		"questions": "Still have questions?",
+		"title": "Contact us"
+	}
+}
