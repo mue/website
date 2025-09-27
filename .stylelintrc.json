@@ -1,6 +1,0 @@
-{
-  "extends": ["stylelint-config-standard", "stylelint-config-prettier-scss"],
-  "formatter": "stylelint-checkstyle-formatter",
-  "plugins": ["stylelint-scss"],
-  "customSyntax": "postcss-scss"
-}
