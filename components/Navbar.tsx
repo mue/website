@@ -118,32 +118,11 @@ export default function Navbar() {
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Components</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[400px] gap-2 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                  {components.map((component) => (
-                    <li key={component.title}>
-                      <NavigationMenuLink asChild>
-                        <Link href={component.href}>
-                          <div className="text-sm font-medium leading-none">
-                            {component.title}
-                          </div>
-                          <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
-                            {component.description}
-                          </p>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                  ))}
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
               <NavigationMenuLink
                 asChild
                 className={navigationMenuTriggerStyle()}
               >
-                <Link href="/docs">Docs</Link>
+                <Link href="/marketplace">Marketplace</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>

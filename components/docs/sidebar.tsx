@@ -32,11 +32,12 @@ function SidebarSection({
   depth?: number;
 }) {
   const normalizedActiveHref = activeHref.replace(/\/$/, "");
-  const nodePath = `/docs/${node.slug.join("/")}`.replace(/\/$/, "");
+  // Use the node's actual href instead of reconstructing the path
+  const normalizedNodeHref = node.href.replace(/\/$/, "");
 
-  const isActive = nodePath === normalizedActiveHref;
+  const isActive = normalizedNodeHref === normalizedActiveHref;
   const isAncestor =
-    isActive || normalizedActiveHref.startsWith(`${nodePath}/`);
+    isActive || normalizedActiveHref.startsWith(`${normalizedNodeHref}/`);
 
   const hasChildren = node.children && node.children.length > 0;
 
@@ -65,6 +66,7 @@ function SidebarSection({
         <span className={cn("truncate", isActive && "text-white")}>
           {node.title}
         </span>
+
         {hasChildren && (
           <span
             className={cn(
