@@ -53,21 +53,21 @@ const components: { title: string; href: string; description: string }[] = [
   },
 ];
 
-const learnLinks: { title: string; href: string; description: string }[] = [
+const docsQuickLinks: { title: string; href: string; description: string }[] = [
   {
     title: "Introduction",
-    href: "/docs",
-    description: "Re-usable components built using Radix UI and Tailwind CSS.",
+    href: "/docs/introduction",
+    description: "Get oriented with Mue's core concepts and setup.",
   },
   {
-    title: "Installation",
-    href: "/docs/installation",
-    description: "How to install dependencies and structure your app.",
+    title: "Marketplace",
+    href: "/docs/marketplace/introduction",
+    description: "Extend Mue with community-curated packs and presets.",
   },
   {
-    title: "Typography",
-    href: "/docs/primitives/typography",
-    description: "Styles for headings, paragraphs, lists...etc",
+    title: "API",
+    href: "/docs/api/introduction",
+    description: "Integrate Mue into your apps with the REST API guide.",
   },
 ];
 
@@ -81,26 +81,26 @@ export default function Navbar() {
         <NavigationMenu viewport={false}>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Home</NavigationMenuTrigger>
+              <NavigationMenuTrigger>Docs</NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                   <li className="row-span-3">
                     <NavigationMenuLink asChild>
                       <Link
                         className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
-                        href="/"
+                        href="/docs"
                       >
                         <div className="mt-4 mb-2 text-lg font-medium">
-                          shadcn/ui
+                          Mue documentation
                         </div>
                         <p className="text-muted-foreground text-sm leading-tight">
-                          Beautifully designed components built with Tailwind
-                          CSS.
+                          Dive into guides, references, and workflows for the
+                          entire Mue ecosystem.
                         </p>
                       </Link>
                     </NavigationMenuLink>
                   </li>
-                  {learnLinks.map((item) => (
+                  {docsQuickLinks.map((item) => (
                     <li key={item.title}>
                       <NavigationMenuLink asChild>
                         <Link href={item.href}>
