@@ -6,7 +6,6 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { DocsShell } from "@/components/docs/docs-shell";
 import { getDocsNavigation } from "@/components/docs/layout-context";
 import { DocsSearch } from "@/components/docs/search";
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import type { DocTreeNode } from "@/lib/docs";
 import { getAllDocsMeta, getDocBySlug } from "@/lib/docs";
@@ -138,9 +137,6 @@ function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
   const next =
     currentIndex < sortedMeta.length - 1 ? sortedMeta[currentIndex + 1] : null;
 
-  const sectionTitle =
-    findTitle(tree, doc.slug.slice(0, -1)) ?? "Documentation";
-
   const breadcrumb = [
     { label: "Documentation", href: "/docs" },
     ...doc.slug.slice(0, -1).map((_, index) => {
@@ -202,11 +198,11 @@ function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
             </Link>
           )}
         </div>
-        <div className="ml-auto">
+        <div>
           {next && (
             <Link
               href={next.href}
-              className="group flex flex-col gap-1 rounded-xl border bg-card/70 p-4 transition hover:border-primary/40"
+              className="group flex flex-col gap-1 rounded-xl border bg-card/70 p-4 transition hover:border-primary/40 items-end"
             >
               <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 Next <ChevronRight className="size-4" />

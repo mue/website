@@ -2,9 +2,7 @@ import Link from "next/link";
 import { ArrowRight, BookOpen, Layers3, PlugZap } from "lucide-react";
 
 import { DocsShell } from "@/components/docs/docs-shell";
-import { DocsSearch } from "@/components/docs/search";
 import { getDocsNavigation } from "@/components/docs/layout-context";
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -33,7 +31,7 @@ const featureHighlights = [
 ];
 
 export default async function DocsIndexPage() {
-  const { tree, docsMeta } = await getDocsNavigation();
+  const { tree } = await getDocsNavigation();
   return (
     <DocsShell
       breadcrumb={[{ label: "Documentation" }]}
@@ -64,24 +62,6 @@ export default async function DocsIndexPage() {
               >
                 View live demo
               </Link>
-            </div>
-          </div>
-          <div className="rounded-3xl border bg-card/60 p-6 shadow-sm backdrop-blur">
-            <p className="text-sm font-medium text-muted-foreground">
-              Quick search
-            </p>
-            <p className="mt-2 text-sm text-muted-foreground/80">
-              Use the palette to jump between guides. Press
-              <span className="mx-1 rounded border bg-muted px-1.5 py-0.5 text-xs font-medium">
-                Ctrl
-              </span>
-              <span className="rounded border bg-muted px-1.5 py-0.5 text-xs font-medium">
-                K
-              </span>{" "}
-              anytime.
-            </p>
-            <div className="mt-4">
-              <DocsSearch docs={docsMeta} />
             </div>
           </div>
         </div>
