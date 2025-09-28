@@ -206,22 +206,6 @@ export async function getDocsTree(): Promise<DocTreeNode[]> {
 
   sortNodes(root);
 
-  const assignFolderHref = (nodes: DocTreeNode[]) => {
-    nodes.forEach((node) => {
-      if (!node.hasPage && node.children && node.children.length > 0) {
-        const firstChild = node.children.find((child) => child.hasPage) ?? node.children[0];
-        if (firstChild) {
-          node.href = firstChild.href;
-        }
-      }
-      if (node.children) {
-        assignFolderHref(node.children);
-      }
-    });
-  };
-
-  assignFolderHref(root);
-
   return root;
 }
 

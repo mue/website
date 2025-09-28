@@ -40,9 +40,9 @@ export default async function DocsIndexPage() {
       header={
         <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_260px]">
           <div className="space-y-4">
-            <Badge className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-primary">
+            {/* <Badge className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-primary">
               New tab, new possibilities
-            </Badge>
+            </Badge> */}
             <h1 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
               Build, customise, and ship delightful Mue experiences.
             </h1>

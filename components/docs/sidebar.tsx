@@ -32,11 +32,11 @@ function SidebarSection({
   depth?: number;
 }) {
   const normalizedActiveHref = activeHref.replace(/\/$/, "");
-  const normalizedNodeHref = node.href.replace(/\/$/, "");
+  const nodePath = `/docs/${node.slug.join("/")}`.replace(/\/$/, "");
 
-  const isActive = normalizedNodeHref === normalizedActiveHref;
+  const isActive = nodePath === normalizedActiveHref;
   const isAncestor =
-    isActive || normalizedActiveHref.startsWith(`${normalizedNodeHref}/`);
+    isActive || normalizedActiveHref.startsWith(`${nodePath}/`);
 
   const hasChildren = node.children && node.children.length > 0;
 
