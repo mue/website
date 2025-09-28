@@ -12,6 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
+import { Library as LibraryIcon } from "lucide-react";
 
 import {
   Select,
@@ -269,10 +270,11 @@ export function MarketplaceExplorer({
                         );
                       }}
                       className={cn(
-                        "rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition",
+                        "flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition",
                         "hover:bg-primary/10 hover:text-primary"
                       )}
                     >
+                      <LibraryIcon className="h-4 w-4" />
                       {collectionNameMap.get(collection) ??
                         collection.replace(/_/g, " ")}
                     </button>

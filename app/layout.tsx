@@ -37,7 +37,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <div className="flex min-h-screen flex-col">
-            <header className="sticky top-0 z-50 bg-background/80 backdrop-blur">
+            <header className="sticky top-0 z-50">
               <div className="mx-auto w-full max-w-7xl px-6 py-4 lg:px-12">
                 <Navbar />
               </div>

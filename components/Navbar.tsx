@@ -73,7 +73,7 @@ const docsQuickLinks: { title: string; href: string; description: string }[] = [
 
 export default function Navbar() {
   return (
-    <nav className="flex w-full flex-row items-center justify-between gap-3 rounded-lg border border-white/20 bg-white/10 px-6 py-4 shadow-lg backdrop-blur-md lg:px-12">
+    <nav className="bg-background/60 backdrop-blur-md flex w-full flex-row items-center justify-between gap-3 rounded-lg border border-background/20 px-6 py-4 shadow-lg lg:px-12">
       <section className="flex flex-row items-center justify-center gap-10">
         <Link href={"/"}>
           <Logo width={100} height={100} className="h-10 w-10" />
