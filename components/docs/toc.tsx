@@ -52,7 +52,7 @@ export function DocsToc({ toc }: DocsTocProps) {
       <h2 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
         On this page
       </h2>
-  <ScrollArea className="mt-4 max-h-[calc(100vh-11rem)] pr-2">
+      <ScrollArea className="mt-4 max-h-[calc(100vh-11rem)] pr-2">
         <ul className="space-y-2 text-sm">
           {toc.map((item) => (
             <li
