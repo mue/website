@@ -58,7 +58,7 @@ const scrollFeatures = [
 
 export default function Home() {
   const featuresSectionRef = useRef<HTMLDivElement | null>(null);
-  const featureRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const featureRefs = useRef<Array<HTMLElement | null>>([]);
   const previewContainerRef = useRef<HTMLDivElement | null>(null);
   const [previewProgress, setPreviewProgress] = useState(0);
   const [activeFeature, setActiveFeature] = useState(0);
