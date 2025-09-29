@@ -14,8 +14,6 @@ import {
 
 export const revalidate = 3600;
 
-export const runtime = "edge";
-
 type MarketplaceCollectionPageProps = {
   params: Promise<{
     collection: string;
