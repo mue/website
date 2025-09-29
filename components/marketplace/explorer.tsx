@@ -12,7 +12,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import { FunnelX, Library as LibraryIcon } from "lucide-react";
+import { FunnelX, Library as LibraryIcon, Search, X } from "lucide-react";
 
 import {
   Select,
@@ -125,19 +125,46 @@ export function MarketplaceExplorer({
     setSortBy("name-asc");
   };
 
+  const isSearching = query.trim().length > 0;
+  const hasActiveFilters =
+    query || typeFilter !== "all" || collectionFilter || sortBy !== "name-asc";
+
   return (
     <section className="space-y-10">
-      <Input
-        type="search"
-        placeholder="Search by name or author"
-        value={query}
-        onChange={(event) => setQuery(event.target.value)}
-        className="md:max-w-sm mx-auto block"
-        aria-label="Search marketplace items"
-      />
+      {/* Enhanced Search Bar */}
+      <div className="relative mx-auto max-w-2xl">
+        <div className="relative">
+          <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
+          <Input
+            type="text"
+            placeholder="Search by name or author..."
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            className="h-12 pl-12 pr-12 text-base shadow-sm transition focus:shadow-md"
+            aria-label="Search marketplace items"
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={() => setQuery("")}
+              className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-1 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+              aria-label="Clear search"
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
+        </div>
+        {isSearching && (
+          <div className="mt-2 text-center text-sm text-muted-foreground">
+            Found{" "}
+            <strong className="text-foreground">{filteredItems.length}</strong>{" "}
+            result{filteredItems.length !== 1 ? "s" : ""}
+          </div>
+        )}
+      </div>
 
       {collectionFilter && collectionFilterLabel && (
-        <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
           <span>Filtering by collection:</span>
           <Badge variant="secondary">{collectionFilterLabel}</Badge>
           <button
@@ -150,7 +177,7 @@ export function MarketplaceExplorer({
         </div>
       )}
 
-      {randomCollections.length > 0 && (
+      {!isSearching && randomCollections.length > 0 && (
         <Carousel
           opts={{
             align: "start",
@@ -288,10 +315,7 @@ export function MarketplaceExplorer({
             </div>
           </div>
         </div>
-        {(query ||
-          typeFilter !== "all" ||
-          collectionFilter ||
-          sortBy !== "name-asc") && (
+        {hasActiveFilters && (
           <Button
             variant="outline"
             onClick={resetFilters}
@@ -391,8 +415,28 @@ export function MarketplaceExplorer({
         </div>
 
         {filteredItems.length === 0 && (
-          <div className="rounded-xl border border-dashed border-border bg-card/50 p-8 text-center text-sm text-muted-foreground">
-            No items match your current filters.
+          <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border bg-gradient-to-br from-muted/30 to-muted/10 p-12 text-center">
+            <div className="mb-4 rounded-full bg-muted/50 p-4">
+              <Search className="h-8 w-8 text-muted-foreground" />
+            </div>
+            <h3 className="mb-2 text-lg font-semibold text-foreground">
+              No items found
+            </h3>
+            <p className="mb-4 max-w-md text-sm text-muted-foreground">
+              {isSearching
+                ? `No results for "${query}". Try adjusting your search or filters.`
+                : "No items match your current filters."}
+            </p>
+            {hasActiveFilters && (
+              <Button
+                variant="outline"
+                onClick={resetFilters}
+                className="gap-2"
+              >
+                <FunnelX className="h-4 w-4" />
+                Clear all filters
+              </Button>
+            )}
           </div>
         )}
       </div>
