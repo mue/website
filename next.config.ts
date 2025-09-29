@@ -1,9 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    ppr: false,
-  },
+	images: {
+		remotePatterns: [
+			{
+				protocol: "https",
+				hostname: "images.unsplash.com",
+			},
+		],
+	},
 };
 
 export default nextConfig;
