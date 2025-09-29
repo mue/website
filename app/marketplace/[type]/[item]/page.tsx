@@ -2,10 +2,38 @@ import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import {
+  ArrowLeft,
+  Calendar,
+  User,
+  Globe,
+  Package,
+  MessageSquareQuote,
+  Users,
+  Type,
+  Images,
+  Camera,
+  MapPin,
+} from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import {
   getMarketplaceItem,
   type MarketplaceItemDetail,
@@ -57,9 +85,6 @@ export default async function MarketplaceItemPage({
   const { type, item } = await params;
   const data = await resolveItem(type, item);
 
-  const hasMedia = Boolean(
-    data.photos?.length || data.screenshot_url || data.icon_url
-  );
   const formattedUpdatedAt = data.updated_at
     ? new Date(data.updated_at).toLocaleDateString(undefined, {
         year: "numeric",
@@ -68,182 +93,514 @@ export default async function MarketplaceItemPage({
       })
     : null;
 
+  const isPhotoPack = type === "photo_packs";
+  const isQuotePack = type === "quote_packs";
+  const isPresetSettings = type === "preset_settings";
+
+  // Get all preset settings (everything except photos, quotes, and standard fields)
+  // Flatten nested settings object if it exists
+  const presetSettings = isPresetSettings
+    ? (() => {
+        const excluded = [
+          "display_name",
+          "name",
+          "description",
+          "icon_url",
+          "screenshot_url",
+          "type",
+          "version",
+          "author",
+          "language",
+          "photos",
+          "quotes",
+          "colour",
+          "updated_at",
+          "in_collections",
+        ];
+
+        // Check if there's a settings object
+        if (data.settings && typeof data.settings === "object") {
+          return Object.entries(data.settings);
+        }
+
+        // Otherwise use all non-excluded fields
+        return Object.entries(data).filter(([key]) => !excluded.includes(key));
+      })()
+    : [];
+
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-10 px-6 py-12 lg:px-8">
+    <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
       <Link
         href="/marketplace"
-        className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition hover:text-foreground"
+        className="inline-flex w-fit items-center gap-2 text-sm font-medium text-muted-foreground transition hover:text-foreground"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to marketplace
       </Link>
 
-      <header className="flex flex-col gap-6 rounded-3xl border border-border bg-card/80 p-8 shadow-sm">
-        <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex items-center gap-4">
-            <div className="relative h-16 w-16 overflow-hidden rounded-2xl border border-border/60 bg-muted">
-              {data.icon_url ? (
-                <Image
-                  src={data.icon_url}
-                  alt={data.display_name}
-                  fill
-                  sizes="64px"
-                  className="object-cover"
-                  unoptimized
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center text-lg font-semibold uppercase text-muted-foreground/80">
-                  {data.display_name.slice(0, 2)}
+      <div className="grid gap-6 lg:grid-cols-[340px_1fr] lg:gap-8">
+        {/* Left Column - Info */}
+        <aside className="space-y-4 lg:space-y-6">
+          <div className="lg:sticky lg:top-8 space-y-4 lg:space-y-6">
+            {/* Main Card */}
+            <div className="flex flex-col gap-6 rounded-2xl border border-border bg-card/80 p-6 shadow-lg backdrop-blur-sm">
+              <div className="flex flex-col items-center gap-4 text-center">
+                <div className="relative h-24 w-24 overflow-hidden rounded-2xl border-2 border-border/60 bg-muted shadow-md">
+                  {data.icon_url ? (
+                    <Image
+                      src={data.icon_url}
+                      alt={data.display_name}
+                      fill
+                      sizes="96px"
+                      className="object-cover"
+                      unoptimized
+                    />
+                  ) : (
+                    <div className="flex h-full w-full items-center justify-center text-2xl font-bold uppercase text-muted-foreground/80">
+                      {data.display_name.slice(0, 2)}
+                    </div>
+                  )}
                 </div>
+
+                <div className="space-y-2">
+                  <h1 className="text-2xl font-bold tracking-tight">
+                    {data.display_name}
+                  </h1>
+                  <Badge variant="secondary" className="text-xs capitalize">
+                    {type.replace(/_/g, " ")}
+                  </Badge>
+                </div>
+              </div>
+
+              <Separator />
+
+              {/* Metadata */}
+              <div className="space-y-3 text-sm">
+                {data.author && (
+                  <div className="flex items-center gap-3 text-muted-foreground">
+                    <User className="h-4 w-4" />
+                    <span>{data.author}</span>
+                  </div>
+                )}
+
+                {data.version && (
+                  <div className="flex items-center gap-3 text-muted-foreground">
+                    <Package className="h-4 w-4" />
+                    <span>Version {data.version}</span>
+                  </div>
+                )}
+
+                {data.language && (
+                  <div className="flex items-center gap-3 text-muted-foreground">
+                    <Globe className="h-4 w-4" />
+                    <span>
+                      {new Intl.DisplayNames([data.language], {
+                        type: "language",
+                      }).of(data.language) || data.language.toUpperCase()}
+                    </span>
+                  </div>
+                )}
+
+                {formattedUpdatedAt && (
+                  <div className="flex items-center gap-3 text-muted-foreground">
+                    <Calendar className="h-4 w-4" />
+                    <span>{formattedUpdatedAt}</span>
+                  </div>
+                )}
+              </div>
+
+              {data.description && (
+                <>
+                  <Separator />
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {data.description}
+                  </p>
+                </>
               )}
             </div>
-            <div className="space-y-2">
-              <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-                {data.display_name}
-              </h1>
-              <div className="flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                <Badge variant="secondary">{type.replace(/_/g, " ")}</Badge>
-                {data.version && <span>Version {data.version}</span>}
-                {data.author && <span>by {data.author}</span>}
-                {data.language && (
-                  <span>Language: {data.language.toUpperCase()}</span>
-                )}
-                {formattedUpdatedAt && (
-                  <span>Updated {formattedUpdatedAt}</span>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
 
-        {data.description && (
-          <p className="max-w-3xl text-base text-muted-foreground md:text-lg">
-            {data.description}
-          </p>
-        )}
-      </header>
-
-      <section className="space-y-6 rounded-3xl border border-border bg-card/70 p-8 shadow-sm">
-        <h2 className="text-xl font-semibold text-foreground">Overview</h2>
-        <div className="space-y-4 text-sm text-muted-foreground">
-          {data.in_collections && data.in_collections.length > 0 && (
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="font-medium text-foreground">Collections:</span>
-              {data.in_collections.map((collection) => (
-                <Link
-                  key={collection.name}
-                  href={`/marketplace/collection/${encodeURIComponent(
-                    collection.name
-                  )}`}
-                  className="inline-flex"
-                >
-                  <Badge variant="outline">{collection.display_name}</Badge>
-                </Link>
-              ))}
-            </div>
-          )}
-
-          {!data.in_collections?.length && (
-            <p>This item is not part of any public collections.</p>
-          )}
-        </div>
-      </section>
-
-      {hasMedia && (
-        <section className="space-y-6 rounded-3xl border border-border bg-card/70 p-8 shadow-sm">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-xl font-semibold text-foreground">Gallery</h2>
-            {data.photos?.length && (
-              <span className="text-sm text-muted-foreground">
-                {data.photos.length}{" "}
-                {data.photos.length === 1 ? "entry" : "entries"}
-              </span>
-            )}
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2">
-            {data.screenshot_url && (
-              <div className="relative h-56 w-full overflow-hidden rounded-2xl border border-border/60">
-                <Image
-                  src={data.screenshot_url}
-                  alt={`${data.display_name} screenshot`}
-                  fill
-                  sizes="(min-width: 768px) 50vw, 100vw"
-                  className="object-cover"
-                  unoptimized
-                />
+            {/* Collections Card */}
+            {data.in_collections && data.in_collections.length > 0 && (
+              <div className="rounded-2xl border border-border bg-card/80 p-6 shadow-lg backdrop-blur-sm">
+                <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                  Collections
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  {data.in_collections.map((collection) => (
+                    <Link
+                      key={collection.name}
+                      href={`/marketplace/collection/${encodeURIComponent(
+                        collection.name
+                      )}`}
+                    >
+                      <Badge
+                        variant="outline"
+                        className="cursor-pointer transition hover:bg-primary/10 hover:text-primary"
+                      >
+                        {collection.display_name}
+                      </Badge>
+                    </Link>
+                  ))}
+                </div>
               </div>
             )}
+          </div>
+        </aside>
 
-            {data.photos?.map((photo, index) => {
-              const photoUrl =
-                photo.url?.default ?? Object.values(photo.url ?? {})[0];
-              if (!photoUrl) return null;
+        {/* Right Column - Content */}
+        <main className="min-h-[400px] lg:min-h-[600px]">
+          <Tabs defaultValue="overview" className="w-full">
+            <TabsList className="mb-4 grid w-full grid-cols-2 lg:mb-6">
+              <TabsTrigger value="overview" className="text-sm">Overview</TabsTrigger>
+              <TabsTrigger value="content" className="text-sm">
+                {isPhotoPack && "Photos"}
+                {isQuotePack && "Quotes"}
+                {isPresetSettings && "Settings"}
+              </TabsTrigger>
+            </TabsList>
 
-              return (
-                <figure
-                  key={`${photoUrl}-${index}`}
-                  className="relative flex h-56 w-full flex-col overflow-hidden rounded-2xl border border-border/60"
-                >
-                  <Image
-                    src={photoUrl}
-                    alt={
-                      photo.location ?? photo.photographer ?? data.display_name
-                    }
-                    fill
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    className="object-cover"
-                    unoptimized
-                  />
-                  {(photo.photographer || photo.location) && (
-                    <figcaption className="relative mt-auto bg-gradient-to-t from-black/70 to-transparent p-4 text-xs text-white">
-                      <div className="font-medium">{photo.photographer}</div>
-                      {photo.location && (
-                        <div className="text-white/80">{photo.location}</div>
-                      )}
-                    </figcaption>
+            <TabsContent value="overview" className="space-y-4 sm:space-y-6">
+              <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
+                <h2 className="mb-3 text-xl font-semibold sm:mb-4 sm:text-2xl">About</h2>
+                <div className="prose prose-sm max-w-none dark:prose-invert">
+                  {data.description ? (
+                    <p className="text-muted-foreground">{data.description}</p>
+                  ) : (
+                    <p className="text-muted-foreground">
+                      No description available for this item.
+                    </p>
                   )}
-                </figure>
-              );
-            })}
-          </div>
-        </section>
-      )}
+                </div>
 
-      {data.quotes && data.quotes.length > 0 && (
-        <section className="space-y-6 rounded-3xl border border-border bg-card/70 p-8 shadow-sm">
-          <h2 className="text-xl font-semibold text-foreground">Quotes</h2>
-          <div className="space-y-4">
-            {data.quotes.map((quote, index) => (
-              <blockquote
-                key={`${quote.quote}-${index}`}
-                className="rounded-2xl border border-border/60 bg-background/80 p-6 text-sm text-foreground shadow-sm"
-              >
-                <p className="text-base italic text-foreground">
-                  “{quote.quote}”
-                </p>
-                {quote.author && (
-                  <footer className="mt-3 text-sm font-medium text-muted-foreground">
-                    — {quote.author}
-                  </footer>
+                {isPhotoPack && data.photos && data.photos.length > 0 && (
+                  <div className="mt-4 grid gap-3 sm:mt-6 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="rounded-xl border border-border/60 bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 p-4 sm:p-6 shadow-sm transition hover:shadow-md">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0 flex-1">
+                          <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 sm:text-3xl">
+                            {data.photos.length}
+                          </div>
+                          <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
+                            Total Photos
+                          </div>
+                        </div>
+                        <div className="flex-shrink-0 rounded-full bg-emerald-500/20 p-2 sm:p-3">
+                          <Images className="h-5 w-5 text-emerald-600 dark:text-emerald-400 sm:h-6 sm:w-6" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="rounded-xl border border-border/60 bg-gradient-to-br from-orange-500/10 to-orange-500/5 p-4 sm:p-6 shadow-sm transition hover:shadow-md">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0 flex-1">
+                          <div className="text-2xl font-bold text-orange-600 dark:text-orange-400 sm:text-3xl">
+                            {
+                              new Set(
+                                data.photos
+                                  .map((p) => p.photographer)
+                                  .filter(Boolean)
+                              ).size
+                            }
+                          </div>
+                          <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
+                            Photographers
+                          </div>
+                        </div>
+                        <div className="flex-shrink-0 rounded-full bg-orange-500/20 p-2 sm:p-3">
+                          <Camera className="h-5 w-5 text-orange-600 dark:text-orange-400 sm:h-6 sm:w-6" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="rounded-xl border border-border/60 bg-gradient-to-br from-cyan-500/10 to-cyan-500/5 p-4 sm:p-6 shadow-sm transition hover:shadow-md">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0 flex-1">
+                          <div className="text-2xl font-bold text-cyan-600 dark:text-cyan-400 sm:text-3xl">
+                            {
+                              new Set(
+                                data.photos
+                                  .map((p) => p.location)
+                                  .filter(Boolean)
+                              ).size
+                            }
+                          </div>
+                          <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
+                            Locations
+                          </div>
+                        </div>
+                        <div className="flex-shrink-0 rounded-full bg-cyan-500/20 p-2 sm:p-3">
+                          <MapPin className="h-5 w-5 text-cyan-600 dark:text-cyan-400 sm:h-6 sm:w-6" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 )}
-              </blockquote>
-            ))}
-          </div>
-        </section>
-      )}
 
-      {!hasMedia && (!data.quotes || data.quotes.length === 0) && (
-        <section className="rounded-3xl border border-dashed border-border bg-card/50 p-8 text-center text-sm text-muted-foreground">
-          No additional media is available for this item yet.
-        </section>
-      )}
+                {!isQuotePack && !isPhotoPack && data.screenshot_url && (
+                  <div className="mt-6">
+                    <h3 className="mb-3 text-lg font-semibold">Preview</h3>
+                    <div className="relative h-64 w-full overflow-hidden rounded-xl border border-border/60 shadow-md">
+                      <Image
+                        src={data.screenshot_url}
+                        alt={`${data.display_name} preview`}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className="object-cover"
+                        unoptimized
+                      />
+                    </div>
+                  </div>
+                )}
 
-      <Separator />
+                {isQuotePack && data.quotes && data.quotes.length > 0 && (
+                  <div className="mt-4 grid gap-3 sm:mt-6 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    <div className="rounded-xl border border-border/60 bg-gradient-to-br from-primary/10 to-primary/5 p-4 sm:p-6 shadow-sm transition hover:shadow-md">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0 flex-1">
+                          <div className="text-2xl font-bold text-primary sm:text-3xl">
+                            {data.quotes.length}
+                          </div>
+                          <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
+                            Total Quotes
+                          </div>
+                        </div>
+                        <div className="flex-shrink-0 rounded-full bg-primary/20 p-2 sm:p-3">
+                          <MessageSquareQuote className="h-5 w-5 text-primary sm:h-6 sm:w-6" />
+                        </div>
+                      </div>
+                    </div>
 
-      <div className="pb-12 text-sm text-muted-foreground">
-        Want to add to this item? Contribute on the{" "}
-        <Link href="https://github.com/mue">Mue GitHub</Link>.
+                    <div className="rounded-xl border border-border/60 bg-gradient-to-br from-blue-500/10 to-blue-500/5 p-4 sm:p-6 shadow-sm transition hover:shadow-md">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0 flex-1">
+                          <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 sm:text-3xl">
+                            {
+                              new Set(
+                                data.quotes.map((q) => q.author).filter(Boolean)
+                              ).size
+                            }
+                          </div>
+                          <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
+                            Unique Authors
+                          </div>
+                        </div>
+                        <div className="flex-shrink-0 rounded-full bg-blue-500/20 p-2 sm:p-3">
+                          <Users className="h-5 w-5 text-blue-600 dark:text-blue-400 sm:h-6 sm:w-6" />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="rounded-xl border border-border/60 bg-gradient-to-br from-purple-500/10 to-purple-500/5 p-4 sm:p-6 shadow-sm transition hover:shadow-md">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0 flex-1">
+                          <div className="text-2xl font-bold text-purple-600 dark:text-purple-400 sm:text-3xl">
+                            {Math.round(
+                              data.quotes.reduce(
+                                (acc, q) => acc + q.quote.length,
+                                0
+                              ) / data.quotes.length
+                            )}
+                          </div>
+                          <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
+                            Avg. Characters
+                          </div>
+                        </div>
+                        <div className="flex-shrink-0 rounded-full bg-purple-500/20 p-2 sm:p-3">
+                          <Type className="h-5 w-5 text-purple-600 dark:text-purple-400 sm:h-6 sm:w-6" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </TabsContent>
+
+            <TabsContent value="content" className="space-y-4 sm:space-y-6">
+              {/* Photo Packs - Carousel */}
+              {isPhotoPack && data.photos && data.photos.length > 0 && (
+                <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
+                  <div className="mb-4 flex items-center justify-between sm:mb-6">
+                    <h2 className="text-xl font-semibold sm:text-2xl">Photo Gallery</h2>
+                    <Badge variant="secondary">
+                      {data.photos.length}{" "}
+                      {data.photos.length === 1 ? "photo" : "photos"}
+                    </Badge>
+                  </div>
+
+                  <Carousel
+                    opts={{
+                      align: "start",
+                      loop: true,
+                    }}
+                    className="w-full"
+                  >
+                    <CarouselContent className="ml-0">
+                      {data.photos.map((photo, index) => {
+                        const photoUrl =
+                          photo.url?.default ??
+                          Object.values(photo.url ?? {})[0];
+                        if (!photoUrl) return null;
+
+                        return (
+                          <CarouselItem
+                            key={`${photoUrl}-${index}`}
+                            className="pl-0"
+                          >
+                            <div className="space-y-4">
+                              <div className="relative h-64 w-full overflow-hidden rounded-xl border border-border/60 shadow-md md:h-96">
+                                <Image
+                                  src={photoUrl}
+                                  alt={
+                                    photo.location ??
+                                    photo.photographer ??
+                                    data.display_name
+                                  }
+                                  fill
+                                  sizes="(min-width: 1024px) 60vw, 100vw"
+                                  className="object-cover"
+                                  unoptimized
+                                />
+                              </div>
+                              {(photo.photographer || photo.location) && (
+                                <div className="rounded-lg bg-muted/50 p-4">
+                                  {photo.photographer && (
+                                    <p className="font-medium">
+                                      📸 {photo.photographer}
+                                    </p>
+                                  )}
+                                  {photo.location && (
+                                    <p className="text-sm text-muted-foreground">
+                                      📍 {photo.location}
+                                    </p>
+                                  )}
+                                </div>
+                              )}
+                            </div>
+                          </CarouselItem>
+                        );
+                      })}
+                    </CarouselContent>
+                    <CarouselPrevious className="left-2" />
+                    <CarouselNext className="right-2" />
+                  </Carousel>
+                </div>
+              )}
+
+              {/* Quote Packs - Table (No Gallery) */}
+              {isQuotePack && data.quotes && data.quotes.length > 0 && (
+                <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
+                  <div className="mb-4 flex items-center justify-between sm:mb-6">
+                    <h2 className="text-xl font-semibold sm:text-2xl">Quotes</h2>
+                    <Badge variant="secondary">
+                      {data.quotes.length}{" "}
+                      {data.quotes.length === 1 ? "quote" : "quotes"}
+                    </Badge>
+                  </div>
+
+                  <div className="w-full overflow-x-auto rounded-lg border">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-16 shrink-0">#</TableHead>
+                          <TableHead>Quote</TableHead>
+                          <TableHead className="w-48 shrink-0">
+                            Author
+                          </TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {data.quotes.map((quote, index) => (
+                          <TableRow key={`${quote.quote}-${index}`}>
+                            <TableCell className="align-top font-medium text-muted-foreground">
+                              {index + 1}
+                            </TableCell>
+                            <TableCell className="max-w-xl break-words font-medium">
+                              {quote.quote}
+                            </TableCell>
+                            <TableCell className="align-top break-words text-muted-foreground">
+                              {quote.author || "—"}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </div>
+              )}
+
+              {/* Preset Settings - Display */}
+              {isPresetSettings && presetSettings.length > 0 && (
+                <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
+                  <div className="mb-4 flex items-center justify-between sm:mb-6">
+                    <h2 className="text-xl font-semibold sm:text-2xl">Preset Settings</h2>
+                    <Badge variant="secondary">
+                      {presetSettings.length}{" "}
+                      {presetSettings.length === 1 ? "setting" : "settings"}
+                    </Badge>
+                  </div>
+
+                  <div className="w-full overflow-x-auto rounded-lg border">
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead className="w-64 shrink-0">Setting</TableHead>
+                          <TableHead>Value</TableHead>
+                          <TableHead className="w-32 shrink-0">Type</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {presetSettings.map(([key, value]) => (
+                          <TableRow key={key}>
+                            <TableCell className="align-top font-mono font-semibold text-primary">
+                              {key}
+                            </TableCell>
+                            <TableCell className="align-top break-words font-mono text-sm">
+                              {typeof value === "object" ? (
+                                <pre className="whitespace-pre-wrap break-words">
+                                  {JSON.stringify(value, null, 2)}
+                                </pre>
+                              ) : (
+                                String(value)
+                              )}
+                            </TableCell>
+                            <TableCell className="align-top text-muted-foreground">
+                              <Badge variant="outline" className="capitalize">
+                                {typeof value}
+                              </Badge>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </div>
+              )}
+
+              {/* No Content Available */}
+              {((isPhotoPack && (!data.photos || data.photos.length === 0)) ||
+                (isQuotePack && (!data.quotes || data.quotes.length === 0)) ||
+                (isPresetSettings && presetSettings.length === 0)) && (
+                <div className="rounded-2xl border border-dashed border-border bg-card/50 p-12 text-center">
+                  <p className="text-muted-foreground">
+                    No content available for this item yet.
+                  </p>
+                </div>
+              )}
+            </TabsContent>
+          </Tabs>
+
+          <Separator className="my-8" />
+
+          <p className="text-center text-sm text-muted-foreground">
+            Want to contribute?{" "}
+            <Link
+              href="https://github.com/mue"
+              className="font-medium text-primary hover:underline"
+            >
+              Visit Mue on GitHub
+            </Link>
+          </p>
+        </main>
       </div>
     </div>
   );

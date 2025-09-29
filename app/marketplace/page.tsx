@@ -24,16 +24,22 @@ export default async function MarketplacePage() {
   const highlightCandidates = collections.filter(
     (collection) => collection.img
   );
-  const randomCollection = highlightCandidates.length
-    ? highlightCandidates[
-        Math.floor(Math.random() * highlightCandidates.length)
-      ]
-    : null;
+
+  const shuffled = [...highlightCandidates].sort(() => Math.random() - 0.5);
+  const randomCollections = shuffled.slice(0, 3);
+
+  // Calculate content types for each collection
+  const collectionsWithTypes = randomCollections.map((collection) => {
+    const collectionItems = items.filter((item) =>
+      item.in_collections.includes(collection.name)
+    );
+    const types = [...new Set(collectionItems.map((item) => item.type))];
+    return { ...collection, contentTypes: types };
+  });
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-12 px-6 py-12 lg:px-8">
-      <header className="space-y-4 text-center lg:text-left">
-        <Badge className="mx-auto w-fit lg:mx-0">Mue Marketplace</Badge>
+      {/* <header className="space-y-4 text-center lg:text-left">
         <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
           Discover community-curated packs, quotes, and presets.
         </h1>
@@ -41,12 +47,12 @@ export default async function MarketplacePage() {
           Search across the entire marketplace catalogue, explore a featured
           collection, and dive into individual items for more details.
         </p>
-      </header>
+      </header> */}
 
       <MarketplaceExplorer
         items={items}
         collections={collections}
-        randomCollection={randomCollection}
+        randomCollections={collectionsWithTypes}
       />
     </div>
   );
