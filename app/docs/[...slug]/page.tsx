@@ -11,6 +11,9 @@ import type { DocTreeNode } from "@/lib/docs";
 import { getAllDocsMeta, getDocBySlug } from "@/lib/docs";
 import { cn } from "@/lib/utils";
 
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
 type DocPageParams = {
   slug?: string[];
 };
@@ -20,8 +23,33 @@ type DocPageProps = {
 };
 
 export async function generateStaticParams() {
-  const docs = await getAllDocsMeta();
-  return docs.map((doc) => ({ slug: doc.slug }));
+  const { docsMeta, tree } = await getDocsNavigation();
+
+  const slugSet = new Set<string>();
+
+  const addSlug = (segments: string[]) => {
+    if (segments.length === 0) return;
+    slugSet.add(segments.join("/"));
+  };
+
+  docsMeta.forEach((doc) => {
+    addSlug(doc.slug);
+  });
+
+  const walk = (nodes: DocTreeNode[]) => {
+    nodes.forEach((node) => {
+      addSlug(node.slug);
+      if (node.children) {
+        walk(node.children);
+      }
+    });
+  };
+
+  walk(tree);
+
+  return Array.from(slugSet.values()).map((slug) => ({
+    slug: slug.split("/").filter(Boolean),
+  }));
 }
 
 export async function generateMetadata({

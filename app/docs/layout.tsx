@@ -5,6 +5,9 @@ import { DocsSearch } from "@/components/docs/search";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { getAllDocsMeta, getDocsTree } from "@/lib/docs";
 
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
 type DocsLayoutProps = {
   children: ReactNode;
   params: Promise<{

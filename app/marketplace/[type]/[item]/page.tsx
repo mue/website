@@ -41,6 +41,8 @@ import {
 
 export const revalidate = 3600;
 
+export const runtime = "edge";
+
 type MarketplaceItemPageProps = {
   params: Promise<{
     type: string;
@@ -251,7 +253,9 @@ export default async function MarketplaceItemPage({
         <main className="min-h-[400px] lg:min-h-[600px]">
           <Tabs defaultValue="overview" className="w-full">
             <TabsList className="mb-4 grid w-full grid-cols-2 lg:mb-6">
-              <TabsTrigger value="overview" className="text-sm">Overview</TabsTrigger>
+              <TabsTrigger value="overview" className="text-sm">
+                Overview
+              </TabsTrigger>
               <TabsTrigger value="content" className="text-sm">
                 {isPhotoPack && "Photos"}
                 {isQuotePack && "Quotes"}
@@ -261,7 +265,9 @@ export default async function MarketplaceItemPage({
 
             <TabsContent value="overview" className="space-y-4 sm:space-y-6">
               <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
-                <h2 className="mb-3 text-xl font-semibold sm:mb-4 sm:text-2xl">About</h2>
+                <h2 className="mb-3 text-xl font-semibold sm:mb-4 sm:text-2xl">
+                  About
+                </h2>
                 <div className="prose prose-sm max-w-none dark:prose-invert">
                   {data.description ? (
                     <p className="text-muted-foreground">{data.description}</p>
@@ -420,7 +426,9 @@ export default async function MarketplaceItemPage({
               {isPhotoPack && data.photos && data.photos.length > 0 && (
                 <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
                   <div className="mb-4 flex items-center justify-between sm:mb-6">
-                    <h2 className="text-xl font-semibold sm:text-2xl">Photo Gallery</h2>
+                    <h2 className="text-xl font-semibold sm:text-2xl">
+                      Photo Gallery
+                    </h2>
                     <Badge variant="secondary">
                       {data.photos.length}{" "}
                       {data.photos.length === 1 ? "photo" : "photos"}
@@ -490,7 +498,9 @@ export default async function MarketplaceItemPage({
               {isQuotePack && data.quotes && data.quotes.length > 0 && (
                 <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
                   <div className="mb-4 flex items-center justify-between sm:mb-6">
-                    <h2 className="text-xl font-semibold sm:text-2xl">Quotes</h2>
+                    <h2 className="text-xl font-semibold sm:text-2xl">
+                      Quotes
+                    </h2>
                     <Badge variant="secondary">
                       {data.quotes.length}{" "}
                       {data.quotes.length === 1 ? "quote" : "quotes"}
@@ -532,7 +542,9 @@ export default async function MarketplaceItemPage({
               {isPresetSettings && presetSettings.length > 0 && (
                 <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
                   <div className="mb-4 flex items-center justify-between sm:mb-6">
-                    <h2 className="text-xl font-semibold sm:text-2xl">Preset Settings</h2>
+                    <h2 className="text-xl font-semibold sm:text-2xl">
+                      Preset Settings
+                    </h2>
                     <Badge variant="secondary">
                       {presetSettings.length}{" "}
                       {presetSettings.length === 1 ? "setting" : "settings"}
@@ -543,7 +555,9 @@ export default async function MarketplaceItemPage({
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="w-64 shrink-0">Setting</TableHead>
+                          <TableHead className="w-64 shrink-0">
+                            Setting
+                          </TableHead>
                           <TableHead>Value</TableHead>
                           <TableHead className="w-32 shrink-0">Type</TableHead>
                         </TableRow>

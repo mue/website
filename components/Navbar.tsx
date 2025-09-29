@@ -13,45 +13,16 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Button } from "./ui/button";
-import { Download } from "lucide-react";
-
-const components: { title: string; href: string; description: string }[] = [
-  {
-    title: "Alert Dialog",
-    href: "/docs/primitives/alert-dialog",
-    description:
-      "A modal dialog that interrupts the user with important content and expects a response.",
-  },
-  {
-    title: "Hover Card",
-    href: "/docs/primitives/hover-card",
-    description:
-      "For sighted users to preview content available behind a link.",
-  },
-  {
-    title: "Progress",
-    href: "/docs/primitives/progress",
-    description:
-      "Displays an indicator showing the completion progress of a task, typically displayed as a progress bar.",
-  },
-  {
-    title: "Scroll-area",
-    href: "/docs/primitives/scroll-area",
-    description: "Visually or semantically separates content.",
-  },
-  {
-    title: "Tabs",
-    href: "/docs/primitives/tabs",
-    description:
-      "A set of layered sections of content—known as tab panels—that are displayed one at a time.",
-  },
-  {
-    title: "Tooltip",
-    href: "/docs/primitives/tooltip",
-    description:
-      "A popup that displays information related to an element when the element receives keyboard focus or the mouse hovers over it.",
-  },
-];
+import { Download, Menu } from "lucide-react";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 
 const docsQuickLinks: { title: string; href: string; description: string }[] = [
   {
@@ -73,11 +44,11 @@ const docsQuickLinks: { title: string; href: string; description: string }[] = [
 
 export default function Navbar() {
   return (
-    <nav className="bg-background/60 backdrop-blur-md flex w-full flex-row items-center justify-between gap-3 rounded-xl border border-foreground/20 px-6 py-4 shadow-lg lg:px-12">
-      <section className="flex flex-row items-center justify-center gap-10">
-        <Link href={"/"}>
-          <Logo width={100} height={100} className="h-10 w-10" />
-        </Link>
+    <nav className="bg-background/60 backdrop-blur-md flex w-full items-center justify-between gap-3 rounded-xl border border-foreground/20 px-4 py-3 shadow-lg sm:px-6 lg:px-12">
+      <Link href={"/"} className="shrink-0">
+        <Logo width={100} height={100} className="h-10 w-10" />
+      </Link>
+      <div className="hidden flex-1 justify-center lg:flex">
         <NavigationMenu viewport={false}>
           <NavigationMenuList>
             <NavigationMenuItem>
@@ -135,12 +106,86 @@ export default function Navbar() {
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-      </section>
-      <section>
-        <Button variant="default">
-          <Download /> Download
+      </div>
+      <div className="flex items-center gap-2">
+        <Button variant="default" className="hidden sm:inline-flex">
+          <Download className="mr-2 h-4 w-4" /> Download
         </Button>
-      </section>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button
+              variant="outline"
+              size="icon"
+              className="border-foreground/20 lg:hidden"
+            >
+              <Menu className="h-4 w-4" />
+              <span className="sr-only">Open navigation menu</span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="flex flex-col gap-6">
+            <SheetHeader className="items-start">
+              <SheetTitle className="text-left">Menu</SheetTitle>
+              <SheetDescription className="text-left">
+                Browse documentation and explore the marketplace.
+              </SheetDescription>
+            </SheetHeader>
+            <div className="flex flex-col gap-5">
+              <nav className="flex flex-col gap-3 text-base font-medium">
+                <SheetClose asChild>
+                  <Link
+                    href="/docs"
+                    className="transition-colors hover:text-primary"
+                  >
+                    Docs
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/marketplace"
+                    className="transition-colors hover:text-primary"
+                  >
+                    Marketplace
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/blog"
+                    className="transition-colors hover:text-primary"
+                  >
+                    Blog
+                  </Link>
+                </SheetClose>
+              </nav>
+              <div className="flex flex-col gap-3">
+                <p className="text-xs font-semibold uppercase text-muted-foreground">
+                  Docs quick links
+                </p>
+                <div className="flex flex-col gap-2">
+                  {docsQuickLinks.map((item) => (
+                    <SheetClose asChild key={item.title}>
+                      <Link
+                        href={item.href}
+                        className="flex flex-col gap-1 rounded-md border border-border/60 p-3 transition hover:border-primary hover:bg-accent/50"
+                      >
+                        <span className="font-medium">{item.title}</span>
+                        <span className="text-muted-foreground text-sm leading-snug">
+                          {item.description}
+                        </span>
+                      </Link>
+                    </SheetClose>
+                  ))}
+                </div>
+              </div>
+              <SheetClose asChild>
+                <Button className="w-full">
+                  <Download className="mr-2 h-4 w-4" />
+                  Download
+                </Button>
+              </SheetClose>
+            </div>
+          </SheetContent>
+        </Sheet>
+      </div>
     </nav>
   );
 }
