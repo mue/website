@@ -73,7 +73,7 @@ const docsQuickLinks: { title: string; href: string; description: string }[] = [
 
 export default function Navbar() {
   return (
-    <nav className="bg-background/60 backdrop-blur-md flex w-full flex-row items-center justify-between gap-3 rounded-lg border border-background/20 px-6 py-4 shadow-lg lg:px-12">
+    <nav className="bg-background/60 backdrop-blur-md flex w-full flex-row items-center justify-between gap-3 rounded-xl border border-foreground/20 px-6 py-4 shadow-lg lg:px-12">
       <section className="flex flex-row items-center justify-center gap-10">
         <Link href={"/"}>
           <Logo width={100} height={100} className="h-10 w-10" />
@@ -126,37 +126,12 @@ export default function Navbar() {
               </NavigationMenuLink>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>List</NavigationMenuTrigger>
-              <NavigationMenuContent>
-                <ul className="grid w-[300px] gap-4">
-                  <li>
-                    <NavigationMenuLink asChild>
-                      <Link href="#">
-                        <div className="font-medium">Components</div>
-                        <div className="text-muted-foreground">
-                          Browse all components in the library.
-                        </div>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link href="#">
-                        <div className="font-medium">Documentation</div>
-                        <div className="text-muted-foreground">
-                          Learn how to use the library.
-                        </div>
-                      </Link>
-                    </NavigationMenuLink>
-                    <NavigationMenuLink asChild>
-                      <Link href="#">
-                        <div className="font-medium">Blog</div>
-                        <div className="text-muted-foreground">
-                          Read our latest blog posts.
-                        </div>
-                      </Link>
-                    </NavigationMenuLink>
-                  </li>
-                </ul>
-              </NavigationMenuContent>
+              <NavigationMenuLink
+                asChild
+                className={navigationMenuTriggerStyle()}
+              >
+                <Link href="/blog">Blog</Link>
+              </NavigationMenuLink>
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
