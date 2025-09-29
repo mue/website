@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 
-import { Badge } from "@/components/ui/badge";
 import { MarketplaceExplorer } from "@/components/marketplace/explorer";
 import {
   getMarketplaceCollections,
