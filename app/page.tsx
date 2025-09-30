@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import { ArrowRight, Rocket } from 'lucide-react';
 import { FaChrome, FaFirefoxBrowser, FaEdge } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
@@ -123,6 +124,19 @@ const browsers = [
 ];
 
 export default function Home() {
+  const [greeting, setGreeting] = useState('Evening');
+
+  useEffect(() => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) {
+      setGreeting('Morning');
+    } else if (hour >= 12 && hour < 18) {
+      setGreeting('Afternoon');
+    } else {
+      setGreeting('Evening');
+    }
+  }, []);
+
   return (
     <div className="relative overflow-hidden">
       {/* Hero Section */}
@@ -141,8 +155,9 @@ export default function Home() {
               </div> */}
 
               <h1 className="mt-8 text-balance text-3xl leading-[1.15] tracking-tight text-foreground sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl">
+                <b className="font-heading tracking-wide font-light">{greeting}.</b>
+                <br />
                 Stop staring at <b className="font-heading tracking-wide font-light">blank</b> tabs.
-                Start <b className="font-heading tracking-wide font-light">vibing</b>.
               </h1>
 
               <p className="mt-6 max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg lg:text-lg">
