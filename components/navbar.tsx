@@ -14,7 +14,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { Button } from './ui/button';
-import { Download, Menu, BookOpen } from 'lucide-react';
+import { Download, Menu, BookOpen, Github } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import {
   Sheet,
@@ -155,22 +155,19 @@ export default function Navbar() {
               <span className="sr-only">Open navigation menu</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="flex flex-col gap-6">
+          <SheetContent side="right" className="flex flex-col gap-4">
             <SheetHeader className="items-start">
-              <SheetTitle className="text-left">Menu</SheetTitle>
-              <SheetDescription className="text-left">
-                Browse documentation and explore the marketplace.
-              </SheetDescription>
+              <SheetTitle className="text-left text-lg">Menu</SheetTitle>
             </SheetHeader>
-            <div className="flex flex-col gap-5">
-              <nav className="flex flex-col gap-3 text-base font-medium">
+            <div className="flex flex-col gap-4">
+              <nav className="flex flex-col gap-2 text-sm">
                 {mobileLinks.map(({ href, label, isActive }) => (
                   <SheetClose asChild key={href}>
                     <Link
                       href={href}
                       aria-current={isActive ? 'page' : undefined}
                       className={cn(
-                        'transition-colors hover:text-primary',
+                        'py-2 transition-colors hover:text-primary',
                         isActive && 'text-primary font-semibold',
                       )}
                     >
@@ -179,47 +176,24 @@ export default function Navbar() {
                   </SheetClose>
                 ))}
               </nav>
-              <div className="flex flex-col gap-3">
-                <p className="text-xs font-semibold uppercase text-muted-foreground">
-                  Docs quick links
-                </p>
-                <div className="flex flex-col gap-2">
-                  {docsQuickLinks.map((item) => {
-                    const isActive = pathname?.startsWith(item.href) ?? false;
-                    return (
-                      <SheetClose asChild key={item.title}>
-                        <Link
-                          href={item.href}
-                          className={cn(
-                            'flex flex-col gap-1 rounded-md border border-border/60 p-3 transition hover:border-primary hover:bg-accent/50',
-                            isActive && 'border-primary bg-accent/40 text-primary',
-                          )}
-                        >
-                          <span className={cn('font-medium', isActive && 'text-primary')}>
-                            {item.title}
-                          </span>
-                          <span
-                            className={cn(
-                              'text-muted-foreground text-sm leading-snug',
-                              isActive && 'text-primary/80',
-                            )}
-                          >
-                            {item.description}
-                          </span>
-                        </Link>
-                      </SheetClose>
-                    );
-                  })}
-                </div>
+              <div className="flex flex-col gap-2 mt-auto">
+                <SheetClose asChild>
+                  <Button className="w-full" size="sm" asChild>
+                    <Link href="/download">
+                      <Download className="mr-2 h-4 w-4" />
+                      Download
+                    </Link>
+                  </Button>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Button className="w-full" variant="outline" size="sm" asChild>
+                    <Link href="https://github.com/mue/mue" target="_blank" rel="noreferrer">
+                      <Github className="mr-2 h-4 w-4" />
+                      GitHub
+                    </Link>
+                  </Button>
+                </SheetClose>
               </div>
-              <SheetClose asChild>
-                <Button className="w-full" asChild>
-                  <Link href="/download">
-                    <Download className="mr-2 h-4 w-4" />
-                    Download
-                  </Link>
-                </Button>
-              </SheetClose>
             </div>
           </SheetContent>
         </Sheet>
