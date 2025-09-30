@@ -21,10 +21,6 @@ const footerLinks = {
     { name: 'Discord', href: 'https://discord.gg/zv8C9F8' },
     { name: 'Twitter', href: 'https://twitter.com/getmue' },
     { name: 'Contact', href: '/contact' },
-    {
-      name: 'Contribute',
-      href: 'https://github.com/mue/mue/blob/main/CONTRIBUTING.md',
-    },
   ],
   Legal: [
     { name: 'Privacy', href: '/privacy' },
