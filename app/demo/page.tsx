@@ -1,11 +1,18 @@
 import Link from 'next/link';
 import { ArrowLeft, ExternalLink } from 'lucide-react';
+import type { Metadata } from 'next';
+
 import { Button } from '@/components/ui/button';
 
-export const metadata = {
-  title: 'Try Mue Demo - Mue',
+export const metadata: Metadata = {
+  title: 'Demo',
   description:
     'Experience Mue Tab in action. Try out the demo to see how Mue can transform your browsing experience.',
+  openGraph: {
+    title: 'Demo | Mue',
+    description:
+      'Experience Mue Tab in action. Try out the demo to see how Mue can transform your browsing experience.',
+  },
 };
 
 export default function DemoPage() {

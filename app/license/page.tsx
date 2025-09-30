@@ -1,10 +1,16 @@
 import Link from 'next/link';
 import { ArrowLeft, Scale, Github } from 'lucide-react';
+import type { Metadata } from 'next';
+
 import { Button } from '@/components/ui/button';
 
-export const metadata = {
-  title: 'License - Mue',
+export const metadata: Metadata = {
+  title: 'License',
   description: 'Learn about the open source licenses used in Mue.',
+  openGraph: {
+    title: 'License | Mue',
+    description: 'Learn about the open source licenses used in Mue.',
+  },
 };
 
 export default function LicensePage() {

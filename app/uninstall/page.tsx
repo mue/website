@@ -1,6 +1,12 @@
-export const metadata = {
-  title: 'Uninstall Survey - Mue Tab',
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Uninstall Survey',
   description: 'Help us improve Mue by sharing your feedback',
+  openGraph: {
+    title: 'Uninstall Survey | Mue',
+    description: 'Help us improve Mue by sharing your feedback',
+  },
 };
 
 export default function UninstallPage() {

@@ -1,10 +1,16 @@
 import Link from 'next/link';
 import { ArrowLeft, Mail, MessageSquare, Github } from 'lucide-react';
+import type { Metadata } from 'next';
+
 import { Button } from '@/components/ui/button';
 
-export const metadata = {
-  title: 'Contact - Mue',
+export const metadata: Metadata = {
+  title: 'Contact',
   description: 'Get in touch with the Mue team. Reach out for support, feedback, or inquiries.',
+  openGraph: {
+    title: 'Contact | Mue',
+    description: 'Get in touch with the Mue team. Reach out for support, feedback, or inquiries.',
+  },
 };
 
 export default function ContactPage() {
