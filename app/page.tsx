@@ -273,7 +273,7 @@ export default function Home() {
           <div className="mt-12 flex flex-col items-center lg:mt-16">
             <div className="gap-5 flex flex-col relative w-full max-w-4xl overflow-hidden rounded-3xl px-6 py-10 text-center">
               {/* <div className="pointer-events-none absolute -top-24 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(255,92,37,0.25)_0%,_transparent_70%)] blur-3xl" /> */}
-              <p className="relative text-[0.65rem] font-bold uppercase tracking-[0.3em] text-muted-foreground/60">
+              <p className="relative text-[0.65rem] font-bold uppercase tracking-[0.3em] dark:text-muted-foreground/60 text-neutral-800">
                 Available everywhere*
               </p>
               <div className="relative flex flex-wrap items-center justify-center gap-4 sm:gap-5">
@@ -298,7 +298,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <p className="relative text-[0.7rem] leading-relaxed text-muted-foreground/70 sm:text-xs">
+              <p className="relative text-[0.7rem] leading-relaxed text-neutral-800 dark:text-muted-foreground/70 sm:text-xs">
                 *Availability can vary by store. Optimized for desktop browsers, but Mue is open
                 source—port it, fork it, and make it your own anywhere.
               </p>
