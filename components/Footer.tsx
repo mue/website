@@ -16,12 +16,12 @@ const footerLinks = {
   Community: [
     { name: "Discord", href: "https://discord.gg/zv8C9F8" },
     { name: "Twitter", href: "https://twitter.com/getmue" },
+    { name: "Contact", href: "/contact" },
     { name: "Contribute", href: "https://github.com/mue/mue/blob/main/CONTRIBUTING.md" },
   ],
   Legal: [
     { name: "Privacy", href: "/privacy" },
-    { name: "Terms", href: "/terms" },
-    { name: "Uninstall", href: "/uninstall" },
+    { name: "License", href: "/license" },
   ],
 };
 
@@ -38,6 +38,18 @@ export default function Footer() {
               A mindful new tab experience that brings calm and focus to every
               browsing session.
             </p>
+            <a
+              href="https://status.muetab.com"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+              </span>
+              <span>All systems operational</span>
+            </a>
             <div className="mt-6 flex items-center gap-4">
               <Link
                 href="https://github.com/mue/mue"
