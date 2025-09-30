@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, Chrome, Globe, Github } from 'lucide-react';
+import { FaChrome, FaFirefoxBrowser, FaEdge } from 'react-icons/fa';
+import { SiNaver } from 'react-icons/si';
 import { Button } from '@/components/ui/button';
 
 const browsers = [
   {
     name: 'Chrome',
-    icon: Chrome,
+    Icon: FaChrome,
     description: 'Get Mue for Chrome and Chromium-based browsers',
     url: 'https://chromewebstore.google.com/detail/mue/jfaidnnckeinloipodbgfjjmipgjnllo',
     version: 'Latest version available',
@@ -17,7 +19,7 @@ const browsers = [
   },
   {
     name: 'Edge',
-    icon: Globe,
+    Icon: FaEdge,
     description: 'Get Mue for Microsoft Edge',
     url: 'https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja',
     version: 'Optimized for Edge',
@@ -26,7 +28,7 @@ const browsers = [
   },
   {
     name: 'Firefox',
-    icon: Globe,
+    Icon: FaFirefoxBrowser,
     description: 'Get Mue for Firefox',
     url: 'https://addons.mozilla.org/firefox/addon/mue',
     version: 'Firefox Add-on',
@@ -34,13 +36,23 @@ const browsers = [
     userAgents: ['Firefox'],
   },
   {
+    name: 'Whale',
+    Icon: SiNaver,
+    description: 'Get Mue for NAVER Whale browser',
+    url: 'https://store.whale.naver.com/detail/llgbhppoedhhjcammholkkpbkegjicbf',
+    version: 'NAVER Whale Store',
+    gradient: 'from-[#1BC5E9] to-[#0D67D2]',
+    userAgents: ['Whale'],
+  },
+];
+
+const secondaryDownloads = [
+  {
     name: 'Source Code',
     icon: Github,
     description: 'Build from source or contribute to the project',
     url: 'https://github.com/mue/mue',
     version: 'Open source on GitHub',
-    gradient: 'from-[#6e5494] to-[#24292e]',
-    userAgents: [],
   },
 ];
 
@@ -76,13 +88,13 @@ export default function DownloadPage() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-          Available for Chrome, Edge, and Firefox. Install in seconds and transform every new tab
+          Available for Chrome, Edge, Firefox, and Whale. Install in seconds and transform every new tab
           into a moment of calm and focus.
         </p>
 
         <div className="mt-16 grid w-full gap-6 sm:grid-cols-1 lg:grid-cols-2">
           {browsers.map((browser) => {
-            const Icon = browser.icon;
+            const Icon = browser.Icon;
             const isDetected = detectedBrowser === browser.name;
             return (
               <div
@@ -134,6 +146,35 @@ export default function DownloadPage() {
               </div>
             );
           })}
+        </div>
+
+        <div className="mt-12 w-full max-w-3xl">
+          <h2 className="mb-6 text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground">
+            Other Options
+          </h2>
+          <div className="grid gap-4">
+            {secondaryDownloads.map((item) => {
+              const Icon = item.icon;
+              return (
+                <a
+                  key={item.name}
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-background/60 p-6 backdrop-blur transition-all hover:border-[#FF5C25]/40 hover:bg-background/80"
+                >
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5">
+                    <Icon className="h-6 w-6 text-foreground" />
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-foreground">{item.name}</h3>
+                    <p className="text-sm text-muted-foreground">{item.description}</p>
+                  </div>
+                  <ArrowRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-[#FF5C25]" />
+                </a>
+              );
+            })}
+          </div>
         </div>
 
         <div className="mt-20 w-full max-w-3xl rounded-3xl border border-white/10 bg-background/60 p-10 backdrop-blur">

@@ -3,7 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Rocket } from 'lucide-react';
-import { siGooglechrome, siFirefoxbrowser, siNaver } from 'simple-icons';
+import { FaChrome, FaFirefoxBrowser, FaEdge } from 'react-icons/fa';
+import { SiNaver } from 'react-icons/si';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -89,7 +90,7 @@ const browsers = [
   {
     name: 'Chrome',
     tagline: 'Chromium flagship',
-    icon: siGooglechrome,
+    Icon: FaChrome,
     iconClass:
       'bg-[conic-gradient(from_120deg_at_50%_50%,#DB4437_0deg,#DB4437_90deg,#F4B400_90deg,#F4B400_180deg,#0F9D58_180deg,#0F9D58_270deg,#4285F4_270deg,#4285F4_360deg)]',
     innerDotClass: 'bg-[#1A73E8]',
@@ -98,7 +99,7 @@ const browsers = [
   {
     name: 'Edge',
     tagline: 'Microsoft Edge',
-    icon: null, // No Edge icon in simple-icons
+    Icon: FaEdge,
     iconClass: 'bg-[linear-gradient(135deg,#00A4EF_0%,#0078D7_55%,#174EB6_100%)]',
     innerDotClass: 'bg-[#0F5BB5]',
     shadowClass: 'shadow-[0_16px_35px_-18px_rgba(0,120,215,0.55)]',
@@ -106,7 +107,7 @@ const browsers = [
   {
     name: 'Firefox',
     tagline: 'Mozilla Firefox',
-    icon: siFirefoxbrowser,
+    Icon: FaFirefoxBrowser,
     iconClass: 'bg-[linear-gradient(135deg,#FF9500_0%,#FF7139_40%,#FF4F5E_70%,#9C2AA0_100%)]',
     innerDotClass: 'bg-[#FF9500]',
     shadowClass: 'shadow-[0_16px_35px_-18px_rgba(255,113,57,0.55)]',
@@ -114,7 +115,7 @@ const browsers = [
   {
     name: 'Whale',
     tagline: 'NAVER Whale',
-    icon: siNaver,
+    Icon: SiNaver,
     iconClass: 'bg-[linear-gradient(135deg,#1BC5E9_0%,#0D67D2_100%)]',
     innerDotClass: 'bg-[#1BC5E9]',
     shadowClass: 'shadow-[0_16px_35px_-18px_rgba(27,197,233,0.55)]',
@@ -277,26 +278,19 @@ export default function Home() {
                 Available everywhere*
               </p>
               <div className="relative flex flex-wrap items-center justify-center gap-4 sm:gap-5">
-                {browsers.map((browser) => (
-                  <div key={browser.name}>
-                    <div className="flex flex-1 flex-row items-center text-left">
-                      <span className="bg-background px-4 py-2 rounded-full text-sm font-semibold text-foreground transition-colors duration-300 group-hover:text-[#FF5C25] sm:text-base flex items-center gap-2">
-                        {browser.icon && (
-                          <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="currentColor"
-                            className="flex-shrink-0"
-                          >
-                            <path d={browser.icon.path} />
-                          </svg>
-                        )}
-                        {browser.name}
-                      </span>
+                {browsers.map((browser) => {
+                  const Icon = browser.Icon;
+                  return (
+                    <div key={browser.name}>
+                      <div className="flex flex-1 flex-row items-center text-left">
+                        <span className="bg-background px-4 py-2 rounded-full text-sm font-semibold text-foreground transition-colors duration-300 group-hover:text-[#FF5C25] sm:text-base flex items-center gap-2">
+                          <Icon className="h-4 w-4 flex-shrink-0" />
+                          {browser.name}
+                        </span>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
               <p className="relative text-[0.7rem] leading-relaxed text-neutral-800 dark:text-muted-foreground/70 sm:text-xs">
                 *Availability can vary by store. Optimized for desktop browsers, but Mue is open
