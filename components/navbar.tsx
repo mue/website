@@ -13,7 +13,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { Button } from './ui/button';
-import { Download, Menu } from 'lucide-react';
+import { Download, Menu, BookOpen } from 'lucide-react';
 import {
   Sheet,
   SheetClose,
@@ -63,7 +63,8 @@ export default function Navbar() {
                         className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
                         href="/docs"
                       >
-                        <div className="mt-4 mb-2 text-lg font-medium">Mue documentation</div>
+                        <BookOpen className="h-6 w-6 mb-2" />
+                        <div className="mb-2 text-lg font-medium">Mue documentation</div>
                         <p className="text-muted-foreground text-sm leading-tight">
                           Dive into guides, references, and workflows for the entire Mue ecosystem.
                         </p>
