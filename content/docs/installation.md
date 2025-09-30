@@ -6,7 +6,7 @@ Installing Mue is a simple and straightforward process.
 
 ## Chrome
 
-To install on Google Chrome, first visit the [Chrome Web Store](https://chrome.google.com/webstore/detail/mue/bngmbednanpcfochchhgbkookpiaiaid) page and click on "Add to Chrome". You will then be
+To install on Google Chrome, first visit the [Chrome Web Store](https://chromewebstore.google.com/detail/mue/bngmbednanpcfochchhgbkookpiaiaid) page and click on "Add to Chrome". You will then be
 prompted with a permissions dialog asking whether you want to add the extension, simply click "Add extension" and Mue will be downloaded and installed. You can then open a new tab to start using Mue.
 If prompted with a question asking whether you want to accept the new tab changes, click yes.
 
@@ -24,7 +24,7 @@ If prompted with a question asking whether you want to accept the new tab change
 
 ## Firefox
 
-To install on Firefox, first visit the [Firefox Add-ons](https://addons.mozilla.org/en-GB/firefox/addon/mue) website and click on "Add to Firefox". You will then be prompted with a dialog asking whether you want to add the extension, simply click "Add" and Mue will be downloaded and installed. You can then open a new tab to start using Mue. If prompted with a question asking whether or not you want to accept the new tab changes,
+To install on Firefox, first visit the [Firefox Add-ons](https://addons.mozilla.org/en-GB/firefox/addon/mue/) website and click on "Add to Firefox". You will then be prompted with a dialog asking whether you want to add the extension, simply click "Add" and Mue will be downloaded and installed. You can then open a new tab to start using Mue. If prompted with a question asking whether or not you want to accept the new tab changes,
 click yes.
 
 ## Local
