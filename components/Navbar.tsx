@@ -104,6 +104,14 @@ export default function Navbar() {
                 <Link href="/blog">Blog</Link>
               </NavigationMenuLink>
             </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink
+                asChild
+                className={navigationMenuTriggerStyle()}
+              >
+                <Link href="/contact">Contact</Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
       </div>
@@ -155,6 +163,14 @@ export default function Navbar() {
                     className="transition-colors hover:text-primary"
                   >
                     Blog
+                  </Link>
+                </SheetClose>
+                <SheetClose asChild>
+                  <Link
+                    href="/contact"
+                    className="transition-colors hover:text-primary"
+                  >
+                    Contact
                   </Link>
                 </SheetClose>
               </nav>

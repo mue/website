@@ -36,9 +36,9 @@ export default function NotFound() {
 						</Link>
 					</Button>
 					<Button size="lg" variant="secondary" className="px-7" asChild>
-						<Link href="/docs/introduction">
+						<Link href="/demo">
 							<Compass className="mr-2 h-4 w-4" />
-							Explore the docs
+							Try Mue Demo
 						</Link>
 					</Button>
 				</div>
