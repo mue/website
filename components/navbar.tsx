@@ -44,11 +44,13 @@ const docsQuickLinks: { title: string; href: string; description: string }[] = [
 
 export default function Navbar() {
   return (
-    <nav className="bg-background/60 backdrop-blur-md flex w-full items-center justify-between gap-3 rounded-xl border border-foreground/20 px-4 py-3 shadow-lg sm:px-6 lg:px-12">
-      <Link href={'/'} className="shrink-0">
-        <Logo width={100} height={100} className="h-10 w-10" />
-      </Link>
-      <div className="hidden flex-1 justify-center lg:flex">
+    <nav className="bg-background/60 backdrop-blur-md flex w-full items-center gap-3 rounded-xl border border-foreground/20 px-4 py-3 shadow-lg sm:px-6 lg:px-12">
+      <div className="flex flex-1 items-center">
+        <Link href={'/'} className="shrink-0">
+          <Logo width={100} height={100} className="h-10 w-10" />
+        </Link>
+      </div>
+      <div className="hidden lg:flex">
         <NavigationMenu viewport={false}>
           <NavigationMenuList>
             <NavigationMenuItem>
@@ -101,7 +103,7 @@ export default function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex flex-1 items-center justify-end gap-2">
         <Button variant="default" className="hidden sm:inline-flex" asChild>
           <Link href="/download">
             <Download className="mr-2 h-4 w-4" /> Download
