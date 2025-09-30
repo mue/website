@@ -20,7 +20,7 @@ export default function ContactPage() {
 
       <div className="mx-auto w-full max-w-4xl px-6 py-16">
         <div className="mb-12 flex items-center gap-4">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20">
             <Mail className="h-8 w-8 text-[#FF5C25]" />
           </div>
           <div>
@@ -45,9 +45,9 @@ export default function ContactPage() {
               href="https://discord.gg/zv8C9F8"
               target="_blank"
               rel="noreferrer"
-              className="group flex flex-col gap-4 rounded-2xl border border-white/10 bg-background/60 p-6 transition hover:border-[#FF5C25]/40 hover:bg-background/80"
+              className="group flex flex-col gap-4 rounded-2xl border border-border bg-background/60 p-6 transition hover:border-[#FF5C25]/40 hover:bg-background/80"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20 transition group-hover:scale-110">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20 transition group-hover:scale-110">
                 <MessageSquare className="h-6 w-6 text-[#FF5C25]" />
               </div>
               <div>
@@ -65,9 +65,9 @@ export default function ContactPage() {
               href="https://github.com/mue/mue/issues"
               target="_blank"
               rel="noreferrer"
-              className="group flex flex-col gap-4 rounded-2xl border border-white/10 bg-background/60 p-6 transition hover:border-[#FF5C25]/40 hover:bg-background/80"
+              className="group flex flex-col gap-4 rounded-2xl border border-border bg-background/60 p-6 transition hover:border-[#FF5C25]/40 hover:bg-background/80"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20 transition group-hover:scale-110">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20 transition group-hover:scale-110">
                 <Github className="h-6 w-6 text-[#FF5C25]" />
               </div>
               <div>
@@ -82,9 +82,9 @@ export default function ContactPage() {
 
             <a
               href="mailto:hello@muetab.com"
-              className="group flex flex-col gap-4 rounded-2xl border border-white/10 bg-background/60 p-6 transition hover:border-[#FF5C25]/40 hover:bg-background/80"
+              className="group flex flex-col gap-4 rounded-2xl border border-border bg-background/60 p-6 transition hover:border-[#FF5C25]/40 hover:bg-background/80"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20 transition group-hover:scale-110">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20 transition group-hover:scale-110">
                 <Mail className="h-6 w-6 text-[#FF5C25]" />
               </div>
               <div>
@@ -100,9 +100,9 @@ export default function ContactPage() {
               href="https://twitter.com/getmue"
               target="_blank"
               rel="noreferrer"
-              className="group flex flex-col gap-4 rounded-2xl border border-white/10 bg-background/60 p-6 transition hover:border-[#FF5C25]/40 hover:bg-background/80"
+              className="group flex flex-col gap-4 rounded-2xl border border-border bg-background/60 p-6 transition hover:border-[#FF5C25]/40 hover:bg-background/80"
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20 transition group-hover:scale-110">
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20 transition group-hover:scale-110">
                 <svg
                   className="h-6 w-6 text-[#FF5C25]"
                   fill="currentColor"
@@ -121,7 +121,7 @@ export default function ContactPage() {
             </a>
           </div>
 
-          <section className="rounded-2xl border border-white/10 bg-background/60 p-6 backdrop-blur">
+          <section className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
             <h3 className="text-xl font-semibold text-foreground">
               Before You Reach Out
             </h3>
