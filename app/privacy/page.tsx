@@ -1,10 +1,16 @@
 import Link from 'next/link';
 import { ArrowLeft, Shield } from 'lucide-react';
+import type { Metadata } from 'next';
+
 import { Button } from '@/components/ui/button';
 
-export const metadata = {
-  title: 'Privacy Policy - Mue',
+export const metadata: Metadata = {
+  title: 'Privacy Policy',
   description: 'Learn how Mue handles your data and protects your privacy.',
+  openGraph: {
+    title: 'Privacy Policy | Mue',
+    description: 'Learn how Mue handles your data and protects your privacy.',
+  },
 };
 
 export default function PrivacyPage() {

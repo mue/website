@@ -6,6 +6,10 @@ import { getMarketplaceCollections, getMarketplaceItems } from '@/lib/marketplac
 export const metadata: Metadata = {
   title: 'Marketplace',
   description: 'Browse the full catalogue of Mue marketplace packs, presets, and quotes.',
+  openGraph: {
+    title: 'Marketplace | Mue',
+    description: 'Browse the full catalogue of Mue marketplace packs, presets, and quotes.',
+  },
 };
 
 export const revalidate = 3600;

@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { Github, Twitter } from 'lucide-react';
-import Logo from './Logo';
-import { ThemeToggle } from './ThemeToggle';
+import Logo from './logo';
+import { ThemeToggle } from './theme-toggle';
 
 const footerLinks = {
   Product: [

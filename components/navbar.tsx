@@ -1,6 +1,6 @@
 'use client';
 
-import Logo from './Logo';
+import Logo from './logo';
 import Link from 'next/link';
 
 import {

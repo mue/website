@@ -1,9 +1,21 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Calendar, User, ArrowRight } from 'lucide-react';
+import type { Metadata } from 'next';
 
 import { getAllBlogPosts } from '@/lib/blog';
 import { Badge } from '@/components/ui/badge';
+
+export const metadata: Metadata = {
+  title: 'Blog',
+  description:
+    'Product updates, technical deep-dives, and thoughts on building mindful browser experiences.',
+  openGraph: {
+    title: 'Blog | Mue',
+    description:
+      'Product updates, technical deep-dives, and thoughts on building mindful browser experiences.',
+  },
+};
 
 export const dynamic = 'force-static';
 

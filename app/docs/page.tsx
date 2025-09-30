@@ -1,10 +1,22 @@
 import Link from 'next/link';
 import { ArrowRight, BookOpen, Layers3, PlugZap } from 'lucide-react';
+import type { Metadata } from 'next';
 
 import { DocsShell } from '@/components/docs/docs-shell';
 import { getDocsNavigation } from '@/components/docs/layout-context';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+
+export const metadata: Metadata = {
+  title: 'Documentation',
+  description:
+    'Everything you need to install, extend, and contribute to the Mue ecosystem—from quickstart guides to deep-dive API references.',
+  openGraph: {
+    title: 'Documentation | Mue',
+    description:
+      'Everything you need to install, extend, and contribute to the Mue ecosystem—from quickstart guides to deep-dive API references.',
+  },
+};
 
 const featureHighlights = [
   {
