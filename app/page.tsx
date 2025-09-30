@@ -8,13 +8,6 @@ import { FaChrome, FaFirefoxBrowser, FaEdge } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
 
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-
-const highlights = [
-  'Fresh photos & quotes that match your energy',
-  'Timer, todos, and widgets—all in one view',
-  'Your data stays yours. Always private, always synced.',
-];
 
 const stats = ['Launched 2018', '5,000+ monthly active users', '10 million+ tabs opened'];
 
@@ -116,6 +109,7 @@ const browsers = [
 
 export default function Home() {
   const [greeting, setGreeting] = useState('Evening');
+  const [ellipsis, setEllipsis] = useState('');
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -126,6 +120,20 @@ export default function Home() {
     } else {
       setGreeting('Evening');
     }
+  }, []);
+
+  useEffect(() => {
+    const frames = ['', '.', '..', '...'] as const;
+    let frameIndex = 0;
+
+    const interval = window.setInterval(() => {
+      frameIndex = (frameIndex + 1) % frames.length;
+      setEllipsis(frames[frameIndex]);
+    }, 420);
+
+    return () => {
+      window.clearInterval(interval);
+    };
   }, []);
 
   return (
@@ -146,18 +154,28 @@ export default function Home() {
               </div> */}
 
               <h1 className="mt-8 text-balance text-3xl leading-[1.15] tracking-tight text-foreground sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl">
-                <b className="font-heading tracking-wide font-light">{greeting}.</b>
-                <br />
-                Stop staring at <b className="font-heading tracking-wide font-light">blank</b> tabs.
+                <span className="block animate-fade-up animate-delay-100">
+                  <b className="font-heading tracking-wide font-light">
+                    {greeting}
+                    <span className="sr-only">...</span>
+                    <span aria-hidden="true" className="ml-1 inline-block w-4 text-left">
+                      {ellipsis}
+                    </span>
+                  </b>
+                </span>
+                <span className="mt-2 block animate-fade-up animate-delay-200">
+                  Stop staring at <b className="font-heading tracking-wide font-light">blank</b>{' '}
+                  tabs.
+                </span>
               </h1>
 
-              <p className="mt-6 max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg lg:text-lg">
+              <p className="mt-6 max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg lg:text-lg animate-fade-up animate-delay-300">
                 Every tab hits different with Mue. Stunning backgrounds, quotes that slap,
                 notes—everything you need to lock in. No fluff. No distractions. Just pure focus
                 energy.
               </p>
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center animate-fade-up animate-delay-400">
                 <Button
                   size="lg"
                   className="group relative overflow-hidden bg-gradient-to-r from-[#FF5C25] to-[#FF456E] px-6 py-4 text-sm font-semibold shadow-[0_20px_60px_-20px_rgba(255,92,37,0.5)] transition-all hover:shadow-[0_25px_70px_-15px_rgba(255,92,37,0.6)] hover:scale-105 sm:text-base"
@@ -190,7 +208,7 @@ export default function Home() {
                 </Button>
               </div>
 
-              <div className="mt-8 space-y-3">
+              <div className="mt-8 space-y-3 animate-fade-up animate-delay-600">
                 <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted-foreground/50">
                   Trusted worldwide
                 </p>
@@ -209,7 +227,7 @@ export default function Home() {
             <div className="relative lg:order-last">
               <div className="absolute -inset-6 rounded-full bg-[linear-gradient(135deg,_rgba(255,92,37,0.25),_rgba(255,69,110,0.25))] blur-[50px] lg:-inset-10 lg:blur-[70px]" />
 
-              <div className="relative overflow-hidden rounded-2xl border-2 border-white/10 bg-slate-950/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)] ring-1 ring-white/5 backdrop-blur">
+              <div className="relative overflow-hidden rounded-2xl border-2 border-white/10 bg-slate-950/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)] ring-1 ring-white/5 backdrop-blur animate-fade-zoom animate-delay-300">
                 <div className="flex items-center justify-between border-b border-white/10 bg-slate-950/80 px-4 py-2.5 backdrop-blur">
                   <div className="flex items-center gap-1.5">
                     <span className="flex h-2.5 w-2.5 rounded-full bg-[#FF5C25]" />
@@ -227,7 +245,7 @@ export default function Home() {
                     priority
                     src="/muetab_screenshot_2.webp"
                     alt="Mue Tab in action - beautiful backgrounds, quotes, and widgets"
-                    className="object-fit"
+                    className="object-fit animate-subtle-pan"
                     sizes="(min-width: 1024px) 55vw, 100vw"
                   />
                 </div>
