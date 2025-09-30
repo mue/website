@@ -21,32 +21,32 @@ const stats = ['Launched 2018', '5,000+ monthly active users', '10 million+ tabs
 const communityStats = [
   {
     label: 'Collaborators',
-    value: '56',
+    value: '50+',
     description: 'Open-source builders keeping Mue fresh.',
   },
   {
     label: 'GitHub Stars',
-    value: '635',
+    value: '600+',
     description: 'Loved by developers across the globe.',
   },
   {
     label: 'Forks',
-    value: '78',
+    value: '70+',
     description: 'Experiments and extensions from the community.',
   },
   {
     label: 'Users',
-    value: 'Thousands',
+    value: '5k+ monthly',
     description: 'Daily focus seekers tuning their tabs.',
   },
   {
     label: 'Tabs Opened',
-    value: 'Millions',
+    value: '10M+',
     description: 'Countless sessions powered by our APIs.',
   },
   {
     label: 'Origins',
-    value: 'Since 2018',
+    value: 'Est. 2018',
     description: 'Years of iteration and mindful design.',
   },
 ];
@@ -58,32 +58,23 @@ const scrollFeatures = [
     description:
       'Pick from curated photo packs or let Mue auto-rotate stunning scenery based on your time of day.',
     bullets: [
-      'Hundreds of handpicked photo collections',
-      'Lighting that adapts from sunrise to sunset',
-      'One-click favorites for instant vibes',
+      'A hand-picked exclusive library of backgrounds',
+      'Community supplied packs available in the Marketplace',
     ],
   },
   {
     eyebrow: 'Stay locked in',
-    title: "Everything you need, nothing you don't",
-    description:
-      'Ambient sounds, quick notes, Pomodoro timers—all right there in your tab. No context switching required.',
-    bullets: [
-      'Focus sessions with smart reminders',
-      'Auto-pause when you switch away',
-      'Track your streaks and deep work hours',
-    ],
-  },
-  {
-    eyebrow: 'Daily inspiration',
     title: 'Quotes that actually resonate',
     description:
-      'Start every tab with words that match your mood. Boost, calm, or focus—your choice, your language.',
-    bullets: [
-      '2,000+ community-curated quotes',
-      'Auto-translates to 20+ languages',
-      'Import your own favorite quotes easily',
-    ],
+      'Words that resonate, in your language. Start every tab with quotes that match your mood and mindset.',
+    bullets: ['hand picked quotes', 'Community curated quote packs'],
+  },
+  {
+    eyebrow: 'Privacy first',
+    title: 'Your data, your rules',
+    description:
+      'Mue is built with privacy at its core. Your data stays on your device and is never sold or shared.',
+    bullets: ['No personal data collection', 'Fully open source on GitHub'],
   },
 ];
 
@@ -226,7 +217,7 @@ export default function Home() {
                     <span className="flex h-2.5 w-2.5 rounded-full bg-[#FF456E]" />
                   </div>
                   <div className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[0.625rem] font-medium text-white/80 backdrop-blur">
-                    ✨ Live Tab
+                    Example
                   </div>
                 </div>
 
@@ -378,8 +369,6 @@ export default function Home() {
         <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-8 px-6 text-center">
           <div className="inline-flex items-center gap-2 rounded-full border border-[#FF456E]/30 bg-[#FF456E]/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.36em] text-[#FF456E]">
             <span>Open Source</span>
-            <span className="h-1 w-1 rounded-full bg-[#FF456E]" />
-            <span>GitHub</span>
           </div>
           <h2 className="text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
             Built by you, for you.
