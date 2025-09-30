@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Github, Twitter } from "lucide-react";
 import Logo from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 
 const footerLinks = {
   Product: [
@@ -69,6 +70,7 @@ export default function Footer() {
                 <Twitter className="h-4 w-4" />
                 <span className="sr-only">Twitter</span>
               </Link>
+              <ThemeToggle />
             </div>
           </div>
 

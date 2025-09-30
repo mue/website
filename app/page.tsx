@@ -408,7 +408,7 @@ export default function Home() {
             </Button>
           </div>
           <div className="mt-10 grid w-full gap-6 text-left sm:grid-cols-3">
-            {["40k+ stars", "200+ contributors", "Since 2016"].map((stat) => (
+            {["600+ stars", "20+ contributors", "Since 2018"].map((stat) => (
               <div
                 key={stat}
                 className="rounded-2xl border border-white/10 bg-background/80 p-5 text-sm text-muted-foreground backdrop-blur"
