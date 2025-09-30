@@ -1,5 +1,8 @@
+'use client';
+
 import Link from 'next/link';
 import { Github, Twitter } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import Logo from './logo';
 import { ThemeToggle } from './theme-toggle';
 
@@ -29,7 +32,51 @@ const footerLinks = {
   ],
 };
 
+type SystemStatus = 'operational' | 'degraded' | 'loading';
+
 export default function Footer() {
+  const [systemStatus, setSystemStatus] = useState<SystemStatus>('loading');
+
+  useEffect(() => {
+    const fetchStatus = async () => {
+      try {
+        const response = await fetch(
+          'https://raw.githubusercontent.com/mue/status/master/history/summary.json'
+        );
+        const data = await response.json();
+
+        // Check if all status keys are "up"
+        const allUp = data.every((service: { status: string }) => service.status === 'up');
+        setSystemStatus(allUp ? 'operational' : 'degraded');
+      } catch (error) {
+        // If fetch fails, assume degraded
+        setSystemStatus('degraded');
+      }
+    };
+
+    fetchStatus();
+  }, []);
+
+  const statusConfig = {
+    operational: {
+      text: 'All systems operational',
+      dotColor: 'bg-emerald-500',
+      pingColor: 'bg-emerald-400',
+    },
+    degraded: {
+      text: 'Degraded performance',
+      dotColor: 'bg-yellow-500',
+      pingColor: 'bg-yellow-400',
+    },
+    loading: {
+      text: 'Checking status...',
+      dotColor: 'bg-gray-500',
+      pingColor: 'bg-gray-400',
+    },
+  };
+
+  const status = statusConfig[systemStatus];
+
   return (
     <footer className="border-t border-white/10 bg-background/80 backdrop-blur">
       <div className="mx-auto w-full max-w-7xl px-6 py-12 lg:px-12">
@@ -48,10 +95,10 @@ export default function Footer() {
               className="mt-4 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
             >
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+                <span className={`absolute inline-flex h-full w-full animate-ping rounded-full ${status.pingColor} opacity-75`}></span>
+                <span className={`relative inline-flex h-2 w-2 rounded-full ${status.dotColor}`}></span>
               </span>
-              <span>All systems operational</span>
+              <span>{status.text}</span>
             </a>
             <div className="mt-6 flex items-center gap-4">
               <Link
