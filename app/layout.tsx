@@ -60,6 +60,9 @@ export const metadata: Metadata = {
       },
     ],
   },
+  other: {
+    'theme-color': '#ff5c25',
+  },
   twitter: {
     card: 'summary_large_image',
     title: 'Mue - Your mindful new tab',
@@ -71,7 +74,6 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
-  themeColor: '#ff5c25',
 };
 
 export default function RootLayout({
