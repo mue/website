@@ -35,61 +35,89 @@ export default function LicensePage() {
           <section className="rounded-2xl border border-border bg-background/60 p-8 backdrop-blur">
             <div className="mb-6 flex items-center gap-3">
               <h2 className="text-2xl font-semibold text-foreground">
-                Main Application
+                Extension & Website
               </h2>
               <span className="rounded-full border border-[#FF5C25]/40 bg-[#FF5C25]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#FF5C25]">
                 BSD-3-Clause
               </span>
             </div>
             <p className="text-muted-foreground">
-              The main Mue Tab application is licensed under the{' '}
+              The Mue Tab extension and this website are licensed under the{' '}
               <strong>BSD-3-Clause License</strong>. This means you are free to use, modify, and
               distribute the software, provided you include the original copyright notice and
               disclaimer.
             </p>
             <div className="mt-6 rounded-lg border border-border bg-muted/30 p-4">
               <p className="text-sm font-mono text-muted-foreground">
-                Copyright (c) 2018-{new Date().getFullYear()}, Mue Contributors
+                Copyright (c) 2019-{new Date().getFullYear()} The Mue Authors
+              </p>
+              <p className="mt-2 text-sm font-mono text-muted-foreground">
+                Copyright (c) 2018-2019 David Ralph
               </p>
             </div>
-            <Button variant="outline" className="mt-6" asChild>
-              <Link
-                href="https://github.com/mue/mue/blob/main/LICENSE"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Github className="mr-2 h-4 w-4" />
-                View BSD License
-              </Link>
-            </Button>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Button variant="outline" asChild>
+                <Link
+                  href="https://github.com/mue/mue/blob/main/LICENSE"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Github className="mr-2 h-4 w-4" />
+                  View Extension License
+                </Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link href="https://github.com/mue/website" target="_blank" rel="noreferrer">
+                  <Github className="mr-2 h-4 w-4" />
+                  View Website License
+                </Link>
+              </Button>
+            </div>
           </section>
 
           <section className="rounded-2xl border border-border bg-background/60 p-8 backdrop-blur">
             <div className="mb-6 flex items-center gap-3">
               <h2 className="text-2xl font-semibold text-foreground">
-                Website Components
+                API & Marketplace
               </h2>
               <span className="rounded-full border border-[#0078D4]/40 bg-[#0078D4]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#0078D4]">
                 MIT
               </span>
             </div>
             <p className="text-muted-foreground">
-              The text and components used on this website are licensed under the{' '}
+              The Mue API and Marketplace are licensed under the{' '}
               <strong>MIT License</strong>. This is a permissive license that allows you to use,
               copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
               software.
             </p>
-            <div className="mt-6 rounded-lg border border-border bg-muted/30 p-4">
-              <p className="text-sm font-mono text-muted-foreground">
-                Copyright (c) {new Date().getFullYear()} Mue Contributors
-              </p>
+            <div className="mt-6 space-y-4">
+              <div className="rounded-lg border border-border bg-muted/30 p-4">
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-2">API</p>
+                <p className="text-sm font-mono text-muted-foreground">
+                  Copyright (c) 2019-{new Date().getFullYear()} The Mue Authors
+                </p>
+              </div>
+              <div className="rounded-lg border border-border bg-muted/30 p-4">
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-2">Marketplace</p>
+                <p className="text-sm font-mono text-muted-foreground">
+                  Copyright (c) 2020-{new Date().getFullYear()} The Mue Authors
+                </p>
+              </div>
             </div>
-            <Button variant="outline" className="mt-6" asChild>
-              <Link href="https://github.com/mue/website" target="_blank" rel="noreferrer">
-                <Github className="mr-2 h-4 w-4" />
-                View MIT License
-              </Link>
-            </Button>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Button variant="outline" asChild>
+                <Link href="https://github.com/mue/api" target="_blank" rel="noreferrer">
+                  <Github className="mr-2 h-4 w-4" />
+                  View API License
+                </Link>
+              </Button>
+              <Button variant="outline" asChild>
+                <Link href="https://github.com/mue/marketplace" target="_blank" rel="noreferrer">
+                  <Github className="mr-2 h-4 w-4" />
+                  View Marketplace License
+                </Link>
+              </Button>
+            </div>
           </section>
 
           <section className="rounded-2xl border border-[#FF5C25]/20 bg-gradient-to-br from-[#FF5C25]/10 to-[#FF456E]/10 p-8 backdrop-blur">
