@@ -1,11 +1,12 @@
 import './globals.css';
 
 import type { Metadata } from 'next';
-import { Lexend_Deca, Inter, Alfa_Slab_One } from 'next/font/google';
-import Navbar from '@/components/navbar';
+import { Alfa_Slab_One, Inter, Lexend_Deca } from 'next/font/google';
+
 import Footer from '@/components/footer';
-import { ThemeProvider } from '@/components/theme-provider';
+import Navbar from '@/components/navbar';
 import { ScrollToTop } from '@/components/scroll-to-top';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const lexendDeca = Lexend_Deca({
   variable: '--font-lexend-deca',

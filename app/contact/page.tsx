@@ -1,6 +1,7 @@
-import Link from 'next/link';
-import { ArrowLeft, Mail, MessageSquare, Github } from 'lucide-react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
+
+import { Github, Mail, MessageSquare } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 

@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
-import { DocsSidebar } from '@/components/docs/sidebar';
 import { DocsSearch } from '@/components/docs/search';
+import { DocsSidebar } from '@/components/docs/sidebar';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { getAllDocsMeta, getDocsTree } from '@/lib/docs';
 

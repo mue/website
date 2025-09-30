@@ -1,10 +1,11 @@
-import Link from 'next/link';
-import { Calendar, User, ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
 
-import { getAllBlogPosts } from '@/lib/blog';
-import { Badge } from '@/components/ui/badge';
+import { ArrowRight, Calendar, User } from 'lucide-react';
+
 import { BlogImage } from '@/components/blog/blog-image';
+import { Badge } from '@/components/ui/badge';
+import { getAllBlogPosts } from '@/lib/blog';
 
 export const metadata: Metadata = {
   title: 'Blog',
