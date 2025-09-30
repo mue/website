@@ -141,7 +141,7 @@ export default async function MarketplaceItemPage({
       <div className="grid gap-6 lg:grid-cols-[340px_1fr] lg:gap-8">
         {/* Left Column - Info */}
         <aside className="space-y-4 lg:space-y-6">
-          <div className="lg:sticky lg:top-8 space-y-4 lg:space-y-6">
+          <div className="lg:sticky lg:top-24 space-y-4 lg:space-y-6">
             {/* Main Card */}
             <div className="flex flex-col gap-6 rounded-2xl border border-border bg-card/80 p-6 shadow-lg backdrop-blur-sm">
               <div className="flex flex-col items-center gap-4 text-center">
