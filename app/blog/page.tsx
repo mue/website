@@ -42,7 +42,7 @@ export default async function BlogPage() {
             <span>Insights & Updates</span>
           </div>
 
-          <h1 className="font-display text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Stories from the Mue community
           </h1>
 
@@ -93,7 +93,7 @@ export default async function BlogPage() {
                     )}
                   </div>
 
-                  <h2 className="mb-3 font-display text-xl font-semibold tracking-tight text-foreground transition group-hover:text-primary">
+                  <h2 className="mb-3 text-xl font-semibold tracking-tight text-foreground transition group-hover:text-primary">
                     {post.frontmatter.title}
                   </h2>
 

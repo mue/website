@@ -71,7 +71,7 @@ export default function DownloadPage() {
           <span>Choose your browser</span>
         </div>
 
-        <h1 className="mt-8 font-display text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+        <h1 className="mt-8 text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
           Get Mue for your browser
         </h1>
 
@@ -109,7 +109,7 @@ export default function DownloadPage() {
                     )}
                   </div>
 
-                  <h3 className="mt-6 font-display text-2xl font-semibold tracking-tight text-foreground">
+                  <h3 className="mt-6 text-2xl font-semibold tracking-tight text-foreground">
                     {browser.name}
                   </h3>
 
@@ -137,7 +137,7 @@ export default function DownloadPage() {
         </div>
 
         <div className="mt-20 w-full max-w-3xl rounded-3xl border border-white/10 bg-background/60 p-10 backdrop-blur">
-          <h2 className="font-display text-2xl font-semibold tracking-tight text-foreground">
+          <h2 className="text-2xl font-semibold tracking-tight text-foreground">
             What happens next?
           </h2>
           <div className="mt-8 space-y-6 text-left">

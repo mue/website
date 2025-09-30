@@ -37,7 +37,7 @@ export default function DemoPage() {
         </div>
 
         <div className="mb-6">
-          <h1 className="font-display text-3xl font-semibold tracking-tight text-foreground">
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground">
             Try Mue Demo
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
@@ -71,7 +71,7 @@ export default function DemoPage() {
         </div>
 
         <div className="mt-8 rounded-2xl border border-white/10 bg-background/60 p-6 backdrop-blur">
-          <h2 className="font-display text-xl font-semibold text-foreground">
+          <h2 className="text-xl font-semibold text-foreground">
             Ready to make Mue your daily companion?
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">

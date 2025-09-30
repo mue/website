@@ -18,7 +18,7 @@ export default function NotFound() {
         </div>
 
         <div className="flex flex-col items-center gap-6 text-balance">
-          <h1 className="font-display text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+          <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Lost in the flow, but not gone for good.
           </h1>
           <p className="max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
@@ -80,7 +80,7 @@ export default function NotFound() {
               <p className="text-[0.65rem] font-semibold uppercase tracking-[0.4em] text-white/75">
                 Still need help?
               </p>
-              <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight">
+              <h2 className="mt-4 text-2xl font-semibold tracking-tight">
                 Our docs and community can point you forward.
               </h2>
               <p className="mt-3 text-sm text-white/80">

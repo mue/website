@@ -1,7 +1,7 @@
 import './globals.css';
 
 import type { Metadata } from 'next';
-import { Lexend_Deca, Inter } from 'next/font/google';
+import { Lexend_Deca, Inter, Alfa_Slab_One } from 'next/font/google';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
 import { ThemeProvider } from '@/components/theme-provider';
@@ -15,6 +15,12 @@ const lexendDeca = Lexend_Deca({
 const inter = Inter({
   variable: '--font-inter',
   subsets: ['latin'],
+});
+
+const alfaSlabOne = Alfa_Slab_One({
+  variable: '--font-alfa-slab-one',
+  subsets: ['latin'],
+  weight: '400',
 });
 
 export const metadata: Metadata = {
@@ -75,7 +81,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${lexendDeca.variable} ${inter.variable} antialiased`}>
+      <body className={`${lexendDeca.variable} ${inter.variable} ${alfaSlabOne.variable} antialiased`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
