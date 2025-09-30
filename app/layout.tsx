@@ -84,7 +84,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${lexendDeca.variable} ${inter.variable} ${alfaSlabOne.variable} antialiased`}>
+      <body
+        className={`${lexendDeca.variable} ${inter.variable} ${alfaSlabOne.variable} antialiased`}
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

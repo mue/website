@@ -91,8 +91,8 @@ export default function DownloadPage() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-          Available for Chrome, Edge, Firefox, and Whale. Install in seconds and transform every new tab
-          into a moment of calm and focus.
+          Available for Chrome, Edge, Firefox, and Whale. Install in seconds and transform every new
+          tab into a moment of calm and focus.
         </p>
 
         <div className="mt-16 grid w-full gap-6 sm:grid-cols-1 lg:grid-cols-2">

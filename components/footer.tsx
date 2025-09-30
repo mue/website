@@ -37,7 +37,7 @@ export default function Footer() {
     const fetchStatus = async () => {
       try {
         const response = await fetch(
-          'https://raw.githubusercontent.com/mue/status/master/history/summary.json'
+          'https://raw.githubusercontent.com/mue/status/master/history/summary.json',
         );
         const data = await response.json();
 
@@ -91,8 +91,12 @@ export default function Footer() {
               className="mt-4 inline-flex items-center gap-2 rounded-lg border border-border bg-muted/50 px-3 py-2 text-xs text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
             >
               <span className="relative flex h-2 w-2">
-                <span className={`absolute inline-flex h-full w-full animate-ping rounded-full ${status.pingColor} opacity-75`}></span>
-                <span className={`relative inline-flex h-2 w-2 rounded-full ${status.dotColor}`}></span>
+                <span
+                  className={`absolute inline-flex h-full w-full animate-ping rounded-full ${status.pingColor} opacity-75`}
+                ></span>
+                <span
+                  className={`relative inline-flex h-2 w-2 rounded-full ${status.dotColor}`}
+                ></span>
               </span>
               <span>{status.text}</span>
             </a>

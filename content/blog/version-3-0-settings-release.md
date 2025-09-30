@@ -31,7 +31,7 @@ Finally, we're happy to announce that Wessel Tip is now a developer working on M
   - Greeting - Events, add name for extra personalisation
   - Quote - Copy button, copy quote and share it
   - Background - Background blur and custom background (requires URL)
-   Search Bar toggle
+    Search Bar toggle
   - Offline mode, not using Mue API
 - Experimental Settings
   - Enable WebP (not supported on all browsers but faster performance)

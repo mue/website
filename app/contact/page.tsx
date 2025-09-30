@@ -25,9 +25,7 @@ export default function ContactPage() {
             <Mail className="h-8 w-8 text-[#FF5C25]" />
           </div>
           <div>
-            <h1 className="text-4xl font-semibold tracking-tight text-foreground">
-              Contact Us
-            </h1>
+            <h1 className="text-4xl font-semibold tracking-tight text-foreground">Contact Us</h1>
             <p className="mt-2 text-sm text-muted-foreground">We&apos;d love to hear from you</p>
           </div>
         </div>
@@ -36,8 +34,8 @@ export default function ContactPage() {
           <section>
             <h2 className="text-2xl font-semibold text-foreground">Get in Touch</h2>
             <p className="mt-4 text-muted-foreground">
-              Whether you have a question, feedback, or need support, we&apos;re here to help. Choose the
-              best way to reach us below.
+              Whether you have a question, feedback, or need support, we&apos;re here to help.
+              Choose the best way to reach us below.
             </p>
           </section>
 
@@ -52,9 +50,7 @@ export default function ContactPage() {
                 <MessageSquare className="h-6 w-6 text-[#FF5C25]" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-foreground">
-                  Discord Community
-                </h3>
+                <h3 className="text-xl font-semibold text-foreground">Discord Community</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Join our Discord server for real-time support, discussions, and to connect with
                   other Mue users.
@@ -72,9 +68,7 @@ export default function ContactPage() {
                 <Github className="h-6 w-6 text-[#FF5C25]" />
               </div>
               <div>
-                <h3 className="text-xl font-semibold text-foreground">
-                  GitHub Issues
-                </h3>
+                <h3 className="text-xl font-semibold text-foreground">GitHub Issues</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Report bugs, request features, or browse existing issues on our GitHub repository.
                 </p>
@@ -123,9 +117,7 @@ export default function ContactPage() {
           </div>
 
           <section className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
-            <h3 className="text-xl font-semibold text-foreground">
-              Before You Reach Out
-            </h3>
+            <h3 className="text-xl font-semibold text-foreground">Before You Reach Out</h3>
             <ul className="mt-4 space-y-2 text-muted-foreground">
               <li className="flex gap-3">
                 <span className="mt-1.5 inline-flex h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF5C25]" />
