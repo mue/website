@@ -1,10 +1,11 @@
-import Link from "next/link";
-import { ArrowLeft, ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Link from 'next/link';
+import { ArrowLeft, ExternalLink } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export const metadata = {
-  title: "Try Mue Demo - Mue",
-  description: "Experience Mue Tab in action. Try out the demo to see how Mue can transform your browsing experience.",
+  title: 'Try Mue Demo - Mue',
+  description:
+    'Experience Mue Tab in action. Try out the demo to see how Mue can transform your browsing experience.',
 };
 
 export default function DemoPage() {
@@ -21,11 +22,7 @@ export default function DemoPage() {
             </Link>
           </Button>
           <Button variant="outline" asChild>
-            <a
-              href="https://demo.muetab.com?nointro=true"
-              target="_blank"
-              rel="noreferrer"
-            >
+            <a href="https://demo.muetab.com?nointro=true" target="_blank" rel="noreferrer">
               Open in new tab
               <ExternalLink className="ml-2 h-4 w-4" />
             </a>
@@ -37,8 +34,8 @@ export default function DemoPage() {
             Try Mue Demo
           </h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Experience Mue Tab in action. Interact with the demo below to see how
-            Mue can transform your browsing experience.
+            Experience Mue Tab in action. Interact with the demo below to see how Mue can transform
+            your browsing experience.
           </p>
         </div>
 
@@ -71,8 +68,8 @@ export default function DemoPage() {
             Ready to make Mue your daily companion?
           </h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Install Mue as your new tab page and enjoy a mindful browsing
-            experience every time you open a new tab.
+            Install Mue as your new tab page and enjoy a mindful browsing experience every time you
+            open a new tab.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <Button asChild>

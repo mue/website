@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import { Calendar, User, ArrowLeft, ArrowRight, ChevronLeft } from "lucide-react";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Calendar, User, ArrowLeft, ArrowRight, ChevronLeft } from 'lucide-react';
 
-import { getAllBlogPosts, getBlogPostBySlug } from "@/lib/blog";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
+import { Badge } from '@/components/ui/badge';
+import { buttonVariants } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 export const dynamicParams = false;
 
 type BlogPostParams = {
@@ -27,15 +27,13 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({
-  params,
-}: BlogPostProps): Promise<Metadata> {
+export async function generateMetadata({ params }: BlogPostProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
 
   if (!post) {
     return {
-      title: "Post Not Found | Mue Blog",
+      title: 'Post Not Found | Mue Blog',
     };
   }
 
@@ -51,10 +49,10 @@ export async function generateMetadata({
 }
 
 function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
 }
 
@@ -66,10 +64,7 @@ function computeReadingTime(content: string) {
 
 export default async function BlogPostPage({ params }: BlogPostProps) {
   const { slug } = await params;
-  const [post, allPosts] = await Promise.all([
-    getBlogPostBySlug(slug),
-    getAllBlogPosts(),
-  ]);
+  const [post, allPosts] = await Promise.all([getBlogPostBySlug(slug), getAllBlogPosts()]);
 
   if (!post) {
     notFound();
@@ -87,10 +82,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
       <article className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
         <Link
           href="/blog"
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "sm" }),
-            "mb-8 gap-2"
-          )}
+          className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), 'mb-8 gap-2')}
         >
           <ChevronLeft className="h-4 w-4" />
           Back to blog
@@ -115,11 +107,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
             {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {post.frontmatter.tags.map((tag) => (
-                  <Badge
-                    key={tag}
-                    variant="secondary"
-                    className="rounded-full"
-                  >
+                  <Badge key={tag} variant="secondary" className="rounded-full">
                     {tag}
                   </Badge>
                 ))}
@@ -145,23 +133,16 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
                 </>
               )}
               <span className="text-muted-foreground/50">•</span>
-              <span className="uppercase tracking-widest">
-                {computeReadingTime(post.content)}
-              </span>
+              <span className="uppercase tracking-widest">{computeReadingTime(post.content)}</span>
             </div>
 
             {post.frontmatter.description && (
-              <p className="text-lg text-muted-foreground">
-                {post.frontmatter.description}
-              </p>
+              <p className="text-lg text-muted-foreground">{post.frontmatter.description}</p>
             )}
           </div>
         </header>
 
-        <div
-          className="docs-prose"
-          dangerouslySetInnerHTML={{ __html: post.content }}
-        />
+        <div className="docs-prose" dangerouslySetInnerHTML={{ __html: post.content }} />
 
         <nav className="mt-16 grid gap-4 border-t pt-8 md:grid-cols-2">
           <div>
@@ -206,14 +187,14 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
               href="https://chromewebstore.google.com/detail/mue/jfaidnnckeinloipodbgfjjmipgjnllo"
               target="_blank"
               rel="noreferrer"
-              className={cn(buttonVariants({ size: "lg" }), "gap-2")}
+              className={cn(buttonVariants({ size: 'lg' }), 'gap-2')}
             >
               Add to Chrome
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               href="/docs/introduction"
-              className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+              className={cn(buttonVariants({ variant: 'outline', size: 'lg' }))}
             >
               View docs
             </Link>

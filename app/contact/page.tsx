@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { ArrowLeft, Mail, MessageSquare, Github } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Link from 'next/link';
+import { ArrowLeft, Mail, MessageSquare, Github } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export const metadata = {
-  title: "Contact - Mue",
-  description: "Get in touch with the Mue team. Reach out for support, feedback, or inquiries.",
+  title: 'Contact - Mue',
+  description: 'Get in touch with the Mue team. Reach out for support, feedback, or inquiries.',
 };
 
 export default function ContactPage() {
@@ -28,20 +28,16 @@ export default function ContactPage() {
             <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground">
               Contact Us
             </h1>
-            <p className="mt-2 text-sm text-muted-foreground">
-              We'd love to hear from you
-            </p>
+            <p className="mt-2 text-sm text-muted-foreground">We'd love to hear from you</p>
           </div>
         </div>
 
         <div className="space-y-8">
           <section>
-            <h2 className="font-display text-2xl font-semibold text-foreground">
-              Get in Touch
-            </h2>
+            <h2 className="font-display text-2xl font-semibold text-foreground">Get in Touch</h2>
             <p className="mt-4 text-muted-foreground">
-              Whether you have a question, feedback, or need support, we're here
-              to help. Choose the best way to reach us below.
+              Whether you have a question, feedback, or need support, we're here to help. Choose the
+              best way to reach us below.
             </p>
           </section>
 
@@ -60,8 +56,8 @@ export default function ContactPage() {
                   Discord Community
                 </h3>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Join our Discord server for real-time support, discussions, and
-                  to connect with other Mue users.
+                  Join our Discord server for real-time support, discussions, and to connect with
+                  other Mue users.
                 </p>
               </div>
             </a>
@@ -80,8 +76,7 @@ export default function ContactPage() {
                   GitHub Issues
                 </h3>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Report bugs, request features, or browse existing issues on our
-                  GitHub repository.
+                  Report bugs, request features, or browse existing issues on our GitHub repository.
                 </p>
               </div>
             </a>
@@ -94,12 +89,10 @@ export default function ContactPage() {
                 <Mail className="h-6 w-6 text-[#FF5C25]" />
               </div>
               <div>
-                <h3 className="font-display text-xl font-semibold text-foreground">
-                  Email
-                </h3>
+                <h3 className="font-display text-xl font-semibold text-foreground">Email</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Send us an email at hello@muetab.com for general inquiries or
-                  business-related questions.
+                  Send us an email at hello@muetab.com for general inquiries or business-related
+                  questions.
                 </p>
               </div>
             </a>
@@ -121,12 +114,9 @@ export default function ContactPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-display text-xl font-semibold text-foreground">
-                  Twitter/X
-                </h3>
+                <h3 className="font-display text-xl font-semibold text-foreground">Twitter/X</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
-                  Follow us on Twitter for the latest updates, announcements, and
-                  news about Mue.
+                  Follow us on Twitter for the latest updates, announcements, and news about Mue.
                 </p>
               </div>
             </a>
@@ -140,17 +130,17 @@ export default function ContactPage() {
               <li className="flex gap-3">
                 <span className="mt-1.5 inline-flex h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF5C25]" />
                 <span>
-                  Check our{" "}
+                  Check our{' '}
                   <Link href="/docs" className="text-foreground underline">
                     documentation
-                  </Link>{" "}
+                  </Link>{' '}
                   for answers to common questions.
                 </span>
               </li>
               <li className="flex gap-3">
                 <span className="mt-1.5 inline-flex h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF5C25]" />
                 <span>
-                  Search existing{" "}
+                  Search existing{' '}
                   <a
                     href="https://github.com/mue/mue/issues"
                     target="_blank"
@@ -158,16 +148,13 @@ export default function ContactPage() {
                     className="text-foreground underline"
                   >
                     GitHub issues
-                  </a>{" "}
+                  </a>{' '}
                   to see if your question has been addressed.
                 </span>
               </li>
               <li className="flex gap-3">
                 <span className="mt-1.5 inline-flex h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF5C25]" />
-                <span>
-                  For technical support, Discord is usually the fastest way to get
-                  help.
-                </span>
+                <span>For technical support, Discord is usually the fastest way to get help.</span>
               </li>
             </ul>
           </section>

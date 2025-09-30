@@ -1,17 +1,17 @@
-import Link from "next/link";
-import Image from "next/image";
-import { Calendar, User, ArrowRight } from "lucide-react";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Calendar, User, ArrowRight } from 'lucide-react';
 
-import { getAllBlogPosts } from "@/lib/blog";
-import { Badge } from "@/components/ui/badge";
+import { getAllBlogPosts } from '@/lib/blog';
+import { Badge } from '@/components/ui/badge';
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 
 function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
   });
 }
 
@@ -35,16 +35,14 @@ export default async function BlogPage() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            Product updates, technical deep-dives, and thoughts on building
-            mindful browser experiences.
+            Product updates, technical deep-dives, and thoughts on building mindful browser
+            experiences.
           </p>
         </header>
 
         {posts.length === 0 ? (
           <div className="rounded-2xl border border-white/10 bg-card/70 p-12 text-center backdrop-blur">
-            <p className="text-muted-foreground">
-              No blog posts yet. Check back soon!
-            </p>
+            <p className="text-muted-foreground">No blog posts yet. Check back soon!</p>
           </div>
         ) : (
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -96,11 +94,7 @@ export default async function BlogPage() {
                   {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
                     <div className="mb-4 flex flex-wrap gap-2">
                       {post.frontmatter.tags.slice(0, 3).map((tag) => (
-                        <Badge
-                          key={tag}
-                          variant="secondary"
-                          className="rounded-full text-xs"
-                        >
+                        <Badge key={tag} variant="secondary" className="rounded-full text-xs">
                           {tag}
                         </Badge>
                       ))}

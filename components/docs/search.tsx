@@ -1,7 +1,7 @@
-"use client";
+'use client';
 
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   Command,
   CommandDialog,
@@ -10,10 +10,10 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/command';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { cn } from '@/lib/utils';
 
 type DocMeta = {
   title: string;
@@ -30,10 +30,7 @@ export function DocsSearch({ docs }: DocsSearchProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const items = useMemo(
-    () => [...docs].sort((a, b) => a.title.localeCompare(b.title)),
-    [docs]
-  );
+  const items = useMemo(() => [...docs].sort((a, b) => a.title.localeCompare(b.title)), [docs]);
 
   const handleOpen = useCallback(() => setOpen(true), []);
 
@@ -42,18 +39,18 @@ export function DocsSearch({ docs }: DocsSearchProps) {
       setOpen(false);
       router.push(href);
     },
-    [router]
+    [router],
   );
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
-      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "k") {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
         event.preventDefault();
         setOpen((prev) => !prev);
       }
     };
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
 
   useEffect(() => {
@@ -86,20 +83,18 @@ export function DocsSearch({ docs }: DocsSearchProps) {
               {items.map((item) => (
                 <CommandItem
                   key={item.href}
-                  value={`${item.title} ${item.description ?? ""}`}
+                  value={`${item.title} ${item.description ?? ''}`}
                   onSelect={() => handleSelect(item.href)}
-                  className={cn(pathname === item.href && "bg-primary/10")}
+                  className={cn(pathname === item.href && 'bg-primary/10')}
                 >
                   <div className="flex flex-col gap-1">
                     <span className="font-medium">{item.title}</span>
                     {item.description && (
-                      <span className="text-xs text-muted-foreground">
-                        {item.description}
-                      </span>
+                      <span className="text-xs text-muted-foreground">{item.description}</span>
                     )}
                   </div>
                   <Badge variant="secondary" className="ml-auto">
-                    {item.slug.join(" / ")}
+                    {item.slug.join(' / ')}
                   </Badge>
                 </CommandItem>
               ))}

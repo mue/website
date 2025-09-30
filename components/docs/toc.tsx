@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import type { TocItem } from "@/lib/docs";
-import { cn } from "@/lib/utils";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import type { TocItem } from '@/lib/docs';
+import { cn } from '@/lib/utils';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 type DocsTocProps = {
   toc: TocItem[];
@@ -20,8 +20,8 @@ export function DocsToc({ toc }: DocsTocProps) {
           .filter((entry) => entry.isIntersecting)
           .sort(
             (a, b) =>
-              Number(a.target.getAttribute("data-depth")) -
-              Number(b.target.getAttribute("data-depth"))
+              Number(a.target.getAttribute('data-depth')) -
+              Number(b.target.getAttribute('data-depth')),
           );
 
         if (visibleHeadings.length > 0) {
@@ -29,15 +29,15 @@ export function DocsToc({ toc }: DocsTocProps) {
         }
       },
       {
-        rootMargin: "0px 0px -70% 0px",
+        rootMargin: '0px 0px -70% 0px',
         threshold: [0, 0.1, 0.5, 1],
-      }
+      },
     );
 
     toc.forEach((item) => {
       const element = document.getElementById(item.id);
       if (element) {
-        element.setAttribute("data-depth", item.depth.toString());
+        element.setAttribute('data-depth', item.depth.toString());
         observer.observe(element);
       }
     });
@@ -58,18 +58,18 @@ export function DocsToc({ toc }: DocsTocProps) {
             <li
               key={item.id}
               className={cn({
-                "pl-0": item.depth === 2,
-                "pl-4": item.depth === 3,
-                "pl-8": item.depth >= 4,
+                'pl-0': item.depth === 2,
+                'pl-4': item.depth === 3,
+                'pl-8': item.depth >= 4,
               })}
             >
               <a
                 href={`#${item.id}`}
                 className={cn(
-                  "block rounded-md px-2 py-1 transition-colors",
+                  'block rounded-md px-2 py-1 transition-colors',
                   activeId === item.id
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-muted-foreground hover:text-foreground',
                 )}
               >
                 {item.title}

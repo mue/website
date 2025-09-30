@@ -1,15 +1,11 @@
-import { Metadata } from "next";
+import { Metadata } from 'next';
 
-import { MarketplaceExplorer } from "@/components/marketplace/explorer";
-import {
-  getMarketplaceCollections,
-  getMarketplaceItems,
-} from "@/lib/marketplace";
+import { MarketplaceExplorer } from '@/components/marketplace/explorer';
+import { getMarketplaceCollections, getMarketplaceItems } from '@/lib/marketplace';
 
 export const metadata: Metadata = {
-  title: "Marketplace",
-  description:
-    "Browse the full catalogue of Mue marketplace packs, presets, and quotes.",
+  title: 'Marketplace',
+  description: 'Browse the full catalogue of Mue marketplace packs, presets, and quotes.',
 };
 
 export const revalidate = 3600;
@@ -20,18 +16,14 @@ export default async function MarketplacePage() {
     getMarketplaceItems(),
   ]);
 
-  const highlightCandidates = collections.filter(
-    (collection) => collection.img
-  );
+  const highlightCandidates = collections.filter((collection) => collection.img);
 
   const shuffled = [...highlightCandidates].sort(() => Math.random() - 0.5);
   const randomCollections = shuffled.slice(0, 3);
 
   // Calculate content types for each collection
   const collectionsWithTypes = randomCollections.map((collection) => {
-    const collectionItems = items.filter((item) =>
-      item.in_collections.includes(collection.name)
-    );
+    const collectionItems = items.filter((item) => item.in_collections.includes(collection.name));
     const types = [...new Set(collectionItems.map((item) => item.type))];
     return { ...collection, contentTypes: types };
   });

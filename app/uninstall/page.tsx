@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Uninstall Survey - Mue Tab",
-  description: "Help us improve Mue by sharing your feedback",
+  title: 'Uninstall Survey - Mue Tab',
+  description: 'Help us improve Mue by sharing your feedback',
 };
 
 export default function UninstallPage() {
@@ -14,8 +14,8 @@ export default function UninstallPage() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-          Your feedback helps us make Mue better for everyone. Please take a
-          moment to share why you&apos;re uninstalling.
+          Your feedback helps us make Mue better for everyone. Please take a moment to share why
+          you&apos;re uninstalling.
         </p>
 
         <div className="mt-12 w-full min-h-screen">

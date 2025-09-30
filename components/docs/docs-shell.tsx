@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
-import { DocsToc } from "@/components/docs/toc";
+import { DocsToc } from '@/components/docs/toc';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,9 +8,9 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import type { TocItem } from "@/lib/docs";
-import { cn } from "@/lib/utils";
+} from '@/components/ui/breadcrumb';
+import type { TocItem } from '@/lib/docs';
+import { cn } from '@/lib/utils';
 
 export type DocsShellProps = {
   toc?: TocItem[];
@@ -19,12 +19,7 @@ export type DocsShellProps = {
   header?: ReactNode;
 };
 
-export function DocsShell({
-  toc = [],
-  breadcrumb,
-  children,
-  header,
-}: DocsShellProps) {
+export function DocsShell({ toc = [], breadcrumb, children, header }: DocsShellProps) {
   const hasToc = toc.length > 0;
   return (
     <div className="space-y-10">
@@ -35,9 +30,7 @@ export function DocsShell({
               <BreadcrumbItem key={`${item.label}-${index}`}>
                 {item.href && index !== breadcrumb.length - 1 ? (
                   <>
-                    <BreadcrumbLink href={item.href}>
-                      {item.label}
-                    </BreadcrumbLink>
+                    <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
                     <BreadcrumbSeparator />
                   </>
                 ) : (
@@ -52,10 +45,8 @@ export function DocsShell({
 
       <div
         className={cn(
-          "gap-10",
-          hasToc
-            ? "xl:grid xl:grid-cols-[minmax(0,1fr)_240px] xl:items-start"
-            : "flex flex-col"
+          'gap-10',
+          hasToc ? 'xl:grid xl:grid-cols-[minmax(0,1fr)_240px] xl:items-start' : 'flex flex-col',
         )}
       >
         <div className="space-y-12">{children}</div>

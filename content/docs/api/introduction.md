@@ -6,9 +6,11 @@ Mue comes with an API which is used by default to get random images and quotes c
 from the photographer.
 
 ## Information
-Base URL: ``https://api.muetab.com``
+
+Base URL: `https://api.muetab.com`
 
 Ratelimits are per route:
+
 ```
 # Public
 / - 30 requests per minute

@@ -1,28 +1,31 @@
-import Link from "next/link";
-import { Github, Twitter } from "lucide-react";
-import Logo from "./Logo";
-import { ThemeToggle } from "./ThemeToggle";
+import Link from 'next/link';
+import { Github, Twitter } from 'lucide-react';
+import Logo from './Logo';
+import { ThemeToggle } from './ThemeToggle';
 
 const footerLinks = {
   Product: [
-    { name: "Download", href: "/download" },
-    { name: "Marketplace", href: "/marketplace" },
-    { name: "Blog", href: "/blog" },
+    { name: 'Download', href: '/download' },
+    { name: 'Marketplace', href: '/marketplace' },
+    { name: 'Blog', href: '/blog' },
   ],
   Resources: [
-    { name: "Documentation", href: "/docs" },
-    { name: "API", href: "/docs/api/introduction" },
-    { name: "GitHub", href: "https://github.com/mue/mue" },
+    { name: 'Documentation', href: '/docs' },
+    { name: 'API', href: '/docs/api/introduction' },
+    { name: 'GitHub', href: 'https://github.com/mue/mue' },
   ],
   Community: [
-    { name: "Discord", href: "https://discord.gg/zv8C9F8" },
-    { name: "Twitter", href: "https://twitter.com/getmue" },
-    { name: "Contact", href: "/contact" },
-    { name: "Contribute", href: "https://github.com/mue/mue/blob/main/CONTRIBUTING.md" },
+    { name: 'Discord', href: 'https://discord.gg/zv8C9F8' },
+    { name: 'Twitter', href: 'https://twitter.com/getmue' },
+    { name: 'Contact', href: '/contact' },
+    {
+      name: 'Contribute',
+      href: 'https://github.com/mue/mue/blob/main/CONTRIBUTING.md',
+    },
   ],
   Legal: [
-    { name: "Privacy", href: "/privacy" },
-    { name: "License", href: "/license" },
+    { name: 'Privacy', href: '/privacy' },
+    { name: 'License', href: '/license' },
   ],
 };
 
@@ -36,8 +39,7 @@ export default function Footer() {
               <Logo className="h-12 w-12" />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              A mindful new tab experience that brings calm and focus to every
-              browsing session.
+              A mindful new tab experience that brings calm and focus to every browsing session.
             </p>
             <a
               href="https://status.muetab.com"
@@ -86,8 +88,8 @@ export default function Footer() {
                       <Link
                         href={link.href}
                         className="text-sm text-muted-foreground transition hover:text-foreground"
-                        target={link.href.startsWith("http") ? "_blank" : undefined}
-                        rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                        target={link.href.startsWith('http') ? '_blank' : undefined}
+                        rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
                       >
                         {link.name}
                       </Link>
@@ -100,7 +102,9 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 border-t border-white/10 pt-8 text-center text-sm text-muted-foreground">
-          <p>© 2019-{new Date().getFullYear()} The Mue Authors. Open source and built with care.</p>
+          <p>
+            © 2019-{new Date().getFullYear()} The Mue Authors. Open source and built with care.
+          </p>
         </div>
       </div>
     </footer>

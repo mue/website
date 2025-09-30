@@ -1,9 +1,9 @@
-const MARKETPLACE_BASE_URL = "https://api.muetab.com/v2/marketplace";
+const MARKETPLACE_BASE_URL = 'https://api.muetab.com/v2/marketplace';
 
 const MARKETPLACE_TYPE_LABELS: Record<string, string> = {
-  preset_settings: "Preset settings",
-  photo_packs: "Photo packs",
-  quote_packs: "Quote packs",
+  preset_settings: 'Preset settings',
+  photo_packs: 'Photo packs',
+  quote_packs: 'Quote packs',
 };
 
 type MarketplaceResponse<T> = {
@@ -74,34 +74,34 @@ async function fetchMarketplace<T>(path: string, init?: RequestInit): Promise<T>
 }
 
 export function getMarketplaceTypeLabel(type: string): string {
-  return MARKETPLACE_TYPE_LABELS[type] ?? type.replace(/_/g, " ");
+  return MARKETPLACE_TYPE_LABELS[type] ?? type.replace(/_/g, ' ');
 }
 
 export async function getMarketplaceCollections(): Promise<MarketplaceCollection[]> {
-  const payload = await fetchMarketplace<MarketplaceResponse<MarketplaceCollection[]>>("collections");
+  const payload =
+    await fetchMarketplace<MarketplaceResponse<MarketplaceCollection[]>>('collections');
   return payload.data;
 }
 
 export async function getMarketplaceItems(): Promise<MarketplaceItemSummary[]> {
-  const payload = await fetchMarketplace<MarketplaceResponse<MarketplaceItemSummary[]>>("items/all");
+  const payload =
+    await fetchMarketplace<MarketplaceResponse<MarketplaceItemSummary[]>>('items/all');
   return payload.data;
 }
 
 export async function getMarketplaceItem(
   category: string,
-  item: string
+  item: string,
 ): Promise<MarketplaceItemDetail> {
   const payload = await fetchMarketplace<MarketplaceResponse<MarketplaceItemDetail>>(
-    `item/${category}/${item}`
+    `item/${category}/${item}`,
   );
   return payload.data;
 }
 
-export async function getMarketplaceCollection(
-  name: string
-): Promise<MarketplaceCollectionDetail> {
+export async function getMarketplaceCollection(name: string): Promise<MarketplaceCollectionDetail> {
   const payload = await fetchMarketplace<MarketplaceResponse<MarketplaceCollectionDetail>>(
-    `collection/${name}`
+    `collection/${name}`,
   );
   return payload.data;
 }
