@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { Calendar, User, ArrowLeft, ArrowRight, ChevronLeft } from 'lucide-react';
+import { notFound } from 'next/navigation';
 
-import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
+import { ArrowLeft, ArrowRight, Calendar, ChevronLeft, User } from 'lucide-react';
+
+import { BlogImage } from '@/components/blog/blog-image';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
+import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
 import { cn } from '@/lib/utils';
-import { BlogImage } from '@/components/blog/blog-image';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;

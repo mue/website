@@ -1,6 +1,7 @@
-import Link from 'next/link';
-import { ArrowLeft, ExternalLink } from 'lucide-react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
+
+import { ArrowLeft, ExternalLink } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 

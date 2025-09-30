@@ -1,6 +1,7 @@
-import Link from 'next/link';
-import { ArrowRight, BookOpen, Layers3, PlugZap } from 'lucide-react';
 import type { Metadata } from 'next';
+import Link from 'next/link';
+
+import { ArrowRight, BookOpen, Layers3, PlugZap } from 'lucide-react';
 
 import { DocsShell } from '@/components/docs/docs-shell';
 import { getDocsNavigation } from '@/components/docs/layout-context';

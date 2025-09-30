@@ -1,10 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Chrome, Globe, Github } from 'lucide-react';
-import { FaChrome, FaFirefoxBrowser, FaEdge } from 'react-icons/fa';
+
+import { useEffect, useState } from 'react';
+import { ArrowRight, Github } from 'lucide-react';
+import { FaChrome, FaEdge, FaFirefoxBrowser } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
+
 import { Button } from '@/components/ui/button';
 import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
 

@@ -2,20 +2,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { useEffect, useState } from 'react';
 import { ArrowRight, Rocket } from 'lucide-react';
 import { FaChrome, FaFirefoxBrowser, FaEdge } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
 
 import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
-
-const highlights = [
-  'Fresh photos & quotes that match your energy',
-  'Timer, todos, and widgets—all in one view',
-  'Your data stays yours. Always private, always synced.',
-];
 
 const stats = ['Launched 2018', '5,000+ monthly active users', '10 million+ tabs opened'];
 
@@ -124,7 +118,6 @@ const browsers = [
 
 export default function Home() {
   const [greeting, setGreeting] = useState('Evening');
-  const [ellipsis, setEllipsis] = useState('');
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -135,20 +128,6 @@ export default function Home() {
     } else {
       setGreeting('Evening');
     }
-  }, []);
-
-  useEffect(() => {
-    const frames = ['', '.', '..', '...'] as const;
-    let frameIndex = 0;
-
-    const interval = window.setInterval(() => {
-      frameIndex = (frameIndex + 1) % frames.length;
-      setEllipsis(frames[frameIndex]);
-    }, 420);
-
-    return () => {
-      window.clearInterval(interval);
-    };
   }, []);
 
   return (
@@ -162,21 +141,12 @@ export default function Home() {
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:items-center">
             {/* Left column - Content */}
             <div className="flex flex-col">
-              {/* <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[#FF5C25]/30 bg-gradient-to-r from-[#FF5C25]/10 to-[#FF456E]/10 px-5 py-2 text-[0.65rem] font-bold uppercase tracking-[0.3em] text-[#FF5C25] backdrop-blur">
-                <span>New Tab</span>
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gradient-to-br from-[#FF5C25] to-[#FF456E]" />
-                <span>Reimagined</span>
-              </div> */}
-
               <h1 className="mt-8 text-balance text-3xl leading-[1.15] tracking-tight text-foreground sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl">
                 <span className="block animate-fade-up animate-delay-100">
                   <b className="font-heading tracking-wide font-light">
-                    {greeting}
-                    <span className="sr-only">...</span>
-                    <span aria-hidden="true" className="ml-1 inline-block w-4 text-left">
-                      {ellipsis}
-                    </span>
+                    {greeting},{' '}
                   </b>
+                  user
                 </span>
                 <span className="mt-2 block animate-fade-up animate-delay-200">
                   Stop staring at <b className="font-heading tracking-wide font-light">blank</b>{' '}
@@ -208,18 +178,10 @@ export default function Home() {
                   className="border-2 border-[#FF5C25]/30 px-6 py-4 text-sm font-semibold transition-all hover:border-[#FF5C25] hover:bg-[#FF5C25]/5 sm:text-base"
                   asChild
                 >
-                  {/* <Link href="/demo">
-                    <Rocket className="mr-2 h-4 w-4" />
-                    Try the demo
-                  </Link> */}
                   <Link href="/demo">
                     <Rocket className="mr-2 h-4 w-4" />
                     Try it now
                   </Link>
-                  {/* <Link href="/demo">
-                    <Play className="mr-2 h-4 w-4" />
-                    Try it now
-                  </Link> */}
                 </Button>
               </div>
 
@@ -265,49 +227,8 @@ export default function Home() {
                   />
                 </div>
               </div>
-
-              {/* Floating cards */}
-              <div className="absolute -left-4 top-1/4 hidden animate-float rounded-xl border border-white/10 bg-background/95 p-4 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.3)] backdrop-blur xl:-left-6 xl:rounded-2xl xl:p-5 2xl:block">
-                <div className="flex items-center gap-3 xl:gap-4">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#FF5C25] to-[#FF456E] text-lg shadow-lg xl:h-12 xl:w-12 xl:rounded-xl xl:text-xl">
-                    🌅
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground xl:text-base">
-                      Fresh vibes
-                    </p>
-                    <p className="text-xs text-muted-foreground xl:text-sm">Every tab</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="absolute -right-4 bottom-1/3 hidden animate-float-delayed rounded-xl border border-white/10 bg-background/95 p-4 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.3)] backdrop-blur xl:-right-6 xl:rounded-2xl xl:p-5 2xl:block">
-                <div className="flex items-center gap-3 xl:gap-4">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#FF5C25] to-[#FF456E] text-lg shadow-lg xl:h-12 xl:w-12 xl:rounded-xl xl:text-xl">
-                    ⏱️
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold text-foreground xl:text-base">Lock in</p>
-                    <p className="text-xs text-muted-foreground xl:text-sm">Stay focused</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
-
-          {/* Feature cards */}
-          {/* <div className="mt-12 grid gap-4 sm:grid-cols-3 sm:gap-5 lg:mt-16">
-            {highlights.map((item) => (
-              <div
-                key={item}
-                className="group relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-background/80 to-background/40 p-5 backdrop-blur transition-all hover:border-[#FF5C25]/40 hover:shadow-[0_30px_70px_-20px_rgba(255,92,37,0.3)] sm:p-6"
-              >
-                <div className="absolute right-0 top-0 h-20 w-20 translate-x-8 -translate-y-8 rounded-full bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20 blur-2xl transition-all duration-500 group-hover:scale-150" />
-                <span className="relative mb-3 inline-flex h-2 w-2 rounded-full bg-gradient-to-br from-[#FF5C25] to-[#FF456E] shadow-lg transition-transform group-hover:scale-125" />
-                <p className="relative text-sm leading-relaxed text-muted-foreground">{item}</p>
-              </div>
-            ))}
-          </div> */}
 
           {/* Browser badges */}
           <div className="mt-12 flex flex-col items-center lg:mt-16">

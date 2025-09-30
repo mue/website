@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
+
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { DocsShell } from '@/components/docs/docs-shell';
