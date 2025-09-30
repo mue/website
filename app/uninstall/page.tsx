@@ -15,7 +15,7 @@ export default function UninstallPage() {
       <div className="pointer-events-none absolute inset-x-0 top-[-20%] -z-20 h-[80vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.25)_0%,_transparent_65%)] blur-3xl" />
 
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center px-6 py-24 text-center">
-        <h1 className="font-display text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
           We&apos;re sorry to see you go
         </h1>
 

@@ -114,7 +114,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
               </div>
             )}
 
-            <h1 className="font-display text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
               {post.frontmatter.title}
             </h1>
 

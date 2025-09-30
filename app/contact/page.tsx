@@ -24,7 +24,7 @@ export default function ContactPage() {
             <Mail className="h-8 w-8 text-[#FF5C25]" />
           </div>
           <div>
-            <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground">
+            <h1 className="text-4xl font-semibold tracking-tight text-foreground">
               Contact Us
             </h1>
             <p className="mt-2 text-sm text-muted-foreground">We&apos;d love to hear from you</p>
@@ -33,7 +33,7 @@ export default function ContactPage() {
 
         <div className="space-y-8">
           <section>
-            <h2 className="font-display text-2xl font-semibold text-foreground">Get in Touch</h2>
+            <h2 className="text-2xl font-semibold text-foreground">Get in Touch</h2>
             <p className="mt-4 text-muted-foreground">
               Whether you have a question, feedback, or need support, we&apos;re here to help. Choose the
               best way to reach us below.
@@ -51,7 +51,7 @@ export default function ContactPage() {
                 <MessageSquare className="h-6 w-6 text-[#FF5C25]" />
               </div>
               <div>
-                <h3 className="font-display text-xl font-semibold text-foreground">
+                <h3 className="text-xl font-semibold text-foreground">
                   Discord Community
                 </h3>
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -71,7 +71,7 @@ export default function ContactPage() {
                 <Github className="h-6 w-6 text-[#FF5C25]" />
               </div>
               <div>
-                <h3 className="font-display text-xl font-semibold text-foreground">
+                <h3 className="text-xl font-semibold text-foreground">
                   GitHub Issues
                 </h3>
                 <p className="mt-2 text-sm text-muted-foreground">
@@ -88,7 +88,7 @@ export default function ContactPage() {
                 <Mail className="h-6 w-6 text-[#FF5C25]" />
               </div>
               <div>
-                <h3 className="font-display text-xl font-semibold text-foreground">Email</h3>
+                <h3 className="text-xl font-semibold text-foreground">Email</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Send us an email at hello@muetab.com for general inquiries or business-related
                   questions.
@@ -113,7 +113,7 @@ export default function ContactPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-display text-xl font-semibold text-foreground">Twitter/X</h3>
+                <h3 className="text-xl font-semibold text-foreground">Twitter/X</h3>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Follow us on Twitter for the latest updates, announcements, and news about Mue.
                 </p>
@@ -122,7 +122,7 @@ export default function ContactPage() {
           </div>
 
           <section className="rounded-2xl border border-white/10 bg-background/60 p-6 backdrop-blur">
-            <h3 className="font-display text-xl font-semibold text-foreground">
+            <h3 className="text-xl font-semibold text-foreground">
               Before You Reach Out
             </h3>
             <ul className="mt-4 space-y-2 text-muted-foreground">

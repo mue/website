@@ -24,7 +24,7 @@ export default function PrivacyPage() {
             <Shield className="h-8 w-8 text-[#FF5C25]" />
           </div>
           <div>
-            <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground">
+            <h1 className="text-4xl font-semibold tracking-tight text-foreground">
               Privacy Policy
             </h1>
             <p className="mt-2 text-sm text-muted-foreground">Last Updated: September 8, 2024</p>
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
 
         <div className="prose-custom space-y-8">
           <section>
-            <h2 className="font-display text-2xl font-semibold text-foreground">Introduction</h2>
+            <h2 className="text-2xl font-semibold text-foreground">Introduction</h2>
             <p className="mt-4 text-muted-foreground">
               Mue shares no personal information with any third parties and all of your settings,
               backgrounds and other data are stored locally via localStorage. This data can be
@@ -42,7 +42,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="font-display text-2xl font-semibold text-foreground">
+            <h2 className="text-2xl font-semibold text-foreground">
               Widget API Requests
             </h2>
             <ul className="mt-4 space-y-2 text-muted-foreground">
@@ -62,7 +62,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h3 className="font-display text-xl font-semibold text-foreground">Weather Widget</h3>
+            <h3 className="text-xl font-semibold text-foreground">Weather Widget</h3>
             <p className="mt-4 text-muted-foreground">
               The weather feature of Mue only stores your inputted location (or estimated when
               clicking on &apos;Auto&apos;) locally, and it is only sent in a request to get the
@@ -73,7 +73,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h3 className="font-display text-xl font-semibold text-foreground">
+            <h3 className="text-xl font-semibold text-foreground">
               Background Widget
             </h3>
             <p className="mt-4 text-muted-foreground">
@@ -91,7 +91,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h3 className="font-display text-xl font-semibold text-foreground">Quote Widget</h3>
+            <h3 className="text-xl font-semibold text-foreground">Quote Widget</h3>
             <p className="mt-4 text-muted-foreground">
               The quote feature of Mue requests to our API (api.muetab.com) in order to get a random
               quote. Your set quote language is sent in this request to get a quote in your
@@ -105,7 +105,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h3 className="font-display text-xl font-semibold text-foreground">
+            <h3 className="text-xl font-semibold text-foreground">
               Quick Links Widget
             </h3>
             <p className="mt-4 text-muted-foreground">
@@ -117,7 +117,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h3 className="font-display text-xl font-semibold text-foreground">Marketplace</h3>
+            <h3 className="text-xl font-semibold text-foreground">Marketplace</h3>
             <p className="mt-4 text-muted-foreground">
               The Marketplace tab requests to our API (marketplace.muetab.com) in order to get a
               list of products in a category as well as a specific one. No information apart from
@@ -127,7 +127,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h3 className="font-display text-xl font-semibold text-foreground">Offline Mode</h3>
+            <h3 className="text-xl font-semibold text-foreground">Offline Mode</h3>
             <p className="mt-4 text-muted-foreground">
               Offline mode can be utilised to prevent requests to any of the services mentioned in
               this privacy policy.

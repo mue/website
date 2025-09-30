@@ -24,7 +24,7 @@ export default function LicensePage() {
             <Scale className="h-8 w-8 text-[#FF5C25]" />
           </div>
           <div>
-            <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground">
+            <h1 className="text-4xl font-semibold tracking-tight text-foreground">
               License
             </h1>
             <p className="mt-2 text-sm text-muted-foreground">Open source and free to use</p>
@@ -34,7 +34,7 @@ export default function LicensePage() {
         <div className="space-y-8">
           <section className="rounded-2xl border border-white/10 bg-background/60 p-8 backdrop-blur">
             <div className="mb-6 flex items-center gap-3">
-              <h2 className="font-display text-2xl font-semibold text-foreground">
+              <h2 className="text-2xl font-semibold text-foreground">
                 Main Application
               </h2>
               <span className="rounded-full border border-[#FF5C25]/40 bg-[#FF5C25]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#FF5C25]">
@@ -66,7 +66,7 @@ export default function LicensePage() {
 
           <section className="rounded-2xl border border-white/10 bg-background/60 p-8 backdrop-blur">
             <div className="mb-6 flex items-center gap-3">
-              <h2 className="font-display text-2xl font-semibold text-foreground">
+              <h2 className="text-2xl font-semibold text-foreground">
                 Website Components
               </h2>
               <span className="rounded-full border border-[#0078D4]/40 bg-[#0078D4]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#0078D4]">
@@ -93,7 +93,7 @@ export default function LicensePage() {
           </section>
 
           <section className="rounded-2xl border border-[#FF5C25]/20 bg-gradient-to-br from-[#FF5C25]/10 to-[#FF456E]/10 p-8 backdrop-blur">
-            <h3 className="font-display text-xl font-semibold text-foreground">Why Open Source?</h3>
+            <h3 className="text-xl font-semibold text-foreground">Why Open Source?</h3>
             <p className="mt-4 text-muted-foreground">
               Mue is built by the community, for the community. We believe in transparency,
               collaboration, and empowering developers to create and contribute. All of our code is
