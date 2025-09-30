@@ -84,7 +84,7 @@ export default async function BlogPage() {
                     </span>
                     {post.frontmatter.author && (
                       <>
-                        <span className="text-muted-foreground/50">"</span>
+                        <span className="text-muted-foreground/50">&bull;</span>
                         <span className="flex items-center gap-1.5">
                           <User className="h-3.5 w-3.5" />
                           {post.frontmatter.author}

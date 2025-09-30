@@ -34,7 +34,7 @@ export default function ContactPage() {
             <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground">
               Contact Us
             </h1>
-            <p className="mt-2 text-sm text-muted-foreground">We'd love to hear from you</p>
+            <p className="mt-2 text-sm text-muted-foreground">We&apos;d love to hear from you</p>
           </div>
         </div>
 
@@ -42,7 +42,7 @@ export default function ContactPage() {
           <section>
             <h2 className="font-display text-2xl font-semibold text-foreground">Get in Touch</h2>
             <p className="mt-4 text-muted-foreground">
-              Whether you have a question, feedback, or need support, we're here to help. Choose the
+              Whether you have a question, feedback, or need support, we&apos;re here to help. Choose the
               best way to reach us below.
             </p>
           </section>
