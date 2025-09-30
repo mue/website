@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 
 import { getAllBlogPosts } from '@/lib/blog';
 import { Badge } from '@/components/ui/badge';
+import { BlogImage } from '@/components/blog/blog-image';
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -65,7 +65,7 @@ export default async function BlogPage() {
               >
                 {post.frontmatter.image && (
                   <div className="relative aspect-[16/9] overflow-hidden">
-                    <Image
+                    <BlogImage
                       src={post.frontmatter.image}
                       alt={post.frontmatter.title}
                       fill
