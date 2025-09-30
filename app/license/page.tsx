@@ -25,9 +25,7 @@ export default function LicensePage() {
             <Scale className="h-8 w-8 text-[#FF5C25]" />
           </div>
           <div>
-            <h1 className="text-4xl font-semibold tracking-tight text-foreground">
-              License
-            </h1>
+            <h1 className="text-4xl font-semibold tracking-tight text-foreground">License</h1>
             <p className="mt-2 text-sm text-muted-foreground">Open source and free to use</p>
           </div>
         </div>
@@ -35,9 +33,7 @@ export default function LicensePage() {
         <div className="space-y-8">
           <section className="rounded-2xl border border-border bg-background/60 p-8 backdrop-blur">
             <div className="mb-6 flex items-center gap-3">
-              <h2 className="text-2xl font-semibold text-foreground">
-                Extension & Website
-              </h2>
+              <h2 className="text-2xl font-semibold text-foreground">Extension & Website</h2>
               <span className="rounded-full border border-[#FF5C25]/40 bg-[#FF5C25]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#FF5C25]">
                 BSD-3-Clause
               </span>
@@ -78,28 +74,29 @@ export default function LicensePage() {
 
           <section className="rounded-2xl border border-border bg-background/60 p-8 backdrop-blur">
             <div className="mb-6 flex items-center gap-3">
-              <h2 className="text-2xl font-semibold text-foreground">
-                API & Marketplace
-              </h2>
+              <h2 className="text-2xl font-semibold text-foreground">API & Marketplace</h2>
               <span className="rounded-full border border-[#0078D4]/40 bg-[#0078D4]/10 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#0078D4]">
                 MIT
               </span>
             </div>
             <p className="text-muted-foreground">
-              The Mue API and Marketplace are licensed under the{' '}
-              <strong>MIT License</strong>. This is a permissive license that allows you to use,
-              copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
-              software.
+              The Mue API and Marketplace are licensed under the <strong>MIT License</strong>. This
+              is a permissive license that allows you to use, copy, modify, merge, publish,
+              distribute, sublicense, and/or sell copies of the software.
             </p>
             <div className="mt-6 space-y-4">
               <div className="rounded-lg border border-border bg-muted/30 p-4">
-                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-2">API</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-2">
+                  API
+                </p>
                 <p className="text-sm font-mono text-muted-foreground">
                   Copyright (c) 2019-{new Date().getFullYear()} The Mue Authors
                 </p>
               </div>
               <div className="rounded-lg border border-border bg-muted/30 p-4">
-                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-2">Marketplace</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/70 mb-2">
+                  Marketplace
+                </p>
                 <p className="text-sm font-mono text-muted-foreground">
                   Copyright (c) 2020-{new Date().getFullYear()} The Mue Authors
                 </p>

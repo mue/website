@@ -88,11 +88,7 @@ export default function NotFound() {
                 Browse the FAQ, reach out on GitHub, or join the conversation.
               </p>
             </div>
-            <Button
-              variant="outline"
-              className="mt-6"
-              asChild
-            >
+            <Button variant="outline" className="mt-6" asChild>
               <Link href="/docs/faq">
                 <LifeBuoy className="mr-2 h-4 w-4" />
                 Visit the help centre

@@ -43,9 +43,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-foreground">
-              Widget API Requests
-            </h2>
+            <h2 className="text-2xl font-semibold text-foreground">Widget API Requests</h2>
             <ul className="mt-4 space-y-2 text-muted-foreground">
               <li className="flex gap-3">
                 <span className="mt-1.5 inline-flex h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF5C25]" />
@@ -74,9 +72,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h3 className="text-xl font-semibold text-foreground">
-              Background Widget
-            </h3>
+            <h3 className="text-xl font-semibold text-foreground">Background Widget</h3>
             <p className="mt-4 text-muted-foreground">
               The photo map location feature of Mue will send a request with the information of the
               photo shown to Mapbox.
@@ -106,9 +102,7 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h3 className="text-xl font-semibold text-foreground">
-              Quick Links Widget
-            </h3>
+            <h3 className="text-xl font-semibold text-foreground">Quick Links Widget</h3>
             <p className="mt-4 text-muted-foreground">
               When Quick Links is enabled, favicons are obtained from the DuckDuckGo favicon API.
               The only information sent is the URL you specified and this cannot be linked to you.

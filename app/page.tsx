@@ -143,9 +143,7 @@ export default function Home() {
             <div className="flex flex-col">
               <h1 className="mt-8 text-balance text-3xl leading-[1.15] tracking-tight text-foreground sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl">
                 <span className="block animate-fade-up animate-delay-100">
-                  <b className="font-heading tracking-wide font-light">
-                    {greeting},{' '}
-                  </b>
+                  <b className="font-heading tracking-wide font-light">{greeting}, </b>
                   user
                 </span>
                 <span className="mt-2 block animate-fade-up animate-delay-200">
@@ -336,8 +334,8 @@ export default function Home() {
             Built by you, for you.
           </h2>
           <p className="max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            100% open source. Join the community shaping the future of Mue—new themes, features, and
-            localization ships every week.
+            100% open source. Join the community shaping the future of Mue—with new backgrounds,
+            features, and localizations released regularly.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Button size="lg" asChild className="shadow-[0_18px_45px_-28px_rgba(15,15,45,0.75)]">

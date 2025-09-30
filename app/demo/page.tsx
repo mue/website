@@ -38,9 +38,7 @@ export default function DemoPage() {
         </div>
 
         <div className="mb-6">
-          <h1 className="text-3xl font-semibold tracking-tight text-foreground">
-            Try Mue Demo
-          </h1>
+          <h1 className="text-3xl font-semibold tracking-tight text-foreground">Try Mue Demo</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Experience Mue Tab in action. Interact with the demo below to see how Mue can transform
             your browsing experience.
