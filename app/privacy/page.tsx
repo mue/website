@@ -20,7 +20,7 @@ export default function PrivacyPage() {
 
       <div className="mx-auto w-full max-w-4xl px-6 py-16">
         <div className="mb-12 flex items-center gap-4">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20">
             <Shield className="h-8 w-8 text-[#FF5C25]" />
           </div>
           <div>
@@ -134,7 +134,7 @@ export default function PrivacyPage() {
             </p>
           </section>
 
-          <section className="rounded-2xl border border-white/10 bg-background/60 p-6 backdrop-blur">
+          <section className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
             <p className="text-sm text-muted-foreground">
               We may update this privacy policy here without notice at any time.
             </p>

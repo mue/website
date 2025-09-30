@@ -74,7 +74,7 @@ export default function Footer() {
   const status = statusConfig[systemStatus];
 
   return (
-    <footer className="border-t border-white/10 bg-background/80 backdrop-blur">
+    <footer className="border-t border-border bg-background/80 backdrop-blur">
       <div className="mx-auto w-full max-w-7xl px-6 py-12 lg:px-12">
         <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
           <div>
@@ -88,7 +88,7 @@ export default function Footer() {
               href="https://status.muetab.com"
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2 text-xs text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg border border-border bg-muted/50 px-3 py-2 text-xs text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
             >
               <span className="relative flex h-2 w-2">
                 <span className={`absolute inline-flex h-full w-full animate-ping rounded-full ${status.pingColor} opacity-75`}></span>
@@ -101,7 +101,7 @@ export default function Footer() {
                 href="https://github.com/mue/mue"
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/50 text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
               >
                 <Github className="h-4 w-4" />
                 <span className="sr-only">GitHub</span>
@@ -110,7 +110,7 @@ export default function Footer() {
                 href="https://twitter.com/getmue"
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/50 text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
               >
                 <Twitter className="h-4 w-4" />
                 <span className="sr-only">Twitter</span>
@@ -144,7 +144,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/10 pt-8 text-center text-sm text-muted-foreground">
+        <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
           <p>
             © 2019-{new Date().getFullYear()} The Mue Authors. Open source and built with care.
           </p>

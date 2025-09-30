@@ -197,7 +197,7 @@ export default function Home() {
                   asChild
                 >
                   <Link href="/download">
-                    <span className="relative z-10">Get Mue—It&apos;s Free</span>
+                    <span className="relative z-10">Get Started</span>
                     <ArrowRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                     <div className="absolute inset-0 -z-0 bg-gradient-to-r from-[#FF456E] to-[#FF5C25] opacity-0 transition-opacity group-hover:opacity-100" />
                   </Link>
@@ -242,14 +242,14 @@ export default function Home() {
             <div className="relative lg:order-last">
               <div className="absolute -inset-6 rounded-full bg-[linear-gradient(135deg,_rgba(255,92,37,0.25),_rgba(255,69,110,0.25))] blur-[50px] lg:-inset-10 lg:blur-[70px]" />
 
-              <div className="relative overflow-hidden rounded-2xl border-2 border-white/10 bg-slate-950/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.5)] ring-1 ring-white/5 backdrop-blur animate-fade-zoom animate-delay-300">
-                <div className="flex items-center justify-between border-b border-white/10 bg-slate-950/80 px-4 py-2.5 backdrop-blur">
+              <div className="relative overflow-hidden rounded-2xl border-2 border-border bg-background/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] ring-1 ring-border backdrop-blur animate-fade-zoom animate-delay-300">
+                <div className="flex items-center justify-between border-b border-border bg-background/80 px-4 py-2.5 backdrop-blur">
                   <div className="flex items-center gap-1.5">
                     <span className="flex h-2.5 w-2.5 rounded-full bg-[#FF5C25]" />
                     <span className="flex h-2.5 w-2.5 rounded-full bg-[#FFB425]" />
                     <span className="flex h-2.5 w-2.5 rounded-full bg-[#FF456E]" />
                   </div>
-                  <div className="rounded-full border border-white/10 bg-white/5 px-2.5 py-1 text-[0.625rem] font-medium text-white/80 backdrop-blur">
+                  <div className="rounded-full border border-border bg-muted px-2.5 py-1 text-[0.625rem] font-medium text-muted-foreground backdrop-blur">
                     Example
                   </div>
                 </div>
@@ -394,7 +394,9 @@ export default function Home() {
                   </ul>
                   <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-[#FF456E]/40 to-transparent" />
                   <p className="mt-4 text-xs uppercase tracking-[0.36em] text-muted-foreground/70">
-                    Crafted with the Mue community
+                    {index === 0 && 'Fully customizable'}
+                    {index === 1 && 'Personalize your flow'}
+                    {index === 2 && 'Built on open principles'}
                   </p>
                 </article>
               ))}
@@ -438,7 +440,7 @@ export default function Home() {
             {communityStats.map((stat) => (
               <div
                 key={stat.label}
-                className="rounded-2xl border border-white/10 bg-background/80 p-5 text-sm text-muted-foreground backdrop-blur"
+                className="rounded-2xl border border-border bg-background/80 p-5 text-sm text-muted-foreground backdrop-blur"
               >
                 <p className="text-xs uppercase tracking-[0.36em] text-[#FF5C25]/80">
                   {stat.label}

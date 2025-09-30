@@ -20,7 +20,7 @@ export default function LicensePage() {
 
       <div className="mx-auto w-full max-w-4xl px-6 py-16">
         <div className="mb-12 flex items-center gap-4">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20">
             <Scale className="h-8 w-8 text-[#FF5C25]" />
           </div>
           <div>
@@ -32,7 +32,7 @@ export default function LicensePage() {
         </div>
 
         <div className="space-y-8">
-          <section className="rounded-2xl border border-white/10 bg-background/60 p-8 backdrop-blur">
+          <section className="rounded-2xl border border-border bg-background/60 p-8 backdrop-blur">
             <div className="mb-6 flex items-center gap-3">
               <h2 className="text-2xl font-semibold text-foreground">
                 Main Application
@@ -47,7 +47,7 @@ export default function LicensePage() {
               distribute the software, provided you include the original copyright notice and
               disclaimer.
             </p>
-            <div className="mt-6 rounded-lg border border-white/10 bg-black/20 p-4">
+            <div className="mt-6 rounded-lg border border-border bg-muted/30 p-4">
               <p className="text-sm font-mono text-muted-foreground">
                 Copyright (c) 2018-{new Date().getFullYear()}, Mue Contributors
               </p>
@@ -64,7 +64,7 @@ export default function LicensePage() {
             </Button>
           </section>
 
-          <section className="rounded-2xl border border-white/10 bg-background/60 p-8 backdrop-blur">
+          <section className="rounded-2xl border border-border bg-background/60 p-8 backdrop-blur">
             <div className="mb-6 flex items-center gap-3">
               <h2 className="text-2xl font-semibold text-foreground">
                 Website Components
@@ -79,7 +79,7 @@ export default function LicensePage() {
               copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
               software.
             </p>
-            <div className="mt-6 rounded-lg border border-white/10 bg-black/20 p-4">
+            <div className="mt-6 rounded-lg border border-border bg-muted/30 p-4">
               <p className="text-sm font-mono text-muted-foreground">
                 Copyright (c) {new Date().getFullYear()} Mue Contributors
               </p>
@@ -100,13 +100,13 @@ export default function LicensePage() {
               publicly available on GitHub, and we welcome contributions from everyone.
             </p>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-lg border border-white/10 bg-background/40 p-4">
+              <div className="rounded-lg border border-border bg-background/40 p-4">
                 <h4 className="font-semibold text-foreground">Transparent</h4>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Every line of code is open for inspection and improvement.
                 </p>
               </div>
-              <div className="rounded-lg border border-white/10 bg-background/40 p-4">
+              <div className="rounded-lg border border-border bg-background/40 p-4">
                 <h4 className="font-semibold text-foreground">Community-Driven</h4>
                 <p className="mt-2 text-sm text-muted-foreground">
                   Built with contributions from developers worldwide.
