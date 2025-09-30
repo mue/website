@@ -60,11 +60,13 @@ export default function Navbar() {
                   <li className="row-span-3">
                     <NavigationMenuLink asChild>
                       <Link
-                        className="from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
+                        className="items-start from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
                         href="/docs"
                       >
-                        <BookOpen className="h-6 w-6 mb-2" />
-                        <div className="mb-2 text-lg font-medium">Mue documentation</div>
+                        <div className="dark:bg-neutral-900 bg-neutral-200 p-4 grid place-content-center aspect-square rounded-full mb-2">
+                          <BookOpen className="h-6 w-6" />
+                        </div>
+                        <div className="mb-2 text-lg font-medium">Documentation</div>
                         <p className="text-muted-foreground text-sm leading-tight">
                           Dive into guides, references, and workflows for the entire Mue ecosystem.
                         </p>
