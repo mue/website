@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Lexend_Deca, Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ScrollToTop } from "@/components/scroll-to-top";
 
@@ -45,6 +46,7 @@ export default function RootLayout({
               </div>
             </header>
             <main className="flex-1">{children}</main>
+            <Footer />
           </div>
         </ThemeProvider>
       </body>
