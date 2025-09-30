@@ -1,10 +1,10 @@
 ---
-title: "Welcome to the Mue Blog"
-date: "2025-09-30"
-author: "Mue Team"
-description: "Introducing the Mue blog—your source for product updates, community stories, and insights into building mindful browser experiences."
-image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1600&q=80"
-tags: ["announcement", "community", "updates"]
+title: 'Welcome to the Mue Blog'
+date: '2025-09-30'
+author: 'Mue Team'
+description: 'Introducing the Mue blog—your source for product updates, community stories, and insights into building mindful browser experiences.'
+image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1600&q=80'
+tags: ['announcement', 'community', 'updates']
 ---
 
 We're excited to launch the official Mue blog! This space will be your go-to source for product updates, technical deep-dives, and stories from our community of mindful makers.
@@ -32,4 +32,4 @@ Thank you for being part of the Mue journey. Here's to more mindful browsing!
 
 ---
 
-*Want to try Mue? [Add it to Chrome](https://chromewebstore.google.com/detail/mue/jfaidnnckeinloipodbgfjjmipgjnllo) or [explore the docs](/docs/introduction) to learn more.*
+_Want to try Mue? [Add it to Chrome](https://chromewebstore.google.com/detail/mue/jfaidnnckeinloipodbgfjjmipgjnllo) or [explore the docs](/docs/introduction) to learn more._

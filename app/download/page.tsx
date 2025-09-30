@@ -1,55 +1,55 @@
-"use client";
+'use client';
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { ArrowRight, Chrome, Globe, Github } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { ArrowRight, Chrome, Globe, Github } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const browsers = [
   {
-    name: "Chrome",
+    name: 'Chrome',
     icon: Chrome,
-    description: "Get Mue for Chrome and Chromium-based browsers",
-    url: "https://chromewebstore.google.com/detail/mue/jfaidnnckeinloipodbgfjjmipgjnllo",
-    version: "Latest version available",
-    gradient: "from-[#4285F4] to-[#34A853]",
-    userAgents: ["Chrome", "Chromium", "Edg/"],
+    description: 'Get Mue for Chrome and Chromium-based browsers',
+    url: 'https://chromewebstore.google.com/detail/mue/jfaidnnckeinloipodbgfjjmipgjnllo',
+    version: 'Latest version available',
+    gradient: 'from-[#4285F4] to-[#34A853]',
+    userAgents: ['Chrome', 'Chromium', 'Edg/'],
   },
   {
-    name: "Edge",
+    name: 'Edge',
     icon: Globe,
-    description: "Get Mue for Microsoft Edge",
-    url: "https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja",
-    version: "Optimized for Edge",
-    gradient: "from-[#0078D4] to-[#50E6FF]",
-    userAgents: ["Edg/"],
+    description: 'Get Mue for Microsoft Edge',
+    url: 'https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja',
+    version: 'Optimized for Edge',
+    gradient: 'from-[#0078D4] to-[#50E6FF]',
+    userAgents: ['Edg/'],
   },
   {
-    name: "Firefox",
+    name: 'Firefox',
     icon: Globe,
-    description: "Get Mue for Firefox",
-    url: "https://addons.mozilla.org/firefox/addon/mue",
-    version: "Firefox Add-on",
-    gradient: "from-[#FF6611] to-[#FF9500]",
-    userAgents: ["Firefox"],
+    description: 'Get Mue for Firefox',
+    url: 'https://addons.mozilla.org/firefox/addon/mue',
+    version: 'Firefox Add-on',
+    gradient: 'from-[#FF6611] to-[#FF9500]',
+    userAgents: ['Firefox'],
   },
   {
-    name: "Source Code",
+    name: 'Source Code',
     icon: Github,
-    description: "Build from source or contribute to the project",
-    url: "https://github.com/mue/mue",
-    version: "Open source on GitHub",
-    gradient: "from-[#6e5494] to-[#24292e]",
+    description: 'Build from source or contribute to the project',
+    url: 'https://github.com/mue/mue',
+    version: 'Open source on GitHub',
+    gradient: 'from-[#6e5494] to-[#24292e]',
     userAgents: [],
   },
 ];
 
 function detectBrowser(): string | null {
-  if (typeof window === "undefined") return null;
+  if (typeof window === 'undefined') return null;
   const ua = navigator.userAgent;
-  if (ua.includes("Edg/")) return "Edge";
-  if (ua.includes("Firefox")) return "Firefox";
-  if (ua.includes("Chrome") || ua.includes("Chromium")) return "Chrome";
+  if (ua.includes('Edg/')) return 'Edge';
+  if (ua.includes('Firefox')) return 'Firefox';
+  if (ua.includes('Chrome') || ua.includes('Chromium')) return 'Chrome';
   return null;
 }
 
@@ -76,8 +76,8 @@ export default function DownloadPage() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-          Available for Chrome, Edge, and Firefox. Install in seconds and
-          transform every new tab into a moment of calm and focus.
+          Available for Chrome, Edge, and Firefox. Install in seconds and transform every new tab
+          into a moment of calm and focus.
         </p>
 
         <div className="mt-16 grid w-full gap-6 sm:grid-cols-1 lg:grid-cols-2">
@@ -89,8 +89,8 @@ export default function DownloadPage() {
                 key={browser.name}
                 className={`group relative overflow-hidden rounded-3xl border p-8 text-left shadow-[0_20px_70px_-40px_rgba(12,12,40,0.8)] backdrop-blur transition-all ${
                   isDetected
-                    ? "border-[#FF5C25]/60 bg-background/95 shadow-[0_25px_90px_-35px_rgba(255,92,37,0.6)] ring-2 ring-[#FF5C25]/30"
-                    : "border-white/10 bg-background/80 hover:border-[#FF5C25]/40 hover:shadow-[0_25px_90px_-35px_rgba(12,12,40,0.95)]"
+                    ? 'border-[#FF5C25]/60 bg-background/95 shadow-[0_25px_90px_-35px_rgba(255,92,37,0.6)] ring-2 ring-[#FF5C25]/30'
+                    : 'border-white/10 bg-background/80 hover:border-[#FF5C25]/40 hover:shadow-[0_25px_90px_-35px_rgba(12,12,40,0.95)]'
                 }`}
               >
                 <div
@@ -113,9 +113,7 @@ export default function DownloadPage() {
                     {browser.name}
                   </h3>
 
-                  <p className="mt-3 text-sm text-muted-foreground">
-                    {browser.description}
-                  </p>
+                  <p className="mt-3 text-sm text-muted-foreground">{browser.description}</p>
 
                   <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-muted-foreground">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
@@ -148,12 +146,9 @@ export default function DownloadPage() {
                 1
               </span>
               <div>
-                <h3 className="font-semibold text-foreground">
-                  Install the extension
-                </h3>
+                <h3 className="font-semibold text-foreground">Install the extension</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Click the button above to add Mue to your browser from the
-                  official store.
+                  Click the button above to add Mue to your browser from the official store.
                 </p>
               </div>
             </div>
@@ -163,12 +158,9 @@ export default function DownloadPage() {
                 2
               </span>
               <div>
-                <h3 className="font-semibold text-foreground">
-                  Open a new tab
-                </h3>
+                <h3 className="font-semibold text-foreground">Open a new tab</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Launch a new tab and Mue will greet you with a beautiful,
-                  personalized experience.
+                  Launch a new tab and Mue will greet you with a beautiful, personalized experience.
                 </p>
               </div>
             </div>
@@ -178,12 +170,10 @@ export default function DownloadPage() {
                 3
               </span>
               <div>
-                <h3 className="font-semibold text-foreground">
-                  Customize your space
-                </h3>
+                <h3 className="font-semibold text-foreground">Customize your space</h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Explore settings to tailor backgrounds, widgets, and themes to
-                  match your workflow.
+                  Explore settings to tailor backgrounds, widgets, and themes to match your
+                  workflow.
                 </p>
               </div>
             </div>

@@ -1,10 +1,10 @@
 ---
-title: "Building a Mindful Browser Experience: The Philosophy Behind Mue"
-date: "2025-09-28"
-author: "Alex Sparkes"
-description: "Explore the design philosophy and intentional choices that make Mue more than just another new tab extension."
-image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=80"
-tags: ["design", "philosophy", "product"]
+title: 'Building a Mindful Browser Experience: The Philosophy Behind Mue'
+date: '2025-09-28'
+author: 'Alex Sparkes'
+description: 'Explore the design philosophy and intentional choices that make Mue more than just another new tab extension.'
+image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=1600&q=80'
+tags: ['design', 'philosophy', 'product']
 ---
 
 In a world of endless browser tabs, notifications, and digital distractions, Mue was born from a simple question: **What if opening a new tab could be a moment of calm instead of chaos?**
@@ -14,6 +14,7 @@ In a world of endless browser tabs, notifications, and digital distractions, Mue
 Most browser new tab pages are designed to maximize engagement—showing you trending news, recommended articles, and shortcuts to get you clicking as quickly as possible. While these features can be useful, they often contribute to a sense of digital overwhelm.
 
 Every time you open a tab, you're hit with:
+
 - Breaking news headlines designed to capture attention
 - Recommended content pulling you in different directions
 - Visual clutter competing for your focus
@@ -31,8 +32,8 @@ function selectBackground(timeOfDay, userPreference) {
   return {
     mood: 'serene',
     lighting: adaptToTime(timeOfDay),
-    source: curatedCollections.filter(calm => calm.score > 0.8)
-  }
+    source: curatedCollections.filter((calm) => calm.score > 0.8),
+  };
 }
 ```
 
@@ -51,12 +52,12 @@ Rather than showing trending headlines, Mue displays thoughtful quotes. These ar
 
 The widgets and features in Mue are intentionally minimal:
 
-| Feature | Traditional Approach | Mue's Approach |
-|---------|---------------------|----------------|
-| **Time** | Show precise seconds | Clean, simple display |
-| **Weather** | Detailed forecasts | At-a-glance info |
-| **Notes** | Feature-rich editor | Quick capture only |
-| **Search** | Autocomplete suggestions | Clean, focused input |
+| Feature     | Traditional Approach     | Mue's Approach        |
+| ----------- | ------------------------ | --------------------- |
+| **Time**    | Show precise seconds     | Clean, simple display |
+| **Weather** | Detailed forecasts       | At-a-glance info      |
+| **Notes**   | Feature-rich editor      | Quick capture only    |
+| **Search**  | Autocomplete suggestions | Clean, focused input  |
 
 ## The Technology Behind the Calm
 
@@ -115,4 +116,4 @@ Mue has been downloaded over 4 million times, but we're just getting started. If
 
 ---
 
-*Building technology that respects your attention is possible. Let's create more of it together.*
+_Building technology that respects your attention is possible. Let's create more of it together._

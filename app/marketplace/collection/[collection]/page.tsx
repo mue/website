@@ -1,16 +1,16 @@
-import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
+import { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
+import { ArrowLeft } from 'lucide-react';
 
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
 import {
   getMarketplaceCollection,
   getMarketplaceTypeLabel,
   type MarketplaceCollectionDetail,
-} from "@/lib/marketplace";
+} from '@/lib/marketplace';
 
 export const revalidate = 3600;
 
@@ -20,9 +20,7 @@ type MarketplaceCollectionPageProps = {
   }>;
 };
 
-async function resolveCollection(
-  name: string
-): Promise<MarketplaceCollectionDetail> {
+async function resolveCollection(name: string): Promise<MarketplaceCollectionDetail> {
   try {
     return await getMarketplaceCollection(name);
   } catch {
@@ -45,7 +43,7 @@ export async function generateMetadata({
     };
   } catch {
     return {
-      title: "Marketplace collection",
+      title: 'Marketplace collection',
     };
   }
 }
@@ -93,16 +91,14 @@ export default async function MarketplaceCollectionPage({
                 {data.display_name}
               </h1>
               {data.description && (
-                <p className="text-muted-foreground text-base md:text-lg">
-                  {data.description}
-                </p>
+                <p className="text-muted-foreground text-base md:text-lg">{data.description}</p>
               )}
             </div>
             <div className="mt-auto flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
               <span>
                 {hasItems
-                  ? `${items.length} ${items.length === 1 ? "item" : "items"}`
-                  : "No items yet"}
+                  ? `${items.length} ${items.length === 1 ? 'item' : 'items'}`
+                  : 'No items yet'}
               </span>
               {data.news && <Badge variant="outline">Latest update</Badge>}
               {data.news_link && (
@@ -121,12 +117,8 @@ export default async function MarketplaceCollectionPage({
       {hasItems ? (
         <section className="space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <h2 className="text-xl font-semibold text-foreground">
-              Included marketplace items
-            </h2>
-            <span className="text-sm text-muted-foreground">
-              Sorted alphabetically
-            </span>
+            <h2 className="text-xl font-semibold text-foreground">Included marketplace items</h2>
+            <span className="text-sm text-muted-foreground">Sorted alphabetically</span>
           </div>
 
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -137,7 +129,7 @@ export default async function MarketplaceCollectionPage({
                 <Link
                   key={`${item.type}-${item.name}`}
                   href={`/marketplace/${encodeURIComponent(
-                    item.type
+                    item.type,
                   )}/${encodeURIComponent(item.name)}`}
                   className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-2xl border border-border bg-card/70 p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
                 >
@@ -158,9 +150,7 @@ export default async function MarketplaceCollectionPage({
                         </div>
                       )}
                     </div>
-                    <Badge variant="outline">
-                      {getMarketplaceTypeLabel(item.type)}
-                    </Badge>
+                    <Badge variant="outline">{getMarketplaceTypeLabel(item.type)}</Badge>
                   </div>
 
                   <div className="space-y-2">
@@ -168,9 +158,7 @@ export default async function MarketplaceCollectionPage({
                       {item.display_name}
                     </h3>
                     {item.author && (
-                      <p className="text-sm text-muted-foreground">
-                        By {item.author}
-                      </p>
+                      <p className="text-sm text-muted-foreground">By {item.author}</p>
                     )}
                   </div>
 
@@ -181,7 +169,7 @@ export default async function MarketplaceCollectionPage({
                         .slice(0, 2)
                         .map((otherCollection) => (
                           <Badge key={otherCollection} variant="secondary">
-                            {otherCollection.replace(/_/g, " ")}
+                            {otherCollection.replace(/_/g, ' ')}
                           </Badge>
                         ))}
                       {item.in_collections.length > 3 && (
@@ -204,7 +192,7 @@ export default async function MarketplaceCollectionPage({
       <Separator />
 
       <div className="pb-12 text-sm text-muted-foreground">
-        Want to expand this collection? Contribute on the{" "}
+        Want to expand this collection? Contribute on the{' '}
         <Link
           href="https://github.com/mue"
           className="text-primary underline-offset-4 hover:underline"

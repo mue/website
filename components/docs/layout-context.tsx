@@ -1,4 +1,4 @@
-import { getAllDocsMeta, getDocsTree } from "@/lib/docs";
+import { getAllDocsMeta, getDocsTree } from '@/lib/docs';
 
 type DocsNavigation = {
   tree: Awaited<ReturnType<typeof getDocsTree>>;
@@ -9,9 +9,10 @@ let navigationPromise: Promise<DocsNavigation> | null = null;
 
 export function getDocsNavigation(): Promise<DocsNavigation> {
   if (!navigationPromise) {
-    navigationPromise = Promise.all([getDocsTree(), getAllDocsMeta()]).then(
-      ([tree, docsMeta]) => ({ tree, docsMeta })
-    );
+    navigationPromise = Promise.all([getDocsTree(), getAllDocsMeta()]).then(([tree, docsMeta]) => ({
+      tree,
+      docsMeta,
+    }));
   }
 
   return navigationPromise;

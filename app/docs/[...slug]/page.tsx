@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
+import Link from 'next/link';
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
-import { DocsShell } from "@/components/docs/docs-shell";
-import { getDocsNavigation } from "@/components/docs/layout-context";
-import { DocsSearch } from "@/components/docs/search";
-import { buttonVariants } from "@/components/ui/button";
-import type { DocTreeNode } from "@/lib/docs";
-import { getAllDocsMeta, getDocBySlug } from "@/lib/docs";
-import { cn } from "@/lib/utils";
+import { DocsShell } from '@/components/docs/docs-shell';
+import { getDocsNavigation } from '@/components/docs/layout-context';
+import { DocsSearch } from '@/components/docs/search';
+import { buttonVariants } from '@/components/ui/button';
+import type { DocTreeNode } from '@/lib/docs';
+import { getAllDocsMeta, getDocBySlug } from '@/lib/docs';
+import { cn } from '@/lib/utils';
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 export const dynamicParams = false;
 
 type DocPageParams = {
@@ -29,7 +29,7 @@ export async function generateStaticParams() {
 
   const addSlug = (segments: string[]) => {
     if (segments.length === 0) return;
-    slugSet.add(segments.join("/"));
+    slugSet.add(segments.join('/'));
   };
 
   docsMeta.forEach((doc) => {
@@ -48,13 +48,11 @@ export async function generateStaticParams() {
   walk(tree);
 
   return Array.from(slugSet.values()).map((slug) => ({
-    slug: slug.split("/").filter(Boolean),
+    slug: slug.split('/').filter(Boolean),
   }));
 }
 
-export async function generateMetadata({
-  params,
-}: DocPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: DocPageProps): Promise<Metadata> {
   const { slug = [] } = await params;
   const doc = await getDocBySlug(slug);
   if (!doc) {
@@ -65,9 +63,7 @@ export async function generateMetadata({
       const topicCount = section.children?.length ?? 0;
       const description =
         topicCount > 0
-          ? `Explore ${topicCount} ${
-              topicCount === 1 ? "topic" : "topics"
-            } in ${title}.`
+          ? `Explore ${topicCount} ${topicCount === 1 ? 'topic' : 'topics'} in ${title}.`
           : `Learn about ${title} in the Mue documentation.`;
       return {
         title: `${title} | Mue Docs`,
@@ -75,13 +71,12 @@ export async function generateMetadata({
       };
     }
     return {
-      title: "Documentation | Mue",
+      title: 'Documentation | Mue',
     };
   }
 
   const description =
-    doc.frontmatter.description ??
-    `Learn about ${doc.frontmatter.title} in the Mue documentation.`;
+    doc.frontmatter.description ?? `Learn about ${doc.frontmatter.title} in the Mue documentation.`;
 
   return {
     title: `${doc.frontmatter.title} | Mue Docs`,
@@ -106,9 +101,7 @@ function flattenTree(tree: DocTreeNode[]): DocTreeNode[] {
 function findNode(tree: DocTreeNode[], slug: string[]) {
   if (slug.length === 0) return null;
   const flattened = flattenTree(tree);
-  return (
-    flattened.find((node) => node.slug.join("/") === slug.join("/")) ?? null
-  );
+  return flattened.find((node) => node.slug.join('/') === slug.join('/')) ?? null;
 }
 
 function findTitle(tree: DocTreeNode[], slug: string[]) {
@@ -123,18 +116,13 @@ function computeReadingTime(markdown: string) {
 
 export default async function DocsArticlePage({ params }: DocPageProps) {
   const { slug = [] } = await params;
-  const [doc, { tree, docsMeta }] = await Promise.all([
-    getDocBySlug(slug),
-    getDocsNavigation(),
-  ]);
+  const [doc, { tree, docsMeta }] = await Promise.all([getDocBySlug(slug), getDocsNavigation()]);
 
   const normalizedSlug = slug.filter(Boolean);
   const section = findNode(tree, normalizedSlug);
 
   if (!doc && section) {
-    return (
-      <DocsSectionContent section={section} tree={tree} docsMeta={docsMeta} />
-    );
+    return <DocsSectionContent section={section} tree={tree} docsMeta={docsMeta} />;
   }
 
   if (!doc) {
@@ -155,23 +143,20 @@ type DocsArticleContentProps = {
 function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
   const sortedMeta = [...docsMeta].sort((a, b) => {
     if (a.order !== b.order) return a.order - b.order;
-    return a.slug.join("/").localeCompare(b.slug.join("/"));
+    return a.slug.join('/').localeCompare(b.slug.join('/'));
   });
 
-  const currentIndex = sortedMeta.findIndex(
-    (item) => item.slug.join("/") === doc.slug.join("/")
-  );
+  const currentIndex = sortedMeta.findIndex((item) => item.slug.join('/') === doc.slug.join('/'));
   const previous = currentIndex > 0 ? sortedMeta[currentIndex - 1] : null;
-  const next =
-    currentIndex < sortedMeta.length - 1 ? sortedMeta[currentIndex + 1] : null;
+  const next = currentIndex < sortedMeta.length - 1 ? sortedMeta[currentIndex + 1] : null;
 
   const breadcrumb = [
-    { label: "Documentation", href: "/docs" },
+    { label: 'Documentation', href: '/docs' },
     ...doc.slug.slice(0, -1).map((_, index) => {
       const segments = doc.slug.slice(0, index + 1);
       return {
         label: findTitle(tree, segments) ?? segments[index],
-        href: `/docs/${segments.join("/")}`,
+        href: `/docs/${segments.join('/')}`,
       };
     }),
     { label: doc.frontmatter.title },
@@ -205,10 +190,7 @@ function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
         </div>
       }
     >
-      <article
-        className="docs-prose"
-        dangerouslySetInnerHTML={{ __html: doc.content }}
-      />
+      <article className="docs-prose" dangerouslySetInnerHTML={{ __html: doc.content }} />
 
       <nav className="grid gap-4 border-t pt-6 md:grid-cols-2">
         <div>
@@ -251,7 +233,7 @@ function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
         <div className="mt-4 flex justify-center gap-3">
           <Link
             href="https://github.com/mue/docs"
-            className={cn(buttonVariants({ variant: "outline" }), "gap-1")}
+            className={cn(buttonVariants({ variant: 'outline' }), 'gap-1')}
           >
             Contribute on GitHub
             <ArrowRight className="size-4" />
@@ -268,18 +250,14 @@ type DocsSectionContentProps = {
   docsMeta: Awaited<ReturnType<typeof getAllDocsMeta>>;
 };
 
-function DocsSectionContent({
-  section,
-  tree,
-  docsMeta,
-}: DocsSectionContentProps) {
+function DocsSectionContent({ section, tree, docsMeta }: DocsSectionContentProps) {
   const breadcrumb = [
-    { label: "Documentation", href: "/docs" },
+    { label: 'Documentation', href: '/docs' },
     ...section.slug.slice(0, -1).map((_, index) => {
       const segments = section.slug.slice(0, index + 1);
       return {
         label: findTitle(tree, segments) ?? segments[index],
-        href: `/docs/${segments.join("/")}`,
+        href: `/docs/${segments.join('/')}`,
       };
     }),
     { label: section.title },
@@ -287,8 +265,7 @@ function DocsSectionContent({
 
   const children = section.children ?? [];
   const getMetaDescription = (slug: string[]) =>
-    docsMeta.find((item) => item.slug.join("/") === slug.join("/"))
-      ?.description;
+    docsMeta.find((item) => item.slug.join('/') === slug.join('/'))?.description;
 
   return (
     <DocsShell
@@ -299,13 +276,11 @@ function DocsSectionContent({
             {/* <Badge className="w-fit rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
               Section
             </Badge> */}
-            <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
-              {section.title}
-            </h1>
+            <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">{section.title}</h1>
             <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
               {children.length > 0
                 ? `Explore ${children.length} ${
-                    children.length === 1 ? "topic" : "topics"
+                    children.length === 1 ? 'topic' : 'topics'
                   } inside ${section.title}.`
                 : `${section.title} doesn’t have published guides yet.`}
             </p>
@@ -335,7 +310,7 @@ function DocsSectionContent({
               const subtopics = child.children ?? [];
               return (
                 <article
-                  key={child.slug.join("/")}
+                  key={child.slug.join('/')}
                   className="flex h-full flex-col justify-between rounded-2xl border bg-card/70 p-6 shadow-sm transition hover:border-primary/30"
                 >
                   <div className="space-y-3">
@@ -345,11 +320,9 @@ function DocsSectionContent({
                         <p className="mt-1 text-sm text-muted-foreground">
                           {description ??
                             (child.hasPage
-                              ? "Open the guide to learn more."
+                              ? 'Open the guide to learn more.'
                               : `Contains ${subtopics.length} ${
-                                  subtopics.length === 1
-                                    ? "additional topic"
-                                    : "additional topics"
+                                  subtopics.length === 1 ? 'additional topic' : 'additional topics'
                                 }.`)}
                         </p>
                       </div>
@@ -358,11 +331,9 @@ function DocsSectionContent({
                     {subtopics.length > 0 && (
                       <ul className="space-y-1 text-sm text-muted-foreground">
                         {subtopics.slice(0, 3).map((item) => (
-                          <li key={item.slug.join("/")}>{item.title}</li>
+                          <li key={item.slug.join('/')}>{item.title}</li>
                         ))}
-                        {subtopics.length > 3 && (
-                          <li>+ {subtopics.length - 3} more</li>
-                        )}
+                        {subtopics.length > 3 && <li>+ {subtopics.length - 3} more</li>}
                       </ul>
                     )}
                   </div>
@@ -371,7 +342,7 @@ function DocsSectionContent({
                     href={child.href}
                     className="mt-6 inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary hover:underline"
                   >
-                    {child.hasPage ? "Read guide" : "Browse section"}
+                    {child.hasPage ? 'Read guide' : 'Browse section'}
                     <ArrowRight className="size-4" />
                   </Link>
                 </article>

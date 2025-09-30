@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import Link from "next/link";
-import { useMemo, useState } from "react";
+import Image from 'next/image';
+import Link from 'next/link';
+import { useMemo, useState } from 'react';
 
 import {
   MarketplaceCollection,
   MarketplaceItemSummary,
   getMarketplaceTypeLabel,
-} from "@/lib/marketplace";
-import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import { Input } from "@/components/ui/input";
-import { FunnelX, Library as LibraryIcon, Search, X } from "lucide-react";
+} from '@/lib/marketplace';
+import { cn } from '@/lib/utils';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { FunnelX, Library as LibraryIcon, Search, X } from 'lucide-react';
 
 import {
   Select,
@@ -20,17 +20,17 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { useRouter } from "next/navigation";
-import { Button } from "../ui/button";
+} from '@/components/ui/select';
+import { useRouter } from 'next/navigation';
+import { Button } from '../ui/button';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
+} from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
 
 type CollectionWithTypes = MarketplaceCollection & {
   contentTypes: string[];
@@ -48,32 +48,24 @@ export function MarketplaceExplorer({
   randomCollections,
 }: MarketplaceExplorerProps) {
   const router = useRouter();
-  const [query, setQuery] = useState("");
-  const [typeFilter, setTypeFilter] = useState<string>("all");
+  const [query, setQuery] = useState('');
+  const [typeFilter, setTypeFilter] = useState<string>('all');
   const [collectionFilter, setCollectionFilter] = useState<string | null>(null);
-  const [sortBy, setSortBy] = useState<string>("name-asc");
+  const [sortBy, setSortBy] = useState<string>('name-asc');
 
   const collectionNameMap = useMemo(() => {
-    return new Map(
-      collections.map((collection) => [
-        collection.name,
-        collection.display_name,
-      ])
-    );
+    return new Map(collections.map((collection) => [collection.name, collection.display_name]));
   }, [collections]);
 
   const collectionFilterLabel = useMemo(() => {
     if (!collectionFilter) return null;
-    return (
-      collectionNameMap.get(collectionFilter) ??
-      collectionFilter.replace(/_/g, " ")
-    );
+    return collectionNameMap.get(collectionFilter) ?? collectionFilter.replace(/_/g, ' ');
   }, [collectionFilter, collectionNameMap]);
 
   const availableTypes = useMemo(() => {
     const unique = new Set(items.map((item) => item.type));
     return Array.from(unique).sort((a, b) =>
-      getMarketplaceTypeLabel(a).localeCompare(getMarketplaceTypeLabel(b))
+      getMarketplaceTypeLabel(a).localeCompare(getMarketplaceTypeLabel(b)),
     );
   }, [items]);
 
@@ -81,9 +73,8 @@ export function MarketplaceExplorer({
     const normalizedQuery = query.trim().toLowerCase();
 
     const filtered = items.filter((item) => {
-      const matchesType = typeFilter === "all" || item.type === typeFilter;
-      const matchesCollection =
-        !collectionFilter || item.in_collections.includes(collectionFilter);
+      const matchesType = typeFilter === 'all' || item.type === typeFilter;
+      const matchesCollection = !collectionFilter || item.in_collections.includes(collectionFilter);
 
       if (!matchesType || !matchesCollection) return false;
 
@@ -96,22 +87,18 @@ export function MarketplaceExplorer({
 
     return filtered.sort((a, b) => {
       switch (sortBy) {
-        case "name-asc":
+        case 'name-asc':
           return a.display_name.localeCompare(b.display_name);
-        case "name-desc":
+        case 'name-desc':
           return b.display_name.localeCompare(a.display_name);
-        case "author-asc":
-          return (a.author || "").localeCompare(b.author || "");
-        case "author-desc":
-          return (b.author || "").localeCompare(a.author || "");
-        case "type-asc":
-          return getMarketplaceTypeLabel(a.type).localeCompare(
-            getMarketplaceTypeLabel(b.type)
-          );
-        case "type-desc":
-          return getMarketplaceTypeLabel(b.type).localeCompare(
-            getMarketplaceTypeLabel(a.type)
-          );
+        case 'author-asc':
+          return (a.author || '').localeCompare(b.author || '');
+        case 'author-desc':
+          return (b.author || '').localeCompare(a.author || '');
+        case 'type-asc':
+          return getMarketplaceTypeLabel(a.type).localeCompare(getMarketplaceTypeLabel(b.type));
+        case 'type-desc':
+          return getMarketplaceTypeLabel(b.type).localeCompare(getMarketplaceTypeLabel(a.type));
         default:
           return a.display_name.localeCompare(b.display_name);
       }
@@ -119,15 +106,15 @@ export function MarketplaceExplorer({
   }, [collectionFilter, items, query, typeFilter, sortBy]);
 
   const resetFilters = () => {
-    setQuery("");
-    setTypeFilter("all");
+    setQuery('');
+    setTypeFilter('all');
     setCollectionFilter(null);
-    setSortBy("name-asc");
+    setSortBy('name-asc');
   };
 
   const isSearching = query.trim().length > 0;
   const hasActiveFilters =
-    query || typeFilter !== "all" || collectionFilter || sortBy !== "name-asc";
+    query || typeFilter !== 'all' || collectionFilter || sortBy !== 'name-asc';
 
   return (
     <section className="space-y-10">
@@ -146,7 +133,7 @@ export function MarketplaceExplorer({
           {query && (
             <button
               type="button"
-              onClick={() => setQuery("")}
+              onClick={() => setQuery('')}
               className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-1 text-muted-foreground transition hover:bg-muted hover:text-foreground"
               aria-label="Clear search"
             >
@@ -156,9 +143,8 @@ export function MarketplaceExplorer({
         </div>
         {isSearching && (
           <div className="mt-2 text-center text-sm text-muted-foreground">
-            Found{" "}
-            <strong className="text-foreground">{filteredItems.length}</strong>{" "}
-            result{filteredItems.length !== 1 ? "s" : ""}
+            Found <strong className="text-foreground">{filteredItems.length}</strong> result
+            {filteredItems.length !== 1 ? 's' : ''}
           </div>
         )}
       </div>
@@ -180,7 +166,7 @@ export function MarketplaceExplorer({
       {!isSearching && randomCollections.length > 0 && (
         <Carousel
           opts={{
-            align: "start",
+            align: 'start',
             loop: true,
           }}
           plugins={[
@@ -231,9 +217,7 @@ export function MarketplaceExplorer({
                       </div>
                       <div className="mt-auto flex items-center gap-3">
                         <Link
-                          href={`/marketplace/collection/${encodeURIComponent(
-                            collection.name
-                          )}`}
+                          href={`/marketplace/collection/${encodeURIComponent(collection.name)}`}
                           className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90"
                         >
                           Open collection page
@@ -260,16 +244,12 @@ export function MarketplaceExplorer({
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="flex w-full flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <span>
-            Showing{" "}
-            <strong className="text-foreground">{filteredItems.length}</strong>{" "}
-            of <strong className="text-foreground">{items.length}</strong> items
+            Showing <strong className="text-foreground">{filteredItems.length}</strong> of{' '}
+            <strong className="text-foreground">{items.length}</strong> items
           </span>
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-2">
-              <label
-                className="text-sm font-medium text-muted-foreground"
-                htmlFor="type-filter"
-              >
+              <label className="text-sm font-medium text-muted-foreground" htmlFor="type-filter">
                 Type
               </label>
               <Select value={typeFilter} onValueChange={setTypeFilter}>
@@ -290,10 +270,7 @@ export function MarketplaceExplorer({
               </Select>
             </div>
             <div className="flex items-center gap-2">
-              <label
-                className="text-sm font-medium text-muted-foreground"
-                htmlFor="sort-by"
-              >
+              <label className="text-sm font-medium text-muted-foreground" htmlFor="sort-by">
                 Sort
               </label>
               <Select value={sortBy} onValueChange={setSortBy}>
@@ -341,7 +318,7 @@ export function MarketplaceExplorer({
             <Link
               key={`${item.type}-${item.name}`}
               href={`/marketplace/${encodeURIComponent(
-                item.type
+                item.type,
               )}/${encodeURIComponent(item.name)}`}
               className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-2xl border border-border bg-card/70 p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
             >
@@ -362,20 +339,14 @@ export function MarketplaceExplorer({
                     </div>
                   )}
                 </div>
-                <Badge variant="outline">
-                  {getMarketplaceTypeLabel(item.type)}
-                </Badge>
+                <Badge variant="outline">{getMarketplaceTypeLabel(item.type)}</Badge>
               </div>
 
               <div className="space-y-2">
                 <h3 className="text-xl font-semibold leading-tight text-foreground">
                   {item.display_name}
                 </h3>
-                {item.author && (
-                  <p className="text-sm text-muted-foreground">
-                    By {item.author}
-                  </p>
-                )}
+                {item.author && <p className="text-sm text-muted-foreground">By {item.author}</p>}
               </div>
 
               {item.in_collections.length > 0 && (
@@ -387,20 +358,15 @@ export function MarketplaceExplorer({
                       onClick={(event) => {
                         event.preventDefault();
                         event.stopPropagation();
-                        router.push(
-                          `/marketplace/collection/${encodeURIComponent(
-                            collection
-                          )}`
-                        );
+                        router.push(`/marketplace/collection/${encodeURIComponent(collection)}`);
                       }}
                       className={cn(
-                        "flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition",
-                        "hover:bg-primary/10 hover:text-primary"
+                        'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
+                        'hover:bg-primary/10 hover:text-primary',
                       )}
                     >
                       <LibraryIcon className="h-4 w-4" />
-                      {collectionNameMap.get(collection) ??
-                        collection.replace(/_/g, " ")}
+                      {collectionNameMap.get(collection) ?? collection.replace(/_/g, ' ')}
                     </button>
                   ))}
                   {item.in_collections.length > 3 && (
@@ -419,20 +385,14 @@ export function MarketplaceExplorer({
             <div className="mb-4 rounded-full bg-muted/50 p-4">
               <Search className="h-8 w-8 text-muted-foreground" />
             </div>
-            <h3 className="mb-2 text-lg font-semibold text-foreground">
-              No items found
-            </h3>
+            <h3 className="mb-2 text-lg font-semibold text-foreground">No items found</h3>
             <p className="mb-4 max-w-md text-sm text-muted-foreground">
               {isSearching
                 ? `No results for "${query}". Try adjusting your search or filters.`
-                : "No items match your current filters."}
+                : 'No items match your current filters.'}
             </p>
             {hasActiveFilters && (
-              <Button
-                variant="outline"
-                onClick={resetFilters}
-                className="gap-2"
-              >
+              <Button variant="outline" onClick={resetFilters} className="gap-2">
                 <FunnelX className="h-4 w-4" />
                 Clear all filters
               </Button>

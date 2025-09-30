@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { ArrowLeft, Scale, Github } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Link from 'next/link';
+import { ArrowLeft, Scale, Github } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export const metadata = {
-  title: "License - Mue",
-  description: "Learn about the open source licenses used in Mue.",
+  title: 'License - Mue',
+  description: 'Learn about the open source licenses used in Mue.',
 };
 
 export default function LicensePage() {
@@ -28,9 +28,7 @@ export default function LicensePage() {
             <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground">
               License
             </h1>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Open source and free to use
-            </p>
+            <p className="mt-2 text-sm text-muted-foreground">Open source and free to use</p>
           </div>
         </div>
 
@@ -45,10 +43,10 @@ export default function LicensePage() {
               </span>
             </div>
             <p className="text-muted-foreground">
-              The main Mue Tab application is licensed under the{" "}
-              <strong>BSD-3-Clause License</strong>. This means you are free to
-              use, modify, and distribute the software, provided you include the
-              original copyright notice and disclaimer.
+              The main Mue Tab application is licensed under the{' '}
+              <strong>BSD-3-Clause License</strong>. This means you are free to use, modify, and
+              distribute the software, provided you include the original copyright notice and
+              disclaimer.
             </p>
             <div className="mt-6 rounded-lg border border-white/10 bg-black/20 p-4">
               <p className="text-sm font-mono text-muted-foreground">
@@ -77,10 +75,10 @@ export default function LicensePage() {
               </span>
             </div>
             <p className="text-muted-foreground">
-              The text and components used on this website are licensed under the{" "}
-              <strong>MIT License</strong>. This is a permissive license that
-              allows you to use, copy, modify, merge, publish, distribute,
-              sublicense, and/or sell copies of the software.
+              The text and components used on this website are licensed under the{' '}
+              <strong>MIT License</strong>. This is a permissive license that allows you to use,
+              copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+              software.
             </p>
             <div className="mt-6 rounded-lg border border-white/10 bg-black/20 p-4">
               <p className="text-sm font-mono text-muted-foreground">
@@ -88,11 +86,7 @@ export default function LicensePage() {
               </p>
             </div>
             <Button variant="outline" className="mt-6" asChild>
-              <Link
-                href="https://github.com/mue/website"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <Link href="https://github.com/mue/website" target="_blank" rel="noreferrer">
                 <Github className="mr-2 h-4 w-4" />
                 View MIT License
               </Link>
@@ -100,14 +94,11 @@ export default function LicensePage() {
           </section>
 
           <section className="rounded-2xl border border-[#FF5C25]/20 bg-gradient-to-br from-[#FF5C25]/10 to-[#FF456E]/10 p-8 backdrop-blur">
-            <h3 className="font-display text-xl font-semibold text-foreground">
-              Why Open Source?
-            </h3>
+            <h3 className="font-display text-xl font-semibold text-foreground">Why Open Source?</h3>
             <p className="mt-4 text-muted-foreground">
-              Mue is built by the community, for the community. We believe in
-              transparency, collaboration, and empowering developers to create
-              and contribute. All of our code is publicly available on GitHub,
-              and we welcome contributions from everyone.
+              Mue is built by the community, for the community. We believe in transparency,
+              collaboration, and empowering developers to create and contribute. All of our code is
+              publicly available on GitHub, and we welcome contributions from everyone.
             </p>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <div className="rounded-lg border border-white/10 bg-background/40 p-4">
@@ -127,7 +118,7 @@ export default function LicensePage() {
 
           <section className="text-center">
             <p className="text-sm text-muted-foreground">
-              Questions about licensing?{" "}
+              Questions about licensing?{' '}
               <Link
                 href="https://github.com/mue/mue/discussions"
                 target="_blank"

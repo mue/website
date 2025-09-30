@@ -1,7 +1,7 @@
-import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
-import { notFound } from "next/navigation";
+import { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import {
   ArrowLeft,
   Calendar,
@@ -14,11 +14,11 @@ import {
   Images,
   Camera,
   MapPin,
-} from "lucide-react";
+} from 'lucide-react';
 
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
   Table,
   TableBody,
@@ -26,18 +26,15 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from '@/components/ui/table';
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
-import {
-  getMarketplaceItem,
-  type MarketplaceItemDetail,
-} from "@/lib/marketplace";
+} from '@/components/ui/carousel';
+import { getMarketplaceItem, type MarketplaceItemDetail } from '@/lib/marketplace';
 
 export const revalidate = 3600;
 
@@ -48,10 +45,7 @@ type MarketplaceItemPageProps = {
   }>;
 };
 
-async function resolveItem(
-  type: string,
-  item: string
-): Promise<MarketplaceItemDetail> {
+async function resolveItem(type: string, item: string): Promise<MarketplaceItemDetail> {
   try {
     return await getMarketplaceItem(type, item);
   } catch {
@@ -59,9 +53,7 @@ async function resolveItem(
   }
 }
 
-export async function generateMetadata({
-  params,
-}: MarketplaceItemPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: MarketplaceItemPageProps): Promise<Metadata> {
   const { type, item } = await params;
 
   try {
@@ -69,57 +61,54 @@ export async function generateMetadata({
     return {
       title: `${data.display_name} – Marketplace`,
       description:
-        data.description ??
-        `Learn more about ${data.display_name} on the Mue marketplace.`,
+        data.description ?? `Learn more about ${data.display_name} on the Mue marketplace.`,
     };
   } catch {
     return {
-      title: "Marketplace item",
+      title: 'Marketplace item',
     };
   }
 }
 
-export default async function MarketplaceItemPage({
-  params,
-}: MarketplaceItemPageProps) {
+export default async function MarketplaceItemPage({ params }: MarketplaceItemPageProps) {
   const { type, item } = await params;
   const data = await resolveItem(type, item);
 
   const formattedUpdatedAt = data.updated_at
     ? new Date(data.updated_at).toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
       })
     : null;
 
-  const isPhotoPack = type === "photo_packs";
-  const isQuotePack = type === "quote_packs";
-  const isPresetSettings = type === "preset_settings";
+  const isPhotoPack = type === 'photo_packs';
+  const isQuotePack = type === 'quote_packs';
+  const isPresetSettings = type === 'preset_settings';
 
   // Get all preset settings (everything except photos, quotes, and standard fields)
   // Flatten nested settings object if it exists
   const presetSettings = isPresetSettings
     ? (() => {
         const excluded = [
-          "display_name",
-          "name",
-          "description",
-          "icon_url",
-          "screenshot_url",
-          "type",
-          "version",
-          "author",
-          "language",
-          "photos",
-          "quotes",
-          "colour",
-          "updated_at",
-          "in_collections",
+          'display_name',
+          'name',
+          'description',
+          'icon_url',
+          'screenshot_url',
+          'type',
+          'version',
+          'author',
+          'language',
+          'photos',
+          'quotes',
+          'colour',
+          'updated_at',
+          'in_collections',
         ];
 
         // Check if there's a settings object
-        if (data.settings && typeof data.settings === "object") {
+        if (data.settings && typeof data.settings === 'object') {
           return Object.entries(data.settings);
         }
 
@@ -163,11 +152,9 @@ export default async function MarketplaceItemPage({
                 </div>
 
                 <div className="space-y-2">
-                  <h1 className="text-2xl font-bold tracking-tight">
-                    {data.display_name}
-                  </h1>
+                  <h1 className="text-2xl font-bold tracking-tight">{data.display_name}</h1>
                   <Badge variant="secondary" className="text-xs capitalize">
-                    {type.replace(/_/g, " ")}
+                    {type.replace(/_/g, ' ')}
                   </Badge>
                 </div>
               </div>
@@ -195,7 +182,7 @@ export default async function MarketplaceItemPage({
                     <Globe className="h-4 w-4" />
                     <span>
                       {new Intl.DisplayNames([data.language], {
-                        type: "language",
+                        type: 'language',
                       }).of(data.language) || data.language.toUpperCase()}
                     </span>
                   </div>
@@ -229,9 +216,7 @@ export default async function MarketplaceItemPage({
                   {data.in_collections.map((collection) => (
                     <Link
                       key={collection.name}
-                      href={`/marketplace/collection/${encodeURIComponent(
-                        collection.name
-                      )}`}
+                      href={`/marketplace/collection/${encodeURIComponent(collection.name)}`}
                     >
                       <Badge
                         variant="outline"
@@ -255,24 +240,20 @@ export default async function MarketplaceItemPage({
                 Overview
               </TabsTrigger>
               <TabsTrigger value="content" className="text-sm">
-                {isPhotoPack && "Photos"}
-                {isQuotePack && "Quotes"}
-                {isPresetSettings && "Settings"}
+                {isPhotoPack && 'Photos'}
+                {isQuotePack && 'Quotes'}
+                {isPresetSettings && 'Settings'}
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="overview" className="space-y-4 sm:space-y-6">
               <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
-                <h2 className="mb-3 text-xl font-semibold sm:mb-4 sm:text-2xl">
-                  About
-                </h2>
+                <h2 className="mb-3 text-xl font-semibold sm:mb-4 sm:text-2xl">About</h2>
                 <div className="prose prose-sm max-w-none dark:prose-invert">
                   {data.description ? (
                     <p className="text-muted-foreground">{data.description}</p>
                   ) : (
-                    <p className="text-muted-foreground">
-                      No description available for this item.
-                    </p>
+                    <p className="text-muted-foreground">No description available for this item.</p>
                   )}
                 </div>
 
@@ -298,13 +279,7 @@ export default async function MarketplaceItemPage({
                       <div className="flex items-center justify-between gap-3">
                         <div className="min-w-0 flex-1">
                           <div className="text-2xl font-bold text-orange-600 dark:text-orange-400 sm:text-3xl">
-                            {
-                              new Set(
-                                data.photos
-                                  .map((p) => p.photographer)
-                                  .filter(Boolean)
-                              ).size
-                            }
+                            {new Set(data.photos.map((p) => p.photographer).filter(Boolean)).size}
                           </div>
                           <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
                             Photographers
@@ -320,13 +295,7 @@ export default async function MarketplaceItemPage({
                       <div className="flex items-center justify-between gap-3">
                         <div className="min-w-0 flex-1">
                           <div className="text-2xl font-bold text-cyan-600 dark:text-cyan-400 sm:text-3xl">
-                            {
-                              new Set(
-                                data.photos
-                                  .map((p) => p.location)
-                                  .filter(Boolean)
-                              ).size
-                            }
+                            {new Set(data.photos.map((p) => p.location).filter(Boolean)).size}
                           </div>
                           <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
                             Locations
@@ -378,11 +347,7 @@ export default async function MarketplaceItemPage({
                       <div className="flex items-center justify-between gap-3">
                         <div className="min-w-0 flex-1">
                           <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 sm:text-3xl">
-                            {
-                              new Set(
-                                data.quotes.map((q) => q.author).filter(Boolean)
-                              ).size
-                            }
+                            {new Set(data.quotes.map((q) => q.author).filter(Boolean)).size}
                           </div>
                           <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
                             Unique Authors
@@ -399,10 +364,8 @@ export default async function MarketplaceItemPage({
                         <div className="min-w-0 flex-1">
                           <div className="text-2xl font-bold text-purple-600 dark:text-purple-400 sm:text-3xl">
                             {Math.round(
-                              data.quotes.reduce(
-                                (acc, q) => acc + q.quote.length,
-                                0
-                              ) / data.quotes.length
+                              data.quotes.reduce((acc, q) => acc + q.quote.length, 0) /
+                                data.quotes.length,
                             )}
                           </div>
                           <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
@@ -424,43 +387,31 @@ export default async function MarketplaceItemPage({
               {isPhotoPack && data.photos && data.photos.length > 0 && (
                 <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
                   <div className="mb-4 flex items-center justify-between sm:mb-6">
-                    <h2 className="text-xl font-semibold sm:text-2xl">
-                      Photo Gallery
-                    </h2>
+                    <h2 className="text-xl font-semibold sm:text-2xl">Photo Gallery</h2>
                     <Badge variant="secondary">
-                      {data.photos.length}{" "}
-                      {data.photos.length === 1 ? "photo" : "photos"}
+                      {data.photos.length} {data.photos.length === 1 ? 'photo' : 'photos'}
                     </Badge>
                   </div>
 
                   <Carousel
                     opts={{
-                      align: "start",
+                      align: 'start',
                       loop: true,
                     }}
                     className="w-full"
                   >
                     <CarouselContent className="ml-0">
                       {data.photos.map((photo, index) => {
-                        const photoUrl =
-                          photo.url?.default ??
-                          Object.values(photo.url ?? {})[0];
+                        const photoUrl = photo.url?.default ?? Object.values(photo.url ?? {})[0];
                         if (!photoUrl) return null;
 
                         return (
-                          <CarouselItem
-                            key={`${photoUrl}-${index}`}
-                            className="pl-0"
-                          >
+                          <CarouselItem key={`${photoUrl}-${index}`} className="pl-0">
                             <div className="space-y-4">
                               <div className="relative h-64 w-full overflow-hidden rounded-xl border border-border/60 shadow-md md:h-96">
                                 <Image
                                   src={photoUrl}
-                                  alt={
-                                    photo.location ??
-                                    photo.photographer ??
-                                    data.display_name
-                                  }
+                                  alt={photo.location ?? photo.photographer ?? data.display_name}
                                   fill
                                   sizes="(min-width: 1024px) 60vw, 100vw"
                                   className="object-cover"
@@ -470,9 +421,7 @@ export default async function MarketplaceItemPage({
                               {(photo.photographer || photo.location) && (
                                 <div className="rounded-lg bg-muted/50 p-4">
                                   {photo.photographer && (
-                                    <p className="font-medium">
-                                      📸 {photo.photographer}
-                                    </p>
+                                    <p className="font-medium">📸 {photo.photographer}</p>
                                   )}
                                   {photo.location && (
                                     <p className="text-sm text-muted-foreground">
@@ -496,12 +445,9 @@ export default async function MarketplaceItemPage({
               {isQuotePack && data.quotes && data.quotes.length > 0 && (
                 <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
                   <div className="mb-4 flex items-center justify-between sm:mb-6">
-                    <h2 className="text-xl font-semibold sm:text-2xl">
-                      Quotes
-                    </h2>
+                    <h2 className="text-xl font-semibold sm:text-2xl">Quotes</h2>
                     <Badge variant="secondary">
-                      {data.quotes.length}{" "}
-                      {data.quotes.length === 1 ? "quote" : "quotes"}
+                      {data.quotes.length} {data.quotes.length === 1 ? 'quote' : 'quotes'}
                     </Badge>
                   </div>
 
@@ -511,9 +457,7 @@ export default async function MarketplaceItemPage({
                         <TableRow>
                           <TableHead className="w-16 shrink-0">#</TableHead>
                           <TableHead>Quote</TableHead>
-                          <TableHead className="w-48 shrink-0">
-                            Author
-                          </TableHead>
+                          <TableHead className="w-48 shrink-0">Author</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -526,7 +470,7 @@ export default async function MarketplaceItemPage({
                               {quote.quote}
                             </TableCell>
                             <TableCell className="align-top break-words text-muted-foreground">
-                              {quote.author || "—"}
+                              {quote.author || '—'}
                             </TableCell>
                           </TableRow>
                         ))}
@@ -540,12 +484,9 @@ export default async function MarketplaceItemPage({
               {isPresetSettings && presetSettings.length > 0 && (
                 <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
                   <div className="mb-4 flex items-center justify-between sm:mb-6">
-                    <h2 className="text-xl font-semibold sm:text-2xl">
-                      Preset Settings
-                    </h2>
+                    <h2 className="text-xl font-semibold sm:text-2xl">Preset Settings</h2>
                     <Badge variant="secondary">
-                      {presetSettings.length}{" "}
-                      {presetSettings.length === 1 ? "setting" : "settings"}
+                      {presetSettings.length} {presetSettings.length === 1 ? 'setting' : 'settings'}
                     </Badge>
                   </div>
 
@@ -553,9 +494,7 @@ export default async function MarketplaceItemPage({
                     <Table>
                       <TableHeader>
                         <TableRow>
-                          <TableHead className="w-64 shrink-0">
-                            Setting
-                          </TableHead>
+                          <TableHead className="w-64 shrink-0">Setting</TableHead>
                           <TableHead>Value</TableHead>
                           <TableHead className="w-32 shrink-0">Type</TableHead>
                         </TableRow>
@@ -567,7 +506,7 @@ export default async function MarketplaceItemPage({
                               {key}
                             </TableCell>
                             <TableCell className="align-top break-words font-mono text-sm">
-                              {typeof value === "object" ? (
+                              {typeof value === 'object' ? (
                                 <pre className="whitespace-pre-wrap break-words">
                                   {JSON.stringify(value, null, 2)}
                                 </pre>
@@ -593,9 +532,7 @@ export default async function MarketplaceItemPage({
                 (isQuotePack && (!data.quotes || data.quotes.length === 0)) ||
                 (isPresetSettings && presetSettings.length === 0)) && (
                 <div className="rounded-2xl border border-dashed border-border bg-card/50 p-12 text-center">
-                  <p className="text-muted-foreground">
-                    No content available for this item yet.
-                  </p>
+                  <p className="text-muted-foreground">No content available for this item yet.</p>
                 </div>
               )}
             </TabsContent>
@@ -604,7 +541,7 @@ export default async function MarketplaceItemPage({
           <Separator className="my-8" />
 
           <p className="text-center text-sm text-muted-foreground">
-            Want to contribute?{" "}
+            Want to contribute?{' '}
             <Link
               href="https://github.com/mue"
               className="font-medium text-primary hover:underline"

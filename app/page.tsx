@@ -1,57 +1,57 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { ArrowRight, Play } from "lucide-react";
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight, Play } from 'lucide-react';
 
-import Logo from "@/components/Logo";
-import { Button } from "@/components/ui/button";
+import Logo from '@/components/Logo';
+import { Button } from '@/components/ui/button';
 
 const highlights = [
-  "Ambient quotes and photography that rotate with your rhythm",
-  "Planned focus sessions, todos, and widgets in one glance",
-  "Privacy-first with synced preferences across every device",
+  'Ambient quotes and photography that rotate with your rhythm',
+  'Planned focus sessions, todos, and widgets in one glance',
+  'Privacy-first with synced preferences across every device',
 ];
 
 const stats = [
-  "4M+ custom tabs opened",
-  "Beloved by mindful makers worldwide",
-  "Open source & privacy-first by design",
+  '4M+ custom tabs opened',
+  'Beloved by mindful makers worldwide',
+  'Open source & privacy-first by design',
 ];
 
 const scrollFeatures = [
   {
-    eyebrow: "Visual serenity",
-    title: "Mood-driven scenes that shift with you",
+    eyebrow: 'Visual serenity',
+    title: 'Mood-driven scenes that shift with you',
     description:
-      "Choose from curated packs or let Mue auto-rotate through scenery that mirrors your time of day.",
+      'Choose from curated packs or let Mue auto-rotate through scenery that mirrors your time of day.',
     bullets: [
-      "Hundreds of handcrafted photo collections",
-      "Dynamic lighting adapts to sunrise and sunset",
-      "One click to favourite any background",
+      'Hundreds of handcrafted photo collections',
+      'Dynamic lighting adapts to sunrise and sunset',
+      'One click to favourite any background',
     ],
   },
   {
-    eyebrow: "Focus in motion",
-    title: "Timer, todos, and music—side by side",
+    eyebrow: 'Focus in motion',
+    title: 'Timer, todos, and music—side by side',
     description:
-      "Launch ambient sounds, capture quick notes, and run Pomodoro sprints without leaving the tab.",
+      'Launch ambient sounds, capture quick notes, and run Pomodoro sprints without leaving the tab.',
     bullets: [
-      "Structured sessions with smart reminders",
-      "Auto-pauses when you switch tasks",
-      "Deep work analytics and streak tracking",
+      'Structured sessions with smart reminders',
+      'Auto-pauses when you switch tasks',
+      'Deep work analytics and streak tracking',
     ],
   },
   {
-    eyebrow: "Personal touch",
-    title: "Quotes and greetings that feel handpicked",
+    eyebrow: 'Personal touch',
+    title: 'Quotes and greetings that feel handpicked',
     description:
-      "Prints daily inspiration in your language, tuned to the tone you need—boost, calm, or focus.",
+      'Prints daily inspiration in your language, tuned to the tone you need—boost, calm, or focus.',
     bullets: [
-      "Library of 2,000+ community-sourced quotes",
-      "Localises automatically for 20+ languages",
-      "Bring your own words with a simple import",
+      'Library of 2,000+ community-sourced quotes',
+      'Localises automatically for 20+ languages',
+      'Bring your own words with a simple import',
     ],
   },
 ];
@@ -71,19 +71,14 @@ export default function Home() {
       const rect = section.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
       const totalScrollable = rect.height + viewportHeight * 0.6;
-      const scrolled = Math.min(
-        Math.max(viewportHeight * 0.4 - rect.top, 0),
-        totalScrollable
-      );
+      const scrolled = Math.min(Math.max(viewportHeight * 0.4 - rect.top, 0), totalScrollable);
       const progress = totalScrollable === 0 ? 0 : scrolled / totalScrollable;
-      setPreviewProgress(
-        Number.isFinite(progress) ? Math.min(Math.max(progress, 0), 1) : 0
-      );
+      setPreviewProgress(Number.isFinite(progress) ? Math.min(Math.max(progress, 0), 1) : 0);
     };
 
     handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   useEffect(() => {
@@ -94,7 +89,7 @@ export default function Home() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = Number(entry.target.getAttribute("data-index"));
+            const index = Number(entry.target.getAttribute('data-index'));
             if (!Number.isNaN(index)) {
               setActiveFeature(index);
             }
@@ -103,8 +98,8 @@ export default function Home() {
       },
       {
         threshold: 0.45,
-        rootMargin: "-30% 0px -30% 0px",
-      }
+        rootMargin: '-30% 0px -30% 0px',
+      },
     );
 
     cards.forEach((card) => card && observer.observe(card));
@@ -115,15 +110,9 @@ export default function Home() {
     const node = previewContainerRef.current;
     if (!node) return;
 
-    node.style.setProperty(
-      "--preview-translate-x",
-      `${-12 + previewProgress * -6}%`
-    );
-    node.style.setProperty(
-      "--preview-translate-y",
-      `${previewProgress * 110}px`
-    );
-    node.style.setProperty("--preview-scale", `${1 - previewProgress * 0.06}`);
+    node.style.setProperty('--preview-translate-x', `${-12 + previewProgress * -6}%`);
+    node.style.setProperty('--preview-translate-y', `${previewProgress * 110}px`);
+    node.style.setProperty('--preview-scale', `${1 - previewProgress * 0.06}`);
   }, [previewProgress]);
 
   return (
@@ -144,9 +133,8 @@ export default function Home() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            Every time you open a new tab, Mue meets you with calming visuals,
-            meaningful words, and the controls you need to focus. It&apos;s the
-            browser ritual that keeps pace with you.
+            Every time you open a new tab, Mue meets you with calming visuals, meaningful words, and
+            the controls you need to focus. It&apos;s the browser ritual that keeps pace with you.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -237,8 +225,8 @@ export default function Home() {
                     A tab that fuels your flow.
                   </div>
                   <p className="mt-3 text-sm text-white/80 md:text-base">
-                    Fresh backgrounds, quotes that resonate, and quick actions
-                    keep you centred while your day evolves.
+                    Fresh backgrounds, quotes that resonate, and quick actions keep you centred
+                    while your day evolves.
                   </p>
                 </div>
 
@@ -248,17 +236,13 @@ export default function Home() {
                   </p>
                   <div>
                     <p className="text-sm font-semibold">Deep work sprint</p>
-                    <p className="text-xs text-white/70">
-                      45 mins • Oceanic Rain
-                    </p>
+                    <p className="text-xs text-white/70">45 mins • Oceanic Rain</p>
                   </div>
                   <div className="rounded-2xl bg-white/10 p-3">
                     <p className="text-[0.6rem] uppercase tracking-[0.35em] text-emerald-200">
                       Win streak
                     </p>
-                    <p className="mt-1 text-sm font-semibold">
-                      12 mindful tabs
-                    </p>
+                    <p className="mt-1 text-sm font-semibold">12 mindful tabs</p>
                   </div>
                 </div>
               </div>
@@ -274,10 +258,7 @@ export default function Home() {
         <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(210,26,17,0.12)_0%,_transparent_75%)]" />
         <div className="mx-auto flex w-full max-w-6xl flex-col gap-14 px-6 lg:grid lg:grid-cols-[minmax(0,560px)_minmax(0,1fr)] lg:items-start lg:gap-16">
           <div className="relative order-2 lg:order-1">
-            <div
-              ref={previewContainerRef}
-              className="sticky top-24 preview-motion"
-            >
+            <div ref={previewContainerRef} className="sticky top-24 preview-motion">
               <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-slate-950/65 shadow-[0_35px_80px_-35px_rgba(10,10,30,0.9)] ring-1 ring-white/10">
                 <div className="flex items-center justify-between border-b border-white/10 px-6 py-4 text-white/75">
                   <div className="flex items-center gap-2 text-sm">
@@ -306,8 +287,8 @@ export default function Home() {
                       Your space, always in flow
                     </h3>
                     <p className="mt-3 text-sm text-white/75">
-                      Stay anchored with a preview that mirrors the live tab as
-                      you explore what makes Mue special.
+                      Stay anchored with a preview that mirrors the live tab as you explore what
+                      makes Mue special.
                     </p>
                   </div>
                 </div>
@@ -325,8 +306,8 @@ export default function Home() {
                 }}
                 className={`scroll-mt-28 rounded-3xl border bg-background/78 p-8 backdrop-blur transition-all lg:p-10 ${
                   activeFeature === index
-                    ? "border-[#FF5C25]/50 shadow-[0_35px_90px_-45px_rgba(12,12,40,0.9)]"
-                    : "border-white/10 shadow-[0_18px_60px_-45px_rgba(12,14,40,0.65)]"
+                    ? 'border-[#FF5C25]/50 shadow-[0_35px_90px_-45px_rgba(12,12,40,0.9)]'
+                    : 'border-white/10 shadow-[0_18px_60px_-45px_rgba(12,14,40,0.65)]'
                 }`}
               >
                 <span className="text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-[#FF5C25]">
@@ -335,9 +316,7 @@ export default function Home() {
                 <h3 className="mt-4 font-display text-3xl font-semibold tracking-tight text-foreground lg:text-[2.15rem]">
                   {feature.title}
                 </h3>
-                <p className="mt-4 text-base text-muted-foreground">
-                  {feature.description}
-                </p>
+                <p className="mt-4 text-base text-muted-foreground">{feature.description}</p>
                 <ul className="mt-6 space-y-3">
                   {feature.bullets.map((bullet) => (
                     <li
@@ -345,9 +324,7 @@ export default function Home() {
                       className="flex items-start gap-3 text-sm text-muted-foreground"
                     >
                       <span className="mt-1 inline-flex h-1.5 w-4 rounded-full bg-gradient-to-r from-[#FF5C25] via-[#D21A11] to-[#FF456E]" />
-                      <span className="text-pretty leading-relaxed">
-                        {bullet}
-                      </span>
+                      <span className="text-pretty leading-relaxed">{bullet}</span>
                     </li>
                   ))}
                 </ul>
@@ -373,21 +350,12 @@ export default function Home() {
             Built together with a community that ships daily.
           </h2>
           <p className="max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            Dive into the repo, open issues, and shape the future of Mue Tab.
-            Contributors keep the experience fresh—from new themes to
-            accessibility enhancements and localization.
+            Dive into the repo, open issues, and shape the future of Mue Tab. Contributors keep the
+            experience fresh—from new themes to accessibility enhancements and localization.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button
-              size="lg"
-              asChild
-              className="shadow-[0_18px_45px_-28px_rgba(15,15,45,0.75)]"
-            >
-              <Link
-                href="https://github.com/mue/mue"
-                target="_blank"
-                rel="noreferrer"
-              >
+            <Button size="lg" asChild className="shadow-[0_18px_45px_-28px_rgba(15,15,45,0.75)]">
+              <Link href="https://github.com/mue/mue" target="_blank" rel="noreferrer">
                 Star Mue on GitHub
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
@@ -398,27 +366,19 @@ export default function Home() {
               asChild
               className="border-[#FF5C25]/30 text-[#FF5C25]"
             >
-              <Link
-                href="https://github.com/mue/mue/issues"
-                target="_blank"
-                rel="noreferrer"
-              >
+              <Link href="https://github.com/mue/mue/issues" target="_blank" rel="noreferrer">
                 View open issues
               </Link>
             </Button>
           </div>
           <div className="mt-10 grid w-full gap-6 text-left sm:grid-cols-3">
-            {["600+ stars", "20+ contributors", "Since 2018"].map((stat) => (
+            {['600+ stars', '20+ contributors', 'Since 2018'].map((stat) => (
               <div
                 key={stat}
                 className="rounded-2xl border border-white/10 bg-background/80 p-5 text-sm text-muted-foreground backdrop-blur"
               >
-                <p className="text-xs uppercase tracking-[0.36em] text-[#FF5C25]/80">
-                  Community
-                </p>
-                <p className="mt-2 text-lg font-semibold text-foreground">
-                  {stat}
-                </p>
+                <p className="text-xs uppercase tracking-[0.36em] text-[#FF5C25]/80">Community</p>
+                <p className="mt-2 text-lg font-semibold text-foreground">{stat}</p>
               </div>
             ))}
           </div>

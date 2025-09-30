@@ -1,13 +1,8 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from 'react';
 
 type LogoProps = SVGProps<SVGSVGElement>;
 
-const Logo = ({
-  width = 500,
-  height = 500,
-  className,
-  ...props
-}: LogoProps) => {
+const Logo = ({ width = 500, height = 500, className, ...props }: LogoProps) => {
   return (
     <svg
       width={width}

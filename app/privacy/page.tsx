@@ -1,10 +1,10 @@
-import Link from "next/link";
-import { ArrowLeft, Shield } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Link from 'next/link';
+import { ArrowLeft, Shield } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 export const metadata = {
-  title: "Privacy Policy - Mue",
-  description: "Learn how Mue handles your data and protects your privacy.",
+  title: 'Privacy Policy - Mue',
+  description: 'Learn how Mue handles your data and protects your privacy.',
 };
 
 export default function PrivacyPage() {
@@ -28,22 +28,17 @@ export default function PrivacyPage() {
             <h1 className="font-display text-4xl font-semibold tracking-tight text-foreground">
               Privacy Policy
             </h1>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Last Updated: September 8, 2024
-            </p>
+            <p className="mt-2 text-sm text-muted-foreground">Last Updated: September 8, 2024</p>
           </div>
         </div>
 
         <div className="prose-custom space-y-8">
           <section>
-            <h2 className="font-display text-2xl font-semibold text-foreground">
-              Introduction
-            </h2>
+            <h2 className="font-display text-2xl font-semibold text-foreground">Introduction</h2>
             <p className="mt-4 text-muted-foreground">
-              Mue shares no personal information with any third parties and all
-              of your settings, backgrounds and other data are stored locally
-              via localStorage. This data can be exported as JSON in advanced
-              settings on Mue.
+              Mue shares no personal information with any third parties and all of your settings,
+              backgrounds and other data are stored locally via localStorage. This data can be
+              exported as JSON in advanced settings on Mue.
             </p>
           </section>
 
@@ -62,23 +57,18 @@ export default function PrivacyPage() {
               </li>
               <li className="flex gap-3">
                 <span className="mt-1.5 inline-flex h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF5C25]" />
-                <span>
-                  All features which make requests can be disabled in settings.
-                </span>
+                <span>All features which make requests can be disabled in settings.</span>
               </li>
             </ul>
           </section>
 
           <section>
-            <h3 className="font-display text-xl font-semibold text-foreground">
-              Weather Widget
-            </h3>
+            <h3 className="font-display text-xl font-semibold text-foreground">Weather Widget</h3>
             <p className="mt-4 text-muted-foreground">
-              The weather feature of Mue only stores your inputted location (or
-              estimated when clicking on &apos;Auto&apos;) locally, and it is only sent
-              in a request to get the current weather in your area. This request
-              cannot be linked to you in any way and is sent through our
-              opensource proxy server (proxy.muetab.com) to our weather provider
+              The weather feature of Mue only stores your inputted location (or estimated when
+              clicking on &apos;Auto&apos;) locally, and it is only sent in a request to get the
+              current weather in your area. This request cannot be linked to you in any way and is
+              sent through our opensource proxy server (proxy.muetab.com) to our weather provider
               (OpenWeatherMap).
             </p>
           </section>
@@ -88,35 +78,30 @@ export default function PrivacyPage() {
               Background Widget
             </h3>
             <p className="mt-4 text-muted-foreground">
-              The photo map location feature of Mue will send a request with the
-              information of the photo shown to Mapbox.
+              The photo map location feature of Mue will send a request with the information of the
+              photo shown to Mapbox.
             </p>
             <p className="mt-4 text-muted-foreground">
-              The background feature of Mue requests to our API in order to get a
-              random image. The only information sent in this request is the
-              background category and resolution. When Unsplash or Pexels are
-              selected, this information is sent through our opensource proxy
-              server to their API. Images are requested and loaded from
-              Cloudinary, Unsplash and Pexels. Enabling the &apos;Use DuckDuckGo
-              Proxy&apos; option in background settings on the main modal will load all
-              images through the DuckDuckGo image proxy instead.
+              The background feature of Mue requests to our API in order to get a random image. The
+              only information sent in this request is the background category and resolution. When
+              Unsplash or Pexels are selected, this information is sent through our opensource proxy
+              server to their API. Images are requested and loaded from Cloudinary, Unsplash and
+              Pexels. Enabling the &apos;Use DuckDuckGo Proxy&apos; option in background settings on
+              the main modal will load all images through the DuckDuckGo image proxy instead.
             </p>
           </section>
 
           <section>
-            <h3 className="font-display text-xl font-semibold text-foreground">
-              Quote Widget
-            </h3>
+            <h3 className="font-display text-xl font-semibold text-foreground">Quote Widget</h3>
             <p className="mt-4 text-muted-foreground">
-              The quote feature of Mue requests to our API (api.muetab.com) in
-              order to get a random quote. Your set quote language is sent in
-              this request to get a quote in your language.
+              The quote feature of Mue requests to our API (api.muetab.com) in order to get a random
+              quote. Your set quote language is sent in this request to get a quote in your
+              language.
             </p>
             <p className="mt-4 text-muted-foreground">
-              When opening the about tab in settings, requests are sent to the
-              GitHub API, our API and our opensource sponsors proxy in order to
-              check for updates, get a list of contributors, sponsors and
-              photographers on Mue.
+              When opening the about tab in settings, requests are sent to the GitHub API, our API
+              and our opensource sponsors proxy in order to check for updates, get a list of
+              contributors, sponsors and photographers on Mue.
             </p>
           </section>
 
@@ -125,33 +110,28 @@ export default function PrivacyPage() {
               Quick Links Widget
             </h3>
             <p className="mt-4 text-muted-foreground">
-              When Quick Links is enabled, favicons are obtained from the
-              DuckDuckGo favicon API. The only information sent is the URL you
-              specified and this cannot be linked to you. If you disable the
-              &apos;Use DuckDuckGo Proxy&apos; setting in the Quick Links tab, the image is
-              obtained through Google&apos;s favicon API instead.
+              When Quick Links is enabled, favicons are obtained from the DuckDuckGo favicon API.
+              The only information sent is the URL you specified and this cannot be linked to you.
+              If you disable the &apos;Use DuckDuckGo Proxy&apos; setting in the Quick Links tab,
+              the image is obtained through Google&apos;s favicon API instead.
             </p>
           </section>
 
           <section>
-            <h3 className="font-display text-xl font-semibold text-foreground">
-              Marketplace
-            </h3>
+            <h3 className="font-display text-xl font-semibold text-foreground">Marketplace</h3>
             <p className="mt-4 text-muted-foreground">
-              The Marketplace tab requests to our API (marketplace.muetab.com) in
-              order to get a list of products in a category as well as a specific
-              one. No information apart from this is sent. Images on Marketplace
-              and My Add-ons pages are loaded through the DuckDuckGo Image Proxy.
+              The Marketplace tab requests to our API (marketplace.muetab.com) in order to get a
+              list of products in a category as well as a specific one. No information apart from
+              this is sent. Images on Marketplace and My Add-ons pages are loaded through the
+              DuckDuckGo Image Proxy.
             </p>
           </section>
 
           <section>
-            <h3 className="font-display text-xl font-semibold text-foreground">
-              Offline Mode
-            </h3>
+            <h3 className="font-display text-xl font-semibold text-foreground">Offline Mode</h3>
             <p className="mt-4 text-muted-foreground">
-              Offline mode can be utilised to prevent requests to any of the
-              services mentioned in this privacy policy.
+              Offline mode can be utilised to prevent requests to any of the services mentioned in
+              this privacy policy.
             </p>
           </section>
 

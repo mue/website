@@ -1,11 +1,11 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
-import { DocsSidebar } from "@/components/docs/sidebar";
-import { DocsSearch } from "@/components/docs/search";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { getAllDocsMeta, getDocsTree } from "@/lib/docs";
+import { DocsSidebar } from '@/components/docs/sidebar';
+import { DocsSearch } from '@/components/docs/search';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { getAllDocsMeta, getDocsTree } from '@/lib/docs';
 
-export const dynamic = "force-static";
+export const dynamic = 'force-static';
 export const dynamicParams = false;
 
 type DocsLayoutProps = {
@@ -15,14 +15,10 @@ type DocsLayoutProps = {
   }>;
 };
 
-export default async function DocsLayout({
-  children,
-  params,
-}: DocsLayoutProps) {
+export default async function DocsLayout({ children, params }: DocsLayoutProps) {
   const { slug = [] } = await params;
   const normalizedSlug = slug.filter(Boolean);
-  const activeHref =
-    normalizedSlug.length > 0 ? `/docs/${normalizedSlug.join("/")}` : "/docs";
+  const activeHref = normalizedSlug.length > 0 ? `/docs/${normalizedSlug.join('/')}` : '/docs';
   const [tree, docsMeta] = await Promise.all([getDocsTree(), getAllDocsMeta()]);
 
   return (
