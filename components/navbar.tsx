@@ -2,6 +2,7 @@
 
 import Logo from './logo';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import {
   NavigationMenu,
@@ -14,6 +15,7 @@ import {
 } from '@/components/ui/navigation-menu';
 import { Button } from './ui/button';
 import { Download, Menu, BookOpen } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import {
   Sheet,
   SheetClose,
@@ -43,6 +45,27 @@ const docsQuickLinks: { title: string; href: string; description: string }[] = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const isDocsActive = pathname?.startsWith('/docs') ?? false;
+  const navLinks = [
+    {
+      href: '/marketplace',
+      label: 'Marketplace',
+      isActive: pathname?.startsWith('/marketplace') ?? false,
+    },
+    {
+      href: '/blog',
+      label: 'Blog',
+      isActive: pathname?.startsWith('/blog') ?? false,
+    },
+    {
+      href: '/contact',
+      label: 'Contact',
+      isActive: pathname?.startsWith('/contact') ?? false,
+    },
+  ];
+  const mobileLinks = [{ href: '/docs', label: 'Docs', isActive: isDocsActive }, ...navLinks];
+
   return (
     <nav className="bg-background/60 backdrop-blur-md flex w-full items-center gap-3 rounded-xl border border-foreground/20 px-4 py-3 shadow-lg sm:px-6 lg:px-12">
       <div className="flex flex-1 items-center">
@@ -54,7 +77,9 @@ export default function Navbar() {
         <NavigationMenu viewport={false}>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Docs</NavigationMenuTrigger>
+              <NavigationMenuTrigger data-active={isDocsActive ? 'true' : undefined}>
+                Docs
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
                   <li className="row-span-3">
@@ -73,36 +98,47 @@ export default function Navbar() {
                       </Link>
                     </NavigationMenuLink>
                   </li>
-                  {docsQuickLinks.map((item) => (
-                    <li key={item.title}>
-                      <NavigationMenuLink asChild>
-                        <Link href={item.href}>
-                          <div className="text-sm font-medium leading-none">{item.title}</div>
-                          <p className="text-muted-foreground line-clamp-2 text-sm leading-snug">
-                            {item.description}
-                          </p>
-                        </Link>
-                      </NavigationMenuLink>
-                    </li>
-                  ))}
+                  {docsQuickLinks.map((item) => {
+                    const isActive = pathname?.startsWith(item.href) ?? false;
+                    return (
+                      <li key={item.title}>
+                        <NavigationMenuLink asChild active={isActive}>
+                          <Link href={item.href}>
+                            <div
+                              className={cn(
+                                'text-sm font-medium leading-none',
+                                isActive && 'text-primary',
+                              )}
+                            >
+                              {item.title}
+                            </div>
+                            <p
+                              className={cn(
+                                'text-muted-foreground line-clamp-2 text-sm leading-snug',
+                                isActive && 'text-primary/80',
+                              )}
+                            >
+                              {item.description}
+                            </p>
+                          </Link>
+                        </NavigationMenuLink>
+                      </li>
+                    );
+                  })}
                 </ul>
               </NavigationMenuContent>
             </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                <Link href="/marketplace">Marketplace</Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                <Link href="/blog">Blog</Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-                <Link href="/contact">Contact</Link>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
+            {navLinks.map(({ href, label, isActive }) => (
+              <NavigationMenuItem key={href}>
+                <NavigationMenuLink
+                  asChild
+                  className={navigationMenuTriggerStyle()}
+                  active={isActive}
+                >
+                  <Link href={href}>{label}</Link>
+                </NavigationMenuLink>
+              </NavigationMenuItem>
+            ))}
           </NavigationMenuList>
         </NavigationMenu>
       </div>
@@ -128,45 +164,52 @@ export default function Navbar() {
             </SheetHeader>
             <div className="flex flex-col gap-5">
               <nav className="flex flex-col gap-3 text-base font-medium">
-                <SheetClose asChild>
-                  <Link href="/docs" className="transition-colors hover:text-primary">
-                    Docs
-                  </Link>
-                </SheetClose>
-                <SheetClose asChild>
-                  <Link href="/marketplace" className="transition-colors hover:text-primary">
-                    Marketplace
-                  </Link>
-                </SheetClose>
-                <SheetClose asChild>
-                  <Link href="/blog" className="transition-colors hover:text-primary">
-                    Blog
-                  </Link>
-                </SheetClose>
-                <SheetClose asChild>
-                  <Link href="/contact" className="transition-colors hover:text-primary">
-                    Contact
-                  </Link>
-                </SheetClose>
+                {mobileLinks.map(({ href, label, isActive }) => (
+                  <SheetClose asChild key={href}>
+                    <Link
+                      href={href}
+                      aria-current={isActive ? 'page' : undefined}
+                      className={cn(
+                        'transition-colors hover:text-primary',
+                        isActive && 'text-primary font-semibold',
+                      )}
+                    >
+                      {label}
+                    </Link>
+                  </SheetClose>
+                ))}
               </nav>
               <div className="flex flex-col gap-3">
                 <p className="text-xs font-semibold uppercase text-muted-foreground">
                   Docs quick links
                 </p>
                 <div className="flex flex-col gap-2">
-                  {docsQuickLinks.map((item) => (
-                    <SheetClose asChild key={item.title}>
-                      <Link
-                        href={item.href}
-                        className="flex flex-col gap-1 rounded-md border border-border/60 p-3 transition hover:border-primary hover:bg-accent/50"
-                      >
-                        <span className="font-medium">{item.title}</span>
-                        <span className="text-muted-foreground text-sm leading-snug">
-                          {item.description}
-                        </span>
-                      </Link>
-                    </SheetClose>
-                  ))}
+                  {docsQuickLinks.map((item) => {
+                    const isActive = pathname?.startsWith(item.href) ?? false;
+                    return (
+                      <SheetClose asChild key={item.title}>
+                        <Link
+                          href={item.href}
+                          className={cn(
+                            'flex flex-col gap-1 rounded-md border border-border/60 p-3 transition hover:border-primary hover:bg-accent/50',
+                            isActive && 'border-primary bg-accent/40 text-primary',
+                          )}
+                        >
+                          <span className={cn('font-medium', isActive && 'text-primary')}>
+                            {item.title}
+                          </span>
+                          <span
+                            className={cn(
+                              'text-muted-foreground text-sm leading-snug',
+                              isActive && 'text-primary/80',
+                            )}
+                          >
+                            {item.description}
+                          </span>
+                        </Link>
+                      </SheetClose>
+                    );
+                  })}
                 </div>
               </div>
               <SheetClose asChild>
