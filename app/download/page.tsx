@@ -6,13 +6,14 @@ import { ArrowRight, Chrome, Globe, Github } from 'lucide-react';
 import { FaChrome, FaFirefoxBrowser, FaEdge } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
 import { Button } from '@/components/ui/button';
+import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
 
 const browsers = [
   {
     name: 'Chrome',
     Icon: FaChrome,
     description: 'Get Mue for Chrome and Chromium-based browsers',
-    url: 'https://chromewebstore.google.com/detail/mue/jfaidnnckeinloipodbgfjjmipgjnllo',
+    url: BROWSER_STORE_URLS.chrome,
     version: 'Latest version available',
     gradient: 'from-[#4285F4] to-[#34A853]',
     userAgents: ['Chrome', 'Chromium', 'Edg/'],
@@ -21,7 +22,7 @@ const browsers = [
     name: 'Edge',
     Icon: FaEdge,
     description: 'Get Mue for Microsoft Edge',
-    url: 'https://microsoftedge.microsoft.com/addons/detail/mue/aepnglgjfokepefimhbnibfjekidhmja',
+    url: BROWSER_STORE_URLS.edge,
     version: 'Optimized for Edge',
     gradient: 'from-[#0078D4] to-[#50E6FF]',
     userAgents: ['Edg/'],
@@ -30,7 +31,7 @@ const browsers = [
     name: 'Firefox',
     Icon: FaFirefoxBrowser,
     description: 'Get Mue for Firefox',
-    url: 'https://addons.mozilla.org/firefox/addon/mue',
+    url: BROWSER_STORE_URLS.firefox,
     version: 'Firefox Add-on',
     gradient: 'from-[#FF6611] to-[#FF9500]',
     userAgents: ['Firefox'],
@@ -39,7 +40,7 @@ const browsers = [
     name: 'Whale',
     Icon: SiNaver,
     description: 'Get Mue for NAVER Whale browser',
-    url: 'https://store.whale.naver.com/detail/llgbhppoedhhjcammholkkpbkegjicbf',
+    url: BROWSER_STORE_URLS.whale,
     version: 'NAVER Whale Store',
     gradient: 'from-[#1BC5E9] to-[#0D67D2]',
     userAgents: ['Whale'],

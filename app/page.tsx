@@ -9,6 +9,7 @@ import { SiNaver } from 'react-icons/si';
 
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
 
 const highlights = [
   'Fresh photos & quotes that match your energy',
@@ -87,6 +88,7 @@ const browsers = [
       'bg-[conic-gradient(from_120deg_at_50%_50%,#DB4437_0deg,#DB4437_90deg,#F4B400_90deg,#F4B400_180deg,#0F9D58_180deg,#0F9D58_270deg,#4285F4_270deg,#4285F4_360deg)]',
     innerDotClass: 'bg-[#1A73E8]',
     shadowClass: 'shadow-[0_16px_35px_-18px_rgba(66,133,244,0.55)]',
+    url: BROWSER_STORE_URLS.chrome,
   },
   {
     name: 'Edge',
@@ -95,6 +97,7 @@ const browsers = [
     iconClass: 'bg-[linear-gradient(135deg,#00A4EF_0%,#0078D7_55%,#174EB6_100%)]',
     innerDotClass: 'bg-[#0F5BB5]',
     shadowClass: 'shadow-[0_16px_35px_-18px_rgba(0,120,215,0.55)]',
+    url: BROWSER_STORE_URLS.edge,
   },
   {
     name: 'Firefox',
@@ -103,6 +106,7 @@ const browsers = [
     iconClass: 'bg-[linear-gradient(135deg,#FF9500_0%,#FF7139_40%,#FF4F5E_70%,#9C2AA0_100%)]',
     innerDotClass: 'bg-[#FF9500]',
     shadowClass: 'shadow-[0_16px_35px_-18px_rgba(255,113,57,0.55)]',
+    url: BROWSER_STORE_URLS.firefox,
   },
   {
     name: 'Whale',
@@ -111,6 +115,7 @@ const browsers = [
     iconClass: 'bg-[linear-gradient(135deg,#1BC5E9_0%,#0D67D2_100%)]',
     innerDotClass: 'bg-[#1BC5E9]',
     shadowClass: 'shadow-[0_16px_35px_-18px_rgba(27,197,233,0.55)]',
+    url: BROWSER_STORE_URLS.whale,
   },
 ];
 
@@ -287,14 +292,20 @@ export default function Home() {
                 {browsers.map((browser) => {
                   const Icon = browser.Icon;
                   return (
-                    <div key={browser.name}>
+                    <Link
+                      key={browser.name}
+                      href={browser.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group"
+                    >
                       <div className="flex flex-1 flex-row items-center text-left">
-                        <span className="bg-background px-4 py-2 rounded-full text-sm font-semibold text-foreground transition-colors duration-300 group-hover:text-[#FF5C25] sm:text-base flex items-center gap-2">
+                        <span className="bg-background px-4 py-2 rounded-full text-sm font-semibold text-foreground transition-all duration-300 hover:text-[#FF5C25] hover:shadow-lg hover:scale-105 sm:text-base flex items-center gap-2">
                           <Icon className="h-4 w-4 flex-shrink-0" />
                           {browser.name}
                         </span>
                       </div>
-                    </div>
+                    </Link>
                   );
                 })}
               </div>
