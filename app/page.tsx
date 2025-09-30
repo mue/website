@@ -67,8 +67,11 @@ const scrollFeatures = [
     eyebrow: 'Stay locked in',
     title: 'Quotes that actually resonate',
     description:
-      'Words that resonate, in your language. Start every tab with quotes that match your mood and mindset.',
-    bullets: ['hand picked quotes', 'Community curated quote packs'],
+      'Start every tab with quotes that match your mood and mindset, delivered in your language.',
+    bullets: [
+      'Hand-picked quotes that inspire and motivate',
+      'Community-curated quote packs from the Marketplace',
+    ],
   },
   {
     eyebrow: 'Privacy first',
@@ -416,7 +419,7 @@ export default function Home() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Button size="lg" asChild className="shadow-[0_18px_45px_-28px_rgba(15,15,45,0.75)]">
               <Link href="https://github.com/mue/mue" target="_blank" rel="noreferrer">
-                Star Mue on GitHub
+                View Mue on GitHub
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
