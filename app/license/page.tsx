@@ -19,13 +19,6 @@ export default function LicensePage() {
       <div className="pointer-events-none absolute inset-x-0 top-[-20%] -z-20 h-[80vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.25)_0%,_transparent_60%)] blur-3xl" />
 
       <div className="mx-auto w-full max-w-4xl px-6 py-16">
-        <Button variant="ghost" asChild className="mb-8">
-          <Link href="/">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to home
-          </Link>
-        </Button>
-
         <div className="mb-12 flex items-center gap-4">
           <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20">
             <Scale className="h-8 w-8 text-[#FF5C25]" />

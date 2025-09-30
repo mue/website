@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Calendar, User, ArrowLeft, ArrowRight, ChevronLeft } from 'lucide-react';
 
@@ -8,6 +7,7 @@ import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { BlogImage } from '@/components/blog/blog-image';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -91,7 +91,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
         <header className="mb-12">
           {post.frontmatter.image && (
             <div className="relative mb-8 aspect-[21/9] overflow-hidden rounded-2xl border border-white/10">
-              <Image
+              <BlogImage
                 src={post.frontmatter.image}
                 alt={post.frontmatter.title}
                 fill
