@@ -1,26 +1,19 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Lexend_Deca, Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ScrollToTop } from "@/components/scroll-to-top";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const lexendDeca = Lexend_Deca({
+  variable: "--font-lexend-deca",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const plusJakarta = Plus_Jakarta_Sans({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -36,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${plusJakarta.variable} antialiased`}
+        className={`${lexendDeca.variable} ${inter.variable} antialiased`}
       >
         <ThemeProvider
           attribute="class"

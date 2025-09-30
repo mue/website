@@ -108,8 +108,10 @@ export default function Navbar() {
         </NavigationMenu>
       </div>
       <div className="flex items-center gap-2">
-        <Button variant="default" className="hidden sm:inline-flex">
-          <Download className="mr-2 h-4 w-4" /> Download
+        <Button variant="default" className="hidden sm:inline-flex" asChild>
+          <Link href="/download">
+            <Download className="mr-2 h-4 w-4" /> Download
+          </Link>
         </Button>
         <Sheet>
           <SheetTrigger asChild>
@@ -177,9 +179,11 @@ export default function Navbar() {
                 </div>
               </div>
               <SheetClose asChild>
-                <Button className="w-full">
-                  <Download className="mr-2 h-4 w-4" />
-                  Download
+                <Button className="w-full" asChild>
+                  <Link href="/download">
+                    <Download className="mr-2 h-4 w-4" />
+                    Download
+                  </Link>
                 </Button>
               </SheetClose>
             </div>
