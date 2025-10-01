@@ -116,7 +116,7 @@ export default function CreateAddonPage() {
       } else if (json.type === 'settings' && json.settings) {
         setSettingsJson(JSON.stringify(json.settings, null, 2));
       }
-    } catch (error) {
+    } catch {
       setErrorMessage('Failed to load example. Please try again.');
       setShowErrorDialog(true);
     }
@@ -157,7 +157,7 @@ export default function CreateAddonPage() {
             setSettingsJson(JSON.stringify(json.settings, null, 2));
           }
         }
-      } catch (error) {
+      } catch {
         setErrorMessage('Invalid JSON file. Please check your file and try again.');
         setShowErrorDialog(true);
       }
@@ -169,7 +169,7 @@ export default function CreateAddonPage() {
   };
 
   const generateAddonData = () => {
-    let addonData: any = { ...metadata };
+    const addonData: Record<string, unknown> = { ...metadata };
 
     if (addonType === 'photos') {
       addonData.photos = photos.filter((p) => p.photographer && p.location && p.url.default);
@@ -186,7 +186,7 @@ export default function CreateAddonPage() {
         );
 
         addonData.settings = filteredSettings;
-      } catch (error) {
+      } catch {
         setErrorMessage('Invalid JSON in settings. Please check your input.');
         setShowErrorDialog(true);
         return null;

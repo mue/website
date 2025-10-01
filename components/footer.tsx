@@ -44,7 +44,7 @@ export default function Footer() {
         // Check if all status keys are "up"
         const allUp = data.every((service: { status: string }) => service.status === 'up');
         setSystemStatus(allUp ? 'operational' : 'degraded');
-      } catch (error) {
+      } catch {
         // If fetch fails, assume degraded
         setSystemStatus('degraded');
       }
