@@ -134,7 +134,7 @@ export default function Home() {
               <h1 className="mt-8 text-balance text-3xl leading-[1.15] tracking-tight text-foreground sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl">
                 <span className="block animate-fade-up animate-delay-100">
                   <b className="font-heading tracking-wide font-light">{greeting}, </b>
-                  user
+                  user.
                 </span>
                 <span className="mt-2 block animate-fade-up animate-delay-200">
                   Stop staring at <b className="font-heading tracking-wide font-light">blank</b>{' '}
