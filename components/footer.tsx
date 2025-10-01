@@ -25,6 +25,7 @@ const footerLinks = {
   Legal: [
     { name: 'Privacy', href: '/privacy' },
     { name: 'License', href: '/license' },
+    { name: 'DMCA', href: '/dmca' },
   ],
 };
 
