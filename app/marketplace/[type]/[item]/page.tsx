@@ -39,6 +39,9 @@ import {
 } from '@/components/ui/carousel';
 import { getMarketplaceItem, type MarketplaceItemDetail } from '@/lib/marketplace';
 import { ItemActions } from './item-actions';
+import { PresetSettingsTable } from '@/components/marketplace/preset-settings-table';
+import { QuotesTable } from '@/components/marketplace/quotes-table';
+import { PhotoGallery } from '@/components/marketplace/photo-gallery';
 
 export const revalidate = 3600;
 
@@ -441,7 +444,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
             </TabsContent>
 
             <TabsContent value="content" className="space-y-4 sm:space-y-6">
-              {/* Photo Packs - Carousel */}
+              {/* Photo Packs - Gallery */}
               {isPhotoPack && data.photos && data.photos.length > 0 && (
                 <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
                   <div className="mb-4 flex items-center justify-between sm:mb-6">
@@ -451,55 +454,11 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                     </Badge>
                   </div>
 
-                  <Carousel
-                    opts={{
-                      align: 'start',
-                      loop: true,
-                    }}
-                    className="w-full max-w-4xl mx-auto"
-                  >
-                    <CarouselContent className="ml-0">
-                      {data.photos.map((photo, index) => {
-                        const photoUrl = photo.url?.default ?? Object.values(photo.url ?? {})[0];
-                        if (!photoUrl) return null;
-
-                        return (
-                          <CarouselItem key={`${photoUrl}-${index}`} className="pl-0">
-                            <div className="space-y-4">
-                              <div className="relative h-64 w-full max-w-4xl overflow-hidden rounded-xl border border-border/60 shadow-md md:h-96 mx-auto">
-                                <Image
-                                  src={photoUrl}
-                                  alt={photo.location ?? photo.photographer ?? data.display_name}
-                                  fill
-                                  sizes="(min-width: 1024px) 60vw, 100vw"
-                                  className="object-cover"
-                                  unoptimized
-                                />
-                              </div>
-                              {(photo.photographer || photo.location) && (
-                                <div className="rounded-lg bg-muted/50 p-4">
-                                  {photo.photographer && (
-                                    <p className="font-medium">📸 {photo.photographer}</p>
-                                  )}
-                                  {photo.location && (
-                                    <p className="text-sm text-muted-foreground">
-                                      📍 {photo.location}
-                                    </p>
-                                  )}
-                                </div>
-                              )}
-                            </div>
-                          </CarouselItem>
-                        );
-                      })}
-                    </CarouselContent>
-                    <CarouselPrevious className="left-2" />
-                    <CarouselNext className="right-2" />
-                  </Carousel>
+                  <PhotoGallery photos={data.photos} itemName={data.display_name} />
                 </div>
               )}
 
-              {/* Quote Packs - Table (No Gallery) */}
+              {/* Quote Packs - Table */}
               {isQuotePack && data.quotes && data.quotes.length > 0 && (
                 <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
                   <div className="mb-4 flex items-center justify-between sm:mb-6">
@@ -509,32 +468,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                     </Badge>
                   </div>
 
-                  <div className="w-full overflow-x-auto rounded-lg border">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-16 shrink-0">#</TableHead>
-                          <TableHead>Quote</TableHead>
-                          <TableHead className="w-48 shrink-0">Author</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {data.quotes.map((quote, index) => (
-                          <TableRow key={`${quote.quote}-${index}`}>
-                            <TableCell className="align-top font-medium text-muted-foreground">
-                              {index + 1}
-                            </TableCell>
-                            <TableCell className="max-w-xl break-words font-medium">
-                              {quote.quote}
-                            </TableCell>
-                            <TableCell className="align-top break-words text-muted-foreground">
-                              {quote.author || '—'}
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                  <QuotesTable quotes={data.quotes} />
                 </div>
               )}
 
@@ -548,40 +482,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                     </Badge>
                   </div>
 
-                  <div className="w-full overflow-x-auto rounded-lg border">
-                    <Table>
-                      <TableHeader>
-                        <TableRow>
-                          <TableHead className="w-64 shrink-0">Setting</TableHead>
-                          <TableHead>Value</TableHead>
-                          <TableHead className="w-32 shrink-0">Type</TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {presetSettings.map(([key, value]) => (
-                          <TableRow key={key}>
-                            <TableCell className="align-top font-mono font-semibold text-primary">
-                              {key}
-                            </TableCell>
-                            <TableCell className="align-top break-words font-mono text-sm">
-                              {typeof value === 'object' ? (
-                                <pre className="whitespace-pre-wrap break-words">
-                                  {JSON.stringify(value, null, 2)}
-                                </pre>
-                              ) : (
-                                String(value)
-                              )}
-                            </TableCell>
-                            <TableCell className="align-top text-muted-foreground">
-                              <Badge variant="outline" className="capitalize">
-                                {typeof value}
-                              </Badge>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </div>
+                  <PresetSettingsTable settings={presetSettings} />
                 </div>
               )}
 
