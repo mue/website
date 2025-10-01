@@ -1,11 +1,7 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-
-import { ArrowRight, Calendar, User } from 'lucide-react';
-
-import { BlogImage } from '@/components/blog/blog-image';
-import { Badge } from '@/components/ui/badge';
+// All list rendering handled client-side in BlogFilter
 import { getAllBlogPosts } from '@/lib/blog';
+import { BlogFilter } from './parts/blog-filter';
 
 export const metadata: Metadata = {
   title: 'Blog',
@@ -19,14 +15,6 @@ export const metadata: Metadata = {
 };
 
 export const dynamic = 'force-static';
-
-function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
-}
 
 export default async function BlogPage() {
   const posts = await getAllBlogPosts();
@@ -53,79 +41,7 @@ export default async function BlogPage() {
           </p>
         </header>
 
-        {posts.length === 0 ? (
-          <div className="rounded-2xl border border-white/10 bg-card/70 p-12 text-center backdrop-blur">
-            <p className="text-muted-foreground">No blog posts yet. Check back soon!</p>
-          </div>
-        ) : (
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {posts.map((post) => (
-              <article
-                key={post.slug}
-                className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-card/70 shadow-[0_18px_60px_-45px_rgba(12,14,40,0.65)] backdrop-blur transition-all hover:-translate-y-1 hover:border-[#FF5C25]/50 hover:shadow-[0_35px_90px_-45px_rgba(12,12,40,0.9)]"
-              >
-                {post.frontmatter.image && (
-                  <div className="relative aspect-[16/9] overflow-hidden">
-                    <BlogImage
-                      src={post.frontmatter.image}
-                      alt={post.frontmatter.title}
-                      fill
-                      className="object-cover transition duration-300 group-hover:scale-105"
-                      sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/40" />
-                  </div>
-                )}
-
-                <div className="flex flex-1 flex-col p-6">
-                  <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1.5">
-                      <Calendar className="h-3.5 w-3.5" />
-                      {formatDate(post.frontmatter.date)}
-                    </span>
-                    {post.frontmatter.author && (
-                      <>
-                        <span className="text-muted-foreground/50">&bull;</span>
-                        <span className="flex items-center gap-1.5">
-                          <User className="h-3.5 w-3.5" />
-                          {post.frontmatter.author}
-                        </span>
-                      </>
-                    )}
-                  </div>
-
-                  <h2 className="mb-3 text-xl font-semibold tracking-tight text-foreground transition group-hover:text-primary">
-                    {post.frontmatter.title}
-                  </h2>
-
-                  {post.excerpt && (
-                    <p className="mb-4 line-clamp-3 text-sm text-muted-foreground">
-                      {post.excerpt}
-                    </p>
-                  )}
-
-                  {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
-                    <div className="mb-4 flex flex-wrap gap-2">
-                      {post.frontmatter.tags.slice(0, 3).map((tag) => (
-                        <Badge key={tag} variant="secondary" className="rounded-full text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  )}
-
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-primary transition group-hover:gap-3"
-                  >
-                    Read more
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
+        <BlogFilter initialPosts={posts} />
       </div>
     </div>
   );

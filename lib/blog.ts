@@ -19,6 +19,8 @@ export type BlogFrontmatter = {
   description?: string;
   image?: string;
   tags?: string[];
+  dateModified?: string; // optional ISO date for updates
+  imagePlaceholder?: string; // optional base64 blur placeholder
 };
 
 export type BlogPost = {
@@ -26,12 +28,16 @@ export type BlogPost = {
   frontmatter: BlogFrontmatter;
   content: string;
   excerpt?: string;
+  readingTime?: string;
+  wordCount?: number;
 };
 
 export type BlogPostPreview = {
   slug: string;
   frontmatter: BlogFrontmatter;
   excerpt?: string;
+  readingTime?: string;
+  wordCount?: number;
 };
 
 function isMarkdownFile(file: string) {
@@ -90,10 +96,17 @@ export async function getAllBlogPosts(): Promise<BlogPostPreview[]> {
       frontmatter.description ||
       content.split('\n\n')[0]?.replace(/[#*`]/g, '').trim().slice(0, 200);
 
+    // Basic word metrics
+    const wordCount = content.split(/\s+/).filter(Boolean).length;
+    const minutes = Math.max(1, Math.round(wordCount / 180));
+    const readingTime = `${minutes} min read`;
+
     posts.push({
       slug,
       frontmatter,
       excerpt,
+      wordCount,
+      readingTime,
     });
   }
 
@@ -129,10 +142,16 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
   const excerpt =
     frontmatter.description || content.split('\n\n')[0]?.replace(/[#*`]/g, '').trim().slice(0, 200);
 
+  const wordCount = content.split(/\s+/).filter(Boolean).length;
+  const minutes = Math.max(1, Math.round(wordCount / 180));
+  const readingTime = `${minutes} min read`;
+
   return {
     slug,
     frontmatter,
     content: html.toString(),
     excerpt,
+    wordCount,
+    readingTime,
   };
 }
