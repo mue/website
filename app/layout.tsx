@@ -27,7 +27,7 @@ const alfaSlabOne = Alfa_Slab_One({
 export const metadata: Metadata = {
   metadataBase: new URL('https://muetab.com'),
   title: {
-    default: 'Mue - Modifiable. User-centric. Experience,',
+    default: 'Mue - Modifiable. User-centric. Experience.',
     template: '%s | Mue',
   },
   description:
