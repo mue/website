@@ -70,12 +70,12 @@ const steps = [
   {
     number: 2,
     title: 'Open a new tab',
-    description: 'Launch a new tab and Mue will greet you with a beautiful, personalized experience.',
+    description: 'Launch a new tab and Mue will guide you through the initial setup process.',
   },
   {
     number: 3,
-    title: 'Customize your space',
-    description: 'Explore settings to tailor backgrounds, widgets, and themes to match your workflow.',
+    title: 'Customise your space',
+    description: 'Explore settings to tailor backgrounds, widgets, and more to match your workflow.',
   },
 ];
 

@@ -82,7 +82,11 @@ export default function Footer() {
               <Logo className="h-12 w-12" />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              A mindful new tab experience that brings calm and focus to every browsing session.
+              <span className="font-bold">M</span>odifiable.{' '}
+              <span className="font-bold">U</span>ser-centric.{' '}
+              <span className="font-bold">E</span>xperience.
+              <br />
+              That's Mue.
             </p>
             <a
               href="https://status.muetab.com"
@@ -150,7 +154,14 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
           <p>
-            © 2019-{new Date().getFullYear()} The Mue Authors. Open source and built with care.
+            © 2019-{new Date().getFullYear()} The Mue Authors. Licensed under{' '}
+            <Link
+              href="/license"
+              className="underline hover:text-foreground"
+            >
+              BSD-3-Clause
+            </Link>
+            . All rights reserved.
           </p>
         </div>
       </div>

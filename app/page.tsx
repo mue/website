@@ -15,23 +15,23 @@ import { CommunityStatCard } from '@/components/home/community-stat-card';
 import { BrowserBadge } from '@/components/home/browser-badge';
 import { StatItem } from '@/components/home/stat-item';
 
-const stats = ['Launched 2018', '5,000+ monthly active users', '10 million+ tabs opened'];
+const stats = ['Building since 2018', '5,000+ monthly active users', '10,000,000+ tabs'];
 
 const communityStats = [
   {
     label: 'Collaborators',
     value: '50+',
-    description: 'Open-source builders keeping Mue fresh.',
+    description: 'Developers keeping Mue fresh and reliable.',
   },
   {
     label: 'GitHub Stars',
     value: '600+',
-    description: 'Loved by developers across the globe.',
+    description: 'Loved by enthusiasts across the globe.',
   },
   {
     label: 'Forks',
     value: '70+',
-    description: 'Experiments and extensions from the community.',
+    description: 'Actively explored and upgraded.',
   },
   {
     label: 'Users',
@@ -41,7 +41,7 @@ const communityStats = [
   {
     label: 'Tabs Opened',
     value: '10M+',
-    description: 'Countless sessions powered by our APIs.',
+    description: 'From new tabs to renewed focus.',
   },
   {
     label: 'Origins',
@@ -55,12 +55,12 @@ const scrollFeatures = [
     eyebrow: 'Eye candy',
     title: 'Backgrounds that hit different',
     description:
-      'Pick from curated photo packs or let Mue auto-rotate stunning scenery based on your time of day.',
+      'Pick from our unique photographer selection or download user-created packs.',
     bullets: [
-      'A hand-picked exclusive library of backgrounds',
-      'Community supplied packs available in the Marketplace',
+      'Exclusive library of photos not found anywhere else',
+      'Community organised backgrounds available in the Marketplace',
     ],
-    footerText: 'Fully customizable',
+    footerText: 'Fully customisable',
   },
   {
     eyebrow: 'Stay locked in',
@@ -69,9 +69,9 @@ const scrollFeatures = [
       'Start every tab with quotes that match your mood and mindset, delivered in your language.',
     bullets: [
       'Hand-picked quotes that inspire and motivate',
-      'Community-curated quote packs from the Marketplace',
+      'Movie quotes, memes and more options in the Marketplace',
     ],
-    footerText: 'Personalize your flow',
+    footerText: 'Personalise your flow',
   },
   {
     eyebrow: 'Privacy first',
@@ -144,7 +144,7 @@ export default function Home() {
 
               <p className="mt-6 max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg lg:text-lg animate-fade-up animate-delay-300">
                 Every tab hits different with Mue. Stunning backgrounds, quotes that slap,
-                notes—everything you need to lock in. No fluff. No distractions. Just pure focus
+                places for your notes - everything you need to lock in. No fluff. No distractions. Just pure focus
                 energy.
               </p>
 
@@ -232,8 +232,7 @@ export default function Home() {
                 ))}
               </div>
               <p className="relative text-[0.7rem] leading-relaxed text-neutral-800 dark:text-muted-foreground/70 sm:text-xs">
-                *Availability can vary by store. Optimized for desktop browsers, but Mue is open
-                source—port it, fork it, and make it your own anywhere.
+                *not actually available on Safari yet, but we&apos;re working on it! And no, we&apos;re not adding Opera support. Please stop asking.
               </p>
             </div>
           </div>
@@ -284,8 +283,8 @@ export default function Home() {
             Built by you, for you.
           </h2>
           <p className="max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            100% open source. Join the community shaping the future of Mue—with new backgrounds,
-            features, and localizations released regularly.
+            100% free and open source. Join the community shaping the future of Mue - whether that's
+            contributing code, reporting issues, or sharing ideas.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Button size="lg" asChild className="shadow-[0_18px_45px_-28px_rgba(15,15,45,0.75)]">
@@ -301,7 +300,7 @@ export default function Home() {
               className="border-[#FF5C25]/30 text-[#FF5C25]"
             >
               <Link href="https://github.com/mue/mue/issues" target="_blank" rel="noreferrer">
-                View open issues
+                See open issues
               </Link>
             </Button>
           </div>
