@@ -36,9 +36,10 @@ export default function LicensePage() {
             description={
               <>
                 The Mue Tab extension and this website are licensed under the{' '}
-                <strong>BSD-3-Clause License</strong>. This means you are free to use, modify, and
-                distribute the software, provided you include the original copyright notice and
-                disclaimer.
+                <strong>BSD-3-Clause License</strong>. This means you&apos;re free to use, modify,
+                and distribute the code, as long as you give appropriate credit, provide a copy of
+                the license, and don&apos;t use our names or trademarks for endorsement without
+                permission.
               </>
             }
             copyrights={
@@ -71,9 +72,10 @@ export default function LicensePage() {
             licenseColor="#0078D4"
             description={
               <>
-                The Mue API and Marketplace are licensed under the <strong>MIT License</strong>.
-                This is a permissive license that allows you to use, copy, modify, merge, publish,
-                distribute, sublicense, and/or sell copies of the software.
+                The Mue API and Marketplace are licensed under the <strong>MIT License</strong>. This
+                means you&apos;re free to use, copy, modify, merge, publish, distribute, sublicense,
+                and/or sell copies of the software, as long as you include the original copyright
+                notice and permission notice in all copies or substantial portions of the software.
               </>
             }
             copyrights={
@@ -128,12 +130,12 @@ export default function LicensePage() {
             <p className="text-sm text-muted-foreground">
               Questions about licensing?{' '}
               <Link
-                href="https://github.com/mue/mue/discussions"
+                href="https://discord.gg/zv8C9F8"
                 target="_blank"
                 rel="noreferrer"
                 className="font-medium text-[#FF5C25] hover:underline"
               >
-                Ask on GitHub Discussions
+                Ask us on Discord
               </Link>
             </p>
           </section>

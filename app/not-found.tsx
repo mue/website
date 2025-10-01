@@ -15,7 +15,7 @@ export default function NotFound() {
         <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-primary">
           <span>404</span>
           <span className="h-1 w-1 rounded-full bg-primary" />
-          <span>Page missing</span>
+          <span>Page not found</span>
         </div>
 
         <div className="flex flex-col items-center gap-6 text-balance">
@@ -23,8 +23,8 @@ export default function NotFound() {
             Lost in the flow, but not gone for good.
           </h1>
           <p className="max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            The page you&apos;re looking for has either moved or hasn&apos;t been crafted yet.
-            Let&apos;s guide you back to the parts of Mue that keep your browsing grounded.
+            The page you&apos;re looking for has either moved or hasn&apos;t been built yet.
+            Let&apos;s take you back to the parts of Mue that keep your browsing focused.
           </p>
         </div>
 
@@ -55,12 +55,12 @@ export default function NotFound() {
                   href: '/blog',
                 },
                 {
-                  label: 'Create for the marketplace',
-                  href: '/docs/marketplace/create',
+                  label: 'Create marketplace items',
+                  href: '/marketplace/create',
                 },
                 {
-                  label: 'Need to uninstall?',
-                  href: '/uninstall',
+                  label: 'View documentation',
+                  href: '/docs',
                 },
               ].map((item) => (
                 <li key={item.href} className="flex items-start gap-3">
@@ -82,16 +82,16 @@ export default function NotFound() {
                 Still need help?
               </p>
               <h2 className="mt-4 text-2xl font-semibold tracking-tight">
-                Our docs and community can point you forward.
+                Our docs and users can point you in the right direction.
               </h2>
               <p className="mt-3 text-sm text-foreground/80">
-                Browse the FAQ, reach out on GitHub, or join the conversation.
+                Browse the FAQ, open an issue on GitHub, or join us on Discord.
               </p>
             </div>
             <Button variant="outline" className="mt-6" asChild>
               <Link href="/docs/faq">
                 <LifeBuoy className="mr-2 h-4 w-4" />
-                Visit the help centre
+                Read the docs
               </Link>
             </Button>
           </div>

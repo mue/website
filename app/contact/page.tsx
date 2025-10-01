@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Github, Mail, MessageSquare } from 'lucide-react';
+import { FaXTwitter } from "react-icons/fa6";
 
 import { Button } from '@/components/ui/button';
 import { PageHeader } from '@/components/shared/page-header';
@@ -18,19 +19,13 @@ export const metadata: Metadata = {
   },
 };
 
-const XIcon = ({ className }: { className?: string }) => (
-  <svg className={className} fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
-
 const contactMethods = [
   {
     href: 'https://discord.gg/zv8C9F8',
     icon: MessageSquare,
-    title: 'Discord Community',
+    title: 'Discord Server',
     description:
-      'Join our Discord server for real-time support, discussions, and to connect with other Mue users.',
+      'Join our Discord server for support, community discussions and to connect with other Mue users.',
     external: true,
   },
   {
@@ -45,13 +40,13 @@ const contactMethods = [
     icon: Mail,
     title: 'Email',
     description:
-      'Send us an email at hello@muetab.com for general inquiries or business-related questions.',
+      'For general inquiries, partnerships or security issues, reach out to us via email at hello@muetab.com',
     external: false,
   },
   {
     href: 'https://twitter.com/getmue',
-    icon: XIcon,
-    title: 'Twitter/X',
+    icon: FaXTwitter,
+    title: 'X (formerly Twitter)',
     description: 'Follow us on Twitter for the latest updates, announcements, and news about Mue.',
     external: true,
   },
@@ -68,8 +63,9 @@ export default function ContactPage() {
         <div className="space-y-8">
           <ContentSection title="Get in Touch">
             <p>
-              Whether you have a question, feedback, or need support, we&apos;re here to help.
-              Choose the best way to reach us below.
+              Whether you have questions, feedback, or need support, our team is here to help. Reach
+              out through any of the channels below, and we&apos;ll get back to you as soon as
+              possible. 
             </p>
           </ContentSection>
 
@@ -87,11 +83,11 @@ export default function ContactPage() {
           </div>
 
           <section className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
-            <h3 className="text-xl font-semibold text-foreground">Before You Reach Out</h3>
+            <h3 className="text-xl font-semibold text-foreground">Things not working?</h3>
             <BulletList
               items={[
                 <>
-                  Check our{' '}
+                  Read our{' '}
                   <Link href="/docs" className="text-foreground underline">
                     documentation
                   </Link>{' '}
@@ -105,11 +101,11 @@ export default function ContactPage() {
                     rel="noreferrer"
                     className="text-foreground underline"
                   >
-                    GitHub issues
+                    GitHub Issues
                   </a>{' '}
-                  to see if your question has been addressed.
+                  to see if your problem has been addressed.
                 </>,
-                'For technical support, Discord is usually the fastest way to get help.',
+                'If you need support, our Discord is usually the fastest way to get help.',
               ]}
             />
           </section>
