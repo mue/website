@@ -72,6 +72,13 @@ export default function Navbar() {
           <Logo width={100} height={100} className="h-10 w-10" />
         </Link>
       </div>
+      <div className="flex lg:hidden">
+        <Link href={'/'} className="cursor-pointer">
+          <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-lexend-deca)' }}>
+            Mue
+          </span>
+        </Link>
+      </div>
       <div className="hidden lg:flex">
         <NavigationMenu viewport={false}>
           <NavigationMenuList>

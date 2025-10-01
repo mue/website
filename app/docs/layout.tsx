@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 import { DocsSearch } from '@/components/docs/search';
 import { DocsSidebar } from '@/components/docs/sidebar';
+import { DocsMobileMenu } from '@/components/docs/mobile-menu';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { getAllDocsMeta, getDocsTree } from '@/lib/docs';
 
@@ -24,6 +25,10 @@ export default async function DocsLayout({ children, params }: DocsLayoutProps) 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-background via-background to-muted/40">
       <div className="mx-auto w-full max-w-7xl px-6 py-10 lg:flex lg:items-start lg:gap-10">
+        {/* Mobile Menu */}
+        <DocsMobileMenu tree={tree} docsMeta={docsMeta} activeHref={activeHref} />
+
+        {/* Desktop Sidebar */}
         <aside className="hidden w-64 shrink-0 lg:block lg:sticky lg:top-28 lg:self-start">
           <ScrollArea className="pr-4 lg:max-h-[calc(100vh-9rem)]">
             <DocsSearch docs={docsMeta} />

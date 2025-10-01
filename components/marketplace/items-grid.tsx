@@ -15,21 +15,21 @@ interface ItemsGridProps {
 export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) {
   const router = useRouter();
   return (
-    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    <div className="grid gap-3 grid-cols-2 sm:gap-4 lg:grid-cols-3">
       {items.map((item) => (
         <Link
           key={`${item.type}-${item.name}`}
           href={`/marketplace/${encodeURIComponent(item.type)}/${encodeURIComponent(item.name)}`}
-          className="group relative flex h-full cursor-pointer flex-col gap-4 overflow-hidden rounded-2xl border border-border bg-card/70 p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
+          className="group relative flex h-full cursor-pointer flex-col gap-3 overflow-hidden rounded-2xl border border-border bg-card/70 p-4 lg:gap-4 lg:p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
         >
-          <div className="flex items-center justify-between gap-4">
-            <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl border border-border/60 bg-muted">
+          <div className="flex items-center justify-center lg:justify-start">
+            <div className="relative h-16 w-16 lg:h-14 lg:w-14 flex-shrink-0 overflow-hidden rounded-xl border border-border/60 bg-muted">
               {item.icon_url ? (
                 <Image
                   src={item.icon_url}
                   alt={item.display_name}
                   fill
-                  sizes="56px"
+                  sizes="64px"
                   className="object-cover"
                   unoptimized
                 />
@@ -41,14 +41,18 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
             </div>
           </div>
 
-          <div className="space-y-2">
-            <h3 className="text-xl font-semibold leading-tight text-foreground">
+          <div className="space-y-1 text-center lg:text-left">
+            <h3 className="text-sm lg:text-xl font-semibold leading-tight text-foreground line-clamp-2">
               {item.display_name}
             </h3>
-            {item.author && <p className="text-sm text-muted-foreground">By {item.author}</p>}
+            {item.author && (
+              <p className="text-xs lg:text-sm text-muted-foreground line-clamp-1">
+                By {item.author}
+              </p>
+            )}
           </div>
 
-          <div className="flex items-center flex-wrap gap-2">
+          <div className="hidden lg:flex items-center flex-wrap gap-2">
             <Badge
               className={cn(
                 'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',

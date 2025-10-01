@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Scale } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { CopyButton } from '@/components/ui/copy-button';
 import { PageHeader } from '@/components/shared/page-header';
 import { LicenseSection } from '@/components/license/license-section';
 import { CopyrightNotice } from '@/components/license/copyright-notice';
@@ -44,12 +45,26 @@ export default function LicensePage() {
             }
             copyrights={
               <div className="rounded-lg border border-border bg-muted/30 p-4 space-y-2">
-                <p className="text-sm font-mono text-muted-foreground">
-                  Copyright (c) 2019-{currentYear} The Mue Authors
-                </p>
-                <p className="text-sm font-mono text-muted-foreground">
-                  Copyright (c) 2018-2019 David Ralph
-                </p>
+                <div className="group flex items-start justify-between gap-2">
+                  <p className="text-sm font-mono text-muted-foreground flex-1">
+                    Copyright (c) 2019-{currentYear} The Mue Authors
+                  </p>
+                  <CopyButton
+                    text={`Copyright (c) 2019-${currentYear} The Mue Authors`}
+                    size="sm"
+                    className="opacity-0 transition-opacity group-hover:opacity-100"
+                  />
+                </div>
+                <div className="group flex items-start justify-between gap-2">
+                  <p className="text-sm font-mono text-muted-foreground flex-1">
+                    Copyright (c) 2018-2019 David Ralph
+                  </p>
+                  <CopyButton
+                    text="Copyright (c) 2018-2019 David Ralph"
+                    size="sm"
+                    className="opacity-0 transition-opacity group-hover:opacity-100"
+                  />
+                </div>
               </div>
             }
             links={

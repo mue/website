@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
 import { DocsShell } from '@/components/docs/docs-shell';
+import { CodeBlockCopy } from '@/components/docs/code-block-copy';
 import { getDocsNavigation } from '@/components/docs/layout-context';
 import { DocsSearch } from '@/components/docs/search';
 import { buttonVariants } from '@/components/ui/button';
@@ -191,6 +192,7 @@ function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
         </div>
       }
     >
+      <CodeBlockCopy />
       <article className="docs-prose" dangerouslySetInnerHTML={{ __html: doc.content }} />
 
       <nav className="grid gap-4 border-t pt-6 md:grid-cols-2">
@@ -310,14 +312,17 @@ function DocsSectionContent({ section, tree, docsMeta }: DocsSectionContentProps
               const description = getMetaDescription(child.slug);
               const subtopics = child.children ?? [];
               return (
-                <article
+                <Link
                   key={child.slug.join('/')}
-                  className="flex h-full flex-col justify-between rounded-2xl border bg-card/70 p-6 shadow-sm transition hover:border-primary/30"
+                  href={child.href}
+                  className="group flex h-full cursor-pointer flex-col justify-between rounded-2xl border bg-card/70 p-6 shadow-sm transition hover:border-primary/30 hover:shadow-md"
                 >
                   <div className="space-y-3">
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <h3 className="text-lg font-semibold">{child.title}</h3>
+                        <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">
+                          {child.title}
+                        </h3>
                         <p className="mt-1 text-sm text-muted-foreground">
                           {description ??
                             (child.hasPage
@@ -339,14 +344,11 @@ function DocsSectionContent({ section, tree, docsMeta }: DocsSectionContentProps
                     )}
                   </div>
 
-                  <Link
-                    href={child.href}
-                    className="mt-6 inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary hover:underline"
-                  >
+                  <div className="mt-6 inline-flex w-fit items-center gap-2 text-sm font-semibold text-primary group-hover:underline">
                     {child.hasPage ? 'Read guide' : 'Browse section'}
                     <ArrowRight className="size-4" />
-                  </Link>
-                </article>
+                  </div>
+                </Link>
               );
             })}
           </div>
