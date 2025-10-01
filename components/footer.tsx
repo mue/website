@@ -91,7 +91,7 @@ export default function Footer() {
               href="https://status.muetab.com"
               target="_blank"
               rel="noreferrer noopener"
-              className="mt-4 inline-flex items-center gap-2 rounded-lg border border-border bg-muted/50 px-3 py-2 text-xs text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
+              className="mt-4 inline-flex cursor-pointer items-center gap-2 rounded-lg border border-border bg-muted/50 px-3 py-2 text-xs text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
             >
               <span className="relative flex h-2 w-2">
                 <span
@@ -108,7 +108,7 @@ export default function Footer() {
                 href="https://github.com/mue/mue"
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/50 text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
+                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border bg-muted/50 text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
               >
                 <Github className="h-4 w-4" />
                 <span className="sr-only">GitHub</span>
@@ -117,7 +117,7 @@ export default function Footer() {
                 href="https://twitter.com/getmue"
                 target="_blank"
                 rel="noreferrer"
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-muted/50 text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
+                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border bg-muted/50 text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
               >
                 <Twitter className="h-4 w-4" />
                 <span className="sr-only">Twitter</span>
@@ -137,7 +137,7 @@ export default function Footer() {
                     <li key={link.name}>
                       <Link
                         href={link.href}
-                        className="text-sm text-muted-foreground transition hover:text-foreground"
+                        className="cursor-pointer text-sm text-muted-foreground transition hover:text-foreground"
                         target={link.href.startsWith('http') ? '_blank' : undefined}
                         rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
                       >
@@ -154,7 +154,7 @@ export default function Footer() {
         <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
           <p>
             © 2019-{new Date().getFullYear()} The Mue Authors. Licensed under{' '}
-            <Link href="/license" className="underline hover:text-foreground">
+            <Link href="/license" className="cursor-pointer underline hover:text-foreground">
               BSD-3-Clause
             </Link>
             . All rights reserved.

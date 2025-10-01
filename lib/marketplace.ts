@@ -1,9 +1,9 @@
 const MARKETPLACE_BASE_URL = 'https://api.muetab.com/v2/marketplace';
 
 const MARKETPLACE_TYPE_LABELS: Record<string, string> = {
-  preset_settings: 'Preset settings',
-  photo_packs: 'Photo packs',
-  quote_packs: 'Quote packs',
+  preset_settings: 'Preset Settings',
+  photo_packs: 'Photo Pack',
+  quote_packs: 'Quote Pack',
 };
 
 type MarketplaceResponse<T> = {

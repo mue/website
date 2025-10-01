@@ -20,7 +20,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
         <Link
           key={`${item.type}-${item.name}`}
           href={`/marketplace/${encodeURIComponent(item.type)}/${encodeURIComponent(item.name)}`}
-          className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-2xl border border-border bg-card/70 p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
+          className="group relative flex h-full cursor-pointer flex-col gap-4 overflow-hidden rounded-2xl border border-border bg-card/70 p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
         >
           <div className="flex items-center justify-between gap-4">
             <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl border border-border/60 bg-muted">
@@ -69,7 +69,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
                       router.push(`/marketplace/collection/${encodeURIComponent(collection)}`);
                     }}
                     className={cn(
-                      'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
+                      'flex cursor-pointer flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
                       'hover:bg-primary/10 hover:text-primary',
                     )}
                   >

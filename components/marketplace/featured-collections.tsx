@@ -68,7 +68,7 @@ export default function FeaturedCollections({ randomCollections }: FeaturedColle
                   <div className="mt-auto flex items-center gap-3">
                     <Link
                       href={`/marketplace/collection/${encodeURIComponent(collection.name)}`}
-                      className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90"
+                      className="cursor-pointer rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90"
                     >
                       Explore collection
                     </Link>
