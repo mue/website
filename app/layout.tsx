@@ -27,7 +27,7 @@ const alfaSlabOne = Alfa_Slab_One({
 export const metadata: Metadata = {
   metadataBase: new URL('https://muetab.com'),
   title: {
-    default: 'Mue - Your mindful new tab',
+    default: 'Mue - Modifiable. User-centric. Experience,',
     template: '%s | Mue',
   },
   description:
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://muetab.com',
-    title: 'Mue - Your mindful new tab',
+    title: 'Mue - Modifiable. User-centric. Experience.',
     description:
       'A fast, open and free-to-use browser extension that gives a new, fresh and customisable tab page to modern browsers.',
     siteName: 'Mue',
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Mue - Your mindful new tab',
+    title: 'Mue - Modifiable. User-centric. Experience.',
     description:
       'A fast, open and free-to-use browser extension that gives a new, fresh and customisable tab page to modern browsers.',
     images: ['/og-image.png'],
