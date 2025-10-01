@@ -14,9 +14,12 @@ import {
   Images,
   Camera,
   MapPin,
+  Share2,
+  Flag,
 } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import {
@@ -35,6 +38,7 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { getMarketplaceItem, type MarketplaceItemDetail } from '@/lib/marketplace';
+import { ItemActions } from './item-actions';
 
 export const revalidate = 3600;
 
@@ -248,6 +252,10 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                   </p>
                 </>
               )}
+
+              <Separator />
+
+              <ItemActions itemName={item} displayName={data.display_name} type={type} />
             </div>
 
             {/* Collections Card */}
