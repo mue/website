@@ -70,6 +70,45 @@ export async function generateMetadata({ params }: MarketplaceItemPageProps): Pr
   }
 }
 
+// Helper function to parse description with line breaks and clickable links
+function parseDescription(description: string) {
+  // Split by newlines
+  const lines = description.split(/\\n|\n/);
+
+  return lines.map((line, lineIndex) => {
+    // Regex to detect URLs
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = line.split(urlRegex);
+
+    return (
+      <span key={lineIndex}>
+        {parts.map((part, partIndex) => {
+          if (urlRegex.test(part)) {
+            return (
+              <a
+                key={partIndex}
+                href={part}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-primary hover:underline"
+              >
+                {part}
+              </a>
+            );
+          }
+          return part;
+        })}
+        {lineIndex < lines.length - 1 && (
+          <>
+            <br />
+            <br />
+          </>
+        )}
+      </span>
+    );
+  });
+}
+
 export default async function MarketplaceItemPage({ params }: MarketplaceItemPageProps) {
   const { type, item } = await params;
   const data = await resolveItem(type, item);
@@ -153,9 +192,14 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
 
                 <div className="space-y-2">
                   <h1 className="text-2xl font-bold tracking-tight">{data.display_name}</h1>
-                  <Badge variant="secondary" className="text-xs capitalize">
-                    {type.replace(/_/g, ' ')}
-                  </Badge>
+                  <Link href={`/marketplace?category=${type}`}>
+                    <Badge
+                      variant="secondary"
+                      className="cursor-pointer text-xs capitalize transition hover:bg-primary/10 hover:text-primary"
+                    >
+                      {type.replace(/_/g, ' ')}
+                    </Badge>
+                  </Link>
                 </div>
               </div>
 
@@ -200,7 +244,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                 <>
                   <Separator />
                   <p className="text-sm leading-relaxed text-muted-foreground">
-                    {data.description}
+                    {data.description.split(/\\n|\n/)[0]}
                   </p>
                 </>
               )}
@@ -233,7 +277,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
         </aside>
 
         {/* Right Column - Content */}
-        <main className="min-h-[400px] lg:min-h-[600px]">
+        <main className="min-h-[400px] lg:min-h-[600px] overflow-hidden">
           <Tabs defaultValue="overview" className="w-full">
             <TabsList className="mb-4 grid w-full grid-cols-2 lg:mb-6">
               <TabsTrigger value="overview" className="text-sm">
@@ -251,7 +295,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                 <h2 className="mb-3 text-xl font-semibold sm:mb-4 sm:text-2xl">About</h2>
                 <div className="prose prose-sm max-w-none dark:prose-invert">
                   {data.description ? (
-                    <p className="text-muted-foreground">{data.description}</p>
+                    <p className="text-muted-foreground">{parseDescription(data.description)}</p>
                   ) : (
                     <p className="text-muted-foreground">No description available for this item.</p>
                   )}
@@ -266,7 +310,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                             {data.photos.length}
                           </div>
                           <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                            Total Photos
+                            Total {data.photos.length === 1 ? 'Photo' : 'Photos'}
                           </div>
                         </div>
                         <div className="flex-shrink-0 rounded-full bg-emerald-500/20 p-2 sm:p-3">
@@ -282,7 +326,9 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                             {new Set(data.photos.map((p) => p.photographer).filter(Boolean)).size}
                           </div>
                           <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                            Photographers
+                            {new Set(data.photos.map((p) => p.photographer).filter(Boolean)).size === 1
+                              ? 'Photographer'
+                              : 'Photographers'}
                           </div>
                         </div>
                         <div className="flex-shrink-0 rounded-full bg-orange-500/20 p-2 sm:p-3">
@@ -298,7 +344,9 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                             {new Set(data.photos.map((p) => p.location).filter(Boolean)).size}
                           </div>
                           <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                            Locations
+                            {new Set(data.photos.map((p) => p.location).filter(Boolean)).size === 1
+                              ? 'Location'
+                              : 'Locations'}
                           </div>
                         </div>
                         <div className="flex-shrink-0 rounded-full bg-cyan-500/20 p-2 sm:p-3">
@@ -334,7 +382,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                             {data.quotes.length}
                           </div>
                           <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                            Total Quotes
+                            Total {data.quotes.length === 1 ? 'Quote' : 'Quotes'}
                           </div>
                         </div>
                         <div className="flex-shrink-0 rounded-full bg-primary/20 p-2 sm:p-3">
@@ -350,7 +398,9 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                             {new Set(data.quotes.map((q) => q.author).filter(Boolean)).size}
                           </div>
                           <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                            Unique Authors
+                            {new Set(data.quotes.map((q) => q.author).filter(Boolean)).size === 1
+                              ? 'Unique Author'
+                              : 'Unique Authors'}
                           </div>
                         </div>
                         <div className="flex-shrink-0 rounded-full bg-blue-500/20 p-2 sm:p-3">
@@ -400,13 +450,13 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                     }}
                     className="w-full max-w-4xl mx-auto"
                   >
-                    <CarouselContent className="-ml-2 md:-ml-4">
+                    <CarouselContent className="ml-0">
                       {data.photos.map((photo, index) => {
                         const photoUrl = photo.url?.default ?? Object.values(photo.url ?? {})[0];
                         if (!photoUrl) return null;
 
                         return (
-                          <CarouselItem key={`${photoUrl}-${index}`} className="pl-2 md:pl-4">
+                          <CarouselItem key={`${photoUrl}-${index}`} className="pl-0">
                             <div className="space-y-4">
                               <div className="relative h-64 w-full max-w-4xl overflow-hidden rounded-xl border border-border/60 shadow-md md:h-96 mx-auto">
                                 <Image
