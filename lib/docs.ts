@@ -58,9 +58,19 @@ function isMarkdownFile(file: string) {
 }
 
 function formatTitleFromSlug(slug: string) {
+  const specialCases: Record<string, string> = {
+    'api': 'API',
+  };
+
   return slug
     .split('-')
-    .map((token) => token.charAt(0).toUpperCase() + token.slice(1))
+    .map((token) => {
+      const lower = token.toLowerCase();
+      if (specialCases[lower]) {
+        return specialCases[lower];
+      }
+      return token.charAt(0).toUpperCase() + token.slice(1);
+    })
     .join(' ');
 }
 

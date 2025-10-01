@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import { ArrowRight, BookOpen, Layers3, PlugZap } from 'lucide-react';
+import { ArrowRight, BookOpen, Layers3, PlugZap, FileEdit } from 'lucide-react';
 
 import { DocsShell } from '@/components/docs/docs-shell';
 import { getDocsNavigation } from '@/components/docs/layout-context';
@@ -110,43 +110,77 @@ export default async function DocsIndexPage() {
           </p>
         </header>
 
-        <div className="grid gap-6 lg:grid-cols-2">
-          {tree.map((section) => (
-            <article
-              key={section.slug.join('/')}
-              className="rounded-2xl border bg-card/70 p-6 shadow-sm transition hover:border-primary/30"
-            >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="text-lg font-semibold">{section.title}</h3>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {section.children?.length ?? 0} topic
-                    {section.children && section.children.length !== 1 && 's'}
-                  </p>
+        <div className="grid auto-rows-fr gap-6 lg:grid-cols-2">
+          {/* Render large cards first */}
+          {tree
+            .filter((section) => section.children && section.children.length > 0)
+            .map((section) => (
+              <article
+                key={section.slug.join('/')}
+                className="flex flex-col rounded-lg border bg-card/70 p-3 shadow-sm transition hover:border-primary/30 lg:rounded-2xl lg:p-6 lg:row-span-2"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <h3 className="text-base font-semibold lg:text-lg">{section.title}</h3>
+                    <p className="mt-0.5 text-xs text-muted-foreground lg:mt-1 lg:text-sm">
+                      {section.children!.length} topic
+                      {section.children!.length !== 1 && 's'}
+                    </p>
+                  </div>
+                  <Link
+                    href={section.href}
+                    className="text-xs font-medium text-primary hover:underline lg:text-sm"
+                  >
+                    View all
+                  </Link>
                 </div>
-                <Link
-                  href={section.href}
-                  className="text-sm font-medium text-primary hover:underline"
-                >
-                  View all
-                </Link>
-              </div>
 
-              <ul className="mt-4 space-y-3">
-                {section.children?.slice(0, 3).map((child) => (
-                  <li key={child.slug.join('/')}>
-                    <Link
-                      href={child.href}
-                      className="group flex items-center justify-between rounded-lg border border-dashed border-transparent px-3 py-2 text-sm transition hover:border-primary/30 hover:bg-primary/5"
-                    >
-                      <span className="font-medium text-foreground">{child.title}</span>
-                      <ArrowRight className="size-3.5 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </article>
-          ))}
+                <ul className="mt-3 space-y-2 lg:mt-4 lg:space-y-3">
+                  {section.children!.slice(0, 3).map((child) => (
+                    <li key={child.slug.join('/')}>
+                      <Link
+                        href={child.href}
+                        className="group flex items-center justify-between rounded-lg border border-dashed border-transparent px-2 py-1.5 text-sm transition hover:border-primary/30 hover:bg-primary/5 lg:px-3 lg:py-2"
+                      >
+                        <span className="font-medium text-foreground">{child.title}</span>
+                        <ArrowRight className="size-3 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-primary lg:size-3.5" />
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+
+          {/* Render small cards after */}
+          {tree
+            .filter((section) => !section.children || section.children.length === 0)
+            .map((section) => (
+              <Link
+                key={section.slug.join('/')}
+                href={section.href}
+                className="group flex items-center justify-between gap-3 rounded-lg border bg-card/70 p-2.5 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg lg:rounded-xl lg:p-4"
+              >
+                <div>
+                  <h3 className="text-sm font-semibold lg:text-base">{section.title}</h3>
+                  <p className="mt-0.5 text-[10px] text-muted-foreground lg:text-xs">View page</p>
+                </div>
+                <ArrowRight className="size-3.5 shrink-0 text-primary transition group-hover:translate-x-1 lg:size-4" />
+              </Link>
+            ))}
+
+          {/* Contribute card - fills empty spot if needed */}
+          <Link
+            href="https://github.com/mue/mue/tree/main/docs"
+            target="_blank"
+            rel="noreferrer"
+            className="group flex items-center justify-between gap-3 rounded-lg border border-dashed border-primary/30 bg-primary/5 p-2.5 shadow-sm transition hover:-translate-y-1 hover:border-primary/60 hover:bg-primary/10 hover:shadow-lg lg:rounded-xl lg:p-4"
+          >
+            <div>
+              <h3 className="text-sm font-semibold text-primary lg:text-base">Contribute to docs</h3>
+              <p className="mt-0.5 text-[10px] text-muted-foreground lg:text-xs">Help improve our documentation</p>
+            </div>
+            <FileEdit className="size-3.5 shrink-0 text-primary transition group-hover:scale-110 lg:size-4" />
+          </Link>
         </div>
       </section>
     </DocsShell>
