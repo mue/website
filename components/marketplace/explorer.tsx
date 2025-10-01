@@ -364,7 +364,6 @@ export function MarketplaceExplorer({
                     </div>
                   )}
                 </div>
-                <Badge variant="outline">{getMarketplaceTypeLabel(item.type)}</Badge>
               </div>
 
               <div className="space-y-2">
@@ -374,33 +373,44 @@ export function MarketplaceExplorer({
                 {item.author && <p className="text-sm text-muted-foreground">By {item.author}</p>}
               </div>
 
-              {item.in_collections.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {item.in_collections.slice(0, 3).map((collection) => (
-                    <button
-                      key={collection}
-                      type="button"
-                      onClick={(event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        router.push(`/marketplace/collection/${encodeURIComponent(collection)}`);
-                      }}
-                      className={cn(
-                        'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
-                        'hover:bg-primary/10 hover:text-primary',
-                      )}
-                    >
-                      <LibraryIcon className="h-4 w-4" />
-                      {collectionNameMap.get(collection) ?? collection.replace(/_/g, ' ')}
-                    </button>
-                  ))}
-                  {item.in_collections.length > 3 && (
-                    <span className="text-xs text-muted-foreground">
-                      +{item.in_collections.length - 3} more
-                    </span>
+              <div className="flex items-center flex-wrap gap-2">
+                <Badge
+                  className={cn(
+                    'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
+                    'hover:bg-primary/10 hover:text-primary',
                   )}
-                </div>
-              )}
+                >
+                  {getMarketplaceTypeLabel(item.type)}
+                </Badge>
+
+                {item.in_collections.length > 0 && (
+                  <div className="flex flex-wrap gap-2">
+                    {item.in_collections.slice(0, 3).map((collection) => (
+                      <button
+                        key={collection}
+                        type="button"
+                        onClick={(event) => {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          router.push(`/marketplace/collection/${encodeURIComponent(collection)}`);
+                        }}
+                        className={cn(
+                          'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
+                          'hover:bg-primary/10 hover:text-primary',
+                        )}
+                      >
+                        <LibraryIcon className="h-4 w-4" />
+                        {collectionNameMap.get(collection) ?? collection.replace(/_/g, ' ')}
+                      </button>
+                    ))}
+                    {item.in_collections.length > 3 && (
+                      <span className="text-xs text-muted-foreground">
+                        +{item.in_collections.length - 3} more
+                      </span>
+                    )}
+                  </div>
+                )}
+              </div>
             </Link>
           ))}
         </div>
