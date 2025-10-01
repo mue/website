@@ -64,11 +64,10 @@ export function DocsSearch({ docs }: DocsSearchProps) {
         className="w-full justify-between bg-card text-left text-muted-foreground shadow-sm"
         onClick={handleOpen}
       >
-        <span className="flex items-center gap-2">
-          Search docs
-          <span className="text-muted-foreground/70">(title, keywords...)</span>
+        <span className="flex items-center gap-2 overflow-hidden min-w-0">
+          <span className="shrink-0">Search docs...</span>
         </span>
-        <kbd className="inline-flex items-center gap-1 rounded border bg-muted px-2 py-1 text-[10px] font-medium uppercase text-muted-foreground">
+        <kbd className="inline-flex items-center gap-1 rounded border bg-muted px-2 py-1 text-[10px] font-medium uppercase text-muted-foreground shrink-0 ml-2">
           Ctrl
           <span className="text-xs">K</span>
         </kbd>
