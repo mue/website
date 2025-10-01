@@ -315,7 +315,7 @@ export function MarketplaceExplorer({
       <section ref={containerRef} className="space-y-10">
         {/* Create Addon Button */}
         {/* Enhanced Search Bar */}
-        <div className="flex flex-row justify-between items-start ">
+        <div className="flex flex-row justify-between items-start gap-2">
           <div className="flex-1 relative max-w-2xl">
             <div className="relative">
               <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
@@ -349,10 +349,11 @@ export function MarketplaceExplorer({
               </div>
             )}
           </div>
-          <Link href="/marketplace/create">
-            <Button className="gap-2">
+          <Link href="/marketplace/create" className="shrink-0">
+            <Button className="gap-2 h-12" size="sm">
               <Plus className="h-4 w-4" />
-              Create Addon
+              <span className="hidden sm:inline">Create Addon</span>
+              <span className="sm:hidden">Create</span>
             </Button>
           </Link>
         </div>
@@ -377,18 +378,18 @@ export function MarketplaceExplorer({
           </Suspense>
         )}
 
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex w-full flex-col gap-3 md:flex-row md:items-center md:justify-between">
-            <span>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <span className="text-sm text-muted-foreground">
               Showing{' '}
               <strong className="text-foreground">
                 {displayStart > 0 ? `${displayStart}-${displayEnd}` : '0'}
               </strong>{' '}
               of <strong className="text-foreground">{filteredItems.length}</strong> items
             </span>
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-muted-foreground" htmlFor="per-page">
+                <label className="hidden sm:inline text-sm font-medium text-muted-foreground" htmlFor="per-page">
                   Per page
                 </label>
                 <Select
@@ -401,7 +402,7 @@ export function MarketplaceExplorer({
                 >
                   <SelectTrigger
                     id="per-page"
-                    className="rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                    className="w-20 rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                   >
                     <SelectValue />
                   </SelectTrigger>
@@ -415,7 +416,7 @@ export function MarketplaceExplorer({
                 </Select>
               </div>
               <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-muted-foreground" htmlFor="type-filter">
+                <label className="hidden sm:inline text-sm font-medium text-muted-foreground" htmlFor="type-filter">
                   Type
                 </label>
                 <Select
@@ -427,12 +428,12 @@ export function MarketplaceExplorer({
                 >
                   <SelectTrigger
                     id="type-filter"
-                    className="rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                    className="w-32 sm:w-auto rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                   >
-                    <SelectValue placeholder="All categories" />
+                    <SelectValue placeholder="All" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">All categories</SelectItem>
+                    <SelectItem value="all">All</SelectItem>
                     {availableTypes.map((type) => (
                       <SelectItem key={type} value={type}>
                         {getMarketplaceTypeLabel(type)}
@@ -442,7 +443,7 @@ export function MarketplaceExplorer({
                 </Select>
               </div>
               <div className="flex items-center gap-2">
-                <label className="text-sm font-medium text-muted-foreground" htmlFor="sort-by">
+                <label className="hidden sm:inline text-sm font-medium text-muted-foreground" htmlFor="sort-by">
                   Sort
                 </label>
                 <Select
@@ -454,9 +455,9 @@ export function MarketplaceExplorer({
                 >
                   <SelectTrigger
                     id="sort-by"
-                    className="rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                    className="w-32 sm:w-auto rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                   >
-                    <SelectValue placeholder="Sort by" />
+                    <SelectValue placeholder="Sort" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="name-asc">Name (A-Z)</SelectItem>

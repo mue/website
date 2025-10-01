@@ -1,4 +1,7 @@
+'use client';
+
 import type { ReactNode } from 'react';
+import { List } from 'lucide-react';
 
 import { DocsToc } from '@/components/docs/toc';
 import {
@@ -9,6 +12,14 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+import { Button } from '@/components/ui/button';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
 import type { TocItem } from '@/lib/docs';
 import { cn } from '@/lib/utils';
 
@@ -24,22 +35,42 @@ export function DocsShell({ toc = [], breadcrumb, children, header }: DocsShellP
   return (
     <div className="space-y-10">
       <div className="border-b pb-6">
-        <Breadcrumb>
-          <BreadcrumbList>
-            {breadcrumb.map((item, index) => (
-              <BreadcrumbItem key={`${item.label}-${index}`}>
-                {item.href && index !== breadcrumb.length - 1 ? (
-                  <>
-                    <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
-                    <BreadcrumbSeparator />
-                  </>
-                ) : (
-                  <BreadcrumbPage>{item.label}</BreadcrumbPage>
-                )}
-              </BreadcrumbItem>
-            ))}
-          </BreadcrumbList>
-        </Breadcrumb>
+        <div className="flex items-center justify-between gap-4">
+          <Breadcrumb>
+            <BreadcrumbList>
+              {breadcrumb.map((item, index) => (
+                <BreadcrumbItem key={`${item.label}-${index}`}>
+                  {item.href && index !== breadcrumb.length - 1 ? (
+                    <>
+                      <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
+                      <BreadcrumbSeparator />
+                    </>
+                  ) : (
+                    <BreadcrumbPage>{item.label}</BreadcrumbPage>
+                  )}
+                </BreadcrumbItem>
+              ))}
+            </BreadcrumbList>
+          </Breadcrumb>
+          {hasToc && (
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="outline" size="sm" className="xl:hidden shrink-0">
+                  <List className="h-4 w-4" />
+                  <span className="ml-2 hidden sm:inline">Contents</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-80">
+                <SheetHeader>
+                  <SheetTitle>Table of Contents</SheetTitle>
+                </SheetHeader>
+                <div className="mt-6">
+                  <DocsToc toc={toc} />
+                </div>
+              </SheetContent>
+            </Sheet>
+          )}
+        </div>
         {header && <div className="mt-6">{header}</div>}
       </div>
 
