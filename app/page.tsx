@@ -54,8 +54,7 @@ const scrollFeatures = [
   {
     eyebrow: 'Eye candy',
     title: 'Backgrounds that hit different',
-    description:
-      'Pick from our unique photographer selection or download user-created packs.',
+    description: 'Pick from our unique photographer selection or download user-created packs.',
     bullets: [
       'Exclusive library of photos not found anywhere else',
       'Community organised backgrounds available in the Marketplace',
@@ -143,9 +142,9 @@ export default function Home() {
               </h1>
 
               <p className="mt-6 max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg lg:text-lg animate-fade-up animate-delay-300">
-                Every tab hits different with Mue. Stunning backgrounds, quotes that slap,
-                places for your notes - everything you need to lock in. No fluff. No distractions. Just pure focus
-                energy.
+                Every tab hits different with Mue. Stunning backgrounds, quotes that slap, places
+                for your notes - everything you need to lock in. No fluff. No distractions. Just
+                pure focus energy.
               </p>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center animate-fade-up animate-delay-400">
@@ -232,7 +231,8 @@ export default function Home() {
                 ))}
               </div>
               <p className="relative text-[0.7rem] leading-relaxed text-neutral-800 dark:text-muted-foreground/70 sm:text-xs">
-                *not actually available on Safari yet, but we&apos;re working on it! And no, we&apos;re not adding Opera support. Please stop asking.
+                *not actually available on Safari yet, but we&apos;re working on it! And no,
+                we&apos;re not adding Opera support. Please stop asking.
               </p>
             </div>
           </div>
@@ -283,8 +283,8 @@ export default function Home() {
             Built by you, for you.
           </h2>
           <p className="max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            100% free and open source. Join the community shaping the future of Mue - whether that's
-            contributing code, reporting issues, or sharing ideas.
+            100% free and open source. Join the community shaping the future of Mue - whether
+            that&apos;s contributing code, reporting issues, or sharing ideas.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Button size="lg" asChild className="shadow-[0_18px_45px_-28px_rgba(15,15,45,0.75)]">

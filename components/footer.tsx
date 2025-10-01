@@ -82,16 +82,15 @@ export default function Footer() {
               <Logo className="h-12 w-12" />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
-              <span className="font-bold">M</span>odifiable.{' '}
-              <span className="font-bold">U</span>ser-centric.{' '}
-              <span className="font-bold">E</span>xperience.
+              <span className="font-bold">M</span>odifiable. <span className="font-bold">U</span>
+              ser-centric. <span className="font-bold">E</span>xperience.
               <br />
-              That's Mue.
+              That&apos;s Mue.
             </p>
             <a
               href="https://status.muetab.com"
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
               className="mt-4 inline-flex items-center gap-2 rounded-lg border border-border bg-muted/50 px-3 py-2 text-xs text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
             >
               <span className="relative flex h-2 w-2">
@@ -155,10 +154,7 @@ export default function Footer() {
         <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
           <p>
             © 2019-{new Date().getFullYear()} The Mue Authors. Licensed under{' '}
-            <Link
-              href="/license"
-              className="underline hover:text-foreground"
-            >
+            <Link href="/license" className="underline hover:text-foreground">
               BSD-3-Clause
             </Link>
             . All rights reserved.
