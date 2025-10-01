@@ -85,7 +85,7 @@ export default function Footer() {
               <span className="font-bold">M</span>odifiable. <span className="font-bold">U</span>
               ser-centric. <span className="font-bold">E</span>xperience.
               <br />
-              That&apos;sMue.
+              That&apos;s Mue.
             </p>
             <a
               href="https://status.muetab.com"
