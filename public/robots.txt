@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://muetab.com
+
+# Sitemaps
+Sitemap: https://muetab.com/sitemap.xml

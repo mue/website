@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-
-import { ArrowLeft, ArrowRight, Calendar, ChevronLeft, User } from 'lucide-react';
-
+import { ArrowLeft, ArrowRight, Calendar, ChevronLeft, User, Clock } from 'lucide-react';
 import { BlogImage } from '@/components/blog/blog-image';
+import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
@@ -31,19 +30,42 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: BlogPostProps): Promise<Metadata> {
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
-
   if (!post) {
-    return {
-      title: 'Post Not Found | Mue Blog',
-    };
+    return { title: 'Post Not Found | Mue Blog' };
   }
-
+  const title = `${post.frontmatter.title} | Mue Blog`;
+  const description =
+    post.excerpt || post.frontmatter.description || 'Read the latest from the Mue blog.';
+  const url = `https://mue.app/blog/${slug}`;
+  const image = post.frontmatter.image;
+  const tags = post.frontmatter.tags || [];
+  const modified = post.frontmatter.dateModified;
+  const readingTime = post.readingTime;
   return {
-    title: `${post.frontmatter.title} | Mue Blog`,
-    description: post.excerpt || post.frontmatter.description,
-    openGraph: post.frontmatter.image
+    title,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      type: 'article',
+      url,
+      title,
+      description,
+      authors: post.frontmatter.author ? [post.frontmatter.author] : undefined,
+      tags,
+      images: image ? [image] : undefined,
+      publishedTime: post.frontmatter.date,
+      modifiedTime: modified,
+    },
+    twitter: {
+      card: image ? 'summary_large_image' : 'summary',
+      title,
+      description,
+      images: image ? [image] : undefined,
+    },
+    keywords: tags.length ? tags : undefined,
+    other: readingTime
       ? {
-          images: [post.frontmatter.image],
+          'reading-time': readingTime,
         }
       : undefined,
   };
@@ -55,12 +77,6 @@ function formatDate(dateString: string) {
     month: 'long',
     day: 'numeric',
   });
-}
-
-function computeReadingTime(content: string) {
-  const words = content.split(/\s+/).filter(Boolean).length;
-  const minutes = Math.max(1, Math.round(words / 180));
-  return `${minutes} min read`;
 }
 
 export default async function BlogPostPage({ params }: BlogPostProps) {
@@ -76,6 +92,8 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
   const previousPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 
+  const hasUpdate =
+    post.frontmatter.dateModified && post.frontmatter.dateModified !== post.frontmatter.date;
   return (
     <div className="relative min-h-screen overflow-hidden">
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-20 h-[60vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.22)_0%,_transparent_60%)] blur-3xl" />
@@ -90,7 +108,7 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
         </Link>
 
         <header className="mb-12">
-          {post.frontmatter.image && (
+          {post.frontmatter.image ? (
             <div className="relative mb-8 aspect-[21/9] overflow-hidden rounded-2xl border border-white/10">
               <BlogImage
                 src={post.frontmatter.image}
@@ -100,8 +118,10 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
                 className="object-cover"
                 sizes="(min-width: 896px) 896px, 100vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/20" />
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
             </div>
+          ) : (
+            <GradientHero title={post.frontmatter.title} />
           )}
 
           <div className="space-y-4">
@@ -122,19 +142,26 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
             <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
-                {formatDate(post.frontmatter.date)}
+                <time dateTime={post.frontmatter.date}>{formatDate(post.frontmatter.date)}</time>
               </span>
-              {post.frontmatter.author && (
-                <>
-                  <span className="text-muted-foreground/50">•</span>
-                  <span className="flex items-center gap-2">
-                    <User className="h-4 w-4" />
-                    {post.frontmatter.author}
-                  </span>
-                </>
+              {hasUpdate && (
+                <span className="flex items-center gap-2" title="Updated date">
+                  <Calendar className="h-4 w-4 opacity-60" />
+                  <time dateTime={post.frontmatter.dateModified} className="italic">
+                    Updated {formatDate(post.frontmatter.dateModified!)}
+                  </time>
+                </span>
               )}
-              <span className="text-muted-foreground/50">•</span>
-              <span className="uppercase tracking-widest">{computeReadingTime(post.content)}</span>
+              {post.frontmatter.author && (
+                <span className="flex items-center gap-2">
+                  <User className="h-4 w-4" />
+                  {post.frontmatter.author}
+                </span>
+              )}
+              <span className="flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                <span>{post.readingTime}</span>
+              </span>
             </div>
 
             {post.frontmatter.description && (
@@ -143,6 +170,18 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
           </div>
         </header>
 
+        <ArticleJsonLd post={post} />
+        <BreadcrumbJsonLd
+          items={[
+            { position: 1, name: 'Home', item: 'https://mue.app/' },
+            { position: 2, name: 'Blog', item: 'https://mue.app/blog' },
+            {
+              position: 3,
+              name: post.frontmatter.title,
+              item: `https://mue.app/blog/${post.slug}`,
+            },
+          ]}
+        />
         <div className="docs-prose" dangerouslySetInnerHTML={{ __html: post.content }} />
 
         <nav className="mt-16 grid gap-4 border-t pt-8 md:grid-cols-2">
@@ -203,5 +242,113 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
         </div>
       </article>
     </div>
+  );
+}
+
+// Gradient hero fallback when no image is provided
+function GradientHero({ title }: { title: string }) {
+  const gradientClass = BLOG_IMAGE_GRADIENTS[blogImageGradientIndex(title)];
+  const initial = (title?.trim()?.[0] || '?').toUpperCase();
+  return (
+    <div
+      className={cn(
+        'relative mb-8 aspect-[21/9] overflow-hidden rounded-2xl border border-white/10 flex items-center justify-center',
+        gradientClass,
+      )}
+      aria-label={`Cover placeholder for ${title}`}
+    >
+      <span className="text-6xl font-semibold tracking-tight text-white/70 drop-shadow select-none">
+        {initial}
+      </span>
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
+    </div>
+  );
+}
+
+// JSON-LD structured data component
+function ArticleJsonLd({
+  post,
+}: {
+  post: {
+    slug: string;
+    frontmatter: {
+      title: string;
+      date: string;
+      author?: string;
+      description?: string;
+      image?: string;
+      tags?: string[];
+      dateModified?: string;
+    };
+    excerpt?: string;
+    readingTime?: string;
+    wordCount?: number;
+  };
+}) {
+  const url = `https://mue.app/blog/${post.slug}`;
+  // Derive numeric reading minutes from the readingTime string like "5 min read"
+  let readingMinutes: number | undefined;
+  if (post.readingTime) {
+    const match = /^(\d+)/.exec(post.readingTime);
+    if (match) readingMinutes = parseInt(match[1], 10);
+  }
+  const timeRequired = readingMinutes ? `PT${readingMinutes}M` : undefined;
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.frontmatter.title,
+    datePublished: post.frontmatter.date,
+    dateModified: post.frontmatter.dateModified || post.frontmatter.date,
+    author: post.frontmatter.author
+      ? { '@type': 'Person', name: post.frontmatter.author }
+      : undefined,
+    description: post.frontmatter.description || post.excerpt,
+    image: post.frontmatter.image ? [post.frontmatter.image] : undefined,
+    keywords: post.frontmatter.tags?.join(', '),
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    url,
+    publisher: {
+      '@type': 'Organization',
+      name: 'Mue',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://mue.app/og-image.png',
+      },
+    },
+    wordCount: post.wordCount,
+    timeRequired,
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data),
+      }}
+    />
+  );
+}
+
+function BreadcrumbJsonLd({
+  items,
+}: {
+  items: { position: number; name: string; item: string }[];
+}) {
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((it) => ({
+      '@type': 'ListItem',
+      position: it.position,
+      name: it.name,
+      item: it.item,
+    })),
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data),
+      }}
+    />
   );
 }
