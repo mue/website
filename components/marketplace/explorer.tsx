@@ -1,18 +1,26 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useMemo, useRef, useState, useEffect } from 'react';
+import dynamic from 'next/dynamic';
+import { Suspense } from 'react';
 
 import {
   MarketplaceCollection,
   MarketplaceItemSummary,
   getMarketplaceTypeLabel,
 } from '@/lib/marketplace';
-import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { FunnelX, Library as LibraryIcon, Plus, Search, X } from 'lucide-react';
+import { FunnelX, Plus, Search, X } from 'lucide-react';
+import { FeaturedCollectionsSkeleton } from './featured-collections-skeleton';
+import { ItemsGridSkeleton } from './items-grid-skeleton';
+
+// Lazy components
+const FeaturedCollectionsLazy = dynamic(() => import('./featured-collections'), {
+  ssr: false,
+});
+const ItemsGridLazy = dynamic(() => import('./items-grid'), { ssr: false });
 
 import {
   Select,
@@ -23,14 +31,7 @@ import {
 } from '@/components/ui/select';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
-import Autoplay from 'embla-carousel-autoplay';
+// (Carousel related imports removed after modularization)
 
 type CollectionWithTypes = MarketplaceCollection & {
   contentTypes: string[];
@@ -371,74 +372,9 @@ export function MarketplaceExplorer({
         )}
 
         {!isSearching && randomCollections.length > 0 && (
-          <Carousel
-            opts={{
-              align: 'start',
-              loop: true,
-            }}
-            plugins={[
-              Autoplay({
-                delay: 5000,
-              }),
-            ]}
-            className="w-full"
-          >
-            <CarouselContent>
-              {randomCollections.map((collection) => (
-                <CarouselItem key={collection.name}>
-                  <article className="overflow-hidden rounded-2xl border border-border bg-card/80 shadow-sm">
-                    <div className="grid gap-6 lg:grid-cols-[2fr_3fr]">
-                      <div className="relative min-h-[220px]">
-                        {collection.img ? (
-                          <Image
-                            src={collection.img}
-                            alt={collection.display_name}
-                            fill
-                            sizes="(min-width: 1024px) 40vw, 100vw"
-                            className="object-cover"
-                            priority
-                            unoptimized
-                          />
-                        ) : (
-                          <div className="h-full w-full bg-muted" />
-                        )}
-                      </div>
-                      <div className="flex flex-col gap-4 p-6">
-                        <div className="space-y-2">
-                          <div className="flex flex-wrap gap-2">
-                            {/* <Badge variant="outline">Featured collection</Badge> */}
-                            {collection.contentTypes.map((type) => (
-                              <Badge key={type} variant="secondary">
-                                {getMarketplaceTypeLabel(type)}
-                              </Badge>
-                            ))}
-                          </div>
-                          <h2 className="text-2xl font-semibold tracking-tight">
-                            {collection.display_name}
-                          </h2>
-                          {collection.description && (
-                            <p className="text-muted-foreground text-sm md:text-base line-clamp-3">
-                              {collection.description}
-                            </p>
-                          )}
-                        </div>
-                        <div className="mt-auto flex items-center gap-3">
-                          <Link
-                            href={`/marketplace/collection/${encodeURIComponent(collection.name)}`}
-                            className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90"
-                          >
-                            Explore collection
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </article>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="left-4" />
-            <CarouselNext className="right-4" />
-          </Carousel>
+          <Suspense fallback={<FeaturedCollectionsSkeleton />}>
+            <FeaturedCollectionsLazy randomCollections={randomCollections} />
+          </Suspense>
         )}
 
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -555,84 +491,9 @@ export function MarketplaceExplorer({
           </span>
         </div> */}
 
-          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {paginatedItems.map((item) => (
-              <Link
-                key={`${item.type}-${item.name}`}
-                href={`/marketplace/${encodeURIComponent(
-                  item.type,
-                )}/${encodeURIComponent(item.name)}`}
-                className="group relative flex h-full flex-col gap-4 overflow-hidden rounded-2xl border border-border bg-card/70 p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
-              >
-                <div className="flex items-center justify-between gap-4">
-                  <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-xl border border-border/60 bg-muted">
-                    {item.icon_url ? (
-                      <Image
-                        src={item.icon_url}
-                        alt={item.display_name}
-                        fill
-                        sizes="56px"
-                        className="object-cover"
-                        unoptimized
-                      />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center text-xs font-semibold uppercase text-muted-foreground/80">
-                        {item.display_name.slice(0, 2)}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <h3 className="text-xl font-semibold leading-tight text-foreground">
-                    {item.display_name}
-                  </h3>
-                  {item.author && <p className="text-sm text-muted-foreground">By {item.author}</p>}
-                </div>
-
-                <div className="flex items-center flex-wrap gap-2">
-                  <Badge
-                    className={cn(
-                      'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
-                      'hover:bg-primary/10 hover:text-primary',
-                    )}
-                  >
-                    {getMarketplaceTypeLabel(item.type)}
-                  </Badge>
-
-                  {item.in_collections.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {item.in_collections.slice(0, 3).map((collection) => (
-                        <button
-                          key={collection}
-                          type="button"
-                          onClick={(event) => {
-                            event.preventDefault();
-                            event.stopPropagation();
-                            router.push(
-                              `/marketplace/collection/${encodeURIComponent(collection)}`,
-                            );
-                          }}
-                          className={cn(
-                            'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
-                            'hover:bg-primary/10 hover:text-primary',
-                          )}
-                        >
-                          <LibraryIcon className="h-4 w-4" />
-                          {collectionNameMap.get(collection) ?? collection.replace(/_/g, ' ')}
-                        </button>
-                      ))}
-                      {item.in_collections.length > 3 && (
-                        <span className="text-xs text-muted-foreground">
-                          +{item.in_collections.length - 3} more
-                        </span>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </Link>
-            ))}
-          </div>
+          <Suspense fallback={<ItemsGridSkeleton count={itemsPerPage} />}>
+            <ItemsGridLazy items={paginatedItems} collectionNameMap={collectionNameMap} />
+          </Suspense>
 
           {filteredItems.length === 0 && (
             <div className="flex flex-col items-center justify-center rounded-2xl border-2 border-dashed border-border bg-gradient-to-br from-muted/30 to-muted/10 p-12 text-center">

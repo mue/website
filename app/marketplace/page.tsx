@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 
 import { MarketplaceExplorer } from '@/components/marketplace/explorer';
 import { getMarketplaceCollections, getMarketplaceItems } from '@/lib/marketplace';
@@ -83,11 +84,27 @@ export default async function MarketplacePage() {
         </p>
       </header> */}
 
-      <MarketplaceExplorer
-        items={items}
-        collections={collections}
-        randomCollections={collectionsWithTypes}
-      />
+      <Suspense
+        fallback={
+          <div className="flex flex-col gap-6" aria-busy="true" aria-label="Loading marketplace">
+            <div className="h-10 w-64 rounded-md bg-muted animate-pulse" />
+            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="h-48 rounded-2xl border border-border bg-card/60 animate-pulse"
+                />
+              ))}
+            </div>
+          </div>
+        }
+      >
+        <MarketplaceExplorer
+          items={items}
+          collections={collections}
+          randomCollections={collectionsWithTypes}
+        />
+      </Suspense>
     </div>
   );
 }
