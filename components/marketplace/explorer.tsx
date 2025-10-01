@@ -52,6 +52,8 @@ export function MarketplaceExplorer({
   const [typeFilter, setTypeFilter] = useState<string>('all');
   const [collectionFilter, setCollectionFilter] = useState<string | null>(null);
   const [sortBy, setSortBy] = useState<string>('name-asc');
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
 
   const collectionNameMap = useMemo(() => {
     return new Map(collections.map((collection) => [collection.name, collection.display_name]));
@@ -110,7 +112,22 @@ export function MarketplaceExplorer({
     setTypeFilter('all');
     setCollectionFilter(null);
     setSortBy('name-asc');
+    setCurrentPage(1);
   };
+
+  const totalPages = Math.ceil(filteredItems.length / itemsPerPage);
+
+  const paginatedItems = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    return filteredItems.slice(startIndex, startIndex + itemsPerPage);
+  }, [filteredItems, currentPage, itemsPerPage]);
+
+  // Reset to page 1 when filters change
+  const prevFilteredLength = useMemo(() => filteredItems.length, [filteredItems.length]);
+
+  if (prevFilteredLength !== filteredItems.length && currentPage > 1) {
+    setCurrentPage(1);
+  }
 
   const isSearching = query.trim().length > 0;
   const hasActiveFilters =
@@ -230,15 +247,8 @@ export function MarketplaceExplorer({
                           href={`/marketplace/collection/${encodeURIComponent(collection.name)}`}
                           className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90"
                         >
-                          Open collection page
+                          Explore collection
                         </Link>
-                        <button
-                          type="button"
-                          onClick={() => setCollectionFilter(collection.name)}
-                          className="text-sm font-medium text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
-                        >
-                          Filter items here
-                        </button>
                       </div>
                     </div>
                   </div>
@@ -254,8 +264,13 @@ export function MarketplaceExplorer({
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div className="flex w-full flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <span>
-            Showing <strong className="text-foreground">{filteredItems.length}</strong> of{' '}
-            <strong className="text-foreground">{items.length}</strong> items
+            Showing{' '}
+            <strong className="text-foreground">
+              {filteredItems.length > 0
+                ? `${(currentPage - 1) * itemsPerPage + 1}-${Math.min(currentPage * itemsPerPage, filteredItems.length)}`
+                : '0'}
+            </strong>{' '}
+            of <strong className="text-foreground">{filteredItems.length}</strong> items
           </span>
           <div className="flex flex-wrap items-center gap-3">
             <div className="flex items-center gap-2">
@@ -324,7 +339,7 @@ export function MarketplaceExplorer({
         </div> */}
 
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-          {filteredItems.map((item) => (
+          {paginatedItems.map((item) => (
             <Link
               key={`${item.type}-${item.name}`}
               href={`/marketplace/${encodeURIComponent(
@@ -407,6 +422,62 @@ export function MarketplaceExplorer({
                 Clear all filters
               </Button>
             )}
+          </div>
+        )}
+
+        {filteredItems.length > 0 && totalPages > 1 && (
+          <div className="flex items-center justify-center gap-2 pt-4">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+            >
+              Previous
+            </Button>
+            <div className="flex items-center gap-1">
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                // Show first page, last page, current page, and pages around current
+                const showPage =
+                  page === 1 ||
+                  page === totalPages ||
+                  (page >= currentPage - 1 && page <= currentPage + 1);
+
+                const showEllipsis =
+                  (page === 2 && currentPage > 3) ||
+                  (page === totalPages - 1 && currentPage < totalPages - 2);
+
+                if (showEllipsis) {
+                  return (
+                    <span key={page} className="px-2 text-muted-foreground">
+                      ...
+                    </span>
+                  );
+                }
+
+                if (!showPage) return null;
+
+                return (
+                  <Button
+                    key={page}
+                    variant={currentPage === page ? 'default' : 'outline'}
+                    size="sm"
+                    onClick={() => setCurrentPage(page)}
+                    className="min-w-[2.5rem]"
+                  >
+                    {page}
+                  </Button>
+                );
+              })}
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+              disabled={currentPage === totalPages}
+            >
+              Next
+            </Button>
           </div>
         )}
       </div>
