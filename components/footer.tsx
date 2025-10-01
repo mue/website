@@ -55,7 +55,7 @@ export default function Footer() {
 
   const statusConfig = {
     operational: {
-      text: 'All systems operational',
+      text: 'All systems are operational',
       dotColor: 'bg-emerald-500',
       pingColor: 'bg-emerald-400',
     },
