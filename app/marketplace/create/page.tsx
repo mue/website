@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -13,7 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { ArrowLeft, Download, Lightbulb, Plus, RotateCcw, Trash2, Upload } from 'lucide-react';
+import { ArrowLeft, ChevronDown, ChevronRight, Download, Github, Lightbulb, Plus, RotateCcw, Trash2, Upload } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import {
   Table,
@@ -24,6 +25,14 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 
 type AddonType = 'photos' | 'quotes' | 'settings';
 
@@ -65,6 +74,15 @@ export default function CreateAddonPage() {
   ]);
   const [quotes, setQuotes] = useState<Quote[]>([{ quote: '', author: '' }]);
   const [settingsJson, setSettingsJson] = useState('');
+  const [showSubmitDialog, setShowSubmitDialog] = useState(false);
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showDeletePhotosDialog, setShowDeletePhotosDialog] = useState(false);
+  const [showDeleteQuotesDialog, setShowDeleteQuotesDialog] = useState(false);
+  const [submitUrl, setSubmitUrl] = useState('');
+  const [selectedStep, setSelectedStep] = useState(1);
+  const [expandedPhotos, setExpandedPhotos] = useState<Set<number>>(new Set([0]));
+  const [expandedQuotes, setExpandedQuotes] = useState<Set<number>>(new Set([0]));
 
   const handleMetadataChange = (field: keyof AddonMetadata, value: string) => {
     setMetadata((prev) => ({
@@ -80,7 +98,9 @@ export default function CreateAddonPage() {
   };
 
   const addPhoto = () => {
+    const newIndex = photos.length;
     setPhotos([...photos, { photographer: '', location: '', url: { default: '' } }]);
+    setExpandedPhotos(new Set([...expandedPhotos, newIndex]));
   };
 
   const removePhoto = (index: number) => {
@@ -98,7 +118,9 @@ export default function CreateAddonPage() {
   };
 
   const addQuote = () => {
+    const newIndex = quotes.length;
     setQuotes([...quotes, { quote: '', author: '' }]);
+    setExpandedQuotes(new Set([...expandedQuotes, newIndex]));
   };
 
   const removeQuote = (index: number) => {
@@ -124,15 +146,41 @@ export default function CreateAddonPage() {
   };
 
   const deleteAllPhotos = () => {
-    if (confirm('Are you sure you want to delete all photos?')) {
-      setPhotos([{ photographer: '', location: '', url: { default: '' } }]);
-    }
+    setShowDeletePhotosDialog(true);
+  };
+
+  const confirmDeletePhotos = () => {
+    setPhotos([{ photographer: '', location: '', url: { default: '' } }]);
+    setShowDeletePhotosDialog(false);
   };
 
   const deleteAllQuotes = () => {
-    if (confirm('Are you sure you want to delete all quotes?')) {
-      setQuotes([{ quote: '', author: '' }]);
+    setShowDeleteQuotesDialog(true);
+  };
+
+  const confirmDeleteQuotes = () => {
+    setQuotes([{ quote: '', author: '' }]);
+    setShowDeleteQuotesDialog(false);
+  };
+
+  const togglePhotoExpanded = (index: number) => {
+    const newExpanded = new Set(expandedPhotos);
+    if (newExpanded.has(index)) {
+      newExpanded.delete(index);
+    } else {
+      newExpanded.add(index);
     }
+    setExpandedPhotos(newExpanded);
+  };
+
+  const toggleQuoteExpanded = (index: number) => {
+    const newExpanded = new Set(expandedQuotes);
+    if (newExpanded.has(index)) {
+      newExpanded.delete(index);
+    } else {
+      newExpanded.add(index);
+    }
+    setExpandedQuotes(newExpanded);
   };
 
   const loadExample = async () => {
@@ -171,7 +219,8 @@ export default function CreateAddonPage() {
         setSettingsJson(JSON.stringify(json.settings, null, 2));
       }
     } catch (error) {
-      alert('Failed to load example. Please try again.');
+      setErrorMessage('Failed to load example. Please try again.');
+      setShowErrorDialog(true);
     }
   };
 
@@ -211,7 +260,8 @@ export default function CreateAddonPage() {
           }
         }
       } catch (error) {
-        alert('Invalid JSON file. Please check your file and try again.');
+        setErrorMessage('Invalid JSON file. Please check your file and try again.');
+        setShowErrorDialog(true);
       }
     };
     reader.readAsText(file);
@@ -220,7 +270,7 @@ export default function CreateAddonPage() {
     event.target.value = '';
   };
 
-  const downloadJson = () => {
+  const generateAddonData = () => {
     let addonData: any = { ...metadata };
 
     if (addonType === 'photos') {
@@ -241,10 +291,49 @@ export default function CreateAddonPage() {
 
         addonData.settings = filteredSettings;
       } catch (error) {
-        alert('Invalid JSON in settings. Please check your input.');
-        return;
+        setErrorMessage('Invalid JSON in settings. Please check your input.');
+        setShowErrorDialog(true);
+        return null;
       }
     }
+
+    return addonData;
+  };
+
+  const validateMetadata = () => {
+    if (!metadata.name.trim()) {
+      setErrorMessage('Please enter a name for your addon.');
+      setShowErrorDialog(true);
+      return false;
+    }
+    if (!metadata.description.trim()) {
+      setErrorMessage('Please enter a description for your addon.');
+      setShowErrorDialog(true);
+      return false;
+    }
+    if (!metadata.version.trim()) {
+      setErrorMessage('Please enter a version for your addon.');
+      setShowErrorDialog(true);
+      return false;
+    }
+    if (!metadata.author.trim()) {
+      setErrorMessage('Please enter an author for your addon.');
+      setShowErrorDialog(true);
+      return false;
+    }
+    if (!metadata.icon_url.trim()) {
+      setErrorMessage('Please enter an icon URL for your addon.');
+      setShowErrorDialog(true);
+      return false;
+    }
+    return true;
+  };
+
+  const downloadJson = () => {
+    if (!validateMetadata()) return;
+
+    const addonData = generateAddonData();
+    if (!addonData) return;
 
     const jsonString = JSON.stringify(addonData, null, 2);
     const blob = new Blob([jsonString], { type: 'application/json' });
@@ -262,6 +351,35 @@ export default function CreateAddonPage() {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+  };
+
+  const submitToMarketplace = () => {
+    if (!validateMetadata()) return;
+
+    const addonData = generateAddonData();
+    if (!addonData) return;
+
+    const fileName = metadata.name
+      .toLowerCase()
+      .replace(/\s+/g, '_')
+      .replace(/[^a-z0-9_]/g, '');
+
+    const folderMap = {
+      photos: 'photo_packs',
+      quotes: 'quote_packs',
+      settings: 'preset_settings',
+    };
+
+    const folder = folderMap[addonType];
+    const jsonString = JSON.stringify(addonData, null, 2);
+    const encodedContent = encodeURIComponent(jsonString);
+    const encodedFileName = encodeURIComponent(`${fileName}.json`);
+
+    // GitHub URL to create a new file in a fork with PR
+    const githubUrl = `https://github.com/mue/marketplace/new/main/data/${folder}?filename=${encodedFileName}&value=${encodedContent}`;
+
+    setSubmitUrl(githubUrl);
+    setShowSubmitDialog(true);
   };
 
   const parsedSettings = useMemo(() => {
@@ -351,53 +469,68 @@ export default function CreateAddonPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">
+              Name <span className="text-destructive">*</span>
+            </Label>
             <Input
               id="name"
               value={metadata.name}
               onChange={(e) => handleMetadataChange('name', e.target.value)}
               placeholder="Example Photos"
+              required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">
+              Description <span className="text-destructive">*</span>
+            </Label>
             <Textarea
               id="description"
               value={metadata.description}
               onChange={(e) => handleMetadataChange('description', e.target.value)}
               placeholder="This is an example."
               rows={3}
+              required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="version">Version</Label>
+            <Label htmlFor="version">
+              Version <span className="text-destructive">*</span>
+            </Label>
             <Input
               id="version"
               value={metadata.version}
               onChange={(e) => handleMetadataChange('version', e.target.value)}
               placeholder="1.0.0"
+              required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="author">Author</Label>
+            <Label htmlFor="author">
+              Author <span className="text-destructive">*</span>
+            </Label>
             <Input
               id="author"
               value={metadata.author}
               onChange={(e) => handleMetadataChange('author', e.target.value)}
               placeholder="Mue"
+              required
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="icon_url">Icon URL</Label>
+            <Label htmlFor="icon_url">
+              Icon URL <span className="text-destructive">*</span>
+            </Label>
             <Input
               id="icon_url"
               value={metadata.icon_url}
               onChange={(e) => handleMetadataChange('icon_url', e.target.value)}
               placeholder="https://example.com/icon.png"
+              required
             />
           </div>
 
@@ -434,109 +567,82 @@ export default function CreateAddonPage() {
               )}
             </div>
           </CardHeader>
-          <CardContent className="space-y-6">
-            {photos.slice(0, 3).map((photo, index) => (
-              <div key={index} className="space-y-4 rounded-lg border p-4">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-medium">Photo {index + 1}</h4>
-                  {photos.length > 1 && (
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => removePhoto(index)}
-                      className="h-8 w-8 p-0"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  )}
-                </div>
+          <CardContent className="space-y-3">
+            {photos.map((photo, index) => {
+              const isExpanded = expandedPhotos.has(index);
+              return (
+                <div key={index} className="rounded-lg border">
+                  <button
+                    onClick={() => togglePhotoExpanded(index)}
+                    className="flex w-full items-center justify-between p-4 text-left transition-colors hover:bg-muted"
+                  >
+                    <div className="flex items-center gap-2">
+                      {isExpanded ? (
+                        <ChevronDown className="h-4 w-4" />
+                      ) : (
+                        <ChevronRight className="h-4 w-4" />
+                      )}
+                      <h4 className="font-medium">
+                        {photo.photographer && photo.location
+                          ? `${photo.photographer} - ${photo.location}`
+                          : photo.photographer
+                            ? photo.photographer
+                            : photo.location
+                              ? photo.location
+                              : `Photo ${index + 1}`}
+                      </h4>
+                    </div>
+                    {photos.length > 1 && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removePhoto(index);
+                        }}
+                        className="h-8 w-8 p-0"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    )}
+                  </button>
 
-                <div className="space-y-2">
-                  <Label htmlFor={`photographer-${index}`}>Photographer</Label>
-                  <Input
-                    id={`photographer-${index}`}
-                    value={photo.photographer}
-                    onChange={(e) => updatePhoto(index, 'photographer', e.target.value)}
-                    placeholder="John Doe"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor={`location-${index}`}>Location</Label>
-                  <Input
-                    id={`location-${index}`}
-                    value={photo.location}
-                    onChange={(e) => updatePhoto(index, 'location', e.target.value)}
-                    placeholder="Paris, France"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor={`url-${index}`}>Image URL</Label>
-                  <Input
-                    id={`url-${index}`}
-                    value={photo.url.default}
-                    onChange={(e) => updatePhoto(index, 'url.default', e.target.value)}
-                    placeholder="https://example.com/photo.jpg"
-                  />
-                </div>
-              </div>
-            ))}
-
-            {photos.length > 3 && (
-              <details className="rounded-lg border p-4">
-                <summary className="cursor-pointer text-sm font-medium">
-                  View {photos.length - 3} more {photos.length - 3 === 1 ? 'photo' : 'photos'}
-                </summary>
-                <div className="mt-4 space-y-6">
-                  {photos.slice(3).map((photo, index) => (
-                    <div key={index + 3} className="space-y-4 rounded-lg border p-4">
-                      <div className="flex items-center justify-between">
-                        <h4 className="font-medium">Photo {index + 4}</h4>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => removePhoto(index + 3)}
-                          className="h-8 w-8 p-0"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-
+                  {isExpanded && (
+                    <div className="space-y-4 border-t p-4">
                       <div className="space-y-2">
-                        <Label htmlFor={`photographer-${index + 3}`}>Photographer</Label>
+                        <Label htmlFor={`photographer-${index}`}>Photographer</Label>
                         <Input
-                          id={`photographer-${index + 3}`}
+                          id={`photographer-${index}`}
                           value={photo.photographer}
-                          onChange={(e) => updatePhoto(index + 3, 'photographer', e.target.value)}
+                          onChange={(e) => updatePhoto(index, 'photographer', e.target.value)}
                           placeholder="John Doe"
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor={`location-${index + 3}`}>Location</Label>
+                        <Label htmlFor={`location-${index}`}>Location</Label>
                         <Input
-                          id={`location-${index + 3}`}
+                          id={`location-${index}`}
                           value={photo.location}
-                          onChange={(e) => updatePhoto(index + 3, 'location', e.target.value)}
+                          onChange={(e) => updatePhoto(index, 'location', e.target.value)}
                           placeholder="Paris, France"
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor={`url-${index + 3}`}>Image URL</Label>
+                        <Label htmlFor={`url-${index}`}>Image URL</Label>
                         <Input
-                          id={`url-${index + 3}`}
+                          id={`url-${index}`}
                           value={photo.url.default}
-                          onChange={(e) => updatePhoto(index + 3, 'url.default', e.target.value)}
+                          onChange={(e) => updatePhoto(index, 'url.default', e.target.value)}
                           placeholder="https://example.com/photo.jpg"
                         />
                       </div>
                     </div>
-                  ))}
+                  )}
                 </div>
-              </details>
-            )}
+              );
+            })}
 
             <Button onClick={addPhoto} variant="outline" className="w-full gap-2">
               <Plus className="h-4 w-4" />
@@ -567,91 +673,73 @@ export default function CreateAddonPage() {
               )}
             </div>
           </CardHeader>
-          <CardContent className="space-y-6">
-            {quotes.slice(0, 3).map((quote, index) => (
-              <div key={index} className="space-y-4 rounded-lg border p-4">
-                <div className="flex items-center justify-between">
-                  <h4 className="font-medium">Quote {index + 1}</h4>
-                  {quotes.length > 1 && (
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => removeQuote(index)}
-                      className="h-8 w-8 p-0"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  )}
-                </div>
+          <CardContent className="space-y-3">
+            {quotes.map((quote, index) => {
+              const isExpanded = expandedQuotes.has(index);
+              return (
+                <div key={index} className="rounded-lg border">
+                  <button
+                    onClick={() => toggleQuoteExpanded(index)}
+                    className="flex w-full items-center justify-between p-4 text-left transition-colors hover:bg-muted"
+                  >
+                    <div className="flex items-center gap-2">
+                      {isExpanded ? (
+                        <ChevronDown className="h-4 w-4" />
+                      ) : (
+                        <ChevronRight className="h-4 w-4" />
+                      )}
+                      <h4 className="font-medium truncate">
+                        {quote.author
+                          ? quote.author
+                          : quote.quote
+                            ? quote.quote.length > 50
+                              ? `${quote.quote.slice(0, 50)}...`
+                              : quote.quote
+                            : `Quote ${index + 1}`}
+                      </h4>
+                    </div>
+                    {quotes.length > 1 && (
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          removeQuote(index);
+                        }}
+                        className="h-8 w-8 p-0"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </Button>
+                    )}
+                  </button>
 
-                <div className="space-y-2">
-                  <Label htmlFor={`quote-${index}`}>Quote</Label>
-                  <Textarea
-                    id={`quote-${index}`}
-                    value={quote.quote}
-                    onChange={(e) => updateQuote(index, 'quote', e.target.value)}
-                    placeholder="The only way to do great work is to love what you do."
-                    rows={3}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor={`author-${index}`}>Author</Label>
-                  <Input
-                    id={`author-${index}`}
-                    value={quote.author}
-                    onChange={(e) => updateQuote(index, 'author', e.target.value)}
-                    placeholder="Steve Jobs"
-                  />
-                </div>
-              </div>
-            ))}
-
-            {quotes.length > 3 && (
-              <details className="rounded-lg border p-4">
-                <summary className="cursor-pointer text-sm font-medium">
-                  View {quotes.length - 3} more {quotes.length - 3 === 1 ? 'quote' : 'quotes'}
-                </summary>
-                <div className="mt-4 space-y-6">
-                  {quotes.slice(3).map((quote, index) => (
-                    <div key={index + 3} className="space-y-4 rounded-lg border p-4">
-                      <div className="flex items-center justify-between">
-                        <h4 className="font-medium">Quote {index + 4}</h4>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => removeQuote(index + 3)}
-                          className="h-8 w-8 p-0"
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-
+                  {isExpanded && (
+                    <div className="space-y-4 border-t p-4">
                       <div className="space-y-2">
-                        <Label htmlFor={`quote-${index + 3}`}>Quote</Label>
+                        <Label htmlFor={`quote-${index}`}>Quote</Label>
                         <Textarea
-                          id={`quote-${index + 3}`}
+                          id={`quote-${index}`}
                           value={quote.quote}
-                          onChange={(e) => updateQuote(index + 3, 'quote', e.target.value)}
+                          onChange={(e) => updateQuote(index, 'quote', e.target.value)}
                           placeholder="The only way to do great work is to love what you do."
                           rows={3}
                         />
                       </div>
 
                       <div className="space-y-2">
-                        <Label htmlFor={`author-${index + 3}`}>Author</Label>
+                        <Label htmlFor={`author-${index}`}>Author</Label>
                         <Input
-                          id={`author-${index + 3}`}
+                          id={`author-${index}`}
                           value={quote.author}
-                          onChange={(e) => updateQuote(index + 3, 'author', e.target.value)}
+                          onChange={(e) => updateQuote(index, 'author', e.target.value)}
                           placeholder="Steve Jobs"
                         />
                       </div>
                     </div>
-                  ))}
+                  )}
                 </div>
-              </details>
-            )}
+              );
+            })}
 
             <Button onClick={addQuote} variant="outline" className="w-full gap-2">
               <Plus className="h-4 w-4" />
@@ -753,12 +841,129 @@ export default function CreateAddonPage() {
         </Card>
       )}
 
-      <div className="flex justify-end">
-        <Button onClick={downloadJson} className="gap-2">
+      <div className="flex justify-end gap-3">
+        <Button variant="outline" onClick={downloadJson} className="gap-2">
           <Download className="h-4 w-4" />
           Download JSON
         </Button>
+        <Button onClick={submitToMarketplace} className="gap-2">
+          <Github className="h-4 w-4" />
+          Submit to Marketplace
+        </Button>
       </div>
+
+      {/* Submit to Marketplace Dialog */}
+      <Dialog open={showSubmitDialog} onOpenChange={setShowSubmitDialog}>
+        <DialogContent className="max-w-4xl">
+          <DialogHeader>
+            <DialogTitle>Submit to Marketplace</DialogTitle>
+            <DialogDescription>
+              Follow these steps to submit your addon to the Mue Marketplace:
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid gap-6 py-4 md:grid-cols-2">
+            <div className="space-y-2">
+              <h4 className="font-medium text-sm">Steps:</h4>
+              <div className="space-y-2">
+                {[
+                  { step: 1, text: 'Click the button below to open GitHub' },
+                  { step: 2, text: "Sign in to GitHub if you haven't already" },
+                  { step: 3, text: 'GitHub will fork the marketplace repository for you' },
+                  { step: 4, text: 'Review your addon JSON in the editor' },
+                  { step: 5, text: 'Scroll down and create a pull request' },
+                  { step: 6, text: 'Wait for the Mue team to review your submission' },
+                ].map(({ step, text }) => (
+                  <button
+                    key={step}
+                    onClick={() => setSelectedStep(step)}
+                    className={cn(
+                      'w-full rounded-lg border p-3 text-left text-sm transition-colors',
+                      selectedStep === step
+                        ? 'border-primary bg-primary/10 text-foreground'
+                        : 'border-border bg-card text-muted-foreground hover:bg-muted',
+                    )}
+                  >
+                    <span className="font-medium">Step {step}:</span> {text}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="flex items-center justify-center">
+              <div className="aspect-video w-full rounded-lg border bg-muted flex items-center justify-center text-sm text-muted-foreground">
+                Step {selectedStep} Preview
+              </div>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowSubmitDialog(false)}>
+              Cancel
+            </Button>
+            <Button
+              onClick={() => {
+                window.open(submitUrl, '_blank');
+                setShowSubmitDialog(false);
+              }}
+              className="gap-2"
+            >
+              <Github className="h-4 w-4" />
+              Open GitHub
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Error Dialog */}
+      <Dialog open={showErrorDialog} onOpenChange={setShowErrorDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Error</DialogTitle>
+            <DialogDescription>{errorMessage}</DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button onClick={() => setShowErrorDialog(false)}>OK</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Photos Confirmation Dialog */}
+      <Dialog open={showDeletePhotosDialog} onOpenChange={setShowDeletePhotosDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete All Photos</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete all photos? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowDeletePhotosDialog(false)}>
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={confirmDeletePhotos}>
+              Delete All
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Quotes Confirmation Dialog */}
+      <Dialog open={showDeleteQuotesDialog} onOpenChange={setShowDeleteQuotesDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete All Quotes</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete all quotes? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowDeleteQuotesDialog(false)}>
+              Cancel
+            </Button>
+            <Button variant="destructive" onClick={confirmDeleteQuotes}>
+              Delete All
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
