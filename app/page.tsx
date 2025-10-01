@@ -283,7 +283,7 @@ export default function Home() {
             Built by you, for you.
           </h2>
           <p className="max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            100% free and open source. Join the community shaping the future of Mue - whether that's
+            100% free and open source. Join the community shaping the future of Mue - whether that&apos;s
             contributing code, reporting issues, or sharing ideas.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4">
