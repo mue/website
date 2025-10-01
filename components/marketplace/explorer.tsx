@@ -12,7 +12,7 @@ import {
 import { cn } from '@/lib/utils';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { FunnelX, Library as LibraryIcon, Search, X } from 'lucide-react';
+import { FunnelX, Library as LibraryIcon, Plus, Search, X } from 'lucide-react';
 
 import {
   Select,
@@ -118,6 +118,16 @@ export function MarketplaceExplorer({
 
   return (
     <section className="space-y-10">
+      {/* Create Addon Button */}
+      <div className="flex justify-end">
+        <Link href="/marketplace/create">
+          <Button className="gap-2">
+            <Plus className="h-4 w-4" />
+            Create Addon
+          </Button>
+        </Link>
+      </div>
+
       {/* Enhanced Search Bar */}
       <div className="relative mx-auto max-w-2xl">
         <div className="relative">
