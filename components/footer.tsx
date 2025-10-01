@@ -55,7 +55,7 @@ export default function Footer() {
 
   const statusConfig = {
     operational: {
-      text: 'All systems operational',
+      text: 'All systems are operational',
       dotColor: 'bg-emerald-500',
       pingColor: 'bg-emerald-400',
     },
@@ -85,7 +85,7 @@ export default function Footer() {
               <span className="font-bold">M</span>odifiable. <span className="font-bold">U</span>
               ser-centric. <span className="font-bold">E</span>xperience.
               <br />
-              That&apos;s Mue.
+              That&apos;sMue.
             </p>
             <a
               href="https://status.muetab.com"
