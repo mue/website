@@ -9,6 +9,8 @@ import { SiNaver } from 'react-icons/si';
 
 import { Button } from '@/components/ui/button';
 import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
+import { BrowserCard } from '@/components/download/browser-card';
+import { NumberedStep } from '@/components/download/numbered-step';
 
 const browsers = [
   {
@@ -59,6 +61,24 @@ const secondaryDownloads = [
   },
 ];
 
+const steps = [
+  {
+    number: 1,
+    title: 'Install the extension',
+    description: 'Click the button above to add Mue to your browser from the official store.',
+  },
+  {
+    number: 2,
+    title: 'Open a new tab',
+    description: 'Launch a new tab and Mue will greet you with a beautiful, personalized experience.',
+  },
+  {
+    number: 3,
+    title: 'Customize your space',
+    description: 'Explore settings to tailor backgrounds, widgets, and themes to match your workflow.',
+  },
+];
+
 function detectBrowser(): string | null {
   if (typeof window === 'undefined') return null;
   const ua = navigator.userAgent;
@@ -96,59 +116,18 @@ export default function DownloadPage() {
         </p>
 
         <div className="mt-16 grid w-full gap-6 sm:grid-cols-1 lg:grid-cols-2">
-          {browsers.map((browser) => {
-            const Icon = browser.Icon;
-            const isDetected = detectedBrowser === browser.name;
-            return (
-              <div
-                key={browser.name}
-                className={`group relative overflow-hidden rounded-3xl border p-8 text-left shadow-[0_20px_70px_-40px_rgba(12,12,40,0.8)] backdrop-blur transition-all ${
-                  isDetected
-                    ? 'border-[#FF5C25]/60 bg-background/95 shadow-[0_25px_90px_-35px_rgba(255,92,37,0.6)] ring-2 ring-[#FF5C25]/30'
-                    : 'border-white/10 bg-background/80 hover:border-[#FF5C25]/40 hover:shadow-[0_25px_90px_-35px_rgba(12,12,40,0.95)]'
-                }`}
-              >
-                <div
-                  className={`absolute inset-x-0 -top-24 h-48 bg-gradient-to-b ${browser.gradient} opacity-[0.08] blur-3xl transition-opacity group-hover:opacity-[0.14]`}
-                />
-
-                <div className="relative">
-                  <div className="flex items-center justify-between">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5">
-                      <Icon className="h-8 w-8 text-foreground" />
-                    </div>
-                    {isDetected && (
-                      <span className="rounded-full border border-[#FF5C25]/40 bg-[#FF5C25]/20 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-[#FF5C25]">
-                        Your Browser
-                      </span>
-                    )}
-                  </div>
-
-                  <h3 className="mt-6 text-2xl font-semibold tracking-tight text-foreground">
-                    {browser.name}
-                  </h3>
-
-                  <p className="mt-3 text-sm text-muted-foreground">{browser.description}</p>
-
-                  <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-muted-foreground">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                    {browser.version}
-                  </div>
-
-                  <Button
-                    size="lg"
-                    className="mt-8 w-full shadow-[0_20px_50px_-25px_var(--tw-shadow-color)] shadow-primary/40"
-                    asChild
-                  >
-                    <Link href={browser.url} target="_blank" rel="noreferrer">
-                      Add to {browser.name}
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </div>
-              </div>
-            );
-          })}
+          {browsers.map((browser) => (
+            <BrowserCard
+              key={browser.name}
+              name={browser.name}
+              icon={browser.Icon}
+              description={browser.description}
+              url={browser.url}
+              version={browser.version}
+              gradient={browser.gradient}
+              isDetected={detectedBrowser === browser.name}
+            />
+          ))}
         </div>
 
         <div className="mt-12 w-full max-w-3xl">
@@ -185,42 +164,14 @@ export default function DownloadPage() {
             What happens next?
           </h2>
           <div className="mt-8 space-y-6 text-left">
-            <div className="flex gap-4">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#FF5C25] to-[#FF456E] text-sm font-bold text-white">
-                1
-              </span>
-              <div>
-                <h3 className="font-semibold text-foreground">Install the extension</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Click the button above to add Mue to your browser from the official store.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#FF5C25] to-[#FF456E] text-sm font-bold text-white">
-                2
-              </span>
-              <div>
-                <h3 className="font-semibold text-foreground">Open a new tab</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Launch a new tab and Mue will greet you with a beautiful, personalized experience.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#FF5C25] to-[#FF456E] text-sm font-bold text-white">
-                3
-              </span>
-              <div>
-                <h3 className="font-semibold text-foreground">Customize your space</h3>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  Explore settings to tailor backgrounds, widgets, and themes to match your
-                  workflow.
-                </p>
-              </div>
-            </div>
+            {steps.map((step) => (
+              <NumberedStep
+                key={step.number}
+                number={step.number}
+                title={step.title}
+                description={step.description}
+              />
+            ))}
           </div>
         </div>
 

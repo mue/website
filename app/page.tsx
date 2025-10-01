@@ -10,6 +10,10 @@ import { SiNaver } from 'react-icons/si';
 
 import { Button } from '@/components/ui/button';
 import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
+import { FeatureCard } from '@/components/home/feature-card';
+import { CommunityStatCard } from '@/components/home/community-stat-card';
+import { BrowserBadge } from '@/components/home/browser-badge';
+import { StatItem } from '@/components/home/stat-item';
 
 const stats = ['Launched 2018', '5,000+ monthly active users', '10 million+ tabs opened'];
 
@@ -56,6 +60,7 @@ const scrollFeatures = [
       'A hand-picked exclusive library of backgrounds',
       'Community supplied packs available in the Marketplace',
     ],
+    footerText: 'Fully customizable',
   },
   {
     eyebrow: 'Stay locked in',
@@ -66,6 +71,7 @@ const scrollFeatures = [
       'Hand-picked quotes that inspire and motivate',
       'Community-curated quote packs from the Marketplace',
     ],
+    footerText: 'Personalize your flow',
   },
   {
     eyebrow: 'Privacy first',
@@ -73,45 +79,29 @@ const scrollFeatures = [
     description:
       'Mue is built with privacy at its core. Your data stays on your device and is never sold or shared.',
     bullets: ['No personal data collection', 'Fully open source on GitHub'],
+    footerText: 'Built on open principles',
   },
 ];
 
 const browsers = [
   {
     name: 'Chrome',
-    tagline: 'Chromium flagship',
     Icon: FaChrome,
-    iconClass:
-      'bg-[conic-gradient(from_120deg_at_50%_50%,#DB4437_0deg,#DB4437_90deg,#F4B400_90deg,#F4B400_180deg,#0F9D58_180deg,#0F9D58_270deg,#4285F4_270deg,#4285F4_360deg)]',
-    innerDotClass: 'bg-[#1A73E8]',
-    shadowClass: 'shadow-[0_16px_35px_-18px_rgba(66,133,244,0.55)]',
     url: BROWSER_STORE_URLS.chrome,
   },
   {
     name: 'Edge',
-    tagline: 'Microsoft Edge',
     Icon: FaEdge,
-    iconClass: 'bg-[linear-gradient(135deg,#00A4EF_0%,#0078D7_55%,#174EB6_100%)]',
-    innerDotClass: 'bg-[#0F5BB5]',
-    shadowClass: 'shadow-[0_16px_35px_-18px_rgba(0,120,215,0.55)]',
     url: BROWSER_STORE_URLS.edge,
   },
   {
     name: 'Firefox',
-    tagline: 'Mozilla Firefox',
     Icon: FaFirefoxBrowser,
-    iconClass: 'bg-[linear-gradient(135deg,#FF9500_0%,#FF7139_40%,#FF4F5E_70%,#9C2AA0_100%)]',
-    innerDotClass: 'bg-[#FF9500]',
-    shadowClass: 'shadow-[0_16px_35px_-18px_rgba(255,113,57,0.55)]',
     url: BROWSER_STORE_URLS.firefox,
   },
   {
     name: 'Whale',
-    tagline: 'NAVER Whale',
     Icon: SiNaver,
-    iconClass: 'bg-[linear-gradient(135deg,#1BC5E9_0%,#0D67D2_100%)]',
-    innerDotClass: 'bg-[#1BC5E9]',
-    shadowClass: 'shadow-[0_16px_35px_-18px_rgba(27,197,233,0.55)]',
     url: BROWSER_STORE_URLS.whale,
   },
 ];
@@ -189,10 +179,7 @@ export default function Home() {
                 </p>
                 <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-medium text-muted-foreground/80 sm:text-sm">
                   {stats.map((stat) => (
-                    <div key={stat} className="flex items-center gap-2">
-                      <span className="flex h-1.5 w-1.5 rounded-full bg-gradient-to-br from-[#FF5C25] to-[#FF456E]" />
-                      <span>{stat}</span>
-                    </div>
+                    <StatItem key={stat} stat={stat} />
                   ))}
                 </div>
               </div>
@@ -231,30 +218,18 @@ export default function Home() {
           {/* Browser badges */}
           <div className="mt-12 flex flex-col items-center lg:mt-16">
             <div className="gap-5 flex flex-col relative w-full max-w-4xl overflow-hidden rounded-3xl px-6 py-10 text-center">
-              {/* <div className="pointer-events-none absolute -top-24 left-1/2 h-48 w-48 -translate-x-1/2 rounded-full bg-[radial-gradient(circle,_rgba(255,92,37,0.25)_0%,_transparent_70%)] blur-3xl" /> */}
               <p className="relative text-[0.65rem] font-bold uppercase tracking-[0.3em] dark:text-muted-foreground/60 text-neutral-800">
                 Available everywhere*
               </p>
               <div className="relative flex flex-wrap items-center justify-center gap-4 sm:gap-5">
-                {browsers.map((browser) => {
-                  const Icon = browser.Icon;
-                  return (
-                    <Link
-                      key={browser.name}
-                      href={browser.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="group"
-                    >
-                      <div className="flex flex-1 flex-row items-center text-left">
-                        <span className="bg-background px-4 py-2 rounded-full text-sm font-semibold text-foreground transition-all duration-300 hover:text-[#FF5C25] hover:shadow-lg hover:scale-105 sm:text-base flex items-center gap-2">
-                          <Icon className="h-4 w-4 flex-shrink-0" />
-                          {browser.name}
-                        </span>
-                      </div>
-                    </Link>
-                  );
-                })}
+                {browsers.map((browser) => (
+                  <BrowserBadge
+                    key={browser.name}
+                    name={browser.name}
+                    icon={browser.Icon}
+                    url={browser.url}
+                  />
+                ))}
               </div>
               <p className="relative text-[0.7rem] leading-relaxed text-neutral-800 dark:text-muted-foreground/70 sm:text-xs">
                 *Availability can vary by store. Optimized for desktop browsers, but Mue is open
@@ -284,40 +259,15 @@ export default function Home() {
           <div className="flex flex-col">
             <div className="space-y-10">
               {scrollFeatures.map((feature, index) => (
-                <article
+                <FeatureCard
                   key={feature.title}
-                  className="rounded-3xl border border-white/10 bg-background/80 p-8 shadow-[0_18px_60px_-45px_rgba(12,14,40,0.65)] backdrop-blur lg:p-10"
-                >
-                  <div className="flex items-center justify-between gap-4">
-                    <span className="text-xs font-semibold uppercase tracking-[0.36em] text-[#FF5C25]">
-                      0{index + 1}
-                    </span>
-                    <span className="text-xs uppercase tracking-[0.36em] text-muted-foreground/70">
-                      {feature.eyebrow}
-                    </span>
-                  </div>
-                  <h3 className="mt-4 text-3xl font-semibold tracking-tight text-foreground lg:text-[2.1rem]">
-                    {feature.title}
-                  </h3>
-                  <p className="mt-4 text-base text-muted-foreground">{feature.description}</p>
-                  <ul className="mt-6 space-y-3">
-                    {feature.bullets.map((bullet) => (
-                      <li
-                        key={bullet}
-                        className="flex items-start gap-3 text-sm text-muted-foreground"
-                      >
-                        <span className="mt-1 inline-flex h-1.5 w-4 rounded-full bg-gradient-to-r from-[#FF5C25] via-[#D21A11] to-[#FF456E]" />
-                        <span className="text-pretty leading-relaxed">{bullet}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-[#FF456E]/40 to-transparent" />
-                  <p className="mt-4 text-xs uppercase tracking-[0.36em] text-muted-foreground/70">
-                    {index === 0 && 'Fully customizable'}
-                    {index === 1 && 'Personalize your flow'}
-                    {index === 2 && 'Built on open principles'}
-                  </p>
-                </article>
+                  index={index}
+                  eyebrow={feature.eyebrow}
+                  title={feature.title}
+                  description={feature.description}
+                  bullets={feature.bullets}
+                  footerText={feature.footerText}
+                />
               ))}
             </div>
           </div>
@@ -357,16 +307,12 @@ export default function Home() {
           </div>
           <div className="mt-10 grid w-full gap-6 text-left sm:grid-cols-2 lg:grid-cols-3">
             {communityStats.map((stat) => (
-              <div
+              <CommunityStatCard
                 key={stat.label}
-                className="rounded-2xl border border-border bg-background/80 p-5 text-sm text-muted-foreground backdrop-blur"
-              >
-                <p className="text-xs uppercase tracking-[0.36em] text-[#FF5C25]/80">
-                  {stat.label}
-                </p>
-                <p className="mt-2 text-lg font-semibold text-foreground">{stat.value}</p>
-                <p className="mt-3 text-xs text-muted-foreground/80">{stat.description}</p>
-              </div>
+                label={stat.label}
+                value={stat.value}
+                description={stat.description}
+              />
             ))}
           </div>
         </div>
