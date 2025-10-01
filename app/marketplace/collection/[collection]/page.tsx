@@ -194,7 +194,7 @@ export default async function MarketplaceCollectionPage({
       <div className="pb-12 text-sm text-muted-foreground">
         Want to expand this collection? Contribute on the{' '}
         <Link
-          href="https://github.com/mue"
+          href="https://github.com/mue/marketplace"
           className="text-primary underline-offset-4 hover:underline"
         >
           Mue GitHub
