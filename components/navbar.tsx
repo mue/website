@@ -68,7 +68,7 @@ export default function Navbar() {
   return (
     <nav className="bg-background/60 backdrop-blur-md flex w-full items-center gap-3 rounded-xl border border-foreground/20 px-4 py-3 shadow-lg sm:px-6 lg:px-12">
       <div className="flex flex-1 items-center">
-        <Link href={'/'} className="shrink-0">
+        <Link href={'/'} className="cursor-pointer shrink-0">
           <Logo width={100} height={100} className="h-10 w-10" />
         </Link>
       </div>
@@ -84,7 +84,7 @@ export default function Navbar() {
                   <li className="row-span-3">
                     <NavigationMenuLink asChild>
                       <Link
-                        className="items-start from-muted/50 to-muted flex h-full w-full flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
+                        className="items-start from-muted/50 to-muted flex h-full w-full cursor-pointer flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
                         href="/docs"
                       >
                         <div className="dark:bg-neutral-900 bg-neutral-200 p-4 grid place-content-center aspect-square rounded-full mb-2">
@@ -166,7 +166,7 @@ export default function Navbar() {
                       href={href}
                       aria-current={isActive ? 'page' : undefined}
                       className={cn(
-                        'py-2 transition-colors hover:text-primary',
+                        'cursor-pointer py-2 transition-colors hover:text-primary',
                         isActive && 'text-primary font-semibold',
                       )}
                     >

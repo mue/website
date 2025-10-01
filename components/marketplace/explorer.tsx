@@ -331,7 +331,7 @@ export function MarketplaceExplorer({
                 <button
                   type="button"
                   onClick={() => setQuery('')}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full p-1 text-muted-foreground transition hover:bg-muted hover:text-foreground"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer rounded-full p-1 text-muted-foreground transition hover:bg-muted hover:text-foreground"
                   aria-label="Clear search"
                 >
                   <X className="h-4 w-4" />
@@ -363,7 +363,7 @@ export function MarketplaceExplorer({
             <Badge variant="secondary">{collectionFilterLabel}</Badge>
             <button
               type="button"
-              className="text-primary underline-offset-2 hover:underline"
+              className="cursor-pointer text-primary underline-offset-2 hover:underline"
               onClick={() => setCollectionFilter(null)}
             >
               Clear
@@ -586,7 +586,7 @@ export function MarketplaceExplorer({
               window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
             }
           }}
-          className="fixed bottom-6 right-6 z-40 rounded-full bg-primary text-primary-foreground shadow-lg transition hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 h-11 w-11 flex items-center justify-center"
+          className="fixed bottom-6 right-6 z-40 cursor-pointer rounded-full bg-primary text-primary-foreground shadow-lg transition hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary/50 h-11 w-11 flex items-center justify-center"
           aria-label="Back to top"
         >
           ↑
