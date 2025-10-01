@@ -398,17 +398,17 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                       align: 'start',
                       loop: true,
                     }}
-                    className="w-full"
+                    className="w-full max-w-4xl mx-auto"
                   >
-                    <CarouselContent className="ml-0">
+                    <CarouselContent className="-ml-2 md:-ml-4">
                       {data.photos.map((photo, index) => {
                         const photoUrl = photo.url?.default ?? Object.values(photo.url ?? {})[0];
                         if (!photoUrl) return null;
 
                         return (
-                          <CarouselItem key={`${photoUrl}-${index}`} className="pl-0">
+                          <CarouselItem key={`${photoUrl}-${index}`} className="pl-2 md:pl-4">
                             <div className="space-y-4">
-                              <div className="relative h-64 w-full overflow-hidden rounded-xl border border-border/60 shadow-md md:h-96">
+                              <div className="relative h-64 w-full max-w-4xl overflow-hidden rounded-xl border border-border/60 shadow-md md:h-96 mx-auto">
                                 <Image
                                   src={photoUrl}
                                   alt={photo.location ?? photo.photographer ?? data.display_name}
