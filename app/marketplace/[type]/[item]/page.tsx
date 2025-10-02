@@ -69,6 +69,21 @@ export async function generateMetadata({ params }: MarketplaceItemPageProps): Pr
       title: `${data.display_name} – Marketplace`,
       description:
         data.description ?? `Learn more about ${data.display_name} on the Mue marketplace.`,
+      openGraph: {
+        title: `${data.display_name} – Marketplace`,
+        description:
+          data.description ?? `Learn more about ${data.display_name} on the Mue marketplace.`,
+        type: 'website',
+        url: `https://mue.app/marketplace/${encodeURIComponent(type)}/${encodeURIComponent(
+          data.name,
+        )}`,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: `${data.display_name} – Marketplace`,
+        description:
+          data.description ?? `Learn more about ${data.display_name} on the Mue marketplace.`,
+      },
     };
   } catch {
     return {
@@ -337,7 +352,8 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                             {new Set(data.photos.map((p) => p.photographer).filter(Boolean)).size}
                           </div>
                           <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                            {new Set(data.photos.map((p) => p.photographer).filter(Boolean)).size === 1
+                            {new Set(data.photos.map((p) => p.photographer).filter(Boolean))
+                              .size === 1
                               ? 'Photographer'
                               : 'Photographers'}
                           </div>

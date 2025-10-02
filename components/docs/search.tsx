@@ -14,13 +14,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
-
-type DocMeta = {
-  title: string;
-  href: string;
-  slug: string[];
-  description?: string;
-};
+import type { DocMeta } from '@/lib/docs';
 
 type DocsSearchProps = {
   docs: DocMeta[];

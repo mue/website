@@ -40,6 +40,21 @@ export async function generateMetadata({
       description:
         data.description ??
         `Browse all items inside the ${data.display_name} collection on the Mue marketplace.`,
+      openGraph: {
+        title: `${data.display_name} – Marketplace collection`,
+        description:
+          data.description ??
+          `Browse all items inside the ${data.display_name} collection on the Mue marketplace.`,
+        type: 'website',
+        url: `https://mue.app/marketplace/collection/${encodeURIComponent(data.name)}`,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: `${data.display_name} – Marketplace collection`,
+        description:
+          data.description ??
+          `Browse all items inside the ${data.display_name} collection on the Mue marketplace.`,
+      },
     };
   } catch {
     return {

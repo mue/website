@@ -44,6 +44,15 @@ export type LoadedDoc = {
   raw: string;
 };
 
+// Public metadata shape used for search/indexing components.
+export type DocMeta = {
+  title: string;
+  slug: string[];
+  href: string;
+  order: number;
+  description?: string;
+};
+
 export type DocTreeNode = {
   title: string;
   slug: string[];
@@ -241,7 +250,7 @@ export async function getDocBySlug(slugSegments: string[]): Promise<LoadedDoc | 
   };
 }
 
-export async function getAllDocsMeta() {
+export async function getAllDocsMeta(): Promise<DocMeta[]> {
   const docs = await collectDocs(DOCS_DIR);
   return docs
     .filter((doc) => !doc.frontmatter.hidden)
