@@ -13,15 +13,6 @@ interface ItemsListProps {
   collectionNameMap: Map<string, string>;
 }
 
-// Helper to check if item is new (within last 7 days)
-const isNewItem = (updatedAt?: string) => {
-  if (!updatedAt) return false;
-  const itemDate = new Date(updatedAt);
-  const sevenDaysAgo = new Date();
-  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-  return itemDate > sevenDaysAgo;
-};
-
 export default function ItemsList({ items, collectionNameMap }: ItemsListProps) {
   const router = useRouter();
   const { toggleFavorite, isFavorite } = useFavorites();
@@ -52,11 +43,6 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
               )}
             />
           </button>
-          {isNewItem(item.updated_at) && (
-            <Badge className="absolute top-3 left-3 z-10 bg-green-500 text-white hover:bg-green-600 text-xs font-semibold px-2 py-0.5">
-              NEW
-            </Badge>
-          )}
           <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg border border-border/60 bg-muted">
             {item.icon_url ? (
               <Image
