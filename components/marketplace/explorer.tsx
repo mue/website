@@ -13,7 +13,7 @@ import {
 } from '@/lib/marketplace';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { FunnelX, Plus, Search, X, LayoutGrid, List, Heart, Sparkles } from 'lucide-react';
+import { FunnelX, Plus, Search, X, LayoutGrid, List, Heart } from 'lucide-react';
 import { FeaturedCollectionsSkeleton } from './featured-collections-skeleton';
 import { ItemsGridSkeleton } from './items-grid-skeleton';
 import { useFavorites } from '@/lib/use-favorites';
@@ -131,7 +131,6 @@ export function MarketplaceExplorer({
   });
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
-  const [showNewOnly, setShowNewOnly] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -181,22 +180,12 @@ export function MarketplaceExplorer({
   const filteredItems = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
 
-    // Helper to check if item is new (within last 7 days)
-    const isNewItem = (updatedAt?: string) => {
-      if (!updatedAt) return false;
-      const itemDate = new Date(updatedAt);
-      const sevenDaysAgo = new Date();
-      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
-      return itemDate > sevenDaysAgo;
-    };
-
     const filtered = items.filter((item) => {
       const matchesType = typeFilter === 'all' || item.type === typeFilter;
       const matchesCollection = !collectionFilter || item.in_collections.includes(collectionFilter);
       const matchesFavorites = !showFavoritesOnly || isFavorite(item.type, item.name);
-      const matchesNew = !showNewOnly || isNewItem(item.updated_at);
 
-      if (!matchesType || !matchesCollection || !matchesFavorites || !matchesNew) return false;
+      if (!matchesType || !matchesCollection || !matchesFavorites) return false;
 
       if (!normalizedQuery) return true;
 
@@ -230,17 +219,7 @@ export function MarketplaceExplorer({
           return hash(a.name, randomSeed) - hash(b.name, randomSeed);
       }
     });
-  }, [
-    collectionFilter,
-    items,
-    query,
-    typeFilter,
-    sortBy,
-    randomSeed,
-    showFavoritesOnly,
-    showNewOnly,
-    isFavorite,
-  ]);
+  }, [collectionFilter, items, query, typeFilter, sortBy, randomSeed, showFavoritesOnly, isFavorite]);
 
   const resetFilters = () => {
     setQuery('');
@@ -248,7 +227,6 @@ export function MarketplaceExplorer({
     setCollectionFilter(null);
     setSortBy('recommended');
     setShowFavoritesOnly(false);
-    setShowNewOnly(false);
     changePage(1, { scroll: false });
   };
 
@@ -403,8 +381,7 @@ export function MarketplaceExplorer({
     typeFilter !== 'all' ||
     collectionFilter ||
     sortBy !== 'recommended' ||
-    showFavoritesOnly ||
-    showNewOnly;
+    showFavoritesOnly;
 
   // Compute display range for the "Showing x-y of z items" UI.
   const displayStart = isSearching
@@ -547,17 +524,6 @@ export function MarketplaceExplorer({
 
         {/* Quick Filter Chips */}
         <div className="flex flex-wrap items-center gap-2">
-          <Badge
-            variant={showNewOnly ? 'default' : 'outline'}
-            className="cursor-pointer transition hover:bg-primary/10 hover:text-primary flex items-center gap-1"
-            onClick={() => {
-              setShowNewOnly(!showNewOnly);
-              changePage(1, { scroll: false });
-            }}
-          >
-            <Sparkles className="h-3 w-3" />
-            New This Week
-          </Badge>
           <Badge
             variant={showFavoritesOnly ? 'default' : 'outline'}
             className="cursor-pointer transition hover:bg-primary/10 hover:text-primary flex items-center gap-1"
