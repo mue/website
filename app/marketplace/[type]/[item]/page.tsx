@@ -3,7 +3,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
-  ArrowLeft,
   Calendar,
   User,
   Globe,
@@ -22,6 +21,7 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
 import {
   Table,
   TableBody,
@@ -47,6 +47,7 @@ import { ItemActions } from './item-actions';
 import { PresetSettingsTable } from '@/components/marketplace/preset-settings-table';
 import { QuotesTable } from '@/components/marketplace/quotes-table';
 import { PhotoGallery } from '@/components/marketplace/photo-gallery';
+import { NoContentEmptyState } from '@/components/marketplace/empty-state';
 import ItemsGrid from '@/components/marketplace/items-grid';
 import { FavoritesProvider } from '@/lib/favorites-context';
 
@@ -218,14 +219,8 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
 
   return (
     <FavoritesProvider>
-      <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
-        <Link
-          href="/marketplace"
-          className="inline-flex w-fit items-center gap-2 text-sm font-medium text-muted-foreground transition hover:text-foreground"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to marketplace
-        </Link>
+      <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-6 py-12 lg:px-8">
+        <MarketplaceBreadcrumb type="item" itemType={type} itemName={data.display_name} />
 
         <div className="grid gap-6 lg:grid-cols-[340px_1fr] lg:gap-8">
           {/* Left Column - Info */}
@@ -253,7 +248,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
 
                   <div className="space-y-2">
                     <h1 className="text-2xl font-bold tracking-tight">{data.display_name}</h1>
-                    <Link href={`/marketplace?category=${type}`}>
+                    <Link href={`/marketplace?type=${type}`}>
                       <Badge
                         variant="secondary"
                         className="cursor-pointer text-xs capitalize transition hover:bg-primary/10 hover:text-primary"
@@ -554,9 +549,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                 {((isPhotoPack && (!data.photos || data.photos.length === 0)) ||
                   (isQuotePack && (!data.quotes || data.quotes.length === 0)) ||
                   (isPresetSettings && presetSettings.length === 0)) && (
-                  <div className="rounded-2xl border border-dashed border-border bg-card/50 p-12 text-center">
-                    <p className="text-muted-foreground">No content available for this item yet.</p>
-                  </div>
+                  <NoContentEmptyState />
                 )}
               </TabsContent>
             </Tabs>

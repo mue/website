@@ -1,7 +1,6 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { getMarketplaceTypeLabel, MarketplaceItemSummary } from '@/lib/marketplace';
 import { Library as LibraryIcon, Heart } from 'lucide-react';
@@ -85,14 +84,20 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
           </div>
 
           <div className="hidden sm:flex items-center flex-wrap gap-2">
-            <Badge
+            <button
+              type="button"
+              onClick={(event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                router.push(`/marketplace?type=${item.type}`);
+              }}
               className={cn(
                 'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
-                'hover:bg-primary/10 hover:text-primary',
+                'hover:bg-primary/10 hover:text-primary cursor-pointer',
               )}
             >
               {getMarketplaceTypeLabel(item.type)}
-            </Badge>
+            </button>
             {item.in_collections.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {item.in_collections.slice(0, 2).map((collection) => (

@@ -151,6 +151,21 @@ function MarketplaceExplorerContent({
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
+  // Sync URL params to state when searchParams change (for navigation from other pages)
+  useEffect(() => {
+    const urlType = searchParams?.get('type') ?? 'all';
+    const urlCollection = searchParams?.get('collection') ?? null;
+    const urlQuery = searchParams?.get('q') ?? searchParams?.get('search') ?? '';
+    const urlSort = searchParams?.get('sort');
+    const urlPage = parseInt(searchParams?.get('page') ?? '1', 10) || 1;
+
+    setTypeFilter(urlType);
+    setCollectionFilter(urlCollection);
+    setQuery(urlQuery);
+    if (urlSort) setSortBy(urlSort);
+    setCurrentPage(urlPage);
+  }, [searchParams]);
+
   // Hydrate viewMode from localStorage after mount to avoid hydration mismatch
   useEffect(() => {
     if (typeof window !== 'undefined') {
