@@ -24,6 +24,7 @@ const footerLinks = {
   Community: [
     { name: 'Join Discord', href: 'https://discord.gg/zv8C9F8' },
     { name: 'Twitter', href: 'https://twitter.com/getmue' },
+    { name: 'Showcase', href: '/showcase' },
     { name: 'Contribute Addon', href: '/marketplace/create' },
     { name: 'Contact', href: '/contact' },
   ],

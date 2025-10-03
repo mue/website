@@ -53,6 +53,11 @@ export default function Navbar() {
       isActive: pathname?.startsWith('/marketplace') ?? false,
     },
     {
+      href: '/showcase',
+      label: 'Showcase',
+      isActive: pathname?.startsWith('/showcase') ?? false,
+    },
+    {
       href: '/blog',
       label: 'Blog',
       isActive: pathname?.startsWith('/blog') ?? false,
