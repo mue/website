@@ -28,6 +28,7 @@ export type MarketplaceItemSummary = {
   language?: string;
   in_collections: string[];
   type: string;
+  updated_at?: string;
 };
 
 export type MarketplaceCollectionDetail = MarketplaceCollection & {

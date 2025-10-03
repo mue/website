@@ -8,7 +8,7 @@ import { Library as LibraryIcon, Heart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useFavorites } from '@/lib/use-favorites';
 
-interface ItemsGridProps {
+interface ItemsListProps {
   items: MarketplaceItemSummary[];
   collectionNameMap: Map<string, string>;
 }
@@ -22,16 +22,16 @@ const isNewItem = (updatedAt?: string) => {
   return itemDate > sevenDaysAgo;
 };
 
-export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) {
+export default function ItemsList({ items, collectionNameMap }: ItemsListProps) {
   const router = useRouter();
   const { toggleFavorite, isFavorite } = useFavorites();
   return (
-    <div className="grid gap-3 grid-cols-2 sm:gap-4 lg:grid-cols-3">
+    <div className="space-y-3">
       {items.map((item) => (
         <Link
           key={`${item.type}-${item.name}`}
           href={`/marketplace/${encodeURIComponent(item.type)}/${encodeURIComponent(item.name)}`}
-          className="group relative flex h-full cursor-pointer flex-col gap-3 overflow-hidden rounded-2xl border border-border bg-card/70 p-4 lg:gap-4 lg:p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
+          className="group relative flex cursor-pointer flex-row items-center gap-4 overflow-hidden rounded-xl border border-border bg-card/70 p-4 shadow-sm transition hover:border-primary/40 hover:shadow-md"
         >
           <button
             type="button"
@@ -57,31 +57,29 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
               NEW
             </Badge>
           )}
-          <div className="flex items-center justify-center lg:justify-start">
-            <div className="relative h-16 w-16 lg:h-14 lg:w-14 flex-shrink-0 overflow-hidden rounded-xl border border-border/60 bg-muted">
-              {item.icon_url ? (
-                <Image
-                  src={item.icon_url}
-                  alt={item.display_name}
-                  fill
-                  sizes="64px"
-                  className="object-cover"
-                  unoptimized
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center text-xs font-semibold uppercase text-muted-foreground/80">
-                  {item.display_name.slice(0, 2)}
-                </div>
-              )}
-            </div>
+          <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg border border-border/60 bg-muted">
+            {item.icon_url ? (
+              <Image
+                src={item.icon_url}
+                alt={item.display_name}
+                fill
+                sizes="64px"
+                className="object-cover"
+                unoptimized
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center text-xs font-semibold uppercase text-muted-foreground/80">
+                {item.display_name.slice(0, 2)}
+              </div>
+            )}
           </div>
 
-          <div className="space-y-1 text-center lg:text-left">
-            <h3 className="text-sm lg:text-xl font-semibold leading-tight text-foreground line-clamp-2">
+          <div className="flex-1 min-w-0 space-y-1">
+            <h3 className="text-base font-semibold leading-tight text-foreground line-clamp-1">
               {item.display_name}
             </h3>
             {item.author && (
-              <p className="text-xs lg:text-sm text-muted-foreground line-clamp-1">
+              <p className="text-sm text-muted-foreground line-clamp-1">
                 By{' '}
                 <button
                   type="button"
@@ -100,7 +98,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
             )}
           </div>
 
-          <div className="hidden lg:flex items-center flex-wrap gap-2">
+          <div className="hidden sm:flex items-center flex-wrap gap-2">
             <Badge
               className={cn(
                 'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
@@ -111,7 +109,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
             </Badge>
             {item.in_collections.length > 0 && (
               <div className="flex flex-wrap gap-2">
-                {item.in_collections.slice(0, 3).map((collection) => (
+                {item.in_collections.slice(0, 2).map((collection) => (
                   <button
                     key={collection}
                     type="button"
@@ -129,9 +127,9 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
                     {collectionNameMap.get(collection) ?? collection.replace(/_/g, ' ')}
                   </button>
                 ))}
-                {item.in_collections.length > 3 && (
+                {item.in_collections.length > 2 && (
                   <span className="text-xs text-muted-foreground">
-                    +{item.in_collections.length - 3} more
+                    +{item.in_collections.length - 2} more
                   </span>
                 )}
               </div>

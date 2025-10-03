@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useMemo, useRef, useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
@@ -12,9 +13,11 @@ import {
 } from '@/lib/marketplace';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { FunnelX, Plus, Search, X } from 'lucide-react';
+import { FunnelX, Plus, Search, X, LayoutGrid, List, Heart, Sparkles } from 'lucide-react';
 import { FeaturedCollectionsSkeleton } from './featured-collections-skeleton';
 import { ItemsGridSkeleton } from './items-grid-skeleton';
+import { useFavorites } from '@/lib/use-favorites';
+import { cn } from '@/lib/utils';
 
 // Lazy components with explicit webpack comments for better chunk naming
 const FeaturedCollectionsLazy = dynamic(
@@ -26,6 +29,11 @@ const FeaturedCollectionsLazy = dynamic(
 );
 
 const ItemsGridLazy = dynamic(() => import(/* webpackChunkName: "items-grid" */ './items-grid'), {
+  ssr: false,
+  loading: () => <ItemsGridSkeleton />,
+});
+
+const ItemsListLazy = dynamic(() => import(/* webpackChunkName: "items-list" */ './items-list'), {
   ssr: false,
   loading: () => <ItemsGridSkeleton />,
 });
@@ -59,6 +67,25 @@ export function MarketplaceExplorer({
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const { favorites, toggleFavorite, isFavorite, loaded: favoritesLoaded } = useFavorites();
+
+  // Create a stable random seed that changes every hour (matching marketplace cache revalidation)
+  const randomSeed = useMemo(() => {
+    if (typeof window === 'undefined') return 0;
+    const currentHour = Math.floor(Date.now() / (1000 * 60 * 60)); // Hour since epoch
+    const stored = sessionStorage.getItem('mkt_random_seed');
+    const storedHour = sessionStorage.getItem('mkt_random_seed_hour');
+
+    if (stored && storedHour && parseInt(storedHour, 10) === currentHour) {
+      return parseInt(stored, 10);
+    }
+
+    // Generate new seed based on current hour for consistency across tabs
+    const newSeed = currentHour % 10000;
+    sessionStorage.setItem('mkt_random_seed', String(newSeed));
+    sessionStorage.setItem('mkt_random_seed_hour', String(currentHour));
+    return newSeed;
+  }, []);
 
   // Parse initial params synchronously to avoid flicker
   const initialParams = useMemo(() => {
@@ -66,7 +93,7 @@ export function MarketplaceExplorer({
     const s = searchParams?.get('q') ?? searchParams?.get('search') ?? '';
     const t = searchParams?.get('type') ?? 'all';
     const c = searchParams?.get('collection') ?? null;
-    const so = searchParams?.get('sort') ?? 'name-asc';
+    const so = searchParams?.get('sort') ?? null; // Let useState handle the default
     const p = parseInt(searchParams?.get('page') ?? '1', 10) || 1;
     const ppParam = parseInt(searchParams?.get('pp') ?? '0', 10) || 0;
     return { s, t, c, so, p, ppParam };
@@ -83,12 +110,13 @@ export function MarketplaceExplorer({
   });
   const [collectionFilter, setCollectionFilter] = useState<string | null>(initialParams.c);
   const [sortBy, setSortBy] = useState<string>(() => {
-    if (initialParams.so !== 'name-asc') return initialParams.so;
+    // Priority: URL param > localStorage > default 'recommended'
+    if (initialParams.so) return initialParams.so;
     if (typeof window !== 'undefined') {
       const stored = window.localStorage.getItem('mkt_sort');
       if (stored) return stored;
     }
-    return 'name-asc';
+    return 'recommended';
   });
   const [currentPage, setCurrentPage] = useState(initialParams.p > 0 ? initialParams.p : 1);
   // Determine initial itemsPerPage: URL param > localStorage > default 12
@@ -101,6 +129,22 @@ export function MarketplaceExplorer({
     }
     return defaultPerPage;
   });
+  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+  const [showNewOnly, setShowNewOnly] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(-1);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // Hydrate viewMode from localStorage after mount to avoid hydration mismatch
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const stored = window.localStorage.getItem('mkt_view') as 'grid' | 'list' | null;
+      if (stored === 'grid' || stored === 'list') {
+        setViewMode(stored);
+      }
+    }
+  }, []);
 
   const collectionNameMap = useMemo(() => {
     return new Map(collections.map((collection) => [collection.name, collection.display_name]));
@@ -118,14 +162,41 @@ export function MarketplaceExplorer({
     );
   }, [items]);
 
+  // Generate search suggestions
+  const suggestions = useMemo(() => {
+    const trimmedQuery = query.trim().toLowerCase();
+    if (!trimmedQuery || trimmedQuery.length < 2) return [];
+
+    const matches = items
+      .filter(
+        (item) =>
+          item.display_name.toLowerCase().includes(trimmedQuery) ||
+          item.author?.toLowerCase().includes(trimmedQuery),
+      )
+      .slice(0, 5);
+
+    return matches;
+  }, [query, items]);
+
   const filteredItems = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
+
+    // Helper to check if item is new (within last 7 days)
+    const isNewItem = (updatedAt?: string) => {
+      if (!updatedAt) return false;
+      const itemDate = new Date(updatedAt);
+      const sevenDaysAgo = new Date();
+      sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+      return itemDate > sevenDaysAgo;
+    };
 
     const filtered = items.filter((item) => {
       const matchesType = typeFilter === 'all' || item.type === typeFilter;
       const matchesCollection = !collectionFilter || item.in_collections.includes(collectionFilter);
+      const matchesFavorites = !showFavoritesOnly || isFavorite(item.type, item.name);
+      const matchesNew = !showNewOnly || isNewItem(item.updated_at);
 
-      if (!matchesType || !matchesCollection) return false;
+      if (!matchesType || !matchesCollection || !matchesFavorites || !matchesNew) return false;
 
       if (!normalizedQuery) return true;
 
@@ -138,27 +209,46 @@ export function MarketplaceExplorer({
       switch (sortBy) {
         case 'name-asc':
           return a.display_name.localeCompare(b.display_name);
-        case 'name-desc':
-          return b.display_name.localeCompare(a.display_name);
-        case 'author-asc':
-          return (a.author || '').localeCompare(b.author || '');
-        case 'author-desc':
-          return (b.author || '').localeCompare(a.author || '');
-        case 'type-asc':
-          return getMarketplaceTypeLabel(a.type).localeCompare(getMarketplaceTypeLabel(b.type));
-        case 'type-desc':
-          return getMarketplaceTypeLabel(b.type).localeCompare(getMarketplaceTypeLabel(a.type));
-        default:
+        case 'updated':
+          // Sort by updated_at (newest first), fallback to name if dates missing
+          if (a.updated_at && b.updated_at) {
+            return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
+          }
+          if (a.updated_at) return -1;
+          if (b.updated_at) return 1;
           return a.display_name.localeCompare(b.display_name);
+        case 'recommended':
+        default:
+          // Stable random order using session seed + item name
+          const hash = (str: string, seed: number) => {
+            let h = seed;
+            for (let i = 0; i < str.length; i++) {
+              h = ((h << 5) - h + str.charCodeAt(i)) | 0;
+            }
+            return h;
+          };
+          return hash(a.name, randomSeed) - hash(b.name, randomSeed);
       }
     });
-  }, [collectionFilter, items, query, typeFilter, sortBy]);
+  }, [
+    collectionFilter,
+    items,
+    query,
+    typeFilter,
+    sortBy,
+    randomSeed,
+    showFavoritesOnly,
+    showNewOnly,
+    isFavorite,
+  ]);
 
   const resetFilters = () => {
     setQuery('');
     setTypeFilter('all');
     setCollectionFilter(null);
-    setSortBy('name-asc');
+    setSortBy('recommended');
+    setShowFavoritesOnly(false);
+    setShowNewOnly(false);
     changePage(1, { scroll: false });
   };
 
@@ -254,10 +344,16 @@ export function MarketplaceExplorer({
 
   useEffect(() => {
     try {
-      if (sortBy === 'name-asc') window.localStorage.removeItem('mkt_sort');
+      if (sortBy === 'recommended') window.localStorage.removeItem('mkt_sort');
       else window.localStorage.setItem('mkt_sort', sortBy);
     } catch {}
   }, [sortBy]);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem('mkt_view', viewMode);
+    } catch {}
+  }, [viewMode]);
 
   // Debounce the query param writing to URL to reduce history churn while typing
   const [debouncedQuery, setDebouncedQuery] = useState(query);
@@ -303,7 +399,12 @@ export function MarketplaceExplorer({
 
   const isSearching = query.trim().length > 0;
   const hasActiveFilters =
-    query || typeFilter !== 'all' || collectionFilter || sortBy !== 'name-asc';
+    query ||
+    typeFilter !== 'all' ||
+    collectionFilter ||
+    sortBy !== 'recommended' ||
+    showFavoritesOnly ||
+    showNewOnly;
 
   // Compute display range for the "Showing x-y of z items" UI.
   const displayStart = isSearching
@@ -328,17 +429,51 @@ export function MarketplaceExplorer({
             <div className="relative">
               <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted-foreground" />
               <Input
+                ref={searchInputRef}
                 type="text"
                 placeholder="Search by name or author..."
                 value={query}
-                onChange={(event) => setQuery(event.target.value)}
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setShowSuggestions(true);
+                  setSelectedSuggestionIndex(-1);
+                }}
+                onFocus={() => setShowSuggestions(true)}
+                onBlur={() => {
+                  // Delay to allow click on suggestion
+                  setTimeout(() => setShowSuggestions(false), 200);
+                }}
+                onKeyDown={(event) => {
+                  if (!showSuggestions || suggestions.length === 0) return;
+
+                  if (event.key === 'ArrowDown') {
+                    event.preventDefault();
+                    setSelectedSuggestionIndex((prev) =>
+                      prev < suggestions.length - 1 ? prev + 1 : prev,
+                    );
+                  } else if (event.key === 'ArrowUp') {
+                    event.preventDefault();
+                    setSelectedSuggestionIndex((prev) => (prev > 0 ? prev - 1 : -1));
+                  } else if (event.key === 'Enter' && selectedSuggestionIndex >= 0) {
+                    event.preventDefault();
+                    const suggestion = suggestions[selectedSuggestionIndex];
+                    router.push(
+                      `/marketplace/${encodeURIComponent(suggestion.type)}/${encodeURIComponent(suggestion.name)}`,
+                    );
+                  } else if (event.key === 'Escape') {
+                    setShowSuggestions(false);
+                  }
+                }}
                 className="h-12 pl-12 pr-12 text-base shadow-sm transition focus:shadow-md"
                 aria-label="Search marketplace items"
               />
               {query && (
                 <button
                   type="button"
-                  onClick={() => setQuery('')}
+                  onClick={() => {
+                    setQuery('');
+                    setShowSuggestions(false);
+                  }}
                   className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer rounded-full p-1 text-muted-foreground transition hover:bg-muted hover:text-foreground"
                   aria-label="Clear search"
                 >
@@ -346,14 +481,58 @@ export function MarketplaceExplorer({
                 </button>
               )}
             </div>
-            {isSearching && (
-              <div
-                className="mt-2 text-center text-sm text-muted-foreground"
-                role="status"
-                aria-live="polite"
-              >
-                Found <strong className="text-foreground">{filteredItems.length}</strong> result
-                {filteredItems.length !== 1 ? 's' : ''}
+
+            {/* Search Suggestions Dropdown */}
+            {showSuggestions && suggestions.length > 0 && (
+              <div className="absolute top-full mt-2 w-full rounded-lg border border-border bg-card shadow-lg z-50 overflow-hidden">
+                <div className="px-5 py-3 text-sm text-muted-foreground border-b border-border">
+                  Found <strong className="text-foreground">{filteredItems.length}</strong> result
+                  {filteredItems.length !== 1 ? 's' : ''}
+                </div>
+                {suggestions.map((suggestion, index) => (
+                  <button
+                    key={`${suggestion.type}-${suggestion.name}`}
+                    type="button"
+                    onClick={() => {
+                      router.push(
+                        `/marketplace/${encodeURIComponent(suggestion.type)}/${encodeURIComponent(suggestion.name)}`,
+                      );
+                      setShowSuggestions(false);
+                    }}
+                    className={cn(
+                      'w-full flex items-center gap-3 p-3 text-left transition hover:bg-muted',
+                      selectedSuggestionIndex === index && 'bg-muted',
+                    )}
+                  >
+                    <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-lg border border-border/60 bg-muted">
+                      {suggestion.icon_url ? (
+                        <Image
+                          src={suggestion.icon_url}
+                          alt={suggestion.display_name}
+                          fill
+                          sizes="40px"
+                          className="object-cover"
+                          unoptimized
+                        />
+                      ) : (
+                        <div className="flex h-full w-full items-center justify-center text-xs font-semibold uppercase text-muted-foreground/80">
+                          {suggestion.display_name.slice(0, 2)}
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-medium text-sm truncate">{suggestion.display_name}</div>
+                      {suggestion.author && (
+                        <div className="text-xs text-muted-foreground truncate">
+                          By {suggestion.author}
+                        </div>
+                      )}
+                    </div>
+                    <Badge variant="secondary" className="text-xs">
+                      {getMarketplaceTypeLabel(suggestion.type)}
+                    </Badge>
+                  </button>
+                ))}
               </div>
             )}
           </div>
@@ -364,6 +543,45 @@ export function MarketplaceExplorer({
               <span className="sm:hidden">Create</span>
             </Button>
           </Link>
+        </div>
+
+        {/* Quick Filter Chips */}
+        <div className="flex flex-wrap items-center gap-2">
+          <Badge
+            variant={showNewOnly ? 'default' : 'outline'}
+            className="cursor-pointer transition hover:bg-primary/10 hover:text-primary flex items-center gap-1"
+            onClick={() => {
+              setShowNewOnly(!showNewOnly);
+              changePage(1, { scroll: false });
+            }}
+          >
+            <Sparkles className="h-3 w-3" />
+            New This Week
+          </Badge>
+          <Badge
+            variant={showFavoritesOnly ? 'default' : 'outline'}
+            className="cursor-pointer transition hover:bg-primary/10 hover:text-primary flex items-center gap-1"
+            onClick={() => {
+              setShowFavoritesOnly(!showFavoritesOnly);
+              changePage(1, { scroll: false });
+            }}
+          >
+            <Heart className={`h-3 w-3 ${showFavoritesOnly ? 'fill-current' : ''}`} />
+            Favorites {favoritesLoaded && favorites.length > 0 && `(${favorites.length})`}
+          </Badge>
+          {availableTypes.map((type) => (
+            <Badge
+              key={type}
+              variant={typeFilter === type ? 'default' : 'outline'}
+              className="cursor-pointer transition hover:bg-primary/10 hover:text-primary"
+              onClick={() => {
+                setTypeFilter(typeFilter === type ? 'all' : type);
+                changePage(1, { scroll: false });
+              }}
+            >
+              {getMarketplaceTypeLabel(type)}
+            </Badge>
+          ))}
         </div>
 
         {collectionFilter && collectionFilterLabel && (
@@ -396,6 +614,26 @@ export function MarketplaceExplorer({
               of <strong className="text-foreground">{filteredItems.length}</strong> items
             </span>
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <div className="flex items-center gap-1 border border-border rounded-md p-1">
+                <Button
+                  variant={viewMode === 'grid' ? 'secondary' : 'ghost'}
+                  size="sm"
+                  onClick={() => setViewMode('grid')}
+                  className="h-8 w-8 p-0"
+                  aria-label="Grid view"
+                >
+                  <LayoutGrid className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant={viewMode === 'list' ? 'secondary' : 'ghost'}
+                  size="sm"
+                  onClick={() => setViewMode('list')}
+                  className="h-8 w-8 p-0"
+                  aria-label="List view"
+                >
+                  <List className="h-4 w-4" />
+                </Button>
+              </div>
               <div className="flex items-center gap-2">
                 <label
                   className="hidden sm:inline text-sm font-medium text-muted-foreground"
@@ -477,12 +715,9 @@ export function MarketplaceExplorer({
                     <SelectValue placeholder="Sort" />
                   </SelectTrigger>
                   <SelectContent>
+                    <SelectItem value="recommended">Recommended</SelectItem>
+                    <SelectItem value="updated">Recently Updated</SelectItem>
                     <SelectItem value="name-asc">Name (A-Z)</SelectItem>
-                    <SelectItem value="name-desc">Name (Z-A)</SelectItem>
-                    <SelectItem value="author-asc">Author (A-Z)</SelectItem>
-                    <SelectItem value="author-desc">Author (Z-A)</SelectItem>
-                    <SelectItem value="type-asc">Type (A-Z)</SelectItem>
-                    <SelectItem value="type-desc">Type (Z-A)</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -510,7 +745,11 @@ export function MarketplaceExplorer({
         </div> */}
 
           <Suspense fallback={<ItemsGridSkeleton count={itemsPerPage} />}>
-            <ItemsGridLazy items={paginatedItems} collectionNameMap={collectionNameMap} />
+            {viewMode === 'grid' ? (
+              <ItemsGridLazy items={paginatedItems} collectionNameMap={collectionNameMap} />
+            ) : (
+              <ItemsListLazy items={paginatedItems} collectionNameMap={collectionNameMap} />
+            )}
           </Suspense>
 
           {filteredItems.length === 0 && (
