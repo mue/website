@@ -16,7 +16,7 @@ import { Input } from '@/components/ui/input';
 import { FunnelX, Plus, Search, X, LayoutGrid, List, Heart } from 'lucide-react';
 import { FeaturedCollectionsSkeleton } from './featured-collections-skeleton';
 import { ItemsGridSkeleton } from './items-grid-skeleton';
-import { useFavorites } from '@/lib/use-favorites';
+import { FavoritesProvider, useFavoritesContext } from '@/lib/favorites-context';
 import { cn } from '@/lib/utils';
 
 // Lazy components with explicit webpack comments for better chunk naming
@@ -64,10 +64,26 @@ export function MarketplaceExplorer({
   collections,
   randomCollections,
 }: MarketplaceExplorerProps) {
+  return (
+    <FavoritesProvider>
+      <MarketplaceExplorerContent
+        items={items}
+        collections={collections}
+        randomCollections={randomCollections}
+      />
+    </FavoritesProvider>
+  );
+}
+
+function MarketplaceExplorerContent({
+  items,
+  collections,
+  randomCollections,
+}: MarketplaceExplorerProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { favorites, toggleFavorite, isFavorite, loaded: favoritesLoaded } = useFavorites();
+  const { favorites, toggleFavorite, isFavorite, loaded: favoritesLoaded } = useFavoritesContext();
 
   // Create a stable random seed that changes every hour (matching marketplace cache revalidation)
   const randomSeed = useMemo(() => {
@@ -219,7 +235,16 @@ export function MarketplaceExplorer({
           return hash(a.name, randomSeed) - hash(b.name, randomSeed);
       }
     });
-  }, [collectionFilter, items, query, typeFilter, sortBy, randomSeed, showFavoritesOnly, isFavorite]);
+  }, [
+    collectionFilter,
+    items,
+    query,
+    typeFilter,
+    sortBy,
+    randomSeed,
+    showFavoritesOnly,
+    isFavorite,
+  ]);
 
   const resetFilters = () => {
     setQuery('');

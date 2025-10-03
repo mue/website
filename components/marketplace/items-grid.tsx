@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { getMarketplaceTypeLabel, MarketplaceItemSummary } from '@/lib/marketplace';
 import { Library as LibraryIcon, Heart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useFavorites } from '@/lib/use-favorites';
+import { useFavoritesContext } from '@/lib/favorites-context';
 
 interface ItemsGridProps {
   items: MarketplaceItemSummary[];
@@ -15,7 +15,7 @@ interface ItemsGridProps {
 
 export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) {
   const router = useRouter();
-  const { toggleFavorite, isFavorite } = useFavorites();
+  const { toggleFavorite, isFavorite } = useFavoritesContext();
   return (
     <div className="grid gap-3 grid-cols-2 sm:gap-4 lg:grid-cols-3">
       {items.map((item) => (
