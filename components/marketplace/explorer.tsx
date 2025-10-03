@@ -16,11 +16,19 @@ import { FunnelX, Plus, Search, X } from 'lucide-react';
 import { FeaturedCollectionsSkeleton } from './featured-collections-skeleton';
 import { ItemsGridSkeleton } from './items-grid-skeleton';
 
-// Lazy components
-const FeaturedCollectionsLazy = dynamic(() => import('./featured-collections'), {
+// Lazy components with explicit webpack comments for better chunk naming
+const FeaturedCollectionsLazy = dynamic(
+  () => import(/* webpackChunkName: "featured-collections" */ './featured-collections'),
+  {
+    ssr: false,
+    loading: () => <FeaturedCollectionsSkeleton />,
+  },
+);
+
+const ItemsGridLazy = dynamic(() => import(/* webpackChunkName: "items-grid" */ './items-grid'), {
   ssr: false,
+  loading: () => <ItemsGridSkeleton />,
 });
-const ItemsGridLazy = dynamic(() => import('./items-grid'), { ssr: false });
 
 import {
   Select,
@@ -389,7 +397,10 @@ export function MarketplaceExplorer({
             </span>
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               <div className="flex items-center gap-2">
-                <label className="hidden sm:inline text-sm font-medium text-muted-foreground" htmlFor="per-page">
+                <label
+                  className="hidden sm:inline text-sm font-medium text-muted-foreground"
+                  htmlFor="per-page"
+                >
                   Per page
                 </label>
                 <Select
@@ -416,7 +427,10 @@ export function MarketplaceExplorer({
                 </Select>
               </div>
               <div className="flex items-center gap-2">
-                <label className="hidden sm:inline text-sm font-medium text-muted-foreground" htmlFor="type-filter">
+                <label
+                  className="hidden sm:inline text-sm font-medium text-muted-foreground"
+                  htmlFor="type-filter"
+                >
                   Type
                 </label>
                 <Select
@@ -443,7 +457,10 @@ export function MarketplaceExplorer({
                 </Select>
               </div>
               <div className="flex items-center gap-2">
-                <label className="hidden sm:inline text-sm font-medium text-muted-foreground" htmlFor="sort-by">
+                <label
+                  className="hidden sm:inline text-sm font-medium text-muted-foreground"
+                  htmlFor="sort-by"
+                >
                   Sort
                 </label>
                 <Select
