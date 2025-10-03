@@ -2,10 +2,11 @@ import { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
+import { NoCollectionItemsEmptyState } from '@/components/marketplace/empty-state';
 import { getMarketplaceCollection, type MarketplaceCollectionDetail } from '@/lib/marketplace';
 import { FavoritesProvider } from '@/lib/favorites-context';
 import ItemsGrid from '@/components/marketplace/items-grid';
@@ -75,18 +76,12 @@ export default async function MarketplaceCollectionPage({
 
   return (
     <FavoritesProvider>
-      <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-10 px-6 py-12 lg:px-8">
-        <Link
-          href="/marketplace"
-          className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition hover:text-foreground"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to marketplace
-        </Link>
+      <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-6 py-12 lg:px-8">
+        <MarketplaceBreadcrumb type="collection" collectionName={data.display_name} />
 
         <header className="overflow-hidden rounded-3xl border border-border bg-card/80 shadow-sm">
           <div className="grid gap-8 lg:grid-cols-[2fr_3fr]">
-            <div className="relative min-h-[220px]">
+            <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[220px]">
               {data.img ? (
                 <Image
                   src={data.img}
@@ -144,9 +139,7 @@ export default async function MarketplaceCollectionPage({
             />
           </section>
         ) : (
-          <section className="rounded-3xl border border-dashed border-border bg-card/50 p-8 text-center text-sm text-muted-foreground">
-            This collection does not currently list any downloadable items.
-          </section>
+          <NoCollectionItemsEmptyState />
         )}
 
         <Separator />

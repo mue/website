@@ -32,7 +32,7 @@ export default function FeaturedCollections({ randomCollections }: FeaturedColle
           <CarouselItem key={collection.name}>
             <article className="overflow-hidden rounded-2xl border border-border bg-card/80 shadow-sm">
               <div className="grid gap-6 lg:grid-cols-[2fr_3fr]">
-                <div className="relative min-h-[220px]">
+                <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[220px]">
                   {collection.img ? (
                     <Image
                       src={collection.img}

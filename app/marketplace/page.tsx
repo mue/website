@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { Suspense } from 'react';
 
 import { MarketplaceExplorer } from '@/components/marketplace/explorer';
+import { MarketplaceLoadingSkeleton } from '@/components/marketplace/marketplace-loading-skeleton';
 import { getMarketplaceCollections, getMarketplaceItems } from '@/lib/marketplace';
 
 // Simple string hash (FNV-1a variant) for deterministic seeding
@@ -60,7 +61,7 @@ export default async function MarketplacePage() {
   });
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-6xl flex-col gap-12 px-6 py-12 lg:px-8">
+    <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-12 px-6 py-12 lg:px-8">
       {/* Preload featured collection images for faster visual stability */}
       {collectionsWithTypes.map((c) =>
         c.img ? (
@@ -84,21 +85,7 @@ export default async function MarketplacePage() {
         </p>
       </header> */}
 
-      <Suspense
-        fallback={
-          <div className="flex flex-col gap-6" aria-busy="true" aria-label="Loading marketplace">
-            <div className="h-10 w-64 rounded-md bg-muted animate-pulse" />
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="h-48 rounded-2xl border border-border bg-card/60 animate-pulse"
-                />
-              ))}
-            </div>
-          </div>
-        }
-      >
+      <Suspense fallback={<MarketplaceLoadingSkeleton />}>
         <MarketplaceExplorer
           items={items}
           collections={collections}

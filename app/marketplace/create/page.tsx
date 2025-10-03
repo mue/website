@@ -1,9 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { Input } from '@/components/ui/input';
-import { ArrowLeft } from 'lucide-react';
+import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
 import { AddonMetadata, AddonType, Photo, Quote } from '@/components/marketplace/create/types';
 import {
   DeleteConfirmDialog,
@@ -436,16 +435,10 @@ export default function CreateAddonPage() {
   };
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8 px-6 py-12 lg:px-8">
+    <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-8 px-6 py-12 lg:px-8">
       {currentStep > 1 && (
         <div className="flex items-center justify-between gap-4">
-          <Link
-            href="/marketplace"
-            className="inline-flex w-fit cursor-pointer items-center gap-2 text-sm font-medium text-muted-foreground transition hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Back to marketplace
-          </Link>
+          <MarketplaceBreadcrumb type="create" />
 
           <DraftManager
             currentDraft={{
