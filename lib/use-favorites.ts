@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 type FavoriteItem = {
   type: string;
@@ -40,9 +40,12 @@ export function useFavorites() {
     });
   };
 
-  const isFavorite = (type: string, name: string) => {
-    return favorites.some((f) => f.type === type && f.name === name);
-  };
+  const isFavorite = useCallback(
+    (type: string, name: string) => {
+      return favorites.some((f) => f.type === type && f.name === name);
+    },
+    [favorites],
+  );
 
   return {
     favorites,

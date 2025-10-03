@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { getMarketplaceTypeLabel, MarketplaceItemSummary } from '@/lib/marketplace';
 import { Library as LibraryIcon, Heart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { useFavorites } from '@/lib/use-favorites';
+import { useFavoritesContext } from '@/lib/favorites-context';
 
 interface ItemsListProps {
   items: MarketplaceItemSummary[];
@@ -15,7 +15,7 @@ interface ItemsListProps {
 
 export default function ItemsList({ items, collectionNameMap }: ItemsListProps) {
   const router = useRouter();
-  const { toggleFavorite, isFavorite } = useFavorites();
+  const { toggleFavorite, isFavorite } = useFavoritesContext();
   return (
     <div className="space-y-3">
       {items.map((item) => (

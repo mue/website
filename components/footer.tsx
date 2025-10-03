@@ -9,17 +9,22 @@ import { ThemeToggle } from './theme-toggle';
 const footerLinks = {
   Product: [
     { name: 'Download', href: '/download' },
+    { name: 'Demo', href: '/demo' },
     { name: 'Marketplace', href: '/marketplace' },
     { name: 'Blog', href: '/blog' },
   ],
   Resources: [
     { name: 'Documentation', href: '/docs' },
     { name: 'API', href: '/docs/api/introduction' },
+    { name: 'FAQ', href: '/docs/faq' },
+    { name: 'Status', href: 'https://status.muetab.com' },
+    { name: 'Changelog', href: 'https://github.com/mue/mue/releases' },
     { name: 'GitHub', href: 'https://github.com/mue/mue' },
   ],
   Community: [
-    { name: 'Discord', href: 'https://discord.gg/zv8C9F8' },
+    { name: 'Join Discord', href: 'https://discord.gg/zv8C9F8' },
     { name: 'Twitter', href: 'https://twitter.com/getmue' },
+    { name: 'Contribute Addon', href: '/marketplace/create' },
     { name: 'Contact', href: '/contact' },
   ],
   Legal: [
