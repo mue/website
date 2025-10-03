@@ -37,11 +37,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { getMarketplaceItem, type MarketplaceItemDetail } from '@/lib/marketplace';
+import {
+  getMarketplaceItem,
+  getMarketplaceItems,
+  type MarketplaceItemDetail,
+  type MarketplaceItemSummary,
+} from '@/lib/marketplace';
 import { ItemActions } from './item-actions';
 import { PresetSettingsTable } from '@/components/marketplace/preset-settings-table';
 import { QuotesTable } from '@/components/marketplace/quotes-table';
 import { PhotoGallery } from '@/components/marketplace/photo-gallery';
+import ItemsGrid from '@/components/marketplace/items-grid';
 
 export const revalidate = 3600;
 
@@ -58,6 +64,33 @@ async function resolveItem(type: string, item: string): Promise<MarketplaceItemD
   } catch {
     notFound();
   }
+}
+
+async function getRelatedItems(
+  currentItemName: string,
+  author?: string,
+  collections?: string[],
+): Promise<MarketplaceItemSummary[]> {
+  const allItems = await getMarketplaceItems();
+
+  // Filter items by same author or in same collections
+  const related = allItems.filter((item) => {
+    // Don't include current item
+    if (item.name === currentItemName) return false;
+
+    // Include if same author
+    if (author && item.author?.toLowerCase() === author.toLowerCase()) return true;
+
+    // Include if in any of the same collections
+    if (collections && collections.length > 0) {
+      return item.in_collections.some((col) => collections.includes(col));
+    }
+
+    return false;
+  });
+
+  // Shuffle and limit to 6 items
+  return related.sort(() => Math.random() - 0.5).slice(0, 6);
 }
 
 export async function generateMetadata({ params }: MarketplaceItemPageProps): Promise<Metadata> {
@@ -134,6 +167,10 @@ function parseDescription(description: string) {
 export default async function MarketplaceItemPage({ params }: MarketplaceItemPageProps) {
   const { type, item } = await params;
   const data = await resolveItem(type, item);
+
+  // Get related items
+  const collectionNames = data.in_collections?.map((c) => (typeof c === 'string' ? c : c.name));
+  const relatedItems = await getRelatedItems(data.name, data.author, collectionNames);
 
   const formattedUpdatedAt = data.updated_at
     ? new Date(data.updated_at).toLocaleDateString(undefined, {
@@ -232,7 +269,12 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                 {data.author && (
                   <div className="flex items-center gap-3 text-muted-foreground">
                     <User className="h-4 w-4" />
-                    <span>{data.author}</span>
+                    <Link
+                      href={`/marketplace/author/${encodeURIComponent(data.author)}`}
+                      className="hover:text-primary hover:underline transition"
+                    >
+                      {data.author}
+                    </Link>
                   </div>
                 )}
 
@@ -512,20 +554,29 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
               )}
             </TabsContent>
           </Tabs>
-
-          <Separator className="my-8" />
-
-          <p className="text-center text-sm text-muted-foreground">
-            Want to contribute?{' '}
-            <Link
-              href="https://github.com/mue"
-              className="font-medium text-primary hover:underline"
-            >
-              Visit Mue on GitHub
-            </Link>
-          </p>
         </main>
       </div>
+      {relatedItems.length > 0 && (
+        <>
+          <Separator className="my-2" />
+
+          <div className="space-y-4">
+            <h2 className="text-2xl font-semibold tracking-tight">You might also like</h2>
+            <p className="text-sm text-muted-foreground">
+              Similar items {data.author && `by ${data.author} or `}from the same collections
+            </p>
+            <ItemsGrid items={relatedItems} collectionNameMap={new Map()} />
+          </div>
+        </>
+      )}
+      <Separator className="my-2" />
+
+      <p className="text-center text-sm text-muted-foreground">
+        Want to contribute?{' '}
+        <Link href="https://github.com/mue" className="font-medium text-primary hover:underline">
+          Visit Mue on GitHub
+        </Link>
+      </p>
     </div>
   );
 }
