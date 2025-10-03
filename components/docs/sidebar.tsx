@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import type { DocTreeNode } from '@/lib/docs';
 import { cn } from '@/lib/utils';
@@ -8,11 +11,18 @@ type DocsSidebarProps = {
   activeHref?: string;
 };
 
-export function DocsSidebar({ tree, activeHref = '/docs' }: DocsSidebarProps) {
+export function DocsSidebar({ tree }: DocsSidebarProps) {
+  // Always use pathname from client-side for accurate current page detection
+  const pathname = usePathname();
+  const currentPath = pathname;
+
+  // Debug log the current path
+  console.log('🔍 Sidebar current path:', currentPath);
+
   return (
     <nav className="space-y-4 text-sm">
       {tree.map((item) => (
-        <SidebarSection key={item.slug.join('/')} node={item} activeHref={activeHref} />
+        <SidebarSection key={item.slug.join('/')} node={item} activeHref={currentPath} />
       ))}
     </nav>
   );
@@ -34,6 +44,16 @@ function SidebarSection({
   const isActive = normalizedNodeHref === normalizedActiveHref;
   const isAncestor = isActive || normalizedActiveHref.startsWith(`${normalizedNodeHref}/`);
 
+  // Debug log for "Creating Add-ons" specifically
+  if (node.title === 'Creating Add-ons') {
+    console.log('📄 Creating Add-ons:', {
+      nodeHref: normalizedNodeHref,
+      activeHref: normalizedActiveHref,
+      isActive,
+      match: normalizedNodeHref === normalizedActiveHref,
+    });
+  }
+
   const hasChildren = node.children && node.children.length > 0;
 
   return (
@@ -42,28 +62,36 @@ function SidebarSection({
         depth > 0 && 'pl-3',
         isAncestor &&
           depth > 0 &&
-          'relative before:absolute before:left-0 before:top-2 before:bottom-2 before:w-px before:bg-primary/30',
+          'relative before:absolute before:left-0 before:top-2 before:bottom-2 before:w-px before:bg-primary/40',
       )}
     >
       <Link
         href={node.href}
+        data-active={isActive ? 'true' : 'false'}
+        data-node-href={normalizedNodeHref}
+        data-current-href={normalizedActiveHref}
         className={cn(
           'flex items-center justify-between rounded-md px-2 py-1.5 transition-all',
-          isActive && 'bg-primary text-primary-foreground shadow-sm ring-1 ring-primary/40',
+          isActive && '!text-primary font-semibold',
           !isActive && isAncestor
-            ? 'bg-muted/70 text-foreground'
-            : 'text-muted-foreground hover:text-foreground',
-          node.hasPage ? 'font-medium' : 'font-semibold',
+            ? 'bg-muted/70 text-foreground font-medium'
+            : 'text-muted-foreground hover:text-foreground hover:bg-muted/50',
+          !isActive && node.hasPage ? 'font-medium' : '',
+          !isActive && !node.hasPage ? 'font-semibold' : '',
         )}
         aria-current={isActive ? 'page' : undefined}
       >
-        <span className={cn('truncate', isActive && 'text-white')}>{node.title}</span>
+        <span className={cn('truncate', isActive && 'font-semibold')}>{node.title}</span>
 
         {hasChildren && (
           <span
             className={cn(
-              'inline-flex h-5 w-5 items-center justify-center rounded-full text-[10px]',
-              isAncestor ? 'bg-primary/10 text-primary' : 'bg-secondary text-secondary-foreground',
+              'inline-flex h-5 w-5 items-center justify-center rounded-full text-[10px] font-semibold',
+              isActive
+                ? 'bg-primary-foreground/20 text-primary-foreground'
+                : isAncestor
+                  ? 'bg-primary/15 text-primary font-semibold'
+                  : 'bg-secondary text-secondary-foreground',
             )}
           >
             {node.children?.length ?? 0}
