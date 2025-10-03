@@ -548,9 +548,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                 {/* No Content Available */}
                 {((isPhotoPack && (!data.photos || data.photos.length === 0)) ||
                   (isQuotePack && (!data.quotes || data.quotes.length === 0)) ||
-                  (isPresetSettings && presetSettings.length === 0)) && (
-                  <NoContentEmptyState />
-                )}
+                  (isPresetSettings && presetSettings.length === 0)) && <NoContentEmptyState />}
               </TabsContent>
             </Tabs>
           </main>
