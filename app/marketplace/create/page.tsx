@@ -1,29 +1,31 @@
 'use client';
 
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
-import { ArrowLeft, Download, Github, Lightbulb, Upload } from 'lucide-react';
-import {
-  AddonMetadata,
-  AddonType,
-  Photo,
-  Quote,
-} from '@/components/marketplace/create/types';
-import { AddonTypeSelector } from '@/components/marketplace/create/addon-type-selector';
-import { MetadataForm } from '@/components/marketplace/create/metadata-form';
-import { PhotoPackEditor } from '@/components/marketplace/create/photo-pack-editor';
-import { QuotePackEditor } from '@/components/marketplace/create/quote-pack-editor';
-import { SettingsEditor } from '@/components/marketplace/create/settings-editor';
+import { ArrowLeft } from 'lucide-react';
+import { AddonMetadata, AddonType, Photo, Quote } from '@/components/marketplace/create/types';
 import {
   DeleteConfirmDialog,
   ErrorDialog,
   SubmitDialog,
 } from '@/components/marketplace/create/dialogs';
+import { StepIndicator } from '@/components/marketplace/create/step-indicator';
+import { StepWelcome } from '@/components/marketplace/create/step-welcome';
+import { StepTypeSelection } from '@/components/marketplace/create/step-type-selection';
+import { StepMetadata } from '@/components/marketplace/create/step-metadata';
+import { StepContent } from '@/components/marketplace/create/step-content';
+import { StepPreview } from '@/components/marketplace/create/step-preview';
+import { StepOutput } from '@/components/marketplace/create/step-output';
+import { DraftManager, SavedDraft } from '@/components/marketplace/create/draft-manager';
+import { useKonamiCode } from '@/lib/easter-eggs';
 
 export default function CreateAddonPage() {
+  const [currentStep, setCurrentStep] = useState(1);
   const [addonType, setAddonType] = useState<AddonType>('photos');
+
+  // Easter egg: Konami code
+  useKonamiCode();
   const [metadata, setMetadata] = useState<AddonMetadata>({
     name: '',
     description: '',
@@ -45,6 +47,79 @@ export default function CreateAddonPage() {
   const [showDeletePhotosDialog, setShowDeletePhotosDialog] = useState(false);
   const [showDeleteQuotesDialog, setShowDeleteQuotesDialog] = useState(false);
   const [submitUrl, setSubmitUrl] = useState('');
+
+  // Load draft from localStorage on mount
+  useEffect(() => {
+    try {
+      const savedDraft = localStorage.getItem('mue-addon-draft');
+      if (savedDraft) {
+        const draft = JSON.parse(savedDraft);
+        if (draft.currentStep) setCurrentStep(draft.currentStep);
+        if (draft.addonType) setAddonType(draft.addonType);
+        if (draft.metadata) setMetadata(draft.metadata);
+        if (draft.photos) setPhotos(draft.photos);
+        if (draft.quotes) setQuotes(draft.quotes);
+        if (draft.settingsJson) setSettingsJson(draft.settingsJson);
+      }
+    } catch (error) {
+      console.error('Failed to load draft:', error);
+    }
+  }, []);
+
+  // Auto-save draft to localStorage whenever state changes
+  useEffect(() => {
+    // Only save if we're past the welcome screen and have some content
+    if (currentStep > 1) {
+      try {
+        const draft = {
+          currentStep,
+          addonType,
+          metadata,
+          photos,
+          quotes,
+          settingsJson,
+          lastSaved: new Date().toISOString(),
+        };
+        localStorage.setItem('mue-addon-draft', JSON.stringify(draft));
+      } catch (error) {
+        console.error('Failed to save draft:', error);
+      }
+    }
+  }, [currentStep, addonType, metadata, photos, quotes, settingsJson]);
+
+  const clearDraft = () => {
+    try {
+      localStorage.removeItem('mue-addon-draft');
+    } catch (error) {
+      console.error('Failed to clear draft:', error);
+    }
+  };
+
+  const handleLoadDraft = (draft: SavedDraft) => {
+    setAddonType(draft.metadata.type);
+    setMetadata(draft.metadata);
+    if (draft.content.photos) setPhotos(draft.content.photos);
+    if (draft.content.quotes) setQuotes(draft.content.quotes);
+    if (draft.content.settingsJson) setSettingsJson(draft.content.settingsJson);
+    // Start at type selection step to allow continuing the workflow
+    setCurrentStep(2);
+  };
+
+  const handleNewDraft = () => {
+    if (
+      confirm(
+        'Start a new draft? This will clear your current progress (unless you save it first).',
+      )
+    ) {
+      setCurrentStep(1);
+      setAddonType('photos');
+      resetMetadata();
+      setPhotos([{ photographer: '', location: '', url: { default: '' } }]);
+      setQuotes([{ quote: '', author: '' }]);
+      setSettingsJson('');
+      clearDraft();
+    }
+  };
 
   const handleMetadataChange = (field: keyof AddonMetadata, value: string) => {
     setMetadata((prev) => ({
@@ -137,8 +212,7 @@ export default function CreateAddonPage() {
         } else {
           // For addon JSON upload, load all data
           if (json.name) setMetadata((prev) => ({ ...prev, name: json.name }));
-          if (json.description)
-            setMetadata((prev) => ({ ...prev, description: json.description }));
+          if (json.description) setMetadata((prev) => ({ ...prev, description: json.description }));
           if (json.type) {
             setAddonType(json.type);
             setMetadata((prev) => ({ ...prev, type: json.type }));
@@ -278,86 +352,148 @@ export default function CreateAddonPage() {
     setShowSubmitDialog(true);
   };
 
+  const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, 6));
+  const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
+  const resetWizard = () => {
+    setCurrentStep(1);
+    setAddonType('photos');
+    resetMetadata();
+    setPhotos([{ photographer: '', location: '', url: { default: '' } }]);
+    setQuotes([{ quote: '', author: '' }]);
+    setSettingsJson('');
+    clearDraft(); // Clear the saved draft
+  };
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return <StepWelcome onNext={nextStep} />;
+      case 2:
+        return (
+          <StepTypeSelection
+            value={addonType}
+            onChange={handleTypeChange}
+            onNext={nextStep}
+            onBack={prevStep}
+          />
+        );
+      case 3:
+        return (
+          <StepMetadata
+            metadata={metadata}
+            onChange={handleMetadataChange}
+            onNext={nextStep}
+            onBack={prevStep}
+          />
+        );
+      case 4:
+        return (
+          <StepContent
+            addonType={addonType}
+            photos={photos}
+            quotes={quotes}
+            settingsJson={settingsJson}
+            onPhotosChange={setPhotos}
+            onQuotesChange={setQuotes}
+            onSettingsChange={setSettingsJson}
+            onDeleteAllPhotos={() => setShowDeletePhotosDialog(true)}
+            onDeleteAllQuotes={() => setShowDeleteQuotesDialog(true)}
+            onSettingsFileUpload={(e) => handleFileUpload(e, true)}
+            onLoadExample={loadExample}
+            onImportAddon={(e) => handleFileUpload(e)}
+            onNext={nextStep}
+            onBack={prevStep}
+          />
+        );
+      case 5:
+        return (
+          <StepPreview
+            addonType={addonType}
+            metadata={metadata}
+            photos={photos}
+            quotes={quotes}
+            settingsJson={settingsJson}
+            onNext={nextStep}
+            onBack={prevStep}
+          />
+        );
+      case 6:
+        return (
+          <StepOutput
+            addonType={addonType}
+            metadata={metadata}
+            photos={photos}
+            quotes={quotes}
+            onDownload={downloadJson}
+            onSubmit={submitToMarketplace}
+            onBack={prevStep}
+            onStartOver={resetWizard}
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-4xl flex-col gap-8 px-6 py-12 lg:px-8">
-      <Link
-        href="/marketplace"
-        className="inline-flex w-fit cursor-pointer items-center gap-2 text-sm font-medium text-muted-foreground transition hover:text-foreground"
-      >
-        <ArrowLeft className="h-4 w-4" />
-        Back to marketplace
-      </Link>
+    <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8 px-6 py-12 lg:px-8">
+      {currentStep > 1 && (
+        <div className="flex items-center justify-between gap-4">
+          <Link
+            href="/marketplace"
+            className="inline-flex w-fit cursor-pointer items-center gap-2 text-sm font-medium text-muted-foreground transition hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to marketplace
+          </Link>
 
-      <header className="space-y-4">
-        <div className="flex items-start justify-between gap-4">
-          <div className="space-y-2">
-            <h1 className="text-3xl font-semibold tracking-tight">Create Addon</h1>
-            <p className="text-muted-foreground">
-              Create your own photo pack, quote pack, or preset settings for the Mue Marketplace.
-            </p>
-          </div>
-          <div className="flex gap-2">
-            <Button variant="outline" onClick={loadExample} className="gap-2">
-              <Lightbulb className="h-4 w-4" />
-              Load Example
-            </Button>
-            <Input
-              id="addon-upload"
-              type="file"
-              accept=".json"
-              onChange={(e) => handleFileUpload(e)}
-              className="hidden"
-            />
-            <Button
-              variant="outline"
-              onClick={() => document.getElementById('addon-upload')?.click()}
-              className="gap-2"
-            >
-              <Upload className="h-4 w-4" />
-              Import Addon
-            </Button>
-          </div>
+          <DraftManager
+            currentDraft={{
+              addonType,
+              metadata,
+              content: {
+                photos,
+                quotes,
+                settingsJson,
+              },
+            }}
+            onLoadDraft={handleLoadDraft}
+            onNewDraft={handleNewDraft}
+          />
         </div>
-      </header>
-
-      <AddonTypeSelector value={addonType} onChange={handleTypeChange} />
-
-      <MetadataForm metadata={metadata} onChange={handleMetadataChange} onReset={resetMetadata} />
-
-      {addonType === 'photos' && (
-        <PhotoPackEditor
-          photos={photos}
-          onChange={setPhotos}
-          onDeleteAll={() => setShowDeletePhotosDialog(true)}
-        />
       )}
 
-      {addonType === 'quotes' && (
-        <QuotePackEditor
-          quotes={quotes}
-          onChange={setQuotes}
-          onDeleteAll={() => setShowDeleteQuotesDialog(true)}
-        />
+      {currentStep > 1 && (
+        <>
+          <StepIndicator
+            currentStep={currentStep}
+            onStepClick={setCurrentStep}
+            canNavigateToStep={(step) => step < currentStep}
+          />
+
+          {/* Progress Percentage */}
+          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+            <span className="font-medium text-primary">
+              {Math.round(((currentStep - 1) / 5) * 100)}% Complete
+            </span>
+            <span>•</span>
+            <span>Step {currentStep} of 6</span>
+          </div>
+        </>
       )}
 
-      {addonType === 'settings' && (
-        <SettingsEditor
-          settingsJson={settingsJson}
-          onChange={setSettingsJson}
-          onFileUpload={(e) => handleFileUpload(e, true)}
-        />
-      )}
-
-      <div className="flex justify-end gap-3">
-        <Button variant="outline" onClick={downloadJson} className="gap-2">
-          <Download className="h-4 w-4" />
-          Download JSON
-        </Button>
-        <Button onClick={submitToMarketplace} className="gap-2">
-          <Github className="h-4 w-4" />
-          Submit to Marketplace
-        </Button>
+      {/* Animated Step Container */}
+      <div key={currentStep} className="animate-in fade-in slide-in-from-right-4 duration-500">
+        {renderStep()}
       </div>
+
+      <Input
+        id="addon-upload-hidden"
+        type="file"
+        accept=".json"
+        onChange={(e) => handleFileUpload(e)}
+        className="hidden"
+      />
 
       <SubmitDialog
         open={showSubmitDialog}
@@ -365,7 +501,11 @@ export default function CreateAddonPage() {
         submitUrl={submitUrl}
       />
 
-      <ErrorDialog open={showErrorDialog} onOpenChange={setShowErrorDialog} message={errorMessage} />
+      <ErrorDialog
+        open={showErrorDialog}
+        onOpenChange={setShowErrorDialog}
+        message={errorMessage}
+      />
 
       <DeleteConfirmDialog
         open={showDeletePhotosDialog}

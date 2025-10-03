@@ -68,11 +68,11 @@ export function QuotePackEditor({ quotes, onChange, onDeleteAll }: QuotePackEdit
           const isExpanded = expandedQuotes.has(index);
           return (
             <div key={index} className="rounded-lg border">
-              <button
-                onClick={() => toggleQuoteExpanded(index)}
-                className="flex w-full items-center justify-between p-4 text-left transition-colors hover:bg-muted"
-              >
-                <div className="flex items-center gap-2">
+              <div className="flex w-full items-center justify-between p-4 transition-colors hover:bg-muted">
+                <button
+                  onClick={() => toggleQuoteExpanded(index)}
+                  className="flex flex-1 items-center gap-2 text-left"
+                >
                   {isExpanded ? (
                     <ChevronDown className="h-4 w-4" />
                   ) : (
@@ -87,21 +87,18 @@ export function QuotePackEditor({ quotes, onChange, onDeleteAll }: QuotePackEdit
                           : quote.quote
                         : `Quote ${index + 1}`}
                   </h4>
-                </div>
+                </button>
                 {quotes.length > 1 && (
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      removeQuote(index);
-                    }}
+                    onClick={() => removeQuote(index)}
                     className="h-8 w-8 p-0"
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>
                 )}
-              </button>
+              </div>
 
               {isExpanded && (
                 <div className="space-y-4 border-t p-4">
