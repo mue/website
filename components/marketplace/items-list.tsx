@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { getMarketplaceTypeLabel, MarketplaceItemSummary } from '@/lib/marketplace';
+import { getMarketplaceTypeLabel, getItemCategory, MarketplaceItemSummary } from '@/lib/marketplace';
 import { Library as LibraryIcon, Heart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useFavoritesContext } from '@/lib/favorites-context';
@@ -19,8 +19,8 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
     <div className="space-y-3">
       {items.map((item) => (
         <Link
-          key={`${item.type}-${item.name}`}
-          href={`/marketplace/${encodeURIComponent(item.type)}/${encodeURIComponent(item.name)}`}
+          key={`${item.type}-${item.id}`}
+          href={`/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`}
           className="group relative flex cursor-pointer flex-row items-center gap-4 overflow-hidden rounded-xl border border-border bg-card/70 p-4 shadow-sm transition hover:border-primary/40 hover:shadow-md"
         >
           <button

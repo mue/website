@@ -214,7 +214,7 @@ function MarketplaceExplorerContent({
     const filtered = items.filter((item) => {
       const matchesType = typeFilter === 'all' || item.type === typeFilter;
       const matchesCollection = !collectionFilter || item.in_collections.includes(collectionFilter);
-      const matchesFavorites = !showFavoritesOnly || isFavorite(item.type, item.name);
+      const matchesFavorites = !showFavoritesOnly || isFavorite(item.type, item.id);
 
       if (!matchesType || !matchesCollection || !matchesFavorites) return false;
 

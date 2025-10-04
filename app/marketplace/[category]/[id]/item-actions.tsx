@@ -7,15 +7,15 @@ import { useFavoritesContext } from '@/lib/favorites-context';
 import { cn } from '@/lib/utils';
 
 interface ItemActionsProps {
-  itemName: string;
+  itemId: string;
   displayName: string;
-  type: string;
+  category: string;
 }
 
-export function ItemActions({ itemName, displayName, type }: ItemActionsProps) {
+export function ItemActions({ itemId, displayName, category }: ItemActionsProps) {
   const [copied, setCopied] = useState(false);
   const { toggleFavorite, isFavorite } = useFavoritesContext();
-  const isItemFavorited = isFavorite(type, itemName);
+  const isItemFavorited = isFavorite(category, itemId);
 
   const handleShare = async () => {
     const url = window.location.href;
@@ -58,7 +58,7 @@ export function ItemActions({ itemName, displayName, type }: ItemActionsProps) {
       <Button
         variant={isItemFavorited ? 'default' : 'outline'}
         size="sm"
-        onClick={() => toggleFavorite(type, itemName)}
+        onClick={() => toggleFavorite(category, itemId)}
         className={cn(
           'flex w-full items-center justify-center gap-2 transition-all',
           isItemFavorited && 'bg-red-500 hover:bg-red-600 text-white',

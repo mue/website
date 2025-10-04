@@ -7,7 +7,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { getMarketplaceTypeLabel } from '@/lib/marketplace';
+import { getMarketplaceTypeLabel, normalizeTypeForFilter } from '@/lib/marketplace';
 
 type BreadcrumbProps =
   | {
@@ -58,7 +58,7 @@ export function MarketplaceBreadcrumb(props: BreadcrumbProps) {
           <>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href={`/marketplace?type=${props.itemType}`}>
+                <Link href={`/marketplace?type=${normalizeTypeForFilter(props.itemType)}`}>
                   {getMarketplaceTypeLabel(props.itemType)}
                 </Link>
               </BreadcrumbLink>
