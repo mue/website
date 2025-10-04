@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
 import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
 import { cn } from '@/lib/utils';
+import { ArticleJsonLd as ArticleJsonLdComponent, BreadcrumbJsonLd } from '@/components/json-ld';
 
 export const dynamic = 'force-static';
 export const dynamicParams = false;
@@ -171,15 +172,26 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
           </div>
         </header>
 
-        <ArticleJsonLd post={post} />
+        <ArticleJsonLdComponent
+          headline={post.frontmatter.title}
+          description={post.frontmatter.description || post.excerpt}
+          url={`https://muetab.com/blog/${post.slug}`}
+          datePublished={post.frontmatter.date}
+          dateModified={post.frontmatter.dateModified}
+          author={post.frontmatter.author}
+          image={post.frontmatter.image}
+          keywords={post.frontmatter.tags}
+          wordCount={post.wordCount}
+          timeRequired={post.readingTime ? `PT${/^(\d+)/.exec(post.readingTime)?.[1] || '5'}M` : undefined}
+        />
         <BreadcrumbJsonLd
           items={[
-            { position: 1, name: 'Home', item: 'https://mue.app/' },
-            { position: 2, name: 'Blog', item: 'https://mue.app/blog' },
+            { position: 1, name: 'Home', item: 'https://muetab.com/' },
+            { position: 2, name: 'Blog', item: 'https://muetab.com/blog' },
             {
               position: 3,
               name: post.frontmatter.title,
-              item: `https://mue.app/blog/${post.slug}`,
+              item: `https://muetab.com/blog/${post.slug}`,
             },
           ]}
         />
@@ -264,93 +276,5 @@ function GradientHero({ title }: { title: string }) {
       </span>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
     </div>
-  );
-}
-
-// JSON-LD structured data component
-function ArticleJsonLd({
-  post,
-}: {
-  post: {
-    slug: string;
-    frontmatter: {
-      title: string;
-      date: string;
-      author?: string;
-      description?: string;
-      image?: string;
-      tags?: string[];
-      dateModified?: string;
-    };
-    excerpt?: string;
-    readingTime?: string;
-    wordCount?: number;
-  };
-}) {
-  const url = `https://mue.app/blog/${post.slug}`;
-  // Derive numeric reading minutes from the readingTime string like "5 min read"
-  let readingMinutes: number | undefined;
-  if (post.readingTime) {
-    const match = /^(\d+)/.exec(post.readingTime);
-    if (match) readingMinutes = parseInt(match[1], 10);
-  }
-  const timeRequired = readingMinutes ? `PT${readingMinutes}M` : undefined;
-  const data = {
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    headline: post.frontmatter.title,
-    datePublished: post.frontmatter.date,
-    dateModified: post.frontmatter.dateModified || post.frontmatter.date,
-    author: post.frontmatter.author
-      ? { '@type': 'Person', name: post.frontmatter.author }
-      : undefined,
-    description: post.frontmatter.description || post.excerpt,
-    image: post.frontmatter.image ? [post.frontmatter.image] : undefined,
-    keywords: post.frontmatter.tags?.join(', '),
-    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-    url,
-    publisher: {
-      '@type': 'Organization',
-      name: 'Mue',
-      logo: {
-        '@type': 'ImageObject',
-        url: 'https://mue.app/og-image.png',
-      },
-    },
-    wordCount: post.wordCount,
-    timeRequired,
-  };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data),
-      }}
-    />
-  );
-}
-
-function BreadcrumbJsonLd({
-  items,
-}: {
-  items: { position: number; name: string; item: string }[];
-}) {
-  const data = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: items.map((it) => ({
-      '@type': 'ListItem',
-      position: it.position,
-      name: it.name,
-      item: it.item,
-    })),
-  };
-  return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(data),
-      }}
-    />
   );
 }

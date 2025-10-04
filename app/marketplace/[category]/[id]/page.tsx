@@ -51,6 +51,7 @@ import { PhotoGallery } from '@/components/marketplace/photo-gallery';
 import { NoContentEmptyState } from '@/components/marketplace/empty-state';
 import ItemsGrid from '@/components/marketplace/items-grid';
 import { FavoritesProvider } from '@/lib/favorites-context';
+import { ProductJsonLd, BreadcrumbJsonLd } from '@/components/json-ld';
 
 export const revalidate = 3600;
 
@@ -233,6 +234,36 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
   return (
     <FavoritesProvider>
       <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-6 py-12 lg:px-8">
+        <ProductJsonLd
+          name={data.display_name}
+          description={data.description}
+          image={data.icon_url || data.screenshot_url}
+          url={`https://muetab.com/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
+            data.id,
+          )}`}
+          brand={data.author}
+          category={data.type?.replace(/_/g, ' ')}
+          datePublished={data.created_at}
+          dateModified={data.updated_at}
+        />
+        <BreadcrumbJsonLd
+          items={[
+            { position: 1, name: 'Home', item: 'https://muetab.com/' },
+            { position: 2, name: 'Marketplace', item: 'https://muetab.com/marketplace' },
+            {
+              position: 3,
+              name: data.type?.replace(/_/g, ' ') || 'Item',
+              item: `https://muetab.com/marketplace?type=${data.type}`,
+            },
+            {
+              position: 4,
+              name: data.display_name,
+              item: `https://muetab.com/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
+                data.id,
+              )}`,
+            },
+          ]}
+        />
         <MarketplaceBreadcrumb type="item" itemType={data.type!} itemName={data.display_name} />
 
         <div className="grid gap-6 lg:grid-cols-[340px_1fr] lg:gap-8">
