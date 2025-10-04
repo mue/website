@@ -186,6 +186,14 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
       })
     : null;
 
+  const formattedCreatedAt = data.created_at
+    ? new Date(data.created_at).toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      })
+    : null;
+
   const isPhotoPack = data.type === 'photo_packs' || data.type === 'photos';
   const isQuotePack = data.type === 'quote_packs' || data.type === 'quotes';
   const isPresetSettings = data.type === 'preset_settings' || data.type === 'settings';
@@ -208,6 +216,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
           'quotes',
           'colour',
           'updated_at',
+          'created_at',
           'in_collections',
         ];
 
@@ -297,10 +306,17 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                     </div>
                   )}
 
+                  {formattedCreatedAt && (
+                    <div className="flex items-center gap-3 text-muted-foreground">
+                      <Calendar className="h-4 w-4" />
+                      <span>Created {formattedCreatedAt}</span>
+                    </div>
+                  )}
+
                   {formattedUpdatedAt && (
                     <div className="flex items-center gap-3 text-muted-foreground">
                       <Calendar className="h-4 w-4" />
-                      <span>{formattedUpdatedAt}</span>
+                      <span>Updated {formattedUpdatedAt}</span>
                     </div>
                   )}
                 </div>
