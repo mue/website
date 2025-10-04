@@ -55,14 +55,17 @@ export const revalidate = 3600;
 
 type MarketplaceItemPageProps = {
   params: Promise<{
-    type: string;
-    item: string;
+    category: string;
+    id: string;
   }>;
 };
 
-async function resolveItem(type: string, item: string): Promise<MarketplaceItemDetail> {
+async function resolveItem(
+  category: 'packs' | 'presets',
+  id: string,
+): Promise<MarketplaceItemDetail> {
   try {
-    return await getMarketplaceItem(type, item);
+    return await getMarketplaceItem(category, id);
   } catch {
     notFound();
   }
@@ -96,10 +99,10 @@ async function getRelatedItems(
 }
 
 export async function generateMetadata({ params }: MarketplaceItemPageProps): Promise<Metadata> {
-  const { type, item } = await params;
+  const { category, id } = await params;
 
   try {
-    const data = await getMarketplaceItem(type, item);
+    const data = await getMarketplaceItem(category as 'packs' | 'presets', id);
     return {
       title: `${data.display_name} – Marketplace`,
       description:
@@ -109,8 +112,8 @@ export async function generateMetadata({ params }: MarketplaceItemPageProps): Pr
         description:
           data.description ?? `Learn more about ${data.display_name} on the Mue marketplace.`,
         type: 'website',
-        url: `https://mue.app/marketplace/${encodeURIComponent(type)}/${encodeURIComponent(
-          data.name,
+        url: `https://mue.app/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
+          data.id,
         )}`,
       },
       twitter: {
@@ -167,8 +170,8 @@ function parseDescription(description: string) {
 }
 
 export default async function MarketplaceItemPage({ params }: MarketplaceItemPageProps) {
-  const { type, item } = await params;
-  const data = await resolveItem(type, item);
+  const { category, id } = await params;
+  const data = await resolveItem(category as 'packs' | 'presets', id);
 
   // Get related items
   const collectionNames = data.in_collections?.map((c) => (typeof c === 'string' ? c : c.name));
@@ -182,9 +185,9 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
       })
     : null;
 
-  const isPhotoPack = type === 'photo_packs';
-  const isQuotePack = type === 'quote_packs';
-  const isPresetSettings = type === 'preset_settings';
+  const isPhotoPack = data.type === 'photo_packs' || data.type === 'photos';
+  const isQuotePack = data.type === 'quote_packs' || data.type === 'quotes';
+  const isPresetSettings = data.type === 'preset_settings' || data.type === 'settings';
 
   // Get all preset settings (everything except photos, quotes, and standard fields)
   // Flatten nested settings object if it exists
@@ -220,7 +223,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
   return (
     <FavoritesProvider>
       <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-6 py-12 lg:px-8">
-        <MarketplaceBreadcrumb type="item" itemType={type} itemName={data.display_name} />
+        <MarketplaceBreadcrumb type="item" itemType={data.type!} itemName={data.display_name} />
 
         <div className="grid gap-6 lg:grid-cols-[340px_1fr] lg:gap-8">
           {/* Left Column - Info */}
@@ -248,12 +251,12 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
 
                   <div className="space-y-2">
                     <h1 className="text-2xl font-bold tracking-tight">{data.display_name}</h1>
-                    <Link href={`/marketplace?type=${type}`}>
+                    <Link href={`/marketplace?type=${data.type}`}>
                       <Badge
                         variant="secondary"
                         className="cursor-pointer text-xs capitalize transition hover:bg-primary/10 hover:text-primary"
                       >
-                        {type.replace(/_/g, ' ')}
+                        {data.type!.replace(/_/g, ' ')}
                       </Badge>
                     </Link>
                   </div>
@@ -312,7 +315,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
 
                 <Separator />
 
-                <ItemActions itemName={item} displayName={data.display_name} type={type} />
+                <ItemActions itemId={id} displayName={data.display_name} category={category} />
               </div>
 
               {/* Collections Card */}
@@ -351,7 +354,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                 <TabsTrigger value="content" className="text-sm">
                   {isPhotoPack && 'Photos'}
                   {isQuotePack && 'Quotes'}
-                  {isPresetSettings && 'Settings'}
+                  {isPresetSettings && 'Preset Settings'}
                 </TabsTrigger>
               </TabsList>
 
@@ -559,7 +562,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
 
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold tracking-tight">You might also like</h2>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-muted-foreground mb-6">
                 Similar items {data.author && `by ${data.author} or `}from the same collections
               </p>
               <ItemsGrid items={relatedItems} collectionNameMap={new Map()} />

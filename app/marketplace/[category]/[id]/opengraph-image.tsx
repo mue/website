@@ -11,23 +11,25 @@ export const contentType = 'image/png';
 
 type OpenGraphImageProps = {
   params: Promise<{
-    type: string;
-    item: string;
+    category: string;
+    id: string;
   }>;
 };
 
 export default async function OpenGraphImage({ params }: OpenGraphImageProps) {
-  const { type, item } = await params;
+  const { category, id } = await params;
 
   try {
-    const data = await getMarketplaceItem(type, item);
+    const data = await getMarketplaceItem(category as 'packs' | 'presets', id);
 
-    // Format type label
-    const typeLabel = type
-      .replace(/_/g, ' ')
-      .split(' ')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+    // Format type label from actual item type
+    const typeLabel = data.type
+      ? data.type
+          .replace(/_/g, ' ')
+          .split(' ')
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(' ')
+      : 'Marketplace Item';
 
     return new ImageResponse(
       (
