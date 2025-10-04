@@ -114,6 +114,26 @@ export function normalizeTypeForFilter(type: string): string {
   return mapping[type] || type;
 }
 
+// Slugify author name for URLs (lowercase, spaces to hyphens, normalize special chars)
+export function slugifyAuthor(author: string): string {
+  return author
+    .toLowerCase()
+    .normalize('NFD') // Decompose accented characters
+    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
+    .replace(/[^\w\s-]/g, '') // Remove non-word chars (except spaces and hyphens)
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .trim();
+}
+
+// De-slugify author name for display/lookup (hyphens to spaces, title case)
+export function deslugifyAuthor(slug: string): string {
+  return slug
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
 export async function getMarketplaceCollections(): Promise<MarketplaceCollection[]> {
   const payload =
     await fetchMarketplace<MarketplaceResponse<MarketplaceCollection[]>>('collections');
