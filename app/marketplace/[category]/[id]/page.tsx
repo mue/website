@@ -40,6 +40,7 @@ import {
 import {
   getMarketplaceItem,
   getMarketplaceItems,
+  slugifyAuthor,
   type MarketplaceItemDetail,
   type MarketplaceItemSummary,
 } from '@/lib/marketplace';
@@ -270,7 +271,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                     <div className="flex items-center gap-3 text-muted-foreground">
                       <User className="h-4 w-4" />
                       <Link
-                        href={`/marketplace/author/${encodeURIComponent(data.author)}`}
+                        href={`/marketplace/author/${slugifyAuthor(data.author)}`}
                         className="hover:text-primary hover:underline transition"
                       >
                         {data.author}

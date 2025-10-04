@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { User, Info } from 'lucide-react';
-import { getMarketplaceItems, type MarketplaceItemSummary } from '@/lib/marketplace';
+import { getMarketplaceItems, slugifyAuthor, deslugifyAuthor, type MarketplaceItemSummary } from '@/lib/marketplace';
 import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
 import ItemsGrid from '@/components/marketplace/items-grid';
 import { FavoritesProvider } from '@/lib/favorites-context';
@@ -14,22 +14,25 @@ type AuthorPageProps = {
   }>;
 };
 
-async function getAuthorItems(author: string): Promise<MarketplaceItemSummary[]> {
+async function getAuthorItems(authorSlug: string): Promise<MarketplaceItemSummary[]> {
   const allItems = await getMarketplaceItems();
-  const decodedAuthor = decodeURIComponent(author);
-  return allItems.filter((item) => item.author?.toLowerCase() === decodedAuthor.toLowerCase());
+  // Match by comparing slugified versions (handles special chars, hyphens, spaces)
+  return allItems.filter((item) =>
+    item.author && slugifyAuthor(item.author) === authorSlug.toLowerCase()
+  );
 }
 
 export async function generateMetadata({ params }: AuthorPageProps): Promise<Metadata> {
   const { author } = await params;
-  const decodedAuthor = decodeURIComponent(author);
+  const items = await getAuthorItems(author);
+  const authorName = items[0]?.author || deslugifyAuthor(author);
 
   return {
-    title: `${decodedAuthor} – Marketplace`,
-    description: `Browse all marketplace items created by ${decodedAuthor}.`,
+    title: `${authorName} – Marketplace`,
+    description: `Browse all marketplace items created by ${authorName}.`,
     openGraph: {
-      title: `${decodedAuthor} – Marketplace`,
-      description: `Browse all marketplace items created by ${decodedAuthor}.`,
+      title: `${authorName} – Marketplace`,
+      description: `Browse all marketplace items created by ${authorName}.`,
       type: 'website',
     },
   };
@@ -37,12 +40,14 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
 
 export default async function AuthorPage({ params }: AuthorPageProps) {
   const { author } = await params;
-  const decodedAuthor = decodeURIComponent(author);
   const items = await getAuthorItems(author);
 
   if (items.length === 0) {
     notFound();
   }
+
+  // Get actual author name from first item (preserves original capitalization and hyphens)
+  const authorName = items[0]?.author || deslugifyAuthor(author);
 
   // Create a simple collection name map for the grid
   const collectionNameMap = new Map<string, string>();
@@ -50,14 +55,14 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
   return (
     <FavoritesProvider>
       <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-6 py-12 lg:px-8">
-        <MarketplaceBreadcrumb type="author" authorName={decodedAuthor} />
+        <MarketplaceBreadcrumb type="author" authorName={authorName} />
 
         <div className="flex items-center gap-4">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
             <User className="h-8 w-8 text-primary" />
           </div>
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">{decodedAuthor}</h1>
+            <h1 className="text-3xl font-bold tracking-tight">{authorName}</h1>
             <p className="text-muted-foreground">
               {items.length} {items.length === 1 ? 'item' : 'items'}
             </p>
