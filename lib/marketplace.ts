@@ -150,23 +150,9 @@ export async function getMarketplaceItem(
   category: 'packs' | 'presets',
   id: string,
 ): Promise<MarketplaceItemDetail> {
-  // TODO: When API supports ID-based lookup, change this to:
-  // const payload = await fetchMarketplace<MarketplaceResponse<MarketplaceItemDetail>>(
-  //   `item/${id}`,
-  // );
-
-  // For now, we need to look up the name from the ID
-  const allItems = await getMarketplaceItems();
-  const validTypes = getCategoryTypes(category);
-  const item = allItems.find((i) => i.id === id && validTypes.includes(i.type));
-
-  if (!item) {
-    throw new Error(`Item not found: ${id} in category: ${category}`);
-  }
-
-  // Fetch using the actual type and name (current API requirement)
+  // API now supports ID-based lookup!
   const payload = await fetchMarketplace<MarketplaceResponse<MarketplaceItemDetail>>(
-    `item/${item.type}/${item.name}`,
+    `item/${id}`,
   );
   return payload.data;
 }
