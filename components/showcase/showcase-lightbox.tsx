@@ -22,7 +22,7 @@ export function ShowcaseLightbox({ item, onClose }: ShowcaseLightboxProps) {
     >
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 z-10 rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition hover:bg-background"
+        className="absolute top-4 right-4 z-10 cursor-pointer rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition-all hover:bg-background hover:scale-110"
         aria-label="Close lightbox"
       >
         <X className="h-6 w-6" />

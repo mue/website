@@ -189,7 +189,7 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
         >
           <button
             onClick={closeLightbox}
-            className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 rounded-full bg-black/50 p-2 text-white transition hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
+            className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 cursor-pointer rounded-full bg-black/50 p-2 text-white transition-all hover:bg-black/70 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
             aria-label="Close lightbox"
           >
             <X className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -202,7 +202,7 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
                   e.stopPropagation();
                   prevImage();
                 }}
-                className="absolute left-2 sm:left-4 z-10 rounded-full bg-black/50 p-2 text-white transition hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
+                className="absolute left-2 sm:left-4 z-10 cursor-pointer rounded-full bg-black/50 p-2 text-white transition-all hover:bg-black/70 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
                 aria-label="Previous image"
               >
                 <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
@@ -213,7 +213,7 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
                   e.stopPropagation();
                   nextImage();
                 }}
-                className="absolute right-2 sm:right-4 z-10 rounded-full bg-black/50 p-2 text-white transition hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
+                className="absolute right-2 sm:right-4 z-10 cursor-pointer rounded-full bg-black/50 p-2 text-white transition-all hover:bg-black/70 hover:scale-110 focus:outline-none focus:ring-2 focus:ring-white"
                 aria-label="Next image"
               >
                 <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
