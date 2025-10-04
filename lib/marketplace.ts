@@ -34,6 +34,7 @@ export type MarketplaceItemSummary = {
   in_collections: string[];
   type: string;
   updated_at?: string;
+  created_at?: string;
 };
 
 export type MarketplaceCollectionDetail = MarketplaceCollection & {
@@ -62,6 +63,7 @@ export type MarketplaceItemDetail = {
   }>;
   colour?: string;
   updated_at?: string;
+  created_at?: string;
   in_collections?: Array<MarketplaceCollection>;
   [key: string]: unknown;
 };
