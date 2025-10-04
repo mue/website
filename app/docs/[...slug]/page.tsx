@@ -13,8 +13,7 @@ import type { DocTreeNode } from '@/lib/docs';
 import { getAllDocsMeta, getDocBySlug } from '@/lib/docs';
 import { cn } from '@/lib/utils';
 
-export const dynamic = 'force-static';
-export const dynamicParams = false;
+export const revalidate = 3600; // Revalidate every hour (ISR)
 
 type DocPageParams = {
   slug?: string[];

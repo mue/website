@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 3600; // Revalidate every hour (ISR)
 
 export default async function ShowcasePage() {
   const items = getShowcaseItems();

@@ -53,7 +53,7 @@ import ItemsGrid from '@/components/marketplace/items-grid';
 import { FavoritesProvider } from '@/lib/favorites-context';
 import { ProductJsonLd, BreadcrumbJsonLd } from '@/components/json-ld';
 
-export const revalidate = 3600;
+export const revalidate = 3600; // Revalidate every hour (ISR)
 
 type MarketplaceItemPageProps = {
   params: Promise<{
