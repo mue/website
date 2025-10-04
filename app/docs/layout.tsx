@@ -6,8 +6,7 @@ import { DocsMobileMenu } from '@/components/docs/mobile-menu';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { getAllDocsMeta, getDocsTree } from '@/lib/docs';
 
-export const dynamic = 'force-static';
-export const dynamicParams = false;
+export const revalidate = 3600; // Revalidate every hour (ISR)
 
 type DocsLayoutProps = {
   children: ReactNode;

@@ -8,6 +8,8 @@ import { getDocsNavigation } from '@/components/docs/layout-context';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
+export const revalidate = 3600; // Revalidate every hour (ISR)
+
 export const metadata: Metadata = {
   title: 'Documentation',
   description:

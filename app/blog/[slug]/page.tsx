@@ -11,8 +11,7 @@ import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
 import { cn } from '@/lib/utils';
 import { ArticleJsonLd as ArticleJsonLdComponent, BreadcrumbJsonLd } from '@/components/json-ld';
 
-export const dynamic = 'force-static';
-export const dynamicParams = false;
+export const revalidate = 3600; // Revalidate every hour (ISR)
 
 type BlogPostParams = {
   slug: string;

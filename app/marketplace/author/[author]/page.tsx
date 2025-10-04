@@ -6,7 +6,7 @@ import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-brea
 import ItemsGrid from '@/components/marketplace/items-grid';
 import { FavoritesProvider } from '@/lib/favorites-context';
 
-export const revalidate = 3600;
+export const revalidate = 3600; // Revalidate every hour (ISR)
 
 type AuthorPageProps = {
   params: Promise<{

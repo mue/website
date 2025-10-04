@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const dynamic = 'force-static';
+export const revalidate = 3600; // Revalidate every hour (ISR)
 
 export default async function BlogPage() {
   const posts = await getAllBlogPosts();

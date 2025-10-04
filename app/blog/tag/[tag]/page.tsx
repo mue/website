@@ -7,8 +7,7 @@ import { BlogCard } from '@/components/blog/blog-card';
 import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 
-export const dynamic = 'force-static';
-export const dynamicParams = false;
+export const revalidate = 3600; // Revalidate every hour (ISR)
 
 interface Params {
   tag: string;

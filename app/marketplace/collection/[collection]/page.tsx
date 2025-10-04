@@ -11,7 +11,7 @@ import { getMarketplaceCollection, type MarketplaceCollectionDetail } from '@/li
 import { FavoritesProvider } from '@/lib/favorites-context';
 import ItemsGrid from '@/components/marketplace/items-grid';
 
-export const revalidate = 3600;
+export const revalidate = 3600; // Revalidate every hour (ISR)
 
 type MarketplaceCollectionPageProps = {
   params: Promise<{
