@@ -8,6 +8,7 @@ import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
 import { ScrollToTop } from '@/components/scroll-to-top';
 import { ThemeProvider } from '@/components/theme-provider';
+import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/json-ld';
 
 const lexendDeca = Lexend_Deca({
   variable: '--font-lexend-deca',
@@ -85,6 +86,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <OrganizationJsonLd />
+        <WebSiteJsonLd />
+      </head>
       <body
         className={`${lexendDeca.variable} ${inter.variable} ${alfaSlabOne.variable} antialiased`}
       >

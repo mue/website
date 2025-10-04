@@ -14,6 +14,7 @@ import { FeatureCard } from '@/components/home/feature-card';
 import { CommunityStatCard } from '@/components/home/community-stat-card';
 import { BrowserBadge } from '@/components/home/browser-badge';
 import { StatItem } from '@/components/home/stat-item';
+import { SoftwareApplicationJsonLd } from '@/components/json-ld';
 
 const stats = ['Building since 2018', '5,000+ monthly active users', '10,000,000+ tabs'];
 
@@ -121,6 +122,7 @@ export default function Home() {
 
   return (
     <div className="relative overflow-hidden">
+      <SoftwareApplicationJsonLd />
       {/* Hero Section */}
       <section className="relative isolate overflow-hidden pb-12 pt-16 sm:pb-20 sm:pt-24 lg:pb-24 lg:pt-28">
         <div className="pointer-events-none absolute inset-x-0 top-0 -z-20 h-[100vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.4)_0%,_transparent_50%)] blur-3xl" />
