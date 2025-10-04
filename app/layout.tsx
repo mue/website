@@ -2,6 +2,7 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 import { Alfa_Slab_One, Inter, Lexend_Deca } from 'next/font/google';
+import Script from 'next/script';
 
 import Footer from '@/components/footer';
 import Navbar from '@/components/navbar';
@@ -104,6 +105,11 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
+        <Script
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          strategy="afterInteractive"
+          data-cf-beacon={JSON.stringify({ token: '9afb1f4a6f99424590b9f96620879e2a' })}
+        />
       </body>
     </html>
   );
