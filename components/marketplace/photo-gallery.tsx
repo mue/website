@@ -27,6 +27,8 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
   const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   const openLightbox = (index: number) => {
     setLightboxIndex(index);
@@ -43,6 +45,33 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
 
   const prevImage = () => {
     setLightboxIndex((prev) => (prev - 1 + photos.length) % photos.length);
+  };
+
+  // Minimum swipe distance (in px) to trigger navigation
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && photos.length > 1) {
+      nextImage();
+    }
+    if (isRightSwipe && photos.length > 1) {
+      prevImage();
+    }
   };
 
   const currentPhoto = photos[lightboxIndex];
@@ -137,8 +166,12 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
               );
             })}
           </CarouselContent>
-          <CarouselPrevious className="left-2" />
-          <CarouselNext className="right-2" />
+          {photos.length > 1 && (
+            <>
+              <CarouselPrevious className="left-2" />
+              <CarouselNext className="right-2" />
+            </>
+          )}
         </Carousel>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -183,6 +216,9 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-2 sm:p-4"
           onClick={closeLightbox}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
           role="dialog"
           aria-modal="true"
           aria-label="Image lightbox"
