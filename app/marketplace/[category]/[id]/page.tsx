@@ -366,7 +366,12 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
 
                 <Separator />
 
-                <ItemActions itemId={id} displayName={data.display_name} category={category} />
+                <ItemActions
+                  itemId={id}
+                  displayName={data.display_name}
+                  description={data.description}
+                  category={category}
+                />
               </div>
 
               {/* Collections Card */}
