@@ -106,8 +106,15 @@ const browsers = [
   },
 ];
 
+function isMobileDevice(): boolean {
+  if (typeof window === 'undefined') return false;
+  const ua = navigator.userAgent;
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+}
+
 export default function Home() {
   const [greeting, setGreeting] = useState('Evening');
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const hour = new Date().getHours();
@@ -118,6 +125,7 @@ export default function Home() {
     } else {
       setGreeting('Evening');
     }
+    setIsMobile(isMobileDevice());
   }, []);
 
   return (
@@ -150,29 +158,55 @@ export default function Home() {
               </p>
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center animate-fade-up animate-delay-400">
-                <Button
-                  size="lg"
-                  className="group relative overflow-hidden bg-gradient-to-r from-[#FF5C25] to-[#FF456E] px-6 py-4 text-sm font-semibold shadow-[0_20px_60px_-20px_rgba(255,92,37,0.5)] transition-all hover:shadow-[0_25px_70px_-15px_rgba(255,92,37,0.6)] hover:scale-105 sm:text-base"
-                  asChild
-                >
-                  <Link href="/download">
-                    <span className="relative z-10">Get Started</span>
-                    <ArrowRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    <div className="absolute inset-0 -z-0 bg-gradient-to-r from-[#FF456E] to-[#FF5C25] opacity-0 transition-opacity group-hover:opacity-100" />
-                  </Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-2 border-[#FF5C25]/30 px-6 py-4 text-sm font-semibold transition-all hover:border-[#FF5C25] hover:bg-[#FF5C25]/5 sm:text-base"
-                  asChild
-                >
-                  <Link href="/demo">
-                    <Rocket className="mr-2 h-4 w-4" />
-                    Try it now
-                  </Link>
-                </Button>
+                {!isMobile ? (
+                  <>
+                    <Button
+                      size="lg"
+                      className="group relative overflow-hidden bg-gradient-to-r from-[#FF5C25] to-[#FF456E] px-6 py-4 text-sm font-semibold shadow-[0_20px_60px_-20px_rgba(255,92,37,0.5)] transition-all hover:shadow-[0_25px_70px_-15px_rgba(255,92,37,0.6)] hover:scale-105 sm:text-base"
+                      asChild
+                    >
+                      <Link href="/download">
+                        <span className="relative z-10">Get Started</span>
+                        <ArrowRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        <div className="absolute inset-0 -z-0 bg-gradient-to-r from-[#FF456E] to-[#FF5C25] opacity-0 transition-opacity group-hover:opacity-100" />
+                      </Link>
+                    </Button>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="border-2 border-[#FF5C25]/30 px-6 py-4 text-sm font-semibold transition-all hover:border-[#FF5C25] hover:bg-[#FF5C25]/5 sm:text-base"
+                      asChild
+                    >
+                      <Link href="/demo">
+                        <Rocket className="mr-2 h-4 w-4" />
+                        Try it now
+                      </Link>
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex h-11 items-center justify-center rounded-lg border-2 border-[#FF5C25]/30 bg-[#FF5C25]/5 px-6 text-center text-sm font-semibold text-foreground backdrop-blur-sm sm:text-base">
+                      Not available on mobile
+                    </div>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      className="border-2 border-[#FF5C25]/30 px-6 py-4 text-sm font-semibold transition-all hover:border-[#FF5C25] hover:bg-[#FF5C25]/5 sm:text-base"
+                      asChild
+                    >
+                      <Link href="/demo">
+                        <Rocket className="mr-2 h-4 w-4" />
+                        Try it now
+                      </Link>
+                    </Button>
+                  </>
+                )}
               </div>
+              {isMobile && (
+                <p className="mt-3 text-xs text-muted-foreground/70 animate-fade-up animate-delay-500">
+                  Mue is a browser extension for desktop. Visit this site on your computer to get started.
+                </p>
+              )}
 
               <div className="mt-8 space-y-3 animate-fade-up animate-delay-600">
                 <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted-foreground/50">
