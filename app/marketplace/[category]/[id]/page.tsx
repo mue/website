@@ -45,6 +45,7 @@ import {
   type MarketplaceItemSummary,
 } from '@/lib/marketplace';
 import { ItemActions } from './item-actions';
+import { ViewTracker } from './view-tracker';
 import { PresetSettingsTable } from '@/components/marketplace/preset-settings-table';
 import { QuotesTable } from '@/components/marketplace/quotes-table';
 import { PhotoGallery } from '@/components/marketplace/photo-gallery';
@@ -350,6 +351,8 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                       <span>Updated {formattedUpdatedAt}</span>
                     </div>
                   )}
+
+                  <ViewTracker itemId={id} initialViews={data.views} />
                 </div>
 
                 {data.description && (
