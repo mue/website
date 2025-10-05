@@ -88,18 +88,36 @@ function detectBrowser(): string | null {
   return null;
 }
 
+function isMobileDevice(): boolean {
+  if (typeof window === 'undefined') return false;
+  const ua = navigator.userAgent;
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+}
+
 export default function DownloadPage() {
   const [detectedBrowser, setDetectedBrowser] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setDetectedBrowser(detectBrowser());
+    setIsMobile(isMobileDevice());
   }, []);
+
   return (
     <div className="relative min-h-[calc(100vh-80px)] overflow-hidden">
       <div className="pointer-events-none absolute inset-x-0 top-[-20%] -z-20 h-[80vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.35)_0%,_transparent_60%)] blur-3xl" />
       <div className="pointer-events-none absolute inset-x-0 bottom-[-20%] -z-30 h-[70vh] bg-[radial-gradient(circle_at_bottom,_rgba(255,69,110,0.28)_0%,_transparent_65%)] blur-3xl" />
 
       <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 pb-24 pt-16 text-center">
+        {isMobile && (
+          <div className="mb-8 w-full max-w-3xl rounded-2xl border border-yellow-500/40 bg-yellow-500/10 p-6 text-left backdrop-blur">
+            <h3 className="font-semibold text-foreground">⚠️ Device Not Supported</h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              Mue is a browser extension for desktop computers. Due to complications, we are unable to support mobile devices. Please visit this page on your computer to install Mue.
+            </p>
+          </div>
+        )}
+
         <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-primary">
           <span>Download</span>
           <span className="h-1 w-1 rounded-full bg-primary" />
