@@ -10,6 +10,7 @@ import {
   MarketplaceCollection,
   MarketplaceItemSummary,
   getMarketplaceTypeLabel,
+  getItemCategory,
 } from '@/lib/marketplace';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -474,8 +475,9 @@ function MarketplaceExplorerContent({
                   } else if (event.key === 'Enter' && selectedSuggestionIndex >= 0) {
                     event.preventDefault();
                     const suggestion = suggestions[selectedSuggestionIndex];
+                    const category = getItemCategory(suggestion.type);
                     router.push(
-                      `/marketplace/${encodeURIComponent(suggestion.type)}/${encodeURIComponent(suggestion.name)}`,
+                      `/marketplace/${category}/${encodeURIComponent(suggestion.id)}`,
                     );
                   } else if (event.key === 'Escape') {
                     setShowSuggestions(false);
@@ -508,11 +510,12 @@ function MarketplaceExplorerContent({
                 </div>
                 {suggestions.map((suggestion, index) => (
                   <button
-                    key={`${suggestion.type}-${suggestion.name}`}
+                    key={`${suggestion.type}-${suggestion.id}`}
                     type="button"
                     onClick={() => {
+                      const category = getItemCategory(suggestion.type);
                       router.push(
-                        `/marketplace/${encodeURIComponent(suggestion.type)}/${encodeURIComponent(suggestion.name)}`,
+                        `/marketplace/${category}/${encodeURIComponent(suggestion.id)}`,
                       );
                       setShowSuggestions(false);
                     }}
