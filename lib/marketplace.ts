@@ -52,6 +52,7 @@ export type MarketplaceItemDetail = {
   version?: string;
   author?: string;
   language?: string;
+  views?: number;
   photos?: Array<{
     photographer?: string;
     location?: string;
