@@ -238,6 +238,14 @@ function MarketplaceExplorerContent({
           if (a.updated_at) return -1;
           if (b.updated_at) return 1;
           return a.display_name.localeCompare(b.display_name);
+        case 'newest':
+          // Sort by created_at (newest first), fallback to name if dates missing
+          if (a.created_at && b.created_at) {
+            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+          }
+          if (a.created_at) return -1;
+          if (b.created_at) return 1;
+          return a.display_name.localeCompare(b.display_name);
         case 'recommended':
         default:
           // Stable random order using session seed + item name
@@ -725,6 +733,7 @@ function MarketplaceExplorerContent({
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="recommended">Recommended</SelectItem>
+                    <SelectItem value="newest">Recently Added</SelectItem>
                     <SelectItem value="updated">Recently Updated</SelectItem>
                     <SelectItem value="name-asc">Name (A-Z)</SelectItem>
                   </SelectContent>
