@@ -40,7 +40,7 @@ export function StepOutput({
       return Math.random() * (max - min) + min;
     }
 
-    const interval: NodeJS.Timeout = setInterval(function () {
+    const interval: NodeJS.Timeout = setInterval(() => {
       const timeLeft = animationEnd - Date.now();
 
       if (timeLeft <= 0) {
@@ -69,9 +69,11 @@ export function StepOutput({
     if (addonType === 'photos') {
       return photos.filter((p) => p.photographer && p.location && p.url.default).length;
     }
+
     if (addonType === 'quotes') {
       return quotes.filter((q) => q.quote && q.author).length;
     }
+
     return 0;
   };
 

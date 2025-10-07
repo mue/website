@@ -17,14 +17,11 @@ import { StepContent } from '@/components/marketplace/create/step-content';
 import { StepPreview } from '@/components/marketplace/create/step-preview';
 import { StepOutput } from '@/components/marketplace/create/step-output';
 import { DraftManager, SavedDraft } from '@/components/marketplace/create/draft-manager';
-import { useKonamiCode } from '@/lib/easter-eggs';
 
 export default function CreateAddonPage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [addonType, setAddonType] = useState<AddonType>('photos');
 
-  // Easter egg: Konami code
-  useKonamiCode();
   const [metadata, setMetadata] = useState<AddonMetadata>({
     name: '',
     description: '',
