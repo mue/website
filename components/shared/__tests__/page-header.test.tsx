@@ -68,7 +68,7 @@ describe('PageHeader', () => {
   });
 
   it('renders subtitle with correct classes', () => {
-    const { container } = render(
+    render(
       <PageHeader
         icon={Home}
         title="Title"

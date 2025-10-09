@@ -101,7 +101,7 @@ describe('CommunityStatCard', () => {
   });
 
   it('maintains text hierarchy with proper spacing', () => {
-    const { container } = render(
+    render(
       <CommunityStatCard label="Metric" value="Value" description="Description" />
     );
 

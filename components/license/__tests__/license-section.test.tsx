@@ -37,10 +37,9 @@ describe('LicenseSection', () => {
   });
 
   it('applies license color to badge', () => {
-    const { container } = render(<LicenseSection {...defaultProps} />);
+    render(<LicenseSection {...defaultProps} />);
 
     const badge = screen.getByText('MIT');
-    const styles = window.getComputedStyle(badge);
 
     expect(badge).toHaveStyle({
       borderColor: '#00FF0040',

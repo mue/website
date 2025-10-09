@@ -38,7 +38,7 @@ export function ContentValidator({
     }
 
     // Check for invalid URLs
-    const invalidUrls = photos.filter((photo, index) => {
+    const invalidUrls = photos.filter((photo) => {
       const url = photo.url.default;
       if (!url) return false;
       try {
@@ -182,7 +182,6 @@ export function ContentValidator({
 
   const errors = issues.filter((i) => i.type === 'error');
   const warnings = issues.filter((i) => i.type === 'warning');
-  const infos = issues.filter((i) => i.type === 'info');
 
   const getIcon = (type: ValidationIssue['type']) => {
     switch (type) {

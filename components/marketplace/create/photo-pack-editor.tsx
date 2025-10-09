@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -17,16 +17,6 @@ import {
   Eye,
   MapPin,
   User,
-  Download,
-  Upload,
-  Grid3x3,
-  List,
-  BarChart3,
-  AlertTriangle,
-  Check,
-  Loader2,
-  ArrowUpDown,
-  X,
 } from 'lucide-react';
 import { Photo } from './types';
 import {
@@ -48,15 +38,6 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import Image from 'next/image';
 import { Badge } from '@/components/ui/badge';
-import { Checkbox } from '@/components/ui/checkbox';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { useImageValidation } from '@/lib/hooks/use-image-validation';
 
 type PhotoPackEditorProps = {
   photos: Photo[];
