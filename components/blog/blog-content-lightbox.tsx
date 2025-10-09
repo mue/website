@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -44,21 +44,21 @@ export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
     setLightboxOpen(false);
   };
 
-  const nextImage = () => {
+  const nextImage = useCallback(() => {
     if (allImages.length === 0) return;
     const newIndex = (currentIndex + 1) % allImages.length;
     setCurrentIndex(newIndex);
     setLightboxSrc(allImages[newIndex].src);
     setLightboxAlt(allImages[newIndex].alt || '');
-  };
+  }, [allImages, currentIndex]);
 
-  const prevImage = () => {
+  const prevImage = useCallback(() => {
     if (allImages.length === 0) return;
     const newIndex = (currentIndex - 1 + allImages.length) % allImages.length;
     setCurrentIndex(newIndex);
     setLightboxSrc(allImages[newIndex].src);
     setLightboxAlt(allImages[newIndex].alt || '');
-  };
+  }, [allImages, currentIndex]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -76,7 +76,7 @@ export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen, currentIndex, allImages]);
+  }, [lightboxOpen, currentIndex, allImages, nextImage, prevImage]);
 
   if (!lightboxOpen) return null;
 

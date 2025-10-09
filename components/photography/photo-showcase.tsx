@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { Camera, MapPin, X, ChevronLeft, ChevronRight, Loader2, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -79,13 +79,13 @@ export function PhotoShowcase() {
     setLightboxOpen(false);
   };
 
-  const nextImage = () => {
+  const nextImage = useCallback(() => {
     setLightboxIndex((prev) => (prev + 1) % filteredPhotos.length);
-  };
+  }, [filteredPhotos.length]);
 
-  const prevImage = () => {
+  const prevImage = useCallback(() => {
     setLightboxIndex((prev) => (prev - 1 + filteredPhotos.length) % filteredPhotos.length);
-  };
+  }, [filteredPhotos.length]);
 
   const currentPhoto = filteredPhotos[lightboxIndex];
 
@@ -105,7 +105,7 @@ export function PhotoShowcase() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxOpen, lightboxIndex, filteredPhotos.length]);
+  }, [lightboxOpen, lightboxIndex, filteredPhotos.length, nextImage, prevImage]);
 
   if (loading) {
     return (

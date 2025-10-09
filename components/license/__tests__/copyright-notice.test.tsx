@@ -3,7 +3,7 @@ import { CopyrightNotice } from '../copyright-notice';
 
 // Mock CopyButton component
 jest.mock('@/components/ui/copy-button', () => ({
-  CopyButton: ({ text, size, className }: any) => (
+  CopyButton: ({ text, className }: { text: string; className?: string }) => (
     <button data-testid="copy-button" data-text={text} className={className}>
       Copy
     </button>

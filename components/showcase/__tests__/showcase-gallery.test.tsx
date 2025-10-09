@@ -5,7 +5,7 @@ import { type ShowcaseItem } from '@/lib/showcase';
 // Mock Next.js Image component
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: ({ fill, unoptimized, priority, ...props }: any) => {
+  default: ({ ...props }: React.ComponentProps<'img'>) => {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
     return <img {...props} />;
   },
@@ -13,7 +13,7 @@ jest.mock('next/image', () => ({
 
 // Mock ShowcaseLightbox component
 jest.mock('../showcase-lightbox', () => ({
-  ShowcaseLightbox: ({ item, onClose }: any) => (
+  ShowcaseLightbox: ({ item, onClose }: { item: ShowcaseItem | null; onClose: () => void }) => (
     item ? (
       <div data-testid="lightbox">
         <button onClick={onClose}>Close</button>

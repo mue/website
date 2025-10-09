@@ -64,7 +64,7 @@ describe('ContactCard', () => {
   });
 
   it('applies hover styles', () => {
-    const { container } = render(<ContactCard {...defaultProps} />);
+    render(<ContactCard {...defaultProps} />);
 
     const link = screen.getByRole('link');
     expect(link).toHaveClass('group', 'hover:border-[#FF5C25]/40');

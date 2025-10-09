@@ -61,7 +61,6 @@ export function ShareModal({ url, title, description, trigger }: ShareModalProps
 
     const encodedUrl = encodeURIComponent(urlWithUtm.toString());
     const encodedTitle = encodeURIComponent(title);
-    const encodedDesc = encodeURIComponent(description || '');
 
     const urls = {
       twitter: `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`,

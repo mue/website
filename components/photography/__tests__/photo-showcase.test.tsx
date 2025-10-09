@@ -4,7 +4,7 @@ import { PhotoShowcase } from '../photo-showcase';
 // Mock Next.js Image component
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: ({ fill, unoptimized, priority, ...props }: any) => {
+  default: ({ ...props }: React.ComponentProps<'img'>) => {
     // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
     return <img {...props} />;
   },

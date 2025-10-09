@@ -84,7 +84,7 @@ function MarketplaceExplorerContent({
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const { favorites, toggleFavorite, isFavorite, loaded: favoritesLoaded } = useFavoritesContext();
+  const { favorites, isFavorite, loaded: favoritesLoaded } = useFavoritesContext();
 
   // Create a stable random seed that changes every hour (matching marketplace cache revalidation)
   const randomSeed = useMemo(() => {
