@@ -224,7 +224,7 @@ export default function Home() {
             <div className="relative lg:order-last">
               <div className="absolute -inset-6 rounded-full bg-[linear-gradient(135deg,_rgba(255,92,37,0.25),_rgba(255,69,110,0.25))] blur-[50px] lg:-inset-10 lg:blur-[70px]" />
 
-              <div className="relative overflow-hidden rounded-2xl border-2 border-border bg-background/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] ring-1 ring-border backdrop-blur">
+              <div className="relative overflow-hidden rounded-2xl border-2 border-border bg-background/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] ring-1 ring-border backdrop-blur animate-fade-zoom animate-delay-300">
                 <div className="flex items-center justify-between border-b border-border bg-background/80 px-4 py-2.5 backdrop-blur">
                   <div className="flex items-center gap-1.5">
                     <span className="flex h-2.5 w-2.5 rounded-full bg-[#FF5C25]" />
@@ -242,7 +242,7 @@ export default function Home() {
                     priority
                     src="/muetab_screenshot_2.webp"
                     alt="Mue Tab in action - beautiful backgrounds, quotes, and widgets"
-                    className="object-fit animate-subtle-pan"
+                    className="object-fit"
                     sizes="(min-width: 1024px) 55vw, 100vw"
                   />
                 </div>
