@@ -3,7 +3,7 @@ title: 'We have a new blog'
 date: '2021-04-15'
 author: 'Isaac Saunders'
 description: 'The new Mue blog, powered by Hugo.'
-image: 'https://res.cloudinary.com/mue/image/upload/blog/new-blog.webp'
+image: '/blog/newblog.webp'
 tags: ['announcement']
 ---
 

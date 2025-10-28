@@ -3,7 +3,7 @@ title: 'Welcome to the blog'
 date: '2020-07-20'
 author: 'David Ralph'
 description: 'Introducing the Mue Blog, informing you of all the latest additions and changes to the Mue project.'
-image: 'https://res.cloudinary.com/mue/image/upload/blog/welcome-to-the-blog.webp'
+image: '/blog/welcome-to-the-blog.webp'
 tags: ['announcement']
 ---
 

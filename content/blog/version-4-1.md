@@ -3,7 +3,7 @@ title: 'Version 4.1'
 date: '2020-10-04'
 author: 'David Ralph'
 description: 'A bug fixing update for Mue with some new extra features and optimisation, further improving your experience.'
-image: 'https://res.cloudinary.com/mue/image/upload/blog/version-4-1.webp'
+image: '/blog/version-4-1.webp'
 tags: ['release', 'update']
 ---
 

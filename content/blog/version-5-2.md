@@ -3,7 +3,7 @@ title: 'Version 5.2'
 date: '2021-08-02'
 author: 'David Ralph'
 description: 'A bug fixing update for Mue with some new extra features and optimisation, further improving your experience.'
-image: 'https://res.cloudinary.com/mue/image/upload/blog/version-5-2.webp'
+image: '/blog/version-5-2.webp'
 tags: ['release', 'update']
 ---
 
