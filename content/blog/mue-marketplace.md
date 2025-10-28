@@ -3,7 +3,7 @@ title: 'Mue Marketplace'
 date: '2020-08-28'
 author: 'Alex Sparkes'
 description: 'Learn how to use the Mue Marketplace to install add-ons on your New Tab. Add-ons elevate your experience by allowing you to customise how Mue looks and feels.'
-image: 'https://res.cloudinary.com/mue/image/upload/blog/mue-marketplace.webp'
+image: '/blog/mue-marketplace.webp'
 tags: ['tutorial', 'features']
 ---
 
@@ -32,7 +32,7 @@ This is the marketplace page, the top has the news for today, in today's it is t
 
 In order to this click on the box which says "Crunchyroll Hime" and it should take you to a product page similar to this:
 
-![Photo pack page](https://res.cloudinary.com/mue/image/upload/blog/photopack.webp)
+![Photo pack page](/blog/photopack.webp)
 
 Each product page has a few key features:
 

@@ -3,7 +3,7 @@ title: 'Version 5.3'
 date: '2021-08-22'
 author: 'David Ralph'
 description: 'Bug fixes and optimisations with a few small features to improve your Mue experience further.'
-image: 'https://res.cloudinary.com/mue/image/upload/blog/version-5-3.webp'
+image: '/blog/version-5-3.webp'
 tags: ['release', 'update']
 ---
 

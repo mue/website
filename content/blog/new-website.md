@@ -3,7 +3,7 @@ title: 'New website'
 date: '2020-08-06'
 author: 'Alex Sparkes'
 description: 'Read the story behind the development of the brand new official Mue website.'
-image: 'https://res.cloudinary.com/mue/image/upload/blog/new-website.webp'
+image: '/blog/new-website.webp'
 tags: ['announcement', 'website']
 ---
 

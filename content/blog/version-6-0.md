@@ -3,7 +3,7 @@ title: 'Version 6.0'
 date: '2021-11-17'
 author: 'David Ralph'
 description: 'Highly requested features and some improvements to the Mue interface'
-image: 'https://res.cloudinary.com/mue/image/upload/blog/version-6-0.webp'
+image: '/blog/version-6-0.webp'
 tags: ['release', 'update']
 ---
 

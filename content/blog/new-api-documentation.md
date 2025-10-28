@@ -3,7 +3,7 @@ title: 'New API documentation'
 date: '2020-07-20'
 author: 'David Ralph'
 description: 'Announcing a new, updated API documentation with improvements to privacy and speed.'
-image: 'https://res.cloudinary.com/mue/image/upload/blog/new-api-docs.webp'
+image: '/blog/apidocs.webp'
 tags: ['announcement', 'documentation']
 ---
 

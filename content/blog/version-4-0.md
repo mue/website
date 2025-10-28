@@ -3,7 +3,7 @@ title: 'Version 4.0'
 date: '2020-08-01'
 author: 'Alex Sparkes'
 description: 'The update introducing the Mue Marketplace, improved modal and translation support for Mue.'
-image: 'https://res.cloudinary.com/mue/image/upload/blog/mue-marketplace.webp'
+image: '/blog/mue-marketplace.webp'
 tags: ['release', 'update']
 ---
 
