@@ -616,9 +616,20 @@ function MarketplaceExplorerContent({
         )}
 
         {!isSearching && randomCollections.length > 0 && (
-          <Suspense fallback={<FeaturedCollectionsSkeleton />}>
-            <FeaturedCollectionsLazy randomCollections={randomCollections} />
-          </Suspense>
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-foreground">Featured Collections</h2>
+              <Link
+                href="/marketplace/collections"
+                className="text-sm text-primary hover:underline underline-offset-4 transition"
+              >
+                View all collections
+              </Link>
+            </div>
+            <Suspense fallback={<FeaturedCollectionsSkeleton />}>
+              <FeaturedCollectionsLazy randomCollections={randomCollections} />
+            </Suspense>
+          </div>
         )}
 
         <div className="flex flex-col gap-4">
