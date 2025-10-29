@@ -27,6 +27,9 @@ type BreadcrumbProps =
       authorName: string;
     }
   | {
+      type: 'authors';
+    }
+  | {
       type: 'category';
       categoryType: string;
     }
@@ -81,10 +84,18 @@ export function MarketplaceBreadcrumb(props: BreadcrumbProps) {
           </>
         )}
 
+        {props.type === 'authors' && (
+          <BreadcrumbItem>
+            <BreadcrumbPage>Authors</BreadcrumbPage>
+          </BreadcrumbItem>
+        )}
+
         {props.type === 'author' && (
           <>
             <BreadcrumbItem>
-              <BreadcrumbPage>Authors</BreadcrumbPage>
+              <BreadcrumbLink asChild>
+                <Link href="/marketplace/authors">Authors</Link>
+              </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
-import { LayoutGrid, Layers, X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { LayoutGrid, Layers, X, ChevronLeft, ChevronRight, Camera, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Carousel,
@@ -152,12 +152,14 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
                     {(photo.photographer || photo.location) && (
                       <div className="text-center space-y-1">
                         {photo.photographer && (
-                          <p className="text-sm font-medium text-foreground">
-                            📷 {photo.photographer}
+                          <p className="text-sm font-medium text-foreground flex items-center justify-center gap-1.5">
+                            <Camera className="h-3.5 w-3.5" /> {photo.photographer}
                           </p>
                         )}
                         {photo.location && (
-                          <p className="text-sm text-muted-foreground">📍 {photo.location}</p>
+                          <p className="text-sm text-muted-foreground flex items-center justify-center gap-1.5">
+                            <MapPin className="h-3.5 w-3.5" /> {photo.location}
+                          </p>
                         )}
                       </div>
                     )}
@@ -197,10 +199,14 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 transition group-hover:opacity-100">
                     <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
                       {photo.photographer && (
-                        <p className="text-xs font-medium truncate">📷 {photo.photographer}</p>
+                        <p className="text-xs font-medium truncate flex items-center gap-1.5">
+                          <Camera className="h-3 w-3 flex-shrink-0" /> {photo.photographer}
+                        </p>
                       )}
                       {photo.location && (
-                        <p className="text-xs truncate">📍 {photo.location}</p>
+                        <p className="text-xs truncate flex items-center gap-1.5">
+                          <MapPin className="h-3 w-3 flex-shrink-0" /> {photo.location}
+                        </p>
                       )}
                     </div>
                   </div>
@@ -274,10 +280,14 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
           {(currentPhoto?.photographer || currentPhoto?.location) && (
             <div className="absolute bottom-14 sm:bottom-16 left-1/2 -translate-x-1/2 max-w-[90vw] rounded-lg bg-black/70 px-3 py-2 sm:px-4 text-white text-center">
               {currentPhoto.photographer && (
-                <p className="text-xs sm:text-sm font-medium truncate">📷 {currentPhoto.photographer}</p>
+                <p className="text-xs sm:text-sm font-medium truncate flex items-center justify-center gap-1.5">
+                  <Camera className="h-3.5 w-3.5 flex-shrink-0" /> {currentPhoto.photographer}
+                </p>
               )}
               {currentPhoto.location && (
-                <p className="text-xs sm:text-sm truncate">📍 {currentPhoto.location}</p>
+                <p className="text-xs sm:text-sm truncate flex items-center justify-center gap-1.5">
+                  <MapPin className="h-3.5 w-3.5 flex-shrink-0" /> {currentPhoto.location}
+                </p>
               )}
             </div>
           )}
