@@ -139,7 +139,6 @@ describe('BrandAssetCard', () => {
     const button = screen.getByRole('button', { name: /download svg/i });
 
     // Spy on document.createElement to capture the link
-    const originalCreateElement = document.createElement.bind(document);
     const createElementSpy = jest.spyOn(document, 'createElement');
 
     fireEvent.click(button);

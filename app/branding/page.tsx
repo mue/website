@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Palette, Download, CheckCircle2, XCircle, Copy } from 'lucide-react';
+import { Palette, CheckCircle2, XCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PageHeader } from '@/components/shared/page-header';
 import { ContentSection } from '@/components/shared/content-section';
-import Logo from '@/components/logo';
 import { BrandColorCard } from '@/components/branding/brand-color-card';
 import { BrandAssetCard } from '@/components/branding/brand-asset-card';
 

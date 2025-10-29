@@ -6,7 +6,6 @@ import { type ShowcaseItem } from '@/lib/showcase';
 jest.mock('next/image', () => ({
   __esModule: true,
   default: ({ ...props }: React.ComponentProps<'img'>) => {
-    // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
     return <img {...props} />;
   },
 }));
