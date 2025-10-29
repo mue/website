@@ -12,13 +12,20 @@ import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
 import { BrowserCard } from '@/components/download/browser-card';
 import { NumberedStep } from '@/components/download/numbered-step';
 
+interface BrowserVersions {
+  chrome: string | null;
+  edge: string | null;
+  firefox: string | null;
+  whale: string | null;
+}
+
 const browsers = [
   {
     name: 'Chrome',
     Icon: FaChrome,
     description: 'Get Mue for Chrome and Chromium-based browsers',
     url: BROWSER_STORE_URLS.chrome,
-    version: 'Latest version available',
+    versionKey: 'chrome' as keyof BrowserVersions,
     gradient: 'from-[#4285F4] to-[#34A853]',
     userAgents: ['Chrome', 'Chromium', 'Edg/'],
   },
@@ -27,7 +34,7 @@ const browsers = [
     Icon: FaEdge,
     description: 'Get Mue for Microsoft Edge',
     url: BROWSER_STORE_URLS.edge,
-    version: 'Optimized for Edge',
+    versionKey: 'edge' as keyof BrowserVersions,
     gradient: 'from-[#0078D4] to-[#50E6FF]',
     userAgents: ['Edg/'],
   },
@@ -36,7 +43,7 @@ const browsers = [
     Icon: FaFirefoxBrowser,
     description: 'Get Mue for Firefox',
     url: BROWSER_STORE_URLS.firefox,
-    version: 'Firefox Add-on',
+    versionKey: 'firefox' as keyof BrowserVersions,
     gradient: 'from-[#FF6611] to-[#FF9500]',
     userAgents: ['Firefox'],
   },
@@ -45,7 +52,7 @@ const browsers = [
     Icon: SiNaver,
     description: 'Get Mue for NAVER Whale browser',
     url: BROWSER_STORE_URLS.whale,
-    version: 'NAVER Whale Store',
+    versionKey: 'whale' as keyof BrowserVersions,
     gradient: 'from-[#1BC5E9] to-[#0D67D2]',
     userAgents: ['Whale'],
   },
@@ -98,10 +105,30 @@ function isMobileDevice(): boolean {
 export default function DownloadPage() {
   const [detectedBrowser, setDetectedBrowser] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [versions, setVersions] = useState<BrowserVersions>({
+    chrome: null,
+    edge: null,
+    firefox: null,
+    whale: null,
+  });
+  const [versionsLoading, setVersionsLoading] = useState(true);
 
   useEffect(() => {
     setDetectedBrowser(detectBrowser());
     setIsMobile(isMobileDevice());
+
+    // Fetch browser versions
+    fetch('/api/browser-versions')
+      .then((res) => res.json())
+      .then((data: BrowserVersions) => {
+        setVersions(data);
+      })
+      .catch((error) => {
+        console.error('Failed to fetch browser versions:', error);
+      })
+      .finally(() => {
+        setVersionsLoading(false);
+      });
   }, []);
 
   return (
@@ -136,18 +163,27 @@ export default function DownloadPage() {
         </p>
 
         <div className="mt-16 grid w-full gap-6 sm:grid-cols-1 lg:grid-cols-2">
-          {browsers.map((browser) => (
-            <BrowserCard
-              key={browser.name}
-              name={browser.name}
-              icon={browser.Icon}
-              description={browser.description}
-              url={browser.url}
-              version={browser.version}
-              gradient={browser.gradient}
-              isDetected={detectedBrowser === browser.name}
-            />
-          ))}
+          {browsers.map((browser) => {
+            const version = versions[browser.versionKey];
+            const displayVersion = versionsLoading
+              ? 'Loading version...'
+              : version
+                ? `Version ${version}`
+                : 'Latest version available';
+
+            return (
+              <BrowserCard
+                key={browser.name}
+                name={browser.name}
+                icon={browser.Icon}
+                description={browser.description}
+                url={browser.url}
+                version={displayVersion}
+                gradient={browser.gradient}
+                isDetected={detectedBrowser === browser.name}
+              />
+            );
+          })}
         </div>
 
         <div className="mt-12 w-full max-w-3xl">
