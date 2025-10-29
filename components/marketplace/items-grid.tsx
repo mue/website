@@ -77,7 +77,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
                       router.push(`/marketplace/author/${slugifyAuthor(item.author)}`);
                     }
                   }}
-                  className="hover:text-primary hover:underline transition"
+                  className="hover:text-primary hover:underline transition cursor-pointer"
                 >
                   {item.author}
                 </button>
