@@ -67,7 +67,8 @@ export default async function AuthorsPage() {
           All Authors
         </h1>
         <p className="text-muted-foreground text-base md:text-lg">
-          Browse {sortedAuthors.length} talented creator{sortedAuthors.length !== 1 ? 's' : ''} in the marketplace.
+          Browse {sortedAuthors.length} talented creator{sortedAuthors.length !== 1 ? 's' : ''} in
+          the marketplace.
         </p>
       </header>
 

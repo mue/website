@@ -68,7 +68,9 @@ export function validateImageUrl(url: string): ValidationIssue[] {
 }
 
 // Validate photo pack
-export function validatePhotos(photos: Array<{ url: { default: string }; photographer?: string; location?: string }>): ContentValidationResult {
+export function validatePhotos(
+  photos: Array<{ url: { default: string }; photographer?: string; location?: string }>,
+): ContentValidationResult {
   const errors: ValidationIssue[] = [];
   const warnings: ValidationIssue[] = [];
   const infos: ValidationIssue[] = [];
@@ -110,7 +112,7 @@ export function validatePhotos(photos: Array<{ url: { default: string }; photogr
   // Validate each photo
   validPhotos.forEach((photo) => {
     const photoIssues = validateImageUrl(photo.url.default);
-    
+
     if (!photo.photographer || !photo.photographer.trim()) {
       photoIssues.push({
         type: 'warning',
@@ -160,7 +162,9 @@ export function validatePhotos(photos: Array<{ url: { default: string }; photogr
 }
 
 // Validate quote pack
-export function validateQuotes(quotes: Array<{ quote: string; author: string; name?: string }>): ContentValidationResult {
+export function validateQuotes(
+  quotes: Array<{ quote: string; author: string; name?: string }>,
+): ContentValidationResult {
   const errors: ValidationIssue[] = [];
   const warnings: ValidationIssue[] = [];
   const infos: ValidationIssue[] = [];

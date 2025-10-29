@@ -68,7 +68,7 @@ function isMarkdownFile(file: string) {
 
 function formatTitleFromSlug(slug: string) {
   const specialCases: Record<string, string> = {
-    'api': 'API',
+    api: 'API',
   };
 
   return slug

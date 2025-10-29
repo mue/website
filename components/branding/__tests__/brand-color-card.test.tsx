@@ -125,7 +125,7 @@ describe('BrandColorCard', () => {
 
   it('renders with different colors correctly', () => {
     const { container, rerender } = render(
-      <BrandColorCard name="Color 1" hex="#FF0000" description="Red color" />
+      <BrandColorCard name="Color 1" hex="#FF0000" description="Red color" />,
     );
 
     let colorPreview = container.querySelector('.h-32.w-full');

@@ -26,7 +26,7 @@ describe('GitHubLinkButton', () => {
 
   it('renders GitHub icon', () => {
     const { container } = render(
-      <GitHubLinkButton href="https://github.com/test/repo" label="GitHub" />
+      <GitHubLinkButton href="https://github.com/test/repo" label="GitHub" />,
     );
 
     const icon = container.querySelector('svg');
@@ -49,7 +49,7 @@ describe('GitHubLinkButton', () => {
 
   it('handles different GitHub URLs', () => {
     const { rerender } = render(
-      <GitHubLinkButton href="https://github.com/user/repo1" label="Repo 1" />
+      <GitHubLinkButton href="https://github.com/user/repo1" label="Repo 1" />,
     );
 
     expect(screen.getByRole('link')).toHaveAttribute('href', 'https://github.com/user/repo1');
@@ -58,7 +58,7 @@ describe('GitHubLinkButton', () => {
 
     expect(screen.getByRole('link')).toHaveAttribute(
       'href',
-      'https://github.com/org/repo2/tree/main'
+      'https://github.com/org/repo2/tree/main',
     );
   });
 });

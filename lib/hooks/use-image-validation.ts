@@ -21,7 +21,7 @@ export function useImageValidation(url: string): UseImageValidationResult {
     // Check if it's a valid URL format
     try {
       const urlObj = new URL(url);
-      
+
       // Check if it's http or https
       if (!['http:', 'https:'].includes(urlObj.protocol)) {
         setStatus('invalid');
@@ -32,8 +32,8 @@ export function useImageValidation(url: string): UseImageValidationResult {
       // Check file extension
       const validExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'];
       const pathname = urlObj.pathname.toLowerCase();
-      const hasValidExtension = validExtensions.some(ext => pathname.endsWith(ext));
-      
+      const hasValidExtension = validExtensions.some((ext) => pathname.endsWith(ext));
+
       if (!hasValidExtension) {
         setStatus('invalid');
         setError('Image should be .jpg, .jpeg, .png, .webp, .gif, or .svg');

@@ -53,7 +53,11 @@ export default async function PhotographyPage() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <Link href="https://docs.muetab.com/api/endpoints#images" target="_blank" rel="noreferrer">
+              <Link
+                href="https://docs.muetab.com/api/endpoints#images"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <ImageIcon className="mr-2 h-4 w-4" />
                 API Documentation
               </Link>
@@ -68,7 +72,9 @@ export default async function PhotographyPage() {
               <Globe className="h-6 w-6 text-primary" />
             </div>
             <p className="text-2xl font-semibold text-foreground">Worldwide</p>
-            <p className="mt-1 text-sm text-muted-foreground">From photographers across the globe</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              From photographers across the globe
+            </p>
           </div>
 
           <div className="rounded-2xl border border-border bg-card/50 p-6 text-center backdrop-blur">
@@ -113,7 +119,9 @@ export default async function PhotographyPage() {
               <div className="mt-8 space-y-6">
                 <div className="grid gap-4 text-left sm:grid-cols-2">
                   <div className="rounded-xl border border-border bg-background/60 p-5">
-                    <h3 className="mb-2 font-semibold text-foreground">What we&apos;re looking for</h3>
+                    <h3 className="mb-2 font-semibold text-foreground">
+                      What we&apos;re looking for
+                    </h3>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-start gap-2">
                         <span className="mt-0.5 text-primary">•</span>
@@ -159,8 +167,8 @@ export default async function PhotographyPage() {
 
                 <div className="rounded-xl border border-border bg-muted/50 p-5">
                   <p className="text-sm text-muted-foreground">
-                    <span className="font-semibold text-foreground">Ready to contribute?</span> Get in
-                    touch with us on{' '}
+                    <span className="font-semibold text-foreground">Ready to contribute?</span> Get
+                    in touch with us on{' '}
                     <Link
                       href="https://discord.gg/zv8C9F8"
                       target="_blank"

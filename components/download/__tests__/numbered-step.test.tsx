@@ -12,7 +12,7 @@ describe('NumberedStep', () => {
 
   it('renders number in gradient circle', () => {
     const { container } = render(
-      <NumberedStep number={2} title="Step Two" description="Description" />
+      <NumberedStep number={2} title="Step Two" description="Description" />,
     );
 
     const numberCircle = container.querySelector('.bg-gradient-to-br.from-\\[\\#FF5C25\\]');
@@ -28,20 +28,18 @@ describe('NumberedStep', () => {
   });
 
   it('applies gradient colors to number circle', () => {
-    const { container } = render(
-      <NumberedStep number={3} title="Step" description="Desc" />
-    );
+    const { container } = render(<NumberedStep number={3} title="Step" description="Desc" />);
 
-    const circle = container.querySelector(".bg-gradient-to-br");
+    const circle = container.querySelector('.bg-gradient-to-br');
     expect(circle).toHaveClass('bg-gradient-to-br', 'from-[#FF5C25]', 'to-[#FF456E]');
   });
 
   it('renders number circle with correct size', () => {
     const { container } = render(
-      <NumberedStep number={1} title="Title" description="Description" />
+      <NumberedStep number={1} title="Title" description="Description" />,
     );
 
-    const circle = container.querySelector(".bg-gradient-to-br");
+    const circle = container.querySelector('.bg-gradient-to-br');
     expect(circle).toHaveClass('h-8', 'w-8', 'rounded-full');
   });
 
@@ -60,9 +58,7 @@ describe('NumberedStep', () => {
   });
 
   it('handles different numbers', () => {
-    const { rerender } = render(
-      <NumberedStep number={1} title="Step 1" description="First" />
-    );
+    const { rerender } = render(<NumberedStep number={1} title="Step 1" description="First" />);
     expect(screen.getByText('1')).toBeInTheDocument();
 
     rerender(<NumberedStep number={99} title="Step 99" description="Ninety-nine" />);
@@ -71,7 +67,7 @@ describe('NumberedStep', () => {
 
   it('renders with flex layout', () => {
     const { container } = render(
-      <NumberedStep number={1} title="Title" description="Description" />
+      <NumberedStep number={1} title="Title" description="Description" />,
     );
 
     const wrapper = container.firstChild;
@@ -79,9 +75,11 @@ describe('NumberedStep', () => {
   });
 
   it('renders number circle as shrink-0', () => {
-    const { container } = render(<NumberedStep number={1} title="Title" description="Description" />);
+    const { container } = render(
+      <NumberedStep number={1} title="Title" description="Description" />,
+    );
 
-    const circle = container.querySelector(".bg-gradient-to-br");
+    const circle = container.querySelector('.bg-gradient-to-br');
     expect(circle).toHaveClass('shrink-0');
   });
 
@@ -109,7 +107,7 @@ describe('NumberedStep', () => {
 
   it('positions number and content with gap', () => {
     const { container } = render(
-      <NumberedStep number={1} title="Title" description="Description" />
+      <NumberedStep number={1} title="Title" description="Description" />,
     );
 
     expect(container.firstChild).toHaveClass('gap-4');
@@ -117,7 +115,7 @@ describe('NumberedStep', () => {
 
   it('renders content in separate div', () => {
     const { container } = render(
-      <NumberedStep number={1} title="Test Title" description="Test Description" />
+      <NumberedStep number={1} title="Test Title" description="Test Description" />,
     );
 
     const contentDiv = container.querySelector('div > div');

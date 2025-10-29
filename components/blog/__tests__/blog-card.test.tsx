@@ -114,9 +114,7 @@ describe('BlogCard', () => {
     const postWithoutExcerpt = { ...mockPost, excerpt: undefined };
     render(<BlogCard post={postWithoutExcerpt} />);
 
-    expect(
-      screen.queryByText('This is a test excerpt for the blog post.')
-    ).not.toBeInTheDocument();
+    expect(screen.queryByText('This is a test excerpt for the blog post.')).not.toBeInTheDocument();
   });
 
   it('renders ArrowRight icon', () => {

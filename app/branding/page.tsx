@@ -115,7 +115,10 @@ export default function BrandingPage() {
             <div className="space-y-4 rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
               <div>
                 <h3 className="text-sm font-semibold text-muted-foreground">PRIMARY FONT</h3>
-                <p className="mt-2 text-2xl font-semibold" style={{ fontFamily: 'var(--font-lexend-deca)' }}>
+                <p
+                  className="mt-2 text-2xl font-semibold"
+                  style={{ fontFamily: 'var(--font-lexend-deca)' }}
+                >
                   Lexend Deca
                 </p>
                 <p className="text-sm text-muted-foreground">Used for headings and display text</p>
@@ -192,8 +195,8 @@ export default function BrandingPage() {
           <section className="rounded-2xl border border-border bg-background/60 p-6 text-center backdrop-blur">
             <h3 className="text-xl font-semibold text-foreground">Need something else?</h3>
             <p className="mt-2 text-muted-foreground">
-              If you need additional brand assets or have questions about using our brand,
-              please reach out to us.
+              If you need additional brand assets or have questions about using our brand, please
+              reach out to us.
             </p>
             <Button asChild className="mt-4">
               <Link href="/contact">Contact Us</Link>

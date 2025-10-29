@@ -40,9 +40,7 @@ export default function DocsArticleLoading() {
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-4/5" />
-                {i % 4 === 0 && (
-                  <Skeleton className="my-6 h-48 w-full rounded-xl" />
-                )}
+                {i % 4 === 0 && <Skeleton className="my-6 h-48 w-full rounded-xl" />}
               </div>
             ))}
 

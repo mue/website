@@ -8,7 +8,7 @@ describe('CommunityStatCard', () => {
         label="GitHub Stars"
         value="2.5k+"
         description="Stars on our repository"
-      />
+      />,
     );
 
     expect(screen.getByText('GitHub Stars')).toBeInTheDocument();
@@ -46,7 +46,7 @@ describe('CommunityStatCard', () => {
 
   it('renders with card styling', () => {
     const { container } = render(
-      <CommunityStatCard label="Test" value="123" description="Test description" />
+      <CommunityStatCard label="Test" value="123" description="Test description" />,
     );
 
     const card = container.firstChild;
@@ -56,7 +56,7 @@ describe('CommunityStatCard', () => {
       'border-border',
       'bg-background/80',
       'p-5',
-      'backdrop-blur'
+      'backdrop-blur',
     );
   });
 
@@ -66,7 +66,7 @@ describe('CommunityStatCard', () => {
         label="Downloads"
         value="1,234,567,890"
         description="Total downloads this year"
-      />
+      />,
     );
 
     expect(screen.getByText('1,234,567,890')).toBeInTheDocument();
@@ -78,7 +78,7 @@ describe('CommunityStatCard', () => {
         label="Users"
         value="10k"
         description="Active users across all platforms"
-      />
+      />,
     );
 
     expect(screen.getByText('Active users across all platforms')).toBeInTheDocument();
@@ -90,7 +90,7 @@ describe('CommunityStatCard', () => {
         label="Contributors"
         value="150+"
         description="Open source contributors"
-      />
+      />,
     );
 
     expect(screen.getByText('150+')).toBeInTheDocument();
@@ -101,9 +101,7 @@ describe('CommunityStatCard', () => {
   });
 
   it('maintains text hierarchy with proper spacing', () => {
-    render(
-      <CommunityStatCard label="Metric" value="Value" description="Description" />
-    );
+    render(<CommunityStatCard label="Metric" value="Value" description="Description" />);
 
     const value = screen.getByText('Value');
     const description = screen.getByText('Description');

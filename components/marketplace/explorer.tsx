@@ -484,9 +484,7 @@ function MarketplaceExplorerContent({
                     event.preventDefault();
                     const suggestion = suggestions[selectedSuggestionIndex];
                     const category = getItemCategory(suggestion.type);
-                    router.push(
-                      `/marketplace/${category}/${encodeURIComponent(suggestion.id)}`,
-                    );
+                    router.push(`/marketplace/${category}/${encodeURIComponent(suggestion.id)}`);
                   } else if (event.key === 'Escape') {
                     setShowSuggestions(false);
                   }
@@ -522,9 +520,7 @@ function MarketplaceExplorerContent({
                     type="button"
                     onClick={() => {
                       const category = getItemCategory(suggestion.type);
-                      router.push(
-                        `/marketplace/${category}/${encodeURIComponent(suggestion.id)}`,
-                      );
+                      router.push(`/marketplace/${category}/${encodeURIComponent(suggestion.id)}`);
                       setShowSuggestions(false);
                     }}
                     className={cn(

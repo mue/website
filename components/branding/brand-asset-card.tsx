@@ -31,7 +31,9 @@ export function BrandAssetCard({ title, description, isDark }: BrandAssetCardPro
     <div className="overflow-hidden rounded-2xl border border-border bg-background/60 backdrop-blur">
       <div
         className={`flex h-48 items-center justify-center p-8 ${
-          isDark ? 'bg-gradient-to-br from-gray-900 to-gray-800' : 'bg-gradient-to-br from-gray-50 to-gray-100'
+          isDark
+            ? 'bg-gradient-to-br from-gray-900 to-gray-800'
+            : 'bg-gradient-to-br from-gray-50 to-gray-100'
         }`}
       >
         <Logo

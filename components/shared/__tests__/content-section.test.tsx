@@ -6,7 +6,7 @@ describe('ContentSection', () => {
     render(
       <ContentSection title="Test Title">
         <p>Test content</p>
-      </ContentSection>
+      </ContentSection>,
     );
 
     expect(screen.getByText('Test Title')).toBeInTheDocument();
@@ -17,7 +17,7 @@ describe('ContentSection', () => {
     render(
       <ContentSection title="Large Title">
         <p>Content</p>
-      </ContentSection>
+      </ContentSection>,
     );
 
     const heading = screen.getByRole('heading', { name: 'Large Title' });
@@ -28,7 +28,7 @@ describe('ContentSection', () => {
     render(
       <ContentSection title="Small Title" titleSize="sm">
         <p>Content</p>
-      </ContentSection>
+      </ContentSection>,
     );
 
     const heading = screen.getByRole('heading', { name: 'Small Title' });
@@ -39,7 +39,7 @@ describe('ContentSection', () => {
     render(
       <ContentSection title="Medium Title" titleSize="md">
         <p>Content</p>
-      </ContentSection>
+      </ContentSection>,
     );
 
     const heading = screen.getByRole('heading', { name: 'Medium Title' });
@@ -50,7 +50,7 @@ describe('ContentSection', () => {
     render(
       <ContentSection title="Explicit Large" titleSize="lg">
         <p>Content</p>
-      </ContentSection>
+      </ContentSection>,
     );
 
     const heading = screen.getByRole('heading', { name: 'Explicit Large' });
@@ -61,7 +61,7 @@ describe('ContentSection', () => {
     const { container } = render(
       <ContentSection title="Test">
         <p>Content</p>
-      </ContentSection>
+      </ContentSection>,
     );
 
     const section = container.querySelector('section');
@@ -73,7 +73,7 @@ describe('ContentSection', () => {
       <ContentSection title="Test">
         <p>Paragraph 1</p>
         <p>Paragraph 2</p>
-      </ContentSection>
+      </ContentSection>,
     );
 
     const contentDiv = container.querySelector('div.mt-4.space-y-4.text-muted-foreground');
@@ -86,7 +86,7 @@ describe('ContentSection', () => {
         <p>First paragraph</p>
         <p>Second paragraph</p>
         <div>Third element</div>
-      </ContentSection>
+      </ContentSection>,
     );
 
     expect(screen.getByText('First paragraph')).toBeInTheDocument();
@@ -98,7 +98,7 @@ describe('ContentSection', () => {
     render(
       <ContentSection title="H2 Test">
         <p>Content</p>
-      </ContentSection>
+      </ContentSection>,
     );
 
     const heading = screen.getByRole('heading', { level: 2 });
@@ -112,7 +112,7 @@ describe('ContentSection', () => {
           <strong>Bold text</strong>
           <em>Italic text</em>
         </div>
-      </ContentSection>
+      </ContentSection>,
     );
 
     expect(screen.getByText('Bold text')).toBeInTheDocument();

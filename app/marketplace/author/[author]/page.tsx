@@ -1,7 +1,12 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { User, Info } from 'lucide-react';
-import { getMarketplaceItems, slugifyAuthor, deslugifyAuthor, type MarketplaceItemSummary } from '@/lib/marketplace';
+import {
+  getMarketplaceItems,
+  slugifyAuthor,
+  deslugifyAuthor,
+  type MarketplaceItemSummary,
+} from '@/lib/marketplace';
 import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
 import ItemsGrid from '@/components/marketplace/items-grid';
 import { FavoritesProvider } from '@/lib/favorites-context';
@@ -17,8 +22,8 @@ type AuthorPageProps = {
 async function getAuthorItems(authorSlug: string): Promise<MarketplaceItemSummary[]> {
   const allItems = await getMarketplaceItems();
   // Match by comparing slugified versions (handles special chars, hyphens, spaces)
-  return allItems.filter((item) =>
-    item.author && slugifyAuthor(item.author) === authorSlug.toLowerCase()
+  return allItems.filter(
+    (item) => item.author && slugifyAuthor(item.author) === authorSlug.toLowerCase(),
   );
 }
 

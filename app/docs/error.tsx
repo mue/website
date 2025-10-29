@@ -86,10 +86,7 @@ export default function DocsError({
               </Link>
             </li>
             <li>
-              <Link
-                href="/contact"
-                className="text-sm font-medium text-primary hover:underline"
-              >
+              <Link href="/contact" className="text-sm font-medium text-primary hover:underline">
                 Contact support
               </Link>
             </li>

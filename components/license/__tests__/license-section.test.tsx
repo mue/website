@@ -78,7 +78,7 @@ describe('LicenseSection', () => {
 
   it('handles different license colors', () => {
     const { rerender } = render(
-      <LicenseSection {...defaultProps} licenseColor="#FF0000" licenseName="GPL" />
+      <LicenseSection {...defaultProps} licenseColor="#FF0000" licenseName="GPL" />,
     );
 
     let badge = screen.getByText('GPL');
@@ -100,7 +100,7 @@ describe('LicenseSection', () => {
             <p>Second paragraph</p>
           </div>
         }
-      />
+      />,
     );
 
     expect(screen.getByText('First paragraph')).toBeInTheDocument();
@@ -118,7 +118,7 @@ describe('LicenseSection', () => {
             <a href="#3">Link 3</a>
           </>
         }
-      />
+      />,
     );
 
     expect(screen.getByRole('link', { name: 'Link 1' })).toBeInTheDocument();

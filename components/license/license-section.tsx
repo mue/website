@@ -22,9 +22,7 @@ export function LicenseSection({
   return (
     <section
       className={`rounded-2xl border p-8 backdrop-blur ${
-        gradient
-          ? 'border-border bg-background/60'
-          : 'border-border bg-background/60'
+        gradient ? 'border-border bg-background/60' : 'border-border bg-background/60'
       }`}
     >
       <div className="mb-6 flex items-center gap-3">

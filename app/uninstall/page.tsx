@@ -16,12 +16,12 @@ export default function UninstallPage() {
 
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center px-6 py-24 text-center">
         <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-           Successfully Uninstalled
+          Successfully Uninstalled
         </h1>
 
         <p className="mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-          We&apos;re sorry to see you go. Please take a moment to share your feedback
-          below so we can continue to improve Mue for everyone.
+          We&apos;re sorry to see you go. Please take a moment to share your feedback below so we
+          can continue to improve Mue for everyone.
         </p>
 
         <div className="mt-12 w-full min-h-screen">

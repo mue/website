@@ -7,11 +7,7 @@ jest.mock('next/image', () => ({
   default: ({ onLoad, onError, ...props }: React.ComponentProps<'img'>) => {
     return (
       // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
-      <img
-        {...props}
-        onLoad={(e) => onLoad && onLoad(e)}
-        onError={(e) => onError && onError(e)}
-      />
+      <img {...props} onLoad={(e) => onLoad && onLoad(e)} onError={(e) => onError && onError(e)} />
     );
   },
 }));
@@ -108,9 +104,7 @@ describe('BlogImage', () => {
   });
 
   it('uses blur placeholder when provided', () => {
-    render(
-      <BlogImage src="/test.jpg" alt="Test" blurDataURL="data:image/jpeg;base64,test" />
-    );
+    render(<BlogImage src="/test.jpg" alt="Test" blurDataURL="data:image/jpeg;base64,test" />);
 
     const image = screen.getByAltText('Test');
     expect(image).toBeInTheDocument();

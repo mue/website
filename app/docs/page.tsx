@@ -178,8 +178,12 @@ export default async function DocsIndexPage() {
             className="group flex items-center justify-between gap-3 rounded-lg border border-dashed border-primary/30 bg-primary/5 p-2.5 shadow-sm transition hover:-translate-y-1 hover:border-primary/60 hover:bg-primary/10 hover:shadow-lg lg:rounded-xl lg:p-4"
           >
             <div>
-              <h3 className="text-sm font-semibold text-primary lg:text-base">Contribute to docs</h3>
-              <p className="mt-0.5 text-[10px] text-muted-foreground lg:text-xs">Help improve our documentation</p>
+              <h3 className="text-sm font-semibold text-primary lg:text-base">
+                Contribute to docs
+              </h3>
+              <p className="mt-0.5 text-[10px] text-muted-foreground lg:text-xs">
+                Help improve our documentation
+              </p>
             </div>
             <FileEdit className="size-3.5 shrink-0 text-primary transition group-hover:scale-110 lg:size-4" />
           </Link>

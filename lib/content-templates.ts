@@ -29,7 +29,8 @@ export const templates: ContentTemplate[] = [
     icon: '🌲',
     metadata: {
       name: 'Nature Photography Pack',
-      description: 'A stunning collection of nature and landscape photographs from around the world',
+      description:
+        'A stunning collection of nature and landscape photographs from around the world',
       version: '1.0.0',
       author: 'Your Name',
       icon_url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4',
@@ -131,11 +132,12 @@ export const templates: ContentTemplate[] = [
           author: 'Steve Jobs',
         },
         {
-          quote: 'Success is not final, failure is not fatal: it is the courage to continue that counts.',
+          quote:
+            'Success is not final, failure is not fatal: it is the courage to continue that counts.',
           author: 'Winston Churchill',
         },
         {
-          quote: 'Believe you can and you\'re halfway there.',
+          quote: "Believe you can and you're halfway there.",
           author: 'Theodore Roosevelt',
         },
         {
@@ -157,7 +159,8 @@ export const templates: ContentTemplate[] = [
     icon: '🤔',
     metadata: {
       name: 'Philosophical Quotes',
-      description: 'Thought-provoking quotes from philosophers and great thinkers throughout history',
+      description:
+        'Thought-provoking quotes from philosophers and great thinkers throughout history',
       version: '1.0.0',
       author: 'Your Name',
       icon_url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d',
@@ -174,7 +177,8 @@ export const templates: ContentTemplate[] = [
           author: 'René Descartes',
         },
         {
-          quote: 'To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.',
+          quote:
+            'To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.',
           author: 'Ralph Waldo Emerson',
         },
         {
@@ -201,7 +205,7 @@ export const templates: ContentTemplate[] = [
     content: {
       quotes: [
         {
-          quote: 'I\'m not superstitious, but I am a little stitious.',
+          quote: "I'm not superstitious, but I am a little stitious.",
           author: 'Michael Scott',
         },
         {
@@ -209,7 +213,8 @@ export const templates: ContentTemplate[] = [
           author: 'Will Rogers',
         },
         {
-          quote: 'I always wanted to be somebody, but now I realize I should have been more specific.',
+          quote:
+            'I always wanted to be somebody, but now I realize I should have been more specific.',
           author: 'Lily Tomlin',
         },
       ],
@@ -244,7 +249,7 @@ export const templates: ContentTemplate[] = [
           searchBarEnabled: false,
         },
         null,
-        2
+        2,
       ),
     },
   },
@@ -276,7 +281,7 @@ export const templates: ContentTemplate[] = [
           todoEnabled: true,
         },
         null,
-        2
+        2,
       ),
     },
   },
@@ -305,7 +310,7 @@ export const templates: ContentTemplate[] = [
           dateEnabled: true,
         },
         null,
-        2
+        2,
       ),
     },
   },
