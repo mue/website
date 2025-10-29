@@ -15,7 +15,9 @@ describe('BulletList', () => {
     const items = [
       <span key="1">Custom element 1</span>,
       <strong key="2">Bold text</strong>,
-      <a key="3" href="#">Link text</a>,
+      <a key="3" href="#">
+        Link text
+      </a>,
     ];
     render(<BulletList items={items} />);
 
@@ -25,11 +27,7 @@ describe('BulletList', () => {
   });
 
   it('renders a list with mixed string and ReactNode items', () => {
-    const items = [
-      'Plain text item',
-      <span key="2">React node item</span>,
-      'Another plain text',
-    ];
+    const items = ['Plain text item', <span key="2">React node item</span>, 'Another plain text'];
     render(<BulletList items={items} />);
 
     expect(screen.getByText('Plain text item')).toBeInTheDocument();
@@ -62,7 +60,14 @@ describe('BulletList', () => {
 
     const bullet = listItem?.querySelector('.bg-\\[\\#FF5C25\\]');
     expect(bullet).toBeInTheDocument();
-    expect(bullet).toHaveClass('mt-1.5', 'inline-flex', 'h-1.5', 'w-1.5', 'shrink-0', 'rounded-full');
+    expect(bullet).toHaveClass(
+      'mt-1.5',
+      'inline-flex',
+      'h-1.5',
+      'w-1.5',
+      'shrink-0',
+      'rounded-full',
+    );
   });
 
   it('renders correct number of items', () => {

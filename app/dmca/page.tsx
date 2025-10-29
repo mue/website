@@ -60,10 +60,7 @@ export default function DMCAPage() {
             <p>Please submit your DMCA notice to our designated copyright agent:</p>
             <div className="mt-4 rounded-xl border border-border bg-muted/30 p-6">
               <p className="font-semibold">Email:</p>
-              <a
-                href="mailto:hello@muetab.com"
-                className="text-primary hover:underline"
-              >
+              <a href="mailto:hello@muetab.com" className="text-primary hover:underline">
                 hello@muetab.com
               </a>
               <p className="mt-4 font-semibold">Subject Line:</p>

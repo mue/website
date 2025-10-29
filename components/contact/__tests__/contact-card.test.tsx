@@ -109,13 +109,7 @@ describe('ContactCard', () => {
     render(<ContactCard {...defaultProps} />);
 
     const link = screen.getByRole('link');
-    expect(link).toHaveClass(
-      'rounded-2xl',
-      'border',
-      'border-border',
-      'bg-background/60',
-      'p-6'
-    );
+    expect(link).toHaveClass('rounded-2xl', 'border', 'border-border', 'bg-background/60', 'p-6');
   });
 
   it('renders description with correct styling', () => {

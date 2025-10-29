@@ -66,7 +66,9 @@ describe('PhotoShowcase', () => {
     render(<PhotoShowcase />);
 
     await waitFor(() => {
-      expect(screen.getByText('Failed to load photos. Please try again later.')).toBeInTheDocument();
+      expect(
+        screen.getByText('Failed to load photos. Please try again later.'),
+      ).toBeInTheDocument();
     });
   });
 
@@ -78,7 +80,9 @@ describe('PhotoShowcase', () => {
     render(<PhotoShowcase />);
 
     await waitFor(() => {
-      expect(screen.getByText('Failed to load photos. Please try again later.')).toBeInTheDocument();
+      expect(
+        screen.getByText('Failed to load photos. Please try again later.'),
+      ).toBeInTheDocument();
     });
   });
 
@@ -256,7 +260,7 @@ describe('PhotoShowcase', () => {
 
     await waitFor(() => {
       expect(
-        screen.getByText('No photos found in this category. Try selecting a different one.')
+        screen.getByText('No photos found in this category. Try selecting a different one.'),
       ).toBeInTheDocument();
     });
   });

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 import { Github, Mail, MessageSquare } from 'lucide-react';
-import { FaXTwitter } from "react-icons/fa6";
+import { FaXTwitter } from 'react-icons/fa6';
 
 import { Button } from '@/components/ui/button';
 import { PageHeader } from '@/components/shared/page-header';
@@ -32,7 +32,8 @@ const contactMethods = [
     href: 'https://github.com/mue/mue/issues',
     icon: Github,
     title: 'GitHub Issues',
-    description: 'Report bugs, request features, or browse existing issues on our GitHub repository.',
+    description:
+      'Report bugs, request features, or browse existing issues on our GitHub repository.',
     external: true,
   },
   {
@@ -65,7 +66,7 @@ export default function ContactPage() {
             <p>
               Whether you have questions, feedback, or need support, our team is here to help. Reach
               out through any of the channels below, and we&apos;ll get back to you as soon as
-              possible. 
+              possible.
             </p>
           </ContentSection>
 

@@ -52,9 +52,7 @@ export function BlogFilter({ initialPosts }: BlogFilterProps) {
 
     // Apply tag filter
     if (filter !== 'all') {
-      list = list.filter((p) =>
-        p.frontmatter.tags?.map((t) => t.toLowerCase()).includes(filter),
-      );
+      list = list.filter((p) => p.frontmatter.tags?.map((t) => t.toLowerCase()).includes(filter));
     }
 
     // Apply search filter

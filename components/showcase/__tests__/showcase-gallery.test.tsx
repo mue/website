@@ -13,14 +13,13 @@ jest.mock('next/image', () => ({
 
 // Mock ShowcaseLightbox component
 jest.mock('../showcase-lightbox', () => ({
-  ShowcaseLightbox: ({ item, onClose }: { item: ShowcaseItem | null; onClose: () => void }) => (
+  ShowcaseLightbox: ({ item, onClose }: { item: ShowcaseItem | null; onClose: () => void }) =>
     item ? (
       <div data-testid="lightbox">
         <button onClick={onClose}>Close</button>
         <p>{item.author}</p>
       </div>
-    ) : null
-  ),
+    ) : null,
 }));
 
 describe('ShowcaseGallery', () => {

@@ -54,7 +54,7 @@ export const showcaseItems: ShowcaseItem[] = [
     author: 'Kağan Can Şit',
     discordUsername: 'kagancansit',
     description: 'Simplistic with powerful quotes',
-    tags: [ 'clean', 'minimal', 'quote pack'],
+    tags: ['clean', 'minimal', 'quote pack'],
     createdAt: '2024-09-15',
   },
   {
@@ -66,7 +66,6 @@ export const showcaseItems: ShowcaseItem[] = [
     tags: ['landscape', 'weather', 'search'],
     createdAt: '2021-08-22',
   },
-
 ];
 
 export function getShowcaseItems(): ShowcaseItem[] {

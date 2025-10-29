@@ -164,9 +164,7 @@ export async function getMarketplaceItem(
   id: string,
 ): Promise<MarketplaceItemDetail> {
   // API now supports ID-based lookup!
-  const payload = await fetchMarketplace<MarketplaceResponse<MarketplaceItemDetail>>(
-    `item/${id}`,
-  );
+  const payload = await fetchMarketplace<MarketplaceResponse<MarketplaceItemDetail>>(`item/${id}`);
   return payload.data;
 }
 

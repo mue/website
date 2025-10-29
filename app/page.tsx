@@ -204,7 +204,8 @@ export default function Home() {
               </div>
               {isMobile && (
                 <p className="mt-3 text-xs text-muted-foreground/70 animate-fade-up animate-delay-500">
-                  Mue is a browser extension for desktop. Visit this site on your computer to get started.
+                  Mue is a browser extension for desktop. Visit this site on your computer to get
+                  started.
                 </p>
               )}
 

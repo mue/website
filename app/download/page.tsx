@@ -75,7 +75,8 @@ const steps = [
   {
     number: 3,
     title: 'Customise your space',
-    description: 'Explore settings to tailor backgrounds, widgets, and more to match your workflow.',
+    description:
+      'Explore settings to tailor backgrounds, widgets, and more to match your workflow.',
   },
 ];
 
@@ -113,7 +114,8 @@ export default function DownloadPage() {
           <div className="mb-8 w-full max-w-3xl rounded-2xl border border-yellow-500/40 bg-yellow-500/10 p-6 text-left backdrop-blur">
             <h3 className="font-semibold text-foreground">⚠️ Device Not Supported</h3>
             <p className="mt-2 text-sm text-muted-foreground">
-              Mue is a browser extension for desktop computers. Due to complications, we are unable to support mobile devices. Please visit this page on your computer to install Mue.
+              Mue is a browser extension for desktop computers. Due to complications, we are unable
+              to support mobile devices. Please visit this page on your computer to install Mue.
             </p>
           </div>
         )}

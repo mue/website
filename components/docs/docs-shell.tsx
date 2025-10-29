@@ -13,13 +13,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import { Button } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import type { TocItem } from '@/lib/docs';
 import { cn } from '@/lib/utils';
 

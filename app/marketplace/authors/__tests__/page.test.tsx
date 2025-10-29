@@ -26,9 +26,7 @@ jest.mock('@/components/marketplace/marketplace-breadcrumb', () => ({
 // Mock Next.js Image component
 jest.mock('next/image', () => ({
   __esModule: true,
-  default: ({ src, alt, ...props }: any) => (
-    <img src={src} alt={alt} {...props} />
-  ),
+  default: ({ src, alt, ...props }: any) => <img src={src} alt={alt} {...props} />,
 }));
 
 // Mock Next.js Link component
@@ -274,12 +272,7 @@ describe('AuthorsPage', () => {
     const { container } = render(page);
 
     const grid = container.querySelector('.grid');
-    expect(grid).toHaveClass(
-      'gap-4',
-      'sm:grid-cols-2',
-      'lg:grid-cols-3',
-      'xl:grid-cols-4'
-    );
+    expect(grid).toHaveClass('gap-4', 'sm:grid-cols-2', 'lg:grid-cols-3', 'xl:grid-cols-4');
   });
 
   it('shows only first 3 content types with +N for more', async () => {

@@ -6,13 +6,7 @@ import type { DocTreeNode, DocMeta } from '@/lib/docs';
 import { DocsSearch } from '@/components/docs/search';
 import { DocsSidebar } from '@/components/docs/sidebar';
 import { Button } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 type DocsMobileMenuProps = {
   tree: DocTreeNode[];

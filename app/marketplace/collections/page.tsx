@@ -4,7 +4,11 @@ import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
 import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
-import { getMarketplaceCollections, getMarketplaceItems, getMarketplaceTypeLabel } from '@/lib/marketplace';
+import {
+  getMarketplaceCollections,
+  getMarketplaceItems,
+  getMarketplaceTypeLabel,
+} from '@/lib/marketplace';
 
 export const metadata: Metadata = {
   title: 'Collections – Marketplace',

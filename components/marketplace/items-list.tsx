@@ -2,7 +2,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import { getMarketplaceTypeLabel, getItemCategory, slugifyAuthor, MarketplaceItemSummary } from '@/lib/marketplace';
+import {
+  getMarketplaceTypeLabel,
+  getItemCategory,
+  slugifyAuthor,
+  MarketplaceItemSummary,
+} from '@/lib/marketplace';
 import { Library as LibraryIcon, Heart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useFavoritesContext } from '@/lib/favorites-context';

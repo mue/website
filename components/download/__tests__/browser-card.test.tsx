@@ -147,7 +147,7 @@ describe('BrowserCard', () => {
       'border-[#FF5C25]/40',
       'bg-[#FF5C25]/20',
       'uppercase',
-      'tracking-wider'
+      'tracking-wider',
     );
   });
 

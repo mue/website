@@ -181,7 +181,9 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
           image={post.frontmatter.image}
           keywords={post.frontmatter.tags}
           wordCount={post.wordCount}
-          timeRequired={post.readingTime ? `PT${/^(\d+)/.exec(post.readingTime)?.[1] || '5'}M` : undefined}
+          timeRequired={
+            post.readingTime ? `PT${/^(\d+)/.exec(post.readingTime)?.[1] || '5'}M` : undefined
+          }
         />
         <BreadcrumbJsonLd
           items={[

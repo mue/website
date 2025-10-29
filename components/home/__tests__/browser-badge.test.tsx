@@ -32,7 +32,7 @@ describe('BrowserBadge', () => {
 
   it('renders icon component', () => {
     const { container } = render(
-      <BrowserBadge name="Safari" icon={FaChrome} url="https://apple.com/safari" />
+      <BrowserBadge name="Safari" icon={FaChrome} url="https://apple.com/safari" />,
     );
 
     const icon = container.querySelector('svg');
@@ -42,7 +42,7 @@ describe('BrowserBadge', () => {
 
   it('displays name and icon together in badge', () => {
     const { container } = render(
-      <BrowserBadge name="Opera" icon={FaChrome} url="https://opera.com" />
+      <BrowserBadge name="Opera" icon={FaChrome} url="https://opera.com" />,
     );
 
     const badge = container.querySelector('.flex.items-center.gap-2');
@@ -52,7 +52,7 @@ describe('BrowserBadge', () => {
 
   it('has hover effects', () => {
     const { container } = render(
-      <BrowserBadge name="Brave" icon={FaChrome} url="https://brave.com" />
+      <BrowserBadge name="Brave" icon={FaChrome} url="https://brave.com" />,
     );
 
     const badge = container.querySelector('span');
@@ -61,7 +61,7 @@ describe('BrowserBadge', () => {
 
   it('has correct text sizing classes', () => {
     const { container } = render(
-      <BrowserBadge name="Vivaldi" icon={FaChrome} url="https://vivaldi.com" />
+      <BrowserBadge name="Vivaldi" icon={FaChrome} url="https://vivaldi.com" />,
     );
 
     const badge = container.querySelector('span');
@@ -70,7 +70,7 @@ describe('BrowserBadge', () => {
 
   it('handles different browser names', () => {
     const { rerender } = render(
-      <BrowserBadge name="Chrome" icon={FaChrome} url="https://chrome.com" />
+      <BrowserBadge name="Chrome" icon={FaChrome} url="https://chrome.com" />,
     );
     expect(screen.getByText('Chrome')).toBeInTheDocument();
 
@@ -80,7 +80,7 @@ describe('BrowserBadge', () => {
 
   it('applies correct styling to badge span', () => {
     const { container } = render(
-      <BrowserBadge name="Test" icon={FaChrome} url="https://test.com" />
+      <BrowserBadge name="Test" icon={FaChrome} url="https://test.com" />,
     );
 
     const badge = container.querySelector('span');
@@ -90,7 +90,7 @@ describe('BrowserBadge', () => {
       'py-2',
       'rounded-full',
       'font-semibold',
-      'text-foreground'
+      'text-foreground',
     );
   });
 });
