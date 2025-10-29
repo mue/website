@@ -6,7 +6,6 @@ jest.mock('next/image', () => ({
   __esModule: true,
   default: ({ onLoad, onError, ...props }: React.ComponentProps<'img'>) => {
     return (
-      // eslint-disable-next-line @next/next/no-img-element, jsx-a11y/alt-text
       <img {...props} onLoad={(e) => onLoad && onLoad(e)} onError={(e) => onError && onError(e)} />
     );
   },

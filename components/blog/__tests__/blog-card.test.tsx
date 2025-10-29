@@ -4,7 +4,6 @@ import { BlogCard, BlogCardPostLike } from '../blog-card';
 // Mock BlogImage component
 jest.mock('../blog-image', () => ({
   BlogImage: ({ src, alt, ...props }: React.ComponentProps<'img'>) => (
-    // eslint-disable-next-line @next/next/no-img-element
     <img src={src} alt={alt} {...props} />
   ),
 }));
