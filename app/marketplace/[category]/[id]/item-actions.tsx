@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { ShareModal } from '@/components/marketplace/share-modal';
 import { useFavoritesContext } from '@/lib/favorites-context';
 import { cn } from '@/lib/utils';
+import Logo from '@/components/logo';
 
 interface ItemActionsProps {
   itemId: string;
@@ -27,6 +28,22 @@ export function ItemActions({ itemId, displayName, description, category }: Item
 
   return (
     <div className="flex flex-col gap-2">
+      <Button
+        variant="default"
+        size="sm"
+        asChild
+        className="flex w-full items-center justify-center gap-2"
+      >
+        <a
+          href={`https://demo.muetab.com/#marketplace/${itemId}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <Logo width={16} height={16} className="h-4 w-4" />
+          Open in Mue
+        </a>
+      </Button>
+
       <Button
         variant={isItemFavorited ? 'default' : 'outline'}
         size="sm"

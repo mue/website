@@ -60,9 +60,11 @@ export function ViewTracker({ itemId, initialViews = 0 }: ViewTrackerProps) {
   if (views === null) return null;
 
   return (
-    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+    <div className="flex items-center gap-3 text-sm text-muted-foreground">
       <Eye className="h-4 w-4" />
-      <span>{views.toLocaleString()} {views === 1 ? 'view' : 'views'}</span>
+      <span>
+        {views.toLocaleString()} {views === 1 ? 'view' : 'views'}
+      </span>
     </div>
   );
 }
