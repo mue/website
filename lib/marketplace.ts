@@ -88,6 +88,15 @@ export function getMarketplaceTypeLabel(type: string): string {
   return MARKETPLACE_TYPE_LABELS[type] ?? type.replace(/_/g, ' ');
 }
 
+export function formatCollectionName(name: string): string {
+  // Replace underscores with spaces and capitalize first letter of each word
+  return name
+    .replace(/_/g, ' ')
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
 // Map API types to URL categories
 export function getItemCategory(type: string): 'packs' | 'presets' {
   if (type === 'preset_settings') return 'presets';

@@ -15,6 +15,9 @@ type BreadcrumbProps =
       collectionName: string;
     }
   | {
+      type: 'collections';
+    }
+  | {
       type: 'item';
       itemType: string;
       itemName: string;
@@ -42,10 +45,18 @@ export function MarketplaceBreadcrumb(props: BreadcrumbProps) {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
 
+        {props.type === 'collections' && (
+          <BreadcrumbItem>
+            <BreadcrumbPage>Collections</BreadcrumbPage>
+          </BreadcrumbItem>
+        )}
+
         {props.type === 'collection' && (
           <>
             <BreadcrumbItem>
-              <BreadcrumbPage>Collections</BreadcrumbPage>
+              <BreadcrumbLink asChild>
+                <Link href="/marketplace/collections">Collections</Link>
+              </BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
