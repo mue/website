@@ -37,11 +37,17 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600; // Revalidate every hour (ISR)
 
-export default async function MarketplacePage() {
+export default async function MarketplacePage({
+  searchParams,
+}: {
+  searchParams?: { embed?: string };
+}) {
   const [collections, items] = await Promise.all([
     getMarketplaceCollections(),
     getMarketplaceItems(),
   ]);
+
+  const isEmbed = searchParams?.embed === 'true';
 
   const highlightCandidates = collections.filter((collection) => collection.img);
 
@@ -61,7 +67,11 @@ export default async function MarketplacePage() {
   });
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-12 px-6 py-12 lg:px-8">
+    <div
+      className={`mx-auto flex w-full max-w-7xl flex-col ${
+        isEmbed ? 'h-screen gap-6 px-4 py-6' : 'min-h-screen gap-12 px-6 py-12 lg:px-8'
+      }`}
+    >
       {/* Preload featured collection images for faster visual stability */}
       {collectionsWithTypes.map((c) =>
         c.img ? (

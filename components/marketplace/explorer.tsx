@@ -19,6 +19,7 @@ import { FeaturedCollectionsSkeleton } from './featured-collections-skeleton';
 import { ItemsGridSkeleton } from './items-grid-skeleton';
 import { FavoritesProvider, useFavoritesContext } from '@/lib/favorites-context';
 import { cn } from '@/lib/utils';
+import { useEmbed } from '@/lib/embed-context';
 
 // Lazy components with explicit webpack comments for better chunk naming
 const FeaturedCollectionsLazy = dynamic(
@@ -85,6 +86,7 @@ function MarketplaceExplorerContent({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { favorites, isFavorite, loaded: favoritesLoaded } = useFavoritesContext();
+  const { isEmbed, sendMessage, config } = useEmbed();
 
   // Create a stable random seed that changes every hour (matching marketplace cache revalidation)
   const randomSeed = useMemo(() => {
@@ -169,13 +171,20 @@ function MarketplaceExplorerContent({
 
   // Hydrate viewMode from localStorage after mount to avoid hydration mismatch
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== 'undefined' && !isEmbed) {
       const stored = window.localStorage.getItem('mkt_view') as 'grid' | 'list' | null;
       if (stored === 'grid' || stored === 'list') {
         setViewMode(stored);
       }
     }
-  }, []);
+  }, [isEmbed]);
+
+  // Apply config from parent when it changes (embed mode)
+  useEffect(() => {
+    if (config.viewMode) setViewMode(config.viewMode);
+    if (config.filters?.type) setTypeFilter(config.filters.type);
+    if (config.filters?.collection) setCollectionFilter(config.filters.collection);
+  }, [config]);
 
   const collectionNameMap = useMemo(() => {
     return new Map(collections.map((collection) => [collection.name, collection.display_name]));
@@ -269,6 +278,16 @@ function MarketplaceExplorerContent({
     showFavoritesOnly,
     isFavorite,
   ]);
+
+  // Send search events in embed mode
+  useEffect(() => {
+    if (isEmbed && query) {
+      sendMessage('marketplace:search', {
+        query,
+        resultsCount: filteredItems.length,
+      });
+    }
+  }, [query, filteredItems.length, isEmbed, sendMessage]);
 
   const resetFilters = () => {
     setQuery('');
@@ -398,6 +417,7 @@ function MarketplaceExplorerContent({
     if (sortBy && sortBy !== 'name-asc') params.set('sort', sortBy);
     if (currentPage && currentPage > 1) params.set('page', String(currentPage));
     if (itemsPerPage !== defaultPerPage) params.set('pp', String(itemsPerPage));
+    if (isEmbed) params.set('embed', 'true');
 
     const qs = params.toString();
     const url = qs ? `${pathname}?${qs}` : pathname;
@@ -415,6 +435,7 @@ function MarketplaceExplorerContent({
     itemsPerPage,
     pathname,
     router,
+    isEmbed,
   ]);
 
   // Reset to page 1 when filters change
@@ -484,7 +505,9 @@ function MarketplaceExplorerContent({
                     event.preventDefault();
                     const suggestion = suggestions[selectedSuggestionIndex];
                     const category = getItemCategory(suggestion.type);
-                    router.push(`/marketplace/${category}/${encodeURIComponent(suggestion.id)}`);
+                    router.push(
+                      `/marketplace/${category}/${encodeURIComponent(suggestion.id)}${isEmbed ? '?embed=true' : ''}`,
+                    );
                   } else if (event.key === 'Escape') {
                     setShowSuggestions(false);
                   }
@@ -520,7 +543,9 @@ function MarketplaceExplorerContent({
                     type="button"
                     onClick={() => {
                       const category = getItemCategory(suggestion.type);
-                      router.push(`/marketplace/${category}/${encodeURIComponent(suggestion.id)}`);
+                      router.push(
+                        `/marketplace/${category}/${encodeURIComponent(suggestion.id)}${isEmbed ? '?embed=true' : ''}`,
+                      );
                       setShowSuggestions(false);
                     }}
                     className={cn(
@@ -560,7 +585,12 @@ function MarketplaceExplorerContent({
               </div>
             )}
           </div>
-          <Link href="/marketplace/create" className="shrink-0">
+          <Link
+            href="/marketplace/create"
+            className="shrink-0"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Button className="gap-2 h-12" size="sm">
               <Plus className="h-4 w-4" />
               <span className="hidden sm:inline">Create Addon</span>
@@ -582,19 +612,20 @@ function MarketplaceExplorerContent({
             <Heart className={`h-3 w-3 ${showFavoritesOnly ? 'fill-current' : ''}`} />
             Favorites {favoritesLoaded && favorites.length > 0 && `(${favorites.length})`}
           </Badge>
-          {availableTypes.map((type) => (
-            <Badge
-              key={type}
-              variant={typeFilter === type ? 'default' : 'outline'}
-              className="cursor-pointer transition hover:bg-primary/10 hover:text-primary"
-              onClick={() => {
-                setTypeFilter(typeFilter === type ? 'all' : type);
-                changePage(1, { scroll: false });
-              }}
-            >
-              {getMarketplaceTypeLabel(type)}
-            </Badge>
-          ))}
+          {!isEmbed &&
+            availableTypes.map((type) => (
+              <Badge
+                key={type}
+                variant={typeFilter === type ? 'default' : 'outline'}
+                className="cursor-pointer transition hover:bg-primary/10 hover:text-primary"
+                onClick={() => {
+                  setTypeFilter(typeFilter === type ? 'all' : type);
+                  changePage(1, { scroll: false });
+                }}
+              >
+                {getMarketplaceTypeLabel(type)}
+              </Badge>
+            ))}
         </div>
 
         {collectionFilter && collectionFilterLabel && (
@@ -616,28 +647,32 @@ function MarketplaceExplorerContent({
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-foreground">Featured Collections</h2>
-                <Link
-                  href="/marketplace/collections"
-                  className="text-sm text-primary hover:underline underline-offset-4 transition"
-                >
-                  View all collections
-                </Link>
+                {!isEmbed && (
+                  <Link
+                    href="/marketplace/collections"
+                    className="text-sm text-primary hover:underline underline-offset-4 transition"
+                  >
+                    View all collections
+                  </Link>
+                )}
               </div>
               <Suspense fallback={<FeaturedCollectionsSkeleton />}>
-                <FeaturedCollectionsLazy randomCollections={randomCollections} />
+                <FeaturedCollectionsLazy randomCollections={randomCollections} isEmbed={isEmbed} />
               </Suspense>
             </div>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <h2 className="text-xl font-semibold text-foreground">Browse by Author</h2>
-                <Link
-                  href="/marketplace/authors"
-                  className="text-sm text-primary hover:underline underline-offset-4 transition"
-                >
-                  View all authors
-                </Link>
+            {!isEmbed && (
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-xl font-semibold text-foreground">Browse by Author</h2>
+                  <Link
+                    href="/marketplace/authors"
+                    className="text-sm text-primary hover:underline underline-offset-4 transition"
+                  >
+                    View all authors
+                  </Link>
+                </div>
               </div>
-            </div>
+            )}
           </>
         )}
 
@@ -701,36 +736,38 @@ function MarketplaceExplorerContent({
                   </SelectContent>
                 </Select>
               </div>
-              <div className="flex items-center gap-2">
-                <label
-                  className="hidden sm:inline text-sm font-medium text-muted-foreground"
-                  htmlFor="type-filter"
-                >
-                  Type
-                </label>
-                <Select
-                  value={typeFilter}
-                  onValueChange={(val) => {
-                    setTypeFilter(val);
-                    changePage(1, { scroll: false });
-                  }}
-                >
-                  <SelectTrigger
-                    id="type-filter"
-                    className="w-32 sm:w-auto rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+              {!isEmbed && (
+                <div className="flex items-center gap-2">
+                  <label
+                    className="hidden sm:inline text-sm font-medium text-muted-foreground"
+                    htmlFor="type-filter"
                   >
-                    <SelectValue placeholder="All" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="all">All</SelectItem>
-                    {availableTypes.map((type) => (
-                      <SelectItem key={type} value={type}>
-                        {getMarketplaceTypeLabel(type)}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
+                    Type
+                  </label>
+                  <Select
+                    value={typeFilter}
+                    onValueChange={(val) => {
+                      setTypeFilter(val);
+                      changePage(1, { scroll: false });
+                    }}
+                  >
+                    <SelectTrigger
+                      id="type-filter"
+                      className="w-32 sm:w-auto rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                    >
+                      <SelectValue placeholder="All" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="all">All</SelectItem>
+                      {availableTypes.map((type) => (
+                        <SelectItem key={type} value={type}>
+                          {getMarketplaceTypeLabel(type)}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
               <div className="flex items-center gap-2">
                 <label
                   className="hidden sm:inline text-sm font-medium text-muted-foreground"
@@ -867,7 +904,7 @@ function MarketplaceExplorerContent({
           )}
         </div>
       </section>
-      {showBackToTop && (
+      {showBackToTop && !isEmbed && (
         <button
           type="button"
           onClick={() => {

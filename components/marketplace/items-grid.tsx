@@ -12,6 +12,7 @@ import {
 import { Library as LibraryIcon, Heart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useFavoritesContext } from '@/lib/favorites-context';
+import { useEmbed } from '@/lib/embed-context';
 
 interface ItemsGridProps {
   items: MarketplaceItemSummary[];
@@ -21,13 +22,22 @@ interface ItemsGridProps {
 export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) {
   const router = useRouter();
   const { toggleFavorite, isFavorite } = useFavoritesContext();
+  const { isEmbed } = useEmbed();
   return (
-    <div className="grid gap-3 grid-cols-2 sm:gap-4 lg:grid-cols-3">
+    <div
+      className={cn(
+        'grid gap-3 grid-cols-2 sm:gap-4',
+        isEmbed ? 'lg:grid-cols-4' : 'lg:grid-cols-3',
+      )}
+    >
       {items.map((item) => (
         <Link
           key={item.id || `${item.type}-${item.name}`}
-          href={`/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`}
-          className="group relative flex h-full cursor-pointer flex-col gap-3 overflow-hidden rounded-2xl border border-border bg-card/70 p-4 lg:gap-4 lg:p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
+          href={`/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}${isEmbed ? '?embed=true' : ''}`}
+          className={cn(
+            'group relative flex h-full cursor-pointer flex-col gap-3 overflow-hidden rounded-2xl border border-border bg-card/70 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md',
+            isEmbed ? 'p-3 lg:p-4' : 'p-4 lg:gap-4 lg:p-6',
+          )}
         >
           <button
             type="button"
@@ -49,7 +59,12 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
             />
           </button>
           <div className="flex items-center justify-center lg:justify-start">
-            <div className="relative h-16 w-16 lg:h-20 lg:w-20 flex-shrink-0 overflow-hidden rounded-xl border border-border/60 bg-muted aspect-square">
+            <div
+              className={cn(
+                'relative flex-shrink-0 overflow-hidden rounded-xl border border-border/60 bg-muted aspect-square',
+                isEmbed ? 'h-12 w-12 lg:h-16 lg:w-16' : 'h-16 w-16 lg:h-20 lg:w-20',
+              )}
+            >
               {item.icon_url ? (
                 <Image
                   src={item.icon_url}
@@ -80,7 +95,9 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
                     event.preventDefault();
                     event.stopPropagation();
                     if (item.author) {
-                      router.push(`/marketplace/author/${slugifyAuthor(item.author)}`);
+                      router.push(
+                        `/marketplace/author/${slugifyAuthor(item.author)}${isEmbed ? '?embed=true' : ''}`,
+                      );
                     }
                   }}
                   className="hover:text-primary hover:underline transition cursor-pointer"
@@ -97,7 +114,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
               onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                router.push(`/marketplace?type=${item.type}`);
+                router.push(`/marketplace?type=${item.type}${isEmbed ? '&embed=true' : ''}`);
               }}
               className={cn(
                 'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
@@ -115,7 +132,9 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
                     onClick={(event) => {
                       event.preventDefault();
                       event.stopPropagation();
-                      router.push(`/marketplace/collection/${encodeURIComponent(collection)}`);
+                      router.push(
+                        `/marketplace/collection/${encodeURIComponent(collection)}${isEmbed ? '?embed=true' : ''}`,
+                      );
                     }}
                     className={cn(
                       'flex cursor-pointer flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',

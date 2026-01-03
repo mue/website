@@ -18,9 +18,10 @@ interface ShareModalProps {
   title: string;
   description?: string;
   trigger?: React.ReactNode;
+  isEmbed?: boolean;
 }
 
-export function ShareModal({ url, title, description, trigger }: ShareModalProps) {
+export function ShareModal({ url, title, description, trigger, isEmbed = false }: ShareModalProps) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -84,7 +85,7 @@ export function ShareModal({ url, title, description, trigger }: ShareModalProps
           </Button>
         )}
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className={isEmbed ? 'top-[10%] translate-y-0' : ''}>
         <DialogHeader className="text-left">
           <DialogTitle>Share this item</DialogTitle>
           <DialogDescription className="line-clamp-2">

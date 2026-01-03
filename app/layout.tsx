@@ -4,11 +4,9 @@ import type { Metadata } from 'next';
 import { Alfa_Slab_One, Inter, Lexend_Deca } from 'next/font/google';
 import Script from 'next/script';
 
-import Footer from '@/components/footer';
-import Navbar from '@/components/navbar';
-import { ScrollToTop } from '@/components/scroll-to-top';
 import { ThemeProvider } from '@/components/theme-provider';
 import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/json-ld';
+import { EmbedProvider, EmbedLayoutWrapper } from '@/lib/embed-context';
 
 const lexendDeca = Lexend_Deca({
   variable: '--font-lexend-deca',
@@ -99,16 +97,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <ScrollToTop />
-          <div className="flex min-h-screen flex-col">
-            <header className="sticky top-0 z-50">
-              <div className="mx-auto w-full max-w-7xl px-6 py-4 lg:px-12">
-                <Navbar />
-              </div>
-            </header>
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </div>
+          <EmbedProvider>
+            <EmbedLayoutWrapper>{children}</EmbedLayoutWrapper>
+          </EmbedProvider>
         </ThemeProvider>
         <Script
           src="https://static.cloudflareinsights.com/beacon.min.js"

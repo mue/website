@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import { Badge } from '@/components/ui/badge';
 import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
+import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
 import { getMarketplaceItems, getMarketplaceTypeLabel, slugifyAuthor } from '@/lib/marketplace';
 import { User } from 'lucide-react';
 
@@ -24,7 +25,13 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600; // Revalidate every hour (ISR)
 
-export default async function AuthorsPage() {
+export default async function AuthorsPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ embed?: string }>;
+}) {
+  const sp = await searchParams;
+  const isEmbed = sp?.embed === 'true';
   const items = await getMarketplaceItems();
 
   // Group items by author
@@ -59,8 +66,18 @@ export default async function AuthorsPage() {
   });
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-6 py-12 lg:px-8">
-      <MarketplaceBreadcrumb type="authors" />
+    <div
+      className={`mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 ${
+        isEmbed ? 'px-4 py-6' : 'px-6 py-12 lg:px-8'
+      }`}
+    >
+      {!isEmbed && <MarketplaceBreadcrumb type="authors" />}
+      <BreadcrumbTracker
+        breadcrumbs={[
+          { label: 'Marketplace', href: '/marketplace' },
+          { label: 'Authors' },
+        ]}
+      />
 
       <header className="space-y-3">
         <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">

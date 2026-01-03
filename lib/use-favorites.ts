@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { useEmbed } from './embed-context';
 
 type FavoriteItem = {
   type: string;
@@ -10,6 +11,7 @@ type FavoriteItem = {
 export function useFavorites() {
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
   const [loaded, setLoaded] = useState(false);
+  const { isEmbed, sendMessage } = useEmbed();
 
   useEffect(() => {
     try {
@@ -29,6 +31,15 @@ export function useFavorites() {
       const newFavorites = exists
         ? prev.filter((f) => !(f.type === type && f.name === name))
         : [...prev, { type, name }];
+
+      // Send postMessage event in embed mode
+      if (isEmbed) {
+        sendMessage('marketplace:favorite:toggle', {
+          id: name,
+          type,
+          isFavorited: !exists,
+        });
+      }
 
       try {
         window.localStorage.setItem('mkt_favorites', JSON.stringify(newFavorites));

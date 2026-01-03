@@ -28,6 +28,7 @@ import {
 } from '@/lib/marketplace';
 import { ItemActions } from './item-actions';
 import { ViewTracker } from './view-tracker';
+import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
 import { PresetSettingsTable } from '@/components/marketplace/preset-settings-table';
 import { QuotesTable } from '@/components/marketplace/quotes-table';
 import { PhotoGallery } from '@/components/marketplace/photo-gallery';
@@ -43,6 +44,7 @@ type MarketplaceItemPageProps = {
     category: string;
     id: string;
   }>;
+  searchParams?: Promise<{ embed?: string }>;
 };
 
 async function resolveItem(
@@ -154,8 +156,13 @@ function parseDescription(description: string) {
   });
 }
 
-export default async function MarketplaceItemPage({ params }: MarketplaceItemPageProps) {
+export default async function MarketplaceItemPage({
+  params,
+  searchParams,
+}: MarketplaceItemPageProps) {
   const { category, id } = await params;
+  const sp = await searchParams;
+  const isEmbed = sp?.embed === 'true';
   const data = await resolveItem(category as 'packs' | 'presets', id);
 
   // Get related items
@@ -216,7 +223,11 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
 
   return (
     <FavoritesProvider>
-      <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-6 py-12 lg:px-8">
+      <div
+        className={`mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 ${
+          isEmbed ? 'px-4 py-6' : 'px-6 py-12 lg:px-8'
+        }`}
+      >
         <ProductJsonLd
           name={data.display_name}
           description={data.description}
@@ -247,7 +258,19 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
             },
           ]}
         />
-        <MarketplaceBreadcrumb type="item" itemType={data.type!} itemName={data.display_name} />
+        {!isEmbed && (
+          <MarketplaceBreadcrumb type="item" itemType={data.type!} itemName={data.display_name} />
+        )}
+        <BreadcrumbTracker
+          breadcrumbs={[
+            { label: 'Marketplace', href: '/marketplace' },
+            {
+              label: data.type?.replace(/_/g, ' ') || 'Item',
+              href: `/marketplace?type=${data.type}${isEmbed ? '&embed=true' : ''}`,
+            },
+            { label: data.display_name },
+          ]}
+        />
 
         <div className="grid gap-6 lg:grid-cols-[340px_1fr] lg:gap-8">
           {/* Left Column - Info */}
@@ -275,14 +298,18 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
 
                   <div className="space-y-2">
                     <h1 className="text-2xl font-bold tracking-tight">{data.display_name}</h1>
-                    <Link href={`/marketplace?type=${data.type}`}>
-                      <Badge
-                        variant="secondary"
-                        className="cursor-pointer text-xs capitalize transition hover:bg-primary/10 hover:text-primary"
+                    {!isEmbed && (
+                      <Link
+                        href={`/marketplace?type=${data.type}${isEmbed ? '&embed=true' : ''}`}
                       >
-                        {data.type!.replace(/_/g, ' ')}
-                      </Badge>
-                    </Link>
+                        <Badge
+                          variant="secondary"
+                          className="cursor-pointer text-xs capitalize transition hover:bg-primary/10 hover:text-primary"
+                        >
+                          {data.type!.replace(/_/g, ' ')}
+                        </Badge>
+                      </Link>
+                    )}
                   </div>
                 </div>
 
@@ -294,7 +321,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                     <div className="flex items-center gap-3 text-muted-foreground">
                       <User className="h-4 w-4" />
                       <Link
-                        href={`/marketplace/author/${slugifyAuthor(data.author)}`}
+                        href={`/marketplace/author/${slugifyAuthor(data.author)}${isEmbed ? '?embed=true' : ''}`}
                         className="hover:text-primary hover:underline transition"
                       >
                         {data.author}
@@ -334,7 +361,12 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                     </div>
                   )}
 
-                  <ViewTracker itemId={id} initialViews={data.views} />
+                  <ViewTracker
+                    itemId={id}
+                    initialViews={data.views}
+                    itemType={data.type}
+                    itemDisplayName={data.display_name}
+                  />
                 </div>
 
                 {data.description && (
@@ -353,6 +385,8 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                   displayName={data.display_name}
                   description={data.description}
                   category={category}
+                  itemType={data.type}
+                  itemData={data}
                 />
               </div>
 
@@ -366,7 +400,7 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
                     {data.in_collections.map((collection) => (
                       <Link
                         key={collection.name}
-                        href={`/marketplace/collection/${encodeURIComponent(collection.name)}`}
+                        href={`/marketplace/collection/${encodeURIComponent(collection.name)}${isEmbed ? '?embed=true' : ''}`}
                       >
                         <Badge
                           variant="outline"
@@ -607,14 +641,18 @@ export default async function MarketplaceItemPage({ params }: MarketplaceItemPag
             </div>
           </>
         )}
-        <Separator className="my-2" />
+        {!isEmbed && (
+          <>
+            <Separator className="my-2" />
 
-        <p className="text-center text-sm text-muted-foreground">
-          Want to contribute?{' '}
-          <Link href="https://github.com/mue" className="font-medium text-primary hover:underline">
-            Visit Mue on GitHub
-          </Link>
-        </p>
+            <p className="text-center text-sm text-muted-foreground">
+              Want to contribute?{' '}
+              <Link href="https://github.com/mue" className="font-medium text-primary hover:underline">
+                Visit Mue on GitHub
+              </Link>
+            </p>
+          </>
+        )}
       </div>
     </FavoritesProvider>
   );
