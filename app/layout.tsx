@@ -3,6 +3,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Alfa_Slab_One, Inter, Lexend_Deca } from 'next/font/google';
 import Script from 'next/script';
+import { Suspense } from 'react';
 
 import { ThemeProvider } from '@/components/theme-provider';
 import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/json-ld';
@@ -97,9 +98,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <EmbedProvider>
-            <EmbedLayoutWrapper>{children}</EmbedLayoutWrapper>
-          </EmbedProvider>
+          <Suspense fallback={null}>
+            <EmbedProvider>
+              <EmbedLayoutWrapper>{children}</EmbedLayoutWrapper>
+            </EmbedProvider>
+          </Suspense>
         </ThemeProvider>
         <Script
           src="https://static.cloudflareinsights.com/beacon.min.js"
