@@ -89,7 +89,7 @@ export default async function CollectionsPage({
         {sortedCollections.map((collection) => (
           <Link
             key={collection.name}
-            href={`/marketplace/collection/${encodeURIComponent(collection.name)}`}
+            href={`/marketplace/collection/${encodeURIComponent(collection.name)}${isEmbed ? '?embed=true' : ''}`}
             className="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-card/70 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
           >
             <div className="relative aspect-[4/3] w-full overflow-hidden">

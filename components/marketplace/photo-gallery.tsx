@@ -11,6 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import { useEmbed } from '@/lib/embed-context';
 
 type Photo = {
   url?: Record<string, string>;
@@ -24,13 +25,45 @@ type PhotoGalleryProps = {
 };
 
 export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
+  const { isEmbed, sendMessage } = useEmbed();
   const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
+  console.log('[PhotoGallery] isEmbed:', isEmbed);
+
   const openLightbox = (index: number) => {
+    console.log('[PhotoGallery] openLightbox called, index:', index, 'isEmbed:', isEmbed);
+    // In embed mode, send postMessage instead of opening lightbox
+    if (isEmbed) {
+      const photo = photos[index];
+      const photoUrl = photo?.url?.default ?? Object.values(photo?.url ?? {})[0];
+      
+      const payload = {
+        action: 'open',
+        index,
+        photo: {
+          url: photoUrl,
+          photographer: photo?.photographer,
+          location: photo?.location,
+          alt: photo?.location ?? photo?.photographer ?? itemName,
+        },
+        photos: photos.map((p) => ({
+          url: p.url?.default ?? Object.values(p.url ?? {})[0],
+          photographer: p.photographer,
+          location: p.location,
+          alt: p.location ?? p.photographer ?? itemName,
+        })),
+        totalCount: photos.length,
+      };
+      
+      console.log('[PhotoGallery] Sending lightbox message:', payload);
+      sendMessage('marketplace:lightbox', payload);
+      return;
+    }
+    
     setLightboxIndex(index);
     setLightboxOpen(true);
   };
@@ -217,8 +250,8 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
         </div>
       )}
 
-      {/* Lightbox Modal */}
-      {lightboxOpen && currentPhotoUrl && (
+      {/* Lightbox Modal - Only render in normal mode (not embed) */}
+      {!isEmbed && lightboxOpen && currentPhotoUrl && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-2 sm:p-4"
           onClick={closeLightbox}
