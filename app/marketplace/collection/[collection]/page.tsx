@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
+import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
 import { NoCollectionItemsEmptyState } from '@/components/marketplace/empty-state';
 import { getMarketplaceCollection, type MarketplaceCollectionDetail } from '@/lib/marketplace';
 import { FavoritesProvider } from '@/lib/favorites-context';
@@ -17,6 +18,7 @@ type MarketplaceCollectionPageProps = {
   params: Promise<{
     collection: string;
   }>;
+  searchParams?: Promise<{ embed?: string }>;
 };
 
 async function resolveCollection(name: string): Promise<MarketplaceCollectionDetail> {
@@ -64,8 +66,11 @@ export async function generateMetadata({
 
 export default async function MarketplaceCollectionPage({
   params,
+  searchParams,
 }: MarketplaceCollectionPageProps) {
   const { collection } = await params;
+  const sp = await searchParams;
+  const isEmbed = sp?.embed === 'true';
   const data = await resolveCollection(collection);
 
   const items = data.items ?? [];
@@ -76,8 +81,19 @@ export default async function MarketplaceCollectionPage({
 
   return (
     <FavoritesProvider>
-      <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-6 py-12 lg:px-8">
-        <MarketplaceBreadcrumb type="collection" collectionName={data.display_name} />
+      <div
+        className={`mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 ${
+          isEmbed ? 'px-4 py-6' : 'px-6 py-12 lg:px-8'
+        }`}
+      >
+        {!isEmbed && <MarketplaceBreadcrumb type="collection" collectionName={data.display_name} />}
+        <BreadcrumbTracker
+          breadcrumbs={[
+            { label: 'Marketplace', href: '/marketplace' },
+            { label: 'Collections', href: `/marketplace/collections${isEmbed ? '?embed=true' : ''}` },
+            { label: data.display_name },
+          ]}
+        />
 
         <header className="overflow-hidden rounded-3xl border border-border bg-card/80 shadow-sm">
           <div className="grid gap-8 lg:grid-cols-[2fr_3fr]">

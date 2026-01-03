@@ -11,6 +11,7 @@ import {
 import { Library as LibraryIcon, Heart } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useFavoritesContext } from '@/lib/favorites-context';
+import { useEmbed } from '@/lib/embed-context';
 
 interface ItemsListProps {
   items: MarketplaceItemSummary[];
@@ -20,12 +21,13 @@ interface ItemsListProps {
 export default function ItemsList({ items, collectionNameMap }: ItemsListProps) {
   const router = useRouter();
   const { toggleFavorite, isFavorite } = useFavoritesContext();
+  const { isEmbed } = useEmbed();
   return (
     <div className="space-y-3">
       {items.map((item) => (
         <Link
           key={item.id || `${item.type}-${item.name}`}
-          href={`/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`}
+          href={`/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}${isEmbed ? '?embed=true' : ''}`}
           className="group relative flex cursor-pointer flex-row items-center gap-4 overflow-hidden rounded-xl border border-border bg-card/70 p-4 shadow-sm transition hover:border-primary/40 hover:shadow-md"
         >
           <button
@@ -77,7 +79,9 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
                     event.preventDefault();
                     event.stopPropagation();
                     if (item.author) {
-                      router.push(`/marketplace/author/${slugifyAuthor(item.author)}`);
+                      router.push(
+                        `/marketplace/author/${slugifyAuthor(item.author)}${isEmbed ? '?embed=true' : ''}`,
+                      );
                     }
                   }}
                   className="hover:text-primary hover:underline transition"
@@ -94,7 +98,7 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
               onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                router.push(`/marketplace?type=${item.type}`);
+                router.push(`/marketplace?type=${item.type}${isEmbed ? '&embed=true' : ''}`);
               }}
               className={cn(
                 'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
@@ -112,7 +116,9 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
                     onClick={(event) => {
                       event.preventDefault();
                       event.stopPropagation();
-                      router.push(`/marketplace/collection/${encodeURIComponent(collection)}`);
+                      router.push(
+                        `/marketplace/collection/${encodeURIComponent(collection)}${isEmbed ? '?embed=true' : ''}`,
+                      );
                     }}
                     className={cn(
                       'flex cursor-pointer flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',

@@ -8,6 +8,7 @@ import {
   type MarketplaceItemSummary,
 } from '@/lib/marketplace';
 import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
+import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
 import ItemsGrid from '@/components/marketplace/items-grid';
 import { FavoritesProvider } from '@/lib/favorites-context';
 
@@ -17,6 +18,7 @@ type AuthorPageProps = {
   params: Promise<{
     author: string;
   }>;
+  searchParams?: Promise<{ embed?: string }>;
 };
 
 async function getAuthorItems(authorSlug: string): Promise<MarketplaceItemSummary[]> {
@@ -43,8 +45,10 @@ export async function generateMetadata({ params }: AuthorPageProps): Promise<Met
   };
 }
 
-export default async function AuthorPage({ params }: AuthorPageProps) {
+export default async function AuthorPage({ params, searchParams }: AuthorPageProps) {
   const { author } = await params;
+  const sp = await searchParams;
+  const isEmbed = sp?.embed === 'true';
   const items = await getAuthorItems(author);
 
   if (items.length === 0) {
@@ -59,8 +63,19 @@ export default async function AuthorPage({ params }: AuthorPageProps) {
 
   return (
     <FavoritesProvider>
-      <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 px-6 py-12 lg:px-8">
-        <MarketplaceBreadcrumb type="author" authorName={authorName} />
+      <div
+        className={`mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-6 ${
+          isEmbed ? 'px-4 py-6' : 'px-6 py-12 lg:px-8'
+        }`}
+      >
+        {!isEmbed && <MarketplaceBreadcrumb type="author" authorName={authorName} />}
+        <BreadcrumbTracker
+          breadcrumbs={[
+            { label: 'Marketplace', href: '/marketplace' },
+            { label: 'Authors', href: `/marketplace/authors${isEmbed ? '?embed=true' : ''}` },
+            { label: authorName },
+          ]}
+        />
 
         <div className="flex items-center gap-4">
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">

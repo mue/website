@@ -2,16 +2,25 @@
 
 import { useEffect, useState } from 'react';
 import { Eye } from 'lucide-react';
+import { useEmbed } from '@/lib/embed-context';
 
 interface ViewTrackerProps {
   itemId: string;
   initialViews?: number;
+  itemType?: string;
+  itemDisplayName?: string;
 }
 
-export function ViewTracker({ itemId, initialViews = 0 }: ViewTrackerProps) {
+export function ViewTracker({
+  itemId,
+  initialViews = 0,
+  itemType,
+  itemDisplayName,
+}: ViewTrackerProps) {
   const [views, setViews] = useState<number | null>(initialViews || null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasTracked, setHasTracked] = useState(false);
+  const { isEmbed, sendMessage } = useEmbed();
 
   useEffect(() => {
     // Only track once per page load
@@ -44,7 +53,16 @@ export function ViewTracker({ itemId, initialViews = 0 }: ViewTrackerProps) {
 
     trackView();
     setHasTracked(true);
-  }, [itemId, hasTracked]);
+
+    // Send postMessage event in embed mode
+    if (isEmbed && itemType && itemDisplayName) {
+      sendMessage('marketplace:item:view', {
+        id: itemId,
+        type: itemType,
+        displayName: itemDisplayName,
+      });
+    }
+  }, [itemId, hasTracked, isEmbed, sendMessage, itemType, itemDisplayName]);
 
   // Show skeleton while loading
   if (isLoading) {
