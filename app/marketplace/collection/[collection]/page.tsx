@@ -164,6 +164,8 @@ export default async function MarketplaceCollectionPage({
           Want to expand this collection? Contribute on the{' '}
           <Link
             href="https://github.com/mue/marketplace"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-primary underline-offset-4 hover:underline"
           >
             Mue GitHub
