@@ -44,7 +44,7 @@ type MarketplaceItemPageProps = {
     category: string;
     id: string;
   }>;
-  searchParams?: Promise<{ embed?: string }>;
+  searchParams?: Promise<{ embed?: string; preview?: string }>;
 };
 
 async function resolveItem(
@@ -99,7 +99,7 @@ export async function generateMetadata({ params }: MarketplaceItemPageProps): Pr
         description:
           data.description ?? `Learn more about ${data.display_name} on the Mue marketplace.`,
         type: 'website',
-        url: `https://mue.app/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
+        url: `https://muetab.com/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
           data.id,
         )}`,
       },
@@ -163,6 +163,16 @@ export default async function MarketplaceItemPage({
   const { category, id } = await params;
   const sp = await searchParams;
   const isEmbed = sp?.embed === 'true';
+  const isPreview = sp?.preview === 'true';
+
+  // Helper to build URLs with embed/preview params preserved
+  const buildEmbedUrl = (path: string, hasExistingParams = false) => {
+    if (!isEmbed) return path;
+    const separator = hasExistingParams ? '&' : '?';
+    const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
+    return `${path}${separator}${params}`;
+  };
+
   const data = await resolveItem(category as 'packs' | 'presets', id);
 
   // Get related items
@@ -266,7 +276,7 @@ export default async function MarketplaceItemPage({
             { label: 'Marketplace', href: '/marketplace' },
             {
               label: data.type?.replace(/_/g, ' ') || 'Item',
-              href: `/marketplace?type=${data.type}${isEmbed ? '&embed=true' : ''}`,
+              href: buildEmbedUrl(`/marketplace?type=${data.type}`, true),
             },
             { label: data.display_name },
           ]}
@@ -300,7 +310,7 @@ export default async function MarketplaceItemPage({
                     <h1 className="text-2xl font-bold tracking-tight">{data.display_name}</h1>
                     {!isEmbed && (
                       <Link
-                        href={`/marketplace?type=${data.type}${isEmbed ? '&embed=true' : ''}`}
+                        href={buildEmbedUrl(`/marketplace?type=${data.type}`, true)}
                       >
                         <Badge
                           variant="secondary"
@@ -321,7 +331,7 @@ export default async function MarketplaceItemPage({
                     <div className="flex items-center gap-3 text-muted-foreground">
                       <User className="h-4 w-4" />
                       <Link
-                        href={`/marketplace/author/${slugifyAuthor(data.author)}${isEmbed ? '?embed=true' : ''}`}
+                        href={buildEmbedUrl(`/marketplace/author/${slugifyAuthor(data.author)}`)}
                         className="hover:text-primary hover:underline transition"
                       >
                         {data.author}
@@ -387,6 +397,7 @@ export default async function MarketplaceItemPage({
                   category={category}
                   itemType={data.type}
                   itemData={data}
+                  isPreview={isPreview}
                 />
               </div>
 
@@ -400,7 +411,7 @@ export default async function MarketplaceItemPage({
                     {data.in_collections.map((collection) => (
                       <Link
                         key={collection.name}
-                        href={`/marketplace/collection/${encodeURIComponent(collection.name)}${isEmbed ? '?embed=true' : ''}`}
+                        href={buildEmbedUrl(`/marketplace/collection/${encodeURIComponent(collection.name)}`)}
                       >
                         <Badge
                           variant="outline"

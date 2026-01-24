@@ -13,6 +13,7 @@ import {
 import Autoplay from 'embla-carousel-autoplay';
 import { getMarketplaceTypeLabel, MarketplaceCollection } from '@/lib/marketplace';
 import { cn } from '@/lib/utils';
+import { useEmbed } from '@/lib/embed-context';
 
 type CollectionWithTypes = MarketplaceCollection & { contentTypes: string[] };
 
@@ -21,7 +22,9 @@ interface FeaturedCollectionsProps {
   isEmbed?: boolean;
 }
 
-export default function FeaturedCollections({ randomCollections, isEmbed = false }: FeaturedCollectionsProps) {
+export default function FeaturedCollections({ randomCollections, isEmbed: isEmbedProp = false }: FeaturedCollectionsProps) {
+  const { isEmbed: isEmbedContext, buildEmbedUrl } = useEmbed();
+  const isEmbed = isEmbedProp || isEmbedContext;
   if (!randomCollections.length) return null;
   return (
     <Carousel
@@ -90,7 +93,7 @@ export default function FeaturedCollections({ randomCollections, isEmbed = false
                   </div>
                   <div className="mt-auto flex items-center gap-3">
                     <Link
-                      href={`/marketplace/collection/${encodeURIComponent(collection.name)}${isEmbed ? '?embed=true' : ''}`}
+                      href={buildEmbedUrl(`/marketplace/collection/${encodeURIComponent(collection.name)}`)}
                       className={cn(
                         "cursor-pointer rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90",
                         isEmbed && "px-3 py-1.5 text-xs"
