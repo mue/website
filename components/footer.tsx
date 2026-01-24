@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Github, Twitter } from 'lucide-react';
+import { Github } from 'lucide-react';
+import { FaXTwitter } from 'react-icons/fa6';
 import { useEffect, useState } from 'react';
 import Logo from './logo';
 import { ThemeToggle } from './theme-toggle';
@@ -23,7 +24,6 @@ const footerLinks = {
   ],
   Community: [
     { name: 'Join Discord', href: 'https://discord.gg/zv8C9F8' },
-    { name: 'Twitter', href: 'https://twitter.com/getmue' },
     { name: 'Showcase', href: '/showcase' },
     { name: 'Contribute Addon', href: '/marketplace/create' },
     { name: 'Contact', href: '/contact' },
@@ -121,13 +121,13 @@ export default function Footer() {
                 <span className="sr-only">GitHub</span>
               </Link>
               <Link
-                href="https://twitter.com/getmue"
+                href="https://x.com/getmue"
                 target="_blank"
                 rel="noreferrer"
                 className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border bg-muted/50 text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
               >
-                <Twitter className="h-4 w-4" />
-                <span className="sr-only">Twitter</span>
+                <FaXTwitter className="h-4 w-4" />
+                <span className="sr-only">X (formerly Twitter)</span>
               </Link>
               <ThemeToggle />
             </div>

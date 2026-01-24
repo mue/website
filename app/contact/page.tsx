@@ -45,10 +45,10 @@ const contactMethods = [
     external: false,
   },
   {
-    href: 'https://twitter.com/getmue',
+    href: 'https://x.com/getmue',
     icon: FaXTwitter,
     title: 'X (formerly Twitter)',
-    description: 'Follow us on Twitter for the latest updates, announcements, and news about Mue.',
+    description: 'Follow us on X for the latest updates, announcements, and news about Mue.',
     external: true,
   },
 ];
