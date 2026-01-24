@@ -8,8 +8,10 @@ import Footer from '@/components/footer';
 
 type EmbedContextType = {
   isEmbed: boolean;
+  isPreview: boolean;
   sendMessage: (type: string, payload: any) => void;
   config: EmbedConfig;
+  buildEmbedUrl: (path: string, hasExistingParams?: boolean) => string;
 };
 
 type EmbedConfig = {
@@ -24,7 +26,30 @@ export function EmbedProvider({ children }: { children: ReactNode }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const isEmbed = searchParams?.get('embed') === 'true';
+  const isPreview = searchParams?.get('preview') === 'true';
+  const themeParam = searchParams?.get('theme') as 'light' | 'dark' | 'system' | null;
   const [config, setConfig] = useState<EmbedConfig>({});
+
+  // Helper to build URLs with embed/preview/theme params preserved
+  const buildEmbedUrl = (path: string, hasExistingParams = false) => {
+    if (!isEmbed) return path;
+    const separator = hasExistingParams ? '&' : '?';
+    const params = [];
+    params.push('embed=true');
+    if (isPreview) params.push('preview=true');
+    if (themeParam) params.push(`theme=${themeParam}`);
+    return `${path}${separator}${params.join('&')}`;
+  };
+
+  // Apply theme from URL parameter on mount
+  useEffect(() => {
+    if (isEmbed && themeParam && typeof window !== 'undefined') {
+      const themeEvent = new CustomEvent('embed-theme-change', {
+        detail: { theme: themeParam },
+      });
+      window.dispatchEvent(themeEvent);
+    }
+  }, [isEmbed, themeParam]);
 
   // Send ready message when embed mode is initialized
   useEffect(() => {
@@ -72,7 +97,7 @@ export function EmbedProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <EmbedContext.Provider value={{ isEmbed, sendMessage, config }}>
+    <EmbedContext.Provider value={{ isEmbed, isPreview, sendMessage, config, buildEmbedUrl }}>
       {children}
     </EmbedContext.Provider>
   );

@@ -21,13 +21,13 @@ interface ItemsListProps {
 export default function ItemsList({ items, collectionNameMap }: ItemsListProps) {
   const router = useRouter();
   const { toggleFavorite, isFavorite } = useFavoritesContext();
-  const { isEmbed } = useEmbed();
+  const { isEmbed, buildEmbedUrl } = useEmbed();
   return (
     <div className="space-y-3">
       {items.map((item) => (
         <Link
           key={item.id || `${item.type}-${item.name}`}
-          href={`/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}${isEmbed ? '?embed=true' : ''}`}
+          href={buildEmbedUrl(`/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`)}
           className="group relative flex cursor-pointer flex-row items-center gap-4 overflow-hidden rounded-xl border border-border bg-card/70 p-4 shadow-sm transition hover:border-primary/40 hover:shadow-md"
         >
           <button
@@ -80,7 +80,7 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
                     event.stopPropagation();
                     if (item.author) {
                       router.push(
-                        `/marketplace/author/${slugifyAuthor(item.author)}${isEmbed ? '?embed=true' : ''}`,
+                        buildEmbedUrl(`/marketplace/author/${slugifyAuthor(item.author)}`),
                       );
                     }
                   }}
@@ -98,7 +98,7 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
               onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                router.push(`/marketplace?type=${item.type}${isEmbed ? '&embed=true' : ''}`);
+                router.push(buildEmbedUrl(`/marketplace?type=${item.type}`, true));
               }}
               className={cn(
                 'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
@@ -117,7 +117,7 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
                       event.preventDefault();
                       event.stopPropagation();
                       router.push(
-                        `/marketplace/collection/${encodeURIComponent(collection)}${isEmbed ? '?embed=true' : ''}`,
+                        buildEmbedUrl(`/marketplace/collection/${encodeURIComponent(collection)}`),
                       );
                     }}
                     className={cn(

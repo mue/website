@@ -22,7 +22,7 @@ interface ItemsGridProps {
 export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) {
   const router = useRouter();
   const { toggleFavorite, isFavorite } = useFavoritesContext();
-  const { isEmbed } = useEmbed();
+  const { isEmbed, buildEmbedUrl } = useEmbed();
   return (
     <div
       className={cn(
@@ -33,7 +33,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
       {items.map((item) => (
         <Link
           key={item.id || `${item.type}-${item.name}`}
-          href={`/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}${isEmbed ? '?embed=true' : ''}`}
+          href={buildEmbedUrl(`/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`)}
           className={cn(
             'group relative flex h-full cursor-pointer flex-col gap-3 overflow-hidden rounded-2xl border border-border bg-card/70 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md',
             isEmbed ? 'p-3 lg:p-4' : 'p-4 lg:gap-4 lg:p-6',
@@ -96,7 +96,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
                     event.stopPropagation();
                     if (item.author) {
                       router.push(
-                        `/marketplace/author/${slugifyAuthor(item.author)}${isEmbed ? '?embed=true' : ''}`,
+                        buildEmbedUrl(`/marketplace/author/${slugifyAuthor(item.author)}`),
                       );
                     }
                   }}
@@ -114,7 +114,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
               onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                router.push(`/marketplace?type=${item.type}${isEmbed ? '&embed=true' : ''}`);
+                router.push(buildEmbedUrl(`/marketplace?type=${item.type}`, true));
               }}
               className={cn(
                 'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
@@ -133,7 +133,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
                       event.preventDefault();
                       event.stopPropagation();
                       router.push(
-                        `/marketplace/collection/${encodeURIComponent(collection)}${isEmbed ? '?embed=true' : ''}`,
+                        buildEmbedUrl(`/marketplace/collection/${encodeURIComponent(collection)}`),
                       );
                     }}
                     className={cn(

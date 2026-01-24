@@ -18,7 +18,7 @@ type AuthorPageProps = {
   params: Promise<{
     author: string;
   }>;
-  searchParams?: Promise<{ embed?: string }>;
+  searchParams?: Promise<{ embed?: string; preview?: string }>;
 };
 
 async function getAuthorItems(authorSlug: string): Promise<MarketplaceItemSummary[]> {
@@ -49,6 +49,15 @@ export default async function AuthorPage({ params, searchParams }: AuthorPagePro
   const { author } = await params;
   const sp = await searchParams;
   const isEmbed = sp?.embed === 'true';
+  const isPreview = sp?.preview === 'true';
+
+  // Helper to build URLs with embed/preview params preserved
+  const buildEmbedUrl = (path: string) => {
+    if (!isEmbed) return path;
+    const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
+    return `${path}?${params}`;
+  };
+
   const items = await getAuthorItems(author);
 
   if (items.length === 0) {
@@ -72,7 +81,7 @@ export default async function AuthorPage({ params, searchParams }: AuthorPagePro
         <BreadcrumbTracker
           breadcrumbs={[
             { label: 'Marketplace', href: '/marketplace' },
-            { label: 'Authors', href: `/marketplace/authors${isEmbed ? '?embed=true' : ''}` },
+            { label: 'Authors', href: buildEmbedUrl('/marketplace/authors') },
             { label: authorName },
           ]}
         />

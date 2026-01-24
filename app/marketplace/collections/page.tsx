@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     title: 'Collections – Marketplace',
     description: 'Browse all collections in the Mue marketplace.',
     type: 'website',
-    url: 'https://mue.app/marketplace/collections',
+    url: 'https://muetab.com/marketplace/collections',
   },
   twitter: {
     card: 'summary_large_image',
@@ -32,10 +32,18 @@ export const revalidate = 3600; // Revalidate every hour (ISR)
 export default async function CollectionsPage({
   searchParams,
 }: {
-  searchParams?: Promise<{ embed?: string }>;
+  searchParams?: Promise<{ embed?: string; preview?: string }>;
 }) {
   const sp = await searchParams;
   const isEmbed = sp?.embed === 'true';
+  const isPreview = sp?.preview === 'true';
+
+  // Helper to build URLs with embed/preview params preserved
+  const buildEmbedUrl = (path: string) => {
+    if (!isEmbed) return path;
+    const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
+    return `${path}?${params}`;
+  };
   const [collections, items] = await Promise.all([
     getMarketplaceCollections(),
     getMarketplaceItems(),
@@ -89,7 +97,7 @@ export default async function CollectionsPage({
         {sortedCollections.map((collection) => (
           <Link
             key={collection.name}
-            href={`/marketplace/collection/${encodeURIComponent(collection.name)}${isEmbed ? '?embed=true' : ''}`}
+            href={buildEmbedUrl(`/marketplace/collection/${encodeURIComponent(collection.name)}`)}
             className="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-card/70 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
           >
             <div className="relative aspect-[4/3] w-full overflow-hidden">
