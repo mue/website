@@ -19,6 +19,7 @@ type BlogPostParams = {
 
 type BlogPostProps = {
   params: Promise<BlogPostParams>;
+  searchParams: Promise<{ embed?: string }>;
 };
 
 export async function generateStaticParams() {
@@ -80,8 +81,10 @@ function formatDate(dateString: string) {
   });
 }
 
-export default async function BlogPostPage({ params }: BlogPostProps) {
+export default async function BlogPostPage({ params, searchParams }: BlogPostProps) {
   const { slug } = await params;
+  const { embed } = await searchParams;
+  const isEmbed = embed === 'true';
   const [post, allPosts] = await Promise.all([getBlogPostBySlug(slug), getAllBlogPosts()]);
 
   if (!post) {
@@ -97,33 +100,38 @@ export default async function BlogPostPage({ params }: BlogPostProps) {
     post.frontmatter.dateModified && post.frontmatter.dateModified !== post.frontmatter.date;
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-20 h-[60vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.22)_0%,_transparent_60%)] blur-3xl" />
+      {!isEmbed && (
+        <div className="pointer-events-none absolute inset-x-0 top-0 -z-20 h-[60vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.22)_0%,_transparent_60%)] blur-3xl" />
+      )}
 
       <article className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
-        <Link
-          href="/blog"
-          className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), 'mb-8 gap-2')}
-        >
-          <ChevronLeft className="h-4 w-4" />
-          Back to blog
-        </Link>
+        {!isEmbed && (
+          <Link
+            href="/blog"
+            className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), 'mb-8 gap-2')}
+          >
+            <ChevronLeft className="h-4 w-4" />
+            Back to blog
+          </Link>
+        )}
 
         <header className="mb-12">
-          {post.frontmatter.image ? (
-            <div className="relative mb-8 aspect-[21/9] overflow-hidden rounded-2xl border border-white/10">
-              <BlogImage
-                src={post.frontmatter.image}
-                alt={post.frontmatter.title}
-                fill
-                priority
-                className="object-cover"
-                sizes="(min-width: 896px) 896px, 100vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
-            </div>
-          ) : (
-            <GradientHero title={post.frontmatter.title} />
-          )}
+          {!isEmbed &&
+            (post.frontmatter.image ? (
+              <div className="relative mb-8 aspect-[21/9] overflow-hidden rounded-2xl border border-white/10">
+                <BlogImage
+                  src={post.frontmatter.image}
+                  alt={post.frontmatter.title}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(min-width: 896px) 896px, 100vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
+              </div>
+            ) : (
+              <GradientHero title={post.frontmatter.title} />
+            ))}
 
           <div className="space-y-4">
             {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (

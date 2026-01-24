@@ -19,18 +19,20 @@ export const metadata: Metadata = {
   },
 };
 
+type ChangelogPageProps = {
+  searchParams: Promise<{ embed?: string }>;
+};
+
 async function getLatestReleasePost(): Promise<BlogPost | null> {
   const allPosts = await getAllBlogPosts();
-  
+
   // Find the first post with the "release" tag
-  const releasePost = allPosts.find((post) => 
-    post.frontmatter.tags?.includes('release')
-  );
-  
+  const releasePost = allPosts.find((post) => post.frontmatter.tags?.includes('release'));
+
   if (!releasePost) {
     return null;
   }
-  
+
   // Get the full post content
   return await getBlogPostBySlug(releasePost.slug);
 }
@@ -43,7 +45,9 @@ function formatDate(dateString: string) {
   });
 }
 
-export default async function ChangelogPage() {
+export default async function ChangelogPage({ searchParams }: ChangelogPageProps) {
+  const { embed } = await searchParams;
+  const isEmbed = embed === 'true';
   const post = await getLatestReleasePost();
 
   if (!post) {
@@ -55,25 +59,28 @@ export default async function ChangelogPage() {
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-20 h-[60vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.22)_0%,_transparent_60%)] blur-3xl" />
+      {!isEmbed && (
+        <div className="pointer-events-none absolute inset-x-0 top-0 -z-20 h-[60vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.22)_0%,_transparent_60%)] blur-3xl" />
+      )}
 
       <article className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
         <header className="mb-12">
-          {post.frontmatter.image ? (
-            <div className="relative mb-8 aspect-[21/9] overflow-hidden rounded-2xl border border-white/10">
-              <BlogImage
-                src={post.frontmatter.image}
-                alt={post.frontmatter.title}
-                fill
-                priority
-                className="object-cover"
-                sizes="(min-width: 896px) 896px, 100vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
-            </div>
-          ) : (
-            <GradientHero title={post.frontmatter.title} />
-          )}
+          {!isEmbed &&
+            (post.frontmatter.image ? (
+              <div className="relative mb-8 aspect-[21/9] overflow-hidden rounded-2xl border border-white/10">
+                <BlogImage
+                  src={post.frontmatter.image}
+                  alt={post.frontmatter.title}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(min-width: 896px) 896px, 100vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
+              </div>
+            ) : (
+              <GradientHero title={post.frontmatter.title} />
+            ))}
 
           <div className="space-y-4">
             {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
