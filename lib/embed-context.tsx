@@ -8,8 +8,10 @@ import Footer from '@/components/footer';
 
 type EmbedContextType = {
   isEmbed: boolean;
+  isPreview: boolean;
   sendMessage: (type: string, payload: any) => void;
   config: EmbedConfig;
+  buildEmbedUrl: (path: string, hasExistingParams?: boolean) => string;
 };
 
 type EmbedConfig = {
@@ -24,7 +26,16 @@ export function EmbedProvider({ children }: { children: ReactNode }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const isEmbed = searchParams?.get('embed') === 'true';
+  const isPreview = searchParams?.get('preview') === 'true';
   const [config, setConfig] = useState<EmbedConfig>({});
+
+  // Helper to build URLs with embed/preview params preserved
+  const buildEmbedUrl = (path: string, hasExistingParams = false) => {
+    if (!isEmbed) return path;
+    const separator = hasExistingParams ? '&' : '?';
+    const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
+    return `${path}${separator}${params}`;
+  };
 
   // Send ready message when embed mode is initialized
   useEffect(() => {
@@ -72,7 +83,7 @@ export function EmbedProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <EmbedContext.Provider value={{ isEmbed, sendMessage, config }}>
+    <EmbedContext.Provider value={{ isEmbed, isPreview, sendMessage, config, buildEmbedUrl }}>
       {children}
     </EmbedContext.Provider>
   );

@@ -86,7 +86,7 @@ function MarketplaceExplorerContent({
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { favorites, isFavorite, loaded: favoritesLoaded } = useFavoritesContext();
-  const { isEmbed, sendMessage, config } = useEmbed();
+  const { isEmbed, isPreview, sendMessage, config, buildEmbedUrl } = useEmbed();
 
   // Create a stable random seed that changes every hour (matching marketplace cache revalidation)
   const randomSeed = useMemo(() => {
@@ -418,6 +418,7 @@ function MarketplaceExplorerContent({
     if (currentPage && currentPage > 1) params.set('page', String(currentPage));
     if (itemsPerPage !== defaultPerPage) params.set('pp', String(itemsPerPage));
     if (isEmbed) params.set('embed', 'true');
+    if (isPreview) params.set('preview', 'true');
 
     const qs = params.toString();
     const url = qs ? `${pathname}?${qs}` : pathname;
@@ -436,6 +437,7 @@ function MarketplaceExplorerContent({
     pathname,
     router,
     isEmbed,
+    isPreview,
   ]);
 
   // Reset to page 1 when filters change
@@ -506,7 +508,7 @@ function MarketplaceExplorerContent({
                     const suggestion = suggestions[selectedSuggestionIndex];
                     const category = getItemCategory(suggestion.type);
                     router.push(
-                      `/marketplace/${category}/${encodeURIComponent(suggestion.id)}${isEmbed ? '?embed=true' : ''}`,
+                      buildEmbedUrl(`/marketplace/${category}/${encodeURIComponent(suggestion.id)}`),
                     );
                   } else if (event.key === 'Escape') {
                     setShowSuggestions(false);
@@ -544,7 +546,7 @@ function MarketplaceExplorerContent({
                     onClick={() => {
                       const category = getItemCategory(suggestion.type);
                       router.push(
-                        `/marketplace/${category}/${encodeURIComponent(suggestion.id)}${isEmbed ? '?embed=true' : ''}`,
+                        buildEmbedUrl(`/marketplace/${category}/${encodeURIComponent(suggestion.id)}`),
                       );
                       setShowSuggestions(false);
                     }}

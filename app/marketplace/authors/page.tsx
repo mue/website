@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Authors – Marketplace',
     description: 'Browse all authors in the Mue marketplace.',
     type: 'website',
-    url: 'https://mue.app/marketplace/authors',
+    url: 'https://muetab.com/marketplace/authors',
   },
   twitter: {
     card: 'summary_large_image',

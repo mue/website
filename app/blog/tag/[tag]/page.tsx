@@ -28,7 +28,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title,
     description,
-    alternates: { canonical: `https://mue.app/blog/tag/${tag}` },
+    alternates: { canonical: `https://muetab.com/blog/tag/${tag}` },
     openGraph: { title, description },
   };
 }
@@ -55,13 +55,13 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
               '@context': 'https://schema.org',
               '@type': 'BreadcrumbList',
               itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://mue.app/' },
-                { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://mue.app/blog' },
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://muetab.com/' },
+                { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://muetab.com/blog' },
                 {
                   '@type': 'ListItem',
                   position: 3,
                   name: readable,
-                  item: `https://mue.app/blog/tag/${tag}`,
+                  item: `https://muetab.com/blog/tag/${tag}`,
                 },
               ],
             }),
