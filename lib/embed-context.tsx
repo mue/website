@@ -27,15 +27,29 @@ export function EmbedProvider({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const isEmbed = searchParams?.get('embed') === 'true';
   const isPreview = searchParams?.get('preview') === 'true';
+  const themeParam = searchParams?.get('theme') as 'light' | 'dark' | 'system' | null;
   const [config, setConfig] = useState<EmbedConfig>({});
 
-  // Helper to build URLs with embed/preview params preserved
+  // Helper to build URLs with embed/preview/theme params preserved
   const buildEmbedUrl = (path: string, hasExistingParams = false) => {
     if (!isEmbed) return path;
     const separator = hasExistingParams ? '&' : '?';
-    const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
-    return `${path}${separator}${params}`;
+    const params = [];
+    params.push('embed=true');
+    if (isPreview) params.push('preview=true');
+    if (themeParam) params.push(`theme=${themeParam}`);
+    return `${path}${separator}${params.join('&')}`;
   };
+
+  // Apply theme from URL parameter on mount
+  useEffect(() => {
+    if (isEmbed && themeParam && typeof window !== 'undefined') {
+      const themeEvent = new CustomEvent('embed-theme-change', {
+        detail: { theme: themeParam },
+      });
+      window.dispatchEvent(themeEvent);
+    }
+  }, [isEmbed, themeParam]);
 
   // Send ready message when embed mode is initialized
   useEffect(() => {
