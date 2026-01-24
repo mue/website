@@ -26,17 +26,17 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const title = pageNum === 1 ? 'Blog | Mue' : `Page ${pageNum} | Blog | Mue`;
   const description =
     'Product updates, technical deep-dives, and thoughts on building mindful browser experiences.';
-  const canonical = pageNum === 1 ? 'https://mue.app/blog' : `https://mue.app/blog/page/${pageNum}`;
+  const canonical = pageNum === 1 ? 'https://muetab.com/blog' : `https://muetab.com/blog/page/${pageNum}`;
   // We need total pages to derive prev/next
   const posts = await getAllBlogPosts();
   const totalPages = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
   const prev =
     pageNum > 1
       ? pageNum - 1 === 1
-        ? 'https://mue.app/blog'
-        : `https://mue.app/blog/page/${pageNum - 1}`
+        ? 'https://muetab.com/blog'
+        : `https://muetab.com/blog/page/${pageNum - 1}`
       : undefined;
-  const next = pageNum < totalPages ? `https://mue.app/blog/page/${pageNum + 1}` : undefined;
+  const next = pageNum < totalPages ? `https://muetab.com/blog/page/${pageNum + 1}` : undefined;
   return {
     title,
     description,
@@ -69,13 +69,13 @@ export default async function BlogPagePaginated({ params }: { params: Promise<Pa
               '@context': 'https://schema.org',
               '@type': 'BreadcrumbList',
               itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://mue.app/' },
-                { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://mue.app/blog' },
+                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://muetab.com/' },
+                { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://muetab.com/blog' },
                 {
                   '@type': 'ListItem',
                   position: 3,
                   name: `Page ${pageNum}`,
-                  item: `https://mue.app/blog/page/${pageNum}`,
+                  item: `https://muetab.com/blog/page/${pageNum}`,
                 },
               ],
             }),

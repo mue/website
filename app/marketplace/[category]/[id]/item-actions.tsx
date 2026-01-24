@@ -16,9 +16,10 @@ interface ItemActionsProps {
   category: string;
   itemType?: string;
   itemData?: any; // Full item data for postMessage
+  isPreview?: boolean;
 }
 
-export function ItemActions({ itemId, displayName, description, category, itemType, itemData }: ItemActionsProps) {
+export function ItemActions({ itemId, displayName, description, category, itemType, itemData, isPreview }: ItemActionsProps) {
   const { toggleFavorite, isFavorite } = useFavoritesContext();
   const { isEmbed, sendMessage } = useEmbed();
   const isItemFavorited = isFavorite(category, itemId);
@@ -82,7 +83,11 @@ export function ItemActions({ itemId, displayName, description, category, itemTy
   return (
     <div className="flex flex-col gap-2">
       {isEmbed ? (
-        isInstalled ? (
+        isPreview ? (
+          <div className="rounded-md bg-muted px-3 py-2 text-center text-sm text-muted-foreground">
+            Install unavailable in preview
+          </div>
+        ) : isInstalled ? (
           <Button
             variant="destructive"
             size="sm"

@@ -18,7 +18,7 @@ type MarketplaceCollectionPageProps = {
   params: Promise<{
     collection: string;
   }>;
-  searchParams?: Promise<{ embed?: string }>;
+  searchParams?: Promise<{ embed?: string; preview?: string }>;
 };
 
 async function resolveCollection(name: string): Promise<MarketplaceCollectionDetail> {
@@ -47,7 +47,7 @@ export async function generateMetadata({
           data.description ??
           `Browse all items inside the ${data.display_name} collection on the Mue marketplace.`,
         type: 'website',
-        url: `https://mue.app/marketplace/collection/${encodeURIComponent(data.name)}`,
+        url: `https://muetab.com/marketplace/collection/${encodeURIComponent(data.name)}`,
       },
       twitter: {
         card: 'summary_large_image',
@@ -71,6 +71,16 @@ export default async function MarketplaceCollectionPage({
   const { collection } = await params;
   const sp = await searchParams;
   const isEmbed = sp?.embed === 'true';
+  const isPreview = sp?.preview === 'true';
+
+  // Helper to build URLs with embed/preview params preserved
+  const buildEmbedUrl = (path: string, hasExistingParams = false) => {
+    if (!isEmbed) return path;
+    const separator = hasExistingParams ? '&' : '?';
+    const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
+    return `${path}${separator}${params}`;
+  };
+
   const data = await resolveCollection(collection);
 
   const items = data.items ?? [];
@@ -90,7 +100,7 @@ export default async function MarketplaceCollectionPage({
         <BreadcrumbTracker
           breadcrumbs={[
             { label: 'Marketplace', href: '/marketplace' },
-            { label: 'Collections', href: `/marketplace/collections${isEmbed ? '?embed=true' : ''}` },
+            { label: 'Collections', href: buildEmbedUrl('/marketplace/collections') },
             { label: data.display_name },
           ]}
         />
@@ -164,6 +174,8 @@ export default async function MarketplaceCollectionPage({
           Want to expand this collection? Contribute on the{' '}
           <Link
             href="https://github.com/mue/marketplace"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-primary underline-offset-4 hover:underline"
           >
             Mue GitHub

@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
   const title = `${post.frontmatter.title} | Mue Blog`;
   const description =
     post.excerpt || post.frontmatter.description || 'Read the latest from the Mue blog.';
-  const url = `https://mue.app/blog/${slug}`;
+  const url = `https://muetab.com/blog/${slug}`;
   const image = post.frontmatter.image;
   const tags = post.frontmatter.tags || [];
   const modified = post.frontmatter.dateModified;
