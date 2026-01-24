@@ -113,18 +113,21 @@ function isMobileDevice(): boolean {
 }
 
 export default function Home() {
-  const [greeting, setGreeting] = useState('Evening');
+  const [greeting] = useState(() => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) return 'Morning';
+    if (hour >= 12 && hour < 18) return 'Afternoon';
+    return 'Evening';
+  });
+
+  const [friendlyTerm] = useState(() => {
+    const friendlyTerms = ['mate', 'pal', 'bud', 'friend', 'chief', 'champ'];
+    return friendlyTerms[Math.floor(Math.random() * friendlyTerms.length)];
+  });
+
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const hour = new Date().getHours();
-    if (hour >= 5 && hour < 12) {
-      setGreeting('Morning');
-    } else if (hour >= 12 && hour < 18) {
-      setGreeting('Afternoon');
-    } else {
-      setGreeting('Evening');
-    }
     setIsMobile(isMobileDevice());
   }, []);
 
@@ -141,9 +144,9 @@ export default function Home() {
             {/* Left column - Content */}
             <div className="flex flex-col">
               <h1 className="mt-8 text-balance text-3xl leading-[1.15] tracking-tight text-foreground sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl">
-                <span className="block animate-fade-up animate-delay-100">
+                <span className="block animate-fade-up animate-delay-100" suppressHydrationWarning>
                   <b className="font-heading tracking-wide font-light">{greeting}, </b>
-                  user.
+                  {friendlyTerm}.
                 </span>
                 <span className="mt-2 block animate-fade-up animate-delay-200">
                   Stop staring at <b className="font-heading tracking-wide font-light">blank</b>{' '}
