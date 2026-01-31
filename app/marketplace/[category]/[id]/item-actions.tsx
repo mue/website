@@ -77,8 +77,14 @@ export function ItemActions({ itemId, displayName, description, category, itemTy
     window.open(reportUrl, '_blank', 'noopener,noreferrer');
   };
 
-  // Get the current page URL (client-side only)
-  const url = typeof window !== 'undefined' ? window.location.href : '';
+  // Get the current page URL (client-side only), stripping embed parameter for sharing
+  const url = typeof window !== 'undefined'
+    ? (() => {
+        const pageUrl = new URL(window.location.href);
+        pageUrl.searchParams.delete('embed');
+        return pageUrl.toString();
+      })()
+    : '';
 
   return (
     <div className="flex flex-col gap-2">
