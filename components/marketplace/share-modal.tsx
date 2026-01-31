@@ -48,8 +48,26 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
       await navigator.clipboard.writeText(url);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch (error) {
-      console.error('Copy failed:', error);
+    } catch {
+      // Fallback for iframes where Clipboard API is blocked
+      try {
+        const textArea = document.createElement('textarea');
+        textArea.value = url;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-9999px';
+        textArea.style.top = '-9999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        if (successful) {
+          setCopied(true);
+          setTimeout(() => setCopied(false), 2000);
+        }
+      } catch (fallbackError) {
+        console.error('Copy failed:', fallbackError);
+      }
     }
   };
 
@@ -93,8 +111,8 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
           </DialogDescription>
         </DialogHeader>
         <div className="flex flex-col gap-4 overflow-auto">
-          {/* Native Share (mobile/PWA) */}
-          {hasNativeShare && (
+          {/* Native Share (mobile/PWA) - hidden in embed mode as it's blocked by permissions policy */}
+          {hasNativeShare && !isEmbed && (
             <Button onClick={handleNativeShare} className="w-full gap-2" variant="default">
               <Share2 className="h-4 w-4" />
               Share via...
