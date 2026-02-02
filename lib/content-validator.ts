@@ -312,3 +312,132 @@ export function validateSettings(settingsJson: string): ContentValidationResult 
     infos,
   };
 }
+
+// Validate API pack settings schema
+export function validateAPIPackSettings(item: any): ContentValidationResult {
+  const errors: ValidationIssue[] = [];
+  const warnings: ValidationIssue[] = [];
+  const infos: ValidationIssue[] = [];
+
+  if (!item.api_enabled) {
+    // Not an API pack, nothing to validate
+    return { isValid: true, errors, warnings, infos };
+  }
+
+  // Check required fields for API packs
+  if (!item.api_provider) {
+    errors.push({ type: 'error', message: 'api_provider is required for API packs', field: 'api_provider' });
+  } else if (!['mue', 'unsplash'].includes(item.api_provider)) {
+    errors.push({
+      type: 'error',
+      message: 'api_provider must be either "mue" or "unsplash"',
+      field: 'api_provider',
+    });
+  }
+
+  if (item.requires_api_key === undefined) {
+    warnings.push({
+      type: 'warning',
+      message: 'requires_api_key should be explicitly set to true or false',
+      field: 'requires_api_key',
+    });
+  }
+
+  if (!item.settings_schema || !Array.isArray(item.settings_schema)) {
+    errors.push({
+      type: 'error',
+      message: 'settings_schema array is required for API packs',
+      field: 'settings_schema',
+    });
+  } else if (item.settings_schema.length === 0) {
+    errors.push({
+      type: 'error',
+      message: 'settings_schema must contain at least one field',
+      field: 'settings_schema',
+    });
+  } else {
+    // Validate each schema field
+    item.settings_schema.forEach((field: any, index: number) => {
+      if (!field.key || typeof field.key !== 'string') {
+        errors.push({
+          type: 'error',
+          message: `Schema field ${index} is missing required "key" property`,
+          field: `settings_schema[${index}].key`,
+        });
+      }
+
+      if (!field.type || typeof field.type !== 'string') {
+        errors.push({
+          type: 'error',
+          message: `Schema field ${index} is missing required "type" property`,
+          field: `settings_schema[${index}].type`,
+        });
+      } else if (!['dropdown', 'chipselect', 'text', 'switch', 'slider'].includes(field.type)) {
+        errors.push({
+          type: 'error',
+          message: `Schema field ${index} has invalid type "${field.type}"`,
+          field: `settings_schema[${index}].type`,
+        });
+      }
+
+      if (!field.label || typeof field.label !== 'string') {
+        errors.push({
+          type: 'error',
+          message: `Schema field ${index} is missing required "label" property`,
+          field: `settings_schema[${index}].label`,
+        });
+      }
+
+      // Check if dropdown/chipselect have options
+      if ((field.type === 'dropdown' || field.type === 'chipselect') && !field.dynamic) {
+        if (!field.options || !Array.isArray(field.options)) {
+          errors.push({
+            type: 'error',
+            message: `Schema field "${field.key}" must have options array`,
+            field: `settings_schema[${index}].options`,
+          });
+        }
+      }
+
+      // Secure fields should have help text
+      if (field.secure && !field.help_text) {
+        warnings.push({
+          type: 'warning',
+          message: `Secure field "${field.key}" should have help_text explaining where to get the key`,
+          field: `settings_schema[${index}].help_text`,
+        });
+      }
+    });
+  }
+
+  // API packs should have empty photos array
+  if (item.photos && Array.isArray(item.photos) && item.photos.length > 0) {
+    warnings.push({
+      type: 'warning',
+      message: 'API packs should have an empty photos array (photos are fetched dynamically)',
+      field: 'photos',
+    });
+  }
+
+  // Info about pack configuration
+  if (errors.length === 0) {
+    infos.push({
+      type: 'info',
+      message: `API pack configured for ${item.api_provider} with ${item.settings_schema?.length || 0} settings`,
+    });
+
+    if (item.requires_api_key) {
+      infos.push({
+        type: 'info',
+        message: 'Users will need to configure their API key after installation',
+      });
+    }
+  }
+
+  return {
+    isValid: errors.length === 0,
+    errors,
+    warnings,
+    infos,
+  };
+}

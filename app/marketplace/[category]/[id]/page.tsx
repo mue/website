@@ -13,11 +13,14 @@ import {
   Images,
   Camera,
   MapPin,
+  AlertCircle,
+  Key,
 } from 'lucide-react';
 
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
 import {
   getMarketplaceItem,
@@ -281,6 +284,27 @@ export default async function MarketplaceItemPage({
             { label: data.display_name },
           ]}
         />
+
+        {/* Warning for API-powered photo packs */}
+        {data.api_enabled && (
+          <Alert>
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>API-Powered Photo Pack</AlertTitle>
+            <AlertDescription>
+              This pack dynamically fetches fresh photos from{' '}
+              {data.api_provider === 'mue' ? 'MUE' : 'Unsplash'} API.
+              {data.requires_api_key && (
+                <>
+                  {' '}
+                  <Key className="inline h-3 w-3 ml-1 mr-1" />
+                  Requires API key configuration after installation.
+                </>
+              )}
+              <br />
+              An internet connection is required. Photos are cached for offline use.
+            </AlertDescription>
+          </Alert>
+        )}
 
         <div className="grid gap-6 lg:grid-cols-[340px_1fr] lg:gap-8">
           {/* Left Column - Info */}
