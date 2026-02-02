@@ -74,11 +74,11 @@ export function ViewTracker({
   if (isLoading) {
     return (
       <div className="flex flex-col gap-3 text-sm text-muted-foreground">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <Eye className="h-4 w-4" />
           <div className="h-4 w-16 animate-pulse rounded bg-muted" />
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <Download className="h-4 w-4" />
           <div className="h-4 w-16 animate-pulse rounded bg-muted" />
         </div>
@@ -92,7 +92,7 @@ export function ViewTracker({
   return (
     <div className="flex flex-col gap-3 text-sm text-muted-foreground">
       {views !== null && (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <Eye className="h-4 w-4" />
           <span>
             {views.toLocaleString()} {views === 1 ? 'view' : 'views'}
@@ -100,7 +100,7 @@ export function ViewTracker({
         </div>
       )}
       {downloads !== null && (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <Download className="h-4 w-4" />
           <span>
             {downloads.toLocaleString()} {downloads === 1 ? 'download' : 'downloads'}
