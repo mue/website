@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 0; // Disable cache temporarily to see new items
+export const revalidate = 3600; // Revalidate every hour (ISR)
 
 export default async function MarketplacePage({
   searchParams,
