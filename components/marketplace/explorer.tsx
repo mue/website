@@ -133,8 +133,8 @@ function MarketplaceExplorerContent({
 
     // Migrate legacy sort values
     const sortMigrationMap: Record<string, string> = {
-      'newest': 'trending',
-      'updated': 'trending',
+      newest: 'trending',
+      updated: 'trending',
       'name-asc': 'recommended',
       'name-desc': 'recommended',
       'least-viewed': 'hidden-gems',
@@ -556,7 +556,9 @@ function MarketplaceExplorerContent({
                     const suggestion = suggestions[selectedSuggestionIndex];
                     const category = getItemCategory(suggestion.type);
                     router.push(
-                      buildEmbedUrl(`/marketplace/${category}/${encodeURIComponent(suggestion.id)}`),
+                      buildEmbedUrl(
+                        `/marketplace/${category}/${encodeURIComponent(suggestion.id)}`,
+                      ),
                     );
                   } else if (event.key === 'Escape') {
                     setShowSuggestions(false);
@@ -594,7 +596,9 @@ function MarketplaceExplorerContent({
                     onClick={() => {
                       const category = getItemCategory(suggestion.type);
                       router.push(
-                        buildEmbedUrl(`/marketplace/${category}/${encodeURIComponent(suggestion.id)}`),
+                        buildEmbedUrl(
+                          `/marketplace/${category}/${encodeURIComponent(suggestion.id)}`,
+                        ),
                       );
                       setShowSuggestions(false);
                     }}
