@@ -90,8 +90,8 @@ export type MarketplaceItemDetail = {
 async function fetchMarketplace<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${MARKETPLACE_BASE_URL}/${path}`, {
     ...init,
-    // cache marketplace data for an hour to avoid rate limits
-    next: { revalidate: 3600 },
+    // cache marketplace data for 1 minute during development
+    next: { revalidate: 60 },
   });
 
   if (!response.ok) {
