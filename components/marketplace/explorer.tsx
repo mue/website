@@ -129,10 +129,31 @@ function MarketplaceExplorerContent({
   });
   const [collectionFilter, setCollectionFilter] = useState<string | null>(initialParams.c);
   const [sortBy, setSortBy] = useState<string>(() => {
+    let initialSort = initialParams.so;
+
+    // Migrate legacy sort values
+    const sortMigrationMap: Record<string, string> = {
+      'newest': 'trending',
+      'updated': 'trending',
+      'name-asc': 'recommended',
+      'name-desc': 'recommended',
+      'least-viewed': 'hidden-gems',
+    };
+
+    if (initialSort && sortMigrationMap[initialSort]) {
+      initialSort = sortMigrationMap[initialSort];
+    }
+
     // Priority: URL param > localStorage > default 'recommended'
-    if (initialParams.so) return initialParams.so;
+    if (initialSort) return initialSort;
+
     if (typeof window !== 'undefined') {
-      const stored = window.localStorage.getItem('mkt_sort');
+      let stored = window.localStorage.getItem('mkt_sort');
+      // Also migrate stored values
+      if (stored && sortMigrationMap[stored]) {
+        stored = sortMigrationMap[stored];
+        window.localStorage.setItem('mkt_sort', stored);
+      }
       if (stored) return stored;
     }
     return 'recommended';
@@ -237,26 +258,52 @@ function MarketplaceExplorerContent({
 
     return filtered.sort((a, b) => {
       switch (sortBy) {
-        case 'name-asc':
-          return a.display_name.localeCompare(b.display_name);
-        case 'updated':
-          // Sort by updated_at (newest first), fallback to name if dates missing
-          if (a.updated_at && b.updated_at) {
-            return new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime();
+        case 'trending': {
+          // Weighted score: views × 0.3 + downloads × 0.7
+          const aViews = a.views || 0;
+          const aDownloads = a.downloads || 0;
+          const bViews = b.views || 0;
+          const bDownloads = b.downloads || 0;
+
+          const aScore = aViews * 0.3 + aDownloads * 0.7;
+          const bScore = bViews * 0.3 + bDownloads * 0.7;
+
+          if (aScore !== bScore) {
+            return bScore - aScore; // Descending
           }
-          if (a.updated_at) return -1;
-          if (b.updated_at) return 1;
           return a.display_name.localeCompare(b.display_name);
-        case 'newest':
-          // Sort by created_at (newest first), fallback to name if dates missing
-          if (a.created_at && b.created_at) {
-            return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        }
+
+        case 'most-downloaded': {
+          const aDownloads = a.downloads || 0;
+          const bDownloads = b.downloads || 0;
+          if (aDownloads !== bDownloads) {
+            return bDownloads - aDownloads; // Descending
           }
-          if (a.created_at) return -1;
-          if (b.created_at) return 1;
           return a.display_name.localeCompare(b.display_name);
+        }
+
+        case 'most-viewed': {
+          const aViews = a.views || 0;
+          const bViews = b.views || 0;
+          if (aViews !== bViews) {
+            return bViews - aViews; // Descending
+          }
+          return a.display_name.localeCompare(b.display_name);
+        }
+
+        case 'hidden-gems': {
+          // Sort by views (ascending) to show lesser-known items
+          const aViews = a.views || 0;
+          const bViews = b.views || 0;
+          if (aViews !== bViews) {
+            return aViews - bViews; // Ascending
+          }
+          return a.display_name.localeCompare(b.display_name);
+        }
+
         case 'recommended':
-        default:
+        default: {
           // Stable random order using session seed + item name
           const hash = (str: string, seed: number) => {
             let h = seed;
@@ -266,6 +313,7 @@ function MarketplaceExplorerContent({
             return h;
           };
           return hash(a.name, randomSeed) - hash(b.name, randomSeed);
+        }
       }
     });
   }, [
@@ -792,9 +840,10 @@ function MarketplaceExplorerContent({
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="recommended">Recommended</SelectItem>
-                    <SelectItem value="newest">Recently Added</SelectItem>
-                    <SelectItem value="updated">Recently Updated</SelectItem>
-                    <SelectItem value="name-asc">Name (A-Z)</SelectItem>
+                    <SelectItem value="trending">Trending</SelectItem>
+                    <SelectItem value="most-downloaded">Most Downloaded</SelectItem>
+                    <SelectItem value="most-viewed">Most Viewed</SelectItem>
+                    <SelectItem value="hidden-gems">Hidden Gems</SelectItem>
                   </SelectContent>
                 </Select>
               </div>

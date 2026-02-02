@@ -73,7 +73,7 @@ export function ViewTracker({
   // Show skeleton while loading
   if (isLoading) {
     return (
-      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+      <div className="flex flex-col gap-3 text-sm text-muted-foreground">
         <div className="flex items-center gap-2">
           <Eye className="h-4 w-4" />
           <div className="h-4 w-16 animate-pulse rounded bg-muted" />
@@ -90,7 +90,7 @@ export function ViewTracker({
   if (views === null && downloads === null) return null;
 
   return (
-    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+    <div className="flex flex-col gap-3 text-sm text-muted-foreground">
       {views !== null && (
         <div className="flex items-center gap-2">
           <Eye className="h-4 w-4" />
