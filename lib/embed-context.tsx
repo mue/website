@@ -84,7 +84,7 @@ export function EmbedProvider({ children }: { children: ReactNode }) {
           embedParams.set('embed', 'true');
           if (isPreview) embedParams.set('preview', 'true');
           if (themeParam) embedParams.set('theme', themeParam);
-          
+
           const fullPath = `${payload.path}?${embedParams.toString()}`;
           router.push(fullPath);
         }
@@ -100,13 +100,13 @@ export function EmbedProvider({ children }: { children: ReactNode }) {
     if (isEmbed && pathname !== previousPathRef.current) {
       const search = searchParams?.toString();
       const fullPath = search ? `${pathname}?${search}` : pathname;
-      
-      sendMessage('marketplace:navigation', { 
+
+      sendMessage('marketplace:navigation', {
         path: pathname,
         fullPath,
-        search: search || ''
+        search: search || '',
       });
-      
+
       previousPathRef.current = pathname;
     }
   }, [pathname, searchParams, isEmbed]);

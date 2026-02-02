@@ -18,13 +18,13 @@ export function BreadcrumbTracker({ breadcrumbs }: BreadcrumbTrackerProps) {
   useEffect(() => {
     if (isEmbed) {
       // Send breadcrumbs with clickable flag and full paths
-      const enhancedBreadcrumbs = breadcrumbs.map(b => ({
+      const enhancedBreadcrumbs = breadcrumbs.map((b) => ({
         ...b,
-        clickable: !!b.href
+        clickable: !!b.href,
       }));
-      
-      sendMessage('marketplace:breadcrumbs', { 
-        breadcrumbs: enhancedBreadcrumbs 
+
+      sendMessage('marketplace:breadcrumbs', {
+        breadcrumbs: enhancedBreadcrumbs,
       });
     }
   }, [isEmbed, sendMessage, breadcrumbs]);
