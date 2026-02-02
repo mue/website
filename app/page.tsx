@@ -165,13 +165,13 @@ export default function Home() {
                   <>
                     <Button
                       size="lg"
-                      className="group relative overflow-hidden bg-gradient-to-r from-[#FF5C25] to-[#FF456E] px-6 py-4 text-sm font-semibold shadow-[0_20px_60px_-20px_rgba(255,92,37,0.5)] transition-all hover:shadow-[0_25px_70px_-15px_rgba(255,92,37,0.6)] hover:scale-105 sm:text-base"
+                      className="group relative overflow-hidden bg-linear-to-r from-[#FF5C25] to-[#FF456E] px-6 py-4 text-sm font-semibold shadow-[0_20px_60px_-20px_rgba(255,92,37,0.5)] transition-all hover:shadow-[0_25px_70px_-15px_rgba(255,92,37,0.6)] hover:scale-105 sm:text-base"
                       asChild
                     >
                       <Link href="/download">
                         <span className="relative z-10">Get Started</span>
                         <ArrowRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        <div className="absolute inset-0 -z-0 bg-gradient-to-r from-[#FF456E] to-[#FF5C25] opacity-0 transition-opacity group-hover:opacity-100" />
+                        <div className="absolute inset-0 -z-0 bg-linear-to-r from-[#FF456E] to-[#FF5C25] opacity-0 transition-opacity group-hover:opacity-100" />
                       </Link>
                     </Button>
                     <Button
