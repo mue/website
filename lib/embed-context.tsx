@@ -1,7 +1,7 @@
 'use client';
 
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
-import { useSearchParams, usePathname } from 'next/navigation';
+import { createContext, useContext, useEffect, useState, ReactNode, useRef } from 'react';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { ScrollToTop } from '@/components/scroll-to-top';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
@@ -25,10 +25,12 @@ const EmbedContext = createContext<EmbedContextType | undefined>(undefined);
 export function EmbedProvider({ children }: { children: ReactNode }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
+  const router = useRouter();
   const isEmbed = searchParams?.get('embed') === 'true';
   const isPreview = searchParams?.get('preview') === 'true';
   const themeParam = searchParams?.get('theme') as 'light' | 'dark' | 'system' | null;
   const [config, setConfig] = useState<EmbedConfig>({});
+  const previousPathRef = useRef(pathname);
 
   // Helper to build URLs with embed/preview/theme params preserved
   const buildEmbedUrl = (path: string, hasExistingParams = false) => {
@@ -75,20 +77,39 @@ export function EmbedProvider({ children }: { children: ReactNode }) {
           });
           window.dispatchEvent(themeEvent);
         }
+      } else if (type === 'marketplace:navigate') {
+        // Handle navigation command from parent
+        if (payload?.path) {
+          const embedParams = new URLSearchParams();
+          embedParams.set('embed', 'true');
+          if (isPreview) embedParams.set('preview', 'true');
+          if (themeParam) embedParams.set('theme', themeParam);
+          
+          const fullPath = `${payload.path}?${embedParams.toString()}`;
+          router.push(fullPath);
+        }
       }
     };
 
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
-  }, [isEmbed]);
+  }, [isEmbed, router, isPreview, themeParam]);
 
-  // Track navigation changes
+  // Track navigation changes and send to parent
   useEffect(() => {
-    if (isEmbed) {
-      sendMessage('marketplace:navigation', { path: pathname });
+    if (isEmbed && pathname !== previousPathRef.current) {
+      const search = searchParams?.toString();
+      const fullPath = search ? `${pathname}?${search}` : pathname;
+      
+      sendMessage('marketplace:navigation', { 
+        path: pathname,
+        fullPath,
+        search: search || ''
+      });
+      
+      previousPathRef.current = pathname;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pathname, isEmbed]);
+  }, [pathname, searchParams, isEmbed]);
 
   const sendMessage = (type: string, payload: any) => {
     if (isEmbed && typeof window !== 'undefined') {
