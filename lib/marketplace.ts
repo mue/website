@@ -68,6 +68,22 @@ export type MarketplaceItemDetail = {
   updated_at?: string;
   created_at?: string;
   in_collections?: Array<MarketplaceCollection>;
+  // API-enabled photo pack fields
+  api_enabled?: boolean;
+  api_provider?: string;
+  requires_api_key?: boolean;
+  settings_schema?: Array<{
+    key: string;
+    type: string;
+    label: string;
+    default?: unknown;
+    required?: boolean;
+    options?: Array<{ value: string; label: string }>;
+    secure?: boolean;
+    help_text?: string;
+    dynamic?: boolean;
+    options_source?: string;
+  }>;
   [key: string]: unknown;
 };
 
