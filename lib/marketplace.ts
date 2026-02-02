@@ -36,6 +36,7 @@ export type MarketplaceItemSummary = {
   updated_at?: string;
   created_at?: string;
   views?: number;
+  downloads?: number;
 };
 
 export type MarketplaceCollectionDetail = MarketplaceCollection & {
@@ -153,9 +154,25 @@ export async function getMarketplaceCollections(): Promise<MarketplaceCollection
   return payload.data;
 }
 
-export async function getMarketplaceItems(): Promise<MarketplaceItemSummary[]> {
+export async function getMarketplaceItems(includeAnalytics: boolean = false): Promise<MarketplaceItemSummary[]> {
+  const params = includeAnalytics ? '?include_analytics=true' : '';
   const payload =
-    await fetchMarketplace<MarketplaceResponse<MarketplaceItemSummary[]>>('items/all');
+    await fetchMarketplace<MarketplaceResponse<MarketplaceItemSummary[]>>(`items/all${params}`);
+  return payload.data;
+}
+
+export async function getTrendingItems(
+  limit: number = 100,
+  category?: string,
+): Promise<MarketplaceItemSummary[]> {
+  const params = new URLSearchParams();
+  params.set('limit', limit.toString());
+  if (category) {
+    params.set('category', category);
+  }
+  const payload = await fetchMarketplace<MarketplaceResponse<MarketplaceItemSummary[]>>(
+    `trending?${params.toString()}`,
+  );
   return payload.data;
 }
 

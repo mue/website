@@ -44,7 +44,7 @@ export default async function MarketplacePage({
 }) {
   const [collections, items] = await Promise.all([
     getMarketplaceCollections(),
-    getMarketplaceItems(),
+    getMarketplaceItems(true),
   ]);
 
   const isEmbed = searchParams?.embed === 'true';
