@@ -1,12 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Eye } from 'lucide-react';
+import { Eye, Download } from 'lucide-react';
 import { useEmbed } from '@/lib/embed-context';
 
 interface ViewTrackerProps {
   itemId: string;
   initialViews?: number;
+  initialDownloads?: number;
   itemType?: string;
   itemDisplayName?: string;
 }
@@ -14,10 +15,12 @@ interface ViewTrackerProps {
 export function ViewTracker({
   itemId,
   initialViews = 0,
+  initialDownloads = 0,
   itemType,
   itemDisplayName,
 }: ViewTrackerProps) {
   const [views, setViews] = useState<number | null>(initialViews || null);
+  const [downloads, setDownloads] = useState<number | null>(initialDownloads || null);
   const [isLoading, setIsLoading] = useState(true);
   const [hasTracked, setHasTracked] = useState(false);
   const { isEmbed, sendMessage } = useEmbed();
@@ -41,6 +44,9 @@ export function ViewTracker({
           // API returns {"views": number}
           if (data.views !== undefined) {
             setViews(data.views);
+          }
+          if (data.downloads !== undefined) {
+            setDownloads(data.downloads);
           }
         }
       } catch (error) {
@@ -67,22 +73,40 @@ export function ViewTracker({
   // Show skeleton while loading
   if (isLoading) {
     return (
-      <div className="flex items-center gap-2 text-sm text-muted-foreground">
-        <Eye className="h-4 w-4" />
-        <div className="h-4 w-16 animate-pulse rounded bg-muted" />
+      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+        <div className="flex items-center gap-2">
+          <Eye className="h-4 w-4" />
+          <div className="h-4 w-16 animate-pulse rounded bg-muted" />
+        </div>
+        <div className="flex items-center gap-2">
+          <Download className="h-4 w-4" />
+          <div className="h-4 w-16 animate-pulse rounded bg-muted" />
+        </div>
       </div>
     );
   }
 
-  // Don't show view counter if we don't have any views data
-  if (views === null) return null;
+  // Don't show if we don't have any data
+  if (views === null && downloads === null) return null;
 
   return (
-    <div className="flex items-center gap-3 text-sm text-muted-foreground">
-      <Eye className="h-4 w-4" />
-      <span>
-        {views.toLocaleString()} {views === 1 ? 'view' : 'views'}
-      </span>
+    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+      {views !== null && (
+        <div className="flex items-center gap-2">
+          <Eye className="h-4 w-4" />
+          <span>
+            {views.toLocaleString()} {views === 1 ? 'view' : 'views'}
+          </span>
+        </div>
+      )}
+      {downloads !== null && (
+        <div className="flex items-center gap-2">
+          <Download className="h-4 w-4" />
+          <span>
+            {downloads.toLocaleString()} {downloads === 1 ? 'download' : 'downloads'}
+          </span>
+        </div>
+      )}
     </div>
   );
 }
