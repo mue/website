@@ -333,9 +333,7 @@ export default async function MarketplaceItemPage({
                   <div className="space-y-2">
                     <h1 className="text-2xl font-bold tracking-tight">{data.display_name}</h1>
                     {!isEmbed && (
-                      <Link
-                        href={buildEmbedUrl(`/marketplace?type=${data.type}`, true)}
-                      >
+                      <Link href={buildEmbedUrl(`/marketplace?type=${data.type}`, true)}>
                         <Badge
                           variant="secondary"
                           className="cursor-pointer text-xs capitalize transition hover:bg-primary/10 hover:text-primary"
@@ -435,7 +433,9 @@ export default async function MarketplaceItemPage({
                     {data.in_collections.map((collection) => (
                       <Link
                         key={collection.name}
-                        href={buildEmbedUrl(`/marketplace/collection/${encodeURIComponent(collection.name)}`)}
+                        href={buildEmbedUrl(
+                          `/marketplace/collection/${encodeURIComponent(collection.name)}`,
+                        )}
                       >
                         <Badge
                           variant="outline"
@@ -682,7 +682,10 @@ export default async function MarketplaceItemPage({
 
             <p className="text-center text-sm text-muted-foreground">
               Want to contribute?{' '}
-              <Link href="https://github.com/mue" className="font-medium text-primary hover:underline">
+              <Link
+                href="https://github.com/mue"
+                className="font-medium text-primary hover:underline"
+              >
                 Visit Mue on GitHub
               </Link>
             </p>
