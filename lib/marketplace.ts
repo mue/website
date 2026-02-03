@@ -71,11 +71,15 @@ export type MarketplaceItemDetail = {
   // API-enabled photo pack fields
   api_enabled?: boolean;
   api_provider?: string;
+  api_endpoint?: string; // The API endpoint URL to fetch photos from
+  direct_api?: boolean; // If true, frontend calls provider directly (no backend proxy)
   requires_api_key?: boolean;
+  cache_refresh_interval?: number; // Optional cache refresh interval in seconds (default: 3600)
   settings_schema?: Array<{
     key: string;
     type: string;
     label: string;
+    placeholder?: string;
     default?: unknown;
     required?: boolean;
     options?: Array<{ value: string; label: string }>;
@@ -83,6 +87,9 @@ export type MarketplaceItemDetail = {
     help_text?: string;
     dynamic?: boolean;
     options_source?: string;
+    min?: number;
+    max?: number;
+    step?: number;
   }>;
   [key: string]: unknown;
 };

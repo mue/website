@@ -327,12 +327,36 @@ export function validateAPIPackSettings(item: any): ContentValidationResult {
   // Check required fields for API packs
   if (!item.api_provider) {
     errors.push({ type: 'error', message: 'api_provider is required for API packs', field: 'api_provider' });
-  } else if (!['mue', 'unsplash'].includes(item.api_provider)) {
-    errors.push({
-      type: 'error',
-      message: 'api_provider must be either "mue" or "unsplash"',
-      field: 'api_provider',
+  }
+
+  // Validate api_endpoint is a valid URL
+  if (!item.api_endpoint) {
+    errors.push({ 
+      type: 'error', 
+      message: 'api_endpoint URL is required for API packs', 
+      field: 'api_endpoint' 
     });
+  } else {
+    try {
+      new URL(item.api_endpoint);
+    } catch {
+      errors.push({ 
+        type: 'error', 
+        message: 'api_endpoint must be a valid URL', 
+        field: 'api_endpoint' 
+      });
+    }
+  }
+
+  // Validate cache_refresh_interval if provided
+  if (item.cache_refresh_interval !== undefined) {
+    if (typeof item.cache_refresh_interval !== 'number' || item.cache_refresh_interval < 60) {
+      warnings.push({
+        type: 'warning',
+        message: 'cache_refresh_interval should be a number >= 60 seconds',
+        field: 'cache_refresh_interval',
+      });
+    }
   }
 
   if (item.requires_api_key === undefined) {
@@ -430,6 +454,13 @@ export function validateAPIPackSettings(item: any): ContentValidationResult {
       infos.push({
         type: 'info',
         message: 'Users will need to configure their API key after installation',
+      });
+    }
+
+    if (item.cache_refresh_interval) {
+      infos.push({
+        type: 'info',
+        message: `Custom cache refresh interval: ${item.cache_refresh_interval} seconds`,
       });
     }
   }
