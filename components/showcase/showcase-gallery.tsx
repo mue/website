@@ -12,16 +12,17 @@ type ShowcaseGalleryProps = {
 };
 
 export function ShowcaseGallery({ items }: ShowcaseGalleryProps) {
-  const [selectedItem, setSelectedItem] = useState<ShowcaseItem | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+  const selectedItem = selectedIndex !== null ? items[selectedIndex] : null;
 
   return (
     <>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((item) => (
+        {items.map((item, index) => (
           <div
             key={item.id}
-            onClick={() => setSelectedItem(item)}
-            className="group relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-card/70 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
+            onClick={() => setSelectedIndex(index)}
+            className={`group relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-card/70 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md ${index === items.length - 1 && items.length % 3 === 1 ? 'lg:col-start-2' : ''}`}
           >
             <div className="relative aspect-video w-full overflow-hidden">
               <Image
@@ -58,7 +59,14 @@ export function ShowcaseGallery({ items }: ShowcaseGalleryProps) {
         ))}
       </div>
 
-      <ShowcaseLightbox item={selectedItem} onClose={() => setSelectedItem(null)} />
+      <ShowcaseLightbox
+        item={selectedItem}
+        onClose={() => setSelectedIndex(null)}
+        onPrevious={() => setSelectedIndex((i) => i !== null && i > 0 ? i - 1 : i)}
+        onNext={() => setSelectedIndex((i) => i !== null && i < items.length - 1 ? i + 1 : i)}
+        hasPrevious={selectedIndex !== null && selectedIndex > 0}
+        hasNext={selectedIndex !== null && selectedIndex < items.length - 1}
+      />
     </>
   );
 }
