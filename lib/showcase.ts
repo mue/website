@@ -66,12 +66,20 @@ export const showcaseItems: ShowcaseItem[] = [
     tags: ['landscape', 'weather', 'search'],
     createdAt: '2021-08-22',
   },
+  {
+    id: '7',
+    imageUrl: '/showcase/rand-mue-setup.webp',
+    author: 'Rand',
+    discordUsername: 'rand',
+    description: 'A pink to the max setup with a custom background',
+    createdAt: '2026-02-01',
+  }
 ];
 
 export function getShowcaseItems(): ShowcaseItem[] {
   // Sort by date, newest first
   return showcaseItems.sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+    (a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime(),
   );
 }
 

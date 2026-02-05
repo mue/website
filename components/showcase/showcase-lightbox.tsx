@@ -1,16 +1,37 @@
 'use client';
 
 import Image from 'next/image';
-import { X, User, Calendar, Tag } from 'lucide-react';
+import { useEffect, useCallback } from 'react';
+import { X, ChevronLeft, ChevronRight, User, Calendar, Tag } from 'lucide-react';
 import { type ShowcaseItem } from '@/lib/showcase';
 import { Badge } from '@/components/ui/badge';
 
 type ShowcaseLightboxProps = {
   item: ShowcaseItem | null;
   onClose: () => void;
+  onPrevious?: () => void;
+  onNext?: () => void;
+  hasPrevious?: boolean;
+  hasNext?: boolean;
 };
 
-export function ShowcaseLightbox({ item, onClose }: ShowcaseLightboxProps) {
+export function ShowcaseLightbox({ item, onClose, onPrevious, onNext, hasPrevious, hasNext }: ShowcaseLightboxProps) {
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'ArrowLeft' && hasPrevious && onPrevious) {
+      onPrevious();
+    } else if (e.key === 'ArrowRight' && hasNext && onNext) {
+      onNext();
+    } else if (e.key === 'Escape') {
+      onClose();
+    }
+  }, [hasPrevious, hasNext, onPrevious, onNext, onClose]);
+
+  useEffect(() => {
+    if (!item) return;
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [item, handleKeyDown]);
+
   if (!item) return null;
 
   return (
@@ -27,6 +48,26 @@ export function ShowcaseLightbox({ item, onClose }: ShowcaseLightboxProps) {
       >
         <X className="h-6 w-6" />
       </button>
+
+      {hasPrevious && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onPrevious?.(); }}
+          className="absolute left-4 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition-all hover:bg-background hover:scale-110"
+          aria-label="Previous image"
+        >
+          <ChevronLeft className="h-6 w-6" />
+        </button>
+      )}
+
+      {hasNext && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onNext?.(); }}
+          className="absolute right-4 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition-all hover:bg-background hover:scale-110"
+          aria-label="Next image"
+        >
+          <ChevronRight className="h-6 w-6" />
+        </button>
+      )}
 
       <div className="flex h-full items-center justify-center p-4">
         <div className="max-w-7xl w-full" onClick={(e) => e.stopPropagation()}>
