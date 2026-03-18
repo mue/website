@@ -4,6 +4,71 @@ title: Changelog
 
 The changelog dates use the DD-MM-YYY format.
 
+### 2.2.1 - 03/02/2026
+
+#### Added
+
+- Optional analytics data (views, downloads) on marketplace item listings via `include_analytics` parameter
+- Download count tracking for marketplace items
+
+#### Changed
+
+- Cache TTL for analytics data set to 1 hour
+
+### 2.2.0 - 28/01/2026
+
+#### Added
+
+- Geocode endpoint (forward geocode query to locations)
+- GPS reverse geocode endpoint (lat/lon to location name)
+- Weather endpoint now supports lat/lon coordinates in addition to city name
+
+### 2.1.0 - 07/10/2025
+
+#### Added
+
+- Full v2 marketplace API: collections, items, curators, featured, trending, recent, search, and stats endpoints
+- Item lookup by ID without requiring category
+- Related items endpoint
+- Marketplace batch fetch endpoint (up to 100 items by ID)
+- View count tracking for marketplace items
+- Pagination support for marketplace item listings
+
+### 2.0.0 - 21/09/2024
+
+#### Added
+
+- v2 API with enhanced endpoints for images, quotes, weather, and marketplace
+- Unsplash image proxy with support for topics, collections, orientation, and username
+- Unsplash topics listing endpoint
+- Weather endpoint
+- Mapbox static map image endpoint
+- OpenTelemetry observability with Baselime edge logger
+- v2 images include `blur_hash`, `colour`, and `coordinates` fields
+
+#### Changed
+
+- Migrated from Node.js/Fastify to Cloudflare Workers (via Wrangler) with Bun runtime
+- Supabase replaces previous database backend
+- Edge caching via Cloudflare KV and Cache API
+
+#### Removed
+
+- Admin routes (`/images/add`, `/images/delete`) — use the [uploader](https://github.com/mue/uploader) utility directly
+- Pexels image fetching
+
+### 1.6.2 - 18/05/2024
+
+#### Added
+
+- Autocomplete search proxy (via Ecosia)
+- Marketplace pagination on v1
+
+#### Changed
+
+- Unsplash endpoint now uses all collections if none specified
+- Unsplash collections parameter trims whitespace
+
 ### 1.6.1 - 23/11/2021
 
 #### Added
