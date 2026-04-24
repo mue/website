@@ -126,8 +126,8 @@ export default function Home() {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-black/80" />
 
       {/* Hero */}
-      <section className="relative pb-16 pt-20 sm:pb-24 sm:pt-28">
-        <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 px-6 text-center">
+      <section className="relative pb-16 pt-12 sm:pb-24 sm:pt-16">
+        <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-10 px-6 text-center">
           <h1 className="font-heading font-light text-balance text-4xl tracking-wide text-foreground sm:text-5xl lg:text-6xl animate-fade-up animate-delay-200">
             Stop staring at{' '}
             <span className="text-[#FF5C25]">blank</span>{' '}
