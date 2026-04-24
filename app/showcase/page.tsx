@@ -30,13 +30,6 @@ export default async function ShowcasePage() {
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32">
         {/* Header */}
         <header className="mb-16 text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-primary">
-            <Sparkles className="h-3 w-3" />
-            <span>Community</span>
-            <span className="h-1 w-1 rounded-full bg-primary" />
-            <span>Showcase</span>
-          </div>
-
           <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             See Mue in action
           </h1>
@@ -93,14 +86,28 @@ export default async function ShowcasePage() {
         )}
 
         {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <h2 className="text-2xl font-semibold text-foreground">Got inspired?</h2>
-          <p className="mt-2 text-muted-foreground">
-            Download Mue and create your own personalized new tab experience.
+        <div className="mt-16 rounded-2xl border border-border bg-muted/30 px-8 py-14 text-center">
+          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#FF5C25]">
+            Your turn
           </p>
-          <Button asChild size="lg" className="mt-6">
-            <Link href="/download">Download Mue</Link>
-          </Button>
+          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            Got inspired?
+          </h2>
+          <p className="mx-auto mt-4 max-w-md text-base text-muted-foreground">
+            Download Mue and make your new tab your own — backgrounds, quotes, widgets, and more.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Button
+              asChild
+              size="lg"
+              className="bg-linear-to-r from-[#c43d10] to-[#b02048] font-semibold text-white"
+            >
+              <Link href="/download">Download Mue</Link>
+            </Button>
+            <Button asChild size="lg" variant="outline" className="border-border">
+              <Link href="/demo">Try the demo</Link>
+            </Button>
+          </div>
         </div>
       </div>
     </div>
