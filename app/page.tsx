@@ -134,200 +134,147 @@ export default function Home() {
   return (
     <div className="relative overflow-hidden">
       <SoftwareApplicationJsonLd />
-      {/* Hero Section */}
-      <section className="relative isolate overflow-hidden pb-12 pt-16 sm:pb-20 sm:pt-24 lg:pb-24 lg:pt-28">
-        <div className="pointer-events-none absolute inset-x-0 top-0 -z-20 h-[100vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.4)_0%,_transparent_50%)] blur-3xl" />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-30 h-[80vh] bg-[radial-gradient(circle_at_bottom,_rgba(255,69,110,0.35)_0%,_transparent_60%)] blur-3xl" />
 
-        <div className="mx-auto w-full max-w-[85rem] px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:items-center">
-            {/* Left column - Content */}
-            <div className="flex flex-col">
-              <h1 className="mt-8 text-balance text-3xl leading-[1.15] tracking-tight text-foreground sm:text-4xl md:text-4xl lg:text-5xl xl:text-6xl">
-                <span className="block animate-fade-up animate-delay-100" suppressHydrationWarning>
-                  <b className="font-heading tracking-wide font-light">{greeting}, </b>
-                  {friendlyTerm}.
-                </span>
-                <span className="mt-2 block animate-fade-up animate-delay-200">
-                  Stop staring at <b className="font-heading tracking-wide font-light">blank</b>{' '}
-                  tabs.
-                </span>
-              </h1>
+      {/* Hero */}
+      <section className="relative pb-16 pt-20 sm:pb-24 sm:pt-28">
+        <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 px-6 text-center">
+          <p
+            className="text-base text-muted-foreground animate-fade-up animate-delay-100"
+            suppressHydrationWarning
+          >
+            {greeting}, {friendlyTerm}.
+          </p>
 
-              <p className="mt-6 max-w-xl text-pretty text-sm leading-relaxed text-muted-foreground sm:text-base md:text-lg lg:text-lg animate-fade-up animate-delay-300">
-                Every tab hits different with Mue. Stunning backgrounds, quotes that slap, places
-                for your notes - everything you need to lock in. No fluff. No distractions. Just
-                pure focus energy.
-              </p>
+          <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl animate-fade-up animate-delay-200">
+            Stop staring at <span className="text-[#FF5C25]">blank</span> tabs.
+          </h1>
 
-              <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center animate-fade-up animate-delay-400">
-                {!isMobile ? (
-                  <>
-                    <Button
-                      size="lg"
-                      className="group relative overflow-hidden bg-linear-to-r from-[#FF5C25] to-[#FF456E] px-6 py-4 text-sm font-semibold shadow-[0_20px_60px_-20px_rgba(255,92,37,0.5)] transition-all hover:shadow-[0_25px_70px_-15px_rgba(255,92,37,0.6)] hover:scale-105 sm:text-base"
-                      asChild
-                    >
-                      <Link href="/download">
-                        <span className="relative z-10">Get Started</span>
-                        <ArrowRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                        <div className="absolute inset-0 -z-0 bg-linear-to-r from-[#FF456E] to-[#FF5C25] opacity-0 transition-opacity group-hover:opacity-100" />
-                      </Link>
-                    </Button>
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="border-2 border-[#FF5C25]/30 px-6 py-4 text-sm font-semibold transition-all hover:border-[#FF5C25] hover:bg-[#FF5C25]/5 sm:text-base"
-                      asChild
-                    >
-                      <Link href="/demo">
-                        <Rocket className="mr-2 h-4 w-4" />
-                        Try it now
-                      </Link>
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    <div className="flex h-11 items-center justify-center rounded-lg border-2 border-[#FF5C25]/30 bg-[#FF5C25]/5 px-6 text-center text-sm font-semibold text-foreground backdrop-blur-sm sm:text-base">
-                      Not available on mobile
-                    </div>
-                    <Button
-                      size="lg"
-                      variant="outline"
-                      className="border-2 border-[#FF5C25]/30 px-6 py-4 text-sm font-semibold transition-all hover:border-[#FF5C25] hover:bg-[#FF5C25]/5 sm:text-base"
-                      asChild
-                    >
-                      <Link href="/demo">
-                        <Rocket className="mr-2 h-4 w-4" />
-                        Try it now
-                      </Link>
-                    </Button>
-                  </>
-                )}
-              </div>
-              {isMobile && (
-                <p className="mt-3 text-xs text-muted-foreground/70 animate-fade-up animate-delay-500">
-                  Mue is a browser extension for desktop. Visit this site on your computer to get
-                  started.
-                </p>
-              )}
+          <p className="max-w-xl text-pretty text-base text-muted-foreground sm:text-lg animate-fade-up animate-delay-300">
+            Every tab hits different with Mue. Stunning backgrounds, quotes that slap, places for
+            your notes — everything you need to lock in.
+          </p>
 
-              <div className="mt-8 space-y-3 animate-fade-up animate-delay-600">
-                <p className="text-[0.65rem] font-bold uppercase tracking-[0.2em] text-muted-foreground/50">
-                  Trusted worldwide
-                </p>
-                <div className="flex flex-wrap gap-x-6 gap-y-2 text-xs font-medium text-muted-foreground/80 sm:text-sm">
-                  {stats.map((stat) => (
-                    <StatItem key={stat} stat={stat} />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Right column - Screenshot */}
-            <div className="relative lg:order-last">
-              <div className="absolute -inset-6 rounded-full bg-[linear-gradient(135deg,_rgba(255,92,37,0.25),_rgba(255,69,110,0.25))] blur-[50px] lg:-inset-10 lg:blur-[70px]" />
-
-              <div className="relative overflow-hidden rounded-2xl border-2 border-border bg-background/50 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] ring-1 ring-border backdrop-blur animate-fade-zoom animate-delay-300">
-                <div className="flex items-center justify-between border-b border-border bg-background/80 px-4 py-2.5 backdrop-blur">
-                  <div className="flex items-center gap-1.5">
-                    <span className="flex h-2.5 w-2.5 rounded-full bg-[#FF5C25]" />
-                    <span className="flex h-2.5 w-2.5 rounded-full bg-[#FFB425]" />
-                    <span className="flex h-2.5 w-2.5 rounded-full bg-[#FF456E]" />
-                  </div>
-                  <div className="rounded-full border border-border bg-muted px-2.5 py-1 text-[0.625rem] font-medium text-muted-foreground backdrop-blur">
-                    Example
-                  </div>
-                </div>
-
-                <div className="relative aspect-[16/10]">
-                  <Image
-                    fill
-                    priority
-                    src="/muetab_screenshot_2.webp"
-                    alt="Mue Tab in action - beautiful backgrounds, quotes, and widgets"
-                    className="object-fit"
-                    sizes="(min-width: 1024px) 55vw, 100vw"
-                  />
-                </div>
-              </div>
-            </div>
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center animate-fade-up animate-delay-400">
+            <Button
+              size="lg"
+              className="group relative overflow-hidden bg-linear-to-r from-[#FF5C25] to-[#FF456E] px-6 py-4 text-sm font-semibold shadow-[0_20px_60px_-20px_rgba(255,92,37,0.5)] transition-all hover:shadow-[0_25px_70px_-15px_rgba(255,92,37,0.6)] hover:scale-105 sm:text-base"
+              asChild
+            >
+              <Link href="/download">
+                <span className="relative z-10">Get Started</span>
+                <ArrowRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                <div className="absolute inset-0 -z-0 bg-linear-to-r from-[#FF456E] to-[#FF5C25] opacity-0 transition-opacity group-hover:opacity-100" />
+              </Link>
+            </Button>
+            <Button
+              size="lg"
+              variant="outline"
+              className="border-2 border-[#FF5C25]/30 px-6 py-4 text-sm font-semibold transition-all hover:border-[#FF5C25] hover:bg-[#FF5C25]/5 sm:text-base"
+              asChild
+            >
+              <Link href="/demo">
+                <Rocket className="mr-2 h-4 w-4" />
+                Try it now
+              </Link>
+            </Button>
           </div>
 
-          {/* Browser badges */}
-          <div className="mt-12 flex flex-col items-center lg:mt-16">
-            <div className="gap-5 flex flex-col relative w-full max-w-4xl overflow-hidden rounded-3xl px-6 py-10 text-center">
-              <p className="relative text-[0.65rem] font-bold uppercase tracking-[0.3em] dark:text-muted-foreground/60 text-neutral-800">
-                Available everywhere*
-              </p>
-              <div className="relative flex flex-wrap items-center justify-center gap-4 sm:gap-5">
-                {browsers.map((browser) => (
-                  <BrowserBadge
-                    key={browser.name}
-                    name={browser.name}
-                    icon={browser.Icon}
-                    url={browser.url}
-                  />
-                ))}
-              </div>
-              <p className="relative text-[0.7rem] leading-relaxed text-neutral-800 dark:text-muted-foreground/70 sm:text-xs">
-                *not actually available on Safari yet, but we&apos;re working on it! And no,
-                we&apos;re not adding Opera support. Please stop asking.
-              </p>
+          {isMobile && (
+            <p className="text-xs text-muted-foreground/70">
+              Mue is a browser extension for desktop. Visit on your computer to get started.
+            </p>
+          )}
+
+          <div className="w-full animate-fade-zoom animate-delay-300">
+            <Image
+              priority
+              src="/muetab_screenshot_2.webp"
+              alt="Mue Tab in action - beautiful backgrounds, quotes, and widgets"
+              width={2559}
+              height={1439}
+              className="w-full rounded-2xl shadow-2xl"
+              sizes="(min-width: 1024px) 80vw, 100vw"
+            />
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground/70 animate-fade-up animate-delay-500">
+            {stats.map((stat, i) => (
+              <span key={stat} className="flex items-center gap-4">
+                {i > 0 && <span className="text-muted-foreground/30">|</span>}
+                <StatItem stat={stat} />
+              </span>
+            ))}
+          </div>
+
+          <div className="mt-4 flex flex-col items-center gap-4">
+            <p className="text-[0.65rem] font-bold uppercase tracking-[0.3em] text-muted-foreground/50">
+              Available everywhere*
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
+              {browsers.map((browser) => (
+                <BrowserBadge
+                  key={browser.name}
+                  name={browser.name}
+                  icon={browser.Icon}
+                  url={browser.url}
+                />
+              ))}
             </div>
+            <p className="text-[0.7rem] leading-relaxed text-muted-foreground/50 sm:text-xs">
+              *not actually available on Safari yet, but we&apos;re working on it! And no,
+              we&apos;re not adding Opera support. Please stop asking.
+            </p>
           </div>
         </div>
       </section>
 
-      <section className="relative border-t border-white/5 bg-gradient-to-b from-background via-background/95 to-background/80 py-28">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(210,26,17,0.12)_0%,_transparent_75%)]" />
-        <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 px-6">
+      {/* Features */}
+      <section className="border-t border-border py-28">
+        <div className="mx-auto flex w-full max-w-5xl flex-col gap-24 px-6">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="text-[0.65rem] font-semibold uppercase tracking-[0.38em] text-[#FF5C25]">
-              Feature spotlight
-            </span>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               Built-in tools to keep you in flow
             </h2>
-            <p className="mt-5 text-base text-muted-foreground sm:text-lg">
+            <p className="mt-4 text-base text-muted-foreground sm:text-lg">
               Mue blends mindful visuals with productivity essentials so every new tab fuels your
               focus instead of draining it.
             </p>
           </div>
 
-          <div className="flex flex-col">
-            <div className="space-y-10">
-              {scrollFeatures.map((feature, index) => (
-                <FeatureCard
-                  key={feature.title}
-                  index={index}
-                  eyebrow={feature.eyebrow}
-                  title={feature.title}
-                  description={feature.description}
-                  bullets={feature.bullets}
-                  footerText={feature.footerText}
-                />
-              ))}
-            </div>
+          <div className="flex flex-col gap-24">
+            {scrollFeatures.map((feature, index) => (
+              <FeatureCard
+                key={feature.title}
+                index={index}
+                eyebrow={feature.eyebrow}
+                title={feature.title}
+                description={feature.description}
+                bullets={feature.bullets}
+                footerText={feature.footerText}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-t border-white/5 bg-background/95 py-24">
-        <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.16),_transparent_65%)]" />
-        <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-8 px-6 text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[#FF456E]/30 bg-[#FF456E]/10 px-4 py-1 text-xs font-semibold uppercase tracking-[0.36em] text-[#FF456E]">
-            <span>Open Source</span>
+      {/* Community */}
+      <section className="border-t border-border py-24">
+        <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-10 px-6 text-center">
+          <div className="flex flex-col items-center gap-4">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-[#FF5C25]">
+              Open Source
+            </p>
+            <h2 className="text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+              Built by you, for you.
+            </h2>
+            <p className="max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
+              100% free and open source. Join the community shaping the future of Mue — whether
+              that&apos;s contributing code, reporting issues, or sharing ideas.
+            </p>
           </div>
-          <h2 className="text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            Built by you, for you.
-          </h2>
-          <p className="max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            100% free and open source. Join the community shaping the future of Mue - whether
-            that&apos;s contributing code, reporting issues, or sharing ideas.
-          </p>
+
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Button size="lg" asChild className="shadow-[0_18px_45px_-28px_rgba(15,15,45,0.75)]">
+            <Button size="lg" asChild>
               <Link href="https://github.com/mue/mue" target="_blank" rel="noreferrer">
                 View Mue on GitHub
                 <ArrowRight className="ml-2 h-4 w-4" />
@@ -344,7 +291,8 @@ export default function Home() {
               </Link>
             </Button>
           </div>
-          <div className="mt-10 grid w-full gap-6 text-left sm:grid-cols-2 lg:grid-cols-3">
+
+          <div className="grid w-full gap-x-8 gap-y-10 text-left sm:grid-cols-2 lg:grid-cols-3">
             {communityStats.map((stat) => (
               <CommunityStatCard
                 key={stat.label}

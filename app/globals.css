@@ -142,31 +142,7 @@
   .font-display {
     font-family: var(--font-alfa-slab-one);
   }
-  @keyframes float {
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-  }
-  @keyframes float-delayed {
-    0%,
-    100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-15px);
-    }
-  }
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
-  }
-  .animate-float-delayed {
-    animation: float-delayed 6s ease-in-out infinite;
-    animation-delay: 1s;
-  }
+
   @keyframes fade-up {
     from {
       opacity: 0;
@@ -213,20 +189,7 @@
   .animate-delay-600 {
     animation-delay: 0.6s;
   }
-  @keyframes subtle-pan {
-    0%,
-    100% {
-      transform: scale(1) translate3d(0, 0, 0);
-    }
-    50% {
-      transform: scale(1.03) translate3d(0, -8px, 0);
-    }
-  }
-  .animate-subtle-pan {
-    animation: subtle-pan 14s ease-in-out infinite;
-    transform-origin: center;
-    will-change: transform;
-  }
+
 }
 
 @layer components {

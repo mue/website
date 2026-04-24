@@ -7,6 +7,12 @@ type FeatureCardProps = {
   footerText: string;
 };
 
+const visualColors = [
+  'bg-[#FF5C25]/8',
+  'bg-[#FF456E]/8',
+  'bg-amber-500/8',
+];
+
 export function FeatureCard({
   index,
   eyebrow,
@@ -15,32 +21,32 @@ export function FeatureCard({
   bullets,
   footerText,
 }: FeatureCardProps) {
+  const isReversed = index % 2 !== 0;
+
   return (
-    <article className="rounded-3xl border border-white/10 bg-background/80 p-8 shadow-[0_18px_60px_-45px_rgba(12,14,40,0.65)] backdrop-blur lg:p-10">
-      <div className="flex items-center justify-between gap-4">
-        <span className="text-xs font-semibold uppercase tracking-[0.36em] text-[#FF5C25]">
-          0{index + 1}
-        </span>
-        <span className="text-xs uppercase tracking-[0.36em] text-muted-foreground/70">
+    <div className={`grid gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center ${isReversed ? 'lg:[&>*:first-child]:order-last' : ''}`}>
+      <div className="flex flex-col">
+        <span className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-[#FF5C25]">
           {eyebrow}
         </span>
+        <h3 className="mt-3 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+          {title}
+        </h3>
+        <p className="mt-4 text-base text-muted-foreground">{description}</p>
+        <ul className="mt-6 space-y-3">
+          {bullets.map((bullet) => (
+            <li key={bullet} className="flex items-start gap-3 text-sm text-muted-foreground">
+              <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF5C25]/60" />
+              <span className="leading-relaxed">{bullet}</span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-8 text-xs uppercase tracking-[0.28em] text-muted-foreground/40">
+          {footerText}
+        </p>
       </div>
-      <h3 className="mt-4 text-3xl font-semibold tracking-tight text-foreground lg:text-[2.1rem]">
-        {title}
-      </h3>
-      <p className="mt-4 text-base text-muted-foreground">{description}</p>
-      <ul className="mt-6 space-y-3">
-        {bullets.map((bullet) => (
-          <li key={bullet} className="flex items-start gap-3 text-sm text-muted-foreground">
-            <span className="mt-1 inline-flex h-1.5 w-4 rounded-full bg-gradient-to-r from-[#FF5C25] via-[#D21A11] to-[#FF456E]" />
-            <span className="text-pretty leading-relaxed">{bullet}</span>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-6 h-px w-full bg-gradient-to-r from-transparent via-[#FF456E]/40 to-transparent" />
-      <p className="mt-4 text-xs uppercase tracking-[0.36em] text-muted-foreground/70">
-        {footerText}
-      </p>
-    </article>
+
+      <div className={`h-64 rounded-2xl lg:h-80 ${visualColors[index % visualColors.length]}`} />
+    </div>
   );
 }

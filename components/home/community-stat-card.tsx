@@ -6,10 +6,10 @@ type CommunityStatCardProps = {
 
 export function CommunityStatCard({ label, value, description }: CommunityStatCardProps) {
   return (
-    <div className="rounded-2xl border border-border bg-background/80 p-5 text-sm text-muted-foreground backdrop-blur">
-      <p className="text-xs uppercase tracking-[0.36em] text-[#FF5C25]/80">{label}</p>
-      <p className="mt-2 text-lg font-semibold text-foreground">{value}</p>
-      <p className="mt-3 text-xs text-muted-foreground/80">{description}</p>
+    <div className="flex flex-col gap-1">
+      <p className="text-2xl font-semibold text-foreground">{value}</p>
+      <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60">{label}</p>
+      <p className="mt-1 text-sm text-muted-foreground/70">{description}</p>
     </div>
   );
 }
