@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight, Calendar, User } from 'lucide-react';
+import { Calendar, User, ArrowRight } from 'lucide-react';
 import { BlogImage } from '@/components/blog/blog-image';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
@@ -50,12 +50,6 @@ export function BlogCard({ post, sizes, className }: BlogCardProps) {
         className="absolute inset-0 z-10"
         tabIndex={0}
       />
-      <div className="pointer-events-none absolute right-3 top-3 z-20 flex h-8 w-8 items-center justify-center rounded-full border border-white/15 bg-black/20 backdrop-blur transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:border-[#FF5C25]/60 group-focus-within:translate-x-0.5 group-focus-within:-translate-y-0.5">
-        <ArrowRight
-          className="h-4 w-4 text-white/70 transition-colors group-hover:text-white group-focus-within:text-white"
-          aria-hidden
-        />
-      </div>
       {frontmatter.image && (
         <div className="relative aspect-[16/9] overflow-hidden">
           <BlogImage
@@ -115,7 +109,9 @@ export function BlogCard({ post, sizes, className }: BlogCardProps) {
           </div>
         )}
 
-        <span className="mt-auto h-0" aria-hidden />
+        <div className="mt-auto flex justify-end pt-2">
+          <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary group-focus-within:text-primary" aria-hidden />
+        </div>
       </div>
     </article>
   );

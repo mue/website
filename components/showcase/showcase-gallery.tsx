@@ -31,6 +31,8 @@ export function ShowcaseGallery({ items }: ShowcaseGalleryProps) {
                 fill
                 className="object-cover transition duration-300 group-hover:scale-105"
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                placeholder={item.blurDataURL ? 'blur' : 'empty'}
+                blurDataURL={item.blurDataURL}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
             </div>

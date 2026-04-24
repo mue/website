@@ -62,8 +62,8 @@ export default function FeaturedCollections({ randomCollections, isEmbed: isEmbe
                   )}
                 </div>
                 <div className={cn(
-                  "flex flex-col gap-4 p-6",
-                  isEmbed && "gap-2 p-3 lg:p-4"
+                  "flex flex-col gap-4 p-6 pr-14",
+                  isEmbed && "gap-2 p-3 pr-12 lg:p-4 lg:pr-14"
                 )}>
                   <div className={cn(
                     "space-y-2",

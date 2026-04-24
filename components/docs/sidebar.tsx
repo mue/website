@@ -71,7 +71,7 @@ function SidebarSection({
         data-node-href={normalizedNodeHref}
         data-current-href={normalizedActiveHref}
         className={cn(
-          'flex items-center justify-between rounded-md px-2 py-1.5 transition-all',
+          'flex items-center justify-between rounded-md px-3 py-1.5 transition-all',
           isActive && '!text-primary font-semibold',
           !isActive && isAncestor
             ? 'bg-muted/70 text-foreground font-medium'

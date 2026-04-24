@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Logo from './logo';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -14,7 +15,7 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { Button } from './ui/button';
-import { Download, Menu, BookOpen } from 'lucide-react';
+import { Download, Menu, BookOpen, Package, Code2, ArrowRight } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa6';
 import { cn } from '@/lib/utils';
 import {
@@ -26,21 +27,24 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 
-const docsQuickLinks: { title: string; href: string; description: string }[] = [
+const docsQuickLinks: { title: string; href: string; description: string; icon: React.ElementType }[] = [
   {
     title: 'Introduction',
     href: '/docs/introduction',
     description: "Get oriented with Mue's core concepts and setup.",
+    icon: BookOpen,
   },
   {
     title: 'Marketplace',
     href: '/docs/marketplace/introduction',
     description: 'Extend Mue with community-curated packs and presets.',
+    icon: Package,
   },
   {
     title: 'API',
     href: '/docs/api/introduction',
     description: 'Integrate Mue into your apps with the REST API guide.',
+    icon: Code2,
   },
 ];
 
@@ -93,51 +97,62 @@ export default function Navbar() {
                 Docs
               </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid gap-2 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                  <li className="row-span-3">
-                    <NavigationMenuLink asChild>
-                      <Link
-                        className="items-start from-muted/50 to-muted flex h-full w-full cursor-pointer flex-col justify-end rounded-md bg-linear-to-b p-6 no-underline outline-hidden select-none focus:shadow-md"
-                        href="/docs"
-                      >
-                        <div className="dark:bg-neutral-900 bg-neutral-200 p-4 grid place-content-center aspect-square rounded-full mb-2">
-                          <BookOpen className="h-6 w-6" />
-                        </div>
-                        <div className="mb-2 text-lg font-medium">Documentation</div>
-                        <p className="text-muted-foreground text-sm leading-tight">
-                          Dive into guides, references, and workflows for the entire Mue ecosystem.
+                <div className="grid md:w-[440px] lg:w-[520px] lg:grid-cols-[1fr_1.4fr]">
+                  <NavigationMenuLink asChild>
+                    <Link
+                      href="/docs"
+                      className="flex flex-col justify-between rounded-l-md bg-linear-to-b from-[#FF5C25]/20 to-[#b02048]/20 px-4 py-6 no-underline outline-hidden select-none transition-colors hover:from-[#FF5C25]/30 hover:to-[#b02048]/30 focus:shadow-md"
+                    >
+                      <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#FF5C25]/80">
+                        <BookOpen className="h-4 w-4 text-white" />
+                      </div>
+                      <div>
+                        <div className="mb-1 text-sm font-semibold text-foreground">Documentation</div>
+                        <p className="text-xs leading-relaxed text-muted-foreground">
+                          Guides, references, and workflows for the entire Mue ecosystem.
                         </p>
-                      </Link>
-                    </NavigationMenuLink>
-                  </li>
-                  {docsQuickLinks.map((item) => {
-                    const isActive = pathname?.startsWith(item.href) ?? false;
-                    return (
-                      <li key={item.title}>
-                        <NavigationMenuLink asChild active={isActive}>
-                          <Link href={item.href}>
-                            <div
+                      </div>
+                      <span className="flex items-center gap-1 text-xs font-medium text-[#FF5C25]">
+                        Browse all docs <ArrowRight className="h-3 w-3" />
+                      </span>
+                    </Link>
+                  </NavigationMenuLink>
+
+                  <ul className="flex flex-col gap-1 p-3">
+                    {docsQuickLinks.map((item) => {
+                      const isActive = pathname?.startsWith(item.href) ?? false;
+                      const Icon = item.icon;
+                      return (
+                        <li key={item.title}>
+                          <NavigationMenuLink asChild active={isActive}>
+                            <Link
+                              href={item.href}
                               className={cn(
-                                'text-sm font-medium leading-none',
-                                isActive && 'text-primary',
+                                'flex items-start gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-muted/60',
+                                isActive && 'bg-muted/60',
                               )}
                             >
-                              {item.title}
-                            </div>
-                            <p
-                              className={cn(
-                                'text-muted-foreground line-clamp-2 text-sm leading-snug',
-                                isActive && 'text-primary/80',
-                              )}
-                            >
-                              {item.description}
-                            </p>
-                          </Link>
-                        </NavigationMenuLink>
-                      </li>
-                    );
-                  })}
-                </ul>
+                              <div className={cn(
+                                'mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border bg-background',
+                                isActive && 'border-[#FF5C25]/40 bg-[#FF5C25]/5',
+                              )}>
+                                <Icon className={cn('h-3.5 w-3.5 text-muted-foreground', isActive && 'text-[#FF5C25]')} />
+                              </div>
+                              <div>
+                                <div className={cn('text-sm font-medium leading-none mb-1', isActive && 'text-[#FF5C25]')}>
+                                  {item.title}
+                                </div>
+                                <p className="text-xs leading-relaxed text-muted-foreground line-clamp-2">
+                                  {item.description}
+                                </p>
+                              </div>
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
             {navLinks.map(({ href, label, isActive }) => (

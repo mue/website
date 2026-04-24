@@ -59,7 +59,7 @@ export default async function BlogPagePaginated({ params }: { params: Promise<Pa
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-20 h-[80vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.28)_0%,_transparent_60%)] blur-3xl" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[80vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.28)_0%,_transparent_60%)] blur-3xl" />
 
       <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
         <script

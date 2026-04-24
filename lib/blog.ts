@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+import sharp from 'sharp';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
@@ -11,6 +12,21 @@ import rehypeRaw from 'rehype-raw';
 import rehypeStringify from 'rehype-stringify';
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog');
+const PUBLIC_DIR = path.join(process.cwd(), 'public');
+
+async function generateBlurDataURL(imagePath: string): Promise<string | undefined> {
+  if (!imagePath?.startsWith('/')) return undefined;
+  try {
+    const buffer = await sharp(path.join(PUBLIC_DIR, imagePath))
+      .resize(8, 8, { fit: 'inside' })
+      .blur()
+      .toFormat('webp')
+      .toBuffer();
+    return `data:image/webp;base64,${buffer.toString('base64')}`;
+  } catch {
+    return undefined;
+  }
+}
 
 export type BlogFrontmatter = {
   title: string;
@@ -101,6 +117,10 @@ export async function getAllBlogPosts(): Promise<BlogPostPreview[]> {
     const minutes = Math.max(1, Math.round(wordCount / 180));
     const readingTime = `${minutes} min read`;
 
+    if (frontmatter.image && !frontmatter.imagePlaceholder) {
+      frontmatter.imagePlaceholder = await generateBlurDataURL(frontmatter.image);
+    }
+
     posts.push({
       slug,
       frontmatter,
@@ -145,6 +165,10 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
   const wordCount = content.split(/\s+/).filter(Boolean).length;
   const minutes = Math.max(1, Math.round(wordCount / 180));
   const readingTime = `${minutes} min read`;
+
+  if (frontmatter.image && !frontmatter.imagePlaceholder) {
+    frontmatter.imagePlaceholder = await generateBlurDataURL(frontmatter.image);
+  }
 
   return {
     slug,

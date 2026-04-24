@@ -2,78 +2,59 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function DocsArticleLoading() {
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-background via-background to-muted/40">
-      <div className="mx-auto w-full max-w-7xl px-6 py-10 lg:flex lg:items-start lg:gap-10">
-        {/* Mobile Menu skeleton */}
-        <div className="mb-6 lg:hidden">
-          <Skeleton className="h-10 w-full" />
-        </div>
-
-        {/* Desktop Sidebar skeleton */}
-        <aside className="hidden w-64 shrink-0 lg:block lg:sticky lg:top-28">
-          <Skeleton className="mb-6 h-10 w-full" />
-          <div className="space-y-3">
-            {[...Array(8)].map((_, i) => (
-              <Skeleton key={i} className="h-5 w-full" />
-            ))}
-          </div>
-        </aside>
-
-        {/* Main content skeleton */}
-        <div className="min-w-0 flex-1 pb-16 lg:pb-0">
-          {/* Breadcrumb skeleton */}
-          <Skeleton className="mb-6 h-5 w-80" />
-
-          {/* Header skeleton */}
-          <div className="mb-8 space-y-4">
-            <Skeleton className="h-10 w-full max-w-2xl" />
-            <Skeleton className="h-6 w-full max-w-xl" />
+    <div className="space-y-10">
+      {/* Header — matches DocsShell border-b pb-6 */}
+      <div className="border-b pb-6 space-y-6">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <Skeleton className="h-4 w-24" />
+            <Skeleton className="h-4 w-3" />
+            <Skeleton className="h-4 w-20" />
+            <Skeleton className="h-4 w-3" />
             <Skeleton className="h-4 w-32" />
           </div>
+          <Skeleton className="h-8 w-24 xl:hidden" />
+        </div>
 
-          {/* Article content skeleton */}
-          <div className="space-y-6">
-            {/* Paragraph blocks */}
-            {[...Array(6)].map((_, i) => (
+        <div className="space-y-2">
+          <Skeleton className="h-9 w-2/3 max-w-md" />
+          <Skeleton className="h-5 w-full max-w-xl" />
+          <Skeleton className="h-3 w-16" />
+        </div>
+      </div>
+
+      {/* Content + TOC — matches DocsShell xl:grid */}
+      <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_240px] xl:items-start gap-10">
+        <div className="space-y-12">
+          <div className="space-y-8">
+            {[...Array(4)].map((_, i) => (
               <div key={i} className="space-y-3">
-                {i % 3 === 0 && <Skeleton className="mb-4 h-7 w-2/3" />}
+                {i % 2 === 0 && <Skeleton className="h-6 w-2/5" />}
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-full" />
                 <Skeleton className="h-4 w-4/5" />
-                {i % 4 === 0 && <Skeleton className="my-6 h-48 w-full rounded-xl" />}
+                {i === 1 && <Skeleton className="mt-2 h-32 w-full rounded-lg" />}
               </div>
             ))}
-
-            {/* Code block skeleton */}
-            <Skeleton className="h-64 w-full rounded-xl" />
-
-            {/* More paragraphs */}
-            <div className="space-y-2">
-              <Skeleton className="h-4 w-full" />
-              <Skeleton className="h-4 w-full" />
-              <Skeleton className="h-4 w-3/4" />
-            </div>
           </div>
 
-          {/* Navigation skeleton */}
-          <div className="mt-12 grid gap-4 border-t pt-6 md:grid-cols-2">
-            <Skeleton className="h-24 w-full rounded-xl" />
-            <Skeleton className="h-24 w-full rounded-xl" />
+          {/* Prev/next nav */}
+          <div className="grid gap-4 border-t pt-6 md:grid-cols-2">
+            <Skeleton className="h-16 w-full rounded-xl" />
+            <Skeleton className="h-16 w-full rounded-xl" />
           </div>
 
-          {/* CTA skeleton */}
-          <Skeleton className="mt-12 h-40 w-full rounded-2xl" />
+          {/* CTA card */}
+          <Skeleton className="h-28 w-full rounded-2xl" />
         </div>
 
-        {/* TOC sidebar skeleton (desktop only) */}
-        <aside className="hidden w-64 shrink-0 xl:block xl:sticky xl:top-28">
-          <div className="space-y-3">
-            <Skeleton className="h-5 w-32" />
-            {[...Array(6)].map((_, i) => (
-              <Skeleton key={i} className="h-4 w-full" />
-            ))}
-          </div>
-        </aside>
+        {/* TOC */}
+        <div className="hidden xl:block space-y-3">
+          <Skeleton className="h-4 w-28" />
+          {[...Array(5)].map((_, i) => (
+            <Skeleton key={i} className="h-3" style={{ width: `${65 + i * 7}%` }} />
+          ))}
+        </div>
       </div>
     </div>
   );

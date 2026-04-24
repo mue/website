@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -10,30 +10,39 @@ type BlogContentLightboxProps = {
 
 export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxVisible, setLightboxVisible] = useState(false);
   const [lightboxSrc, setLightboxSrc] = useState('');
   const [lightboxAlt, setLightboxAlt] = useState('');
   const [allImages, setAllImages] = useState<HTMLImageElement[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    // Find all images in the blog content
+    return () => {
+      if (openTimer.current) clearTimeout(openTimer.current);
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
+
+  useEffect(() => {
     const images = document.querySelectorAll('.docs-prose img');
     const imageElements = Array.from(images) as HTMLImageElement[];
     setAllImages(imageElements);
 
-    // Add click handlers to all images
     imageElements.forEach((img, index) => {
       img.style.cursor = 'zoom-in';
       img.onclick = () => {
         setLightboxSrc(img.src);
         setLightboxAlt(img.alt || '');
         setCurrentIndex(index);
+        if (closeTimer.current) clearTimeout(closeTimer.current);
         setLightboxOpen(true);
+        openTimer.current = setTimeout(() => setLightboxVisible(true), 16);
       };
     });
 
     return () => {
-      // Cleanup click handlers
       imageElements.forEach((img) => {
         img.onclick = null;
       });
@@ -41,7 +50,9 @@ export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
   }, [contentHtml]);
 
   const closeLightbox = () => {
-    setLightboxOpen(false);
+    if (openTimer.current) clearTimeout(openTimer.current);
+    setLightboxVisible(false);
+    closeTimer.current = setTimeout(() => setLightboxOpen(false), 250);
   };
 
   const nextImage = useCallback(() => {
@@ -60,18 +71,13 @@ export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
     setLightboxAlt(allImages[newIndex].alt || '');
   }, [allImages, currentIndex]);
 
-  // Keyboard navigation
   useEffect(() => {
     if (!lightboxOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        closeLightbox();
-      } else if (e.key === 'ArrowRight') {
-        nextImage();
-      } else if (e.key === 'ArrowLeft') {
-        prevImage();
-      }
+      if (e.key === 'Escape') closeLightbox();
+      else if (e.key === 'ArrowRight') nextImage();
+      else if (e.key === 'ArrowLeft') prevImage();
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -82,7 +88,7 @@ export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-2 sm:p-4"
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-2 sm:p-4 transition-opacity duration-250 ${lightboxVisible ? 'opacity-100' : 'opacity-0'}`}
       onClick={closeLightbox}
       role="dialog"
       aria-modal="true"
@@ -99,10 +105,7 @@ export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
       {allImages.length > 1 && (
         <>
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              prevImage();
-            }}
+            onClick={(e) => { e.stopPropagation(); prevImage(); }}
             className="absolute left-2 sm:left-4 z-10 rounded-full bg-black/50 p-2 text-white transition hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
             aria-label="Previous image"
           >
@@ -110,10 +113,7 @@ export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
           </button>
 
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              nextImage();
-            }}
+            onClick={(e) => { e.stopPropagation(); nextImage(); }}
             className="absolute right-2 sm:right-4 z-10 rounded-full bg-black/50 p-2 text-white transition hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
             aria-label="Next image"
           >
@@ -122,7 +122,9 @@ export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
         </>
       )}
 
-      <div className="relative max-h-[90vh] max-w-[90vw] w-full h-full flex items-center justify-center">
+      <div
+        className={`relative max-h-[90vh] max-w-[90vw] w-full h-full flex items-center justify-center transition-all duration-250 ${lightboxVisible ? 'scale-100 opacity-100' : 'scale-[0.97] opacity-0'}`}
+      >
         <div className="relative w-full h-full" onClick={(e) => e.stopPropagation()}>
           <Image
             src={lightboxSrc}

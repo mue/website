@@ -70,8 +70,8 @@ export function DocsShell({ toc = [], breadcrumb, children, header }: DocsShellP
 
       <div
         className={cn(
-          'gap-10',
-          hasToc ? 'xl:grid xl:grid-cols-[minmax(0,1fr)_240px] xl:items-start' : 'flex flex-col',
+          'gap-16',
+          hasToc ? 'xl:grid xl:grid-cols-[minmax(0,1fr)_220px] xl:items-start' : 'flex flex-col',
         )}
       >
         <div className="space-y-12">{children}</div>

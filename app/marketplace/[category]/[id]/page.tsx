@@ -479,57 +479,33 @@ export default async function MarketplaceItemPage({
                   </div>
 
                   {isPhotoPack && data.photos && data.photos.length > 0 && (
-                    <div className="mt-4 grid gap-3 sm:mt-6 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                      <div className="rounded-xl border border-border/60 bg-gradient-to-br from-emerald-500/10 to-emerald-500/5 p-4 sm:p-6 shadow-sm transition hover:shadow-md">
-                        <div className="flex items-center justify-between gap-3">
-                          <div className="min-w-0 flex-1">
-                            <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 sm:text-3xl">
-                              {data.photos.length}
-                            </div>
-                            <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                              Total {data.photos.length === 1 ? 'Photo' : 'Photos'}
-                            </div>
+                    <div className="mt-4 sm:mt-6 rounded-xl border border-border bg-card/50 divide-y sm:divide-y-0 sm:divide-x divide-border overflow-hidden flex flex-col sm:flex-row">
+                      <div className="flex flex-1 items-center gap-3 px-5 py-4">
+                        <Images className="h-4 w-4 shrink-0 text-muted-foreground" />
+                        <div>
+                          <div className="text-xl font-semibold text-foreground">{data.photos.length}</div>
+                          <div className="text-xs text-muted-foreground">Total {data.photos.length === 1 ? 'Photo' : 'Photos'}</div>
+                        </div>
+                      </div>
+                      <div className="flex flex-1 items-center gap-3 px-5 py-4">
+                        <Camera className="h-4 w-4 shrink-0 text-muted-foreground" />
+                        <div>
+                          <div className="text-xl font-semibold text-foreground">
+                            {new Set(data.photos.map((p) => p.photographer).filter(Boolean)).size}
                           </div>
-                          <div className="flex-shrink-0 rounded-full bg-emerald-500/20 p-2 sm:p-3">
-                            <Images className="h-5 w-5 text-emerald-600 dark:text-emerald-400 sm:h-6 sm:w-6" />
+                          <div className="text-xs text-muted-foreground">
+                            {new Set(data.photos.map((p) => p.photographer).filter(Boolean)).size === 1 ? 'Photographer' : 'Photographers'}
                           </div>
                         </div>
                       </div>
-
-                      <div className="rounded-xl border border-border/60 bg-gradient-to-br from-orange-500/10 to-orange-500/5 p-4 sm:p-6 shadow-sm transition hover:shadow-md">
-                        <div className="flex items-center justify-between gap-3">
-                          <div className="min-w-0 flex-1">
-                            <div className="text-2xl font-bold text-orange-600 dark:text-orange-400 sm:text-3xl">
-                              {new Set(data.photos.map((p) => p.photographer).filter(Boolean)).size}
-                            </div>
-                            <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                              {new Set(data.photos.map((p) => p.photographer).filter(Boolean))
-                                .size === 1
-                                ? 'Photographer'
-                                : 'Photographers'}
-                            </div>
+                      <div className="flex flex-1 items-center gap-3 px-5 py-4">
+                        <MapPin className="h-4 w-4 shrink-0 text-muted-foreground" />
+                        <div>
+                          <div className="text-xl font-semibold text-foreground">
+                            {new Set(data.photos.map((p) => p.location).filter(Boolean)).size}
                           </div>
-                          <div className="flex-shrink-0 rounded-full bg-orange-500/20 p-2 sm:p-3">
-                            <Camera className="h-5 w-5 text-orange-600 dark:text-orange-400 sm:h-6 sm:w-6" />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="rounded-xl border border-border/60 bg-gradient-to-br from-cyan-500/10 to-cyan-500/5 p-4 sm:p-6 shadow-sm transition hover:shadow-md">
-                        <div className="flex items-center justify-between gap-3">
-                          <div className="min-w-0 flex-1">
-                            <div className="text-2xl font-bold text-cyan-600 dark:text-cyan-400 sm:text-3xl">
-                              {new Set(data.photos.map((p) => p.location).filter(Boolean)).size}
-                            </div>
-                            <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                              {new Set(data.photos.map((p) => p.location).filter(Boolean)).size ===
-                              1
-                                ? 'Location'
-                                : 'Locations'}
-                            </div>
-                          </div>
-                          <div className="flex-shrink-0 rounded-full bg-cyan-500/20 p-2 sm:p-3">
-                            <MapPin className="h-5 w-5 text-cyan-600 dark:text-cyan-400 sm:h-6 sm:w-6" />
+                          <div className="text-xs text-muted-foreground">
+                            {new Set(data.photos.map((p) => p.location).filter(Boolean)).size === 1 ? 'Location' : 'Locations'}
                           </div>
                         </div>
                       </div>
@@ -553,57 +529,32 @@ export default async function MarketplaceItemPage({
                   )}
 
                   {isQuotePack && data.quotes && data.quotes.length > 0 && (
-                    <div className="mt-4 grid gap-3 sm:mt-6 sm:gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                      <div className="rounded-xl border border-border/60 bg-gradient-to-br from-primary/10 to-primary/5 p-4 sm:p-6 shadow-sm transition hover:shadow-md">
-                        <div className="flex items-center justify-between gap-3">
-                          <div className="min-w-0 flex-1">
-                            <div className="text-2xl font-bold text-primary sm:text-3xl">
-                              {data.quotes.length}
-                            </div>
-                            <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                              Total {data.quotes.length === 1 ? 'Quote' : 'Quotes'}
-                            </div>
+                    <div className="mt-4 sm:mt-6 rounded-xl border border-border bg-card/50 divide-y sm:divide-y-0 sm:divide-x divide-border overflow-hidden flex flex-col sm:flex-row">
+                      <div className="flex flex-1 items-center gap-3 px-5 py-4">
+                        <MessageSquareQuote className="h-4 w-4 shrink-0 text-muted-foreground" />
+                        <div>
+                          <div className="text-xl font-semibold text-foreground">{data.quotes.length}</div>
+                          <div className="text-xs text-muted-foreground">Total {data.quotes.length === 1 ? 'Quote' : 'Quotes'}</div>
+                        </div>
+                      </div>
+                      <div className="flex flex-1 items-center gap-3 px-5 py-4">
+                        <Users className="h-4 w-4 shrink-0 text-muted-foreground" />
+                        <div>
+                          <div className="text-xl font-semibold text-foreground">
+                            {new Set(data.quotes.map((q) => q.author).filter(Boolean)).size}
                           </div>
-                          <div className="flex-shrink-0 rounded-full bg-primary/20 p-2 sm:p-3">
-                            <MessageSquareQuote className="h-5 w-5 text-primary sm:h-6 sm:w-6" />
+                          <div className="text-xs text-muted-foreground">
+                            {new Set(data.quotes.map((q) => q.author).filter(Boolean)).size === 1 ? 'Unique Author' : 'Unique Authors'}
                           </div>
                         </div>
                       </div>
-
-                      <div className="rounded-xl border border-border/60 bg-gradient-to-br from-blue-500/10 to-blue-500/5 p-4 sm:p-6 shadow-sm transition hover:shadow-md">
-                        <div className="flex items-center justify-between gap-3">
-                          <div className="min-w-0 flex-1">
-                            <div className="text-2xl font-bold text-blue-600 dark:text-blue-400 sm:text-3xl">
-                              {new Set(data.quotes.map((q) => q.author).filter(Boolean)).size}
-                            </div>
-                            <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                              {new Set(data.quotes.map((q) => q.author).filter(Boolean)).size === 1
-                                ? 'Unique Author'
-                                : 'Unique Authors'}
-                            </div>
+                      <div className="flex flex-1 items-center gap-3 px-5 py-4">
+                        <Type className="h-4 w-4 shrink-0 text-muted-foreground" />
+                        <div>
+                          <div className="text-xl font-semibold text-foreground">
+                            {Math.round(data.quotes.reduce((acc, q) => acc + q.quote.length, 0) / data.quotes.length)}
                           </div>
-                          <div className="flex-shrink-0 rounded-full bg-blue-500/20 p-2 sm:p-3">
-                            <Users className="h-5 w-5 text-blue-600 dark:text-blue-400 sm:h-6 sm:w-6" />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="rounded-xl border border-border/60 bg-gradient-to-br from-purple-500/10 to-purple-500/5 p-4 sm:p-6 shadow-sm transition hover:shadow-md">
-                        <div className="flex items-center justify-between gap-3">
-                          <div className="min-w-0 flex-1">
-                            <div className="text-2xl font-bold text-purple-600 dark:text-purple-400 sm:text-3xl">
-                              {Math.round(
-                                data.quotes.reduce((acc, q) => acc + q.quote.length, 0) /
-                                  data.quotes.length,
-                              )}
-                            </div>
-                            <div className="mt-1 text-xs font-medium text-muted-foreground sm:text-sm">
-                              Avg. Characters
-                            </div>
-                          </div>
-                          <div className="flex-shrink-0 rounded-full bg-purple-500/20 p-2 sm:p-3">
-                            <Type className="h-5 w-5 text-purple-600 dark:text-purple-400 sm:h-6 sm:w-6" />
-                          </div>
+                          <div className="text-xs text-muted-foreground">Avg. Characters</div>
                         </div>
                       </div>
                     </div>

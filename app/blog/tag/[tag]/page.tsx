@@ -45,7 +45,7 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
   const readable = tag.replace(/-/g, ' ');
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-0 -z-20 h-[60vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.22)_0%,_transparent_60%)] blur-3xl" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[60vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.22)_0%,_transparent_60%)] blur-3xl" />
       <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
         <script
           type="application/ld+json"

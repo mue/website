@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight, User, Calendar, Tag } from 'lucide-react';
 import { type ShowcaseItem } from '@/lib/showcase';
 import { Badge } from '@/components/ui/badge';
@@ -16,14 +16,32 @@ type ShowcaseLightboxProps = {
 };
 
 export function ShowcaseLightbox({ item, onClose, onPrevious, onNext, hasPrevious, hasNext }: ShowcaseLightboxProps) {
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'ArrowLeft' && hasPrevious && onPrevious) {
-      onPrevious();
-    } else if (e.key === 'ArrowRight' && hasNext && onNext) {
-      onNext();
-    } else if (e.key === 'Escape') {
-      onClose();
+  const [visible, setVisible] = useState(false);
+  const [displayItem, setDisplayItem] = useState<ShowcaseItem | null>(null);
+  const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    if (item) {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+      setVisible(false);
+      setDisplayItem(item);
+      openTimer.current = setTimeout(() => setVisible(true), 16);
+    } else {
+      if (openTimer.current) clearTimeout(openTimer.current);
+      setVisible(false);
+      closeTimer.current = setTimeout(() => setDisplayItem(null), 250);
     }
+    return () => {
+      if (openTimer.current) clearTimeout(openTimer.current);
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, [item]);
+
+  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === 'ArrowLeft' && hasPrevious && onPrevious) onPrevious();
+    else if (e.key === 'ArrowRight' && hasNext && onNext) onNext();
+    else if (e.key === 'Escape') onClose();
   }, [hasPrevious, hasNext, onPrevious, onNext, onClose]);
 
   useEffect(() => {
@@ -32,18 +50,18 @@ export function ShowcaseLightbox({ item, onClose, onPrevious, onNext, hasPreviou
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [item, handleKeyDown]);
 
-  if (!item) return null;
+  if (!displayItem) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm"
+      className={`fixed inset-0 z-50 bg-black/70 backdrop-blur-sm transition-opacity duration-250 ${visible ? 'opacity-100' : 'opacity-0'}`}
       onClick={onClose}
       role="dialog"
       aria-modal="true"
     >
       <button
         onClick={onClose}
-        className="absolute top-4 right-4 z-10 cursor-pointer rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition-all hover:bg-background hover:scale-110"
+        className="absolute right-4 top-4 z-10 cursor-pointer rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition-all hover:scale-110 hover:bg-background"
         aria-label="Close lightbox"
       >
         <X className="h-6 w-6" />
@@ -52,7 +70,7 @@ export function ShowcaseLightbox({ item, onClose, onPrevious, onNext, hasPreviou
       {hasPrevious && (
         <button
           onClick={(e) => { e.stopPropagation(); onPrevious?.(); }}
-          className="absolute left-4 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition-all hover:bg-background hover:scale-110"
+          className="absolute left-4 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition-all hover:scale-110 hover:bg-background"
           aria-label="Previous image"
         >
           <ChevronLeft className="h-6 w-6" />
@@ -62,51 +80,55 @@ export function ShowcaseLightbox({ item, onClose, onPrevious, onNext, hasPreviou
       {hasNext && (
         <button
           onClick={(e) => { e.stopPropagation(); onNext?.(); }}
-          className="absolute right-4 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition-all hover:bg-background hover:scale-110"
+          className="absolute right-4 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition-all hover:scale-110 hover:bg-background"
           aria-label="Next image"
         >
           <ChevronRight className="h-6 w-6" />
         </button>
       )}
 
-      <div className="flex h-full items-center justify-center p-4">
-        <div className="max-w-7xl w-full" onClick={(e) => e.stopPropagation()}>
-          <div className="relative aspect-video w-full overflow-hidden rounded-lg">
+      <div
+        className={`flex h-full items-center justify-center p-4 transition-all duration-250 ${visible ? 'scale-100 opacity-100' : 'scale-[0.97] opacity-0'}`}
+      >
+        <div className="w-full max-w-7xl" onClick={(e) => e.stopPropagation()}>
+          <div className="relative aspect-video w-full overflow-hidden rounded-xl">
             <Image
-              src={item.imageUrl}
-              alt={`Mue setup by ${item.author}`}
+              src={displayItem.imageUrl}
+              alt={`Mue setup by ${displayItem.author}`}
               fill
               className="object-contain"
               sizes="(max-width: 1536px) 100vw, 1536px"
               priority
+              placeholder={displayItem.blurDataURL ? 'blur' : 'empty'}
+              blurDataURL={displayItem.blurDataURL}
             />
           </div>
 
-          <div className="mt-4 rounded-lg bg-background/80 p-6 backdrop-blur-sm">
+          <div className="mt-4 rounded-xl bg-background/80 p-6 backdrop-blur-sm">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <User className="h-4 w-4" />
                   <span>
-                    {item.discordUsername ? (
+                    {displayItem.discordUsername ? (
                       <>
-                        <span className="font-medium text-foreground">{item.author}</span>
-                        <span className="ml-2 text-xs">({item.discordUsername})</span>
+                        <span className="font-medium text-foreground">{displayItem.author}</span>
+                        <span className="ml-2 text-xs">({displayItem.discordUsername})</span>
                       </>
                     ) : (
-                      <span className="font-medium text-foreground">{item.author}</span>
+                      <span className="font-medium text-foreground">{displayItem.author}</span>
                     )}
                   </span>
                 </div>
 
-                {item.description && (
-                  <p className="text-sm text-muted-foreground">{item.description}</p>
+                {displayItem.description && (
+                  <p className="text-sm text-muted-foreground">{displayItem.description}</p>
                 )}
 
                 <div className="flex items-center gap-2 text-xs text-muted-foreground">
                   <Calendar className="h-3 w-3" />
                   <span>
-                    {new Date(item.createdAt).toLocaleDateString(undefined, {
+                    {new Date(displayItem.createdAt).toLocaleDateString(undefined, {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric',
@@ -115,9 +137,9 @@ export function ShowcaseLightbox({ item, onClose, onPrevious, onNext, hasPreviou
                 </div>
               </div>
 
-              {item.tags && item.tags.length > 0 && (
+              {displayItem.tags && displayItem.tags.length > 0 && (
                 <div className="flex flex-wrap gap-2">
-                  {item.tags.map((tag) => (
+                  {displayItem.tags.map((tag) => (
                     <Badge key={tag} variant="secondary" className="text-xs">
                       <Tag className="mr-1 h-3 w-3" />
                       {tag}

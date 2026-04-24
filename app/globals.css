@@ -201,16 +201,57 @@
     @apply mt-0;
   }
 
+  .docs-prose h2,
+  .docs-prose h4 {
+    @apply transition-colors duration-150;
+  }
+
   .docs-prose h2 {
-    @apply mt-12 scroll-m-24 text-2xl font-semibold tracking-tight;
+    @apply mt-12 scroll-m-24 text-2xl font-semibold tracking-tight text-foreground;
   }
 
   .docs-prose h3 {
-    @apply mt-10 scroll-m-24 text-xl font-semibold;
+    @apply mt-16 scroll-m-24 border-t border-border pt-8 text-xs font-bold uppercase tracking-widest text-[#FF5C25];
   }
 
   .docs-prose h4 {
-    @apply mt-8 scroll-m-24 text-lg font-semibold;
+    @apply mt-10 scroll-m-24 text-base font-semibold text-foreground;
+  }
+
+  .docs-prose h2 a,
+  .docs-prose h3 a,
+  .docs-prose h4 a {
+    @apply transition-colors duration-150;
+  }
+
+  .docs-prose h2 a::after,
+  .docs-prose h4 a::after {
+    content: ' #';
+    @apply text-muted-foreground/30 opacity-0 transition-opacity duration-150;
+  }
+
+  .docs-prose h2:hover a::after,
+  .docs-prose h4:hover a::after {
+    @apply opacity-100;
+  }
+
+  .docs-prose h2:hover a,
+  .docs-prose h4:hover a {
+    @apply text-foreground/80;
+  }
+
+  .docs-prose h5 {
+    @apply mt-6 mb-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground/60;
+  }
+
+  .docs-prose h5 + table,
+  .docs-prose h5 + pre {
+    @apply mt-2;
+  }
+
+  .docs-prose strong,
+  .docs-prose b {
+    @apply font-semibold text-foreground;
   }
 
   .docs-prose p {

@@ -22,7 +22,7 @@ const communityStats: { label: string; value: string; icon: LucideIcon }[] = [
   { label: 'Collaborators', value: '50+', icon: Users },
   { label: 'GitHub Stars', value: '600+', icon: Star },
   { label: 'Forks', value: '70+', icon: GitFork },
-  { label: 'Users', value: '5k+ monthly', icon: UserCheck },
+  { label: 'Users', value: '5K+ Monthly', icon: UserCheck },
   { label: 'Tabs Opened', value: '10M+', icon: LayoutDashboard },
   { label: 'Origins', value: 'Est. 2018', icon: CalendarDays },
 ];
@@ -93,7 +93,7 @@ export default function Home() {
     <div className="relative overflow-hidden">
       <SoftwareApplicationJsonLd />
       <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[100vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.25)_0%,_transparent_65%)] blur-3xl" />
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-black/80" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-transparent dark:to-black/80" />
 
       {/* Hero */}
       <section className="relative pb-16 pt-12 sm:pb-24 sm:pt-16">
@@ -200,11 +200,9 @@ export default function Home() {
               <FeatureCard
                 key={feature.title}
                 index={index}
-                eyebrow={feature.eyebrow}
                 title={feature.title}
                 description={feature.description}
                 bullets={feature.bullets}
-                footerText={feature.footerText}
               />
             ))}
           </div>
@@ -238,7 +236,6 @@ export default function Home() {
               className="border-[#FF5C25]/30 text-[#FF5C25]"
             >
               <Link href="https://github.com/mue/mue/issues" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2">
-                <FaGithub className="h-4 w-4" />
                 <span>See open issues</span>
               </Link>
             </Button>

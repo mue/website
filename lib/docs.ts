@@ -135,7 +135,7 @@ function createProcessor(toc: TocItem[]) {
         className: [
           'no-underline',
           'font-medium',
-          'text-muted-foreground',
+          'text-inherit',
           'hover:text-foreground',
         ],
       },

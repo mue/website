@@ -2,64 +2,67 @@ import { Skeleton } from '@/components/ui/skeleton';
 
 export default function DocsLoading() {
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-background via-background to-muted/40">
-      <div className="mx-auto w-full max-w-7xl px-6 py-10 lg:flex lg:items-start lg:gap-10">
-        {/* Mobile Menu skeleton */}
-        <div className="mb-6 lg:hidden">
-          <Skeleton className="h-10 w-full" />
+    <div className="space-y-10">
+      {/* Header — matches DocsShell border-b pb-6 */}
+      <div className="border-b pb-6 space-y-6">
+        <Skeleton className="h-4 w-28" />
+
+        <div className="space-y-4">
+          <Skeleton className="h-10 w-full max-w-2xl" />
+          <Skeleton className="h-6 w-full max-w-xl" />
+          <div className="flex gap-3">
+            <Skeleton className="h-10 w-36 rounded-lg" />
+            <Skeleton className="h-10 w-28 rounded-lg" />
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="space-y-12">
+        {/* "Pick a storyline" — 3-col card grid */}
+        <div className="space-y-4">
+          <div className="space-y-1">
+            <Skeleton className="h-6 w-40" />
+            <Skeleton className="h-4 w-80" />
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="flex flex-col gap-4 rounded-2xl border bg-card/70 p-6">
+                <Skeleton className="h-8 w-8 rounded-md" />
+                <div className="space-y-2">
+                  <Skeleton className="h-5 w-24" />
+                  <Skeleton className="h-4 w-full" />
+                  <Skeleton className="h-4 w-4/5" />
+                </div>
+                <Skeleton className="mt-auto h-4 w-20" />
+              </div>
+            ))}
+          </div>
         </div>
 
-        {/* Desktop Sidebar skeleton */}
-        <aside className="hidden w-64 shrink-0 lg:block">
-          <Skeleton className="mb-6 h-10 w-full" />
-          <div className="space-y-4">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="space-y-2">
-                <Skeleton className="h-6 w-full" />
-                <div className="ml-4 space-y-1">
+        {/* "All documentation" — section cards grid */}
+        <div className="space-y-4">
+          <div className="space-y-1">
+            <Skeleton className="h-6 w-40" />
+            <Skeleton className="h-4 w-64" />
+          </div>
+          <div className="grid gap-6 lg:grid-cols-2">
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="flex flex-col rounded-2xl border bg-card/70 p-6">
+                <div className="flex items-start justify-between gap-3 mb-4">
+                  <div className="space-y-1">
+                    <Skeleton className="h-5 w-28" />
+                    <Skeleton className="h-3 w-16" />
+                  </div>
+                  <Skeleton className="h-4 w-14" />
+                </div>
+                <div className="space-y-2">
                   {[...Array(3)].map((_, j) => (
-                    <Skeleton key={j} className="h-5 w-full" />
+                    <Skeleton key={j} className="h-9 w-full rounded-lg" />
                   ))}
                 </div>
               </div>
             ))}
-          </div>
-        </aside>
-
-        {/* Main content skeleton */}
-        <div className="min-w-0 flex-1">
-          {/* Breadcrumb skeleton */}
-          <Skeleton className="mb-6 h-5 w-64" />
-
-          {/* Header skeleton */}
-          <div className="mb-12 space-y-4">
-            <Skeleton className="h-10 w-full max-w-2xl" />
-            <Skeleton className="h-6 w-full max-w-xl" />
-            <div className="flex gap-3">
-              <Skeleton className="h-10 w-32" />
-              <Skeleton className="h-10 w-32" />
-            </div>
-          </div>
-
-          {/* Content sections skeleton */}
-          <div className="space-y-8">
-            {[...Array(3)].map((_, i) => (
-              <div key={i} className="space-y-4">
-                <Skeleton className="h-8 w-64" />
-                <div className="space-y-2">
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-full" />
-                  <Skeleton className="h-4 w-5/6" />
-                </div>
-                {i % 2 === 0 && <Skeleton className="h-32 w-full rounded-xl" />}
-              </div>
-            ))}
-          </div>
-
-          {/* Navigation skeleton */}
-          <div className="mt-12 grid gap-4 border-t pt-6 md:grid-cols-2">
-            <Skeleton className="h-20 w-full rounded-xl" />
-            <Skeleton className="h-20 w-full rounded-xl" />
           </div>
         </div>
       </div>

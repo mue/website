@@ -642,8 +642,7 @@ function MarketplaceExplorerContent({
           <Link
             href="/marketplace/create"
             className="shrink-0"
-            target="_blank"
-            rel="noopener noreferrer"
+            {...(isEmbed ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           >
             <Button className="gap-2 h-12" size="sm">
               <Plus className="h-4 w-4" />

@@ -1,83 +1,85 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import type { TocItem } from '@/lib/docs';
 import { cn } from '@/lib/utils';
-import { ScrollArea } from '@/components/ui/scroll-area';
+
+const SCROLL_OFFSET = 120; // accounts for sticky navbar
 
 type DocsTocProps = {
   toc: TocItem[];
 };
 
 export function DocsToc({ toc }: DocsTocProps) {
-  const [activeId, setActiveId] = useState<string | null>(null);
+  const [activeId, setActiveId] = useState<string | null>(toc[0]?.id ?? null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const itemRefs = useRef<Map<string, HTMLAnchorElement>>(new Map());
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleHeadings = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort(
-            (a, b) =>
-              Number(a.target.getAttribute('data-depth')) -
-              Number(b.target.getAttribute('data-depth')),
-          );
+    const headingEls = toc
+      .map((item) => document.getElementById(item.id))
+      .filter(Boolean) as HTMLElement[];
 
-        if (visibleHeadings.length > 0) {
-          setActiveId(visibleHeadings[0].target.id);
+    if (headingEls.length === 0) return;
+
+    const updateActive = () => {
+      let current = headingEls[0];
+      for (const el of headingEls) {
+        if (el.getBoundingClientRect().top <= SCROLL_OFFSET) {
+          current = el;
         }
-      },
-      {
-        rootMargin: '0px 0px -70% 0px',
-        threshold: [0, 0.1, 0.5, 1],
-      },
-    );
-
-    toc.forEach((item) => {
-      const element = document.getElementById(item.id);
-      if (element) {
-        element.setAttribute('data-depth', item.depth.toString());
-        observer.observe(element);
       }
-    });
+      setActiveId(current.id);
+    };
 
-    return () => observer.disconnect();
+    window.addEventListener('scroll', updateActive, { passive: true });
+    updateActive();
+    return () => window.removeEventListener('scroll', updateActive);
   }, [toc]);
+
+  // Scroll the active TOC item into view within the list
+  useEffect(() => {
+    if (!activeId) return;
+    const el = itemRefs.current.get(activeId);
+    el?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+  }, [activeId]);
 
   if (toc.length === 0) return null;
 
   return (
     <aside>
-      <h2 className="font-semibold text-sm uppercase tracking-wide text-muted-foreground">
+      <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/60">
         On this page
       </h2>
-      <ScrollArea className="mt-4 max-h-[calc(100vh-11rem)] pr-2">
-        <ul className="space-y-2 text-sm">
-          {toc.map((item) => (
-            <li
-              key={item.id}
-              className={cn({
-                'pl-0': item.depth === 2,
-                'pl-4': item.depth === 3,
-                'pl-8': item.depth >= 4,
-              })}
+      <ul ref={listRef} className="mt-4 max-h-[calc(100vh-11rem)] space-y-1 overflow-y-auto pr-2 text-sm">
+        {toc.map((item) => (
+          <li
+            key={item.id}
+            className={cn({
+              'pl-0': item.depth === 2,
+              'pl-4': item.depth === 3,
+              'pl-7': item.depth >= 4,
+            })}
+          >
+            <a
+              ref={(el) => {
+                if (el) itemRefs.current.set(item.id, el);
+                else itemRefs.current.delete(item.id);
+              }}
+              href={`#${item.id}`}
+              className={cn(
+                'block rounded-md px-2 py-1 transition-colors',
+                activeId === item.id
+                  ? 'text-primary'
+                  : 'text-muted-foreground hover:text-foreground',
+              )}
             >
-              <a
-                href={`#${item.id}`}
-                className={cn(
-                  'block rounded-md px-2 py-1 transition-colors',
-                  activeId === item.id
-                    ? 'bg-primary/10 text-primary'
-                    : 'text-muted-foreground hover:text-foreground',
-                )}
-              >
-                {item.title}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </ScrollArea>
+              {item.title}
+            </a>
+          </li>
+        ))}
+      </ul>
     </aside>
   );
 }

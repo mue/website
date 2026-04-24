@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { LayoutGrid, Layers, X, ChevronLeft, ChevronRight, Camera, MapPin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -28,20 +28,20 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
   const { isEmbed, sendMessage } = useEmbed();
   const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
   const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxVisible, setLightboxVisible] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+  const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   console.log('[PhotoGallery] isEmbed:', isEmbed);
 
   const openLightbox = (index: number) => {
-    console.log('[PhotoGallery] openLightbox called, index:', index, 'isEmbed:', isEmbed);
-    // In embed mode, send postMessage instead of opening lightbox
     if (isEmbed) {
       const photo = photos[index];
       const photoUrl = photo?.url?.default ?? Object.values(photo?.url ?? {})[0];
-      
-      const payload = {
+      sendMessage('marketplace:lightbox', {
         action: 'open',
         index,
         photo: {
@@ -57,19 +57,20 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
           alt: p.location ?? p.photographer ?? itemName,
         })),
         totalCount: photos.length,
-      };
-      
-      console.log('[PhotoGallery] Sending lightbox message:', payload);
-      sendMessage('marketplace:lightbox', payload);
+      });
       return;
     }
-    
+
+    if (closeTimer.current) clearTimeout(closeTimer.current);
     setLightboxIndex(index);
     setLightboxOpen(true);
+    openTimer.current = setTimeout(() => setLightboxVisible(true), 16);
   };
 
   const closeLightbox = () => {
-    setLightboxOpen(false);
+    if (openTimer.current) clearTimeout(openTimer.current);
+    setLightboxVisible(false);
+    closeTimer.current = setTimeout(() => setLightboxOpen(false), 250);
   };
 
   const nextImage = useCallback(() => {
@@ -109,6 +110,13 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
 
   const currentPhoto = photos[lightboxIndex];
   const currentPhotoUrl = currentPhoto?.url?.default ?? Object.values(currentPhoto?.url ?? {})[0];
+
+  useEffect(() => {
+    return () => {
+      if (openTimer.current) clearTimeout(openTimer.current);
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
+  }, []);
 
   // Keyboard navigation for lightbox
   useEffect(() => {
@@ -250,10 +258,9 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
         </div>
       )}
 
-      {/* Lightbox Modal - Only render in normal mode (not embed) */}
       {!isEmbed && lightboxOpen && currentPhotoUrl && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-2 sm:p-4"
+          className={`fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-2 sm:p-4 transition-opacity duration-250 ${lightboxVisible ? 'opacity-100' : 'opacity-0'}`}
           onClick={closeLightbox}
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
@@ -296,7 +303,7 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
             </>
           )}
 
-          <div className="relative max-h-[90vh] max-w-[90vw] w-full h-full flex items-center justify-center">
+          <div className={`relative max-h-[90vh] max-w-[90vw] w-full h-full flex items-center justify-center transition-all duration-250 ${lightboxVisible ? 'scale-100 opacity-100' : 'scale-[0.97] opacity-0'}`}>
             <div className="relative w-full h-full" onClick={(e) => e.stopPropagation()}>
               <Image
                 src={currentPhotoUrl}
