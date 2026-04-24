@@ -87,20 +87,17 @@ export default async function ShowcasePage() {
 
         {/* Bottom CTA */}
         <div className="mt-16 rounded-2xl border border-border bg-muted/30 px-8 py-14 text-center">
-          <p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#FF5C25]">
-            Your turn
-          </p>
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
             Got inspired?
           </h2>
-          <p className="mx-auto mt-4 max-w-md text-base text-muted-foreground">
-            Download Mue and make your new tab your own — backgrounds, quotes, widgets, and more.
+          <p className="mx-auto mt-4 max-w-l text-base text-muted-foreground">
+            Download Mue and create your own personalized new tab experience.
           </p>
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Button
               asChild
               size="lg"
-              className="bg-linear-to-r from-[#c43d10] to-[#b02048] font-semibold text-white"
+              className="bg-linear-to-r from-[#c43d10] to-[#b02048] font-semibold text-white shadow-[0_20px_60px_-20px_rgba(255,92,37,0.4)] transition-all hover:scale-105 hover:shadow-[0_25px_70px_-15px_rgba(255,92,37,0.5)]"
             >
               <Link href="/download">Download Mue</Link>
             </Button>
