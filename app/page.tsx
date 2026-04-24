@@ -136,19 +136,18 @@ export default function Home() {
 
           <p className="max-w-xl text-pretty text-base text-muted-foreground sm:text-lg animate-fade-up animate-delay-300">
             Every tab hits different with Mue. Stunning backgrounds, quotes that slap, places for
-            your notes — everything you need to lock in.
+            your notes: everything you need to lock in.
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center animate-fade-up animate-delay-400">
             <Button
               size="lg"
-              className="group relative overflow-hidden bg-linear-to-r from-[#FF5C25] to-[#FF456E] px-6 py-4 text-sm font-semibold shadow-[0_20px_60px_-20px_rgba(255,92,37,0.5)] transition-all hover:shadow-[0_25px_70px_-15px_rgba(255,92,37,0.6)] hover:scale-105 sm:text-base"
+              className="group relative overflow-hidden border border-white/20 bg-linear-to-r from-[#FF5C25] to-[#FF456E] px-6 py-4 text-sm font-semibold text-white shadow-[0_20px_60px_-20px_rgba(255,92,37,0.5)] transition-all hover:shadow-[0_25px_70px_-15px_rgba(255,92,37,0.6)] hover:scale-105 sm:text-base"
               asChild
             >
               <Link href="/download">
-                <span className="relative z-10">Get Started</span>
-                <ArrowRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                <div className="absolute inset-0 -z-0 bg-linear-to-r from-[#FF456E] to-[#FF5C25] opacity-0 transition-opacity group-hover:opacity-100" />
+                <ArrowRight className="mr-2 h-4 w-4" />
+                Get Started
               </Link>
             </Button>
             <Button
