@@ -142,12 +142,12 @@ export default function Home() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center animate-fade-up animate-delay-400">
             <Button
               size="lg"
-              className="group relative overflow-hidden border border-white/20 bg-linear-to-r from-[#FF5C25] to-[#FF456E] px-6 py-4 text-sm font-semibold text-white shadow-[0_20px_60px_-20px_rgba(255,92,37,0.5)] transition-all hover:shadow-[0_25px_70px_-15px_rgba(255,92,37,0.6)] hover:scale-105 sm:text-base"
+              className="group relative overflow-hidden border border-white/20 bg-linear-to-r from-[#c43d10] to-[#b02048] px-6 py-4 text-sm font-semibold text-white shadow-[0_20px_60px_-20px_rgba(255,92,37,0.4)] transition-all hover:scale-105 sm:text-base"
               asChild
             >
-              <Link href="/download">
-                <ArrowRight className="mr-2 h-4 w-4" />
-                Get Started
+              <Link href="/download" className="flex items-center justify-center gap-2">
+                <ArrowRight className="h-4 w-4" />
+                <span>Get Started</span>
               </Link>
             </Button>
             <Button
@@ -156,9 +156,9 @@ export default function Home() {
               className="border-2 border-[#FF5C25]/30 px-6 py-4 text-sm font-semibold transition-all hover:border-[#FF5C25] hover:bg-[#FF5C25]/5 sm:text-base"
               asChild
             >
-              <Link href="/demo">
-                <Rocket className="mr-2 h-4 w-4" />
-                Try it now
+              <Link href="/demo" className="flex items-center justify-center gap-2">
+                <Rocket className="h-4 w-4" />
+                <span>Try it now</span>
               </Link>
             </Button>
           </div>
