@@ -276,7 +276,7 @@ export default function Home() {
             </Button>
           </div>
 
-          <div className="grid w-full gap-x-8 gap-y-10 text-left sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid w-full gap-x-8 gap-y-10 text-center sm:grid-cols-2 lg:grid-cols-3">
             {communityStats.map((stat) => (
               <CommunityStatCard
                 key={stat.label}
