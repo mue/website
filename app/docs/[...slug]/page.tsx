@@ -81,7 +81,7 @@ export async function generateMetadata({ params }: DocPageProps): Promise<Metada
     doc.frontmatter.description ?? `Learn about ${doc.frontmatter.title} in the Mue documentation.`;
 
   return {
-    title: `${doc.frontmatter.title} | Mue Docs`,
+    title: doc.frontmatter.title,
     description,
   };
 }

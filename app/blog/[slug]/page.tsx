@@ -33,9 +33,9 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
   if (!post) {
-    return { title: 'Post Not Found | Mue Blog' };
+    return { title: 'Page Not Found' };
   }
-  const title = `${post.frontmatter.title} | Mue Blog`;
+  const title = post.frontmatter.title;
   const description =
     post.excerpt || post.frontmatter.description || 'Read the latest from the Mue blog.';
   const url = `https://muetab.com/blog/${slug}`;

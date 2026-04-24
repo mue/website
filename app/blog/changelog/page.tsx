@@ -11,10 +11,10 @@ import { cn } from '@/lib/utils';
 export const revalidate = 3600; // Revalidate every hour (ISR)
 
 export const metadata: Metadata = {
-  title: 'Latest Changelog | Mue Blog',
+  title: 'Latest Changelog',
   description: 'View the latest release notes and updates for Mue.',
   openGraph: {
-    title: 'Latest Changelog | Mue Blog',
+    title: 'Latest Changelog',
     description: 'View the latest release notes and updates for Mue.',
   },
 };

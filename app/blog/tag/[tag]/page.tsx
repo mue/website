@@ -23,8 +23,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { tag } = await params;
   const readable = tag.replace(/-/g, ' ');
-  const title = `${readable.charAt(0).toUpperCase() + readable.slice(1)} | Tag | Mue Blog`;
+  const title = readable.charAt(0).toUpperCase() + readable.slice(1);
   const description = `Articles tagged with ${readable} on the Mue Blog.`;
+
   return {
     title,
     description,
@@ -36,13 +37,17 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
 export default async function TagPage({ params }: { params: Promise<Params> }) {
   const { tag } = await params;
   const posts = await getAllBlogPosts();
+
   const filtered = posts.filter((p) =>
     p.frontmatter.tags?.map((t) => t.toLowerCase()).includes(tag.toLowerCase()),
   );
+
   if (filtered.length === 0) {
     notFound();
   }
+
   const readable = tag.replace(/-/g, ' ');
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[60vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.22)_0%,_transparent_60%)] blur-3xl" />
@@ -67,12 +72,14 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
             }),
           }}
         />
+
         <Link
           href="/blog"
           className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), 'mb-8 gap-2')}
         >
           <ChevronLeft className="h-4 w-4" /> Back to blog
         </Link>
+
         <header className="mb-16 text-center">
           <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Posts tagged &quot;{readable}&quot;
@@ -81,6 +88,7 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
             {filtered.length} post{filtered.length !== 1 && 's'} with this tag.
           </p>
         </header>
+
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((post) => (
             <BlogCard key={post.slug} post={post} />
