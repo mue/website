@@ -18,28 +18,25 @@ import { SoftwareApplicationJsonLd } from '@/components/json-ld';
 
 const stats = ['Building since 2018', '5,000+ monthly active users', '10,000,000+ tabs'];
 
-const communityStats: { label: string; value: string; description: string; icon: LucideIcon }[] = [
-  { label: 'Collaborators', value: '50+', description: 'Developers keeping Mue fresh and reliable.', icon: Users },
-  { label: 'GitHub Stars', value: '600+', description: 'Loved by enthusiasts across the globe.', icon: Star },
-  { label: 'Forks', value: '70+', description: 'Actively explored and upgraded.', icon: GitFork },
-  { label: 'Users', value: '5k+ monthly', description: 'Daily focus seekers tuning their tabs.', icon: UserCheck },
-  { label: 'Tabs Opened', value: '10M+', description: 'From new tabs to renewed focus.', icon: LayoutDashboard },
-  { label: 'Origins', value: 'Est. 2018', description: 'Years of iteration and mindful design.', icon: CalendarDays },
+const communityStats: { label: string; value: string; icon: LucideIcon }[] = [
+  { label: 'Collaborators', value: '50+', icon: Users },
+  { label: 'GitHub Stars', value: '600+', icon: Star },
+  { label: 'Forks', value: '70+', icon: GitFork },
+  { label: 'Users', value: '5k+ monthly', icon: UserCheck },
+  { label: 'Tabs Opened', value: '10M+', icon: LayoutDashboard },
+  { label: 'Origins', value: 'Est. 2018', icon: CalendarDays },
 ];
 
 const scrollFeatures = [
   {
-    eyebrow: 'Eye candy',
     title: 'Backgrounds that hit different',
     description: 'Pick from our unique photographer selection or download user-created packs.',
     bullets: [
       'Exclusive library of photos not found anywhere else',
       'Community organised backgrounds available in the Marketplace',
     ],
-    footerText: 'Fully customisable',
   },
   {
-    eyebrow: 'Stay locked in',
     title: 'Quotes that actually resonate',
     description:
       'Start every tab with quotes that match your mood and mindset, delivered in your language.',
@@ -47,15 +44,12 @@ const scrollFeatures = [
       'Hand-picked quotes that inspire and motivate',
       'Movie quotes, memes and more options in the Marketplace',
     ],
-    footerText: 'Personalise your flow',
   },
   {
-    eyebrow: 'Privacy first',
     title: 'Your data, your rules',
     description:
       'Mue is built with privacy at its core. Your data stays on your device and is never sold or shared.',
     bullets: ['No personal data collection', 'Fully open source on GitHub'],
-    footerText: 'Built on open principles',
   },
 ];
 
@@ -221,14 +215,11 @@ export default function Home() {
       <section className="border-t border-border py-24">
         <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-10 px-6 text-center">
           <div className="flex flex-col items-center gap-4">
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-[#FF5C25]">
-              Open Source
-            </p>
             <h2 className="text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               Built by you, for you.
             </h2>
             <p className="max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-              100% free and open source. Join the community shaping the future of Mue — whether
+              100% free and open source. Join the community shaping the future of Mue - whether
               that&apos;s contributing code, reporting issues, or sharing ideas.
             </p>
           </div>
@@ -258,7 +249,6 @@ export default function Home() {
                 key={stat.label}
                 label={stat.label}
                 value={stat.value}
-                description={stat.description}
                 icon={stat.icon}
               />
             ))}
