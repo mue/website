@@ -134,10 +134,10 @@ export default function Home() {
   return (
     <div className="relative overflow-hidden">
       <SoftwareApplicationJsonLd />
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[100vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.25)_0%,_transparent_70%)] blur-3xl" />
 
       {/* Hero */}
       <section className="relative pb-16 pt-20 sm:pb-24 sm:pt-28">
-        <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[100vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.25)_0%,_transparent_70%)] blur-3xl" />
         <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 px-6 text-center">
           <p
             className="text-lg font-medium text-foreground/70 animate-fade-up animate-delay-100"
