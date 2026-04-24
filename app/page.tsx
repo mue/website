@@ -142,7 +142,7 @@ export default function Home() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center animate-fade-up animate-delay-400">
             <Button
               size="lg"
-              className="group relative overflow-hidden border border-white/20 bg-linear-to-r from-[#c43d10] to-[#b02048] px-6 py-4 text-sm font-semibold text-white shadow-[0_20px_60px_-20px_rgba(255,92,37,0.4)] transition-all hover:scale-105 sm:text-base"
+              className="group relative overflow-hidden bg-linear-to-r from-[#c43d10] to-[#b02048] px-6 py-4 text-sm font-semibold text-white shadow-[0_20px_60px_-20px_rgba(255,92,37,0.4)] transition-all hover:scale-105 sm:text-base"
               asChild
             >
               <Link href="/download" className="flex items-center justify-center gap-2">
