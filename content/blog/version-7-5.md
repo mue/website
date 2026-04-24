@@ -1,10 +1,16 @@
 ---
-title: 'Version 7.5.0'
+title: Version 7.5.0
 date: '2026-01-24'
-author: 'David Ralph'
-description: 'A major update with a revamped codebase, improved UX, and a new marketplace experience.'
-image: '/blog/version-7-5.webp'
-tags: ['release', 'update']
+author: David Ralph
+description: >-
+  A major update with a revamped codebase, improved UX, and a new marketplace
+  experience.
+image: /blog/version-7-5.webp
+tags:
+  - release
+  - update
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRogAAABXRUJQVlA4WAoAAAAQAAAABwAABAAAQUxQSCkAAAAAuszf39/fzLrH2+/v7+/bx9Xq/////+rVv9Ll5eXl0r+pusvLy8u6qQBWUDggOAAAAPABAJ0BKggABQABQCYlAE6NcABZtKd+gAD+8ainY+FQYkIfsu61m4ehHBqma+T1MOGgGhKWAAAA
 ---
 
 In this update, we overhauled the codebase, improved a ton of UX issues and released

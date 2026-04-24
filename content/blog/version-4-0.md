@@ -1,10 +1,16 @@
 ---
-title: 'Version 4.0'
+title: Version 4.0
 date: '2020-08-01'
-author: 'Alex Sparkes'
-description: 'The update introducing the Mue Marketplace, improved modal and translation support for Mue.'
-image: '/blog/mue-marketplace.webp'
-tags: ['release', 'update']
+author: Alex Sparkes
+description: >-
+  The update introducing the Mue Marketplace, improved modal and translation
+  support for Mue.
+image: /blog/mue-marketplace.webp
+tags:
+  - release
+  - update
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAACwAQCdASoIAAQAAUAmJQBOgB6H5v/8AOJ+zgXFXmc97kisb7emzeoqRydjVWLgZuIAAA==
 ---
 
 Mue 4.0 is one of the largest updates ever in the history of Mue. We have put many hours into this update, we hope you enjoy it and please email us with any queries or suggestions.

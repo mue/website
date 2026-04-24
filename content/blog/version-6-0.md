@@ -1,10 +1,14 @@
 ---
-title: 'Version 6.0'
+title: Version 6.0
 date: '2021-11-17'
-author: 'David Ralph'
-description: 'Highly requested features and some improvements to the Mue interface'
-image: '/blog/version-6-0.webp'
-tags: ['release', 'update']
+author: David Ralph
+description: Highly requested features and some improvements to the Mue interface
+image: /blog/version-6-0.webp
+tags:
+  - release
+  - update
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAACQAQCdASoIAAQAAUAmJZwAAudP3WAA/q38yCTdKzyu50pxXxwBBBkrVAAAAA==
 ---
 
 Here's an update that brings some highly requested features to Mue, improvements to the interface and much more.

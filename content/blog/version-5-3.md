@@ -1,10 +1,16 @@
 ---
-title: 'Version 5.3'
+title: Version 5.3
 date: '2021-08-22'
-author: 'David Ralph'
-description: 'Bug fixes and optimisations with a few small features to improve your Mue experience further.'
-image: '/blog/version-5-3.webp'
-tags: ['release', 'update']
+author: David Ralph
+description: >-
+  Bug fixes and optimisations with a few small features to improve your Mue
+  experience further.
+image: /blog/version-5-3.webp
+tags:
+  - release
+  - update
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAADQAQCdASoIAAQAAUAmJZQCdAEPBSnLIAD+5u2vhs+XDHH004FB2iCnnYnfc9A0AAA=
 ---
 
 Here's an update that brings some new features to Mue and a lot of fixes.

@@ -1,10 +1,16 @@
 ---
-title: 'Version 5.0 - The big one'
+title: Version 5.0 - The big one
 date: '2021-04-23'
-author: 'Isaac Saunders'
-description: 'The biggest update to Mue yet. Learn about everything that was added to Mue in the new 5.0 release.'
-image: '/blog/version-5-0-the-big-one.webp'
-tags: ['release', 'update']
+author: Isaac Saunders
+description: >-
+  The biggest update to Mue yet. Learn about everything that was added to Mue in
+  the new 5.0 release.
+image: /blog/version-5-0-the-big-one.webp
+tags:
+  - release
+  - update
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAADwAQCdASoIAAQAAUAmJZQCdH8AFcoz3gAA/k/lXagU/dCpIBbDoP0podM5iIgXhEiUAAAA
 ---
 
 Over the last six months, we have been working on the largest (and longest to develop) update to Mue. The v5.0 screenshot above compared to the v4.1 screenshot below shows the massive transformation that Mue has undergone.

@@ -1,0 +1,3 @@
+# Exclude vercel/og from OpenNext build
+**/node_modules/@vercel/og/**
+**/node_modules/next/dist/compiled/@vercel/og/**

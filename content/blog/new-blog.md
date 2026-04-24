@@ -1,10 +1,13 @@
 ---
-title: 'We have a new blog'
+title: We have a new blog
 date: '2021-04-15'
-author: 'Isaac Saunders'
+author: Isaac Saunders
 description: 'The new Mue blog, powered by Hugo.'
-image: '/blog/newblog.webp'
-tags: ['announcement']
+image: /blog/newblog.webp
+tags:
+  - announcement
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRmQAAABXRUJQVlA4WAoAAAAQAAAABwAABAAAQUxQSAoAAAABB1D/iAhERP8DVlA4IDQAAADwAQCdASoIAAUAAUAmJZQCdH8AFco5GoAA/vfglH+d8anOLLWKrJlduGcRiEYvuSgkAAAA
 ---
 
 Hugo is cool. Ghost is also cool and has an awesome default theme. We mixed them.

@@ -1,10 +1,16 @@
 ---
-title: 'Version 4.1'
+title: Version 4.1
 date: '2020-10-04'
-author: 'David Ralph'
-description: 'A bug fixing update for Mue with some new extra features and optimisation, further improving your experience.'
-image: '/blog/version-4-1.webp'
-tags: ['release', 'update']
+author: David Ralph
+description: >-
+  A bug fixing update for Mue with some new extra features and optimisation,
+  further improving your experience.
+image: /blog/version-4-1.webp
+tags:
+  - release
+  - update
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAAAQAgCdASoIAAQAAUAmJYwCdH8AFcqkYhwAAP73qvbOCGeJs+6CI1kJuAAAAA==
 ---
 
 Here's an update that brings many fixes to Mue and a few additions.

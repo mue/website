@@ -1,10 +1,16 @@
 ---
-title: 'Version 5.2'
+title: Version 5.2
 date: '2021-08-02'
-author: 'David Ralph'
-description: 'A bug fixing update for Mue with some new extra features and optimisation, further improving your experience.'
-image: '/blog/version-5-2.webp'
-tags: ['release', 'update']
+author: David Ralph
+description: >-
+  A bug fixing update for Mue with some new extra features and optimisation,
+  further improving your experience.
+image: /blog/version-5-2.webp
+tags:
+  - release
+  - update
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRj4AAABXRUJQVlA4IDIAAADQAQCdASoIAAQAAUAmJZQCdAD0h/tsAAD+4p3lLgrA81j99moBWdafuGB4Uh2qo0ZAAA==
 ---
 
 Here's an update that brings some new features to Mue and fixes.

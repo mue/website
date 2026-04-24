@@ -1,10 +1,16 @@
 ---
-title: 'Version 5.1'
+title: Version 5.1
 date: '2021-06-16'
-author: 'David Ralph'
-description: 'A bug fixing update for Mue with some new extra features and optimisation, further improving your experience.'
-image: '/blog/version-5-1.webp'
-tags: ['release', 'update']
+author: David Ralph
+description: >-
+  A bug fixing update for Mue with some new extra features and optimisation,
+  further improving your experience.
+image: /blog/version-5-1.webp
+tags:
+  - release
+  - update
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADQAQCdASoIAAQAAUAmJZACdAD0l8hMxAD+h+jr57xNSspaxa/Rp8aCVCV9/oQ4oP6xscG6/ebgwAAA
 ---
 
 Here's an update that brings some new features to Mue and fixes.

@@ -1,10 +1,16 @@
 ---
-title: 'New API documentation'
+title: New API documentation
 date: '2020-07-20'
-author: 'David Ralph'
-description: 'Announcing a new, updated API documentation with improvements to privacy and speed.'
-image: '/blog/apidocs.webp'
-tags: ['announcement', 'documentation']
+author: David Ralph
+description: >-
+  Announcing a new, updated API documentation with improvements to privacy and
+  speed.
+image: /blog/apidocs.webp
+tags:
+  - announcement
+  - documentation
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoIAAQAAUAmJaQAA3AA/vzrIAA=
 ---
 
 Today I am happy to announce that the new Mue API documentation has launched! It's mostly similar to the old one, but now it's cleaner, faster and has no tracking.

@@ -1,10 +1,14 @@
 ---
-title: 'Version 7.0'
+title: Version 7.0
 date: '2022-07-04'
-author: 'David Ralph'
-description: 'Release of the largest update yet to Mue'
-image: '/blog/version-7-0.webp'
-tags: ['release', 'update']
+author: David Ralph
+description: Release of the largest update yet to Mue
+image: /blog/version-7-0.webp
+tags:
+  - release
+  - update
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAACwAQCdASoIAAQAAUAmJQBOgB6Q/22AAP1S8YJz984WA5X+P5FRkOe/NUzWvBm4m2jtFa4AAAA=
 ---
 
 This is the largest update Mue has ever had, with a complete redesign of widgets, a new share modal, a revamped modal, and a huge number of new features, changes, and fixes.

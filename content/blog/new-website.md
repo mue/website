@@ -1,10 +1,14 @@
 ---
-title: 'New website'
+title: New website
 date: '2020-08-06'
-author: 'Alex Sparkes'
-description: 'Read the story behind the development of the brand new official Mue website.'
-image: '/blog/new-website.webp'
-tags: ['announcement', 'website']
+author: Alex Sparkes
+description: Read the story behind the development of the brand new official Mue website.
+image: /blog/new-website.webp
+tags:
+  - announcement
+  - website
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACwAQCdASoIAAQAAUAmJZQCdAEPDgH8AP7+Z9SQPy3ge1ETD9qucLHYKHcT1MAA
 ---
 
 A few days ago the Mue Team set out a goal which was to revamp the website. Whilst the old one was ok, we felt it was time for a refresh. We wanted something true to the Mue brand while remaining extremely fast and responsive.
