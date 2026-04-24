@@ -7,7 +7,6 @@ import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeRaw from 'rehype-raw';
 import rehypeStringify from 'rehype-stringify';
 import { visit } from 'unist-util-visit';
@@ -141,10 +140,6 @@ function createProcessor(toc: TocItem[]) {
       },
     })
     .use(rehypeRaw)
-    .use(rehypePrettyCode, {
-      theme: 'github-dark',
-      keepBackground: false,
-    })
     .use(() => (tree: Root) => {
       visit(tree, 'element', (node: Element) => {
         if (!node.tagName) return;

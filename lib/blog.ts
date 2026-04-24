@@ -6,7 +6,6 @@ import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypePrettyCode from 'rehype-pretty-code';
 import rehypeRaw from 'rehype-raw';
 import rehypeStringify from 'rehype-stringify';
 
@@ -64,10 +63,6 @@ function createProcessor() {
       },
     })
     .use(rehypeRaw)
-    .use(rehypePrettyCode, {
-      theme: 'github-dark',
-      keepBackground: false,
-    })
     .use(rehypeStringify, { allowDangerousHtml: true });
 }
 
