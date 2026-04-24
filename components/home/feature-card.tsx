@@ -35,8 +35,8 @@ export function FeatureCard({
         <p className="mt-4 text-base text-muted-foreground">{description}</p>
         <ul className="mt-6 space-y-3">
           {bullets.map((bullet) => (
-            <li key={bullet} className="flex items-start gap-3 text-sm text-muted-foreground">
-              <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF5C25]/60" />
+            <li key={bullet} className="flex items-center gap-3 text-sm text-muted-foreground">
+              <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#FF5C25]/60" />
               <span className="leading-relaxed">{bullet}</span>
             </li>
           ))}
