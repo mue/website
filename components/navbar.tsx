@@ -14,7 +14,8 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { Button } from './ui/button';
-import { Download, Menu, BookOpen, Github } from 'lucide-react';
+import { Download, Menu, BookOpen } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa6';
 import { cn } from '@/lib/utils';
 import {
   Sheet,
@@ -199,7 +200,7 @@ export default function Navbar() {
                 <SheetClose asChild>
                   <Button className="w-full" variant="outline" size="sm" asChild>
                     <Link href="https://github.com/mue/mue" target="_blank" rel="noreferrer">
-                      <Github className="mr-2 h-4 w-4" />
+                      <FaGithub className="mr-2 h-4 w-4" />
                       GitHub
                     </Link>
                   </Button>

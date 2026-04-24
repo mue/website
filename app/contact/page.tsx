@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
-import { Github, Mail, MessageSquare } from 'lucide-react';
-import { FaXTwitter } from 'react-icons/fa6';
+import { Mail, MessageSquare } from 'lucide-react';
+import { FaXTwitter, FaGithub } from 'react-icons/fa6';
 
 import { Button } from '@/components/ui/button';
 import { PageHeader } from '@/components/shared/page-header';
@@ -30,7 +30,7 @@ const contactMethods = [
   },
   {
     href: 'https://github.com/mue/mue/issues',
-    icon: Github,
+    icon: FaGithub,
     title: 'GitHub Issues',
     description:
       'Report bugs, request features, or browse existing issues on our GitHub repository.',

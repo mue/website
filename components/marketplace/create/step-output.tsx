@@ -1,7 +1,8 @@
 import { AddonMetadata, AddonType, Photo, Quote } from './types';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { Download, Github, CheckCircle2, FileJson, Package, Copy, Check } from 'lucide-react';
+import { Download, CheckCircle2, FileJson, Package, Copy, Check } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa6';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
@@ -248,7 +249,7 @@ export function StepOutput({
             Download JSON
           </Button>
           <Button onClick={onSubmit} className="gap-2">
-            <Github className="h-4 w-4" />
+            <FaGithub className="h-4 w-4" />
             Submit to Marketplace
           </Button>
         </div>

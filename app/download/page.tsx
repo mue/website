@@ -3,8 +3,9 @@
 import Link from 'next/link';
 
 import { useEffect, useState } from 'react';
-import { ArrowRight, Github } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { FaChrome, FaEdge, FaFirefoxBrowser } from 'react-icons/fa';
+import { FaG, FaGithub } from 'react-icons/fa6';
 import { SiNaver } from 'react-icons/si';
 
 import { Button } from '@/components/ui/button';
@@ -61,7 +62,7 @@ const browsers = [
 const secondaryDownloads = [
   {
     name: 'Source Code',
-    icon: Github,
+    icon: FaGithub,
     description: 'Build from source or contribute to the project',
     url: 'https://github.com/mue/mue',
     version: 'Open source on GitHub',

@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
-import { Github } from 'lucide-react';
+import { FaG, FaGithub } from 'react-icons/fa6';
 
 type SubmitDialogProps = {
   open: boolean;
@@ -73,7 +73,7 @@ export function SubmitDialog({ open, onOpenChange, submitUrl }: SubmitDialogProp
             }}
             className="gap-2"
           >
-            <Github className="h-4 w-4" />
+            <FaGithub className="h-4 w-4" />
             Open GitHub
           </Button>
         </DialogFooter>

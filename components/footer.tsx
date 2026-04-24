@@ -1,8 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Github } from 'lucide-react';
-import { FaXTwitter } from 'react-icons/fa6';
+import { FaXTwitter, FaGithub } from 'react-icons/fa6';
 import { useEffect, useState } from 'react';
 import Logo from './logo';
 import { ThemeToggle } from './theme-toggle';
@@ -64,17 +63,14 @@ export default function Footer() {
     operational: {
       text: 'All systems are operational',
       dotColor: 'bg-emerald-500',
-      pingColor: 'bg-emerald-400',
     },
     degraded: {
       text: 'Degraded performance',
       dotColor: 'bg-yellow-500',
-      pingColor: 'bg-yellow-400',
     },
     loading: {
       text: 'Checking status...',
       dotColor: 'bg-gray-500',
-      pingColor: 'bg-gray-400',
     },
   };
 
@@ -100,14 +96,9 @@ export default function Footer() {
               rel="noreferrer noopener"
               className="mt-4 inline-flex cursor-pointer items-center gap-2 rounded-lg border border-border bg-muted/50 px-3 py-2 text-xs text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
             >
-              <span className="relative flex h-2 w-2">
-                <span
-                  className={`absolute inline-flex h-full w-full animate-ping rounded-full ${status.pingColor} opacity-75`}
-                ></span>
-                <span
-                  className={`relative inline-flex h-2 w-2 rounded-full ${status.dotColor}`}
-                ></span>
-              </span>
+              <span
+                className={`inline-flex h-2 w-2 rounded-full ${status.dotColor}`}
+              />
               <span>{status.text}</span>
             </a>
             <div className="mt-6 flex items-center gap-4">
@@ -117,7 +108,7 @@ export default function Footer() {
                 rel="noreferrer"
                 className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border bg-muted/50 text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
               >
-                <Github className="h-4 w-4" />
+                <FaGithub className="h-4 w-4" />
                 <span className="sr-only">GitHub</span>
               </Link>
               <Link
