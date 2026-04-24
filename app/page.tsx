@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { useEffect, useState } from 'react';
 import { ArrowRight, Rocket, Users, Star, GitFork, UserCheck, LayoutDashboard, CalendarDays, type LucideIcon } from 'lucide-react';
-import { FaChrome, FaFirefoxBrowser, FaEdge } from 'react-icons/fa';
+import { FaChrome, FaFirefoxBrowser, FaEdge, FaGithub } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
 
 import { Button } from '@/components/ui/button';
@@ -226,9 +226,9 @@ export default function Home() {
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Button size="lg" asChild>
-              <Link href="https://github.com/mue/mue" target="_blank" rel="noreferrer">
-                View Mue on GitHub
-                <ArrowRight className="ml-2 h-4 w-4" />
+              <Link href="https://github.com/mue/mue" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2">
+                <FaGithub className="h-4 w-4" />
+                <span>View Mue on GitHub</span>
               </Link>
             </Button>
             <Button
@@ -237,8 +237,9 @@ export default function Home() {
               asChild
               className="border-[#FF5C25]/30 text-[#FF5C25]"
             >
-              <Link href="https://github.com/mue/mue/issues" target="_blank" rel="noreferrer">
-                See open issues
+              <Link href="https://github.com/mue/mue/issues" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2">
+                <FaGithub className="h-4 w-4" />
+                <span>See open issues</span>
               </Link>
             </Button>
           </div>
