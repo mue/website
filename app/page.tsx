@@ -137,6 +137,7 @@ export default function Home() {
 
       {/* Hero */}
       <section className="relative pb-16 pt-20 sm:pb-24 sm:pt-28">
+        <div className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[70vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.15)_0%,_transparent_65%)] blur-2xl" />
         <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 px-6 text-center">
           <p
             className="text-base text-muted-foreground animate-fade-up animate-delay-100"
@@ -145,8 +146,10 @@ export default function Home() {
             {greeting}, {friendlyTerm}.
           </p>
 
-          <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl animate-fade-up animate-delay-200">
-            Stop staring at <span className="text-[#FF5C25]">blank</span> tabs.
+          <h1 className="text-balance text-4xl tracking-tight text-foreground sm:text-5xl lg:text-6xl animate-fade-up animate-delay-200">
+            Stop staring at{' '}
+            <span className="font-heading font-light tracking-wide text-[#FF5C25]">blank</span>{' '}
+            tabs.
           </h1>
 
           <p className="max-w-xl text-pretty text-base text-muted-foreground sm:text-lg animate-fade-up animate-delay-300">
