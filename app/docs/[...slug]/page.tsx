@@ -56,6 +56,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: DocPageProps): Promise<Metadata> {
   const { slug = [] } = await params;
   const doc = await getDocBySlug(slug);
+
   if (!doc) {
     const { tree } = await getDocsNavigation();
     const section = findNode(tree, slug.filter(Boolean));
@@ -67,7 +68,7 @@ export async function generateMetadata({ params }: DocPageProps): Promise<Metada
           ? `Explore ${topicCount} ${topicCount === 1 ? 'topic' : 'topics'} in ${title}.`
           : `Learn about ${title} in the Mue documentation.`;
       return {
-        title: `${title} | Mue Docs`,
+        title,
         description,
       };
     }
