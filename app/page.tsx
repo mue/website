@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { useEffect, useState } from 'react';
-import { ArrowRight, Rocket } from 'lucide-react';
+import { ArrowRight, Rocket, Users, Star, GitFork, UserCheck, LayoutDashboard, CalendarDays, type LucideIcon } from 'lucide-react';
 import { FaChrome, FaFirefoxBrowser, FaEdge } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
 
@@ -18,37 +18,13 @@ import { SoftwareApplicationJsonLd } from '@/components/json-ld';
 
 const stats = ['Building since 2018', '5,000+ monthly active users', '10,000,000+ tabs'];
 
-const communityStats = [
-  {
-    label: 'Collaborators',
-    value: '50+',
-    description: 'Developers keeping Mue fresh and reliable.',
-  },
-  {
-    label: 'GitHub Stars',
-    value: '600+',
-    description: 'Loved by enthusiasts across the globe.',
-  },
-  {
-    label: 'Forks',
-    value: '70+',
-    description: 'Actively explored and upgraded.',
-  },
-  {
-    label: 'Users',
-    value: '5k+ monthly',
-    description: 'Daily focus seekers tuning their tabs.',
-  },
-  {
-    label: 'Tabs Opened',
-    value: '10M+',
-    description: 'From new tabs to renewed focus.',
-  },
-  {
-    label: 'Origins',
-    value: 'Est. 2018',
-    description: 'Years of iteration and mindful design.',
-  },
+const communityStats: { label: string; value: string; description: string; icon: LucideIcon }[] = [
+  { label: 'Collaborators', value: '50+', description: 'Developers keeping Mue fresh and reliable.', icon: Users },
+  { label: 'GitHub Stars', value: '600+', description: 'Loved by enthusiasts across the globe.', icon: Star },
+  { label: 'Forks', value: '70+', description: 'Actively explored and upgraded.', icon: GitFork },
+  { label: 'Users', value: '5k+ monthly', description: 'Daily focus seekers tuning their tabs.', icon: UserCheck },
+  { label: 'Tabs Opened', value: '10M+', description: 'From new tabs to renewed focus.', icon: LayoutDashboard },
+  { label: 'Origins', value: 'Est. 2018', description: 'Years of iteration and mindful design.', icon: CalendarDays },
 ];
 
 const scrollFeatures = [
@@ -283,6 +259,7 @@ export default function Home() {
                 label={stat.label}
                 value={stat.value}
                 description={stat.description}
+                icon={stat.icon}
               />
             ))}
           </div>
