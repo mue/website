@@ -134,7 +134,8 @@ export default function Home() {
   return (
     <div className="relative overflow-hidden">
       <SoftwareApplicationJsonLd />
-      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[100vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.25)_0%,_transparent_70%)] blur-3xl" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[100vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.25)_0%,_transparent_65%)] blur-3xl" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[100vh] bg-gradient-to-b from-transparent via-transparent to-black/40" />
 
       {/* Hero */}
       <section className="relative pb-16 pt-20 sm:pb-24 sm:pt-28">
