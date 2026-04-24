@@ -113,6 +113,18 @@ function isMobileDevice(): boolean {
 }
 
 export default function Home() {
+  const [greeting] = useState(() => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) return 'Morning';
+    if (hour >= 12 && hour < 18) return 'Afternoon';
+    return 'Evening';
+  });
+
+  const [friendlyTerm] = useState(() => {
+    const terms = ['mate', 'pal', 'bud', 'friend', 'chief', 'champ'];
+    return terms[Math.floor(Math.random() * terms.length)];
+  });
+
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -126,28 +138,37 @@ export default function Home() {
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-black/50" />
 
       {/* Hero */}
-      <section className="relative pb-16 pt-20 sm:pb-24 sm:pt-28">
-        <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 px-6 text-center">
-          <h1 className="font-heading font-light text-balance text-4xl tracking-wide text-foreground sm:text-5xl lg:text-6xl animate-fade-up animate-delay-200">
+      <section className="relative pb-20 pt-24 sm:pb-28 sm:pt-32">
+        <div className="mx-auto flex w-full max-w-4xl flex-col items-center px-6 text-center">
+          {/* Greeting */}
+          <p
+            className="text-base font-medium text-foreground/60 animate-fade-up animate-delay-100"
+            suppressHydrationWarning
+          >
+            {greeting}, {friendlyTerm}.
+          </p>
+
+          {/* Heading + subheading */}
+          <h1 className="mt-4 font-heading font-light text-balance text-5xl tracking-wide text-foreground sm:text-6xl lg:text-7xl animate-fade-up animate-delay-200">
             Stop staring at{' '}
-            <span className="text-[#FF5C25]">blank</span>{' '}
-            tabs.
+            <span className="text-[#FF5C25]">blank</span> tabs.
           </h1>
 
-          <p className="max-w-xl text-pretty text-base text-muted-foreground sm:text-lg animate-fade-up animate-delay-300">
+          <p className="mt-5 max-w-lg text-pretty text-base text-muted-foreground sm:text-lg animate-fade-up animate-delay-300">
             Every tab hits different with Mue. Stunning backgrounds, quotes that slap, places for
             your notes — everything you need to lock in.
           </p>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center animate-fade-up animate-delay-400">
+          {/* CTAs */}
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center animate-fade-up animate-delay-400">
             <Button
               size="lg"
-              className="group relative overflow-hidden bg-linear-to-r from-[#FF5C25] to-[#FF456E] px-6 py-4 text-sm font-semibold shadow-[0_20px_60px_-20px_rgba(255,92,37,0.5)] transition-all hover:shadow-[0_25px_70px_-15px_rgba(255,92,37,0.6)] hover:scale-105 sm:text-base"
+              className="group relative overflow-hidden bg-linear-to-r from-[#FF5C25] to-[#FF456E] px-6 py-4 text-sm font-semibold text-white shadow-[0_20px_60px_-20px_rgba(255,92,37,0.5)] transition-all hover:shadow-[0_25px_70px_-15px_rgba(255,92,37,0.6)] hover:scale-105 sm:text-base"
               asChild
             >
               <Link href="/download">
+                <ArrowRight className="relative z-10 mr-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 <span className="relative z-10">Get Started</span>
-                <ArrowRight className="relative z-10 ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                 <div className="absolute inset-0 -z-0 bg-linear-to-r from-[#FF456E] to-[#FF5C25] opacity-0 transition-opacity group-hover:opacity-100" />
               </Link>
             </Button>
@@ -165,12 +186,13 @@ export default function Home() {
           </div>
 
           {isMobile && (
-            <p className="text-xs text-muted-foreground/70">
+            <p className="mt-3 text-xs text-muted-foreground/70">
               Mue is a browser extension for desktop. Visit on your computer to get started.
             </p>
           )}
 
-          <div className="w-full animate-fade-zoom animate-delay-300">
+          {/* Screenshot */}
+          <div className="mt-14 w-full animate-fade-zoom animate-delay-300">
             <Image
               priority
               src="/muetab_screenshot_2.webp"
@@ -182,10 +204,11 @@ export default function Home() {
             />
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground/70 animate-fade-up animate-delay-500">
+          {/* Stats */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground/60 animate-fade-up animate-delay-500">
             {stats.map((stat, i) => (
               <span key={stat} className="flex items-center gap-4">
-                {i > 0 && <span className="text-muted-foreground/30">|</span>}
+                {i > 0 && <span className="text-muted-foreground/20">|</span>}
                 <StatItem stat={stat} />
               </span>
             ))}
