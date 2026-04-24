@@ -16,7 +16,7 @@ export default function CollectionsLoading() {
         <Skeleton className="h-5 w-80" />
       </div>
 
-      {/* Collections grid — image card + text */}
+      {/* Collections grid */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 9 }).map((_, i) => (
           <div key={i} className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card/70">

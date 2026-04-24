@@ -3,7 +3,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function DocsLoading() {
   return (
     <div className="space-y-10">
-      {/* Header — matches DocsShell border-b pb-6 */}
+      {/* Header */}
       <div className="border-b pb-6 space-y-6">
         <Skeleton className="h-4 w-28" />
 
@@ -19,7 +19,7 @@ export default function DocsLoading() {
 
       {/* Content */}
       <div className="space-y-12">
-        {/* "Pick a storyline" — 3-col card grid */}
+        {/* "Pick a storyline" */}
         <div className="space-y-4">
           <div className="space-y-1">
             <Skeleton className="h-6 w-40" />
@@ -40,7 +40,7 @@ export default function DocsLoading() {
           </div>
         </div>
 
-        {/* "All documentation" — section cards grid */}
+        {/* "All documentation" */}
         <div className="space-y-4">
           <div className="space-y-1">
             <Skeleton className="h-6 w-40" />

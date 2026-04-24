@@ -3,7 +3,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function DocsArticleLoading() {
   return (
     <div className="space-y-10">
-      {/* Header — matches DocsShell border-b pb-6 */}
+      {/* Header */}
       <div className="border-b pb-6 space-y-6">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
@@ -23,7 +23,7 @@ export default function DocsArticleLoading() {
         </div>
       </div>
 
-      {/* Content + TOC — matches DocsShell xl:grid */}
+      {/* Content + TOC */}
       <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_240px] xl:items-start gap-10">
         <div className="space-y-12">
           <div className="space-y-8">

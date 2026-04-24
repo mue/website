@@ -16,7 +16,7 @@ export default function AuthorsLoading() {
         <Skeleton className="h-5 w-72" />
       </div>
 
-      {/* Authors grid — circular avatar + name + count + badges */}
+      {/* Authors grid */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {Array.from({ length: 12 }).map((_, i) => (
           <div key={i} className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-card/70 p-6">

@@ -1,6 +1,6 @@
 import { AddonMetadata, AddonType, Photo, Quote } from './types';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Eye } from 'lucide-react';
+import { ArrowRight, Eye, Lightbulb } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
@@ -193,7 +193,7 @@ export function StepPreview({
               {(getContentPreview() as Quote[]).map((quote, idx) => (
                 <div key={idx} className="rounded-lg border bg-muted/50 p-3 text-sm">
                   <p className="italic">&ldquo;{quote.quote}&rdquo;</p>
-                  <p className="mt-1 text-xs text-muted-foreground">— {quote.author}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">- {quote.author}</p>
                 </div>
               ))}
             </div>
@@ -210,10 +210,12 @@ export function StepPreview({
         )}
       </div>
 
-      <div className="rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-900 dark:bg-blue-950">
-        <p className="text-sm text-blue-900 dark:text-blue-100">
-          💡 <strong>Tip:</strong> Make sure your icon and screenshot URLs are working correctly. If
-          the preview doesn&apos;t look right, go back and update your metadata.
+      <div className="flex items-start gap-3 rounded-xl border border-border bg-muted/30 px-4 py-3">
+        <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+        <p className="text-sm text-muted-foreground">
+          Make sure your icon and
+          screenshot URLs are working correctly. If the preview doesn&apos;t look right, go back and
+          update your metadata.
         </p>
       </div>
 

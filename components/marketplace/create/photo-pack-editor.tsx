@@ -14,7 +14,6 @@ import {
   Search,
   Shuffle,
   Copy,
-  Eye,
   MapPin,
   User,
 } from 'lucide-react';
@@ -159,10 +158,9 @@ function SortablePhotoItem({
       {isExpanded && (
         <div className="space-y-4 border-t p-4">
           <div className="grid gap-4 md:grid-cols-2">
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               <Label htmlFor={`photographer-${index}`}>
-                <User className="mr-1 inline h-3 w-3" />
-                Photographer *
+                Photographer <span className="text-destructive">*</span>
               </Label>
               <Input
                 id={`photographer-${index}`}
@@ -171,10 +169,9 @@ function SortablePhotoItem({
                 placeholder="John Doe"
               />
             </div>
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               <Label htmlFor={`location-${index}`}>
-                <MapPin className="mr-1 inline h-3 w-3" />
-                Location *
+                Location <span className="text-destructive">*</span>
               </Label>
               <Input
                 id={`location-${index}`}
@@ -184,10 +181,9 @@ function SortablePhotoItem({
               />
             </div>
           </div>
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             <Label htmlFor={`url-${index}`}>
-              <Eye className="mr-1 inline h-3 w-3" />
-              Image URL *
+              Image URL <span className="text-destructive">*</span>
             </Label>
             <Input
               id={`url-${index}`}
@@ -200,7 +196,7 @@ function SortablePhotoItem({
 
           {/* Image Preview */}
           {photo.url.default && (
-            <div className="space-y-2">
+            <div className="flex flex-col gap-2">
               <Label>Preview</Label>
               <div className="relative h-48 w-full overflow-hidden rounded-lg border">
                 <Image
@@ -376,7 +372,7 @@ export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEdit
           <div className="mt-4 space-y-3 rounded-lg border bg-muted/50 p-4">
             <h4 className="font-medium">Bulk Edit All Photos</h4>
             <div className="grid gap-3 md:grid-cols-2">
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 <Label htmlFor="bulk-photographer">Set Photographer (All)</Label>
                 <Input
                   id="bulk-photographer"
@@ -385,7 +381,7 @@ export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEdit
                   placeholder="Leave empty to keep individual values"
                 />
               </div>
-              <div className="space-y-2">
+              <div className="flex flex-col gap-2">
                 <Label htmlFor="bulk-location">Set Location (All)</Label>
                 <Input
                   id="bulk-location"

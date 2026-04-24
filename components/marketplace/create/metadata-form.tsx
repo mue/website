@@ -28,7 +28,7 @@ export function MetadataForm({ metadata, onChange, onReset }: MetadataFormProps)
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="name">
             Name <span className="text-destructive">*</span>
           </Label>
@@ -41,7 +41,7 @@ export function MetadataForm({ metadata, onChange, onReset }: MetadataFormProps)
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="description">
             Description <span className="text-destructive">*</span>
           </Label>
@@ -55,7 +55,7 @@ export function MetadataForm({ metadata, onChange, onReset }: MetadataFormProps)
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="version">
             Version <span className="text-destructive">*</span>
           </Label>
@@ -68,7 +68,7 @@ export function MetadataForm({ metadata, onChange, onReset }: MetadataFormProps)
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="author">
             Author <span className="text-destructive">*</span>
           </Label>
@@ -81,7 +81,7 @@ export function MetadataForm({ metadata, onChange, onReset }: MetadataFormProps)
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="icon_url">
             Icon URL <span className="text-destructive">*</span>
           </Label>
@@ -94,7 +94,7 @@ export function MetadataForm({ metadata, onChange, onReset }: MetadataFormProps)
           />
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="screenshot_url">Screenshot URL</Label>
           <Input
             id="screenshot_url"

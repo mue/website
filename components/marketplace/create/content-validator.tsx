@@ -1,6 +1,6 @@
-import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { AlertCircle, AlertTriangle, CheckCircle2, Info } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import { AddonType, Photo, Quote } from './types';
 
 export interface ValidationIssue {
@@ -169,41 +169,34 @@ export function ContentValidator({
     }
   }
 
-  if (issues.length === 0) {
-    return (
-      <Alert className="border-green-200 bg-green-50 dark:border-green-900 dark:bg-green-950">
-        <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400" />
-        <AlertDescription className="text-green-900 dark:text-green-100">
-          No validation issues found. Your content looks great!
-        </AlertDescription>
-      </Alert>
-    );
-  }
-
   const errors = issues.filter((i) => i.type === 'error');
   const warnings = issues.filter((i) => i.type === 'warning');
 
-  const getIcon = (type: ValidationIssue['type']) => {
+  const iconFor = (type: ValidationIssue['type']) => {
     switch (type) {
       case 'error':
         return <AlertCircle className="h-4 w-4 text-destructive" />;
       case 'warning':
-        return <AlertTriangle className="h-4 w-4 text-yellow-600 dark:text-yellow-400" />;
+        return <AlertTriangle className="h-4 w-4 text-yellow-500" />;
       case 'info':
-        return <Info className="h-4 w-4 text-blue-600 dark:text-blue-400" />;
+        return <Info className="h-4 w-4 text-primary" />;
     }
   };
 
-  const getBorderColor = (type: ValidationIssue['type']) => {
-    switch (type) {
-      case 'error':
-        return 'border-destructive/50 bg-destructive/5';
-      case 'warning':
-        return 'border-yellow-200 bg-yellow-50 dark:border-yellow-900 dark:bg-yellow-950';
-      case 'info':
-        return 'border-blue-200 bg-blue-50 dark:border-blue-900 dark:bg-blue-950';
-    }
+  const rowStyles: Record<ValidationIssue['type'], string> = {
+    error: 'border-destructive/30 bg-destructive/5',
+    warning: 'border-yellow-500/30 bg-yellow-500/5',
+    info: 'border-border bg-muted/30',
   };
+
+  if (issues.length === 0) {
+    return (
+      <div className="flex items-start gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.07] px-4 py-3">
+        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
+        <p className="text-sm text-foreground/80">No validation issues found. Your content looks great!</p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-3">
@@ -215,7 +208,7 @@ export function ContentValidator({
           </Badge>
         )}
         {warnings.length > 0 && (
-          <Badge variant="outline" className="border-yellow-600 text-yellow-600">
+          <Badge variant="outline" className="border-yellow-500/60 text-yellow-500">
             {warnings.length} Warning{warnings.length > 1 ? 's' : ''}
           </Badge>
         )}
@@ -223,10 +216,13 @@ export function ContentValidator({
 
       <div className="space-y-2">
         {issues.map((issue, index) => (
-          <Alert key={index} className={getBorderColor(issue.type)}>
-            {getIcon(issue.type)}
-            <AlertDescription className="text-sm">{issue.message}</AlertDescription>
-          </Alert>
+          <div
+            key={index}
+            className={cn('flex items-start gap-3 rounded-xl border px-4 py-3', rowStyles[issue.type])}
+          >
+            <div className="mt-0.5 shrink-0">{iconFor(issue.type)}</div>
+            <p className="text-sm text-foreground/80">{issue.message}</p>
+          </div>
         ))}
       </div>
     </div>

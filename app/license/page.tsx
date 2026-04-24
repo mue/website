@@ -3,9 +3,7 @@ import Link from 'next/link';
 
 import { Scale } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
 import { CopyButton } from '@/components/ui/copy-button';
-import { PageHeader } from '@/components/shared/page-header';
 import { LicenseSection } from '@/components/license/license-section';
 import { CopyrightNotice } from '@/components/license/copyright-notice';
 import { GitHubLinkButton } from '@/components/license/github-link-button';
@@ -24,12 +22,24 @@ const currentYear = new Date().getFullYear();
 export default function LicensePage() {
   return (
     <div className="relative min-h-[calc(100vh-80px)] overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-[-20%] -z-20 h-[80vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.25)_0%,_transparent_60%)] blur-3xl" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[100vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.12)_0%,_transparent_60%)] blur-3xl" />
 
-      <div className="mx-auto w-full max-w-4xl px-6 py-16">
-        <PageHeader icon={Scale} title="License" subtitle="Open source and free to use" />
+      <div className="mx-auto max-w-4xl px-6 py-24 sm:py-32">
+        <header className="mb-16 text-center">
+          <div className="mb-4 flex justify-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20">
+              <Scale className="h-6 w-6 text-[#FF5C25]" />
+            </div>
+          </div>
+          <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            License
+          </h1>
+          <p className="mx-auto mt-4 text-base text-muted-foreground">
+            Open source and free to use.
+          </p>
+        </header>
 
-        <div className="space-y-8">
+        <div className="space-y-6">
           <LicenseSection
             title="Extension & Website"
             licenseName="BSD-3-Clause"
@@ -44,9 +54,9 @@ export default function LicensePage() {
               </>
             }
             copyrights={
-              <div className="rounded-lg border border-border bg-muted/30 p-4 space-y-2">
+              <div className="space-y-2 rounded-lg border border-border bg-muted/30 p-4">
                 <div className="group flex items-start justify-between gap-2">
-                  <p className="text-sm font-mono text-muted-foreground flex-1">
+                  <p className="flex-1 font-mono text-sm text-muted-foreground">
                     Copyright (c) 2019-{currentYear} The Mue Authors
                   </p>
                   <CopyButton
@@ -56,7 +66,7 @@ export default function LicensePage() {
                   />
                 </div>
                 <div className="group flex items-start justify-between gap-2">
-                  <p className="text-sm font-mono text-muted-foreground flex-1">
+                  <p className="flex-1 font-mono text-sm text-muted-foreground">
                     Copyright (c) 2018-2019 David Ralph
                   </p>
                   <CopyButton
@@ -119,48 +129,49 @@ export default function LicensePage() {
             }
           />
 
-          <section className="rounded-2xl border border-[#FF5C25]/20 bg-gradient-to-br from-[#FF5C25]/10 to-[#FF456E]/10 p-8 backdrop-blur">
+          <div className="h-px bg-border" />
+
+          {/* Why Open Source */}
+          <section className="rounded-2xl border border-[#FF5C25]/20 bg-gradient-to-br from-[#FF5C25]/10 to-[#FF456E]/10 p-8">
             <h3 className="text-xl font-semibold text-foreground">Why Open Source?</h3>
-            <p className="mt-4 text-muted-foreground">
+            <p className="mt-3 text-muted-foreground">
               Mue is built by the community, for the community. We believe in transparency,
               collaboration, and empowering developers to create and contribute. All of our code is
               publicly available on GitHub, and we welcome contributions from everyone.
             </p>
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-lg border border-border bg-background/40 p-4">
+              <div className="rounded-xl border border-border bg-background/40 p-4">
                 <h4 className="font-semibold text-foreground">Transparent</h4>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <p className="mt-1.5 text-sm text-muted-foreground">
                   Every line of code is open for inspection and improvement.
                 </p>
               </div>
-              <div className="rounded-lg border border-border bg-background/40 p-4">
+              <div className="rounded-xl border border-border bg-background/40 p-4">
                 <h4 className="font-semibold text-foreground">Community-Driven</h4>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <p className="mt-1.5 text-sm text-muted-foreground">
                   Built with contributions from developers worldwide.
                 </p>
               </div>
             </div>
           </section>
 
-          <section className="text-center">
+          <div className="rounded-2xl border border-border bg-muted/30 p-5">
             <p className="text-sm text-muted-foreground">
               Questions about licensing?{' '}
               <Link
                 href="https://discord.gg/zv8C9F8"
                 target="_blank"
                 rel="noreferrer"
-                className="font-medium text-[#FF5C25] hover:underline"
+                className="text-foreground underline underline-offset-2"
               >
                 Ask us on Discord
+              </Link>{' '}
+              or{' '}
+              <Link href="/contact" className="text-foreground underline underline-offset-2">
+                get in touch.
               </Link>
             </p>
-          </section>
-        </div>
-
-        <div className="mt-12 flex justify-center">
-          <Button asChild>
-            <Link href="/download">Get Started with Mue</Link>
-          </Button>
+          </div>
         </div>
       </div>
     </div>

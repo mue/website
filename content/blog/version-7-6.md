@@ -21,7 +21,7 @@ This update brings a range of UI refinements across form components and modals, 
 * **Three-branch release workflow** automation for structured main, beta, and dev releases
 
 **Changed**
-* **Font replaced** — Montserrat swapped for Inter globally
+* **Font replaced** - Montserrat swapped for Inter globally
 * **New default quotes experience** with an improved added quotes page
 * **Form component accessibility** overhauled across Checkbox, Dropdown, Radio, Slider, and Text inputs
 * **Modal close button** styling and theming improved

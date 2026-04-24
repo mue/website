@@ -1,6 +1,6 @@
 <h1 align="center">Mue Website</h1>
 
-<p align="center">The official website for Mue — showcasing features, docs, marketplace, and more.</p>
+<p align="center">The official website for Mue - showcasing features, docs, marketplace, and more.</p>
 
 <p align="center"><a href="https://muetab.com">muetab.com</a></p>
 

@@ -27,7 +27,7 @@ export function MarketplaceLoadingSkeleton() {
         <FeaturedCollectionsSkeleton />
       </div>
 
-      {/* Browse by Author — just a heading row, no cards */}
+      {/* Browse by Author */}
       <div className="flex items-center justify-between">
         <Skeleton className="h-7 w-40" />
         <Skeleton className="h-4 w-28" />

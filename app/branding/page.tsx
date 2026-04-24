@@ -2,8 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Palette, CheckCircle2, XCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { PageHeader } from '@/components/shared/page-header';
-import { ContentSection } from '@/components/shared/content-section';
 import { BrandColorCard } from '@/components/branding/brand-color-card';
 import { BrandAssetCard } from '@/components/branding/brand-asset-card';
 
@@ -57,24 +55,50 @@ const logoVariants = [
   },
 ];
 
+const dos = [
+  'Use the logo with adequate spacing around it',
+  'Maintain the logo\'s aspect ratio when scaling',
+  'Use the provided color palette consistently',
+  'Credit Mue when featuring our brand',
+];
+
+const donts = [
+  'Modify the logo colors or gradient',
+  'Distort, rotate, or alter the logo in any way',
+  'Use the logo on busy or conflicting backgrounds',
+  'Recreate or modify the logo yourself',
+];
+
 export default function BrandingPage() {
   return (
     <div className="relative min-h-[calc(100vh-80px)] overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-[-20%] -z-20 h-[80vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.25)_0%,_transparent_60%)] blur-3xl" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[100vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.12)_0%,_transparent_60%)] blur-3xl" />
 
-      <div className="mx-auto w-full max-w-6xl px-6 py-16">
-        <PageHeader icon={Palette} title="Branding" subtitle="Assets and guidelines" />
+      <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
+        <header className="mb-16 text-center">
+          <div className="mb-4 flex justify-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20">
+              <Palette className="h-6 w-6 text-[#FF5C25]" />
+            </div>
+          </div>
+          <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+            Brand Guidelines
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
+            Logos, colors, and usage guidelines for representing Mue consistently across all
+            contexts.
+          </p>
+        </header>
 
-        <div className="space-y-12">
-          {/* Logo Section */}
-          <ContentSection title="Logo">
-            <p className="mb-8">
-              Our logo represents Mue&apos;s core functionality of customization and organization.
-              The layered design symbolizes multiple customizable elements coming together to create
-              your perfect new tab experience.
+        <div className="space-y-16">
+          {/* Logo */}
+          <section>
+            <h2 className="mb-2 text-2xl font-semibold text-foreground">Logo</h2>
+            <p className="mb-8 text-muted-foreground">
+              Our logo represents Mue&apos;s core philosophy of customization. The layered design
+              symbolizes multiple elements coming together to create your perfect new tab experience.
             </p>
-
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-2">
               {logoVariants.map((variant) => (
                 <BrandAssetCard
                   key={variant.title}
@@ -84,16 +108,18 @@ export default function BrandingPage() {
                 />
               ))}
             </div>
-          </ContentSection>
+          </section>
+
+          <div className="h-px bg-border" />
 
           {/* Color Palette */}
-          <ContentSection title="Color Palette">
-            <p className="mb-8">
-              Our vibrant color palette is inspired by sunrises and new beginnings. These colors
-              should be used consistently across all Mue-related materials.
+          <section>
+            <h2 className="mb-2 text-2xl font-semibold text-foreground">Color Palette</h2>
+            <p className="mb-8 text-muted-foreground">
+              Our vibrant palette is inspired by sunrises and new beginnings. Use these colors
+              consistently across all Mue-related materials.
             </p>
-
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
               {brandColors.map((color) => (
                 <BrandColorCard
                   key={color.hex}
@@ -103,104 +129,87 @@ export default function BrandingPage() {
                 />
               ))}
             </div>
-          </ContentSection>
+          </section>
+
+          <div className="h-px bg-border" />
 
           {/* Typography */}
-          <ContentSection title="Typography">
-            <p className="mb-6">
-              We use system fonts for optimal performance and native feel across all platforms.
+          <section>
+            <h2 className="mb-2 text-2xl font-semibold text-foreground">Typography</h2>
+            <p className="mb-8 text-muted-foreground">
+              We use purpose-chosen fonts that balance personality with readability.
             </p>
-
-            <div className="space-y-4 rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
-              <div>
-                <h3 className="text-sm font-semibold text-muted-foreground">PRIMARY FONT</h3>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-2xl border border-border bg-background/60 p-6">
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Primary font</p>
                 <p
-                  className="mt-2 text-2xl font-semibold"
+                  className="mt-3 text-3xl font-semibold"
                   style={{ fontFamily: 'var(--font-lexend-deca)' }}
                 >
                   Lexend Deca
                 </p>
-                <p className="text-sm text-muted-foreground">Used for headings and display text</p>
+                <p className="mt-2 text-sm text-muted-foreground">Headings and display text</p>
               </div>
-
-              <div className="h-px bg-border" />
-
-              <div>
-                <h3 className="text-sm font-semibold text-muted-foreground">BODY FONT</h3>
-                <p className="mt-2 text-lg">System Font Stack</p>
-                <p className="text-sm text-muted-foreground">
-                  -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif
-                </p>
+              <div className="rounded-2xl border border-border bg-background/60 p-6">
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Body font</p>
+                <p className="mt-3 text-3xl font-semibold">Inter</p>
+                <p className="mt-2 text-sm text-muted-foreground">Body copy and UI elements</p>
               </div>
             </div>
-          </ContentSection>
+          </section>
+
+          <div className="h-px bg-border" />
 
           {/* Usage Guidelines */}
-          <ContentSection title="Usage Guidelines">
-            <div className="space-y-6">
-              <div className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
-                <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+          <section>
+            <h2 className="mb-2 text-2xl font-semibold text-foreground">Usage Guidelines</h2>
+            <p className="mb-8 text-muted-foreground">
+              Follow these guidelines to keep the Mue brand consistent and recognizable.
+            </p>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="rounded-2xl border border-border bg-background/60 p-6">
+                <h3 className="mb-4 flex items-center gap-2 font-semibold text-foreground">
                   <CheckCircle2 className="h-5 w-5 text-green-500" />
                   Do
                 </h3>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                    <span>Use the logo with adequate spacing around it</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                    <span>Maintain the logo&apos;s aspect ratio when scaling</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                    <span>Use the provided color palette consistently</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                    <span>Credit Mue when featuring our brand</span>
-                  </li>
+                <ul className="space-y-3">
+                  {dos.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-green-500" />
+                      {item}
+                    </li>
+                  ))}
                 </ul>
               </div>
-
-              <div className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
-                <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-foreground">
+              <div className="rounded-2xl border border-border bg-background/60 p-6">
+                <h3 className="mb-4 flex items-center gap-2 font-semibold text-foreground">
                   <XCircle className="h-5 w-5 text-red-500" />
                   Don&apos;t
                 </h3>
-                <ul className="space-y-2 text-muted-foreground">
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-destructive" />
-                    <span>Modify the logo colors or gradient</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-destructive" />
-                    <span>Distort, rotate, or alter the logo in any way</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-destructive" />
-                    <span>Use the logo on busy or conflicting backgrounds</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-destructive" />
-                    <span>Recreate or modify the logo yourself</span>
-                  </li>
+                <ul className="space-y-3">
+                  {donts.map((item) => (
+                    <li key={item} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <span className="mt-[5px] h-1.5 w-1.5 shrink-0 rounded-full bg-red-500" />
+                      {item}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
-          </ContentSection>
+          </section>
 
-          {/* Contact Section */}
-          <section className="rounded-2xl border border-border bg-background/60 p-6 text-center backdrop-blur">
+          <div className="h-px bg-border" />
+
+          {/* CTA */}
+          <div className="rounded-2xl border border-border bg-muted/30 p-8 text-center">
             <h3 className="text-xl font-semibold text-foreground">Need something else?</h3>
-            <p className="mt-2 text-muted-foreground">
-              If you need additional brand assets or have questions about using our brand, please
-              reach out to us.
+            <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
+              If you need additional brand assets or have questions about using our brand, reach out.
             </p>
-            <Button asChild className="mt-4">
+            <Button asChild className="mt-6">
               <Link href="/contact">Contact Us</Link>
             </Button>
-          </section>
+          </div>
         </div>
       </div>
     </div>

@@ -51,10 +51,10 @@ export function StepTypeSelection({ value, onChange, onNext, onBack }: StepTypeS
         {addonTypes.map(({ type, icon: Icon, title, description }) => (
           <Card
             key={type}
-            className={`cursor-pointer p-6 transition-all hover:shadow-lg ${
+            className={`cursor-pointer p-6 transition-all ${
               value === type
-                ? 'border-primary bg-primary/5 ring-2 ring-primary ring-offset-2'
-                : 'hover:border-primary/50'
+                ? 'border-primary bg-primary/5'
+                : 'hover:border-primary/40'
             }`}
             onClick={() => onChange(type)}
           >

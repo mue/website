@@ -32,7 +32,7 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
       </div>
 
       <Card className="space-y-6 p-6">
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="name">
             Name <span className="text-destructive">*</span>
           </Label>
@@ -45,7 +45,7 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
           <p className="text-xs text-muted-foreground">A descriptive name for your addon</p>
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="description">
             Description <span className="text-destructive">*</span>
           </Label>
@@ -60,7 +60,7 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
         </div>
 
         <div className="grid gap-6 sm:grid-cols-2">
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             <Label htmlFor="version">
               Version <span className="text-destructive">*</span>
             </Label>
@@ -73,7 +73,7 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
             <p className="text-xs text-muted-foreground">Semantic versioning (e.g., 1.0.0)</p>
           </div>
 
-          <div className="space-y-2">
+          <div className="flex flex-col gap-2">
             <Label htmlFor="author">
               Author <span className="text-destructive">*</span>
             </Label>
@@ -87,7 +87,7 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
           </div>
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="icon_url">
             Icon URL <span className="text-destructive">*</span>
           </Label>
@@ -103,7 +103,7 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
           </p>
         </div>
 
-        <div className="space-y-2">
+        <div className="flex flex-col gap-2">
           <Label htmlFor="screenshot_url">Screenshot URL (Optional)</Label>
           <ImageUrlInput
             id="screenshot_url"
@@ -117,9 +117,9 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
           </p>
         </div>
 
-        <div className="flex items-start gap-2 rounded-lg border border-blue-200 bg-blue-50 p-4 dark:border-blue-900 dark:bg-blue-950">
-          <Info className="mt-0.5 h-4 w-4 shrink-0 text-blue-600 dark:text-blue-400" />
-          <p className="text-sm text-blue-900 dark:text-blue-100">
+        <div className="flex items-start gap-3 rounded-xl border border-border bg-muted/30 px-4 py-3">
+          <Info className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+          <p className="text-sm text-muted-foreground">
             Make sure your images are hosted on a reliable service like GitHub, Imgur, or your own
             website. The URLs must be publicly accessible.
           </p>

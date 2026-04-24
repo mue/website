@@ -32,60 +32,57 @@ export function StepIndicator({ currentStep, onStepClick, canNavigateToStep }: S
   };
 
   return (
-    <div className="mb-8">
-      <div className="flex items-center justify-between">
-        {steps.map((step, index) => (
-          <div key={step.number} className="flex flex-1 items-center">
-            <button
-              onClick={() => handleStepClick(step.number)}
-              disabled={!isStepClickable(step.number)}
+    <div className="flex items-center justify-between">
+      {steps.map((step, index) => (
+        <div key={step.number} className="flex flex-1 items-center">
+          <button
+            onClick={() => handleStepClick(step.number)}
+            disabled={!isStepClickable(step.number)}
+            className={cn(
+              'flex flex-col items-center gap-1.5 transition-opacity',
+              isStepClickable(step.number)
+                ? 'cursor-pointer hover:opacity-80'
+                : 'cursor-default',
+            )}
+          >
+            <div
               className={cn(
-                'flex flex-col items-center gap-2 transition-all',
-                isStepClickable(step.number) && 'cursor-pointer hover:scale-105 active:scale-95',
-                !isStepClickable(step.number) && 'cursor-default',
+                'flex h-8 w-8 items-center justify-center rounded-full border transition-all',
+                step.number < currentStep &&
+                  'border-primary bg-primary text-primary-foreground',
+                step.number === currentStep &&
+                  'border-primary bg-primary/10 text-primary',
+                step.number > currentStep &&
+                  'border-border bg-background text-muted-foreground',
               )}
             >
-              <div
-                className={cn(
-                  'flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all relative',
-                  step.number < currentStep && 'border-primary bg-primary text-primary-foreground',
-                  step.number === currentStep &&
-                    'border-primary bg-primary/10 text-primary animate-pulse',
-                  step.number > currentStep && 'border-muted bg-background text-muted-foreground',
-                  isStepClickable(step.number) && 'hover:border-primary hover:bg-primary/20',
-                )}
-              >
-                {step.number < currentStep ? (
-                  <Check className="h-5 w-5 animate-in zoom-in duration-300" />
-                ) : (
-                  <span className="text-sm font-semibold">{step.number}</span>
-                )}
-                {/* Pulsing ring for current step */}
-                {step.number === currentStep && (
-                  <div className="absolute inset-0 rounded-full border-2 border-primary animate-ping opacity-75" />
-                )}
-              </div>
-              <span
-                className={cn(
-                  'hidden text-xs font-medium transition-colors sm:block',
-                  step.number <= currentStep ? 'text-foreground' : 'text-muted-foreground',
-                  isStepClickable(step.number) && 'group-hover:text-primary',
-                )}
-              >
-                {step.title}
-              </span>
-            </button>
-            {index < steps.length - 1 && (
-              <div
-                className={cn(
-                  'mx-2 h-0.5 flex-1 transition-all',
-                  step.number < currentStep ? 'bg-primary' : 'bg-muted',
-                )}
-              />
-            )}
-          </div>
-        ))}
-      </div>
+              {step.number < currentStep ? (
+                <Check className="h-3.5 w-3.5" />
+              ) : (
+                <span className="text-xs font-semibold">{step.number}</span>
+              )}
+            </div>
+            <span
+              className={cn(
+                'hidden text-xs transition-colors sm:block',
+                step.number === currentStep && 'font-medium text-foreground',
+                step.number < currentStep && 'text-foreground/60',
+                step.number > currentStep && 'text-muted-foreground',
+              )}
+            >
+              {step.title}
+            </span>
+          </button>
+          {index < steps.length - 1 && (
+            <div
+              className={cn(
+                'mx-2 mb-4 h-px flex-1 transition-colors',
+                step.number < currentStep ? 'bg-primary/40' : 'bg-border',
+              )}
+            />
+          )}
+        </div>
+      ))}
     </div>
   );
 }

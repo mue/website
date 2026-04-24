@@ -28,10 +28,9 @@ export function LicenseSection({
       <div className="mb-6 flex items-center gap-3">
         <h2 className="text-2xl font-semibold text-foreground">{title}</h2>
         <span
-          className="rounded-full border px-3 py-1 text-xs font-semibold uppercase tracking-wider"
+          className="rounded-md px-2 py-0.5 font-mono text-xs"
           style={{
-            borderColor: `${licenseColor}40`,
-            backgroundColor: `${licenseColor}10`,
+            backgroundColor: `${licenseColor}15`,
             color: licenseColor,
           }}
         >

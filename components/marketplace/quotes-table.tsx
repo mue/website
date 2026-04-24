@@ -50,7 +50,7 @@ export function QuotesTable({ quotes }: QuotesTableProps) {
                   {quote.quote}
                 </TableCell>
                 <TableCell className="align-top break-words text-muted-foreground">
-                  {quote.author || '—'}
+                  {quote.author || '-'}
                 </TableCell>
               </TableRow>
             ))}

@@ -13,11 +13,11 @@ export const revalidate = 3600; // Revalidate every hour (ISR)
 export const metadata: Metadata = {
   title: 'Documentation',
   description:
-    'Everything you need to install, extend, and contribute to the Mue ecosystem—from quickstart guides to deep-dive API references.',
+    'Everything you need to install, extend, and contribute to the Mue ecosystem - from quickstart guides to deep-dive API references.',
   openGraph: {
     title: 'Documentation | Mue',
     description:
-      'Everything you need to install, extend, and contribute to the Mue ecosystem—from quickstart guides to deep-dive API references.',
+      'Everything you need to install, extend, and contribute to the Mue ecosystem - from quickstart guides to deep-dive API references.',
   },
 };
 
@@ -57,7 +57,7 @@ export default async function DocsIndexPage() {
               Build, customise, and ship delightful Mue experiences.
             </h1>
             <p className="text-muted-foreground text-base md:text-lg">
-              Everything you need to install, extend, and contribute to the Mue ecosystem—from
+              Everything you need to install, extend, and contribute to the Mue ecosystem - from
               quickstart guides to deep-dive API references.
             </p>
             <div className="flex flex-wrap items-center gap-3">

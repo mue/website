@@ -3,8 +3,6 @@ import Link from 'next/link';
 
 import { Shield } from 'lucide-react';
 
-import { Button } from '@/components/ui/button';
-import { PageHeader } from '@/components/shared/page-header';
 import { ContentSection } from '@/components/shared/content-section';
 import { BulletList } from '@/components/shared/bullet-list';
 
@@ -20,16 +18,24 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <div className="relative min-h-[calc(100vh-80px)] overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-[-20%] -z-20 h-[80vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.25)_0%,_transparent_60%)] blur-3xl" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[100vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.12)_0%,_transparent_60%)] blur-3xl" />
 
-      <div className="mx-auto w-full max-w-4xl px-6 py-16">
-        <PageHeader
-          icon={Shield}
-          title="Privacy Policy"
-          subtitle="Last Updated: September 8, 2024"
-        />
+      <div className="mx-auto max-w-3xl px-6 py-24 sm:py-32">
+        <header className="mb-16 text-center">
+          <div className="mb-4 flex justify-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20">
+              <Shield className="h-6 w-6 text-[#FF5C25]" />
+            </div>
+          </div>
+          <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            Privacy Policy
+          </h1>
+          <p className="mx-auto mt-4 text-sm text-muted-foreground">
+            Last updated: September 8, 2024
+          </p>
+        </header>
 
-        <div className="prose-custom space-y-8">
+        <div className="space-y-10">
           <ContentSection title="Introduction">
             <p>
               Mue shares no personal information with any third parties and all of your settings,
@@ -37,6 +43,8 @@ export default function PrivacyPage() {
               exported as JSON in advanced settings on Mue.
             </p>
           </ContentSection>
+
+          <div className="h-px bg-border" />
 
           <ContentSection title="Widget API Requests">
             <BulletList
@@ -47,6 +55,8 @@ export default function PrivacyPage() {
               ]}
             />
           </ContentSection>
+
+          <div className="h-px bg-border" />
 
           <ContentSection title="Weather Widget" titleSize="md">
             <p>
@@ -76,8 +86,7 @@ export default function PrivacyPage() {
           <ContentSection title="Quote Widget" titleSize="md">
             <p>
               The quote feature of Mue requests to our API (api.muetab.com) in order to get a random
-              quote. Your set quote language is sent in this request to get a quote in your
-              language.
+              quote. Your set quote language is sent in this request to get a quote in your language.
             </p>
             <p>
               When opening the about tab in settings, requests are sent to the GitHub API, our API
@@ -111,17 +120,16 @@ export default function PrivacyPage() {
             </p>
           </ContentSection>
 
-          <section className="rounded-2xl border border-border bg-background/60 p-6 backdrop-blur">
-            <p className="text-sm text-muted-foreground">
-              We may update this privacy policy here without notice at any time.
-            </p>
-          </section>
-        </div>
+          <div className="h-px bg-border" />
 
-        <div className="mt-12 flex justify-center">
-          <Button asChild>
-            <Link href="/download">Get Started with Mue</Link>
-          </Button>
+          <div className="flex items-start gap-3 rounded-2xl border border-border bg-muted/30 p-5">
+            <p className="text-sm text-muted-foreground">
+              We may update this privacy policy without notice at any time. Questions?{' '}
+              <Link href="/contact" className="text-foreground underline underline-offset-2">
+                Get in touch.
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

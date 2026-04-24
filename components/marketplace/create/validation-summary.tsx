@@ -31,8 +31,8 @@ export function ValidationSummary({ validation }: ValidationSummaryProps) {
           <AlertDescription>
             <ul className="mt-2 space-y-1 text-sm">
               {validation.errors.map((error, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <span className="mt-0.5">•</span>
+                <li key={index} className="flex items-center gap-2">
+                  <span>•</span>
                   <span>{error.message}</span>
                 </li>
               ))}
@@ -50,8 +50,8 @@ export function ValidationSummary({ validation }: ValidationSummaryProps) {
           <AlertDescription className="text-amber-800 dark:text-amber-200">
             <ul className="mt-2 space-y-1 text-sm">
               {validation.warnings.map((warning, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <span className="mt-0.5">•</span>
+                <li key={index} className="flex items-center gap-2">
+                  <span>•</span>
                   <span>{warning.message}</span>
                 </li>
               ))}
@@ -69,8 +69,8 @@ export function ValidationSummary({ validation }: ValidationSummaryProps) {
           <AlertDescription className="text-blue-800 dark:text-blue-200">
             <ul className="mt-2 space-y-1 text-sm">
               {validation.infos.map((info, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <span className="mt-0.5">•</span>
+                <li key={index} className="flex items-center gap-2">
+                  <span>•</span>
                   <span>{info.message}</span>
                 </li>
               ))}

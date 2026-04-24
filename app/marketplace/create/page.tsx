@@ -17,8 +17,10 @@ import { StepContent } from '@/components/marketplace/create/step-content';
 import { StepPreview } from '@/components/marketplace/create/step-preview';
 import { StepOutput } from '@/components/marketplace/create/step-output';
 import { DraftManager, SavedDraft } from '@/components/marketplace/create/draft-manager';
+import { CreateAddonSkeleton } from '@/components/marketplace/create/create-skeleton';
 
 export default function CreateAddonPage() {
+  const [mounted, setMounted] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [addonType, setAddonType] = useState<AddonType>('photos');
 
@@ -60,6 +62,7 @@ export default function CreateAddonPage() {
     } catch (error) {
       console.error('Failed to load draft:', error);
     }
+    setMounted(true);
   }, []);
 
   // Auto-save draft to localStorage whenever state changes
@@ -152,46 +155,7 @@ export default function CreateAddonPage() {
     setShowDeleteQuotesDialog(false);
   };
 
-  const loadExample = async () => {
-    const exampleUrls = {
-      photos: 'https://raw.githubusercontent.com/mue/marketplace/main/examples/photo_pack.json',
-      quotes: 'https://raw.githubusercontent.com/mue/marketplace/main/examples/quote_pack.json',
-      settings:
-        'https://raw.githubusercontent.com/mue/marketplace/main/examples/preset_settings.json',
-    };
 
-    try {
-      const response = await fetch(exampleUrls[addonType]);
-      if (!response.ok) throw new Error('Failed to load example');
-
-      const json = await response.json();
-
-      // Load metadata
-      if (json.name) setMetadata((prev) => ({ ...prev, name: json.name }));
-      if (json.description) setMetadata((prev) => ({ ...prev, description: json.description }));
-      if (json.type) {
-        setAddonType(json.type);
-        setMetadata((prev) => ({ ...prev, type: json.type }));
-      }
-      if (json.version) setMetadata((prev) => ({ ...prev, version: json.version }));
-      if (json.author) setMetadata((prev) => ({ ...prev, author: json.author }));
-      if (json.icon_url) setMetadata((prev) => ({ ...prev, icon_url: json.icon_url }));
-      if (json.screenshot_url)
-        setMetadata((prev) => ({ ...prev, screenshot_url: json.screenshot_url }));
-
-      // Load content
-      if (json.type === 'photos' && json.photos) {
-        setPhotos(json.photos);
-      } else if (json.type === 'quotes' && json.quotes) {
-        setQuotes(json.quotes);
-      } else if (json.type === 'settings' && json.settings) {
-        setSettingsJson(JSON.stringify(json.settings, null, 2));
-      }
-    } catch {
-      setErrorMessage('Failed to load example. Please try again.');
-      setShowErrorDialog(true);
-    }
-  };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, isSettings = false) => {
     const file = event.target.files?.[0];
@@ -395,7 +359,6 @@ export default function CreateAddonPage() {
             onDeleteAllPhotos={() => setShowDeletePhotosDialog(true)}
             onDeleteAllQuotes={() => setShowDeleteQuotesDialog(true)}
             onSettingsFileUpload={(e) => handleFileUpload(e, true)}
-            onLoadExample={loadExample}
             onImportAddon={(e) => handleFileUpload(e)}
             onNext={nextStep}
             onBack={prevStep}
@@ -431,49 +394,32 @@ export default function CreateAddonPage() {
     }
   };
 
-  return (
-    <div className="mx-auto flex min-h-screen w-full max-w-7xl flex-col gap-8 px-6 py-12 lg:px-8">
-      {currentStep > 1 && (
-        <div className="flex items-center justify-between gap-4">
-          <MarketplaceBreadcrumb type="create" />
+  if (!mounted) return <CreateAddonSkeleton />;
 
+  return (
+    <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8 px-6 py-12 lg:px-8">
+      <div className="flex items-center justify-between gap-4">
+        <MarketplaceBreadcrumb type="create" />
+        {currentStep > 1 && (
           <DraftManager
             currentDraft={{
               addonType,
               metadata,
-              content: {
-                photos,
-                quotes,
-                settingsJson,
-              },
+              content: { photos, quotes, settingsJson },
             }}
             onLoadDraft={handleLoadDraft}
             onNewDraft={handleNewDraft}
           />
-        </div>
-      )}
+        )}
+      </div>
 
-      {currentStep > 1 && (
-        <>
-          <StepIndicator
-            currentStep={currentStep}
-            onStepClick={setCurrentStep}
-            canNavigateToStep={(step) => step < currentStep}
-          />
+      <StepIndicator
+        currentStep={currentStep}
+        onStepClick={setCurrentStep}
+        canNavigateToStep={(step) => step < currentStep}
+      />
 
-          {/* Progress Percentage */}
-          <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
-            <span className="font-medium text-primary">
-              {Math.round(((currentStep - 1) / 5) * 100)}% Complete
-            </span>
-            <span>•</span>
-            <span>Step {currentStep} of 6</span>
-          </div>
-        </>
-      )}
-
-      {/* Animated Step Container */}
-      <div key={currentStep} className="animate-in fade-in slide-in-from-right-4 duration-500">
+      <div key={currentStep} className="animate-in fade-in slide-in-from-right-4 duration-300">
         {renderStep()}
       </div>
 

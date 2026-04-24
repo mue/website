@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { PhotoPackEditor } from './photo-pack-editor';
 import { QuotePackEditor } from './quote-pack-editor';
 import { SettingsEditor } from './settings-editor';
-import { ArrowRight, Lightbulb, Upload, Sparkles, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Upload, Sparkles, CheckCircle2 } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { useState } from 'react';
 import { TemplatePicker } from './template-picker';
@@ -22,7 +22,6 @@ interface StepContentProps {
   onDeleteAllPhotos: () => void;
   onDeleteAllQuotes: () => void;
   onSettingsFileUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onLoadExample: () => void;
   onImportAddon: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onNext: () => void;
   onBack: () => void;
@@ -39,7 +38,6 @@ export function StepContent({
   onDeleteAllPhotos,
   onDeleteAllQuotes,
   onSettingsFileUpload,
-  onLoadExample,
   onImportAddon,
   onNext,
   onBack,
@@ -125,10 +123,6 @@ export function StepContent({
         <Button variant="outline" onClick={() => setShowTemplatePicker(true)} className="gap-2">
           <Sparkles className="h-4 w-4" />
           Use Template
-        </Button>
-        <Button variant="outline" onClick={onLoadExample} className="gap-2">
-          <Lightbulb className="h-4 w-4" />
-          Load Example
         </Button>
         <Input
           id="addon-upload-step"

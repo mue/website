@@ -54,7 +54,7 @@ The changelog dates use the DD-MM-YYY format.
 
 #### Removed
 
-- Admin routes (`/images/add`, `/images/delete`) — use the [uploader](https://github.com/mue/uploader) utility directly
+- Admin routes (`/images/add`, `/images/delete`) - use the [uploader](https://github.com/mue/uploader) utility directly
 - Pexels image fetching
 
 ### 1.6.2 - 18/05/2024

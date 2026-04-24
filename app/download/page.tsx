@@ -3,9 +3,9 @@
 import Link from 'next/link';
 
 import { useEffect, useState } from 'react';
-import { ArrowRight } from 'lucide-react';
+import { AlertTriangle, ArrowRight } from 'lucide-react';
 import { FaChrome, FaEdge, FaFirefoxBrowser } from 'react-icons/fa';
-import { FaG, FaGithub } from 'react-icons/fa6';
+import { FaGithub } from 'react-icons/fa6';
 import { SiNaver } from 'react-icons/si';
 
 import { Button } from '@/components/ui/button';
@@ -118,43 +118,32 @@ export default function DownloadPage() {
     setDetectedBrowser(detectBrowser());
     setIsMobile(isMobileDevice());
 
-    // Fetch browser versions
     fetch('/api/browser-versions')
       .then((res) => res.json())
-      .then((data: BrowserVersions) => {
-        setVersions(data);
-      })
-      .catch((error) => {
-        console.error('Failed to fetch browser versions:', error);
-      })
-      .finally(() => {
-        setVersionsLoading(false);
-      });
+      .then((data: BrowserVersions) => setVersions(data))
+      .catch((error) => console.error('Failed to fetch browser versions:', error))
+      .finally(() => setVersionsLoading(false));
   }, []);
 
   return (
     <div className="relative min-h-[calc(100vh-80px)] overflow-hidden">
-      <div className="pointer-events-none absolute inset-x-0 top-[-20%] -z-20 h-[80vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.35)_0%,_transparent_60%)] blur-3xl" />
-      <div className="pointer-events-none absolute inset-x-0 bottom-[-20%] -z-30 h-[70vh] bg-[radial-gradient(circle_at_bottom,_rgba(255,69,110,0.28)_0%,_transparent_65%)] blur-3xl" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[70vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.15)_0%,_transparent_65%)] blur-3xl" />
 
       <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 pb-24 pt-16 text-center">
         {isMobile && (
-          <div className="mb-8 w-full max-w-3xl rounded-2xl border border-yellow-500/40 bg-yellow-500/10 p-6 text-left backdrop-blur">
-            <h3 className="font-semibold text-foreground">⚠️ Device Not Supported</h3>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Mue is a browser extension for desktop computers. Due to complications, we are unable
-              to support mobile devices. Please visit this page on your computer to install Mue.
-            </p>
+          <div className="mb-10 flex w-full max-w-3xl items-start gap-3 rounded-2xl border border-yellow-500/20 bg-yellow-500/[0.07] px-5 py-4 text-left">
+            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-yellow-500" />
+            <div>
+              <p className="text-sm font-medium text-foreground">Desktop only</p>
+              <p className="mt-0.5 text-sm text-muted-foreground">
+                Mue is a browser extension for desktop computers. Please visit this page on your
+                computer to install.
+              </p>
+            </div>
           </div>
         )}
 
-        <div className="inline-flex items-center gap-2 rounded-full border border-primary/40 bg-primary/10 px-4 py-1.5 text-[0.7rem] font-semibold uppercase tracking-[0.32em] text-primary">
-          <span>Download</span>
-          <span className="h-1 w-1 rounded-full bg-primary" />
-          <span>Choose your browser</span>
-        </div>
-
-        <h1 className="mt-8 text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
+        <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
           Get Mue for your browser
         </h1>
 
@@ -163,7 +152,7 @@ export default function DownloadPage() {
           tab into a moment of calm and focus.
         </p>
 
-        <div className="mt-16 grid w-full gap-6 sm:grid-cols-1 lg:grid-cols-2">
+        <div className="mt-16 grid w-full gap-6 grid-cols-1 sm:grid-cols-2">
           {browsers.map((browser) => {
             const version = versions[browser.versionKey];
             const displayVersion = versionsLoading
@@ -187,10 +176,11 @@ export default function DownloadPage() {
           })}
         </div>
 
+        {/* Other options */}
         <div className="mt-12 w-full max-w-3xl">
-          <h2 className="mb-6 text-center text-sm font-semibold uppercase tracking-widest text-muted-foreground">
-            Other Options
-          </h2>
+          <p className="mb-4 text-left text-xs font-medium uppercase tracking-widest text-muted-foreground/60">
+            Other options
+          </p>
           <div className="grid gap-4">
             {secondaryDownloads.map((item) => {
               const Icon = item.icon;
@@ -200,33 +190,38 @@ export default function DownloadPage() {
                   href={item.url}
                   target="_blank"
                   rel="noreferrer"
-                  className="group flex items-center gap-4 rounded-2xl border border-white/10 bg-background/60 p-6 backdrop-blur transition-all hover:border-[#FF5C25]/40 hover:bg-background/80"
+                  className="group flex items-center gap-4 rounded-2xl border border-border bg-card/50 p-5 transition-all hover:border-primary/30 hover:bg-card/80"
                 >
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5">
-                    <Icon className="h-6 w-6 text-foreground" />
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-muted">
+                    <Icon className="h-5 w-5 text-foreground" />
                   </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold text-foreground">{item.name}</h3>
+                  <div className="flex-1 text-left">
+                    <p className="text-sm font-semibold text-foreground">{item.name}</p>
                     <p className="text-sm text-muted-foreground">{item.description}</p>
                   </div>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-[#FF5C25]" />
+                  <ArrowRight className="h-4 w-4 text-muted-foreground transition-transform group-hover:translate-x-1" />
                 </a>
               );
             })}
           </div>
         </div>
 
-        <div className="mt-20 w-full max-w-3xl rounded-3xl border border-white/10 bg-background/60 p-10 backdrop-blur">
+        {/* What happens next */}
+        <div className="mt-20 w-full max-w-3xl text-left">
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
             What happens next?
           </h2>
-          <div className="mt-8 space-y-6 text-left">
-            {steps.map((step) => (
+          <p className="mt-2 text-sm text-muted-foreground">
+            Up and running in under a minute.
+          </p>
+          <div className="mt-8">
+            {steps.map((step, i) => (
               <NumberedStep
                 key={step.number}
                 number={step.number}
                 title={step.title}
                 description={step.description}
+                isLast={i === steps.length - 1}
               />
             ))}
           </div>
