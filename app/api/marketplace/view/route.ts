@@ -9,7 +9,6 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Item ID is required' }, { status: 400 });
     }
 
-    // Make the request to the marketplace API from the server
     const response = await fetch(`https://api.muetab.com/v2/marketplace/item/${itemId}/view`, {
       method: 'POST',
       headers: {

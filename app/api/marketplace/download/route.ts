@@ -9,19 +9,18 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Item ID is required' }, { status: 400 });
     }
 
-    // Make the request to the marketplace API from the server
-    const response = await fetch(`https://api.muetab.com/v2/marketplace/item/${itemId}/download`, {
+    const res = await fetch(`https://api.muetab.com/v2/marketplace/item/${itemId}/download`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
     });
 
-    if (!response.ok) {
-      return NextResponse.json({ error: 'Failed to track download' }, { status: response.status });
+    if (!res.ok) {
+      return NextResponse.json({ error: 'Failed to track download' }, { status: res.status });
     }
 
-    const data = await response.json();
+    const data = await res.json();
     return NextResponse.json(data);
   } catch (error) {
     console.error('Error tracking download:', error);

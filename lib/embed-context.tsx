@@ -1,7 +1,9 @@
 'use client';
 
 import { createContext, useContext, useEffect, useState, ReactNode, useRef } from 'react';
+
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+
 import { ScrollToTop } from '@/components/scroll-to-top';
 import Navbar from '@/components/navbar';
 import Footer from '@/components/footer';
@@ -129,6 +131,7 @@ export function useEmbed() {
   if (!context) {
     throw new Error('useEmbed must be used within EmbedProvider');
   }
+
   return context;
 }
 
@@ -136,11 +139,9 @@ export function EmbedLayoutWrapper({ children }: { children: ReactNode }) {
   const { isEmbed } = useEmbed();
 
   if (isEmbed) {
-    // Embed mode: no navbar/footer, reduced spacing
     return <main className="flex-1">{children}</main>;
   }
 
-  // Normal mode: with navbar/footer
   return (
     <>
       <ScrollToTop />

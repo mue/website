@@ -6,7 +6,7 @@ export default function Loading() {
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-20 h-[60vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.22)_0%,_transparent_60%)] blur-3xl" />
 
       <div className="mx-auto max-w-7xl">
-        {/* Header skeleton */}
+        {/* Header */}
         <div className="mb-16 flex flex-col items-center gap-6 text-center">
           <Skeleton className="h-8 w-32" />
           <Skeleton className="h-16 w-full max-w-3xl" />
@@ -17,7 +17,7 @@ export default function Loading() {
           </div>
         </div>
 
-        {/* Content skeleton */}
+        {/* Content */}
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {[...Array(6)].map((_, i) => (
             <div key={i} className="rounded-2xl border border-border bg-card/70 p-6">

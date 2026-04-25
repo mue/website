@@ -6,39 +6,39 @@ export default function BlogPostLoading() {
       <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[60vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.22)_0%,_transparent_60%)] blur-3xl" />
 
       <article className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
-        {/* Back button skeleton */}
+        {/* Back button  */}
         <Skeleton className="mb-8 h-9 w-32" />
 
         <header className="mb-12">
-          {/* Featured image skeleton */}
+          {/* Featured image */}
           <Skeleton className="mb-8 aspect-[21/9] w-full rounded-2xl" />
 
           <div className="space-y-4">
-            {/* Tags skeleton */}
+            {/* Tags */}
             <div className="flex gap-2">
               <Skeleton className="h-6 w-16 rounded-full" />
               <Skeleton className="h-6 w-20 rounded-full" />
               <Skeleton className="h-6 w-14 rounded-full" />
             </div>
 
-            {/* Title skeleton */}
+            {/* Title */}
             <Skeleton className="h-12 w-full sm:h-14" />
             <Skeleton className="h-12 w-4/5 sm:h-14" />
 
-            {/* Meta info skeleton */}
+            {/* Meta info */}
             <div className="flex flex-wrap items-center gap-4">
               <Skeleton className="h-5 w-32" />
               <Skeleton className="h-5 w-28" />
               <Skeleton className="h-5 w-24" />
             </div>
 
-            {/* Description skeleton */}
+            {/* Description */}
             <Skeleton className="h-6 w-full" />
             <Skeleton className="h-6 w-3/4" />
           </div>
         </header>
 
-        {/* Content skeleton */}
+        {/* Content */}
         <div className="space-y-4">
           {[...Array(8)].map((_, i) => (
             <div key={i} className="space-y-2">
@@ -50,13 +50,13 @@ export default function BlogPostLoading() {
           ))}
         </div>
 
-        {/* Navigation skeleton */}
+        {/* Navigation */}
         <div className="mt-16 grid gap-4 border-t pt-8 md:grid-cols-2">
           <Skeleton className="h-24 w-full rounded-xl" />
           <Skeleton className="h-24 w-full rounded-xl" />
         </div>
 
-        {/* CTA skeleton */}
+        {/* CTA */}
         <Skeleton className="mt-12 h-48 w-full rounded-2xl" />
       </article>
     </div>

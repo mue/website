@@ -1,6 +1,7 @@
 'use client';
 
 import { createContext, useContext, ReactNode } from 'react';
+
 import { useFavorites } from './use-favorites';
 
 type FavoritesContextType = {
@@ -20,8 +21,10 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
 
 export function useFavoritesContext() {
   const context = useContext(FavoritesContext);
+
   if (context === undefined) {
     throw new Error('useFavoritesContext must be used within a FavoritesProvider');
   }
+
   return context;
 }

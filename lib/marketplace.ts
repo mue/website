@@ -4,7 +4,7 @@ const MARKETPLACE_TYPE_LABELS: Record<string, string> = {
   preset_settings: 'Preset Settings',
   photo_packs: 'Photo Packs',
   quote_packs: 'Quote Packs',
-  // Detail endpoint returns singular versions
+  // detail page
   photos: 'Photo Packs',
   quotes: 'Quote Packs',
   settings: 'Preset Settings',
@@ -68,13 +68,16 @@ export type MarketplaceItemDetail = {
   updated_at?: string;
   created_at?: string;
   in_collections?: Array<MarketplaceCollection>;
-  // API-enabled photo pack fields
+
+  // API
   api_enabled?: boolean;
   api_provider?: string;
-  api_endpoint?: string; // The API endpoint URL to fetch photos from
-  direct_api?: boolean; // If true, frontend calls provider directly (no backend proxy)
+  api_endpoint?: string;
+  direct_api?: boolean; // no proxy
   requires_api_key?: boolean;
-  cache_refresh_interval?: number; // Optional cache refresh interval in seconds (default: 3600)
+  cache_refresh_interval?: number; // in seconds (default: 3600)
+
+  // Settings
   settings_schema?: Array<{
     key: string;
     type: string;
@@ -97,7 +100,6 @@ export type MarketplaceItemDetail = {
 async function fetchMarketplace<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${MARKETPLACE_BASE_URL}/${path}`, {
     ...init,
-    // cache marketplace data for 1 minute during development
     next: { revalidate: 60 },
   });
 
@@ -113,7 +115,6 @@ export function getMarketplaceTypeLabel(type: string): string {
 }
 
 export function formatCollectionName(name: string): string {
-  // Replace underscores with spaces and capitalize first letter of each word
   return name
     .replace(/_/g, ' ')
     .split(' ')
@@ -124,42 +125,44 @@ export function formatCollectionName(name: string): string {
 // Map API types to URL categories
 export function getItemCategory(type: string): 'packs' | 'presets' {
   if (type === 'preset_settings') return 'presets';
+
   return 'packs'; // photo_packs, quote_packs
 }
 
-// Reverse mapping: category to API types
+// reverse map
 export function getCategoryTypes(category: string): string[] {
   if (category === 'presets') return ['preset_settings'];
   if (category === 'packs') return ['photo_packs', 'quote_packs'];
+
   return [];
 }
 
-// Get display name for category
 export function getCategoryLabel(category: string): string {
   if (category === 'presets') return 'Presets';
   if (category === 'packs') return 'Packs';
+
   return category;
 }
 
-// Normalize type to filter parameter (convert singular to plural)
+// singular -> plural
 export function normalizeTypeForFilter(type: string): string {
   const mapping: Record<string, string> = {
     photos: 'photo_packs',
     quotes: 'quote_packs',
     settings: 'preset_settings',
   };
+
   return mapping[type] || type;
 }
 
-// Slugify author name for URLs (lowercase, spaces to hyphens, normalize special chars)
 export function slugifyAuthor(author: string): string {
   return author
     .toLowerCase()
-    .normalize('NFD') // Decompose accented characters
-    .replace(/[\u0300-\u036f]/g, '') // Remove diacritics
-    .replace(/[^\w\s-]/g, '') // Remove non-word chars (except spaces and hyphens)
-    .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .normalize('NFD') // decompose accented characters
+    .replace(/[\u0300-\u036f]/g, '') // remove diacritics
+    .replace(/[^\w\s-]/g, '') // remove non-word chars (except spaces and hyphens)
+    .replace(/\s+/g, '-') // replace spaces with hyphens
+    .replace(/-+/g, '-') // replace multiple hyphens with single hyphen
     .trim();
 }
 
@@ -190,12 +193,15 @@ export async function getTrendingItems(
 ): Promise<MarketplaceItemSummary[]> {
   const params = new URLSearchParams();
   params.set('limit', limit.toString());
+
   if (category) {
     params.set('category', category);
   }
+
   const payload = await fetchMarketplace<MarketplaceResponse<MarketplaceItemSummary[]>>(
     `trending?${params.toString()}`,
   );
+
   return payload.data;
 }
 
@@ -203,7 +209,6 @@ export async function getMarketplaceItem(
   category: 'packs' | 'presets',
   id: string,
 ): Promise<MarketplaceItemDetail> {
-  // API now supports ID-based lookup!
   const payload = await fetchMarketplace<MarketplaceResponse<MarketplaceItemDetail>>(`item/${id}`);
   return payload.data;
 }

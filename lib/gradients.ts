@@ -1,5 +1,3 @@
-// Shared gradient constants and hashing so they can be used in both client and server (OG) contexts.
-// Keep in sync with visual intent of BlogImage gradients.
 export const BLOG_IMAGE_GRADIENTS = [
   'bg-gradient-to-br from-pink-500/70 via-rose-500/60 to-orange-400/70 dark:from-pink-600 dark:via-fuchsia-600 dark:to-orange-500',
   'bg-gradient-to-br from-indigo-500/70 via-violet-500/60 to-purple-400/70 dark:from-indigo-600 dark:via-violet-700 dark:to-purple-600',
@@ -13,6 +11,9 @@ export const BLOG_IMAGE_GRADIENTS = [
 
 export function blogImageGradientIndex(key: string): number {
   let hash = 0;
-  for (let i = 0; i < key.length; i++) hash = (hash * 33 + key.charCodeAt(i)) >>> 0;
+  for (let i = 0; i < key.length; i++) {
+    hash = (hash * 33 + key.charCodeAt(i)) >>> 0;
+  }
+
   return hash % BLOG_IMAGE_GRADIENTS.length;
 }

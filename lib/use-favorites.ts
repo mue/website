@@ -32,7 +32,7 @@ export function useFavorites() {
         ? prev.filter((f) => !(f.type === type && f.name === name))
         : [...prev, { type, name }];
 
-      // Send postMessage event in embed mode
+      // send data to extension
       if (isEmbed) {
         sendMessage('marketplace:favorite:toggle', {
           id: name,

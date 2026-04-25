@@ -10,18 +10,18 @@ interface BrowserVersions {
 
 async function fetchFirefoxVersion(): Promise<string | null> {
   try {
-    const response = await fetch('https://addons.mozilla.org/api/v5/addons/addon/mue/', {
+    const res = await fetch('https://addons.mozilla.org/api/v5/addons/addon/mue/', {
       headers: {
         'User-Agent': 'Mue Website/1.0',
       },
     });
 
-    if (!response.ok) {
-      console.error('Firefox API error:', response.status);
+    if (!res.ok) {
+      console.error('Firefox API error:', res.status);
       return null;
     }
 
-    const data = await response.json();
+    const data = await res.json();
     return data.current_version?.version || null;
   } catch (error) {
     console.error('Error fetching Firefox version:', error);
@@ -41,8 +41,7 @@ async function fetchChromeVersion(): Promise<string | null> {
 
 async function fetchEdgeVersion(): Promise<string | null> {
   try {
-    // Edge Add-ons API endpoint
-    const response = await fetch(
+    const res = await fetch(
       'https://microsoftedge.microsoft.com/addons/getproductdetailsbycrxid/aepnglgjfokepefimhbnibfjekidhmja',
       {
         headers: {
@@ -52,12 +51,12 @@ async function fetchEdgeVersion(): Promise<string | null> {
       },
     );
 
-    if (!response.ok) {
-      console.error('Edge Add-ons API error:', response.status);
+    if (!res.ok) {
+      console.error('Edge Add-ons API error:', res.status);
       return null;
     }
 
-    const data = await response.json();
+    const data = await res.json();
     return data.version || null;
   } catch (error) {
     console.error('Error fetching Edge version:', error);
@@ -72,7 +71,6 @@ async function fetchWhaleVersion(chromeVersion: string | null): Promise<string |
 
 export async function GET() {
   try {
-    // Fetch Chrome, Edge, and Firefox in parallel
     const [chrome, edge, firefox] = await Promise.all([
       fetchChromeVersion(),
       fetchEdgeVersion(),
@@ -90,7 +88,7 @@ export async function GET() {
 
     return NextResponse.json(versions, {
       headers: {
-        // Cache for 1 hour
+        // 1 hour
         'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=7200',
       },
     });
