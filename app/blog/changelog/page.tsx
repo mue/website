@@ -11,7 +11,6 @@ import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
 import { getAllBlogPosts, getBlogPostBySlug, type BlogPost } from '@/lib/blog';
 import { cn } from '@/lib/utils';
 
-export const revalidate = 3600; // hourly
 
 export const metadata: Metadata = {
   title: 'Latest Changelog',

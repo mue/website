@@ -14,7 +14,6 @@ import type { DocTreeNode } from '@/lib/docs';
 import { getAllDocsMeta, getDocBySlug } from '@/lib/docs';
 import { cn } from '@/lib/utils';
 
-export const revalidate = 3600; // hourly
 
 type DocPageParams = {
   slug?: string[];

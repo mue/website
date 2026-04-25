@@ -14,7 +14,6 @@ import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
 import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
 import { cn } from '@/lib/utils';
 
-export const revalidate = 3600; // hourly
 
 type BlogPostParams = {
   slug: string;

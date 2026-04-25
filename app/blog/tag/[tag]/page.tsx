@@ -10,7 +10,6 @@ import { buttonVariants } from '@/components/ui/button';
 import { getAllBlogPosts } from '@/lib/blog';
 import { cn } from '@/lib/utils';
 
-export const revalidate = 3600; // hourly
 
 interface Params {
   tag: string;

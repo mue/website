@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 3600; // hourly
 
 export default async function BlogPage() {
   const posts = await getAllBlogPosts();
