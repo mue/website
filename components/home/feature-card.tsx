@@ -3,12 +3,20 @@ type FeatureCardProps = {
   title: string;
   description: string;
   bullets: string[];
+  image?: string;
 };
 
 const visualColors = ['bg-[#FF5C25]/8', 'bg-[#FF456E]/8', 'bg-amber-500/8'];
 
+const featureImages = [
+  '/home/home-bghitdiff.webp',
+  '/home/home-quote.webp',
+  '/home/home-privacy.webp',
+];
+
 export function FeatureCard({ index, title, description, bullets }: FeatureCardProps) {
   const isReversed = index % 2 !== 0;
+  const imageSrc = featureImages[index % featureImages.length];
 
   return (
     <div
@@ -29,7 +37,14 @@ export function FeatureCard({ index, title, description, bullets }: FeatureCardP
         </ul>
       </div>
 
-      <div className={`h-64 rounded-2xl lg:h-80 ${visualColors[index % visualColors.length]}`} />
+      <div className={`h-64 rounded-2xl lg:h-80 flex items-center justify-center overflow-hidden ${visualColors[index % visualColors.length]}`}>
+        <img
+          src={imageSrc}
+          alt={title}
+          className="object-contain h-full w-full"
+          loading="lazy"
+        />
+      </div>
     </div>
   );
 }
