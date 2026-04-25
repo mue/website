@@ -8,11 +8,12 @@ import { Separator } from '@/components/ui/separator';
 import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
 import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
 import { NoCollectionItemsEmptyState } from '@/components/marketplace/empty-state';
-import { getMarketplaceCollection, type MarketplaceCollectionDetail } from '@/lib/marketplace';
-import { FavoritesProvider } from '@/lib/favorites-context';
 import ItemsGrid from '@/components/marketplace/items-grid';
 
-export const revalidate = 60; // Revalidate every minute (ISR)
+import { getMarketplaceCollection, type MarketplaceCollectionDetail } from '@/lib/marketplace';
+import { FavoritesProvider } from '@/lib/favorites-context';
+
+export const revalidate = 60; // every minute
 
 type MarketplaceCollectionPageProps = {
   params: Promise<{
@@ -122,6 +123,7 @@ export default async function MarketplaceCollectionPage({
                 <div className="h-full w-full bg-muted" />
               )}
             </div>
+
             <div className="flex flex-col gap-5 p-8">
               <div className="space-y-3">
                 <Badge variant="secondary">Collection</Badge>
@@ -132,6 +134,7 @@ export default async function MarketplaceCollectionPage({
                   <p className="text-muted-foreground text-base md:text-lg">{data.description}</p>
                 )}
               </div>
+
               <div className="mt-auto flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
                 <span>
                   {hasItems

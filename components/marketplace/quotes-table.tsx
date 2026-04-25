@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+
 import { ChevronDown, ChevronUp } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import {
   Table,
@@ -40,6 +42,7 @@ export function QuotesTable({ quotes }: QuotesTableProps) {
               <TableHead className="font-bold text-foreground w-48">Author</TableHead>
             </TableRow>
           </TableHeader>
+
           <TableBody>
             {displayedQuotes.map((quote, index) => (
               <TableRow key={index}>

@@ -1,17 +1,19 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import Link from 'next/link';
 
-import { useEffect, useState } from 'react';
 import { AlertTriangle, ArrowRight } from 'lucide-react';
 import { FaChrome, FaEdge, FaFirefoxBrowser } from 'react-icons/fa';
 import { FaGithub } from 'react-icons/fa6';
 import { SiNaver } from 'react-icons/si';
 
 import { Button } from '@/components/ui/button';
-import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
 import { BrowserCard } from '@/components/download/browser-card';
 import { NumberedStep } from '@/components/download/numbered-step';
+
+import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
 
 interface BrowserVersions {
   chrome: string | null;
@@ -91,21 +93,25 @@ const steps = [
 function detectBrowser(): string | null {
   if (typeof window === 'undefined') return null;
   const ua = navigator.userAgent;
+
   if (ua.includes('Edg/')) return 'Edge';
   if (ua.includes('Firefox')) return 'Firefox';
   if (ua.includes('Chrome') || ua.includes('Chromium')) return 'Chrome';
+
   return null;
 }
 
 function isMobileDevice(): boolean {
   if (typeof window === 'undefined') return false;
   const ua = navigator.userAgent;
+
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
 }
 
 export default function DownloadPage() {
   const [detectedBrowser, setDetectedBrowser] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
+
   const [versions, setVersions] = useState<BrowserVersions>({
     chrome: null,
     edge: null,
@@ -176,11 +182,11 @@ export default function DownloadPage() {
           })}
         </div>
 
-        {/* Other options */}
         <div className="mt-12 w-full max-w-3xl">
           <p className="mb-4 text-left text-xs font-medium uppercase tracking-widest text-muted-foreground/60">
             Other options
           </p>
+
           <div className="grid gap-4">
             {secondaryDownloads.map((item) => {
               const Icon = item.icon;
@@ -206,11 +212,11 @@ export default function DownloadPage() {
           </div>
         </div>
 
-        {/* What happens next */}
         <div className="mt-20 w-full max-w-3xl text-left">
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
             What happens next?
           </h2>
+
           <p className="mt-2 text-sm text-muted-foreground">Up and running in under a minute.</p>
           <div className="mt-8">
             {steps.map((step, i) => (

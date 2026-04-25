@@ -1,4 +1,7 @@
 import { useState } from 'react';
+
+import { FaGithub } from 'react-icons/fa6';
+
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -8,8 +11,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+
 import { cn } from '@/lib/utils';
-import { FaGithub } from 'react-icons/fa6';
 
 type SubmitDialogProps = {
   open: boolean;
@@ -29,6 +32,7 @@ export function SubmitDialog({ open, onOpenChange, submitUrl }: SubmitDialogProp
             Follow these steps to submit your addon to the Mue Marketplace:
           </DialogDescription>
         </DialogHeader>
+
         <div className="grid gap-6 py-4 md:grid-cols-2">
           <div className="space-y-2">
             <h4 className="font-medium text-sm">Steps:</h4>
@@ -56,12 +60,14 @@ export function SubmitDialog({ open, onOpenChange, submitUrl }: SubmitDialogProp
               ))}
             </div>
           </div>
+
           <div className="flex items-center justify-center">
             <div className="aspect-video w-full rounded-lg border bg-muted flex items-center justify-center text-sm text-muted-foreground">
               Step {selectedStep} Preview
             </div>
           </div>
         </div>
+
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancel
@@ -96,6 +102,7 @@ export function ErrorDialog({ open, onOpenChange, message }: ErrorDialogProps) {
           <DialogTitle>Error</DialogTitle>
           <DialogDescription>{message}</DialogDescription>
         </DialogHeader>
+
         <DialogFooter>
           <Button onClick={() => onOpenChange(false)}>OK</Button>
         </DialogFooter>
@@ -126,6 +133,7 @@ export function DeleteConfirmDialog({
           <DialogTitle>{title}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
+
         <DialogFooter>
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancel

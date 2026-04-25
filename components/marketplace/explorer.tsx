@@ -2,9 +2,9 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useMemo, useRef, useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
+
+import { Suspense, useMemo, useRef, useState, useEffect } from 'react';
 
 import {
   MarketplaceCollection,
@@ -12,11 +12,15 @@ import {
   getMarketplaceTypeLabel,
   getItemCategory,
 } from '@/lib/marketplace';
+
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+
 import { FunnelX, Plus, Search, X, LayoutGrid, List, Heart } from 'lucide-react';
+
 import { FeaturedCollectionsSkeleton } from './featured-collections-skeleton';
 import { ItemsGridSkeleton } from './items-grid-skeleton';
+
 import { FavoritesProvider, useFavoritesContext } from '@/lib/favorites-context';
 import { cn } from '@/lib/utils';
 import { useEmbed } from '@/lib/embed-context';
@@ -49,7 +53,6 @@ import {
 } from '@/components/ui/select';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { Button } from '../ui/button';
-// (Carousel related imports removed after modularization)
 
 type CollectionWithTypes = MarketplaceCollection & {
   contentTypes: string[];

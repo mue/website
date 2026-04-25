@@ -1,6 +1,9 @@
-import { Badge } from '@/components/ui/badge';
 import { AlertCircle, AlertTriangle, CheckCircle2, Info } from 'lucide-react';
+
+import { Badge } from '@/components/ui/badge';
+
 import { cn } from '@/lib/utils';
+
 import { AddonType, Photo, Quote } from './types';
 
 export interface ValidationIssue {

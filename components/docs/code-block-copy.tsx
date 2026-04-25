@@ -1,8 +1,9 @@
 'use client';
 
-import { Check, Copy } from 'lucide-react';
 import { useEffect } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
+
+import { Check, Copy } from 'lucide-react';
 
 export function CodeBlockCopy() {
   useEffect(() => {
@@ -10,7 +11,7 @@ export function CodeBlockCopy() {
     const codeBlocks = document.querySelectorAll('.docs-prose pre');
 
     codeBlocks.forEach((block) => {
-      // Skip if button already exists
+      // skip if button already exists
       if (block.querySelector('.copy-code-button')) return;
 
       const wrapper = document.createElement('div');

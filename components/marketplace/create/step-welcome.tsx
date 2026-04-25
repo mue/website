@@ -1,3 +1,7 @@
+import { useEffect, useState } from 'react';
+
+import { Sparkles, FileText, Image, MessageSquareQuote, Settings, RefreshCw } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import {
   AlertDialog,
@@ -10,8 +14,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Sparkles, FileText, Image, MessageSquareQuote, Settings, RefreshCw } from 'lucide-react';
-import { useEffect, useState } from 'react';
 
 interface StepWelcomeProps {
   onNext: () => void;
@@ -67,7 +69,6 @@ export function StepWelcome({ onNext }: StepWelcomeProps) {
 
   return (
     <div className="mx-auto flex max-w-3xl flex-col gap-10 py-8">
-      {/* Hero */}
       <div className="text-center">
         <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
           Build a Marketplace Addon
@@ -78,7 +79,6 @@ export function StepWelcome({ onNext }: StepWelcomeProps) {
         </p>
       </div>
 
-      {/* Addon type cards */}
       <div className="grid gap-3 sm:grid-cols-3">
         {addonTypes.map((type) => (
           <div
@@ -94,7 +94,6 @@ export function StepWelcome({ onNext }: StepWelcomeProps) {
         ))}
       </div>
 
-      {/* Draft notice */}
       {hasDraft && (
         <div className="flex items-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.07] px-4 py-3 text-sm">
           <FileText className="h-4 w-4 shrink-0 text-emerald-500" />
@@ -104,7 +103,6 @@ export function StepWelcome({ onNext }: StepWelcomeProps) {
         </div>
       )}
 
-      {/* CTA */}
       <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
         {hasDraft ? (
           <>
@@ -112,6 +110,7 @@ export function StepWelcome({ onNext }: StepWelcomeProps) {
               <FileText className="mr-2 h-4 w-4" />
               Continue Draft
             </Button>
+
             <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
               <AlertDialogTrigger asChild>
                 <Button size="lg" variant="outline">
@@ -119,6 +118,7 @@ export function StepWelcome({ onNext }: StepWelcomeProps) {
                   Start Fresh
                 </Button>
               </AlertDialogTrigger>
+
               <AlertDialogContent>
                 <AlertDialogHeader>
                   <AlertDialogTitle>Start Fresh?</AlertDialogTitle>

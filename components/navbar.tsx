@@ -1,9 +1,14 @@
 'use client';
 
 import React from 'react';
+
 import Logo from './logo';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+
+import { Download, Menu, BookOpen, Package, Code2, ArrowRight } from 'lucide-react';
+import { FaGithub } from 'react-icons/fa6';
 
 import {
   NavigationMenu,
@@ -14,10 +19,6 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
-import { Button } from './ui/button';
-import { Download, Menu, BookOpen, Package, Code2, ArrowRight } from 'lucide-react';
-import { FaGithub } from 'react-icons/fa6';
-import { cn } from '@/lib/utils';
 import {
   Sheet,
   SheetClose,
@@ -26,6 +27,10 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet';
+
+import { Button } from './ui/button';
+
+import { cn } from '@/lib/utils';
 
 const docsQuickLinks: {
   title: string;
@@ -56,6 +61,7 @@ const docsQuickLinks: {
 export default function Navbar() {
   const pathname = usePathname();
   const isDocsActive = pathname?.startsWith('/docs') ?? false;
+
   const navLinks = [
     {
       href: '/marketplace',
@@ -78,6 +84,7 @@ export default function Navbar() {
       isActive: pathname?.startsWith('/contact') ?? false,
     },
   ];
+
   const mobileLinks = [{ href: '/docs', label: 'Docs', isActive: isDocsActive }, ...navLinks];
 
   return (
@@ -87,6 +94,7 @@ export default function Navbar() {
           <Logo width={100} height={100} className="h-10 w-10" />
         </Link>
       </div>
+
       <div className="flex lg:hidden">
         <Link href={'/'} className="cursor-pointer">
           <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-lexend-deca)' }}>
@@ -94,6 +102,7 @@ export default function Navbar() {
           </span>
         </Link>
       </div>
+
       <div className="hidden lg:flex">
         <NavigationMenu viewport={false}>
           <NavigationMenuList>
@@ -174,6 +183,7 @@ export default function Navbar() {
                 </div>
               </NavigationMenuContent>
             </NavigationMenuItem>
+
             {navLinks.map(({ href, label, isActive }) => (
               <NavigationMenuItem key={href}>
                 <NavigationMenuLink
@@ -188,12 +198,14 @@ export default function Navbar() {
           </NavigationMenuList>
         </NavigationMenu>
       </div>
+
       <div className="flex flex-1 items-center justify-end gap-2">
         <Button variant="default" className="hidden sm:inline-flex" asChild>
           <Link href="/download">
             <Download className="mr-2 h-4 w-4" /> Download
           </Link>
         </Button>
+
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon" className="border-foreground/20 lg:hidden">
@@ -201,10 +213,12 @@ export default function Navbar() {
               <span className="sr-only">Open navigation menu</span>
             </Button>
           </SheetTrigger>
+
           <SheetContent side="right" className="flex flex-col gap-4">
             <SheetHeader className="items-start">
               <SheetTitle className="text-left text-lg">Menu</SheetTitle>
             </SheetHeader>
+
             <div className="flex flex-col gap-4">
               <nav className="flex flex-col gap-2 text-sm">
                 {mobileLinks.map(({ href, label, isActive }) => (
@@ -222,6 +236,7 @@ export default function Navbar() {
                   </SheetClose>
                 ))}
               </nav>
+
               <div className="flex flex-col gap-2 mt-auto">
                 <SheetClose asChild>
                   <Button className="w-full" size="sm" asChild>
@@ -231,6 +246,7 @@ export default function Navbar() {
                     </Link>
                   </Button>
                 </SheetClose>
+
                 <SheetClose asChild>
                   <Button className="w-full" variant="outline" size="sm" asChild>
                     <Link href="https://github.com/mue/mue" target="_blank" rel="noreferrer">

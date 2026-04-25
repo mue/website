@@ -1,7 +1,9 @@
 'use client';
 
 import { useState } from 'react';
+
 import { ChevronDown, ChevronUp } from 'lucide-react';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -44,6 +46,7 @@ export function PresetSettingsTable({ settings }: PresetSettingsTableProps) {
               <TableHead className="font-bold text-foreground w-24">Type</TableHead>
             </TableRow>
           </TableHeader>
+
           <TableBody>
             {displayedSettings.map(([key, value]) => (
               <TableRow key={key}>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
-// All list rendering handled client-side in BlogFilter
+
 import { getAllBlogPosts } from '@/lib/blog';
+
 import { BlogFilter } from './parts/blog-filter';
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 3600; // Revalidate every hour (ISR)
+export const revalidate = 3600; // hourly
 
 export default async function BlogPage() {
   const posts = await getAllBlogPosts();

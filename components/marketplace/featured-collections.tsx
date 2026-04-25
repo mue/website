@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { Badge } from '@/components/ui/badge';
 import {
   Carousel,
@@ -10,8 +11,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+
 import Autoplay from 'embla-carousel-autoplay';
+
 import { getMarketplaceTypeLabel, MarketplaceCollection } from '@/lib/marketplace';
+
 import { cn } from '@/lib/utils';
 import { useEmbed } from '@/lib/embed-context';
 
@@ -28,7 +32,9 @@ export default function FeaturedCollections({
 }: FeaturedCollectionsProps) {
   const { isEmbed: isEmbedContext, buildEmbedUrl } = useEmbed();
   const isEmbed = isEmbedProp || isEmbedContext;
+
   if (!randomCollections.length) return null;
+
   return (
     <Carousel
       opts={{ align: 'start', loop: true }}
@@ -70,6 +76,7 @@ export default function FeaturedCollections({
                     <div className="h-full w-full bg-muted" />
                   )}
                 </div>
+
                 <div
                   className={cn(
                     'flex flex-col gap-4 p-6 pr-14',
@@ -103,6 +110,7 @@ export default function FeaturedCollections({
                       </p>
                     )}
                   </div>
+
                   <div className="mt-auto flex items-center gap-3">
                     <Link
                       href={buildEmbedUrl(
@@ -122,6 +130,7 @@ export default function FeaturedCollections({
           </CarouselItem>
         ))}
       </CarouselContent>
+
       <CarouselPrevious className="left-4" />
       <CarouselNext className="right-4" />
     </Carousel>

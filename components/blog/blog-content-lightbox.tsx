@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState, useCallback, useRef } from 'react';
+
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -13,8 +14,10 @@ export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
   const [lightboxVisible, setLightboxVisible] = useState(false);
   const [lightboxSrc, setLightboxSrc] = useState('');
   const [lightboxAlt, setLightboxAlt] = useState('');
+
   const [allImages, setAllImages] = useState<HTMLImageElement[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -51,22 +54,27 @@ export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
 
   const closeLightbox = () => {
     if (openTimer.current) clearTimeout(openTimer.current);
+
     setLightboxVisible(false);
     closeTimer.current = setTimeout(() => setLightboxOpen(false), 250);
   };
 
   const nextImage = useCallback(() => {
     if (allImages.length === 0) return;
+
     const newIndex = (currentIndex + 1) % allImages.length;
     setCurrentIndex(newIndex);
+
     setLightboxSrc(allImages[newIndex].src);
     setLightboxAlt(allImages[newIndex].alt || '');
   }, [allImages, currentIndex]);
 
   const prevImage = useCallback(() => {
     if (allImages.length === 0) return;
+
     const newIndex = (currentIndex - 1 + allImages.length) % allImages.length;
     setCurrentIndex(newIndex);
+
     setLightboxSrc(allImages[newIndex].src);
     setLightboxAlt(allImages[newIndex].alt || '');
   }, [allImages, currentIndex]);

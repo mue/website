@@ -58,7 +58,6 @@ export default function ContactPage() {
       <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[70vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.15)_0%,_transparent_65%)] blur-3xl" />
 
       <div className="mx-auto max-w-5xl px-6 py-24 sm:py-32">
-        {/* Hero */}
         <header className="mb-16 text-center">
           <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Get in Touch with Us
@@ -69,20 +68,19 @@ export default function ContactPage() {
           </p>
         </header>
 
-        {/* Contact cards */}
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {contactMethods.map((method) => (
             <ContactCard key={method.title} {...method} />
           ))}
         </div>
 
-        {/* Self-help callout */}
         <div className="mt-6">
           <div className="rounded-2xl border border-border bg-muted/30 p-6">
             <div className="flex items-start gap-4">
               <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border bg-background">
                 <Search className="h-4 w-4 text-muted-foreground" />
               </div>
+
               <div>
                 <h3 className="font-semibold text-foreground">Before reaching out</h3>
                 <ul className="mt-3 space-y-2 text-sm text-muted-foreground">

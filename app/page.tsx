@@ -1,9 +1,10 @@
 'use client';
 
+import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { useEffect, useState } from 'react';
 import {
   ArrowRight,
   Rocket,
@@ -19,12 +20,13 @@ import { FaChrome, FaFirefoxBrowser, FaEdge, FaGithub } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
 
 import { Button } from '@/components/ui/button';
-import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
 import { FeatureCard } from '@/components/home/feature-card';
 import { CommunityStatCard } from '@/components/home/community-stat-card';
 import { BrowserBadge } from '@/components/home/browser-badge';
 import { StatItem } from '@/components/home/stat-item';
 import { SoftwareApplicationJsonLd } from '@/components/json-ld';
+
+import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
 
 const stats = ['Building since 2018', '5,000+ monthly active users', '10,000,000+ tabs'];
 
@@ -128,6 +130,7 @@ export default function Home() {
                 <span>Get Started</span>
               </Link>
             </Button>
+
             <Button
               size="lg"
               variant="outline"
@@ -242,6 +245,7 @@ export default function Home() {
                 <span>View Mue on GitHub</span>
               </Link>
             </Button>
+
             <Button
               size="lg"
               variant="outline"

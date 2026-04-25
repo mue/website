@@ -1,6 +1,8 @@
 import Link from 'next/link';
+
 import { ArrowRight } from 'lucide-react';
 import { IconType } from 'react-icons';
+
 import { Button } from '@/components/ui/button';
 
 type BrowserCardProps = {

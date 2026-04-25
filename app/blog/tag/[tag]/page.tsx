@@ -1,13 +1,16 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getAllBlogPosts } from '@/lib/blog';
+
 import { ChevronLeft } from 'lucide-react';
+
 import { BlogCard } from '@/components/blog/blog-card';
-import { cn } from '@/lib/utils';
 import { buttonVariants } from '@/components/ui/button';
 
-export const revalidate = 3600; // Revalidate every hour (ISR)
+import { getAllBlogPosts } from '@/lib/blog';
+import { cn } from '@/lib/utils';
+
+export const revalidate = 3600; // hourly
 
 interface Params {
   tag: string;
@@ -54,7 +57,6 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
       <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
         <script
           type="application/ld+json"
-          // BreadcrumbList JSON-LD
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',

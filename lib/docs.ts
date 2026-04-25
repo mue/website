@@ -1,15 +1,20 @@
 import { promises as fs } from 'fs';
 import type { Dirent } from 'fs';
+
 import path from 'path';
 import matter from 'gray-matter';
+
 import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
+
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeRaw from 'rehype-raw';
 import rehypeStringify from 'rehype-stringify';
+
 import { visit } from 'unist-util-visit';
+
 import { toString } from 'hast-util-to-string';
 import type { Element, Root } from 'hast';
 
@@ -84,6 +89,7 @@ function formatTitleFromSlug(slug: string) {
 
 async function collectDocs(dir: string, segments: string[] = []) {
   let entries: Dirent[] = [];
+
   try {
     entries = await fs.readdir(dir, { withFileTypes: true });
   } catch (error) {
@@ -92,6 +98,7 @@ async function collectDocs(dir: string, segments: string[] = []) {
     }
     throw error;
   }
+
   const docs: DocEntry[] = [];
 
   for (const entry of entries) {
@@ -158,10 +165,12 @@ export async function getDocsTree(): Promise<DocTreeNode[]> {
 
   const ensureBranch = (entry: DocEntry) => {
     let nodes = root;
+
     entry.slug.forEach((segment, index) => {
       const path = entry.slug.slice(0, index + 1);
       const slugKey = path.join('/');
       const isLeaf = index === entry.slug.length - 1;
+
       let node = nodes.find((candidate) => candidate.slug.join('/') === slugKey);
 
       if (!node) {
@@ -201,6 +210,7 @@ export async function getDocsTree(): Promise<DocTreeNode[]> {
       if (a.order !== b.order) return a.order - b.order;
       return a.title.localeCompare(b.title);
     });
+
     nodes.forEach((node) => {
       if (node.children) {
         sortNodes(node.children);

@@ -1,10 +1,13 @@
 import { useState } from 'react';
+
+import { ChevronDown, ChevronRight, Plus, Trash2 } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { ChevronDown, ChevronRight, Plus, Trash2 } from 'lucide-react';
+
 import { Quote } from './types';
 
 type QuotePackEditorProps = {
@@ -34,11 +37,13 @@ export function QuotePackEditor({ quotes, onChange, onDeleteAll }: QuotePackEdit
 
   const toggleQuoteExpanded = (index: number) => {
     const newExpanded = new Set(expandedQuotes);
+
     if (newExpanded.has(index)) {
       newExpanded.delete(index);
     } else {
       newExpanded.add(index);
     }
+
     setExpandedQuotes(newExpanded);
   };
 
@@ -63,6 +68,7 @@ export function QuotePackEditor({ quotes, onChange, onDeleteAll }: QuotePackEdit
           )}
         </div>
       </CardHeader>
+
       <CardContent className="space-y-3">
         {quotes.map((quote, index) => {
           const isExpanded = expandedQuotes.has(index);

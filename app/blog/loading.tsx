@@ -12,14 +12,14 @@ export default function BlogLoading() {
           <Skeleton className="mx-auto h-6 w-full max-w-2xl" />
         </header>
 
-        {/* Filter skeleton */}
+        {/* Filter */}
         <div className="mb-8 flex flex-wrap gap-2">
           {[...Array(5)].map((_, i) => (
             <Skeleton key={i} className="h-8 w-20 rounded-full" />
           ))}
         </div>
 
-        {/* Blog posts grid skeleton */}
+        {/* Blog posts grid */}
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {[...Array(9)].map((_, i) => (
             <div key={i} className="flex flex-col">

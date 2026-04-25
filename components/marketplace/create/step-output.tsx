@@ -1,12 +1,17 @@
-import { AddonMetadata, AddonType, Photo, Quote } from './types';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+import { useEffect, useState } from 'react';
+
+import Image from 'next/image';
+
 import { Download, CheckCircle2, FileJson, Package, Copy, Check } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa6';
-import { Badge } from '@/components/ui/badge';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
+
 import confetti from 'canvas-confetti';
+
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+
+import { AddonMetadata, AddonType, Photo, Quote } from './types';
 
 interface StepOutputProps {
   addonType: AddonType;
@@ -31,7 +36,6 @@ export function StepOutput({
 }: StepOutputProps) {
   const [copied, setCopied] = useState(false);
 
-  // Celebrate with confetti when reaching this step
   useEffect(() => {
     const duration = 3000;
     const animationEnd = Date.now() + duration;
@@ -50,12 +54,12 @@ export function StepOutput({
 
       const particleCount = 50 * (timeLeft / duration);
 
-      // Fire confetti from both sides
       confetti({
         ...defaults,
         particleCount,
         origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
       });
+
       confetti({
         ...defaults,
         particleCount,
@@ -90,7 +94,7 @@ export function StepOutput({
   };
 
   const handleCopyToClipboard = async () => {
-    // Generate the addon JSON
+    // generate json
     const addonData: Record<string, unknown> = {
       name: metadata.name,
       description: metadata.description,
@@ -244,6 +248,7 @@ export function StepOutput({
               </>
             )}
           </Button>
+
           <Button variant="outline" onClick={onDownload} className="gap-2">
             <Download className="h-4 w-4" />
             Download JSON

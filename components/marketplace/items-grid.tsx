@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { cn } from '@/lib/utils';
 import {
   getMarketplaceTypeLabel,
@@ -9,8 +10,11 @@ import {
   formatCollectionName,
   MarketplaceItemSummary,
 } from '@/lib/marketplace';
+
 import { Library as LibraryIcon, Heart } from 'lucide-react';
+
 import { useRouter } from 'next/navigation';
+
 import { useFavoritesContext } from '@/lib/favorites-context';
 import { useEmbed } from '@/lib/embed-context';
 
@@ -21,8 +25,10 @@ interface ItemsGridProps {
 
 export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) {
   const router = useRouter();
+
   const { toggleFavorite, isFavorite } = useFavoritesContext();
   const { isEmbed, buildEmbedUrl } = useEmbed();
+
   return (
     <div
       className={cn(
@@ -60,6 +66,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
               )}
             />
           </button>
+
           <div className="flex items-center justify-center lg:justify-start">
             <div
               className={cn(

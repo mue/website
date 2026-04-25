@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import {
   Breadcrumb,
   BreadcrumbList,
@@ -7,6 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
+
 import { getMarketplaceTypeLabel, normalizeTypeForFilter } from '@/lib/marketplace';
 
 type BreadcrumbProps =

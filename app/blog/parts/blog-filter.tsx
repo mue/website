@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { BlogCard } from '@/components/blog/blog-card';
-import { cn } from '@/lib/utils';
+
 import { Search } from 'lucide-react';
+
+import { BlogCard } from '@/components/blog/blog-card';
 import {
   Select,
   SelectTrigger,
@@ -12,7 +13,8 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-// Types based on expected shape from getAllBlogPosts
+import { cn } from '@/lib/utils';
+
 interface Frontmatter {
   title: string;
   date: string;
@@ -50,12 +52,10 @@ export function BlogFilter({ initialPosts }: BlogFilterProps) {
   const filtered = useMemo(() => {
     let list = initialPosts;
 
-    // Apply tag filter
     if (filter !== 'all') {
       list = list.filter((p) => p.frontmatter.tags?.map((t) => t.toLowerCase()).includes(filter));
     }
 
-    // Apply search filter
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
       list = list.filter(
@@ -66,7 +66,6 @@ export function BlogFilter({ initialPosts }: BlogFilterProps) {
       );
     }
 
-    // Sort
     return [...list].sort((a, b) => {
       const da = new Date(a.frontmatter.date).getTime();
       const db = new Date(b.frontmatter.date).getTime();
@@ -77,7 +76,6 @@ export function BlogFilter({ initialPosts }: BlogFilterProps) {
   return (
     <div className="flex flex-col gap-10">
       <div className="flex flex-col gap-4">
-        {/* Search bar */}
         <div className="relative">
           <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <input
@@ -89,7 +87,6 @@ export function BlogFilter({ initialPosts }: BlogFilterProps) {
           />
         </div>
 
-        {/* Filters and Sort */}
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap items-center gap-3">
             {FILTER_TAGS.map((tag) => {
@@ -112,10 +109,12 @@ export function BlogFilter({ initialPosts }: BlogFilterProps) {
               );
             })}
           </div>
+
           <div className="flex items-center gap-3">
             <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
               Sort
             </span>
+
             <Select value={sortOrder} onValueChange={(v) => setSortOrder(v as 'newest' | 'oldest')}>
               <SelectTrigger size="sm" className="min-w-[9rem]">
                 <SelectValue placeholder="Sort by" />

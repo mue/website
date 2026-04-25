@@ -1,12 +1,14 @@
 import './globals.css';
 
+import { Suspense } from 'react';
+
 import type { Metadata } from 'next';
 import { Alfa_Slab_One, Inter, Lexend_Deca } from 'next/font/google';
 import Script from 'next/script';
-import { Suspense } from 'react';
 
 import { ThemeProvider } from '@/components/theme-provider';
 import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/json-ld';
+
 import { EmbedProvider, EmbedLayoutWrapper } from '@/lib/embed-context';
 
 const lexendDeca = Lexend_Deca({
@@ -89,6 +91,7 @@ export default function RootLayout({
         <OrganizationJsonLd />
         <WebSiteJsonLd />
       </head>
+
       <body
         className={`${lexendDeca.variable} ${inter.variable} ${alfaSlabOne.variable} antialiased`}
       >
@@ -104,6 +107,7 @@ export default function RootLayout({
             </EmbedProvider>
           </Suspense>
         </ThemeProvider>
+
         <Script
           src="https://static.cloudflareinsights.com/beacon.min.js"
           strategy="afterInteractive"

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+
 import { Input } from '@/components/ui/input';
 import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
 import { AddonMetadata, AddonType, Photo, Quote } from '@/components/marketplace/create/types';
@@ -39,19 +40,22 @@ export default function CreateAddonPage() {
   ]);
   const [quotes, setQuotes] = useState<Quote[]>([{ quote: '', author: '' }]);
   const [settingsJson, setSettingsJson] = useState('');
+
   const [showSubmitDialog, setShowSubmitDialog] = useState(false);
   const [showErrorDialog, setShowErrorDialog] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+
   const [showDeletePhotosDialog, setShowDeletePhotosDialog] = useState(false);
   const [showDeleteQuotesDialog, setShowDeleteQuotesDialog] = useState(false);
+
   const [submitUrl, setSubmitUrl] = useState('');
 
-  // Load draft from localStorage on mount
   useEffect(() => {
     try {
       const savedDraft = localStorage.getItem('mue-addon-draft');
       if (savedDraft) {
         const draft = JSON.parse(savedDraft);
+
         if (draft.currentStep) setCurrentStep(draft.currentStep);
         if (draft.addonType) setAddonType(draft.addonType);
         if (draft.metadata) setMetadata(draft.metadata);
@@ -65,9 +69,7 @@ export default function CreateAddonPage() {
     setMounted(true);
   }, []);
 
-  // Auto-save draft to localStorage whenever state changes
   useEffect(() => {
-    // Only save if we're past the welcome screen and have some content
     if (currentStep > 1) {
       try {
         const draft = {
@@ -97,10 +99,11 @@ export default function CreateAddonPage() {
   const handleLoadDraft = (draft: SavedDraft) => {
     setAddonType(draft.metadata.type);
     setMetadata(draft.metadata);
+
     if (draft.content.photos) setPhotos(draft.content.photos);
     if (draft.content.quotes) setQuotes(draft.content.quotes);
     if (draft.content.settingsJson) setSettingsJson(draft.content.settingsJson);
-    // Start at type selection step to allow continuing the workflow
+
     setCurrentStep(2);
   };
 
@@ -165,21 +168,24 @@ export default function CreateAddonPage() {
         const json = JSON.parse(e.target?.result as string);
 
         if (isSettings) {
-          // For settings JSON upload, only extract the settings object
+          // for settings JSON upload, only extract the settings object
           setSettingsJson(JSON.stringify(json, null, 2));
         } else {
-          // For addon JSON upload, load all data
           if (json.name) setMetadata((prev) => ({ ...prev, name: json.name }));
           if (json.description) setMetadata((prev) => ({ ...prev, description: json.description }));
+
           if (json.type) {
             setAddonType(json.type);
             setMetadata((prev) => ({ ...prev, type: json.type }));
           }
+
           if (json.version) setMetadata((prev) => ({ ...prev, version: json.version }));
           if (json.author) setMetadata((prev) => ({ ...prev, author: json.author }));
           if (json.icon_url) setMetadata((prev) => ({ ...prev, icon_url: json.icon_url }));
-          if (json.screenshot_url)
+
+          if (json.screenshot_url) {
             setMetadata((prev) => ({ ...prev, screenshot_url: json.screenshot_url }));
+          }
 
           if (json.type === 'photos' && json.photos) {
             setPhotos(json.photos);
@@ -234,21 +240,25 @@ export default function CreateAddonPage() {
       setShowErrorDialog(true);
       return false;
     }
+
     if (!metadata.description.trim()) {
       setErrorMessage('Please enter a description for your addon.');
       setShowErrorDialog(true);
       return false;
     }
+
     if (!metadata.version.trim()) {
       setErrorMessage('Please enter a version for your addon.');
       setShowErrorDialog(true);
       return false;
     }
+
     if (!metadata.author.trim()) {
       setErrorMessage('Please enter an author for your addon.');
       setShowErrorDialog(true);
       return false;
     }
+
     if (!metadata.icon_url.trim()) {
       setErrorMessage('Please enter an icon URL for your addon.');
       setShowErrorDialog(true);
@@ -275,9 +285,11 @@ export default function CreateAddonPage() {
     const link = document.createElement('a');
     link.href = url;
     link.download = `${fileName || 'addon'}.json`;
+
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
     URL.revokeObjectURL(url);
   };
 

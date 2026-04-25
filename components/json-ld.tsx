@@ -15,7 +15,6 @@ export const JsonLd: FC<JsonLdProps> = ({ data }) => {
   );
 };
 
-// Organization Schema
 export const OrganizationJsonLd: FC = () => {
   const data = {
     '@context': 'https://schema.org',
@@ -36,7 +35,6 @@ export const OrganizationJsonLd: FC = () => {
   return <JsonLd data={data} />;
 };
 
-// WebSite Schema with Search Action
 export const WebSiteJsonLd: FC = () => {
   const data = {
     '@context': 'https://schema.org',
@@ -58,7 +56,6 @@ export const WebSiteJsonLd: FC = () => {
   return <JsonLd data={data} />;
 };
 
-// SoftwareApplication Schema
 type SoftwareApplicationJsonLdProps = {
   operatingSystem?: string;
   applicationCategory?: string;
@@ -101,7 +98,6 @@ export const SoftwareApplicationJsonLd: FC<SoftwareApplicationJsonLdProps> = ({
   return <JsonLd data={data} />;
 };
 
-// WebPage Schema
 type WebPageJsonLdProps = {
   title: string;
   description: string;
@@ -138,7 +134,6 @@ export const WebPageJsonLd: FC<WebPageJsonLdProps> = ({
   return <JsonLd data={data} />;
 };
 
-// Article Schema (already exists in blog but making it reusable)
 type ArticleJsonLdProps = {
   headline: string;
   description?: string;
@@ -199,7 +194,6 @@ export const ArticleJsonLd: FC<ArticleJsonLdProps> = ({
   return <JsonLd data={data} />;
 };
 
-// BreadcrumbList Schema
 type BreadcrumbItem = {
   position: number;
   name: string;
@@ -225,7 +219,6 @@ export const BreadcrumbJsonLd: FC<BreadcrumbJsonLdProps> = ({ items }) => {
   return <JsonLd data={data} />;
 };
 
-// Product Schema (for marketplace items)
 type ProductJsonLdProps = {
   name: string;
   description?: string;
@@ -269,7 +262,6 @@ export const ProductJsonLd: FC<ProductJsonLdProps> = ({
   return <JsonLd data={data} />;
 };
 
-// FAQPage Schema
 type FAQItem = {
   question: string;
   answer: string;
@@ -296,7 +288,6 @@ export const FAQPageJsonLd: FC<FAQPageJsonLdProps> = ({ faqs }) => {
   return <JsonLd data={data} />;
 };
 
-// CollectionPage Schema
 type CollectionPageJsonLdProps = {
   name: string;
   description?: string;

@@ -1,15 +1,21 @@
-import { AddonType, Photo, Quote } from './types';
+import { useState } from 'react';
+
+import { ArrowRight, Upload, Sparkles, CheckCircle2 } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+
 import { PhotoPackEditor } from './photo-pack-editor';
 import { QuotePackEditor } from './quote-pack-editor';
 import { SettingsEditor } from './settings-editor';
-import { ArrowRight, Upload, Sparkles, CheckCircle2 } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { useState } from 'react';
+
 import { TemplatePicker } from './template-picker';
-import { ContentTemplate } from '@/lib/content-templates';
 import { ValidationSummary } from './validation-summary';
+
+import { ContentTemplate } from '@/lib/content-templates';
 import { validatePhotos, validateQuotes, validateSettings } from '@/lib/content-validator';
+
+import { AddonType, Photo, Quote } from './types';
 
 interface StepContentProps {
   addonType: AddonType;
@@ -49,9 +55,11 @@ export function StepContent({
     if (template.content.photos) {
       onPhotosChange(template.content.photos);
     }
+
     if (template.content.quotes) {
       onQuotesChange(template.content.quotes);
     }
+
     if (template.content.settingsJson) {
       onSettingsChange(template.content.settingsJson);
     }
@@ -61,12 +69,15 @@ export function StepContent({
     if (addonType === 'photos') {
       return validatePhotos(photos);
     }
+
     if (addonType === 'quotes') {
       return validateQuotes(quotes);
     }
+
     if (addonType === 'settings') {
       return validateSettings(settingsJson);
     }
+
     return { isValid: true, errors: [], warnings: [], infos: [] };
   };
 
@@ -97,9 +108,11 @@ export function StepContent({
     if (addonType === 'photos') {
       return photos.some((p) => p.photographer && p.location && p.url.default);
     }
+
     if (addonType === 'quotes') {
       return quotes.some((q) => q.quote && q.author);
     }
+
     if (addonType === 'settings') {
       try {
         if (!settingsJson.trim()) return false;
@@ -109,6 +122,7 @@ export function StepContent({
         return false;
       }
     }
+
     return false;
   };
 

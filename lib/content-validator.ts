@@ -23,7 +23,8 @@ export interface ContentValidationResult {
   quoteValidations?: QuoteValidation[];
 }
 
-// Validate image URL format
+export const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'];
+
 export function validateImageUrl(url: string): ValidationIssue[] {
   const issues: ValidationIssue[] = [];
 
@@ -32,14 +33,11 @@ export function validateImageUrl(url: string): ValidationIssue[] {
     return issues;
   }
 
-  // Check protocol
   if (!url.match(/^https?:\/\//i)) {
     issues.push({ type: 'error', message: 'URL must start with http:// or https://' });
   }
 
-  // Check file extension
-  const validExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'];
-  const hasValidExtension = validExtensions.some((ext) => url.toLowerCase().includes(ext));
+  const hasValidExtension = IMAGE_EXTENSIONS.some((ext) => url.toLowerCase().includes(ext));
 
   if (!hasValidExtension) {
     issues.push({
@@ -48,7 +46,6 @@ export function validateImageUrl(url: string): ValidationIssue[] {
     });
   }
 
-  // Recommend HTTPS
   if (url.match(/^http:\/\//i)) {
     issues.push({
       type: 'warning',
@@ -56,7 +53,6 @@ export function validateImageUrl(url: string): ValidationIssue[] {
     });
   }
 
-  // Check URL length
   if (url.length > 500) {
     issues.push({
       type: 'warning',
@@ -67,7 +63,6 @@ export function validateImageUrl(url: string): ValidationIssue[] {
   return issues;
 }
 
-// Validate photo pack
 export function validatePhotos(
   photos: Array<{ url: { default: string }; photographer?: string; location?: string }>,
 ): ContentValidationResult {
@@ -76,13 +71,11 @@ export function validatePhotos(
   const infos: ValidationIssue[] = [];
   const photoValidations: PhotoValidation[] = [];
 
-  // Check if there are photos
   if (!photos || photos.length === 0) {
     errors.push({ type: 'error', message: 'At least one photo is required' });
     return { isValid: false, errors, warnings, infos };
   }
 
-  // Filter out empty photos
   const validPhotos = photos.filter((p) => p.url?.default?.trim());
 
   if (validPhotos.length === 0) {
@@ -90,15 +83,16 @@ export function validatePhotos(
     return { isValid: false, errors, warnings, infos };
   }
 
-  // Check for duplicates
   const urlSet = new Set<string>();
   const duplicates: string[] = [];
 
   validPhotos.forEach((photo) => {
     const url = photo.url.default.trim();
+
     if (urlSet.has(url)) {
       duplicates.push(url);
     }
+
     urlSet.add(url);
   });
 
@@ -109,7 +103,6 @@ export function validatePhotos(
     });
   }
 
-  // Validate each photo
   validPhotos.forEach((photo) => {
     const photoIssues = validateImageUrl(photo.url.default);
 
@@ -139,7 +132,6 @@ export function validatePhotos(
     });
   });
 
-  // Size recommendations
   if (validPhotos.length < 5) {
     infos.push({
       type: 'info',
@@ -161,7 +153,6 @@ export function validatePhotos(
   };
 }
 
-// Validate quote pack
 export function validateQuotes(
   quotes: Array<{ quote: string; author: string; name?: string }>,
 ): ContentValidationResult {
@@ -170,13 +161,11 @@ export function validateQuotes(
   const infos: ValidationIssue[] = [];
   const quoteValidations: QuoteValidation[] = [];
 
-  // Check if there are quotes
   if (!quotes || quotes.length === 0) {
     errors.push({ type: 'error', message: 'At least one quote is required' });
     return { isValid: false, errors, warnings, infos };
   }
 
-  // Filter out empty quotes
   const validQuotes = quotes.filter((q) => q.quote?.trim() && q.author?.trim());
 
   if (validQuotes.length === 0) {
@@ -184,15 +173,16 @@ export function validateQuotes(
     return { isValid: false, errors, warnings, infos };
   }
 
-  // Check for duplicates
   const quoteSet = new Set<string>();
   const duplicates: string[] = [];
 
   validQuotes.forEach((quote) => {
     const key = `${quote.quote.trim()}|${quote.author.trim()}`;
+
     if (quoteSet.has(key)) {
       duplicates.push(quote.quote);
     }
+
     quoteSet.add(key);
   });
 
@@ -203,11 +193,9 @@ export function validateQuotes(
     });
   }
 
-  // Validate each quote
   validQuotes.forEach((quote, index) => {
     const quoteIssues: ValidationIssue[] = [];
 
-    // Check quote length
     const quoteLength = quote.quote.trim().length;
     if (quoteLength < 10) {
       quoteIssues.push({
@@ -221,7 +209,6 @@ export function validateQuotes(
       });
     }
 
-    // Check author length
     if (quote.author.trim().length > 50) {
       quoteIssues.push({
         type: 'warning',
@@ -241,7 +228,6 @@ export function validateQuotes(
     });
   });
 
-  // Size recommendations
   if (validQuotes.length < 10) {
     infos.push({
       type: 'info',
@@ -263,7 +249,6 @@ export function validateQuotes(
   };
 }
 
-// Validate settings JSON
 export function validateSettings(settingsJson: string): ContentValidationResult {
   const errors: ValidationIssue[] = [];
   const warnings: ValidationIssue[] = [];
@@ -277,14 +262,13 @@ export function validateSettings(settingsJson: string): ContentValidationResult 
   try {
     const parsed = JSON.parse(settingsJson);
 
-    // Check if it's an object
     if (typeof parsed !== 'object' || Array.isArray(parsed)) {
       errors.push({ type: 'error', message: 'Settings must be a JSON object' });
       return { isValid: false, errors, warnings, infos };
     }
 
-    // Check if it has settings
     const settingsCount = Object.keys(parsed).length;
+
     if (settingsCount === 0) {
       warnings.push({ type: 'warning', message: 'Settings object is empty' });
     } else if (settingsCount < 5) {
@@ -313,18 +297,16 @@ export function validateSettings(settingsJson: string): ContentValidationResult 
   };
 }
 
-// Validate API pack settings schema
 export function validateAPIPackSettings(item: any): ContentValidationResult {
   const errors: ValidationIssue[] = [];
   const warnings: ValidationIssue[] = [];
   const infos: ValidationIssue[] = [];
 
   if (!item.api_enabled) {
-    // Not an API pack, nothing to validate
+    // nothing to validate
     return { isValid: true, errors, warnings, infos };
   }
 
-  // Check required fields for API packs
   if (!item.api_provider) {
     errors.push({
       type: 'error',
@@ -333,7 +315,6 @@ export function validateAPIPackSettings(item: any): ContentValidationResult {
     });
   }
 
-  // Validate api_endpoint is a valid URL
   if (!item.api_endpoint) {
     errors.push({
       type: 'error',
@@ -352,7 +333,6 @@ export function validateAPIPackSettings(item: any): ContentValidationResult {
     }
   }
 
-  // Validate cache_refresh_interval if provided
   if (item.cache_refresh_interval !== undefined) {
     if (typeof item.cache_refresh_interval !== 'number' || item.cache_refresh_interval < 60) {
       warnings.push({
@@ -384,7 +364,6 @@ export function validateAPIPackSettings(item: any): ContentValidationResult {
       field: 'settings_schema',
     });
   } else {
-    // Validate each schema field
     item.settings_schema.forEach((field: any, index: number) => {
       if (!field.key || typeof field.key !== 'string') {
         errors.push({
@@ -416,7 +395,6 @@ export function validateAPIPackSettings(item: any): ContentValidationResult {
         });
       }
 
-      // Check if dropdown/chipselect have options
       if ((field.type === 'dropdown' || field.type === 'chipselect') && !field.dynamic) {
         if (!field.options || !Array.isArray(field.options)) {
           errors.push({
@@ -427,7 +405,6 @@ export function validateAPIPackSettings(item: any): ContentValidationResult {
         }
       }
 
-      // Secure fields should have help text
       if (field.secure && !field.help_text) {
         warnings.push({
           type: 'warning',
@@ -438,7 +415,6 @@ export function validateAPIPackSettings(item: any): ContentValidationResult {
     });
   }
 
-  // API packs should have empty photos array
   if (item.photos && Array.isArray(item.photos) && item.photos.length > 0) {
     warnings.push({
       type: 'warning',
@@ -447,7 +423,6 @@ export function validateAPIPackSettings(item: any): ContentValidationResult {
     });
   }
 
-  // Info about pack configuration
   if (errors.length === 0) {
     infos.push({
       type: 'info',

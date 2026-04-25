@@ -1,9 +1,12 @@
 'use client';
 
-import Link from 'next/link';
-import { FaXTwitter, FaGithub } from 'react-icons/fa6';
 import { useEffect, useState } from 'react';
+
+import Link from 'next/link';
+
+import { FaXTwitter, FaGithub } from 'react-icons/fa6';
 import Logo from './logo';
+
 import { ThemeToggle } from './theme-toggle';
 
 const footerLinks = {
@@ -47,11 +50,9 @@ export default function Footer() {
         );
         const data = await response.json();
 
-        // Check if all status keys are "up"
         const allUp = data.every((service: { status: string }) => service.status === 'up');
         setSystemStatus(allUp ? 'operational' : 'degraded');
       } catch {
-        // If fetch fails, assume degraded
         setSystemStatus('degraded');
       }
     };
@@ -84,6 +85,7 @@ export default function Footer() {
             <Link href="/" className="inline-block">
               <Logo className="h-12 w-12" />
             </Link>
+
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">
               <span className="font-bold">M</span>odifiable. <span className="font-bold">U</span>
               ser-centric. <span className="font-bold">E</span>xperience.
@@ -99,6 +101,7 @@ export default function Footer() {
               <span className={`inline-flex h-2 w-2 rounded-full ${status.dotColor}`} />
               <span>{status.text}</span>
             </a>
+
             <div className="mt-6 flex items-center gap-4">
               <Link
                 href="https://github.com/mue/mue"
@@ -128,6 +131,7 @@ export default function Footer() {
                 <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
                   {category}
                 </h3>
+
                 <ul className="mt-4 space-y-3">
                   {links.map((link) => (
                     <li key={link.name}>

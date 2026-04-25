@@ -1,17 +1,20 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+
 import { ArrowLeft, ArrowRight, Calendar, ChevronLeft, User, Clock } from 'lucide-react';
+
 import { BlogImage } from '@/components/blog/blog-image';
 import { BlogContentLightbox } from '@/components/blog/blog-content-lightbox';
-import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
 import { Badge } from '@/components/ui/badge';
 import { buttonVariants } from '@/components/ui/button';
-import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
-import { cn } from '@/lib/utils';
 import { ArticleJsonLd as ArticleJsonLdComponent, BreadcrumbJsonLd } from '@/components/json-ld';
 
-export const revalidate = 3600; // Revalidate every hour (ISR)
+import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
+import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
+import { cn } from '@/lib/utils';
+
+export const revalidate = 3600; // hourly
 
 type BlogPostParams = {
   slug: string;
@@ -31,10 +34,12 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: BlogPostProps): Promise<Metadata> {
   const { slug } = await params;
+
   const post = await getBlogPostBySlug(slug);
   if (!post) {
     return { title: 'Page Not Found' };
   }
+
   const title = post.frontmatter.title;
   const description =
     post.excerpt || post.frontmatter.description || 'Read the latest from the Mue blog.';
@@ -43,6 +48,7 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
   const tags = post.frontmatter.tags || [];
   const modified = post.frontmatter.dateModified;
   const readingTime = post.readingTime;
+
   return {
     title,
     description,
@@ -91,13 +97,13 @@ export default async function BlogPostPage({ params, searchParams }: BlogPostPro
     notFound();
   }
 
-  // Find adjacent posts
   const currentIndex = allPosts.findIndex((p) => p.slug === slug);
   const previousPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 
   const hasUpdate =
     post.frontmatter.dateModified && post.frontmatter.dateModified !== post.frontmatter.date;
+
   return (
     <div className="relative min-h-screen overflow-hidden">
       {!isEmbed && (
@@ -153,6 +159,7 @@ export default async function BlogPostPage({ params, searchParams }: BlogPostPro
                 <Calendar className="h-4 w-4" />
                 <time dateTime={post.frontmatter.date}>{formatDate(post.frontmatter.date)}</time>
               </span>
+
               {hasUpdate && (
                 <span className="flex items-center gap-2" title="Updated date">
                   <Calendar className="h-4 w-4 opacity-60" />
@@ -193,6 +200,7 @@ export default async function BlogPostPage({ params, searchParams }: BlogPostPro
             post.readingTime ? `PT${/^(\d+)/.exec(post.readingTime)?.[1] || '5'}M` : undefined
           }
         />
+
         <BreadcrumbJsonLd
           items={[
             { position: 1, name: 'Home', item: 'https://muetab.com/' },
@@ -204,6 +212,7 @@ export default async function BlogPostPage({ params, searchParams }: BlogPostPro
             },
           ]}
         />
+
         <div className="docs-prose" dangerouslySetInnerHTML={{ __html: post.content }} />
         <BlogContentLightbox contentHtml={post.content} />
 
@@ -223,6 +232,7 @@ export default async function BlogPostPage({ params, searchParams }: BlogPostPro
               </Link>
             )}
           </div>
+
           <div>
             {nextPost && (
               <Link
@@ -268,10 +278,10 @@ export default async function BlogPostPage({ params, searchParams }: BlogPostPro
   );
 }
 
-// Gradient hero fallback when no image is provided
 function GradientHero({ title }: { title: string }) {
   const gradientClass = BLOG_IMAGE_GRADIENTS[blogImageGradientIndex(title)];
   const initial = (title?.trim()?.[0] || '?').toUpperCase();
+
   return (
     <div
       className={cn(

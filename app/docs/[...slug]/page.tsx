@@ -9,11 +9,12 @@ import { CodeBlockCopy } from '@/components/docs/code-block-copy';
 import { getDocsNavigation } from '@/components/docs/layout-context';
 import { DocsSearch } from '@/components/docs/search';
 import { buttonVariants } from '@/components/ui/button';
+
 import type { DocTreeNode } from '@/lib/docs';
 import { getAllDocsMeta, getDocBySlug } from '@/lib/docs';
 import { cn } from '@/lib/utils';
 
-export const revalidate = 3600; // Revalidate every hour (ISR)
+export const revalidate = 3600; // hourly
 
 type DocPageParams = {
   slug?: string[];
@@ -72,6 +73,7 @@ export async function generateMetadata({ params }: DocPageProps): Promise<Metada
         description,
       };
     }
+
     return {
       title: 'Documentation | Mue',
     };
@@ -96,6 +98,7 @@ function flattenTree(tree: DocTreeNode[]): DocTreeNode[] {
       }
     });
   };
+
   walk(tree);
   return nodes;
 }
@@ -171,9 +174,6 @@ function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
       header={
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="space-y-2">
-            {/* <Badge className="w-fit rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-              {sectionTitle}
-            </Badge> */}
             <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
               {doc.frontmatter.title}
             </h1>
@@ -211,6 +211,7 @@ function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
             </Link>
           )}
         </div>
+
         <div>
           {next && (
             <Link
@@ -276,9 +277,6 @@ function DocsSectionContent({ section, tree, docsMeta }: DocsSectionContentProps
       header={
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="space-y-2">
-            {/* <Badge className="w-fit rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-              Section
-            </Badge> */}
             <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">{section.title}</h1>
             <p className="max-w-2xl text-sm text-muted-foreground md:text-base">
               {children.length > 0
@@ -288,6 +286,7 @@ function DocsSectionContent({ section, tree, docsMeta }: DocsSectionContentProps
                 : `${section.title} doesn’t have published guides yet.`}
             </p>
           </div>
+
           <div className="w-full max-w-sm md:hidden">
             <DocsSearch docs={docsMeta} />
           </div>

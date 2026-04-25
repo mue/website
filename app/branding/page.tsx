@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+
 import { Palette, CheckCircle2, XCircle } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { BrandColorCard } from '@/components/branding/brand-color-card';
 import { BrandAssetCard } from '@/components/branding/brand-asset-card';
@@ -81,6 +83,7 @@ export default function BrandingPage() {
               <Palette className="h-6 w-6 text-[#FF5C25]" />
             </div>
           </div>
+
           <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Brand Guidelines
           </h1>
@@ -91,7 +94,6 @@ export default function BrandingPage() {
         </header>
 
         <div className="space-y-16">
-          {/* Logo */}
           <section>
             <h2 className="mb-2 text-2xl font-semibold text-foreground">Logo</h2>
             <p className="mb-8 text-muted-foreground">
@@ -99,6 +101,7 @@ export default function BrandingPage() {
               symbolizes multiple elements coming together to create your perfect new tab
               experience.
             </p>
+
             <div className="grid gap-4 md:grid-cols-2">
               {logoVariants.map((variant) => (
                 <BrandAssetCard
@@ -113,13 +116,13 @@ export default function BrandingPage() {
 
           <div className="h-px bg-border" />
 
-          {/* Color Palette */}
           <section>
             <h2 className="mb-2 text-2xl font-semibold text-foreground">Color Palette</h2>
             <p className="mb-8 text-muted-foreground">
               Our vibrant palette is inspired by sunrises and new beginnings. Use these colors
               consistently across all Mue-related materials.
             </p>
+
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
               {brandColors.map((color) => (
                 <BrandColorCard
@@ -134,12 +137,12 @@ export default function BrandingPage() {
 
           <div className="h-px bg-border" />
 
-          {/* Typography */}
           <section>
             <h2 className="mb-2 text-2xl font-semibold text-foreground">Typography</h2>
             <p className="mb-8 text-muted-foreground">
               We use purpose-chosen fonts that balance personality with readability.
             </p>
+
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-border bg-background/60 p-6">
                 <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
@@ -165,12 +168,12 @@ export default function BrandingPage() {
 
           <div className="h-px bg-border" />
 
-          {/* Usage Guidelines */}
           <section>
             <h2 className="mb-2 text-2xl font-semibold text-foreground">Usage Guidelines</h2>
             <p className="mb-8 text-muted-foreground">
               Follow these guidelines to keep the Mue brand consistent and recognizable.
             </p>
+
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-border bg-background/60 p-6">
                 <h3 className="mb-4 flex items-center gap-2 font-semibold text-foreground">
@@ -186,6 +189,7 @@ export default function BrandingPage() {
                   ))}
                 </ul>
               </div>
+
               <div className="rounded-2xl border border-border bg-background/60 p-6">
                 <h3 className="mb-4 flex items-center gap-2 font-semibold text-foreground">
                   <XCircle className="h-5 w-5 text-red-500" />
@@ -205,7 +209,6 @@ export default function BrandingPage() {
 
           <div className="h-px bg-border" />
 
-          {/* CTA */}
           <div className="rounded-2xl border border-border bg-muted/30 p-8 text-center">
             <h3 className="text-xl font-semibold text-foreground">Need something else?</h3>
             <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">

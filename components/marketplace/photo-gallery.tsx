@@ -1,8 +1,11 @@
 'use client';
 
 import { useState, useEffect, useCallback, useRef } from 'react';
+
 import Image from 'next/image';
+
 import { LayoutGrid, Layers, X, ChevronLeft, ChevronRight, Camera, MapPin } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import {
   Carousel,
@@ -11,6 +14,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+
 import { useEmbed } from '@/lib/embed-context';
 
 type Photo = {
@@ -27,11 +31,14 @@ type PhotoGalleryProps = {
 export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
   const { isEmbed, sendMessage } = useEmbed();
   const [viewMode, setViewMode] = useState<'carousel' | 'grid'>('carousel');
+
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxVisible, setLightboxVisible] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
@@ -41,6 +48,7 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
     if (isEmbed) {
       const photo = photos[index];
       const photoUrl = photo?.url?.default ?? Object.values(photo?.url ?? {})[0];
+
       sendMessage('marketplace:lightbox', {
         action: 'open',
         index,
@@ -58,17 +66,21 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
         })),
         totalCount: photos.length,
       });
+
       return;
     }
 
     if (closeTimer.current) clearTimeout(closeTimer.current);
+
     setLightboxIndex(index);
     setLightboxOpen(true);
+
     openTimer.current = setTimeout(() => setLightboxVisible(true), 16);
   };
 
   const closeLightbox = () => {
     if (openTimer.current) clearTimeout(openTimer.current);
+
     setLightboxVisible(false);
     closeTimer.current = setTimeout(() => setLightboxOpen(false), 250);
   };
@@ -81,7 +93,6 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
     setLightboxIndex((prev) => (prev - 1 + photos.length) % photos.length);
   }, [photos.length]);
 
-  // Minimum swipe distance (in px) to trigger navigation
   const minSwipeDistance = 50;
 
   const onTouchStart = (e: React.TouchEvent) => {
@@ -103,6 +114,7 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
     if (isLeftSwipe && photos.length > 1) {
       nextImage();
     }
+
     if (isRightSwipe && photos.length > 1) {
       prevImage();
     }
@@ -118,7 +130,6 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
     };
   }, []);
 
-  // Keyboard navigation for lightbox
   useEffect(() => {
     if (!lightboxOpen) return;
 

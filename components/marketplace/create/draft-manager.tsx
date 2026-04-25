@@ -1,6 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+
+import { Save, FolderOpen, Trash2, Download, Upload, Clock, FileText } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -13,8 +16,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Save, FolderOpen, Trash2, Download, Upload, Clock, FileText } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+
 import { getMarketplaceTypeLabel } from '@/lib/marketplace';
 
 export interface SavedDraft {
@@ -48,18 +51,19 @@ const DRAFTS_STORAGE_KEY = 'mue_addon_drafts';
 
 export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
   const [drafts, setDrafts] = useState<SavedDraft[]>([]);
-  const [showSaveDialog, setShowSaveDialog] = useState(false);
-  const [showLoadDialog, setShowLoadDialog] = useState(false);
   const [draftName, setDraftName] = useState('');
   const [selectedDraftId, setSelectedDraftId] = useState<string | null>(null);
 
-  // Load drafts from localStorage
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [showLoadDialog, setShowLoadDialog] = useState(false);
+
   useEffect(() => {
     loadDrafts();
   }, []);
 
   const loadDrafts = () => {
     const stored = localStorage.getItem(DRAFTS_STORAGE_KEY);
+
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
@@ -95,6 +99,7 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
   const handleDeleteDraft = (id: string) => {
     const updatedDrafts = drafts.filter((draft) => draft.id !== id);
     saveDrafts(updatedDrafts);
+
     if (id === selectedDraftId) {
       setSelectedDraftId(null);
     }
@@ -111,9 +116,11 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
     const dataBlob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(dataBlob);
     const link = document.createElement('a');
+
     link.href = url;
     link.download = `${draft.name.replace(/\s+/g, '-')}-draft.json`;
     link.click();
+
     URL.revokeObjectURL(url);
   };
 
@@ -121,8 +128,10 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'application/json';
+
     input.onchange = (e) => {
       const file = (e.target as HTMLInputElement).files?.[0];
+
       if (file) {
         const reader = new FileReader();
         reader.onload = (event) => {
@@ -136,6 +145,7 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
             alert('Failed to import draft. Please check the file format.');
           }
         };
+
         reader.readAsText(file);
       }
     };
@@ -154,6 +164,7 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
     if (diffMins < 60) return `${diffMins} minute${diffMins > 1 ? 's' : ''} ago`;
     if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
     if (diffDays < 7) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+
     return date.toLocaleDateString();
   };
 
@@ -161,12 +172,15 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
     if (draft.content.photos && draft.content.photos.length > 0) {
       return `${draft.content.photos.length} photo${draft.content.photos.length > 1 ? 's' : ''}`;
     }
+
     if (draft.content.quotes && draft.content.quotes.length > 0) {
       return `${draft.content.quotes.length} quote${draft.content.quotes.length > 1 ? 's' : ''}`;
     }
+
     if (draft.content.settingsJson) {
       return 'Settings configured';
     }
+
     return 'No content yet';
   };
 
@@ -204,7 +218,6 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
         </Button>
       </div>
 
-      {/* Save Draft Dialog */}
       <Dialog open={showSaveDialog} onOpenChange={setShowSaveDialog}>
         <DialogContent>
           <DialogHeader>
@@ -253,7 +266,6 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
         </DialogContent>
       </Dialog>
 
-      {/* Load Draft Dialog */}
       <Dialog open={showLoadDialog} onOpenChange={setShowLoadDialog}>
         <DialogContent className="max-w-2xl max-h-[80vh] overflow-hidden flex flex-col">
           <DialogHeader>

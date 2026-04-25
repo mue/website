@@ -131,7 +131,6 @@ export default function LicensePage() {
 
           <div className="h-px bg-border" />
 
-          {/* Why Open Source */}
           <section className="rounded-2xl border border-[#FF5C25]/20 bg-gradient-to-br from-[#FF5C25]/10 to-[#FF456E]/10 p-8">
             <h3 className="text-xl font-semibold text-foreground">Why Open Source?</h3>
             <p className="mt-3 text-muted-foreground">

@@ -1,4 +1,5 @@
 import { Check } from 'lucide-react';
+
 import { cn } from '@/lib/utils';
 
 interface StepIndicatorProps {
@@ -21,7 +22,6 @@ export function StepIndicator({ currentStep, onStepClick, canNavigateToStep }: S
     if (!onStepClick) return false;
     if (stepNumber === currentStep) return false;
     if (canNavigateToStep) return canNavigateToStep(stepNumber);
-    // By default, allow navigating to completed steps
     return stepNumber < currentStep;
   };
 
@@ -68,6 +68,7 @@ export function StepIndicator({ currentStep, onStepClick, canNavigateToStep }: S
               {step.title}
             </span>
           </button>
+
           {index < steps.length - 1 && (
             <div
               className={cn(

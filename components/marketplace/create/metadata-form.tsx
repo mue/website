@@ -1,9 +1,11 @@
+import { RotateCcw } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { RotateCcw } from 'lucide-react';
+
 import { AddonMetadata } from './types';
 
 type MetadataFormProps = {
@@ -27,6 +29,7 @@ export function MetadataForm({ metadata, onChange, onReset }: MetadataFormProps)
           </Button>
         </div>
       </CardHeader>
+
       <CardContent className="space-y-4">
         <div className="flex flex-col gap-2">
           <Label htmlFor="name">

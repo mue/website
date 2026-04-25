@@ -1,8 +1,11 @@
 'use client';
 
 import { useState } from 'react';
+
 import { Check, Copy, Share2 } from 'lucide-react';
+
 import { FaFacebook, FaReddit, FaXTwitter } from 'react-icons/fa6';
+
 import {
   Dialog,
   DialogContent,
@@ -35,7 +38,6 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
         });
         setOpen(false);
       } catch (error) {
-        // User cancelled or share failed, ignore
         if ((error as Error).name !== 'AbortError') {
           console.error('Share failed:', error);
         }
@@ -49,18 +51,22 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback for iframes where Clipboard API is blocked
+      // embed fallback
       try {
         const textArea = document.createElement('textarea');
         textArea.value = url;
         textArea.style.position = 'fixed';
         textArea.style.left = '-9999px';
         textArea.style.top = '-9999px';
+
         document.body.appendChild(textArea);
+
         textArea.focus();
         textArea.select();
+
         const successful = document.execCommand('copy');
         document.body.removeChild(textArea);
+
         if (successful) {
           setCopied(true);
           setTimeout(() => setCopied(false), 2000);
@@ -72,7 +78,6 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
   };
 
   const shareToSocial = (platform: 'twitter' | 'facebook' | 'reddit') => {
-    // Add UTM parameters for tracking
     const urlWithUtm = new URL(url);
     urlWithUtm.searchParams.set('utm_source', platform);
     urlWithUtm.searchParams.set('utm_medium', 'social');
@@ -90,7 +95,6 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
     window.open(urls[platform], '_blank');
   };
 
-  // Check if native share is available
   const hasNativeShare = typeof navigator !== 'undefined' && 'share' in navigator;
 
   return (
@@ -103,6 +107,7 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
           </Button>
         )}
       </DialogTrigger>
+
       <DialogContent className={isEmbed ? 'top-[10%] translate-y-0' : ''}>
         <DialogHeader className="text-left">
           <DialogTitle>Share this item</DialogTitle>
@@ -110,8 +115,9 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
             Share with others via social media or copy the link.
           </DialogDescription>
         </DialogHeader>
+
         <div className="flex flex-col gap-4 overflow-auto">
-          {/* Native Share (mobile/PWA) - hidden in embed mode as it's blocked by permissions policy */}
+          {/* cannot use native on embed */}
           {hasNativeShare && !isEmbed && (
             <Button onClick={handleNativeShare} className="w-full gap-2" variant="default">
               <Share2 className="h-4 w-4" />
@@ -119,7 +125,6 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
             </Button>
           )}
 
-          {/* Copy Link */}
           <div className="flex items-center gap-2">
             <div className="flex-1 rounded-md border border-border bg-muted px-3 py-2 text-sm truncate">
               {url}
@@ -144,7 +149,6 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
             </Button>
           </div>
 
-          {/* Social Sharing */}
           <div className="space-y-2">
             <p className="text-xs font-medium text-muted-foreground">Share on social media</p>
             <div className="grid grid-cols-3 gap-2">
@@ -155,7 +159,7 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
                 size="sm"
               >
                 <FaXTwitter className="h-3.5 w-3.5" />
-                Twitter
+                X (Twitter)
               </Button>
               <Button
                 onClick={() => shareToSocial('facebook')}

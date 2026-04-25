@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
+
 import Link from 'next/link';
+
 import { AlertTriangle, ArrowLeft, RefreshCw, ShoppingBag } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -48,12 +50,14 @@ export default function MarketplaceError({
             <RefreshCw className="mr-2 h-4 w-4" />
             Try again
           </Button>
+
           <Button size="lg" variant="secondary" asChild>
             <Link href="/marketplace">
               <ShoppingBag className="mr-2 h-4 w-4" />
               Browse marketplace
             </Link>
           </Button>
+
           <Button size="lg" variant="outline" asChild>
             <Link href="/">
               <ArrowLeft className="mr-2 h-4 w-4" />

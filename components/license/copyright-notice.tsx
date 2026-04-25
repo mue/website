@@ -18,6 +18,7 @@ export function CopyrightNotice({ label, year, holder }: CopyrightNoticeProps) {
           {label}
         </p>
       )}
+
       <div className="flex items-start justify-between gap-2">
         <p className="text-sm font-mono text-muted-foreground flex-1">{copyrightText}</p>
         <CopyButton

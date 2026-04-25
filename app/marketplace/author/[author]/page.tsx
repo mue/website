@@ -1,18 +1,21 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+
 import { User, Info } from 'lucide-react';
+
+import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
+import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
+import ItemsGrid from '@/components/marketplace/items-grid';
+
 import {
   getMarketplaceItems,
   slugifyAuthor,
   deslugifyAuthor,
   type MarketplaceItemSummary,
 } from '@/lib/marketplace';
-import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
-import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
-import ItemsGrid from '@/components/marketplace/items-grid';
 import { FavoritesProvider } from '@/lib/favorites-context';
 
-export const revalidate = 60; // Revalidate every minute (ISR)
+export const revalidate = 60; // every minute
 
 type AuthorPageProps = {
   params: Promise<{

@@ -1,10 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+
+import Image from 'next/image';
+
 import {
   ChevronDown,
   ChevronRight,
@@ -17,7 +16,7 @@ import {
   MapPin,
   User,
 } from 'lucide-react';
-import { Photo } from './types';
+
 import {
   DndContext,
   closestCenter,
@@ -35,8 +34,14 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import Image from 'next/image';
+
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
+
+import { Photo } from './types';
 
 type PhotoPackEditorProps = {
   photos: Photo[];
@@ -89,7 +94,7 @@ function SortablePhotoItem({
       className={`rounded-lg border ${isMatch && searchTerm ? 'ring-2 ring-primary' : ''}`}
     >
       <div className="flex w-full items-center justify-between p-4 transition-colors hover:bg-muted">
-        {/* Drag Handle */}
+        {/* handle */}
         <button
           {...attributes}
           {...listeners}
@@ -98,11 +103,10 @@ function SortablePhotoItem({
           <GripVertical className="h-5 w-5 text-muted-foreground" />
         </button>
 
-        {/* Toggle Button */}
         <button onClick={onToggle} className="flex flex-1 items-center gap-5 text-left">
           {isExpanded ? <ChevronDown className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
 
-          {/* Preview Thumbnail */}
+          {/* preview */}
           {photo.url.default && (
             <div className="relative h-10 w-10 overflow-hidden rounded">
               <Image
@@ -125,10 +129,7 @@ function SortablePhotoItem({
                     ? photo.location
                     : `Photo ${index + 1}`}
             </h4>
-            {/* {photo.url.default && (
-              <p className="text-xs text-muted-foreground truncate max-w-md">{photo.url.default}</p>
-            )} */}
-            {/* Badges */}
+
             <div className="flex gap-1">
               {photo.photographer && (
                 <Badge variant="secondary" className="gap-1 text-xs">
@@ -146,7 +147,6 @@ function SortablePhotoItem({
           </div>
         </button>
 
-        {/* Delete Button */}
         {canRemove && (
           <Button variant="ghost" size="sm" onClick={onRemove} className="ml-2 h-8 w-8 p-0">
             <Trash2 className="h-4 w-4" />
@@ -154,7 +154,6 @@ function SortablePhotoItem({
         )}
       </div>
 
-      {/* Expanded Form */}
       {isExpanded && (
         <div className="space-y-4 border-t p-4">
           <div className="grid gap-4 md:grid-cols-2">
@@ -169,6 +168,7 @@ function SortablePhotoItem({
                 placeholder="John Doe"
               />
             </div>
+
             <div className="flex flex-col gap-2">
               <Label htmlFor={`location-${index}`}>
                 Location <span className="text-destructive">*</span>
@@ -181,6 +181,7 @@ function SortablePhotoItem({
               />
             </div>
           </div>
+
           <div className="flex flex-col gap-2">
             <Label htmlFor={`url-${index}`}>
               Image URL <span className="text-destructive">*</span>
@@ -194,7 +195,6 @@ function SortablePhotoItem({
             />
           </div>
 
-          {/* Image Preview */}
           {photo.url.default && (
             <div className="flex flex-col gap-2">
               <Label>Preview</Label>
@@ -218,6 +218,7 @@ function SortablePhotoItem({
 export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEditorProps) {
   const [expandedPhotos, setExpandedPhotos] = useState<Set<number>>(new Set([0]));
   const [searchTerm, setSearchTerm] = useState('');
+
   const [showBulkEdit, setShowBulkEdit] = useState(false);
   const [bulkPhotographer, setBulkPhotographer] = useState('');
   const [bulkLocation, setBulkLocation] = useState('');
@@ -231,12 +232,14 @@ export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEdit
 
   const addPhoto = () => {
     const newIndex = photos.length;
+
     onChange([...photos, { photographer: '', location: '', url: { default: '' } }]);
     setExpandedPhotos(new Set([...expandedPhotos, newIndex]));
   };
 
   const removePhoto = (index: number) => {
     onChange(photos.filter((_, i) => i !== index));
+
     const newExpanded = new Set(expandedPhotos);
     newExpanded.delete(index);
     setExpandedPhotos(newExpanded);
@@ -244,21 +247,25 @@ export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEdit
 
   const updatePhoto = (index: number, field: keyof Photo | 'url.default', value: string) => {
     const updated = [...photos];
+
     if (field === 'url.default') {
       updated[index].url.default = value;
     } else {
       updated[index][field as keyof Photo] = value as never;
     }
+
     onChange(updated);
   };
 
   const togglePhotoExpanded = (index: number) => {
     const newExpanded = new Set(expandedPhotos);
+
     if (newExpanded.has(index)) {
       newExpanded.delete(index);
     } else {
       newExpanded.add(index);
     }
+
     setExpandedPhotos(newExpanded);
   };
 
@@ -283,6 +290,7 @@ export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEdit
       photographer: bulkPhotographer || photo.photographer,
       location: bulkLocation || photo.location,
     }));
+
     onChange(updated);
     setBulkPhotographer('');
     setBulkLocation('');
@@ -339,7 +347,7 @@ export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEdit
           </div>
         </div>
 
-        {/* Toolbar */}
+        {/* toolbar */}
         <div className="flex flex-wrap gap-2 pt-4">
           <div className="relative flex-1 min-w-[200px]">
             <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -350,6 +358,7 @@ export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEdit
               className="pl-9"
             />
           </div>
+
           <Button variant="outline" size="sm" onClick={expandAll}>
             Expand All
           </Button>
@@ -367,7 +376,6 @@ export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEdit
           </Button>
         </div>
 
-        {/* Bulk Edit Panel */}
         {showBulkEdit && (
           <div className="mt-4 space-y-3 rounded-lg border bg-muted/50 p-4">
             <h4 className="font-medium">Bulk Edit All Photos</h4>
@@ -381,6 +389,7 @@ export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEdit
                   placeholder="Leave empty to keep individual values"
                 />
               </div>
+
               <div className="flex flex-col gap-2">
                 <Label htmlFor="bulk-location">Set Location (All)</Label>
                 <Input
@@ -391,6 +400,7 @@ export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEdit
                 />
               </div>
             </div>
+
             <div className="flex gap-2">
               <Button onClick={applyBulkEdit} size="sm">
                 Apply to All Photos
@@ -402,7 +412,6 @@ export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEdit
           </div>
         )}
 
-        {/* Search Results */}
         {searchTerm && (
           <p className="text-sm text-muted-foreground">
             Found {filteredIndices.length} photo{filteredIndices.length !== 1 ? 's' : ''}

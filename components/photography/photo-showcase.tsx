@@ -1,8 +1,11 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+
 import Image from 'next/image';
+
 import { Camera, MapPin, X, ChevronLeft, ChevronRight, Loader2, AlertCircle } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 
 type PhotoData = {
@@ -19,9 +22,12 @@ export function PhotoShowcase() {
   const [photos, setPhotos] = useState<PhotoData[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [photographers, setPhotographers] = useState<string[]>([]);
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
   const [selectedCategory, setSelectedCategory] = useState<CategoryFilter>('all');
+
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
@@ -31,7 +37,6 @@ export function PhotoShowcase() {
         setLoading(true);
         setError(null);
 
-        // Fetch categories and photographers
         const [categoriesRes, photographersRes] = await Promise.all([
           fetch('https://api.muetab.com/images/categories'),
           fetch('https://api.muetab.com/images/photographers'),
@@ -47,7 +52,6 @@ export function PhotoShowcase() {
         setCategories(categoriesData);
         setPhotographers(photographersData);
 
-        // Fetch multiple random images (let's get 24 to fill the grid)
         const photoPromises = Array.from({ length: 24 }, () =>
           fetch('https://api.muetab.com/images/random').then((res) => res.json()),
         );

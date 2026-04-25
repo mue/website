@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 60; // Revalidate every minute (ISR)
+export const revalidate = 60; // every minute
 
 export default async function CollectionsPage({
   searchParams,
@@ -42,6 +42,7 @@ export default async function CollectionsPage({
   const buildEmbedUrl = (path: string) => {
     if (!isEmbed) return path;
     const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
+
     return `${path}?${params}`;
   };
   const [collections, items] = await Promise.all([

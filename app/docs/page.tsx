@@ -6,9 +6,10 @@ import { ArrowRight, BookOpen, Layers3, PlugZap, FileEdit } from 'lucide-react';
 import { DocsShell } from '@/components/docs/docs-shell';
 import { getDocsNavigation } from '@/components/docs/layout-context';
 import { buttonVariants } from '@/components/ui/button';
+
 import { cn } from '@/lib/utils';
 
-export const revalidate = 3600; // Revalidate every hour (ISR)
+export const revalidate = 3600; // hourly
 
 export const metadata: Metadata = {
   title: 'Documentation',
@@ -44,15 +45,13 @@ const featureHighlights = [
 
 export default async function DocsIndexPage() {
   const { tree } = await getDocsNavigation();
+
   return (
     <DocsShell
       breadcrumb={[{ label: 'Documentation' }]}
       header={
         <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_260px]">
           <div className="space-y-4">
-            {/* <Badge className="rounded-full border border-primary/20 bg-primary/10 px-3 py-1 text-primary">
-              New tab, new possibilities
-            </Badge> */}
             <h1 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
               Build, customise, and ship delightful Mue experiences.
             </h1>
@@ -60,6 +59,7 @@ export default async function DocsIndexPage() {
               Everything you need to install, extend, and contribute to the Mue ecosystem - from
               quickstart guides to deep-dive API references.
             </p>
+
             <div className="flex flex-wrap items-center gap-3">
               <Link href="/docs/introduction" className={cn(buttonVariants({ size: 'lg' }))}>
                 Start exploring
@@ -83,6 +83,7 @@ export default async function DocsIndexPage() {
             Dive into step-by-step guides designed for builders, translators, and integrators.
           </p>
         </header>
+
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           {featureHighlights.map((feature) => (
             <Link
@@ -113,7 +114,7 @@ export default async function DocsIndexPage() {
         </header>
 
         <div className="grid auto-rows-fr gap-6 lg:grid-cols-2">
-          {/* Render large cards first */}
+          {/* large cards */}
           {tree
             .filter((section) => section.children && section.children.length > 0)
             .map((section) => (
@@ -153,7 +154,7 @@ export default async function DocsIndexPage() {
               </article>
             ))}
 
-          {/* Render small cards after */}
+          {/* smaller cards */}
           {tree
             .filter((section) => !section.children || section.children.length === 0)
             .map((section) => (
@@ -170,7 +171,6 @@ export default async function DocsIndexPage() {
               </Link>
             ))}
 
-          {/* Contribute card - fills empty spot if needed */}
           <Link
             href="https://github.com/mue/mue/tree/main/docs"
             target="_blank"

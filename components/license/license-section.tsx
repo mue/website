@@ -37,6 +37,7 @@ export function LicenseSection({
           {licenseName}
         </span>
       </div>
+
       <div className="text-muted-foreground">{description}</div>
       <div className="mt-6 space-y-4">{copyrights}</div>
       <div className="mt-6 flex flex-wrap gap-3">{links}</div>

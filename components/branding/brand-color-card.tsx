@@ -1,7 +1,8 @@
 'use client';
 
-import { Copy, Check } from 'lucide-react';
 import { useState } from 'react';
+
+import { Copy, Check } from 'lucide-react';
 
 interface BrandColorCardProps {
   name: string;

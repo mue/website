@@ -1,4 +1,5 @@
 import { Skeleton } from '@/components/ui/skeleton';
+
 import { FeaturedCollectionsSkeleton } from './featured-collections-skeleton';
 
 export function MarketplaceLoadingSkeleton() {

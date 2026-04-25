@@ -6,6 +6,7 @@ import { DocsSearch } from '@/components/docs/search';
 import { DocsSidebar } from '@/components/docs/sidebar';
 import { DocsMobileMenu } from '@/components/docs/mobile-menu';
 import { ScrollArea } from '@/components/ui/scroll-area';
+
 import { getAllDocsMeta, getDocsTree } from '@/lib/docs';
 
 export const revalidate = 3600;

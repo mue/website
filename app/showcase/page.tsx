@@ -1,10 +1,13 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
+
 import { Sparkles, Upload } from 'lucide-react';
 import { FaDiscord } from 'react-icons/fa';
-import { getShowcaseItems } from '@/lib/showcase';
+
 import { ShowcaseGallery } from '@/components/showcase/showcase-gallery';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
+
+import { getShowcaseItems } from '@/lib/showcase';
 
 export const metadata: Metadata = {
   title: 'Community Showcase',
@@ -17,18 +20,16 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 3600; // Revalidate every hour (ISR)
+export const revalidate = 3600; // hourly
 
 export default async function ShowcasePage() {
   const items = getShowcaseItems();
 
   return (
     <div className="relative min-h-screen overflow-hidden">
-      {/* Background gradient */}
       <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[70vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.15)_0%,_transparent_65%)] blur-3xl" />
 
       <div className="mx-auto max-w-7xl px-6 py-24 sm:py-32">
-        {/* Header */}
         <header className="mb-16 text-center">
           <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             See Mue in action
@@ -39,7 +40,6 @@ export default async function ShowcasePage() {
             with Mue&apos;s powerful customization features.
           </p>
 
-          {/* CTA Buttons */}
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <Button asChild size="lg" variant="outline">
               <Link href="https://discord.gg/zv8C9F8" target="_blank" rel="noreferrer">
@@ -56,7 +56,6 @@ export default async function ShowcasePage() {
           </div>
         </header>
 
-        {/* Info Banner */}
         <div className="mb-12 rounded-2xl border border-border bg-muted/50 p-6 text-center">
           <p className="text-sm text-muted-foreground">
             <span className="font-semibold text-foreground">Want to be featured?</span> Share your
@@ -73,7 +72,6 @@ export default async function ShowcasePage() {
           </p>
         </div>
 
-        {/* Gallery */}
         {items.length > 0 ? (
           <ShowcaseGallery items={items} />
         ) : (
@@ -85,7 +83,6 @@ export default async function ShowcasePage() {
           </div>
         )}
 
-        {/* Bottom CTA */}
         <div className="mt-16 rounded-2xl border border-border bg-muted/30 px-8 py-14 text-center">
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
             Got inspired?
@@ -93,6 +90,7 @@ export default async function ShowcasePage() {
           <p className="mx-auto mt-4 max-w-l text-base text-muted-foreground">
             Download Mue and create your own personalized new tab experience.
           </p>
+
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             <Button
               asChild

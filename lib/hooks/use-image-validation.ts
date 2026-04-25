@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { IMAGE_EXTENSIONS } from '@/lib/content-validator';
 
 export type ValidationStatus = 'idle' | 'validating' | 'valid' | 'invalid' | 'error';
 
@@ -18,21 +19,17 @@ export function useImageValidation(url: string): UseImageValidationResult {
       return;
     }
 
-    // Check if it's a valid URL format
     try {
       const urlObj = new URL(url);
 
-      // Check if it's http or https
       if (!['http:', 'https:'].includes(urlObj.protocol)) {
         setStatus('invalid');
         setError('URL must use http:// or https://');
         return;
       }
 
-      // Check file extension
-      const validExtensions = ['.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg'];
       const pathname = urlObj.pathname.toLowerCase();
-      const hasValidExtension = validExtensions.some((ext) => pathname.endsWith(ext));
+      const hasValidExtension = IMAGE_EXTENSIONS.some((ext) => pathname.endsWith(ext));
 
       if (!hasValidExtension) {
         setStatus('invalid');

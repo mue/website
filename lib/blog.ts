@@ -1,9 +1,12 @@
 import { promises as fs } from 'fs';
 import path from 'path';
+
 import matter from 'gray-matter';
+
 import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
+
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeRaw from 'rehype-raw';
@@ -65,6 +68,7 @@ function createProcessor() {
 
 export async function getAllBlogPosts(): Promise<BlogPostPreview[]> {
   let entries;
+
   try {
     entries = await fs.readdir(BLOG_DIR, { withFileTypes: true });
   } catch (error) {
@@ -86,17 +90,13 @@ export async function getAllBlogPosts(): Promise<BlogPostPreview[]> {
 
     const slug = entry.name.replace(/\.(mdx|md)$/i, '');
 
-    // Extract excerpt from content (first paragraph)
     const excerpt =
       frontmatter.description ||
       content.split('\n\n')[0]?.replace(/[#*`]/g, '').trim().slice(0, 200);
 
-    // Basic word metrics
     const wordCount = content.split(/\s+/).filter(Boolean).length;
     const minutes = Math.max(1, Math.round(wordCount / 180));
     const readingTime = `${minutes} min read`;
-
-    // imagePlaceholder should be generated externally and set in frontmatter
 
     posts.push({
       slug,
@@ -107,7 +107,7 @@ export async function getAllBlogPosts(): Promise<BlogPostPreview[]> {
     });
   }
 
-  // Sort by date descending
+  // descending
   posts.sort((a, b) => {
     const dateA = new Date(a.frontmatter.date);
     const dateB = new Date(b.frontmatter.date);
@@ -142,8 +142,6 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
   const wordCount = content.split(/\s+/).filter(Boolean).length;
   const minutes = Math.max(1, Math.round(wordCount / 180));
   const readingTime = `${minutes} min read`;
-
-  // imagePlaceholder should be generated externally and set in frontmatter
 
   return {
     slug,

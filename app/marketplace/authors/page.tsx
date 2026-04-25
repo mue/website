@@ -1,11 +1,13 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 
+import { User } from 'lucide-react';
+
 import { Badge } from '@/components/ui/badge';
 import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
 import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
+
 import { getMarketplaceItems, getMarketplaceTypeLabel, slugifyAuthor } from '@/lib/marketplace';
-import { User } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Authors – Marketplace',
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 60; // Revalidate every minute (ISR)
+export const revalidate = 60; // every minute
 
 export default async function AuthorsPage({
   searchParams,

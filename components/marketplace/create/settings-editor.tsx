@@ -1,4 +1,7 @@
 import { useMemo } from 'react';
+
+import { Upload } from 'lucide-react';
+
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -13,7 +16,6 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Textarea } from '@/components/ui/textarea';
-import { Upload } from 'lucide-react';
 
 type SettingsEditorProps = {
   settingsJson: string;
@@ -24,6 +26,7 @@ type SettingsEditorProps = {
 export function SettingsEditor({ settingsJson, onChange, onFileUpload }: SettingsEditorProps) {
   const parsedSettings = useMemo(() => {
     if (!settingsJson) return [];
+
     try {
       const parsed = JSON.parse(settingsJson);
       const ignoredKeys = ['language', 'statsdata', 'nextquote', 'installed', 'nextImage'];
@@ -75,6 +78,7 @@ export function SettingsEditor({ settingsJson, onChange, onFileUpload }: Setting
                     <TableHead className="w-32 shrink-0">Type</TableHead>
                   </TableRow>
                 </TableHeader>
+
                 <TableBody>
                   {parsedSettings.map(([key, value]) => (
                     <TableRow key={key}>
@@ -100,6 +104,7 @@ export function SettingsEditor({ settingsJson, onChange, onFileUpload }: Setting
                 </TableBody>
               </Table>
             </div>
+
             <details className="rounded-lg border p-4">
               <summary className="cursor-pointer text-sm font-medium">View Raw JSON</summary>
               <Textarea

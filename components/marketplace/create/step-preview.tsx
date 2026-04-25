@@ -1,10 +1,14 @@
-import { AddonMetadata, AddonType, Photo, Quote } from './types';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, Eye, Lightbulb } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
 import Image from 'next/image';
+
+import { ArrowRight, Eye, Lightbulb } from 'lucide-react';
+
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+
 import { cn } from '@/lib/utils';
 import { getMarketplaceTypeLabel } from '@/lib/marketplace';
+
+import { AddonMetadata, AddonType, Photo, Quote } from './types';
 
 interface StepPreviewProps {
   addonType: AddonType;
@@ -29,9 +33,11 @@ export function StepPreview({
     if (addonType === 'photos') {
       return photos.filter((p) => p.photographer && p.location && p.url.default).length;
     }
+
     if (addonType === 'quotes') {
       return quotes.filter((q) => q.quote && q.author).length;
     }
+
     if (addonType === 'settings') {
       try {
         const parsed = JSON.parse(settingsJson);
@@ -40,6 +46,7 @@ export function StepPreview({
         return 0;
       }
     }
+
     return 0;
   };
 
@@ -48,10 +55,12 @@ export function StepPreview({
       const validPhotos = photos.filter((p) => p.photographer && p.location && p.url.default);
       return validPhotos.slice(0, 3);
     }
+
     if (addonType === 'quotes') {
       const validQuotes = quotes.filter((q) => q.quote && q.author);
       return validQuotes.slice(0, 3);
     }
+
     return [];
   };
 
@@ -67,13 +76,11 @@ export function StepPreview({
         </p>
       </div>
 
-      {/* Simulated Marketplace Card */}
       <div className="mx-auto max-w-md">
         <div className="mb-4 text-center text-sm text-muted-foreground">
           This is how users will see your addon in the marketplace:
         </div>
 
-        {/* Marketplace Item Card - matching the actual design */}
         <div className="group relative flex h-full cursor-pointer flex-col gap-3 overflow-hidden rounded-2xl border border-border bg-card/70 p-4 lg:gap-4 lg:p-6 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md">
           <div className="flex items-center justify-center lg:justify-start">
             <div className="relative h-16 w-16 lg:h-14 lg:w-14 flex-shrink-0 overflow-hidden rounded-xl border border-border/60 bg-muted">
@@ -116,7 +123,7 @@ export function StepPreview({
             </Badge>
           </div>
 
-          {/* Mobile view badge */}
+          {/* mobile view */}
           <div className="flex lg:hidden items-center justify-center gap-2">
             <Badge
               className={cn(
@@ -129,9 +136,8 @@ export function StepPreview({
         </div>
       </div>
 
-      {/* Additional Preview Info */}
       <div className="mx-auto max-w-3xl space-y-4">
-        {/* Stats */}
+        {/* stats */}
         <div className="rounded-lg border bg-card p-4">
           <h4 className="mb-3 font-semibold">Addon Details</h4>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -139,6 +145,7 @@ export function StepPreview({
               <span className="text-muted-foreground">Version:</span>
               <span className="font-medium">{metadata.version}</span>
             </div>
+
             <div className="flex items-center gap-2 text-sm">
               <span className="text-muted-foreground">
                 {addonType === 'photos'
@@ -149,6 +156,7 @@ export function StepPreview({
               </span>
               <span className="font-medium">{getContentCount()}</span>
             </div>
+
             {metadata.description && (
               <div className="sm:col-span-2 text-sm">
                 <span className="text-muted-foreground">Description:</span>
@@ -158,7 +166,6 @@ export function StepPreview({
           </div>
         </div>
 
-        {/* Content Preview */}
         {addonType === 'photos' && getContentPreview().length > 0 && (
           <div className="rounded-lg border bg-card p-4">
             <h4 className="mb-3 font-semibold">Sample Photos</h4>
@@ -222,6 +229,7 @@ export function StepPreview({
         <Button variant="outline" onClick={onBack}>
           Back to Edit
         </Button>
+
         <Button onClick={onNext} className="gap-2">
           Looks Good!
           <ArrowRight className="h-4 w-4" />

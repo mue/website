@@ -6,6 +6,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+
 import { AddonType } from './types';
 
 type AddonTypeSelectorProps = {
@@ -20,11 +21,13 @@ export function AddonTypeSelector({ value, onChange }: AddonTypeSelectorProps) {
         <CardTitle>Addon Type</CardTitle>
         <CardDescription>Select the type of addon you want to create</CardDescription>
       </CardHeader>
+
       <CardContent>
         <Select value={value} onValueChange={onChange}>
           <SelectTrigger>
             <SelectValue />
           </SelectTrigger>
+
           <SelectContent>
             <SelectItem value="photos">Photo Pack</SelectItem>
             <SelectItem value="quotes">Quote Pack</SelectItem>

@@ -1,14 +1,17 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+
 import { Calendar, Clock, User } from 'lucide-react';
+
 import { BlogImage } from '@/components/blog/blog-image';
 import { BlogContentLightbox } from '@/components/blog/blog-content-lightbox';
-import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
 import { Badge } from '@/components/ui/badge';
+
+import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
 import { getAllBlogPosts, getBlogPostBySlug, type BlogPost } from '@/lib/blog';
 import { cn } from '@/lib/utils';
 
-export const revalidate = 3600; // Revalidate every hour (ISR)
+export const revalidate = 3600; // hourly
 
 export const metadata: Metadata = {
   title: 'Latest Changelog',
@@ -26,14 +29,12 @@ type ChangelogPageProps = {
 async function getLatestReleasePost(): Promise<BlogPost | null> {
   const allPosts = await getAllBlogPosts();
 
-  // Find the first post with the "release" tag
   const releasePost = allPosts.find((post) => post.frontmatter.tags?.includes('release'));
 
   if (!releasePost) {
     return null;
   }
 
-  // Get the full post content
   return await getBlogPostBySlug(releasePost.slug);
 }
 
@@ -135,10 +136,10 @@ export default async function ChangelogPage({ searchParams }: ChangelogPageProps
   );
 }
 
-// Gradient hero fallback when no image is provided
 function GradientHero({ title }: { title: string }) {
   const gradientClass = BLOG_IMAGE_GRADIENTS[blogImageGradientIndex(title)];
   const initial = (title?.trim()?.[0] || '?').toUpperCase();
+
   return (
     <div
       className={cn(

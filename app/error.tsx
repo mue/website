@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect } from 'react';
+
 import Link from 'next/link';
+
 import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -101,6 +103,7 @@ export default function Error({
                 If this error persists, please report it on GitHub or reach out on Discord.
               </p>
             </div>
+
             <Button variant="outline" className="mt-6" asChild>
               <Link href="https://github.com/mue/mue/issues" target="_blank" rel="noreferrer">
                 <AlertTriangle className="mr-2 h-4 w-4" />

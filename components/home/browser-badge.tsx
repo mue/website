@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import { IconType } from 'react-icons';
 
 type BrowserBadgeProps = {

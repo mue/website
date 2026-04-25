@@ -1,6 +1,7 @@
 'use client';
 
 import { Download } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/logo';
 
@@ -19,11 +20,14 @@ export function BrandAssetCard({ title, description, isDark }: BrandAssetCardPro
     const blob = new Blob([svgData], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
+
     link.href = url;
     link.download = `mue-logo-${isDark ? 'dark' : 'light'}.svg`;
+
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
     URL.revokeObjectURL(url);
   };
 

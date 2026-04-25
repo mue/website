@@ -1,11 +1,13 @@
-import { AddonMetadata } from './types';
+import { ArrowRight, Info } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowRight, Info } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { ImageUrlInput } from '@/components/ui/image-url-input';
+
+import { AddonMetadata } from './types';
 
 interface StepMetadataProps {
   metadata: AddonMetadata;

@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+
 import { useEmbed } from '@/lib/embed-context';
 
 export type BreadcrumbItem = {
@@ -17,7 +18,6 @@ export function BreadcrumbTracker({ breadcrumbs }: BreadcrumbTrackerProps) {
 
   useEffect(() => {
     if (isEmbed) {
-      // Send breadcrumbs with clickable flag and full paths
       const enhancedBreadcrumbs = breadcrumbs.map((b) => ({
         ...b,
         clickable: !!b.href,

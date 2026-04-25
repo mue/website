@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+
 import { useEmbed } from './embed-context';
 
 type FavoriteItem = {

@@ -22,9 +22,7 @@ export default function DemoPage() {
       <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[70vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.15)_0%,_transparent_65%)] blur-3xl" />
 
       <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-5 px-6 py-6">
-        {/* Browser chrome + iframe */}
         <div className="overflow-hidden rounded-2xl border border-white/10 shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)] ring-1 ring-white/[0.06]">
-          {/* Chrome bar */}
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 border-b border-white/[0.08] bg-white/[0.04] px-4 py-2.5">
             <div className="flex items-center gap-1.5">
               <Button
@@ -59,7 +57,6 @@ export default function DemoPage() {
             </div>
           </div>
 
-          {/* Iframe */}
           <div className="relative h-[78vh] w-full">
             <iframe
               src="https://demo.muetab.com?nointro=true"
@@ -71,7 +68,6 @@ export default function DemoPage() {
           </div>
         </div>
 
-        {/* CTA section */}
         <div className="flex flex-col gap-4 border-t border-white/10 pt-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h2 className="text-base font-semibold text-foreground">

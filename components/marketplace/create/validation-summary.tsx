@@ -1,5 +1,7 @@
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { AlertCircle, AlertTriangle, Info, CheckCircle2 } from 'lucide-react';
+
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+
 import { ContentValidationResult } from '@/lib/content-validator';
 
 interface ValidationSummaryProps {

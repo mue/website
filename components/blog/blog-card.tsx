@@ -1,9 +1,12 @@
 'use client';
 
 import Link from 'next/link';
+
 import { Calendar, User, ArrowRight } from 'lucide-react';
+
 import { BlogImage } from '@/components/blog/blog-image';
 import { Badge } from '@/components/ui/badge';
+
 import { cn } from '@/lib/utils';
 
 export interface BlogCardPostLike {

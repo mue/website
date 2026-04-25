@@ -1,8 +1,10 @@
-import { Metadata } from 'next';
 import { Suspense } from 'react';
+
+import { Metadata } from 'next';
 
 import { MarketplaceExplorer } from '@/components/marketplace/explorer';
 import { MarketplaceLoadingSkeleton } from '@/components/marketplace/marketplace-loading-skeleton';
+
 import { getMarketplaceCollections, getMarketplaceItems } from '@/lib/marketplace';
 
 // Simple string hash (FNV-1a variant) for deterministic seeding
@@ -18,11 +20,13 @@ function hashString(str: string) {
 // Deterministic Fisher-Yates shuffle using a linear congruential generator (LCG)
 function seededShuffle<T>(arr: T[], seed: number): T[] {
   const a = [...arr];
+
   for (let i = a.length - 1; i > 0; i--) {
     seed = (seed * 1664525 + 1013904223) % 4294967296; // LCG
     const j = seed % (i + 1);
     [a[i], a[j]] = [a[j], a[i]];
   }
+
   return a;
 }
 
@@ -35,7 +39,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 60; // Revalidate every minute (ISR)
+export const revalidate = 60; // every minute
 
 export default async function MarketplacePage({
   searchParams,
@@ -72,7 +76,7 @@ export default async function MarketplacePage({
         isEmbed ? 'h-screen gap-6 px-4 py-6' : 'min-h-screen gap-12 px-6 py-12 lg:px-8'
       }`}
     >
-      {/* Preload featured collection images for faster visual stability */}
+      {/* preload featured */}
       {collectionsWithTypes.map((c) =>
         c.img ? (
           <link
@@ -81,19 +85,9 @@ export default async function MarketplacePage({
             as="image"
             // Using raw URL; if remote domains need config ensure they're in next.config
             href={c.img}
-            // Optional image type guess (could add conditional if you know extensions)
           />
         ) : null,
       )}
-      {/* <header className="space-y-4 text-center lg:text-left">
-        <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
-          Discover community-curated packs, quotes, and presets.
-        </h1>
-        <p className="text-muted-foreground text-base md:text-lg">
-          Search across the entire marketplace catalogue, explore a featured
-          collection, and dive into individual items for more details.
-        </p>
-      </header> */}
 
       <Suspense fallback={<MarketplaceLoadingSkeleton />}>
         <MarketplaceExplorer

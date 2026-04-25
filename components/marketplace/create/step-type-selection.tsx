@@ -1,7 +1,9 @@
-import { AddonType } from './types';
+import { Image, MessageSquareQuote, Settings, ArrowRight } from 'lucide-react';
+
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Image, MessageSquareQuote, Settings, ArrowRight } from 'lucide-react';
+
+import { AddonType } from './types';
 
 interface StepTypeSelectionProps {
   value: AddonType;

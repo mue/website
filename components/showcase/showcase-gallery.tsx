@@ -1,10 +1,14 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
+
+import Image from 'next/image';
+
 import { User } from 'lucide-react';
+
 import { type ShowcaseItem } from '@/lib/showcase';
 import { ShowcaseLightbox } from './showcase-lightbox';
+
 import { Badge } from '@/components/ui/badge';
 
 type ShowcaseGalleryProps = {

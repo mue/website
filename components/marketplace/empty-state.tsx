@@ -1,5 +1,7 @@
 import Link from 'next/link';
+
 import { LucideIcon, PackageOpen, Library, Search, Sparkles } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 
 type EmptyStateProps = {
@@ -50,7 +52,6 @@ export function MarketplaceEmptyState({
   );
 }
 
-// Preset empty states for common scenarios
 export function NoItemsEmptyState() {
   return (
     <MarketplaceEmptyState

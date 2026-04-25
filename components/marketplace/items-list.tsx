@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+
 import { cn } from '@/lib/utils';
 import {
   getMarketplaceTypeLabel,
@@ -8,8 +9,11 @@ import {
   slugifyAuthor,
   MarketplaceItemSummary,
 } from '@/lib/marketplace';
+
 import { Library as LibraryIcon, Heart } from 'lucide-react';
+
 import { useRouter } from 'next/navigation';
+
 import { useFavoritesContext } from '@/lib/favorites-context';
 import { useEmbed } from '@/lib/embed-context';
 
@@ -20,6 +24,7 @@ interface ItemsListProps {
 
 export default function ItemsList({ items, collectionNameMap }: ItemsListProps) {
   const router = useRouter();
+
   const { toggleFavorite, isFavorite } = useFavoritesContext();
   const { buildEmbedUrl } = useEmbed();
 
@@ -52,6 +57,7 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
               )}
             />
           </button>
+
           <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg border border-border/60 bg-muted">
             {item.icon_url ? (
               <Image
@@ -73,6 +79,7 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
             <h3 className="text-base font-semibold leading-tight text-foreground line-clamp-1">
               {item.display_name}
             </h3>
+
             {item.author && (
               <p className="text-sm text-muted-foreground line-clamp-1">
                 By{' '}
@@ -110,6 +117,7 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
             >
               {getMarketplaceTypeLabel(item.type)}
             </button>
+
             {item.in_collections.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {item.in_collections.slice(0, 2).map((collection) => (

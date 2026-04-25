@@ -1,3 +1,5 @@
+import { Sparkles } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import {
@@ -8,8 +10,8 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
+
 import { ContentTemplate, getTemplatesByType } from '@/lib/content-templates';
-import { Sparkles } from 'lucide-react';
 
 interface TemplatePickerProps {
   addonType: 'photos' | 'quotes' | 'settings';

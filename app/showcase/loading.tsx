@@ -6,7 +6,7 @@ export default function ShowcaseLoading() {
       <div className="pointer-events-none absolute inset-x-0 top-0 -z-20 h-[80vh] bg-[radial-gradient(circle_at_top,_rgba(255,92,37,0.15)_0%,_transparent_60%)] blur-3xl" />
 
       <div className="mx-auto max-w-7xl">
-        {/* Header skeleton */}
+        {/* Header */}
         <div className="mb-16 text-center">
           <Skeleton className="mx-auto mb-6 h-8 w-48" />
           <Skeleton className="mx-auto mb-4 h-12 w-full max-w-3xl sm:h-16" />
@@ -17,14 +17,14 @@ export default function ShowcaseLoading() {
           </div>
         </div>
 
-        {/* Stats skeleton */}
+        {/* Stats */}
         <div className="mb-16 grid gap-6 sm:grid-cols-3">
           {[...Array(3)].map((_, i) => (
             <Skeleton key={i} className="h-24 w-full rounded-2xl" />
           ))}
         </div>
 
-        {/* Gallery grid skeleton */}
+        {/* Gallery grid */}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {[...Array(9)].map((_, i) => (
             <Skeleton
@@ -37,7 +37,7 @@ export default function ShowcaseLoading() {
           ))}
         </div>
 
-        {/* Load more skeleton */}
+        {/* Load more */}
         <div className="mt-12 text-center">
           <Skeleton className="mx-auto h-11 w-40" />
         </div>

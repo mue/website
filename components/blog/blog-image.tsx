@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+
 import Image from 'next/image';
+
 import { cn } from '@/lib/utils';
 import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
 
@@ -43,8 +45,11 @@ export function BlogImage({
 
   const ratioClass = useMemo(() => {
     if (!aspectRatio) return null;
+
     const allowed = new Set(['16/9', '4/3', '1/1', '3/2', '2/3', '21/9']);
+
     if (!allowed.has(aspectRatio)) return null;
+
     return `aspect-[${aspectRatio}]`;
   }, [aspectRatio]);
 
