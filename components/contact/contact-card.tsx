@@ -29,9 +29,7 @@ export function ContactCard({
       <div className="mt-4">
         <h3 className="text-lg font-semibold text-foreground">{title}</h3>
         <p className="mt-1.5 text-sm text-muted-foreground">{description}</p>
-        {handle && (
-          <p className="mt-3 font-mono text-sm text-foreground/70">{handle}</p>
-        )}
+        {handle && <p className="mt-3 font-mono text-sm text-foreground/70">{handle}</p>}
       </div>
 
       <div className="mt-auto flex items-center justify-between pt-6">

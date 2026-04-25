@@ -303,7 +303,9 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
             </>
           )}
 
-          <div className={`relative max-h-[90vh] max-w-[90vw] w-full h-full flex items-center justify-center transition-all duration-250 ${lightboxVisible ? 'scale-100 opacity-100' : 'scale-[0.97] opacity-0'}`}>
+          <div
+            className={`relative max-h-[90vh] max-w-[90vw] w-full h-full flex items-center justify-center transition-all duration-250 ${lightboxVisible ? 'scale-100 opacity-100' : 'scale-[0.97] opacity-0'}`}
+          >
             <div className="relative w-full h-full" onClick={(e) => e.stopPropagation()}>
               <Image
                 src={currentPhotoUrl}

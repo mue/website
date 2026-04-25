@@ -483,8 +483,12 @@ export default async function MarketplaceItemPage({
                       <div className="flex flex-1 items-center gap-3 px-5 py-4">
                         <Images className="h-4 w-4 shrink-0 text-muted-foreground" />
                         <div>
-                          <div className="text-xl font-semibold text-foreground">{data.photos.length}</div>
-                          <div className="text-xs text-muted-foreground">Total {data.photos.length === 1 ? 'Photo' : 'Photos'}</div>
+                          <div className="text-xl font-semibold text-foreground">
+                            {data.photos.length}
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            Total {data.photos.length === 1 ? 'Photo' : 'Photos'}
+                          </div>
                         </div>
                       </div>
                       <div className="flex flex-1 items-center gap-3 px-5 py-4">
@@ -494,7 +498,10 @@ export default async function MarketplaceItemPage({
                             {new Set(data.photos.map((p) => p.photographer).filter(Boolean)).size}
                           </div>
                           <div className="text-xs text-muted-foreground">
-                            {new Set(data.photos.map((p) => p.photographer).filter(Boolean)).size === 1 ? 'Photographer' : 'Photographers'}
+                            {new Set(data.photos.map((p) => p.photographer).filter(Boolean))
+                              .size === 1
+                              ? 'Photographer'
+                              : 'Photographers'}
                           </div>
                         </div>
                       </div>
@@ -505,7 +512,9 @@ export default async function MarketplaceItemPage({
                             {new Set(data.photos.map((p) => p.location).filter(Boolean)).size}
                           </div>
                           <div className="text-xs text-muted-foreground">
-                            {new Set(data.photos.map((p) => p.location).filter(Boolean)).size === 1 ? 'Location' : 'Locations'}
+                            {new Set(data.photos.map((p) => p.location).filter(Boolean)).size === 1
+                              ? 'Location'
+                              : 'Locations'}
                           </div>
                         </div>
                       </div>
@@ -533,8 +542,12 @@ export default async function MarketplaceItemPage({
                       <div className="flex flex-1 items-center gap-3 px-5 py-4">
                         <MessageSquareQuote className="h-4 w-4 shrink-0 text-muted-foreground" />
                         <div>
-                          <div className="text-xl font-semibold text-foreground">{data.quotes.length}</div>
-                          <div className="text-xs text-muted-foreground">Total {data.quotes.length === 1 ? 'Quote' : 'Quotes'}</div>
+                          <div className="text-xl font-semibold text-foreground">
+                            {data.quotes.length}
+                          </div>
+                          <div className="text-xs text-muted-foreground">
+                            Total {data.quotes.length === 1 ? 'Quote' : 'Quotes'}
+                          </div>
                         </div>
                       </div>
                       <div className="flex flex-1 items-center gap-3 px-5 py-4">
@@ -544,7 +557,9 @@ export default async function MarketplaceItemPage({
                             {new Set(data.quotes.map((q) => q.author).filter(Boolean)).size}
                           </div>
                           <div className="text-xs text-muted-foreground">
-                            {new Set(data.quotes.map((q) => q.author).filter(Boolean)).size === 1 ? 'Unique Author' : 'Unique Authors'}
+                            {new Set(data.quotes.map((q) => q.author).filter(Boolean)).size === 1
+                              ? 'Unique Author'
+                              : 'Unique Authors'}
                           </div>
                         </div>
                       </div>
@@ -552,7 +567,10 @@ export default async function MarketplaceItemPage({
                         <Type className="h-4 w-4 shrink-0 text-muted-foreground" />
                         <div>
                           <div className="text-xl font-semibold text-foreground">
-                            {Math.round(data.quotes.reduce((acc, q) => acc + q.quote.length, 0) / data.quotes.length)}
+                            {Math.round(
+                              data.quotes.reduce((acc, q) => acc + q.quote.length, 0) /
+                                data.quotes.length,
+                            )}
                           </div>
                           <div className="text-xs text-muted-foreground">Avg. Characters</div>
                         </div>

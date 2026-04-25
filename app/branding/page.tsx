@@ -57,7 +57,7 @@ const logoVariants = [
 
 const dos = [
   'Use the logo with adequate spacing around it',
-  'Maintain the logo\'s aspect ratio when scaling',
+  "Maintain the logo's aspect ratio when scaling",
   'Use the provided color palette consistently',
   'Credit Mue when featuring our brand',
 ];
@@ -96,7 +96,8 @@ export default function BrandingPage() {
             <h2 className="mb-2 text-2xl font-semibold text-foreground">Logo</h2>
             <p className="mb-8 text-muted-foreground">
               Our logo represents Mue&apos;s core philosophy of customization. The layered design
-              symbolizes multiple elements coming together to create your perfect new tab experience.
+              symbolizes multiple elements coming together to create your perfect new tab
+              experience.
             </p>
             <div className="grid gap-4 md:grid-cols-2">
               {logoVariants.map((variant) => (
@@ -141,7 +142,9 @@ export default function BrandingPage() {
             </p>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-border bg-background/60 p-6">
-                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Primary font</p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                  Primary font
+                </p>
                 <p
                   className="mt-3 text-3xl font-semibold"
                   style={{ fontFamily: 'var(--font-lexend-deca)' }}
@@ -151,7 +154,9 @@ export default function BrandingPage() {
                 <p className="mt-2 text-sm text-muted-foreground">Headings and display text</p>
               </div>
               <div className="rounded-2xl border border-border bg-background/60 p-6">
-                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Body font</p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                  Body font
+                </p>
                 <p className="mt-3 text-3xl font-semibold">Inter</p>
                 <p className="mt-2 text-sm text-muted-foreground">Body copy and UI elements</p>
               </div>
@@ -204,7 +209,8 @@ export default function BrandingPage() {
           <div className="rounded-2xl border border-border bg-muted/30 p-8 text-center">
             <h3 className="text-xl font-semibold text-foreground">Need something else?</h3>
             <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
-              If you need additional brand assets or have questions about using our brand, reach out.
+              If you need additional brand assets or have questions about using our brand, reach
+              out.
             </p>
             <Button asChild className="mt-6">
               <Link href="/contact">Contact Us</Link>

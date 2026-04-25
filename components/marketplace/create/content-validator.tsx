@@ -193,7 +193,9 @@ export function ContentValidator({
     return (
       <div className="flex items-start gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.07] px-4 py-3">
         <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-500" />
-        <p className="text-sm text-foreground/80">No validation issues found. Your content looks great!</p>
+        <p className="text-sm text-foreground/80">
+          No validation issues found. Your content looks great!
+        </p>
       </div>
     );
   }
@@ -218,7 +220,10 @@ export function ContentValidator({
         {issues.map((issue, index) => (
           <div
             key={index}
-            className={cn('flex items-start gap-3 rounded-xl border px-4 py-3', rowStyles[issue.type])}
+            className={cn(
+              'flex items-start gap-3 rounded-xl border px-4 py-3',
+              rowStyles[issue.type],
+            )}
           >
             <div className="mt-0.5 shrink-0">{iconFor(issue.type)}</div>
             <p className="text-sm text-foreground/80">{issue.message}</p>

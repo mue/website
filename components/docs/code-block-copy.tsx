@@ -51,7 +51,6 @@ export function CodeBlockCopy() {
 
       wrapper.appendChild(button);
     });
-
   }, []);
 
   return null;

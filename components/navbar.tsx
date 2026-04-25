@@ -27,7 +27,12 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 
-const docsQuickLinks: { title: string; href: string; description: string; icon: React.ElementType }[] = [
+const docsQuickLinks: {
+  title: string;
+  href: string;
+  description: string;
+  icon: React.ElementType;
+}[] = [
   {
     title: 'Introduction',
     href: '/docs/introduction',
@@ -107,7 +112,9 @@ export default function Navbar() {
                         <BookOpen className="h-4 w-4 text-white" />
                       </div>
                       <div>
-                        <div className="mb-1 text-sm font-semibold text-foreground">Documentation</div>
+                        <div className="mb-1 text-sm font-semibold text-foreground">
+                          Documentation
+                        </div>
                         <p className="text-xs leading-relaxed text-muted-foreground">
                           Guides, references, and workflows for the entire Mue ecosystem.
                         </p>
@@ -132,14 +139,26 @@ export default function Navbar() {
                                 isActive && 'bg-muted/60',
                               )}
                             >
-                              <div className={cn(
-                                'mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border bg-background',
-                                isActive && 'border-[#FF5C25]/40 bg-[#FF5C25]/5',
-                              )}>
-                                <Icon className={cn('h-3.5 w-3.5 text-muted-foreground', isActive && 'text-[#FF5C25]')} />
+                              <div
+                                className={cn(
+                                  'mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border bg-background',
+                                  isActive && 'border-[#FF5C25]/40 bg-[#FF5C25]/5',
+                                )}
+                              >
+                                <Icon
+                                  className={cn(
+                                    'h-3.5 w-3.5 text-muted-foreground',
+                                    isActive && 'text-[#FF5C25]',
+                                  )}
+                                />
                               </div>
                               <div>
-                                <div className={cn('text-sm font-medium leading-none mb-1', isActive && 'text-[#FF5C25]')}>
+                                <div
+                                  className={cn(
+                                    'text-sm font-medium leading-none mb-1',
+                                    isActive && 'text-[#FF5C25]',
+                                  )}
+                                >
                                   {item.title}
                                 </div>
                                 <p className="text-xs leading-relaxed text-muted-foreground line-clamp-2">

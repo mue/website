@@ -12,19 +12,20 @@
 
 ## File Map
 
-| File | Change |
-|---|---|
-| `app/globals.css` | Remove `animate-float`, `animate-pan`, `animate-subtle-pan` keyframes and utilities |
-| `components/home/stat-item.tsx` | Remove gradient dot — render as plain `<span>` |
-| `components/home/community-stat-card.tsx` | Remove card border/background/shadow — render as plain number + label block |
-| `components/home/feature-card.tsx` | Replace card layout with alternating two-column row (text \| colour block) |
-| `app/page.tsx` | Hero: single-column centered layout, bare screenshot, inline stats. Features: pass `index` for alternating. Community: remove pill badge, remove section gradient. |
+| File                                      | Change                                                                                                                                                             |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `app/globals.css`                         | Remove `animate-float`, `animate-pan`, `animate-subtle-pan` keyframes and utilities                                                                                |
+| `components/home/stat-item.tsx`           | Remove gradient dot — render as plain `<span>`                                                                                                                     |
+| `components/home/community-stat-card.tsx` | Remove card border/background/shadow — render as plain number + label block                                                                                        |
+| `components/home/feature-card.tsx`        | Replace card layout with alternating two-column row (text \| colour block)                                                                                         |
+| `app/page.tsx`                            | Hero: single-column centered layout, bare screenshot, inline stats. Features: pass `index` for alternating. Community: remove pill badge, remove section gradient. |
 
 ---
 
 ## Task 1: Remove unused animation keyframes from globals.css
 
 **Files:**
+
 - Modify: `app/globals.css`
 
 - [ ] **Step 1: Open globals.css and locate the float/pan keyframes**
@@ -52,6 +53,7 @@ git commit -m "style: remove float and pan animation keyframes"
 ## Task 2: Simplify StatItem — remove gradient dot
 
 **Files:**
+
 - Modify: `components/home/stat-item.tsx`
 
 - [ ] **Step 1: Replace the component body**
@@ -85,6 +87,7 @@ git commit -m "style: simplify StatItem to plain text"
 ## Task 3: Simplify CommunityStatCard — remove card border and background
 
 **Files:**
+
 - Modify: `components/home/community-stat-card.tsx`
 
 - [ ] **Step 1: Replace the component body**
@@ -100,7 +103,9 @@ export function CommunityStatCard({ label, value, description }: CommunityStatCa
   return (
     <div className="flex flex-col gap-1">
       <p className="text-2xl font-semibold text-foreground">{value}</p>
-      <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60">{label}</p>
+      <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60">
+        {label}
+      </p>
       <p className="mt-1 text-sm text-muted-foreground/70">{description}</p>
     </div>
   );
@@ -124,6 +129,7 @@ git commit -m "style: simplify CommunityStatCard to plain number block"
 ## Task 4: Redesign FeatureCard as alternating two-column row
 
 **Files:**
+
 - Modify: `components/home/feature-card.tsx`
 
 - [ ] **Step 1: Replace the component**
@@ -140,11 +146,7 @@ type FeatureCardProps = {
   footerText: string;
 };
 
-const visualColors = [
-  'bg-[#FF5C25]/8',
-  'bg-[#FF456E]/8',
-  'bg-amber-500/8',
-];
+const visualColors = ['bg-[#FF5C25]/8', 'bg-[#FF456E]/8', 'bg-amber-500/8'];
 
 export function FeatureCard({
   index,
@@ -157,7 +159,9 @@ export function FeatureCard({
   const isReversed = index % 2 !== 0;
 
   return (
-    <div className={`grid gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center ${isReversed ? 'lg:[&>*:first-child]:order-last' : ''}`}>
+    <div
+      className={`grid gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center ${isReversed ? 'lg:[&>*:first-child]:order-last' : ''}`}
+    >
       {/* Text side */}
       <div className="flex flex-col">
         <span className="text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-[#FF5C25]">
@@ -181,9 +185,7 @@ export function FeatureCard({
       </div>
 
       {/* Visual side */}
-      <div
-        className={`h-64 rounded-2xl lg:h-80 ${visualColors[index % visualColors.length]}`}
-      />
+      <div className={`h-64 rounded-2xl lg:h-80 ${visualColors[index % visualColors.length]}`} />
     </div>
   );
 }
@@ -206,9 +208,11 @@ git commit -m "style: replace FeatureCard with alternating two-column row"
 ## Task 5: Redesign the Hero section in page.tsx
 
 **Files:**
+
 - Modify: `app/page.tsx`
 
 **What changes:**
+
 - Remove the two gradient blob `div`s at the top of the hero section
 - Change layout from two-column grid to centered single-column
 - Greeting + motivational copy: keep as-is but centred
@@ -225,7 +229,10 @@ Replace the entire `<section className="relative isolate overflow-hidden ...">` 
 <section className="relative pb-16 pt-20 sm:pb-24 sm:pt-28">
   <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-6 px-6 text-center">
     {/* Greeting */}
-    <p className="text-base text-muted-foreground animate-fade-up animate-delay-100" suppressHydrationWarning>
+    <p
+      className="text-base text-muted-foreground animate-fade-up animate-delay-100"
+      suppressHydrationWarning
+    >
       {greeting}, {friendlyTerm}.
     </p>
 
@@ -236,8 +243,8 @@ Replace the entire `<section className="relative isolate overflow-hidden ...">` 
 
     {/* Subheading */}
     <p className="max-w-xl text-pretty text-base text-muted-foreground sm:text-lg animate-fade-up animate-delay-300">
-      Every tab hits different with Mue. Stunning backgrounds, quotes that slap, places
-      for your notes — everything you need to lock in.
+      Every tab hits different with Mue. Stunning backgrounds, quotes that slap, places for your
+      notes — everything you need to lock in.
     </p>
 
     {/* CTAs */}
@@ -311,8 +318,8 @@ Replace the entire `<section className="relative isolate overflow-hidden ...">` 
         ))}
       </div>
       <p className="text-[0.7rem] leading-relaxed text-muted-foreground/50 sm:text-xs">
-        *not actually available on Safari yet, but we&apos;re working on it! And no,
-        we&apos;re not adding Opera support. Please stop asking.
+        *not actually available on Safari yet, but we&apos;re working on it! And no, we&apos;re not
+        adding Opera support. Please stop asking.
       </p>
     </div>
   </div>
@@ -336,6 +343,7 @@ git commit -m "style: redesign hero to centered single-column layout"
 ## Task 6: Redesign the Features section in page.tsx
 
 **Files:**
+
 - Modify: `app/page.tsx`
 
 - [ ] **Step 1: Replace the features `<section>` block**
@@ -350,8 +358,8 @@ Replace the entire second `<section>` (the one starting with `<section className
         Built-in tools to keep you in flow
       </h2>
       <p className="mt-4 text-base text-muted-foreground sm:text-lg">
-        Mue blends mindful visuals with productivity essentials so every new tab fuels your
-        focus instead of draining it.
+        Mue blends mindful visuals with productivity essentials so every new tab fuels your focus
+        instead of draining it.
       </p>
     </div>
 
@@ -389,6 +397,7 @@ git commit -m "style: redesign features section with alternating rows"
 ## Task 7: Redesign the Community section in page.tsx
 
 **Files:**
+
 - Modify: `app/page.tsx`
 
 - [ ] **Step 1: Replace the community `<section>` block**
@@ -418,12 +427,7 @@ Replace the entire third `<section>` (starting with `<section className="relativ
           <ArrowRight className="ml-2 h-4 w-4" />
         </Link>
       </Button>
-      <Button
-        size="lg"
-        variant="outline"
-        asChild
-        className="border-[#FF5C25]/30 text-[#FF5C25]"
-      >
+      <Button size="lg" variant="outline" asChild className="border-[#FF5C25]/30 text-[#FF5C25]">
         <Link href="https://github.com/mue/mue/issues" target="_blank" rel="noreferrer">
           See open issues
         </Link>
@@ -461,6 +465,7 @@ git commit -m "style: redesign community section, remove decorative elements"
 ## Self-Review
 
 **Spec coverage:**
+
 - ✅ Remove gradient blobs/glow — Task 5 removes both hero blobs and the glow ring
 - ✅ Plain greeting text (no pill wrapper) — Task 5
 - ✅ Screenshot without browser chrome — Task 5

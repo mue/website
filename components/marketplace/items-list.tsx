@@ -21,13 +21,16 @@ interface ItemsListProps {
 export default function ItemsList({ items, collectionNameMap }: ItemsListProps) {
   const router = useRouter();
   const { toggleFavorite, isFavorite } = useFavoritesContext();
-  const { isEmbed, buildEmbedUrl } = useEmbed();
+  const { buildEmbedUrl } = useEmbed();
+
   return (
     <div className="space-y-3">
       {items.map((item) => (
         <Link
           key={item.id || `${item.type}-${item.name}`}
-          href={buildEmbedUrl(`/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`)}
+          href={buildEmbedUrl(
+            `/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`,
+          )}
           className="group relative flex cursor-pointer flex-row items-center gap-4 overflow-hidden rounded-xl border border-border bg-card/70 p-4 shadow-sm transition hover:border-primary/40 hover:shadow-md"
         >
           <button

@@ -73,10 +73,7 @@ export default async function AuthorsPage({
     >
       {!isEmbed && <MarketplaceBreadcrumb type="authors" />}
       <BreadcrumbTracker
-        breadcrumbs={[
-          { label: 'Marketplace', href: '/marketplace' },
-          { label: 'Authors' },
-        ]}
+        breadcrumbs={[{ label: 'Marketplace', href: '/marketplace' }, { label: 'Authors' }]}
       />
 
       <header className="space-y-3">

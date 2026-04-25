@@ -33,7 +33,9 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
       {items.map((item) => (
         <Link
           key={item.id || `${item.type}-${item.name}`}
-          href={buildEmbedUrl(`/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`)}
+          href={buildEmbedUrl(
+            `/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`,
+          )}
           className={cn(
             'group relative flex h-full cursor-pointer flex-col gap-3 overflow-hidden rounded-2xl border border-border bg-card/70 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md',
             isEmbed ? 'p-3 lg:p-4' : 'p-4 lg:gap-4 lg:p-6',

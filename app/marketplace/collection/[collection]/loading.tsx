@@ -39,7 +39,10 @@ export default function CollectionLoading() {
       {/* Items grid */}
       <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="flex flex-col gap-3 rounded-2xl border border-border bg-card/70 p-4 lg:gap-4 lg:p-6">
+          <div
+            key={i}
+            className="flex flex-col gap-3 rounded-2xl border border-border bg-card/70 p-4 lg:gap-4 lg:p-6"
+          >
             <div className="flex items-center justify-center lg:justify-start">
               <Skeleton className="h-16 w-16 rounded-xl lg:h-20 lg:w-20" />
             </div>

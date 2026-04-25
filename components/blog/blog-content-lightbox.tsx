@@ -105,7 +105,10 @@ export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
       {allImages.length > 1 && (
         <>
           <button
-            onClick={(e) => { e.stopPropagation(); prevImage(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              prevImage();
+            }}
             className="absolute left-2 sm:left-4 z-10 rounded-full bg-black/50 p-2 text-white transition hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
             aria-label="Previous image"
           >
@@ -113,7 +116,10 @@ export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
           </button>
 
           <button
-            onClick={(e) => { e.stopPropagation(); nextImage(); }}
+            onClick={(e) => {
+              e.stopPropagation();
+              nextImage();
+            }}
             className="absolute right-2 sm:right-4 z-10 rounded-full bg-black/50 p-2 text-white transition hover:bg-black/70 focus:outline-none focus:ring-2 focus:ring-white"
             aria-label="Next image"
           >

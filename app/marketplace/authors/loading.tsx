@@ -19,7 +19,10 @@ export default function AuthorsLoading() {
       {/* Authors grid */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {Array.from({ length: 12 }).map((_, i) => (
-          <div key={i} className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-card/70 p-6">
+          <div
+            key={i}
+            className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-card/70 p-6"
+          >
             <Skeleton className="h-20 w-20 rounded-full" />
             <div className="flex flex-col items-center gap-2 w-full">
               <Skeleton className="h-5 w-32" />

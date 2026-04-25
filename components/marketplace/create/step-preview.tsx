@@ -213,9 +213,8 @@ export function StepPreview({
       <div className="flex items-start gap-3 rounded-xl border border-border bg-muted/30 px-4 py-3">
         <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
         <p className="text-sm text-muted-foreground">
-          Make sure your icon and
-          screenshot URLs are working correctly. If the preview doesn&apos;t look right, go back and
-          update your metadata.
+          Make sure your icon and screenshot URLs are working correctly. If the preview doesn&apos;t
+          look right, go back and update your metadata.
         </p>
       </div>
 

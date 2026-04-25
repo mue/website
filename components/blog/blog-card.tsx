@@ -110,7 +110,10 @@ export function BlogCard({ post, sizes, className }: BlogCardProps) {
         )}
 
         <div className="mt-auto flex justify-end pt-2">
-          <ArrowRight className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary group-focus-within:text-primary" aria-hidden />
+          <ArrowRight
+            className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary group-focus-within:text-primary"
+            aria-hidden
+          />
         </div>
       </div>
     </article>

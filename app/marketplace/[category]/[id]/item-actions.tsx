@@ -19,7 +19,15 @@ interface ItemActionsProps {
   isPreview?: boolean;
 }
 
-export function ItemActions({ itemId, displayName, description, category, itemType, itemData, isPreview }: ItemActionsProps) {
+export function ItemActions({
+  itemId,
+  displayName,
+  description,
+  category,
+  itemType,
+  itemData,
+  isPreview,
+}: ItemActionsProps) {
   const { toggleFavorite, isFavorite } = useFavoritesContext();
   const { isEmbed, sendMessage } = useEmbed();
   const isItemFavorited = isFavorite(category, itemId);
@@ -78,13 +86,14 @@ export function ItemActions({ itemId, displayName, description, category, itemTy
   };
 
   // Get the current page URL (client-side only), stripping embed parameter for sharing
-  const url = typeof window !== 'undefined'
-    ? (() => {
-        const pageUrl = new URL(window.location.href);
-        pageUrl.searchParams.delete('embed');
-        return pageUrl.toString();
-      })()
-    : '';
+  const url =
+    typeof window !== 'undefined'
+      ? (() => {
+          const pageUrl = new URL(window.location.href);
+          pageUrl.searchParams.delete('embed');
+          return pageUrl.toString();
+        })()
+      : '';
 
   return (
     <div className="flex flex-col gap-2">

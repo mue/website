@@ -41,7 +41,6 @@ export function StepWelcome({ onNext }: StepWelcomeProps) {
     }
   };
 
-
   const addonTypes = [
     {
       icon: Image,
@@ -99,7 +98,9 @@ export function StepWelcome({ onNext }: StepWelcomeProps) {
       {hasDraft && (
         <div className="flex items-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.07] px-4 py-3 text-sm">
           <FileText className="h-4 w-4 shrink-0 text-emerald-500" />
-          <span className="text-foreground/80">You have a draft saved, continue where you left off!</span>
+          <span className="text-foreground/80">
+            You have a draft saved, continue where you left off!
+          </span>
         </div>
       )}
 

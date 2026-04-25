@@ -1,4 +1,5 @@
 # Homepage Redesign — Design Spec
+
 **Date:** 2026-04-24
 **Status:** Approved
 
@@ -22,6 +23,7 @@ Redesign the homepage to feel clean and product-focused (Raycast/Arc aesthetic) 
 **Layout:** Centered, single column
 
 **Content (top to bottom):**
+
 1. Greeting line + motivational subheading — kept as-is in copy, but rendered as plain unstyled text (no pill/badge wrapper, no decorative border)
 2. H1: "Stop staring at blank tabs." — large, confident, unchanged
 3. One-line subheading — trim existing copy to ~15 words
@@ -38,6 +40,7 @@ Redesign the homepage to feel clean and product-focused (Raycast/Arc aesthetic) 
 **Layout:** Stacked alternating two-column rows (text | visual, visual | text)
 
 **Each row contains:**
+
 - Section headline (no numbered eyebrow badges)
 - Description paragraph
 - 2–3 bullet points
@@ -54,6 +57,7 @@ Redesign the homepage to feel clean and product-focused (Raycast/Arc aesthetic) 
 **Layout:** Centered text block + stats grid
 
 **Content:**
+
 - Open source badge + GitHub links — rendered as a simple centered text block, not a card
 - Stats grid: 6 stats (Collaborators, Stars, Forks, Users, Tabs, Origins) in a 3×2 or 6-col row — just `big number` + `label` underneath, no card borders or shadows
 - Browser store badges row — kept as-is
@@ -64,15 +68,15 @@ Redesign the homepage to feel clean and product-focused (Raycast/Arc aesthetic) 
 
 ## Global Changes
 
-| Current | New |
-|---|---|
-| Gradient blob backgrounds | Removed |
-| `animate-float`, `animate-pan` | Removed |
-| `animate-fade-up` on scroll | Kept |
-| Pill/badge wrappers on text | Removed |
-| Identical card grid patterns | Replaced with section-specific layouts |
-| Browser chrome on screenshot | Removed — plain screenshot with shadow |
-| Dot indicators on stats | Removed |
+| Current                        | New                                    |
+| ------------------------------ | -------------------------------------- |
+| Gradient blob backgrounds      | Removed                                |
+| `animate-float`, `animate-pan` | Removed                                |
+| `animate-fade-up` on scroll    | Kept                                   |
+| Pill/badge wrappers on text    | Removed                                |
+| Identical card grid patterns   | Replaced with section-specific layouts |
+| Browser chrome on screenshot   | Removed — plain screenshot with shadow |
+| Dot indicators on stats        | Removed                                |
 
 ---
 

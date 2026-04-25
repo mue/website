@@ -19,7 +19,10 @@ export default function CollectionsLoading() {
       {/* Collections grid */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {Array.from({ length: 9 }).map((_, i) => (
-          <div key={i} className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card/70">
+          <div
+            key={i}
+            className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card/70"
+          >
             <Skeleton className="aspect-[4/3] w-full rounded-none" />
             <div className="flex flex-col gap-3 p-4 lg:p-5">
               <div className="space-y-2">

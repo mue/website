@@ -155,8 +155,6 @@ export default function CreateAddonPage() {
     setShowDeleteQuotesDialog(false);
   };
 
-
-
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, isSettings = false) => {
     const file = event.target.files?.[0];
     if (!file) return;

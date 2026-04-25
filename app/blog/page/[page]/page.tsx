@@ -26,7 +26,8 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const title = pageNum === 1 ? 'Blog | Mue' : `Page ${pageNum} | Blog | Mue`;
   const description =
     'Product updates, technical deep-dives, and thoughts on building mindful browser experiences.';
-  const canonical = pageNum === 1 ? 'https://muetab.com/blog' : `https://muetab.com/blog/page/${pageNum}`;
+  const canonical =
+    pageNum === 1 ? 'https://muetab.com/blog' : `https://muetab.com/blog/page/${pageNum}`;
   // We need total pages to derive prev/next
   const posts = await getAllBlogPosts();
   const totalPages = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));

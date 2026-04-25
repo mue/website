@@ -64,8 +64,8 @@ export function ShowcaseGallery({ items }: ShowcaseGalleryProps) {
       <ShowcaseLightbox
         item={selectedItem}
         onClose={() => setSelectedIndex(null)}
-        onPrevious={() => setSelectedIndex((i) => i !== null && i > 0 ? i - 1 : i)}
-        onNext={() => setSelectedIndex((i) => i !== null && i < items.length - 1 ? i + 1 : i)}
+        onPrevious={() => setSelectedIndex((i) => (i !== null && i > 0 ? i - 1 : i))}
+        onNext={() => setSelectedIndex((i) => (i !== null && i < items.length - 1 ? i + 1 : i))}
         hasPrevious={selectedIndex !== null && selectedIndex > 0}
         hasNext={selectedIndex !== null && selectedIndex < items.length - 1}
       />

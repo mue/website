@@ -62,7 +62,8 @@ export function DocsSearch({ docs }: DocsSearchProps) {
           <span className="shrink-0">Search docs...</span>
         </span>
         <kbd className="inline-flex items-center gap-1 rounded border bg-muted px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground shrink-0 ml-2">
-          <span>⌘</span><span>K</span>
+          <span>⌘</span>
+          <span>K</span>
         </kbd>
       </Button>
 

@@ -62,13 +62,13 @@ Proxies a random image from Unsplash.
 
 ##### Request
 
-| Parameter               | Type   | Info                                      |
-| ----------------------- | ------ | ----------------------------------------- |
-| categories (optional)   | string | Comma-separated Unsplash category names   |
-| collections (optional)  | string | Comma-separated Unsplash collection IDs   |
-| orientation (optional)  | string | `landscape`, `portrait`, or `squarish`    |
-| topics (optional)       | string | Comma-separated Unsplash topic slugs      |
-| username (optional)     | string | Limit results to a specific Unsplash user |
+| Parameter              | Type   | Info                                      |
+| ---------------------- | ------ | ----------------------------------------- |
+| categories (optional)  | string | Comma-separated Unsplash category names   |
+| collections (optional) | string | Comma-separated Unsplash collection IDs   |
+| orientation (optional) | string | `landscape`, `portrait`, or `squarish`    |
+| topics (optional)      | string | Comma-separated Unsplash topic slugs      |
+| username (optional)    | string | Limit results to a specific Unsplash user |
 
 #### Get Unsplash Topics
 

@@ -326,24 +326,28 @@ export function validateAPIPackSettings(item: any): ContentValidationResult {
 
   // Check required fields for API packs
   if (!item.api_provider) {
-    errors.push({ type: 'error', message: 'api_provider is required for API packs', field: 'api_provider' });
+    errors.push({
+      type: 'error',
+      message: 'api_provider is required for API packs',
+      field: 'api_provider',
+    });
   }
 
   // Validate api_endpoint is a valid URL
   if (!item.api_endpoint) {
-    errors.push({ 
-      type: 'error', 
-      message: 'api_endpoint URL is required for API packs', 
-      field: 'api_endpoint' 
+    errors.push({
+      type: 'error',
+      message: 'api_endpoint URL is required for API packs',
+      field: 'api_endpoint',
     });
   } else {
     try {
       new URL(item.api_endpoint);
     } catch {
-      errors.push({ 
-        type: 'error', 
-        message: 'api_endpoint must be a valid URL', 
-        field: 'api_endpoint' 
+      errors.push({
+        type: 'error',
+        message: 'api_endpoint must be a valid URL',
+        field: 'api_endpoint',
       });
     }
   }

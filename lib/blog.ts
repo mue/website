@@ -10,9 +10,6 @@ import rehypeRaw from 'rehype-raw';
 import rehypeStringify from 'rehype-stringify';
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog');
-const PUBLIC_DIR = path.join(process.cwd(), 'public');
-
-
 
 export type BlogFrontmatter = {
   title: string;

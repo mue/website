@@ -53,9 +53,7 @@ export default function DMCAPage() {
               copyright infringement and is accessible via the Mue service, including our
               marketplace, please notify our copyright agent as set forth below.
             </p>
-            <p className="mt-4 font-semibold text-foreground">
-              Your DMCA notice must include:
-            </p>
+            <p className="mt-4 font-semibold text-foreground">Your DMCA notice must include:</p>
             <BulletList
               items={[
                 'A physical or electronic signature of the copyright owner or a person authorized to act on their behalf.',
@@ -73,14 +71,18 @@ export default function DMCAPage() {
           <ContentSection title="How to Submit">
             <p>Please submit your DMCA notice to our designated copyright agent:</p>
             <div className="mt-4 rounded-2xl border border-border bg-muted/30 p-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Email</p>
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                Email
+              </p>
               <a
                 href="mailto:hello@muetab.com"
                 className="mt-1 block font-mono text-foreground underline underline-offset-2"
               >
                 hello@muetab.com
               </a>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Subject line</p>
+              <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                Subject line
+              </p>
               <p className="mt-1 font-mono text-sm text-foreground">DMCA Takedown Request</p>
             </div>
           </ContentSection>

@@ -4,7 +4,6 @@ import { FeaturedCollectionsSkeleton } from './featured-collections-skeleton';
 export function MarketplaceLoadingSkeleton() {
   return (
     <div className="flex flex-col gap-10" aria-busy="true" aria-label="Loading marketplace">
-
       {/* Search bar + Create Addon button */}
       <div className="flex flex-row items-start justify-between gap-2">
         <Skeleton className="h-12 max-w-2xl flex-1 rounded-lg" />
@@ -46,7 +45,10 @@ export function MarketplaceLoadingSkeleton() {
       {/* Items grid */}
       <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3">
         {Array.from({ length: 6 }).map((_, i) => (
-          <div key={i} className="flex flex-col gap-3 rounded-2xl border border-border bg-card/70 p-4 lg:gap-4 lg:p-6">
+          <div
+            key={i}
+            className="flex flex-col gap-3 rounded-2xl border border-border bg-card/70 p-4 lg:gap-4 lg:p-6"
+          >
             <div className="flex items-center justify-center lg:justify-start">
               <Skeleton className="h-16 w-16 rounded-xl lg:h-20 lg:w-20" />
             </div>

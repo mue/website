@@ -13,7 +13,9 @@ export function CommunityStatCard({ label, value, icon: Icon }: CommunityStatCar
         <Icon className="h-5 w-5 text-white" />
       </div>
       <p className="text-3xl font-semibold text-foreground">{value}</p>
-      <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60">{label}</p>
+      <p className="text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground/60">
+        {label}
+      </p>
     </div>
   );
 }

@@ -131,12 +131,7 @@ function createProcessor(toc: TocItem[]) {
     .use(rehypeAutolinkHeadings, {
       behavior: 'wrap',
       properties: {
-        className: [
-          'no-underline',
-          'font-medium',
-          'text-inherit',
-          'hover:text-foreground',
-        ],
+        className: ['no-underline', 'font-medium', 'text-inherit', 'hover:text-foreground'],
       },
     })
     .use(rehypeRaw)

@@ -52,9 +52,7 @@ export function StepTypeSelection({ value, onChange, onNext, onBack }: StepTypeS
           <Card
             key={type}
             className={`cursor-pointer p-6 transition-all ${
-              value === type
-                ? 'border-primary bg-primary/5'
-                : 'hover:border-primary/40'
+              value === type ? 'border-primary bg-primary/5' : 'hover:border-primary/40'
             }`}
             onClick={() => onChange(type)}
           >

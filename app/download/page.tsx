@@ -211,9 +211,7 @@ export default function DownloadPage() {
           <h2 className="text-2xl font-semibold tracking-tight text-foreground">
             What happens next?
           </h2>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Up and running in under a minute.
-          </p>
+          <p className="mt-2 text-sm text-muted-foreground">Up and running in under a minute.</p>
           <div className="mt-8">
             {steps.map((step, i) => (
               <NumberedStep

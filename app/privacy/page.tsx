@@ -86,7 +86,8 @@ export default function PrivacyPage() {
           <ContentSection title="Quote Widget" titleSize="md">
             <p>
               The quote feature of Mue requests to our API (api.muetab.com) in order to get a random
-              quote. Your set quote language is sent in this request to get a quote in your language.
+              quote. Your set quote language is sent in this request to get a quote in your
+              language.
             </p>
             <p>
               When opening the about tab in settings, requests are sent to the GitHub API, our API

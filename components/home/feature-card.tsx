@@ -5,17 +5,15 @@ type FeatureCardProps = {
   bullets: string[];
 };
 
-const visualColors = [
-  'bg-[#FF5C25]/8',
-  'bg-[#FF456E]/8',
-  'bg-amber-500/8',
-];
+const visualColors = ['bg-[#FF5C25]/8', 'bg-[#FF456E]/8', 'bg-amber-500/8'];
 
 export function FeatureCard({ index, title, description, bullets }: FeatureCardProps) {
   const isReversed = index % 2 !== 0;
 
   return (
-    <div className={`grid gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center ${isReversed ? 'lg:[&>*:first-child]:order-last' : ''}`}>
+    <div
+      className={`grid gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center ${isReversed ? 'lg:[&>*:first-child]:order-last' : ''}`}
+    >
       <div className="flex flex-col">
         <h3 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
           {title}

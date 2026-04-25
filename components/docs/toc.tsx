@@ -52,7 +52,10 @@ export function DocsToc({ toc }: DocsTocProps) {
       <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/60">
         On this page
       </h2>
-      <ul ref={listRef} className="mt-4 max-h-[calc(100vh-11rem)] space-y-1 overflow-y-auto pr-2 text-sm">
+      <ul
+        ref={listRef}
+        className="mt-4 max-h-[calc(100vh-11rem)] space-y-1 overflow-y-auto pr-2 text-sm"
+      >
         {toc.map((item) => (
           <li
             key={item.id}

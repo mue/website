@@ -15,7 +15,14 @@ type ShowcaseLightboxProps = {
   hasNext?: boolean;
 };
 
-export function ShowcaseLightbox({ item, onClose, onPrevious, onNext, hasPrevious, hasNext }: ShowcaseLightboxProps) {
+export function ShowcaseLightbox({
+  item,
+  onClose,
+  onPrevious,
+  onNext,
+  hasPrevious,
+  hasNext,
+}: ShowcaseLightboxProps) {
   const [visible, setVisible] = useState(false);
   const [displayItem, setDisplayItem] = useState<ShowcaseItem | null>(null);
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -38,11 +45,14 @@ export function ShowcaseLightbox({ item, onClose, onPrevious, onNext, hasPreviou
     };
   }, [item]);
 
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
-    if (e.key === 'ArrowLeft' && hasPrevious && onPrevious) onPrevious();
-    else if (e.key === 'ArrowRight' && hasNext && onNext) onNext();
-    else if (e.key === 'Escape') onClose();
-  }, [hasPrevious, hasNext, onPrevious, onNext, onClose]);
+  const handleKeyDown = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft' && hasPrevious && onPrevious) onPrevious();
+      else if (e.key === 'ArrowRight' && hasNext && onNext) onNext();
+      else if (e.key === 'Escape') onClose();
+    },
+    [hasPrevious, hasNext, onPrevious, onNext, onClose],
+  );
 
   useEffect(() => {
     if (!item) return;
@@ -69,7 +79,10 @@ export function ShowcaseLightbox({ item, onClose, onPrevious, onNext, hasPreviou
 
       {hasPrevious && (
         <button
-          onClick={(e) => { e.stopPropagation(); onPrevious?.(); }}
+          onClick={(e) => {
+            e.stopPropagation();
+            onPrevious?.();
+          }}
           className="absolute left-4 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition-all hover:scale-110 hover:bg-background"
           aria-label="Previous image"
         >
@@ -79,7 +92,10 @@ export function ShowcaseLightbox({ item, onClose, onPrevious, onNext, hasPreviou
 
       {hasNext && (
         <button
-          onClick={(e) => { e.stopPropagation(); onNext?.(); }}
+          onClick={(e) => {
+            e.stopPropagation();
+            onNext?.();
+          }}
           className="absolute right-4 top-1/2 z-10 -translate-y-1/2 cursor-pointer rounded-full bg-background/80 p-2 text-foreground backdrop-blur-sm transition-all hover:scale-110 hover:bg-background"
           aria-label="Next image"
         >

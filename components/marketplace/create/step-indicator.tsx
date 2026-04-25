@@ -40,20 +40,15 @@ export function StepIndicator({ currentStep, onStepClick, canNavigateToStep }: S
             disabled={!isStepClickable(step.number)}
             className={cn(
               'flex flex-col items-center gap-1.5 transition-opacity',
-              isStepClickable(step.number)
-                ? 'cursor-pointer hover:opacity-80'
-                : 'cursor-default',
+              isStepClickable(step.number) ? 'cursor-pointer hover:opacity-80' : 'cursor-default',
             )}
           >
             <div
               className={cn(
                 'flex h-8 w-8 items-center justify-center rounded-full border transition-all',
-                step.number < currentStep &&
-                  'border-primary bg-primary text-primary-foreground',
-                step.number === currentStep &&
-                  'border-primary bg-primary/10 text-primary',
-                step.number > currentStep &&
-                  'border-border bg-background text-muted-foreground',
+                step.number < currentStep && 'border-primary bg-primary text-primary-foreground',
+                step.number === currentStep && 'border-primary bg-primary/10 text-primary',
+                step.number > currentStep && 'border-border bg-background text-muted-foreground',
               )}
             >
               {step.number < currentStep ? (

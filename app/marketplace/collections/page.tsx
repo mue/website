@@ -78,10 +78,7 @@ export default async function CollectionsPage({
     >
       {!isEmbed && <MarketplaceBreadcrumb type="collections" />}
       <BreadcrumbTracker
-        breadcrumbs={[
-          { label: 'Marketplace', href: '/marketplace' },
-          { label: 'Collections' },
-        ]}
+        breadcrumbs={[{ label: 'Marketplace', href: '/marketplace' }, { label: 'Collections' }]}
       />
 
       <header className="space-y-3">

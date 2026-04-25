@@ -4,7 +4,17 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { useEffect, useState } from 'react';
-import { ArrowRight, Rocket, Users, Star, GitFork, UserCheck, LayoutDashboard, CalendarDays, type LucideIcon } from 'lucide-react';
+import {
+  ArrowRight,
+  Rocket,
+  Users,
+  Star,
+  GitFork,
+  UserCheck,
+  LayoutDashboard,
+  CalendarDays,
+  type LucideIcon,
+} from 'lucide-react';
 import { FaChrome, FaFirefoxBrowser, FaEdge, FaGithub } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
 
@@ -99,9 +109,7 @@ export default function Home() {
       <section className="relative pb-16 pt-12 sm:pb-24 sm:pt-16">
         <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-10 px-6 text-center">
           <h1 className="font-heading font-light text-balance text-4xl tracking-wide text-foreground sm:text-5xl lg:text-6xl animate-fade-up animate-delay-200">
-            Stop staring at{' '}
-            <span className="text-[#FF5C25]">blank</span>{' '}
-            tabs.
+            Stop staring at <span className="text-[#FF5C25]">blank</span> tabs.
           </h1>
 
           <p className="max-w-xl text-pretty text-base text-muted-foreground sm:text-lg animate-fade-up animate-delay-300">
@@ -224,7 +232,12 @@ export default function Home() {
 
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Button size="lg" asChild>
-              <Link href="https://github.com/mue/mue" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2">
+              <Link
+                href="https://github.com/mue/mue"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center gap-2"
+              >
                 <FaGithub className="h-4 w-4" />
                 <span>View Mue on GitHub</span>
               </Link>
@@ -235,7 +248,12 @@ export default function Home() {
               asChild
               className="border-[#FF5C25]/30 text-[#FF5C25]"
             >
-              <Link href="https://github.com/mue/mue/issues" target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2">
+              <Link
+                href="https://github.com/mue/mue/issues"
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center gap-2"
+              >
                 <span>See open issues</span>
               </Link>
             </Button>

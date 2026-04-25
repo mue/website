@@ -64,7 +64,8 @@ export default function ContactPage() {
             Get in Touch with Us
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            Whether you have questions, feedback, or need support, we're here to help. Reach out through any of the channels below, and we'll get back to you as soon as possible.
+            Whether you have questions, feedback, or need support, we're here to help. Reach out
+            through any of the channels below, and we'll get back to you as soon as possible.
           </p>
         </header>
 
