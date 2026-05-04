@@ -26,19 +26,19 @@ export function BrowserCard({
 }: BrowserCardProps) {
   return (
     <div
-      className={`group relative overflow-hidden rounded-3xl border p-8 text-left shadow-[0_20px_70px_-40px_rgba(12,12,40,0.8)] backdrop-blur transition-all ${
+      className={`group relative overflow-hidden rounded-3xl border p-8 text-left backdrop-blur transition-all duration-300 ${
         isDetected
-          ? 'border-[#FF5C25]/60 bg-background/95 shadow-[0_25px_90px_-35px_rgba(255,92,37,0.6)] ring-2 ring-[#FF5C25]/30'
-          : 'border-white/10 bg-background/80 hover:border-[#FF5C25]/40 hover:shadow-[0_25px_90px_-35px_rgba(12,12,40,0.95)]'
+          ? 'border-[#FF5C25]/60 bg-background shadow-[0_25px_90px_-35px_rgba(255,92,37,0.4)] ring-2 ring-[#FF5C25]/30'
+          : 'border-border bg-background shadow-sm hover:border-[#FF5C25]/40 hover:shadow-[0_20px_60px_-20px_rgba(255,92,37,0.2)] dark:border-white/10 dark:shadow-none dark:hover:shadow-[0_25px_90px_-35px_rgba(12,12,40,0.95)]'
       }`}
     >
       <div
-        className={`absolute inset-x-0 -top-24 h-48 bg-gradient-to-b ${gradient} opacity-[0.08] blur-3xl transition-opacity group-hover:opacity-[0.14]`}
+        className={`absolute inset-x-0 -top-24 h-48 bg-gradient-to-b ${gradient} opacity-[0.06] blur-3xl transition-opacity duration-300 group-hover:opacity-[0.12] dark:opacity-[0.08] dark:group-hover:opacity-[0.14]`}
       />
 
       <div className="relative">
         <div className="flex items-center justify-between">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-gradient-to-br from-white/10 to-white/5">
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-muted/50 dark:border-white/10 dark:bg-gradient-to-br dark:from-white/10 dark:to-white/5">
             <Icon className="h-8 w-8 text-foreground" />
           </div>
           {isDetected && (
@@ -52,7 +52,7 @@ export function BrowserCard({
 
         <p className="mt-3 text-sm text-muted-foreground">{description}</p>
 
-        <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-muted-foreground">
+        <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-muted/50 px-3 py-1 text-xs text-muted-foreground dark:border-white/10 dark:bg-white/5">
           <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
           {version}
         </div>

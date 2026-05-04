@@ -222,8 +222,8 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
           </CarouselContent>
           {photos.length > 1 && (
             <>
-              <CarouselPrevious className="left-2" />
-              <CarouselNext className="right-2" />
+              <CarouselPrevious className="left-2 bg-background/80 backdrop-blur-sm border-border/60 hover:bg-background" />
+              <CarouselNext className="right-2 bg-background/80 backdrop-blur-sm border-border/60 hover:bg-background" />
             </>
           )}
         </Carousel>

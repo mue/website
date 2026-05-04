@@ -130,7 +130,7 @@ export default function DMCAPage() {
             <p className="text-sm text-muted-foreground">
               We may update this policy without notice at any time. This policy does not constitute
               legal advice. Questions?{' '}
-              <Link href="/contact" className="text-foreground underline underline-offset-2">
+              <Link href="/contact" className="text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-foreground">
                 Get in touch.
               </Link>
             </p>

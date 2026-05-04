@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
 
 import { cn } from '@/lib/utils';
 import {
@@ -23,8 +24,15 @@ interface ItemsGridProps {
   collectionNameMap: Map<string, string>;
 }
 
+function getInitials(name: string): string {
+  const words = name.trim().split(/\s+/);
+  if (words.length === 1) return words[0][0].toUpperCase();
+  return (words[0][0] + words[1][0]).toUpperCase();
+}
+
 export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) {
   const router = useRouter();
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 
   const { toggleFavorite, isFavorite } = useFavoritesContext();
   const { isEmbed, buildEmbedUrl } = useEmbed();
@@ -54,7 +62,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
               event.stopPropagation();
               toggleFavorite(item.type, item.name);
             }}
-            className="absolute top-3 right-3 z-10 rounded-full bg-background/80 backdrop-blur-sm p-2 transition hover:bg-background hover:scale-110"
+            className="absolute top-3 right-3 z-10 cursor-pointer rounded-full bg-background/80 backdrop-blur-sm p-2 transition hover:bg-background hover:scale-110"
             aria-label="Toggle favorite"
           >
             <Heart
@@ -74,7 +82,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
                 isEmbed ? 'h-12 w-12 lg:h-16 lg:w-16' : 'h-16 w-16 lg:h-20 lg:w-20',
               )}
             >
-              {item.icon_url ? (
+              {item.icon_url && !failedImages.has(item.id) ? (
                 <Image
                   src={item.icon_url}
                   alt={item.display_name}
@@ -82,10 +90,11 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
                   sizes="64px"
                   className="object-cover"
                   unoptimized
+                  onError={() => setFailedImages((prev) => new Set(prev).add(item.id))}
                 />
               ) : (
-                <div className="flex h-full w-full items-center justify-center text-xs font-semibold uppercase text-muted-foreground/80">
-                  {item.display_name.slice(0, 2)}
+                <div className="flex h-full w-full items-center justify-center text-xl font-bold text-foreground">
+                  {getInitials(item.display_name)}
                 </div>
               )}
             </div>

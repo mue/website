@@ -54,7 +54,7 @@ const contactMethods = [
 
 export default function ContactPage() {
   return (
-    <div className="relative min-h-[calc(100vh-80px)] overflow-hidden">
+    <div className="relative overflow-hidden">
       <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[70vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.15)_0%,_transparent_65%)] blur-3xl" />
 
       <div className="mx-auto max-w-5xl px-6 py-24 sm:py-32">
@@ -74,39 +74,34 @@ export default function ContactPage() {
           ))}
         </div>
 
-        <div className="mt-6">
-          <div className="rounded-2xl border border-border bg-muted/30 p-6">
-            <div className="flex items-start gap-4">
-              <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border bg-background">
-                <Search className="h-4 w-4 text-muted-foreground" />
-              </div>
-
-              <div>
-                <h3 className="font-semibold text-foreground">Before reaching out</h3>
-                <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-                  <li>
-                    &rarr; Check the{' '}
-                    <Link href="/docs" className="text-foreground underline underline-offset-2">
-                      documentation
-                    </Link>{' '}
-                    for answers to common questions
-                  </li>
-                  <li>
-                    &rarr; Search{' '}
-                    <a
-                      href="https://github.com/mue/mue/issues"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-foreground underline underline-offset-2"
-                    >
-                      GitHub Issues
-                    </a>{' '}
-                    to see if your problem has been reported
-                  </li>
-                  <li>&rarr; Our Discord community can usually help faster than email</li>
-                </ul>
-              </div>
-            </div>
+        <div className="mt-6 rounded-2xl border border-border bg-muted/30 px-8 py-7">
+          <div className="flex items-center gap-2 text-sm font-medium text-foreground">
+            <Search className="h-4 w-4 text-muted-foreground" />
+            Before reaching out
+          </div>
+          <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:gap-0">
+            <p className="text-sm leading-relaxed text-muted-foreground sm:pr-8">
+              Check the{' '}
+              <Link href="/docs" className="text-foreground no-underline hover:underline underline-offset-2">
+                documentation
+              </Link>{' '}
+              for answers to common questions.
+            </p>
+            <p className="text-sm leading-relaxed text-muted-foreground sm:border-l sm:border-border sm:px-8">
+              Search{' '}
+              <a
+                href="https://github.com/mue/mue/issues"
+                target="_blank"
+                rel="noreferrer"
+                className="text-foreground no-underline hover:underline underline-offset-2"
+              >
+                GitHub Issues
+              </a>{' '}
+              to see if your problem has been reported.
+            </p>
+            <p className="text-sm leading-relaxed text-muted-foreground sm:border-l sm:border-border sm:pl-8">
+              Our Discord community can usually help faster than email.
+            </p>
           </div>
         </div>
       </div>

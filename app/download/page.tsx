@@ -137,15 +137,12 @@ export default function DownloadPage() {
 
       <div className="mx-auto flex w-full max-w-6xl flex-col items-center px-6 pb-24 pt-16 text-center">
         {isMobile && (
-          <div className="mb-10 flex w-full max-w-3xl items-start gap-3 rounded-2xl border border-yellow-500/20 bg-yellow-500/[0.07] px-5 py-4 text-left">
-            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0 text-yellow-500" />
-            <div>
-              <p className="text-sm font-medium text-foreground">Desktop only</p>
-              <p className="mt-0.5 text-sm text-muted-foreground">
-                Mue is a browser extension for desktop computers. Please visit this page on your
-                computer to install.
-              </p>
-            </div>
+          <div className="mb-10 w-full max-w-3xl rounded-2xl border border-yellow-500/30 bg-yellow-500/[0.08] p-6 text-center">
+            <AlertTriangle className="mx-auto mb-3 h-8 w-8 text-yellow-500" />
+            <p className="text-base font-semibold text-foreground">Desktop only</p>
+            <p className="mt-1.5 text-sm text-muted-foreground">
+              Mue is a browser extension for desktop computers. Visit this page on your computer to install.
+            </p>
           </div>
         )}
 

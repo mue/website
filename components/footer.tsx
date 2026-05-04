@@ -154,7 +154,7 @@ export default function Footer() {
         <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
           <p>
             © 2019-{new Date().getFullYear()} The Mue Authors. Licensed under{' '}
-            <Link href="/license" className="cursor-pointer underline hover:text-foreground">
+            <Link href="/license" className="cursor-pointer underline underline-offset-4 decoration-muted-foreground/50 hover:text-foreground hover:decoration-foreground transition-colors">
               BSD-3-Clause
             </Link>
             . All rights reserved.

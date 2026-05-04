@@ -52,13 +52,13 @@ export default function FeaturedCollections({
             >
               <div
                 className={cn(
-                  'grid gap-6 lg:grid-cols-[2fr_3fr]',
+                  'grid grid-cols-[140px_1fr] lg:grid-cols-[2fr_3fr]',
                   isEmbed && 'gap-2 lg:gap-3 lg:grid-cols-[80px_1fr]',
                 )}
               >
                 <div
                   className={cn(
-                    'relative aspect-[4/3] lg:aspect-auto lg:min-h-[220px]',
+                    'relative min-h-[140px] lg:aspect-auto lg:min-h-[220px]',
                     isEmbed && 'hidden lg:block lg:aspect-square lg:min-h-0 lg:h-20 lg:w-20',
                   )}
                 >
@@ -79,21 +79,21 @@ export default function FeaturedCollections({
 
                 <div
                   className={cn(
-                    'flex flex-col gap-4 p-6 pr-14',
+                    'flex flex-col gap-3 p-4 pr-12 lg:gap-4 lg:p-6 lg:pr-14',
                     isEmbed && 'gap-2 p-3 pr-12 lg:p-4 lg:pr-14',
                   )}
                 >
-                  <div className={cn('space-y-2', isEmbed && 'space-y-1')}>
-                    <div className="flex flex-wrap gap-2">
+                  <div className={cn('space-y-1.5 lg:space-y-2', isEmbed && 'space-y-1')}>
+                    <div className="flex flex-wrap gap-1.5">
                       {collection.contentTypes.map((type) => (
-                        <Badge key={type} variant="secondary" className={cn(isEmbed && 'text-xs')}>
+                        <Badge key={type} variant="secondary" className={cn('text-xs', isEmbed && 'text-xs')}>
                           {getMarketplaceTypeLabel(type)}
                         </Badge>
                       ))}
                     </div>
                     <h2
                       className={cn(
-                        'text-2xl font-semibold tracking-tight',
+                        'text-base font-semibold tracking-tight lg:text-2xl',
                         isEmbed && 'text-lg lg:text-xl',
                       )}
                     >
@@ -102,7 +102,7 @@ export default function FeaturedCollections({
                     {collection.description && (
                       <p
                         className={cn(
-                          'text-muted-foreground text-sm md:text-base line-clamp-3',
+                          'text-muted-foreground text-xs line-clamp-2 lg:text-base lg:line-clamp-3',
                           isEmbed && 'text-xs lg:text-sm line-clamp-2',
                         )}
                       >
@@ -117,7 +117,7 @@ export default function FeaturedCollections({
                         `/marketplace/collection/${encodeURIComponent(collection.name)}`,
                       )}
                       className={cn(
-                        'cursor-pointer rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90',
+                        'cursor-pointer rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90 lg:px-4 lg:py-2 lg:text-sm',
                         isEmbed && 'px-3 py-1.5 text-xs',
                       )}
                     >
@@ -131,8 +131,8 @@ export default function FeaturedCollections({
         ))}
       </CarouselContent>
 
-      <CarouselPrevious className="left-4" />
-      <CarouselNext className="right-4" />
+      <CarouselPrevious className="left-4 bg-background/80 backdrop-blur-sm border-border/60 hover:bg-background" />
+      <CarouselNext className="right-4 bg-background/80 backdrop-blur-sm border-border/60 hover:bg-background" />
     </Carousel>
   );
 }

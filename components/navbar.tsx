@@ -90,13 +90,13 @@ export default function Navbar() {
   return (
     <nav className="bg-background/60 backdrop-blur-md flex w-full items-center gap-3 rounded-xl border border-foreground/20 px-4 py-3 shadow-lg sm:px-6 lg:px-12">
       <div className="flex flex-1 items-center">
-        <Link href={'/'} className="cursor-pointer shrink-0">
+        <Link href={'/'} className="cursor-pointer shrink-0" aria-label="Mue home">
           <Logo width={100} height={100} className="h-10 w-10" />
         </Link>
       </div>
 
       <div className="flex lg:hidden">
-        <Link href={'/'} className="cursor-pointer">
+        <Link href={'/'} className="cursor-pointer" aria-label="Mue home">
           <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-lexend-deca)' }}>
             Mue
           </span>
@@ -150,7 +150,7 @@ export default function Navbar() {
                             >
                               <div
                                 className={cn(
-                                  'mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border bg-background',
+                                  'flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-border bg-background',
                                   isActive && 'border-[#FF5C25]/40 bg-[#FF5C25]/5',
                                 )}
                               >

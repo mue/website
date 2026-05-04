@@ -32,10 +32,20 @@ export function StepIndicator({ currentStep, onStepClick, canNavigateToStep }: S
   };
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center">
       {steps.map((step, index) => (
-        <div key={step.number} className="flex flex-1 items-center">
+        <>
+          {index > 0 && (
+            <div
+              key={`line-${step.number}`}
+              className={cn(
+                'mx-2 h-px flex-1 transition-colors sm:mb-4',
+                step.number <= currentStep ? 'bg-primary/40' : 'bg-border',
+              )}
+            />
+          )}
           <button
+            key={step.number}
             onClick={() => handleStepClick(step.number)}
             disabled={!isStepClickable(step.number)}
             className={cn(
@@ -68,16 +78,7 @@ export function StepIndicator({ currentStep, onStepClick, canNavigateToStep }: S
               {step.title}
             </span>
           </button>
-
-          {index < steps.length - 1 && (
-            <div
-              className={cn(
-                'mx-2 mb-4 h-px flex-1 transition-colors',
-                step.number < currentStep ? 'bg-primary/40' : 'bg-border',
-              )}
-            />
-          )}
-        </div>
+        </>
       ))}
     </div>
   );

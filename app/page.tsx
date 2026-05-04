@@ -1,6 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -28,7 +27,7 @@ import { SoftwareApplicationJsonLd } from '@/components/json-ld';
 
 import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
 
-const stats = ['Building since 2018', '5,000+ monthly active users', '10,000,000+ tabs'];
+const stats = ['Developed since 2018', '10,000+ monthly active users', '10,000,000+ tabs'];
 
 const communityStats: { label: string; value: string; icon: LucideIcon }[] = [
   { label: 'Collaborators', value: '50+', icon: Users },
@@ -36,7 +35,7 @@ const communityStats: { label: string; value: string; icon: LucideIcon }[] = [
   { label: 'Forks', value: '70+', icon: GitFork },
   { label: 'Users', value: '5K+ Monthly', icon: UserCheck },
   { label: 'Tabs Opened', value: '10M+', icon: LayoutDashboard },
-  { label: 'Origins', value: 'Est. 2018', icon: CalendarDays },
+  { label: 'First Version', value: '2018', icon: CalendarDays },
 ];
 
 const scrollFeatures = [
@@ -88,23 +87,12 @@ const browsers = [
   },
 ];
 
-function isMobileDevice(): boolean {
-  if (typeof window === 'undefined') return false;
-  const ua = navigator.userAgent;
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
-}
-
 export default function Home() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(isMobileDevice());
-  }, []);
 
   return (
     <div className="relative overflow-hidden">
       <SoftwareApplicationJsonLd />
-      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[100vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.25)_0%,_transparent_65%)] blur-3xl" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[100vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.15)_0%,_transparent_60%)] blur-3xl dark:bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.25)_0%,_transparent_65%)]" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-transparent dark:to-black/80" />
 
       {/* Hero */}
@@ -119,7 +107,7 @@ export default function Home() {
             your notes: everything you need to lock in.
           </p>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center animate-fade-up animate-delay-400">
+          <div className="flex flex-row flex-wrap justify-center gap-3 sm:items-center animate-fade-up animate-delay-400">
             <Button
               size="lg"
               className="group relative overflow-hidden bg-linear-to-r from-[#c43d10] to-[#b02048] px-6 py-4 text-sm font-semibold text-white shadow-[0_20px_60px_-20px_rgba(255,92,37,0.4)] transition-all hover:scale-105 sm:text-base"
@@ -134,7 +122,7 @@ export default function Home() {
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-[#FF5C25]/30 px-6 py-4 text-sm font-semibold transition-all hover:border-[#FF5C25] hover:bg-[#FF5C25]/5 sm:text-base"
+              className="border-2 border-[#FF5C25]/40 px-6 py-4 text-sm font-semibold transition-all duration-200 hover:border-[#FF5C25] hover:bg-[#FF5C25]/10 sm:text-base"
               asChild
             >
               <Link href="/demo" className="flex items-center justify-center gap-2">
@@ -144,11 +132,6 @@ export default function Home() {
             </Button>
           </div>
 
-          {isMobile && (
-            <p className="text-xs text-muted-foreground/70">
-              Mue is a browser extension for desktop. Visit on your computer to get started.
-            </p>
-          )}
 
           <div className="w-full animate-fade-zoom animate-delay-300">
             <Image
@@ -162,20 +145,20 @@ export default function Home() {
             />
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-sm text-muted-foreground/70 animate-fade-up animate-delay-500">
+          <div className="flex flex-col items-center gap-1.5 text-sm text-muted-foreground/70 animate-fade-up animate-delay-500 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-4 sm:gap-y-2">
             {stats.map((stat, i) => (
               <span key={stat} className="flex items-center gap-4">
-                {i > 0 && <span className="text-muted-foreground/30">|</span>}
+                {i > 0 && <span className="hidden text-muted-foreground/30 sm:inline">|</span>}
                 <StatItem stat={stat} />
               </span>
             ))}
           </div>
 
-          <div className="mt-4 flex flex-col items-center gap-4">
-            <p className="text-[0.65rem] font-bold uppercase tracking-[0.3em] text-muted-foreground/50">
+          <div className="mt-4 flex flex-col items-center gap-5 animate-fade-up animate-delay-500">
+            <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/50">
               Available everywhere*
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-5">
+            </span>
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               {browsers.map((browser) => (
                 <BrowserBadge
                   key={browser.name}
@@ -186,8 +169,7 @@ export default function Home() {
               ))}
             </div>
             <p className="text-[0.7rem] leading-relaxed text-muted-foreground/50 sm:text-xs">
-              *not actually available on Safari yet, but we&apos;re working on it! And no,
-              we&apos;re not adding Opera support. Please stop asking.
+              *not actually available on Safari yet, but we&apos;re working on it!
             </p>
           </div>
         </div>
@@ -263,7 +245,7 @@ export default function Home() {
             </Button>
           </div>
 
-          <div className="grid w-full gap-x-8 gap-y-10 text-center sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid w-full grid-cols-2 gap-x-8 gap-y-10 text-center lg:grid-cols-3">
             {communityStats.map((stat) => (
               <CommunityStatCard
                 key={stat.label}

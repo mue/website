@@ -127,7 +127,7 @@ export default function PrivacyPage() {
           <div className="flex items-start gap-3 rounded-2xl border border-border bg-muted/30 p-5">
             <p className="text-sm text-muted-foreground">
               We may update this privacy policy without notice at any time. Questions?{' '}
-              <Link href="/contact" className="text-foreground underline underline-offset-2">
+              <Link href="/contact" className="text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-foreground">
                 Get in touch.
               </Link>
             </p>

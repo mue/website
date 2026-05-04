@@ -521,7 +521,7 @@ function MarketplaceExplorerContent({
 
   return (
     <>
-      <section ref={containerRef} className="space-y-10">
+      <section ref={containerRef} className="space-y-6">
         {/* Create Addon Button */}
         {/* Enhanced Search Bar */}
         <div className="flex flex-row justify-between items-start gap-2">
@@ -567,7 +567,7 @@ function MarketplaceExplorerContent({
                     setShowSuggestions(false);
                   }
                 }}
-                className="h-12 pl-12 pr-12 text-base shadow-sm transition focus:shadow-md"
+                className="h-12 pl-12 pr-12 text-sm sm:text-base shadow-sm transition focus:shadow-md"
                 aria-label="Search marketplace items"
               />
               {query && (
@@ -656,10 +656,10 @@ function MarketplaceExplorerContent({
         </div>
 
         {/* Quick Filter Chips */}
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex items-center gap-2 overflow-x-auto pb-0.5 scrollbar-none sm:flex-wrap sm:overflow-visible sm:pb-0">
           <Badge
             variant={showFavoritesOnly ? 'default' : 'outline'}
-            className="cursor-pointer transition hover:bg-primary/10 hover:text-primary flex items-center gap-1"
+            className={cn('cursor-pointer transition flex items-center gap-1', showFavoritesOnly ? 'hover:bg-primary/80' : 'hover:bg-primary/10 hover:text-primary')}
             onClick={() => {
               setShowFavoritesOnly(!showFavoritesOnly);
               changePage(1, { scroll: false });
@@ -673,7 +673,7 @@ function MarketplaceExplorerContent({
               <Badge
                 key={type}
                 variant={typeFilter === type ? 'default' : 'outline'}
-                className="cursor-pointer transition hover:bg-primary/10 hover:text-primary"
+                className={cn('cursor-pointer transition', typeFilter === type ? 'hover:bg-primary/80' : 'hover:bg-primary/10 hover:text-primary')}
                 onClick={() => {
                   setTypeFilter(typeFilter === type ? 'all' : type);
                   changePage(1, { scroll: false });
@@ -708,7 +708,7 @@ function MarketplaceExplorerContent({
                     href="/marketplace/collections"
                     className="text-sm text-primary hover:underline underline-offset-4 transition"
                   >
-                    View all collections
+                    View all
                   </Link>
                 )}
               </div>
@@ -717,155 +717,152 @@ function MarketplaceExplorerContent({
               </Suspense>
             </div>
             {!isEmbed && (
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-semibold text-foreground">Browse by Author</h2>
-                  <Link
-                    href="/marketplace/authors"
-                    className="text-sm text-primary hover:underline underline-offset-4 transition"
-                  >
-                    View all authors
-                  </Link>
-                </div>
+              <div className="mt-16 flex items-center justify-between">
+                <h2 className="text-xl font-semibold text-foreground">Browse by Author</h2>
+                <Link
+                  href="/marketplace/authors"
+                  className="text-sm text-primary hover:underline underline-offset-4 transition"
+                >
+                  View all
+                </Link>
               </div>
             )}
           </>
         )}
 
-        <div className="flex flex-col gap-4">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <span className="text-sm text-muted-foreground">
-              Showing{' '}
-              <strong className="text-foreground">
-                {displayStart > 0 ? `${displayStart}-${displayEnd}` : '0'}
-              </strong>{' '}
-              of <strong className="text-foreground">{filteredItems.length}</strong> items
-            </span>
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-              <div className="flex items-center gap-1 border border-border rounded-md p-1">
-                <Button
-                  variant={viewMode === 'grid' ? 'secondary' : 'ghost'}
-                  size="sm"
-                  onClick={() => setViewMode('grid')}
-                  className="h-8 w-8 p-0"
-                  aria-label="Grid view"
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <span className="text-sm text-muted-foreground">
+            Showing{' '}
+            <strong className="text-foreground">
+              {displayStart > 0 ? `${displayStart}-${displayEnd}` : '0'}
+            </strong>{' '}
+            of <strong className="text-foreground">{filteredItems.length}</strong> items
+          </span>
+
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="flex items-center gap-1 border border-border rounded-md p-1 shrink-0">
+              <Button
+                variant={viewMode === 'grid' ? 'secondary' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('grid')}
+                className="h-8 w-8 p-0"
+                aria-label="Grid view"
+              >
+                <LayoutGrid className="h-4 w-4" />
+              </Button>
+              <Button
+                variant={viewMode === 'list' ? 'secondary' : 'ghost'}
+                size="sm"
+                onClick={() => setViewMode('list')}
+                className="h-8 w-8 p-0"
+                aria-label="List view"
+              >
+                <List className="h-4 w-4" />
+              </Button>
+            </div>
+            <div className="flex items-center gap-2">
+              <label
+                className="hidden sm:inline text-sm font-medium text-muted-foreground"
+                htmlFor="per-page"
+              >
+                Per page
+              </label>
+              <Select
+                value={String(itemsPerPage)}
+                onValueChange={(val) => {
+                  const num = parseInt(val, 10) || defaultPerPage;
+                  setItemsPerPage(num);
+                  changePage(1, { scroll: false });
+                }}
+              >
+                <SelectTrigger
+                  id="per-page"
+                  className="w-20 rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                 >
-                  <LayoutGrid className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant={viewMode === 'list' ? 'secondary' : 'ghost'}
-                  size="sm"
-                  onClick={() => setViewMode('list')}
-                  className="h-8 w-8 p-0"
-                  aria-label="List view"
-                >
-                  <List className="h-4 w-4" />
-                </Button>
-              </div>
-              <div className="flex items-center gap-2">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {[12, 24, 48].map((n) => (
+                    <SelectItem key={n} value={String(n)}>
+                      {n}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            {!isEmbed && (
+              <div className="flex flex-1 sm:flex-none items-center gap-2">
                 <label
-                  className="hidden sm:inline text-sm font-medium text-muted-foreground"
-                  htmlFor="per-page"
+                  className="hidden sm:inline text-sm font-medium text-muted-foreground shrink-0"
+                  htmlFor="type-filter"
                 >
-                  Per page
+                  Type
                 </label>
                 <Select
-                  value={String(itemsPerPage)}
+                  value={typeFilter}
                   onValueChange={(val) => {
-                    const num = parseInt(val, 10) || defaultPerPage;
-                    setItemsPerPage(num);
+                    setTypeFilter(val);
                     changePage(1, { scroll: false });
                   }}
                 >
                   <SelectTrigger
-                    id="per-page"
-                    className="w-20 rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+                    id="type-filter"
+                    className="w-full sm:w-auto rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                   >
-                    <SelectValue />
+                    <SelectValue placeholder="All" />
                   </SelectTrigger>
                   <SelectContent>
-                    {[12, 24, 48].map((n) => (
-                      <SelectItem key={n} value={String(n)}>
-                        {n}
+                    <SelectItem value="all">All</SelectItem>
+                    {availableTypes.map((type) => (
+                      <SelectItem key={type} value={type}>
+                        {getMarketplaceTypeLabel(type)}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
-              {!isEmbed && (
-                <div className="flex items-center gap-2">
-                  <label
-                    className="hidden sm:inline text-sm font-medium text-muted-foreground"
-                    htmlFor="type-filter"
-                  >
-                    Type
-                  </label>
-                  <Select
-                    value={typeFilter}
-                    onValueChange={(val) => {
-                      setTypeFilter(val);
-                      changePage(1, { scroll: false });
-                    }}
-                  >
-                    <SelectTrigger
-                      id="type-filter"
-                      className="w-32 sm:w-auto rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-                    >
-                      <SelectValue placeholder="All" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="all">All</SelectItem>
-                      {availableTypes.map((type) => (
-                        <SelectItem key={type} value={type}>
-                          {getMarketplaceTypeLabel(type)}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              )}
-              <div className="flex items-center gap-2">
-                <label
-                  className="hidden sm:inline text-sm font-medium text-muted-foreground"
-                  htmlFor="sort-by"
+            )}
+            <div className="flex flex-1 sm:flex-none items-center gap-2">
+              <label
+                className="hidden sm:inline text-sm font-medium text-muted-foreground shrink-0"
+                htmlFor="sort-by"
+              >
+                Sort
+              </label>
+              <Select
+                value={sortBy}
+                onValueChange={(val) => {
+                  setSortBy(val);
+                  changePage(1, { scroll: false });
+                }}
+              >
+                <SelectTrigger
+                  id="sort-by"
+                  className="w-full sm:w-auto rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
                 >
-                  Sort
-                </label>
-                <Select
-                  value={sortBy}
-                  onValueChange={(val) => {
-                    setSortBy(val);
-                    changePage(1, { scroll: false });
-                  }}
-                >
-                  <SelectTrigger
-                    id="sort-by"
-                    className="w-32 sm:w-auto rounded-md border border-border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
-                  >
-                    <SelectValue placeholder="Sort" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="recommended">Recommended</SelectItem>
-                    <SelectItem value="trending">Trending</SelectItem>
-                    <SelectItem value="most-downloaded">Most Downloaded</SelectItem>
-                    <SelectItem value="most-viewed">Most Viewed</SelectItem>
-                    <SelectItem value="hidden-gems">Hidden Gems</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+                  <SelectValue placeholder="Sort" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="recommended">Recommended</SelectItem>
+                  <SelectItem value="trending">Trending</SelectItem>
+                  <SelectItem value="most-downloaded">Most Downloaded</SelectItem>
+                  <SelectItem value="most-viewed">Most Viewed</SelectItem>
+                  <SelectItem value="hidden-gems">Hidden Gems</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
-          {hasActiveFilters && (
-            <Button
-              variant="outline"
-              onClick={resetFilters}
-              className="self-start rounded-md border border-border px-3 py-2 text-sm font-medium text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
-            >
-              <FunnelX />
-              Reset filters
-            </Button>
-          )}
         </div>
+        {hasActiveFilters && (
+          <Button
+            variant="outline"
+            onClick={resetFilters}
+            className="self-start rounded-md border border-border px-3 py-2 text-sm font-medium text-muted-foreground transition hover:border-primary/40 hover:text-foreground"
+          >
+            <FunnelX />
+            Reset filters
+          </Button>
+        )}
 
         <div className="space-y-4">
           {/* <div className="flex items-center justify-between text-sm text-muted-foreground">

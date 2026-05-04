@@ -192,9 +192,10 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
           size="sm"
           onClick={() => setShowSaveDialog(true)}
           className="gap-2"
+          aria-label="Save Draft"
         >
           <Save className="h-4 w-4" />
-          Save Draft
+          <span className="hidden sm:inline">Save Draft</span>
         </Button>
 
         <Button
@@ -202,9 +203,10 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
           size="sm"
           onClick={() => setShowLoadDialog(true)}
           className="gap-2"
+          aria-label="Load Draft"
         >
           <FolderOpen className="h-4 w-4" />
-          Load Draft
+          <span className="hidden sm:inline">Load Draft</span>
           {drafts.length > 0 && (
             <Badge variant="secondary" className="ml-1">
               {drafts.length}
@@ -212,9 +214,9 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
           )}
         </Button>
 
-        <Button variant="outline" size="sm" onClick={handleImportDraft} className="gap-2">
+        <Button variant="outline" size="sm" onClick={handleImportDraft} className="gap-2" aria-label="Import">
           <Upload className="h-4 w-4" />
-          Import
+          <span className="hidden sm:inline">Import</span>
         </Button>
       </div>
 

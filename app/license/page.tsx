@@ -24,14 +24,14 @@ export default function LicensePage() {
     <div className="relative min-h-[calc(100vh-80px)] overflow-hidden">
       <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[100vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.12)_0%,_transparent_60%)] blur-3xl" />
 
-      <div className="mx-auto max-w-4xl px-6 py-24 sm:py-32">
-        <header className="mb-16 text-center">
+      <div className="mx-auto max-w-4xl px-6 py-12 sm:py-24">
+        <header className="mb-10 text-center sm:mb-16">
           <div className="mb-4 flex justify-center">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-border bg-gradient-to-br from-[#FF5C25]/20 to-[#FF456E]/20">
               <Scale className="h-6 w-6 text-[#FF5C25]" />
             </div>
           </div>
-          <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+          <h1 className="text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
             License
           </h1>
           <p className="mx-auto mt-4 text-base text-muted-foreground">
@@ -55,7 +55,7 @@ export default function LicensePage() {
             }
             copyrights={
               <div className="space-y-2 rounded-lg border border-border bg-muted/30 p-4">
-                <div className="group flex items-start justify-between gap-2">
+                <div className="group flex items-center justify-between gap-2">
                   <p className="flex-1 font-mono text-sm text-muted-foreground">
                     Copyright (c) 2019-{currentYear} The Mue Authors
                   </p>
@@ -65,7 +65,7 @@ export default function LicensePage() {
                     className="opacity-0 transition-opacity group-hover:opacity-100"
                   />
                 </div>
-                <div className="group flex items-start justify-between gap-2">
+                <div className="group flex items-center justify-between gap-2">
                   <p className="flex-1 font-mono text-sm text-muted-foreground">
                     Copyright (c) 2018-2019 David Ralph
                   </p>
@@ -161,12 +161,12 @@ export default function LicensePage() {
                 href="https://discord.gg/zv8C9F8"
                 target="_blank"
                 rel="noreferrer"
-                className="text-foreground underline underline-offset-2"
+                className="text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-foreground"
               >
                 Ask us on Discord
               </Link>{' '}
               or{' '}
-              <Link href="/contact" className="text-foreground underline underline-offset-2">
+              <Link href="/contact" className="text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-foreground">
                 get in touch.
               </Link>
             </p>

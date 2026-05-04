@@ -77,7 +77,7 @@ export function BlogFilter({ initialPosts }: BlogFilterProps) {
     <div className="flex flex-col gap-10">
       <div className="flex flex-col gap-4">
         <div className="relative">
-          <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="pointer-events-none absolute left-4 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <input
             type="text"
             placeholder="Search posts..."

@@ -52,7 +52,7 @@ The online creator provides a guided 6-step wizard that makes creating add-ons e
    - **Settings**: Paste your exported settings JSON or upload a file
 6. Preview your add-on to see how it will appear in the marketplace
 7. Download the generated JSON file
-8. Test it in Mue Tab via Settings → My Add-ons → Sideload
+8. Test it in Mue Tab via Settings -> My Add-ons -> Sideload
 
 ### Tips for Creating Great Add-ons
 
@@ -154,9 +154,9 @@ If you prefer to create add-ons manually, all add-ons use the JSON format. This 
 
 1. Open Mue Tab
 2. Press F12 to open Developer Tools
-3. Go to Application → Local Storage
+3. Go to Application -> Local Storage
 4. Look for keys starting with your Mue Tab domain
-5. Or export your settings from Settings → Advanced → Export Settings
+5. Or export your settings from Settings -> Advanced -> Export Settings
 
 ### Testing Your Add-on
 
@@ -164,7 +164,7 @@ After creating your JSON file:
 
 1. Save it with a descriptive filename (e.g., `my_photo_pack.json`)
 2. Open Mue Tab
-3. Go to Settings → My Add-ons → Sideload
+3. Go to Settings -> My Add-ons -> Sideload
 4. Upload your JSON file
 5. Test that everything works correctly
 
