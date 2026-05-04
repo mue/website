@@ -107,8 +107,8 @@ export default async function MarketplaceCollectionPage({
         />
 
         <header className="overflow-hidden rounded-3xl border border-border bg-card/80 shadow-sm">
-          <div className="grid gap-8 lg:grid-cols-[2fr_3fr]">
-            <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[220px]">
+          <div className="grid grid-cols-[140px_1fr] lg:grid-cols-[2fr_3fr]">
+            <div className="relative min-h-[140px] lg:aspect-auto lg:min-h-[220px]">
               {data.img ? (
                 <Image
                   src={data.img}
@@ -124,18 +124,18 @@ export default async function MarketplaceCollectionPage({
               )}
             </div>
 
-            <div className="flex flex-col gap-5 p-8">
-              <div className="space-y-3">
+            <div className="flex flex-col gap-3 p-4 pr-5 lg:gap-5 lg:p-8">
+              <div className="space-y-1.5 lg:space-y-3">
                 <Badge variant="secondary">Collection</Badge>
-                <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+                <h1 className="text-xl font-semibold tracking-tight text-foreground lg:text-3xl lg:md:text-4xl">
                   {data.display_name}
                 </h1>
                 {data.description && (
-                  <p className="text-muted-foreground text-base md:text-lg">{data.description}</p>
+                  <p className="text-muted-foreground text-sm line-clamp-2 lg:text-base lg:line-clamp-none lg:md:text-lg">{data.description}</p>
                 )}
               </div>
 
-              <div className="mt-auto flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+              <div className="mt-auto flex flex-wrap items-center gap-2 text-xs text-muted-foreground lg:gap-4 lg:text-sm">
                 <span>
                   {hasItems
                     ? `${items.length} ${items.length === 1 ? 'item' : 'items'}`

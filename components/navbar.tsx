@@ -85,7 +85,6 @@ export default function Navbar() {
     },
   ];
 
-  const mobileLinks = [{ href: '/docs', label: 'Docs', isActive: isDocsActive }, ...navLinks];
 
   return (
     <nav className="bg-background/60 backdrop-blur-md flex w-full items-center gap-3 rounded-xl border border-foreground/20 px-4 py-3 shadow-lg sm:px-6 lg:px-12">
@@ -214,48 +213,68 @@ export default function Navbar() {
             </Button>
           </SheetTrigger>
 
-          <SheetContent side="right" className="flex flex-col gap-4">
-            <SheetHeader className="items-start">
-              <SheetTitle className="text-left text-lg">Menu</SheetTitle>
+          <SheetContent
+            side="right"
+            className="flex flex-col gap-0 p-0 [&>[data-slot='sheet-close']]:top-[10px] [&>[data-slot='sheet-close']]:right-[10px] [&>[data-slot='sheet-close']]:flex [&>[data-slot='sheet-close']]:items-center [&>[data-slot='sheet-close']]:justify-center [&>[data-slot='sheet-close']]:h-9 [&>[data-slot='sheet-close']]:w-9 [&>[data-slot='sheet-close']]:rounded-lg [&>[data-slot='sheet-close']]:border [&>[data-slot='sheet-close']]:border-foreground/20 [&>[data-slot='sheet-close']]:opacity-100 [&>[data-slot='sheet-close']_svg]:size-4"
+          >
+            <SheetHeader className="relative flex flex-row items-center border-b border-border px-4 py-3">
+              <SheetClose asChild>
+                <Link href="/" aria-label="Mue home">
+                  <Logo width={100} height={100} className="h-8 w-8" />
+                </Link>
+              </SheetClose>
+              <SheetTitle
+                className="absolute left-1/2 -translate-x-1/2 text-base font-bold"
+                style={{ fontFamily: 'var(--font-lexend-deca)' }}
+              >
+                Mue
+              </SheetTitle>
             </SheetHeader>
 
-            <div className="flex flex-col gap-4">
-              <nav className="flex flex-col gap-2 text-sm">
-                {mobileLinks.map(({ href, label, isActive }) => (
-                  <SheetClose asChild key={href}>
-                    <Link
-                      href={href}
-                      aria-current={isActive ? 'page' : undefined}
-                      className={cn(
-                        'cursor-pointer py-2 transition-colors hover:text-primary',
-                        isActive && 'text-primary font-semibold',
-                      )}
-                    >
-                      {label}
-                    </Link>
-                  </SheetClose>
-                ))}
-              </nav>
-
-              <div className="flex flex-col gap-2 mt-auto">
-                <SheetClose asChild>
-                  <Button className="w-full" size="sm" asChild>
-                    <Link href="/download">
-                      <Download className="mr-2 h-4 w-4" />
-                      Download
-                    </Link>
-                  </Button>
+            <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-3 py-3">
+              <SheetClose asChild>
+                <Link
+                  href="/docs"
+                  aria-current={isDocsActive ? 'page' : undefined}
+                  className={cn(
+                    'flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted',
+                    isDocsActive ? 'text-[#FF5C25]' : 'text-foreground/70 hover:text-foreground',
+                  )}
+                >
+                  Docs
+                </Link>
+              </SheetClose>
+              {navLinks.map(({ href, label, isActive }) => (
+                <SheetClose asChild key={href}>
+                  <Link
+                    href={href}
+                    aria-current={isActive ? 'page' : undefined}
+                    className={cn(
+                      'flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted',
+                      isActive ? 'text-[#FF5C25]' : 'text-foreground/70 hover:text-foreground',
+                    )}
+                  >
+                    {label}
+                  </Link>
                 </SheetClose>
+              ))}
+            </nav>
 
-                <SheetClose asChild>
-                  <Button className="w-full" variant="outline" size="sm" asChild>
-                    <Link href="https://github.com/mue/mue" target="_blank" rel="noreferrer">
-                      <FaGithub className="mr-2 h-4 w-4" />
-                      GitHub
-                    </Link>
-                  </Button>
-                </SheetClose>
-              </div>
+            <div className="flex flex-col gap-2 border-t border-border px-3 py-3">
+              <SheetClose asChild>
+                <Button className="w-full" size="sm" asChild>
+                  <Link href="/download">
+                    <Download className="h-4 w-4" /> Download
+                  </Link>
+                </Button>
+              </SheetClose>
+              <SheetClose asChild>
+                <Button className="w-full" variant="outline" size="sm" asChild>
+                  <Link href="https://github.com/mue/mue" target="_blank" rel="noreferrer">
+                    <FaGithub className="h-4 w-4" /> GitHub
+                  </Link>
+                </Button>
+              </SheetClose>
             </div>
           </SheetContent>
         </Sheet>
