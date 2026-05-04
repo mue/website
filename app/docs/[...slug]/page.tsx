@@ -194,38 +194,33 @@ function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
       <CodeBlockCopy />
       <article className="docs-prose" dangerouslySetInnerHTML={{ __html: doc.content }} />
 
-      <nav className="grid gap-4 border-t pt-6 md:grid-cols-2">
-        <div>
-          {previous && (
-            <Link
-              href={previous.href}
-              className="group flex flex-col gap-1 rounded-xl border bg-card/70 p-4 transition hover:border-primary/40"
-            >
-              <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                <ChevronLeft className="size-4" /> Previous
-              </span>
-              <span className="font-medium text-foreground group-hover:text-primary">
-                {previous.title}
-              </span>
-            </Link>
-          )}
-        </div>
-
-        <div>
-          {next && (
-            <Link
-              href={next.href}
-              className="group flex flex-col gap-1 rounded-xl border bg-card/70 p-4 transition hover:border-primary/40 items-end"
-            >
-              <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-                Next <ChevronRight className="size-4" />
-              </span>
-              <span className="font-medium text-foreground group-hover:text-primary">
-                {next.title}
-              </span>
-            </Link>
-          )}
-        </div>
+      <nav className="flex gap-3 border-t pt-6">
+        {previous && (
+          <Link
+            href={previous.href}
+            className="group flex flex-1 flex-col gap-1 rounded-xl border bg-card/70 p-4 transition hover:border-primary/40"
+          >
+            <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              <ChevronLeft className="size-4" /> Previous
+            </span>
+            <span className="font-medium text-foreground group-hover:text-primary">
+              {previous.title}
+            </span>
+          </Link>
+        )}
+        {next && (
+          <Link
+            href={next.href}
+            className="group flex flex-1 flex-col items-end gap-1 rounded-xl border bg-card/70 p-4 transition hover:border-primary/40"
+          >
+            <span className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              Next <ChevronRight className="size-4" />
+            </span>
+            <span className="font-medium text-foreground group-hover:text-primary">
+              {next.title}
+            </span>
+          </Link>
+        )}
       </nav>
 
       <div className="rounded-2xl border bg-card/70 p-6 text-center shadow-sm">

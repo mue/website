@@ -112,16 +112,16 @@ export default async function DocsIndexPage() {
           </p>
         </header>
 
-        <div className="grid auto-rows-fr gap-6 lg:grid-cols-2">
+        <div className="grid gap-4 lg:auto-rows-fr lg:grid-cols-2 lg:gap-6">
           {/* large cards */}
           {tree
             .filter((section) => section.children && section.children.length > 0)
             .map((section) => (
               <article
                 key={section.slug.join('/')}
-                className="flex flex-col rounded-lg border bg-card/70 p-3 shadow-sm transition hover:border-primary/30 lg:rounded-2xl lg:p-6 lg:row-span-2"
+                className="flex flex-col rounded-lg border bg-card/70 p-4 shadow-sm transition hover:border-primary/30 lg:rounded-2xl lg:p-6 lg:row-span-2"
               >
-                <div className="flex items-start justify-between gap-3">
+                <div className="flex items-center justify-between gap-3">
                   <div>
                     <h3 className="text-base font-semibold lg:text-lg">{section.title}</h3>
                     <p className="mt-0.5 text-xs text-muted-foreground lg:mt-1 lg:text-sm">

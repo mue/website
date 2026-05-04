@@ -54,11 +54,14 @@ export function DocsShell({ toc = [], breadcrumb, children, header }: DocsShellP
                   <span className="ml-2 hidden sm:inline">Contents</span>
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-80">
-                <SheetHeader>
-                  <SheetTitle>Table of Contents</SheetTitle>
+              <SheetContent
+                side="right"
+                className="flex w-80 flex-col gap-0 p-0 [&>[data-slot='sheet-close']]:top-[10px] [&>[data-slot='sheet-close']]:right-[10px] [&>[data-slot='sheet-close']]:flex [&>[data-slot='sheet-close']]:h-9 [&>[data-slot='sheet-close']]:w-9 [&>[data-slot='sheet-close']]:items-center [&>[data-slot='sheet-close']]:justify-center [&>[data-slot='sheet-close']]:rounded-lg [&>[data-slot='sheet-close']]:border [&>[data-slot='sheet-close']]:border-foreground/20 [&>[data-slot='sheet-close']]:opacity-100 [&>[data-slot='sheet-close']_svg]:size-4"
+              >
+                <SheetHeader className="flex h-14 shrink-0 flex-row items-center border-b border-border px-4">
+                  <SheetTitle className="text-sm font-semibold">Table of Contents</SheetTitle>
                 </SheetHeader>
-                <div className="mt-6">
+                <div className="flex-1 overflow-y-auto px-4 py-4">
                   <DocsToc toc={toc} />
                 </div>
               </SheetContent>
