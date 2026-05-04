@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     'mue',
     'new tab',
     'browser extension',
-    'customizable',
+    'customisable',
     'productivity',
     'chrome',
     'firefox',

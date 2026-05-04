@@ -74,7 +74,7 @@ The changelog dates use the DD-MM-YYY format.
 #### Added
 
 - Full umami implementation (apart from location and resolution, this is not planned)
-- Log unauthorized errors to umami
+- Log unauthorised errors to umami
 
 ### Changed
 

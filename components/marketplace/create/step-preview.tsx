@@ -211,7 +211,7 @@ export function StepPreview({
           <div className="rounded-lg border bg-card p-4">
             <h4 className="mb-3 font-semibold">Settings Configuration</h4>
             <p className="text-sm text-muted-foreground">
-              Contains {getContentCount()} customized settings that will be applied to Mue Tab
+              Contains {getContentCount()} customised settings that will be applied to Mue Tab
             </p>
           </div>
         )}

@@ -256,12 +256,12 @@ export const templates: ContentTemplate[] = [
   {
     id: 'productivity-preset',
     name: 'Productivity Preset',
-    description: 'Settings optimized for focus and productivity',
+    description: 'Settings optimised for focus and productivity',
     type: 'settings',
     icon: '⚡',
     metadata: {
       name: 'Productivity Preset',
-      description: 'Optimized settings for maximum focus and productivity',
+      description: 'Optimised settings for maximum focus and productivity',
       version: '1.0.0',
       author: 'Your Name',
       icon_url: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b',

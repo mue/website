@@ -56,12 +56,12 @@ export default function DMCAPage() {
             <p className="mt-4 font-semibold text-foreground">Your DMCA notice must include:</p>
             <BulletList
               items={[
-                'A physical or electronic signature of the copyright owner or a person authorized to act on their behalf.',
+                'A physical or electronic signature of the copyright owner or a person authorised to act on their behalf.',
                 'Identification of the copyrighted work claimed to have been infringed.',
                 'Identification of the material that is claimed to be infringing and information reasonably sufficient to permit us to locate the material.',
                 'Your contact information, including your address, telephone number, and an email address.',
-                'A statement that you have a good faith belief that use of the material is not authorized by the copyright owner, its agent, or the law.',
-                'A statement that the information in the notification is accurate, and, under penalty of perjury, that you are authorized to act on behalf of the copyright owner.',
+                'A statement that you have a good faith belief that use of the material is not authorised by the copyright owner, its agent, or the law.',
+                'A statement that the information in the notification is accurate, and, under penalty of perjury, that you are authorised to act on behalf of the copyright owner.',
               ]}
             />
           </ContentSection>
@@ -92,7 +92,7 @@ export default function DMCAPage() {
           <ContentSection title="Counter-Notification">
             <p>
               If you believe that your content that was removed is not infringing, or that you have
-              authorization from the copyright owner, you may send a counter-notice containing the
+              authorisation from the copyright owner, you may send a counter-notice containing the
               following to our copyright agent:
             </p>
             <BulletList

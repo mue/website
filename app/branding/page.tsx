@@ -9,10 +9,10 @@ import { BrandAssetCard } from '@/components/branding/brand-asset-card';
 
 export const metadata: Metadata = {
   title: 'Branding',
-  description: 'Download Mue logos, learn about our brand colors, and discover usage guidelines.',
+  description: 'Download Mue logos, learn about our brand colours, and discover usage guidelines.',
   openGraph: {
     title: 'Branding | Mue',
-    description: 'Download Mue logos, learn about our brand colors, and discover usage guidelines.',
+    description: 'Download Mue logos, learn about our brand colours, and discover usage guidelines.',
   },
 };
 
@@ -20,7 +20,7 @@ const brandColors = [
   {
     name: 'Primary Orange',
     hex: '#FF5C25',
-    description: 'Main brand color for primary actions and highlights',
+    description: 'Main brand colour for primary actions and highlights',
   },
   {
     name: 'Deep Red',
@@ -35,12 +35,12 @@ const brandColors = [
   {
     name: 'Light Coral',
     hex: '#F18D91',
-    description: 'Secondary color for lighter backgrounds',
+    description: 'Secondary colour for lighter backgrounds',
   },
   {
     name: 'Warm Beige',
     hex: '#FBD3C6',
-    description: 'Tertiary color for subtle backgrounds',
+    description: 'Tertiary colour for subtle backgrounds',
   },
 ];
 
@@ -60,12 +60,12 @@ const logoVariants = [
 const dos = [
   'Use the logo with adequate spacing around it',
   "Maintain the logo's aspect ratio when scaling",
-  'Use the provided color palette consistently',
+  'Use the provided colour palette consistently',
   'Credit Mue when featuring our brand',
 ];
 
 const donts = [
-  'Modify the logo colors or gradient',
+  'Modify the logo colours or gradient',
   'Distort, rotate, or alter the logo in any way',
   'Use the logo on busy or conflicting backgrounds',
   'Recreate or modify the logo yourself',
@@ -97,7 +97,7 @@ export default function BrandingPage() {
           <section>
             <h2 className="mb-2 text-2xl font-semibold text-foreground">Logo</h2>
             <p className="mb-8 text-muted-foreground">
-              Our logo represents Mue&apos;s core philosophy of customization. The layered design
+              Our logo represents Mue&apos;s core philosophy of customisation. The layered design
               symbolizes multiple elements coming together to create your perfect new tab
               experience.
             </p>
@@ -117,9 +117,9 @@ export default function BrandingPage() {
           <div className="h-px bg-border" />
 
           <section>
-            <h2 className="mb-2 text-2xl font-semibold text-foreground">Color Palette</h2>
+            <h2 className="mb-2 text-2xl font-semibold text-foreground">Colour Palette</h2>
             <p className="mb-8 text-muted-foreground">
-              Our vibrant palette is inspired by sunrises and new beginnings. Use these colors
+              Our vibrant palette is inspired by sunrises and new beginnings. Use these colours
               consistently across all Mue-related materials.
             </p>
 

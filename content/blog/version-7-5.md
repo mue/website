@@ -40,7 +40,7 @@ smoother experience for users. We're hoping that this sets the stage for more fr
 - **Enhanced Quote component** with better font scaling and width management
 - **Refactored Quick Links** and Greeting components for better performance
 - **Updated Color Picker** with improved styles and usability
-- **Optimized event handling** and state management throughout the app
+- **Optimised event handling** and state management throughout the app
 - **Updated Documentation** and README with new web store badges
 
 **Fixed**

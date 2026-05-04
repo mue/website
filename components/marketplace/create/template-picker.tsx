@@ -37,7 +37,7 @@ export function TemplatePicker({
             Choose a Template
           </DialogTitle>
           <DialogDescription>
-            Start with a pre-made template and customize it to your needs
+            Start with a pre-made template and customise it to your needs
           </DialogDescription>
         </DialogHeader>
 

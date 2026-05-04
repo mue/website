@@ -12,11 +12,11 @@ import { getShowcaseItems } from '@/lib/showcase';
 export const metadata: Metadata = {
   title: 'Community Showcase',
   description:
-    'Discover beautiful Mue setups from our community. Get inspired by creative customizations and share your own.',
+    'Discover beautiful Mue setups from our community. Get inspired by creative customisations and share your own.',
   openGraph: {
     title: 'Community Showcase | Mue',
     description:
-      'Discover beautiful Mue setups from our community. Get inspired by creative customizations and share your own.',
+      'Discover beautiful Mue setups from our community. Get inspired by creative customisations and share your own.',
   },
 };
 
@@ -37,7 +37,7 @@ export default async function ShowcasePage() {
 
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
             Explore creative setups from our community. Each one is unique, personalized, and built
-            with Mue&apos;s powerful customization features.
+            with Mue&apos;s powerful customisation features.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
