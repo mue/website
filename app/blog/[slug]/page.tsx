@@ -212,7 +212,7 @@ export default async function BlogPostPage({ params, searchParams }: BlogPostPro
           ]}
         />
 
-        <div className="docs-prose" dangerouslySetInnerHTML={{ __html: post.content }} />
+        <div className="blog-prose" dangerouslySetInnerHTML={{ __html: post.content }} />
         <BlogContentLightbox contentHtml={post.content} />
 
         <nav className="mt-16 grid gap-4 border-t pt-8 md:grid-cols-2">

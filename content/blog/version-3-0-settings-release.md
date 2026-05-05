@@ -3,7 +3,7 @@ title: 'Version 3.0 - Settings release'
 date: '2020-07-20'
 author: 'David Ralph'
 description: 'Introducing settings to Mue, allowing for lots of customisation to make Mue yours.'
-image: 'https://res.cloudinary.com/mue/image/upload/blog/version-3-0-settings-release.webp'
+image: '/blog/version-3-0-settings-release.webp'
 tags: ['release', 'update']
 ---
 

@@ -302,4 +302,86 @@
   .docs-prose td {
     @apply border-t px-4 py-3 text-muted-foreground;
   }
+
+  .blog-prose {
+    @apply max-w-none text-base leading-7 text-foreground;
+  }
+
+  .blog-prose > *:first-child {
+    @apply mt-0;
+  }
+
+  .blog-prose h2 {
+    @apply mt-12 text-2xl font-semibold tracking-tight text-foreground;
+  }
+
+  .blog-prose h3 {
+    @apply mt-8 text-xl font-semibold tracking-tight text-foreground;
+  }
+
+  .blog-prose h4 {
+    @apply mt-6 text-lg font-semibold text-foreground;
+  }
+
+  .blog-prose strong,
+  .blog-prose b {
+    @apply font-semibold text-foreground;
+  }
+
+  .blog-prose p {
+    @apply mt-4 text-muted-foreground;
+  }
+
+  .blog-prose a {
+    @apply font-medium text-primary underline-offset-4 hover:underline;
+  }
+
+  .blog-prose h2 a,
+  .blog-prose h3 a,
+  .blog-prose h4 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .blog-prose ul {
+    @apply mt-4 space-y-2 pl-6 marker:text-primary;
+    list-style-type: disc;
+  }
+
+  .blog-prose ol {
+    @apply mt-4 space-y-2 pl-6 marker:text-primary;
+    list-style-type: decimal;
+  }
+
+  .blog-prose li {
+    @apply text-muted-foreground;
+  }
+
+  .blog-prose blockquote {
+    @apply mt-6 border-l-4 border-primary/40 bg-primary/5 px-6 py-4 text-base italic text-muted-foreground;
+  }
+
+  .blog-prose pre {
+    @apply mt-6 overflow-x-auto rounded-xl border bg-muted/40 p-4 text-sm;
+  }
+
+  .blog-prose code {
+    @apply rounded bg-muted px-1.5 py-0.5 text-sm font-semibold text-primary;
+  }
+
+  .blog-prose pre code {
+    @apply flex-1 overflow-x-auto bg-transparent p-0 text-muted-foreground;
+  }
+
+  .blog-prose table {
+    @apply mt-6 w-full overflow-hidden rounded-xl border text-sm;
+  }
+
+  .blog-prose th {
+    @apply bg-muted/50 px-4 py-3 text-left font-semibold;
+  }
+
+  .blog-prose td {
+    @apply border-t px-4 py-3 text-muted-foreground;
+  }
 }

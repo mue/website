@@ -18,4 +18,4 @@ Welcome to the Mue blog. Here we will share updates on new features, interesting
 
 You can enjoy this photo of a beautiful penguin for now.
 
-> Photo by Danielle Barnes / Unsplash
+*Photo by Danielle Barnes / Unsplash*

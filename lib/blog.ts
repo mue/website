@@ -54,12 +54,7 @@ function createProcessor() {
     .use(rehypeAutolinkHeadings, {
       behavior: 'wrap',
       properties: {
-        className: [
-          'no-underline',
-          'font-medium',
-          'text-muted-foreground',
-          'hover:text-foreground',
-        ],
+        className: ['no-underline'],
       },
     })
     .use(rehypeRaw)
