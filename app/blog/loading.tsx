@@ -7,7 +7,6 @@ export default function BlogLoading() {
 
       <div className="mx-auto max-w-6xl px-6 py-24 sm:py-32">
         <header className="mb-16 text-center">
-          <Skeleton className="mx-auto mb-6 h-8 w-64" />
           <Skeleton className="mx-auto mb-4 h-12 w-full max-w-3xl sm:h-16" />
           <Skeleton className="mx-auto h-6 w-full max-w-2xl" />
         </header>

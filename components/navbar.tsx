@@ -199,7 +199,7 @@ export default function Navbar() {
       </div>
 
       <div className="flex flex-1 items-center justify-end gap-2">
-        <Button variant="default" className="hidden sm:inline-flex" asChild>
+        <Button variant="default" className="hidden lg:inline-flex" asChild>
           <Link href="/download">
             <Download className="mr-2 h-4 w-4" /> Download
           </Link>
