@@ -42,6 +42,14 @@ import { ProductJsonLd, BreadcrumbJsonLd } from '@/components/json-ld';
 
 export const revalidate = 60; // Revalidate every minute (ISR)
 
+const PROVIDER_NAMES: Record<string, string> = {
+  mue: 'MUE',
+  unsplash: 'Unsplash',
+  pexels: 'Pexels',
+  pixabay: 'Pixabay',
+  flickr: 'Flickr',
+};
+
 type MarketplaceItemPageProps = {
   params: Promise<{
     category: string;
@@ -292,7 +300,7 @@ export default async function MarketplaceItemPage({
             <AlertTitle>API-Powered Photo Pack</AlertTitle>
             <AlertDescription>
               This pack dynamically fetches fresh photos from{' '}
-              {data.api_provider === 'mue' ? 'MUE' : 'Unsplash'} API.
+              {PROVIDER_NAMES[data.api_provider] ?? data.api_provider} API.
               {data.requires_api_key && (
                 <>
                   {' '}
@@ -625,9 +633,22 @@ export default async function MarketplaceItemPage({
                 )}
 
                 {/* No Content Available */}
-                {((isPhotoPack && (!data.photos || data.photos.length === 0)) ||
-                  (isQuotePack && (!data.quotes || data.quotes.length === 0)) ||
-                  (isPresetSettings && presetSettings.length === 0)) && <NoContentEmptyState />}
+                {isPhotoPack && (!data.photos || data.photos.length === 0) && (
+                  data.api_enabled ? (
+                    <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
+                      <Images className="h-10 w-10 mb-3 opacity-40" />
+                      <p className="text-sm">
+                        Photos are fetched live from the{' '}
+                        {PROVIDER_NAMES[data.api_provider] ?? data.api_provider} API and are not
+                        previewed here.
+                      </p>
+                    </div>
+                  ) : (
+                    <NoContentEmptyState />
+                  )
+                )}
+                {(isQuotePack && (!data.quotes || data.quotes.length === 0)) && <NoContentEmptyState />}
+                {(isPresetSettings && presetSettings.length === 0) && <NoContentEmptyState />}
               </TabsContent>
             </Tabs>
           </main>
