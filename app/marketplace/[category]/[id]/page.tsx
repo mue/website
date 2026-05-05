@@ -300,7 +300,7 @@ export default async function MarketplaceItemPage({
             <AlertTitle>API-Powered Photo Pack</AlertTitle>
             <AlertDescription>
               This pack dynamically fetches fresh photos from{' '}
-              {PROVIDER_NAMES[data.api_provider] ?? data.api_provider} API.
+              {(data.api_provider && PROVIDER_NAMES[data.api_provider]) ?? data.api_provider} API.
               {data.requires_api_key && (
                 <>
                   {' '}
@@ -639,7 +639,7 @@ export default async function MarketplaceItemPage({
                       <Images className="h-10 w-10 mb-3 opacity-40" />
                       <p className="text-sm">
                         Photos are fetched live from the{' '}
-                        {PROVIDER_NAMES[data.api_provider] ?? data.api_provider} API and are not
+                        {(data.api_provider && PROVIDER_NAMES[data.api_provider]) ?? data.api_provider} API and are not
                         previewed here.
                       </p>
                     </div>
