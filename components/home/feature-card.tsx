@@ -41,7 +41,7 @@ export function FeatureCard({ index, title, description, bullets }: FeatureCardP
         <img
           src={imageSrc}
           alt={title}
-          className="object-contain h-full w-full"
+          className="object-cover h-full w-full"
           loading="lazy"
         />
       </div>
