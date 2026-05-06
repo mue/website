@@ -23,6 +23,8 @@ type DocPageProps = {
   params: Promise<DocPageParams>;
 };
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const { docsMeta, tree } = await getDocsNavigation();
 
