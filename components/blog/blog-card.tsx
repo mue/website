@@ -102,19 +102,20 @@ export function BlogCard({ post, sizes, className }: BlogCardProps) {
           </p>
         )}
 
-        {frontmatter.tags && frontmatter.tags.length > 0 && (
-          <div className="mb-4 flex flex-wrap gap-2" itemProp="keywords">
-            {frontmatter.tags.slice(0, 3).map((tag) => (
-              <Badge key={tag} variant="secondary" className="rounded-full text-xs">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        )}
-
-        <div className="mt-auto flex justify-end pt-2">
+        <div className="mt-auto flex items-center justify-between pt-2">
+          {frontmatter.tags && frontmatter.tags.length > 0 ? (
+            <div className="flex flex-wrap gap-2" itemProp="keywords">
+              {frontmatter.tags.slice(0, 3).map((tag) => (
+                <Badge key={tag} variant="secondary" className="rounded-full text-xs">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          ) : (
+            <span />
+          )}
           <ArrowRight
-            className="h-4 w-4 text-muted-foreground transition-colors group-hover:text-primary group-focus-within:text-primary"
+            className="h-4 w-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary group-focus-within:text-primary"
             aria-hidden
           />
         </div>

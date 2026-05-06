@@ -1,8 +1,7 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
 
-import { Sparkles, Upload } from 'lucide-react';
-import { FaDiscord } from 'react-icons/fa';
+import { Upload } from 'lucide-react';
 
 import { ShowcaseGallery } from '@/components/showcase/showcase-gallery';
 import { Button } from '@/components/ui/button';
@@ -36,17 +35,11 @@ export default async function ShowcasePage() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            Explore creative setups from our community. Each one is unique, personalized, and built
-            with Mue&apos;s powerful customisation features.
+            Explore creative setups from our users. Each tab is a unique expression of how
+            Mue can be customised to fit different aesthetics and workflows.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
-            <Button asChild size="lg" variant="outline">
-              <Link href="https://discord.gg/zv8C9F8" target="_blank" rel="noreferrer">
-                <FaDiscord className="mr-2 h-4 w-4" />
-                Join Discord
-              </Link>
-            </Button>
             <Button asChild size="lg" variant="outline">
               <Link href="https://discord.gg/zv8C9F8" target="_blank" rel="noreferrer">
                 <Upload className="mr-2 h-4 w-4" />
@@ -56,39 +49,14 @@ export default async function ShowcasePage() {
           </div>
         </header>
 
-        <div className="mb-12 rounded-2xl border border-border bg-muted/50 p-6 text-center">
-          <p className="text-sm text-muted-foreground">
-            <span className="font-semibold text-foreground">Want to be featured?</span> Share your
-            Mue setup in our{' '}
-            <Link
-              href="https://discord.gg/zv8C9F8"
-              target="_blank"
-              rel="noreferrer"
-              className="text-primary underline-offset-4 hover:underline"
-            >
-              Discord community
-            </Link>{' '}
-            and it might appear here!
-          </p>
-        </div>
-
-        {items.length > 0 ? (
-          <ShowcaseGallery items={items} />
-        ) : (
-          <div className="rounded-3xl border border-dashed border-border bg-card/50 p-16 text-center">
-            <Sparkles className="mx-auto h-12 w-12 text-muted-foreground/50" />
-            <p className="mt-4 text-sm text-muted-foreground">
-              No showcase items yet. Be the first to share your setup!
-            </p>
-          </div>
-        )}
+        <ShowcaseGallery items={items} />
 
         <div className="mt-16 rounded-2xl border border-border bg-muted/30 px-8 py-14 text-center">
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-            Got inspired?
+            Feel inspired?
           </h2>
           <p className="mx-auto mt-4 max-w-l text-base text-muted-foreground">
-            Download Mue and create your own personalized new tab experience.
+            Download Mue and create your own personalised new tab experience.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3">

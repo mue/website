@@ -16,8 +16,13 @@ export const metadata: Metadata = {
 };
 
 
-export default async function BlogPage() {
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ filter?: string }>;
+}) {
   const posts = await getAllBlogPosts();
+  const { filter } = await searchParams;
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -30,12 +35,11 @@ export default async function BlogPage() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            Product updates, technical deep-dives, and thoughts on building mindful browser
-            experiences.
+            Release changelogs, feature explanations and announcements for the tab.
           </p>
         </header>
 
-        <BlogFilter initialPosts={posts} />
+        <BlogFilter initialPosts={posts} initialFilter={filter} />
       </div>
     </div>
   );

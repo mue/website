@@ -15,12 +15,11 @@ export default function NotFound() {
 
       <div className="relative mx-auto flex w-full max-w-2xl flex-col items-center gap-6 text-center">
         <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-          Lost in the flow
+          Page not found
         </h1>
 
         <p className="max-w-md text-pretty text-base text-muted-foreground">
-          This page has either moved or doesn&apos;t exist. Let&apos;s get you back somewhere
-          useful.
+          The page you are looking for does not exist. Double-check the URL or return to the homepage to explore Mue.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3">

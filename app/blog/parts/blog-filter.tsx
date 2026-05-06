@@ -31,6 +31,7 @@ interface BlogPost {
 
 interface BlogFilterProps {
   initialPosts: BlogPost[];
+  initialFilter?: string;
 }
 
 const FILTER_TAGS = [
@@ -44,8 +45,9 @@ const FILTER_TAGS = [
   { label: 'Website', value: 'website' },
 ];
 
-export function BlogFilter({ initialPosts }: BlogFilterProps) {
-  const [filter, setFilter] = useState<string>('all');
+export function BlogFilter({ initialPosts, initialFilter }: BlogFilterProps) {
+  const validFilter = FILTER_TAGS.some((t) => t.value === initialFilter) ? initialFilter! : 'all';
+  const [filter, setFilter] = useState<string>(validFilter);
   const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
   const [searchQuery, setSearchQuery] = useState<string>('');
 
@@ -98,7 +100,7 @@ export function BlogFilter({ initialPosts }: BlogFilterProps) {
                   {...(active ? { 'aria-pressed': 'true' } : { 'aria-pressed': 'false' })}
                   onClick={() => setFilter(tag.value)}
                   className={cn(
-                    'cursor-pointer rounded-full border px-4 py-1.5 text-xs font-semibold tracking-wide transition focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-0',
+                    'cursor-pointer rounded-full border px-4 py-1.5 text-xs tracking-wide transition focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-0',
                     active
                       ? 'bg-primary text-primary-foreground border-primary'
                       : 'bg-background/40 border-border hover:border-primary/40 text-muted-foreground hover:text-foreground',
@@ -116,12 +118,12 @@ export function BlogFilter({ initialPosts }: BlogFilterProps) {
             </span>
 
             <Select value={sortOrder} onValueChange={(v) => setSortOrder(v as 'newest' | 'oldest')}>
-              <SelectTrigger size="sm" className="min-w-[9rem]">
+              <SelectTrigger size="sm" className="min-w-[7rem]">
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="newest">Newest first</SelectItem>
-                <SelectItem value="oldest">Oldest first</SelectItem>
+                <SelectItem value="newest">Newest</SelectItem>
+                <SelectItem value="oldest">Oldest</SelectItem>
               </SelectContent>
             </Select>
           </div>

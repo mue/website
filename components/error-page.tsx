@@ -26,7 +26,7 @@ export function ErrorPage({ error, reset }: ErrorPageProps) {
         </h1>
 
         <p className="max-w-md text-pretty text-base text-muted-foreground">
-          We hit an unexpected error. Your data is safe — try refreshing or head back home.
+          We will sort it! In the meantime, you can try refreshing the page to see if that helps.
         </p>
 
         {process.env.NODE_ENV === 'development' && (

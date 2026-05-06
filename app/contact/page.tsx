@@ -21,15 +21,15 @@ const contactMethods = [
     icon: MessageSquare,
     title: 'Discord Server',
     description: 'Real-time support and community discussions with the Mue team.',
-    badge: 'Fastest response',
+    handle: 'discord.gg/zv8C9F8',
     external: true,
   },
   {
     href: 'https://github.com/mue/mue/issues',
     icon: FaGithub,
     title: 'GitHub Issues',
-    description: 'Report bugs, request features, or browse what others have reported.',
-    badge: 'Bugs & features',
+    description: 'Report bugs, request features, or see what others have reported.',
+    handle: 'github.com/mue',
     external: true,
   },
   {
@@ -38,16 +38,14 @@ const contactMethods = [
     title: 'Email',
     description: 'General inquiries, partnerships, or security issues.',
     handle: 'hello@muetab.com',
-    badge: 'General & security',
     external: false,
   },
   {
     href: 'https://x.com/getmue',
     icon: FaXTwitter,
-    title: 'X (Twitter)',
-    description: 'Follow us for updates, announcements, and news about Mue.',
+    title: 'X',
+    description: 'Updates, tips, and news about Mue.',
     handle: '@getmue',
-    badge: 'Stay updated',
     external: true,
   },
 ];
@@ -63,8 +61,7 @@ export default function ContactPage() {
             Get in Touch with Us
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            Whether you have questions, feedback, or need support, we're here to help. Reach out
-            through any of the channels below, and we'll get back to you as soon as possible.
+            Need support? Have feedback or suggestions? We&apos;d love to hear from you!
           </p>
         </header>
 
@@ -100,7 +97,16 @@ export default function ContactPage() {
               to see if your problem has been reported.
             </p>
             <p className="text-sm leading-relaxed text-muted-foreground sm:border-l sm:border-border sm:pl-8">
-              Our Discord community can usually help faster than email.
+              Our{' '}
+              <a
+                href="https://discord.gg/zv8C9F8"
+                target="_blank"
+                rel="noreferrer"
+                className="text-foreground no-underline hover:underline underline-offset-2"
+              >
+                Discord community
+              </a>{' '}
+              can usually help faster than email.
             </p>
           </div>
         </div>

@@ -30,15 +30,19 @@ export function ContactCard({
       <div className="mt-4">
         <h3 className="text-lg font-semibold text-foreground">{title}</h3>
         <p className="mt-1.5 text-sm text-muted-foreground">{description}</p>
-        {handle && <p className="mt-3 font-mono text-sm text-foreground/70">{handle}</p>}
       </div>
 
       <div className="mt-auto flex items-center justify-between pt-6">
-        {badge && (
-          <span className="rounded-full border border-border bg-muted/50 px-2.5 py-1 text-xs text-muted-foreground">
-            {badge}
-          </span>
-        )}
+        <div className="flex flex-col gap-1">
+          {handle && (
+            <p className="font-mono text-sm text-foreground/70">{handle}</p>
+          )}
+          {badge && (
+            <span className="rounded-full border border-border bg-muted/50 px-2.5 py-1 text-xs text-muted-foreground">
+              {badge}
+            </span>
+          )}
+        </div>
         <ArrowUpRight className="ml-auto h-4 w-4 text-muted-foreground/40 transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-[#FF5C25]" />
       </div>
     </div>

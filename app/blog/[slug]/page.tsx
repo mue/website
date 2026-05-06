@@ -112,16 +112,6 @@ export default async function BlogPostPage({ params, searchParams }: BlogPostPro
       )}
 
       <article className="mx-auto max-w-4xl px-6 py-16 sm:py-24">
-        {!isEmbed && (
-          <Link
-            href="/blog"
-            className={cn(buttonVariants({ variant: 'ghost', size: 'sm' }), 'mb-8 gap-2')}
-          >
-            <ChevronLeft className="h-4 w-4" />
-            Back to blog
-          </Link>
-        )}
-
         <header className="mb-12">
           {!isEmbed &&
             (post.frontmatter.image ? (
@@ -144,9 +134,11 @@ export default async function BlogPostPage({ params, searchParams }: BlogPostPro
             {post.frontmatter.tags && post.frontmatter.tags.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {post.frontmatter.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="rounded-full">
-                    {tag}
-                  </Badge>
+                  <Link key={tag} href={`/blog?filter=${tag.toLowerCase()}`}>
+                    <Badge variant="secondary" className="rounded-full cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
+                      {tag}
+                    </Badge>
+                  </Link>
                 ))}
               </div>
             )}
