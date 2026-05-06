@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipProvider } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 
 interface CopyButtonProps {
@@ -33,24 +34,27 @@ export function CopyButton({
   };
 
   return (
-    <Button
-      variant={variant}
-      size={size}
-      onClick={handleCopy}
-      className={cn('transition-all', className)}
-      title={copied ? 'Copied!' : 'Copy to clipboard'}
-    >
-      {copied ? (
-        <>
-          <Check className="h-4 w-4" />
-          {showText && <span className="ml-2">Copied!</span>}
-        </>
-      ) : (
-        <>
-          <Copy className="h-4 w-4" />
-          {showText && <span className="ml-2">Copy</span>}
-        </>
-      )}
-    </Button>
+    <TooltipProvider delayDuration={300}>
+      <Tooltip content={copied ? 'Copied!' : 'Copy to clipboard'}>
+        <Button
+          variant={variant}
+          size={size}
+          onClick={handleCopy}
+          className={cn('transition-all', className)}
+        >
+          {copied ? (
+            <>
+              <Check className="h-4 w-4" />
+              {showText && <span className="ml-2">Copied!</span>}
+            </>
+          ) : (
+            <>
+              <Copy className="h-4 w-4" />
+              {showText && <span className="ml-2">Copy</span>}
+            </>
+          )}
+        </Button>
+      </Tooltip>
+    </TooltipProvider>
   );
 }

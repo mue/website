@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowLeft, ExternalLink, Lock, Monitor } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipProvider } from '@/components/ui/tooltip';
 
 function isMobileDevice(): boolean {
   if (typeof window === 'undefined') return false;
@@ -27,17 +28,20 @@ export default function DemoPage() {
         <div className="overflow-hidden rounded-2xl border border-border shadow-sm dark:border-white/10 dark:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.6)] dark:ring-1 dark:ring-white/[0.06]">
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 border-b border-border bg-muted/40 px-4 py-2.5 dark:border-white/[0.08] dark:bg-white/[0.04]">
             <div className="flex items-center gap-1.5">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-7 w-7 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground dark:text-white/40 dark:hover:bg-white/10 dark:hover:text-white/70"
-                asChild
-              >
-                <Link href="/" aria-label="Go back to home">
-                  <ArrowLeft className="h-3.5 w-3.5" />
-                </Link>
-              </Button>
-              <span className="hidden sm:inline text-xs font-medium text-muted-foreground dark:text-white/40">Try Mue</span>
+              <TooltipProvider delayDuration={300}>
+                <Tooltip content="Go back to home">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground dark:text-white/40 dark:hover:bg-white/10 dark:hover:text-white/70"
+                    asChild
+                  >
+                    <Link href="/" aria-label="Go back to home">
+                      <ArrowLeft className="h-3.5 w-3.5" />
+                    </Link>
+                  </Button>
+                </Tooltip>
+              </TooltipProvider>
             </div>
 
             <div className="flex items-center gap-1.5 rounded-full border border-border bg-background px-4 py-1.5 text-xs text-muted-foreground dark:border-white/[0.08] dark:bg-white/[0.06] dark:text-white/50">
@@ -46,16 +50,20 @@ export default function DemoPage() {
             </div>
 
             <div className="flex justify-end">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-7 w-7 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground dark:text-white/40 dark:hover:bg-white/10 dark:hover:text-white/70"
-                asChild
-              >
-                <a href="https://demo.muetab.com?nointro=true" target="_blank" rel="noreferrer" aria-label="Open demo in new tab">
-                  <ExternalLink className="h-3.5 w-3.5" />
-                </a>
-              </Button>
+              <TooltipProvider delayDuration={300}>
+                <Tooltip content="Open in new tab">
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-7 w-7 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground dark:text-white/40 dark:hover:bg-white/10 dark:hover:text-white/70"
+                    asChild
+                  >
+                    <a href="https://demo.muetab.com?nointro=true" target="_blank" rel="noreferrer" aria-label="Open demo in new tab">
+                      <ExternalLink className="h-3.5 w-3.5" />
+                    </a>
+                  </Button>
+                </Tooltip>
+              </TooltipProvider>
             </div>
           </div>
 
@@ -93,7 +101,7 @@ export default function DemoPage() {
               Ready to make Mue your daily companion?
             </h2>
             <p className="mt-0.5 text-sm text-muted-foreground">
-              Install Mue as your new tab page and enjoy a mindful browsing experience every day.
+              Install Mue as your new tab page and enjoy a unique browsing experience each day.
             </p>
           </div>
           <div className="flex shrink-0 flex-wrap justify-center gap-3 sm:justify-start">

@@ -65,7 +65,7 @@ export default async function DocsIndexPage() {
                 <ArrowRight className="size-4" />
               </Link>
               <Link
-                href="https://demo.muetab.com"
+                href="/demo"
                 className={cn(buttonVariants({ variant: 'ghost', size: 'lg' }))}
               >
                 View live demo

@@ -75,18 +75,18 @@ const steps = [
   {
     number: 1,
     title: 'Install the extension',
-    description: 'Click the button above to add Mue to your browser from the official store.',
+    description: 'Click the download buttons above to add Mue to your browser from the official store.',
   },
   {
     number: 2,
     title: 'Open a new tab',
-    description: 'Launch a new tab and Mue will guide you through the initial setup process.',
+    description: 'Launch a new tab and Mue will guide you through the setup process.',
   },
   {
     number: 3,
     title: 'Customise your space',
     description:
-      'Explore settings to tailor backgrounds, widgets, and more to match your workflow.',
+      'Explore settings to tailor backgrounds, widgets, and more to make the tab yours!',
   },
 ];
 
@@ -214,7 +214,7 @@ export default function DownloadPage() {
             What happens next?
           </h2>
 
-          <p className="mt-2 text-sm text-muted-foreground">Up and running in under a minute.</p>
+          <p className="mt-2 text-sm text-muted-foreground">Get up and running in under a minute.</p>
           <div className="mt-8">
             {steps.map((step, i) => (
               <NumberedStep

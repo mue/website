@@ -27,7 +27,7 @@ import { SoftwareApplicationJsonLd } from '@/components/json-ld';
 
 import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
 
-const stats = ['Developed since 2018', '10,000+ monthly active users', '10,000,000+ tabs'];
+const stats = ['Maintained since 2018', '10,000+ monthly active users', '10,000,000+ tabs'];
 
 const communityStats: { label: string; value: string; icon: LucideIcon }[] = [
   { label: 'Collaborators', value: '50+', icon: Users },
@@ -40,26 +40,26 @@ const communityStats: { label: string; value: string; icon: LucideIcon }[] = [
 
 const scrollFeatures = [
   {
-    title: 'Backgrounds that hit different',
-    description: 'Pick from our unique photographer selection or download user-created packs.',
+    title: 'Beautiful backgrounds that inspire',
+    description: 'Pick from our selection of exclusive library, choose your own, or explore the Marketplace for community packs.',
     bullets: [
-      'Exclusive library of photos not found anywhere else',
-      'Community organised backgrounds available in the Marketplace',
+      'Hand-picked selection from our in-house photography team',
+      'Community submitted packs available in the Marketplace',
     ],
   },
   {
-    title: 'Quotes that actually resonate',
+    title: 'Quotes to keep you motivated',
     description:
-      'Start every tab with quotes that match your mood and mindset, delivered in your language.',
+      'Get inspiration, humour or wisdom from our massive library of quote packs in multiple languages.',
     bullets: [
       'Hand-picked quotes that inspire and motivate',
       'Movie quotes, memes and more options in the Marketplace',
     ],
   },
   {
-    title: 'Your data, your rules',
+    title: 'Keeping your data secure',
     description:
-      'Mue is built with privacy at its core. Your data stays on your device and is never sold or shared.',
+      'Mue is open-source and contains no tracking. All data is stored on device and is never shared without your consent.',
     bullets: ['No personal data collection', 'Fully open source on GitHub'],
   },
 ];
@@ -102,9 +102,9 @@ export default function Home() {
             Stop staring at <span className="text-[#FF5C25]">blank</span> tabs.
           </h1>
 
-          <p className="max-w-xl text-pretty text-base text-muted-foreground sm:text-lg animate-fade-up animate-delay-300">
-            Every tab hits different with Mue. Stunning backgrounds, quotes that slap, places for
-            your notes: everything you need to lock in.
+          <p className="max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg animate-fade-up animate-delay-300">
+            Improve your new tab experience with Mue. Unique backgrounds, motivational quotes, and 
+            a ton of features. All for free, and open-source too.
           </p>
 
           <div className="flex flex-row flex-wrap justify-center gap-3 sm:items-center animate-fade-up animate-delay-400">
@@ -155,8 +155,8 @@ export default function Home() {
           </div>
 
           <div className="mt-4 flex flex-col items-center gap-5 animate-fade-up animate-delay-500">
-            <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/50">
-              Available everywhere*
+            <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground/50">
+              Available for your browser
             </span>
             <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3">
               {browsers.map((browser) => (
@@ -168,9 +168,6 @@ export default function Home() {
                 />
               ))}
             </div>
-            <p className="text-[0.7rem] leading-relaxed text-muted-foreground/50 sm:text-xs">
-              *not actually available on Safari yet, but we&apos;re working on it!
-            </p>
           </div>
         </div>
       </section>
@@ -180,11 +177,10 @@ export default function Home() {
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-24 px-6">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
-              Built-in tools to keep you in flow
+              Features that make a difference.
             </h2>
-            <p className="mt-4 text-base text-muted-foreground sm:text-lg">
-              Mue blends mindful visuals with productivity essentials so every new tab fuels your
-              focus instead of draining it.
+            <p className="mt-4 text-base text-muted-foreground sm:text-m">
+              Mue boasts unique widgets and a design tailored towards productivity and wellbeing.
             </p>
           </div>
 
@@ -209,9 +205,9 @@ export default function Home() {
             <h2 className="text-balance text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
               Built by you, for you.
             </h2>
-            <p className="max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-              100% free and open source. Join the community shaping the future of Mue - whether
-              that&apos;s contributing code, reporting issues, or sharing ideas.
+            <p className="max-w-3xl text-pretty text-base text-muted-foreground sm:text-lg">
+              Developed in the open with a passionate community of users from around the world. Join 
+              us on GitHub - whether that be contributing code, suggesting ideas or reporting issues!
             </p>
           </div>
 
