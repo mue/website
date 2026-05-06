@@ -24,6 +24,8 @@ type BlogPostProps = {
   searchParams: Promise<{ embed?: string }>;
 };
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const posts = await getAllBlogPosts();
   return posts.map((post) => ({
