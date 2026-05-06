@@ -13,30 +13,30 @@ import { cn } from '@/lib/utils';
 export const metadata: Metadata = {
   title: 'Documentation',
   description:
-    'Everything you need to install, extend, and contribute to the Mue ecosystem - from quickstart guides to deep-dive API references.',
+    'Read up on how to install, extend and contribute to Mue Tab. Covers everything from quickstart guides to API changelogs and more!',
   openGraph: {
     title: 'Documentation | Mue',
     description:
-      'Everything you need to install, extend, and contribute to the Mue ecosystem - from quickstart guides to deep-dive API references.',
+      'Read up on how to install, extend and contribute to Mue Tab. Covers everything from quickstart guides to API changelogs and more!',
   },
 };
 
 const featureHighlights = [
   {
     title: 'Marketplace',
-    description: 'Extend Mue with community-built photo, quote, and preset packs.',
+    description: 'Create photo packs, quote packs and preset settings for the Mue community to enjoy.',
     icon: Layers3,
     href: '/docs/marketplace/introduction',
   },
   {
     title: 'API',
-    description: "Integrate Mue's curated content into your own projects via the REST API.",
+    description: "Build applications based on Mue's open REST API, the same one the extension uses.",
     icon: PlugZap,
     href: '/docs/api/introduction',
   },
   {
     title: 'Translate',
-    description: 'Help localise Mue for the world with our Weblate-powered workflow.',
+    description: 'Help localise Mue for the world with our Weblate-powered localisation system.',
     icon: BookOpen,
     href: '/docs/translations',
   },
@@ -52,16 +52,15 @@ export default async function DocsIndexPage() {
         <div className="grid gap-6 md:grid-cols-[minmax(0,1fr)_260px]">
           <div className="space-y-4">
             <h1 className="text-3xl font-semibold leading-tight tracking-tight md:text-4xl">
-              Build, customise, and ship delightful Mue experiences.
+              Explore Mue's documentation
             </h1>
             <p className="text-muted-foreground text-base md:text-lg">
-              Everything you need to install, extend, and contribute to the Mue ecosystem - from
-              quickstart guides to deep-dive API references.
+              Read up on how to install, extend and contribute to Mue Tab.
             </p>
 
             <div className="flex flex-wrap items-center gap-3">
               <Link href="/docs/introduction" className={cn(buttonVariants({ size: 'lg' }))}>
-                Start exploring
+                Get started
                 <ArrowRight className="size-4" />
               </Link>
               <Link
@@ -77,9 +76,9 @@ export default async function DocsIndexPage() {
     >
       <section className="space-y-6">
         <header className="flex flex-col gap-2">
-          <h2 className="text-xl font-semibold">Pick a storyline</h2>
+          <h2 className="text-xl font-semibold">Pick a feature</h2>
           <p className="text-sm text-muted-foreground">
-            Dive into step-by-step guides designed for builders, translators, and integrators.
+            Dive into step-by-step guides designed for creators, developers and translators.
           </p>
         </header>
 
@@ -108,7 +107,7 @@ export default async function DocsIndexPage() {
         <header className="flex flex-col gap-2">
           <h2 className="text-xl font-semibold">All documentation</h2>
           <p className="text-sm text-muted-foreground">
-            Browse every guide and reference, grouped by domain.
+            Browse every guide and reference, grouped by section.
           </p>
         </header>
 
@@ -181,7 +180,7 @@ export default async function DocsIndexPage() {
                 Contribute to docs
               </h3>
               <p className="mt-0.5 text-[10px] text-muted-foreground lg:text-xs">
-                Help improve our documentation
+                Help improve these pages by contributing on GitHub
               </p>
             </div>
             <FileEdit className="size-3.5 shrink-0 text-primary transition group-hover:scale-110 lg:size-4" />

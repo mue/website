@@ -1,5 +1,6 @@
 ---
 title: Changelog
+order: 3
 ---
 
 The changelog dates use the DD-MM-YYY format.

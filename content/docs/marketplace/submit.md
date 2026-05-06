@@ -1,5 +1,6 @@
 ---
 title: Submitting Add-ons
+order: 3
 ---
 
 Submitting add-ons is as easy as:

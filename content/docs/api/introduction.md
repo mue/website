@@ -1,5 +1,6 @@
 ---
 title: Introduction
+order: 1
 ---
 
 Mue comes with an API which is used by default to get random images and quotes curated by the Mue team. Please note that unlike the rest of Mue, these images are not free to be used without permission

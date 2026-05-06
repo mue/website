@@ -1,5 +1,6 @@
 ---
 title: Creating Add-ons
+order: 2
 ---
 
 ## Creating Add-ons with the Online Editor (Recommended)

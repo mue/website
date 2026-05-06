@@ -228,7 +228,7 @@ function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
       <div className="rounded-2xl border bg-card/70 p-6 text-center shadow-sm">
         <h2 className="text-lg font-semibold">Missing something?</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          Our docs live in the open. If you see a gap, jump in and improve them.
+          If you can see an area tha needs more detail, feel free to improve it!
         </p>
         <div className="mt-4 flex justify-center gap-3">
           <Link
@@ -293,7 +293,7 @@ function DocsSectionContent({ section, tree, docsMeta }: DocsSectionContentProps
         <header className="flex flex-col gap-2">
           <h2 className="text-xl font-semibold">Available guides</h2>
           <p className="text-sm text-muted-foreground">
-            Jump straight into the content that lives within this section.
+            See the sections and content available in this category.
           </p>
         </header>
 
@@ -318,14 +318,14 @@ function DocsSectionContent({ section, tree, docsMeta }: DocsSectionContentProps
                         <h3 className="text-lg font-semibold group-hover:text-primary transition-colors">
                           {child.title}
                         </h3>
-                        <p className="mt-1 text-sm text-muted-foreground">
-                          {description ??
-                            (child.hasPage
-                              ? 'Open the guide to learn more.'
-                              : `Contains ${subtopics.length} ${
-                                  subtopics.length === 1 ? 'additional topic' : 'additional topics'
-                                }.`)}
-                        </p>
+                        {(description || !child.hasPage) && (
+                          <p className="mt-1 text-sm text-muted-foreground">
+                            {description ??
+                              `Contains ${subtopics.length} ${
+                                subtopics.length === 1 ? 'additional topic' : 'additional topics'
+                              }.`}
+                          </p>
+                        )}
                       </div>
                     </div>
 

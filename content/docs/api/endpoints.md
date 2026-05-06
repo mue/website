@@ -1,5 +1,6 @@
 ---
 title: Endpoints
+order: 2
 ---
 
 The API has two versions. v2 endpoints are available at `https://api.muetab.com/v2` and include enhanced fields and additional services. v1 endpoints are available at `https://api.muetab.com` for backwards compatibility.
