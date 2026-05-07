@@ -1,46 +1,27 @@
 import { Metadata } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import {
-  Calendar,
-  User,
-  Globe,
-  Package,
-  MessageSquareQuote,
-  Users,
-  Type,
-  Images,
-  Camera,
-  MapPin,
-  AlertCircle,
-  Key,
-} from 'lucide-react';
+import { AlertCircle, Key } from 'lucide-react';
 
-import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
+import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
+import ItemsGrid from '@/components/marketplace/items-grid';
+import { ProductJsonLd, BreadcrumbJsonLd } from '@/components/json-ld';
+
 import {
   getMarketplaceItem,
   getMarketplaceItems,
   getItemCategory,
-  slugifyAuthor,
   type MarketplaceItemDetail,
   type MarketplaceItemSummary,
 } from '@/lib/marketplace';
-import { ItemActions } from './item-actions';
-import { ViewTracker } from './view-tracker';
-import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
-import { PresetSettingsTable } from '@/components/marketplace/preset-settings-table';
-import { QuotesTable } from '@/components/marketplace/quotes-table';
-import { PhotoGallery } from '@/components/marketplace/photo-gallery';
-import { NoContentEmptyState } from '@/components/marketplace/empty-state';
-import ItemsGrid from '@/components/marketplace/items-grid';
 import { FavoritesProvider } from '@/lib/favorites-context';
-import { ProductJsonLd, BreadcrumbJsonLd } from '@/components/json-ld';
 import { SITE_URL } from '@/lib/constants/site';
+
+import { ItemSidebar } from './item-sidebar';
+import { ItemContentTabs } from './item-content-tabs';
 
 export const dynamicParams = false;
 
@@ -61,10 +42,7 @@ const PROVIDER_NAMES: Record<string, string> = {
 };
 
 type MarketplaceItemPageProps = {
-  params: Promise<{
-    category: string;
-    id: string;
-  }>;
+  params: Promise<{ category: string; id: string }>;
   searchParams?: Promise<{ embed?: string; preview?: string }>;
 };
 
@@ -85,96 +63,41 @@ async function getRelatedItems(
   collections?: string[],
 ): Promise<MarketplaceItemSummary[]> {
   const allItems = await getMarketplaceItems();
-
-  // Filter items by same author or in same collections
   const related = allItems.filter((item) => {
-    // Don't include current item
     if (item.name === currentItemName) return false;
-
-    // Include if same author
     if (author && item.author?.toLowerCase() === author.toLowerCase()) return true;
-
-    // Include if in any of the same collections
     if (collections && collections.length > 0) {
       return item.in_collections.some((col) => collections.includes(col));
     }
-
     return false;
   });
-
-  // Shuffle and limit to 6 items
   return related.sort(() => Math.random() - 0.5).slice(0, 6);
 }
 
 export async function generateMetadata({ params }: MarketplaceItemPageProps): Promise<Metadata> {
   const { category, id } = await params;
-
   try {
     const data = await getMarketplaceItem(category as 'packs' | 'presets', id);
+    const description =
+      data.description ?? `Learn more about ${data.display_name} on the Mue marketplace.`;
     return {
       title: `${data.display_name} – Marketplace`,
-      description:
-        data.description ?? `Learn more about ${data.display_name} on the Mue marketplace.`,
+      description,
       openGraph: {
         title: `${data.display_name} – Marketplace`,
-        description:
-          data.description ?? `Learn more about ${data.display_name} on the Mue marketplace.`,
+        description,
         type: 'website',
-        url: `${SITE_URL}/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
-          data.id,
-        )}`,
+        url: `${SITE_URL}/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(data.id)}`,
       },
       twitter: {
         card: 'summary_large_image',
         title: `${data.display_name} – Marketplace`,
-        description:
-          data.description ?? `Learn more about ${data.display_name} on the Mue marketplace.`,
+        description,
       },
     };
   } catch {
-    return {
-      title: 'Marketplace item',
-    };
+    return { title: 'Marketplace item' };
   }
-}
-
-// Helper function to parse description with line breaks and clickable links
-function parseDescription(description: string) {
-  // Split by newlines
-  const lines = description.split(/\\n|\n/);
-
-  return lines.map((line, lineIndex) => {
-    // Regex to detect URLs
-    const urlRegex = /(https?:\/\/[^\s]+)/g;
-    const parts = line.split(urlRegex);
-
-    return (
-      <span key={lineIndex}>
-        {parts.map((part, partIndex) => {
-          if (urlRegex.test(part)) {
-            return (
-              <a
-                key={partIndex}
-                href={part}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-primary hover:underline"
-              >
-                {part}
-              </a>
-            );
-          }
-          return part;
-        })}
-        {lineIndex < lines.length - 1 && (
-          <>
-            <br />
-            <br />
-          </>
-        )}
-      </span>
-    );
-  });
 }
 
 export default async function MarketplaceItemPage({
@@ -186,17 +109,15 @@ export default async function MarketplaceItemPage({
   const isEmbed = sp?.embed === 'true';
   const isPreview = sp?.preview === 'true';
 
-  // Helper to build URLs with embed/preview params preserved
   const buildEmbedUrl = (path: string, hasExistingParams = false) => {
     if (!isEmbed) return path;
-    const separator = hasExistingParams ? '&' : '?';
-    const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
-    return `${path}${separator}${params}`;
+    const sep = hasExistingParams ? '&' : '?';
+    const qs = isPreview ? 'embed=true&preview=true' : 'embed=true';
+    return `${path}${sep}${qs}`;
   };
 
   const data = await resolveItem(category as 'packs' | 'presets', id);
 
-  // Get related items
   const collectionNames = data.in_collections?.map((c) => (typeof c === 'string' ? c : c.name));
   const relatedItems = await getRelatedItems(data.name, data.author, collectionNames);
 
@@ -220,8 +141,6 @@ export default async function MarketplaceItemPage({
   const isQuotePack = data.type === 'quote_packs' || data.type === 'quotes';
   const isPresetSettings = data.type === 'preset_settings' || data.type === 'settings';
 
-  // Get all preset settings (everything except photos, quotes, and standard fields)
-  // Flatten nested settings object if it exists
   const presetSettings = isPresetSettings
     ? (() => {
         const excluded = [
@@ -241,13 +160,9 @@ export default async function MarketplaceItemPage({
           'created_at',
           'in_collections',
         ];
-
-        // Check if there's a settings object
         if (data.settings && typeof data.settings === 'object') {
           return Object.entries(data.settings);
         }
-
-        // Otherwise use all non-excluded fields
         return Object.entries(data).filter(([key]) => !excluded.includes(key));
       })()
     : [];
@@ -263,9 +178,7 @@ export default async function MarketplaceItemPage({
           name={data.display_name}
           description={data.description}
           image={data.icon_url || data.screenshot_url}
-          url={`${SITE_URL}/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
-            data.id,
-          )}`}
+          url={`${SITE_URL}/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(data.id)}`}
           brand={data.author}
           category={data.type?.replace(/_/g, ' ')}
           datePublished={data.created_at}
@@ -283,12 +196,11 @@ export default async function MarketplaceItemPage({
             {
               position: 4,
               name: data.display_name,
-              item: `${SITE_URL}/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
-                data.id,
-              )}`,
+              item: `${SITE_URL}/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(data.id)}`,
             },
           ]}
         />
+
         {!isEmbed && (
           <MarketplaceBreadcrumb type="item" itemType={data.type!} itemName={data.display_name} />
         )}
@@ -303,7 +215,6 @@ export default async function MarketplaceItemPage({
           ]}
         />
 
-        {/* Warning for API-powered photo packs */}
         {data.api_enabled && (
           <Alert>
             <AlertCircle className="h-4 w-4" />
@@ -325,348 +236,29 @@ export default async function MarketplaceItemPage({
         )}
 
         <div className="grid gap-6 lg:grid-cols-[340px_1fr] lg:gap-8">
-          {/* Left Column - Info */}
-          <aside className="space-y-4 lg:space-y-6">
-            <div className="lg:sticky lg:top-24 space-y-4 lg:space-y-6">
-              {/* Main Card */}
-              <div className="flex flex-col gap-6 rounded-2xl border border-border bg-card/80 p-6 shadow-lg backdrop-blur-sm">
-                <div className="flex flex-col items-center gap-4 text-center">
-                  <div className="relative h-24 w-24 overflow-hidden rounded-2xl border-2 border-border/60 bg-muted shadow-md">
-                    {data.icon_url ? (
-                      <Image
-                        src={data.icon_url}
-                        alt={data.display_name}
-                        fill
-                        sizes="96px"
-                        className="object-cover"
-                        unoptimized
-                      />
-                    ) : (
-                      <div className="flex h-full w-full items-center justify-center text-2xl font-bold uppercase text-muted-foreground/80">
-                        {data.display_name.slice(0, 2)}
-                      </div>
-                    )}
-                  </div>
+          <ItemSidebar
+            data={data}
+            id={id}
+            category={category}
+            isEmbed={isEmbed}
+            isPreview={isPreview}
+            formattedCreatedAt={formattedCreatedAt}
+            formattedUpdatedAt={formattedUpdatedAt}
+          />
 
-                  <div className="space-y-2">
-                    <h1 className="text-2xl font-bold tracking-tight">{data.display_name}</h1>
-                    {!isEmbed && (
-                      <Link href={buildEmbedUrl(`/marketplace?type=${data.type}`, true)}>
-                        <Badge
-                          variant="secondary"
-                          className="cursor-pointer text-xs capitalize transition hover:bg-primary/10 hover:text-primary"
-                        >
-                          {data.type!.replace(/_/g, ' ')}
-                        </Badge>
-                      </Link>
-                    )}
-                  </div>
-                </div>
-
-                <Separator />
-
-                {/* Metadata */}
-                <div className="space-y-3 text-sm">
-                  {data.author && (
-                    <div className="flex items-center gap-3 text-muted-foreground">
-                      <User className="h-4 w-4" />
-                      <Link
-                        href={buildEmbedUrl(`/marketplace/author/${slugifyAuthor(data.author)}`)}
-                        className="hover:text-primary hover:underline transition"
-                      >
-                        {data.author}
-                      </Link>
-                    </div>
-                  )}
-
-                  {data.version && (
-                    <div className="flex items-center gap-3 text-muted-foreground">
-                      <Package className="h-4 w-4" />
-                      <span>Version {data.version}</span>
-                    </div>
-                  )}
-
-                  {data.language && (
-                    <div className="flex items-center gap-3 text-muted-foreground">
-                      <Globe className="h-4 w-4" />
-                      <span>
-                        {new Intl.DisplayNames([data.language], {
-                          type: 'language',
-                        }).of(data.language) || data.language.toUpperCase()}
-                      </span>
-                    </div>
-                  )}
-
-                  {formattedCreatedAt && (
-                    <div className="flex items-center gap-3 text-muted-foreground">
-                      <Calendar className="h-4 w-4" />
-                      <span>Created {formattedCreatedAt}</span>
-                    </div>
-                  )}
-
-                  {formattedUpdatedAt && (
-                    <div className="flex items-center gap-3 text-muted-foreground">
-                      <Calendar className="h-4 w-4" />
-                      <span>Updated {formattedUpdatedAt}</span>
-                    </div>
-                  )}
-
-                  <ViewTracker
-                    itemId={id}
-                    initialViews={data.views}
-                    itemType={data.type}
-                    itemDisplayName={data.display_name}
-                  />
-                </div>
-
-                {data.description && (
-                  <>
-                    <Separator />
-                    <p className="text-sm leading-relaxed text-muted-foreground">
-                      {data.description.split(/\\n|\n/)[0]}
-                    </p>
-                  </>
-                )}
-
-                <Separator />
-
-                <ItemActions
-                  itemId={id}
-                  displayName={data.display_name}
-                  description={data.description}
-                  category={category}
-                  itemType={data.type}
-                  itemData={data}
-                  isPreview={isPreview}
-                />
-              </div>
-
-              {/* Collections Card */}
-              {data.in_collections && data.in_collections.length > 0 && (
-                <div className="rounded-2xl border border-border bg-card/80 p-6 shadow-lg backdrop-blur-sm">
-                  <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                    Collections
-                  </h2>
-                  <div className="flex flex-wrap gap-2">
-                    {data.in_collections.map((collection) => (
-                      <Link
-                        key={collection.name}
-                        href={buildEmbedUrl(
-                          `/marketplace/collection/${encodeURIComponent(collection.name)}`,
-                        )}
-                      >
-                        <Badge
-                          variant="outline"
-                          className="cursor-pointer transition hover:bg-primary/10 hover:text-primary"
-                        >
-                          {collection.display_name}
-                        </Badge>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </aside>
-
-          {/* Right Column - Content */}
-          <main className="min-h-[400px] lg:min-h-[600px] overflow-hidden">
-            <Tabs defaultValue="overview" className="w-full">
-              <TabsList className="mb-4 grid w-full grid-cols-2 lg:mb-6">
-                <TabsTrigger value="overview" className="text-sm">
-                  Overview
-                </TabsTrigger>
-                <TabsTrigger value="content" className="text-sm">
-                  {isPhotoPack && 'Photos'}
-                  {isQuotePack && 'Quotes'}
-                  {isPresetSettings && 'Preset Settings'}
-                </TabsTrigger>
-              </TabsList>
-
-              <TabsContent value="overview" className="space-y-4 sm:space-y-6">
-                <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
-                  <h2 className="mb-3 text-xl font-semibold sm:mb-4 sm:text-2xl">About</h2>
-                  <div className="prose prose-sm max-w-none dark:prose-invert">
-                    {data.description ? (
-                      <p className="text-muted-foreground">{parseDescription(data.description)}</p>
-                    ) : (
-                      <p className="text-muted-foreground">
-                        No description available for this item.
-                      </p>
-                    )}
-                  </div>
-
-                  {isPhotoPack && data.photos && data.photos.length > 0 && (
-                    <div className="mt-4 sm:mt-6 rounded-xl border border-border bg-card/50 divide-y sm:divide-y-0 sm:divide-x divide-border overflow-hidden flex flex-col sm:flex-row">
-                      <div className="flex flex-1 items-center gap-3 px-5 py-4">
-                        <Images className="h-4 w-4 shrink-0 text-muted-foreground" />
-                        <div>
-                          <div className="text-xl font-semibold text-foreground">
-                            {data.photos.length}
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            Total {data.photos.length === 1 ? 'Photo' : 'Photos'}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-1 items-center gap-3 px-5 py-4">
-                        <Camera className="h-4 w-4 shrink-0 text-muted-foreground" />
-                        <div>
-                          <div className="text-xl font-semibold text-foreground">
-                            {new Set(data.photos.map((p) => p.photographer).filter(Boolean)).size}
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            {new Set(data.photos.map((p) => p.photographer).filter(Boolean))
-                              .size === 1
-                              ? 'Photographer'
-                              : 'Photographers'}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-1 items-center gap-3 px-5 py-4">
-                        <MapPin className="h-4 w-4 shrink-0 text-muted-foreground" />
-                        <div>
-                          <div className="text-xl font-semibold text-foreground">
-                            {new Set(data.photos.map((p) => p.location).filter(Boolean)).size}
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            {new Set(data.photos.map((p) => p.location).filter(Boolean)).size === 1
-                              ? 'Location'
-                              : 'Locations'}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {!isQuotePack && !isPhotoPack && data.screenshot_url && (
-                    <div className="mt-6">
-                      <h3 className="mb-3 text-lg font-semibold">Preview</h3>
-                      <div className="relative h-64 w-full overflow-hidden rounded-xl border border-border/60 shadow-md">
-                        <Image
-                          src={data.screenshot_url}
-                          alt={`${data.display_name} preview`}
-                          fill
-                          sizes="(min-width: 1024px) 50vw, 100vw"
-                          className="object-cover"
-                          unoptimized
-                        />
-                      </div>
-                    </div>
-                  )}
-
-                  {isQuotePack && data.quotes && data.quotes.length > 0 && (
-                    <div className="mt-4 sm:mt-6 rounded-xl border border-border bg-card/50 divide-y sm:divide-y-0 sm:divide-x divide-border overflow-hidden flex flex-col sm:flex-row">
-                      <div className="flex flex-1 items-center gap-3 px-5 py-4">
-                        <MessageSquareQuote className="h-4 w-4 shrink-0 text-muted-foreground" />
-                        <div>
-                          <div className="text-xl font-semibold text-foreground">
-                            {data.quotes.length}
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            Total {data.quotes.length === 1 ? 'Quote' : 'Quotes'}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-1 items-center gap-3 px-5 py-4">
-                        <Users className="h-4 w-4 shrink-0 text-muted-foreground" />
-                        <div>
-                          <div className="text-xl font-semibold text-foreground">
-                            {new Set(data.quotes.map((q) => q.author).filter(Boolean)).size}
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            {new Set(data.quotes.map((q) => q.author).filter(Boolean)).size === 1
-                              ? 'Unique Author'
-                              : 'Unique Authors'}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex flex-1 items-center gap-3 px-5 py-4">
-                        <Type className="h-4 w-4 shrink-0 text-muted-foreground" />
-                        <div>
-                          <div className="text-xl font-semibold text-foreground">
-                            {Math.round(
-                              data.quotes.reduce((acc, q) => acc + q.quote.length, 0) /
-                                data.quotes.length,
-                            )}
-                          </div>
-                          <div className="text-xs text-muted-foreground">Avg. Characters</div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </TabsContent>
-
-              <TabsContent value="content" className="space-y-4 sm:space-y-6">
-                {/* Photo Packs - Gallery */}
-                {isPhotoPack && data.photos && data.photos.length > 0 && (
-                  <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
-                    <div className="mb-4 flex items-center justify-between sm:mb-6">
-                      <h2 className="text-xl font-semibold sm:text-2xl">Photo Gallery</h2>
-                      <Badge variant="secondary">
-                        {data.photos.length} {data.photos.length === 1 ? 'photo' : 'photos'}
-                      </Badge>
-                    </div>
-
-                    <PhotoGallery photos={data.photos} itemName={data.display_name} />
-                  </div>
-                )}
-
-                {/* Quote Packs - Table */}
-                {isQuotePack && data.quotes && data.quotes.length > 0 && (
-                  <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
-                    <div className="mb-4 flex items-center justify-between sm:mb-6">
-                      <h2 className="text-xl font-semibold sm:text-2xl">Quotes</h2>
-                      <Badge variant="secondary">
-                        {data.quotes.length} {data.quotes.length === 1 ? 'quote' : 'quotes'}
-                      </Badge>
-                    </div>
-
-                    <QuotesTable quotes={data.quotes} />
-                  </div>
-                )}
-
-                {/* Preset Settings - Display */}
-                {isPresetSettings && presetSettings.length > 0 && (
-                  <div className="rounded-2xl border border-border bg-card/70 p-4 sm:p-6 lg:p-8 shadow-sm">
-                    <div className="mb-4 flex items-center justify-between sm:mb-6">
-                      <h2 className="text-xl font-semibold sm:text-2xl">Preset Settings</h2>
-                      <Badge variant="secondary">
-                        {presetSettings.length}{' '}
-                        {presetSettings.length === 1 ? 'setting' : 'settings'}
-                      </Badge>
-                    </div>
-
-                    <PresetSettingsTable settings={presetSettings} />
-                  </div>
-                )}
-
-                {/* No Content Available */}
-                {isPhotoPack && (!data.photos || data.photos.length === 0) && (
-                  data.api_enabled ? (
-                    <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
-                      <Images className="h-10 w-10 mb-3 opacity-40" />
-                      <p className="text-sm">
-                        Photos are fetched live from the{' '}
-                        {(data.api_provider && PROVIDER_NAMES[data.api_provider]) ?? data.api_provider} API and are not
-                        previewed here.
-                      </p>
-                    </div>
-                  ) : (
-                    <NoContentEmptyState />
-                  )
-                )}
-                {(isQuotePack && (!data.quotes || data.quotes.length === 0)) && <NoContentEmptyState />}
-                {(isPresetSettings && presetSettings.length === 0) && <NoContentEmptyState />}
-              </TabsContent>
-            </Tabs>
-          </main>
+          <ItemContentTabs
+            data={data}
+            isPhotoPack={isPhotoPack}
+            isQuotePack={isQuotePack}
+            isPresetSettings={isPresetSettings}
+            presetSettings={presetSettings}
+            providerNames={PROVIDER_NAMES}
+          />
         </div>
+
         {relatedItems.length > 0 && (
           <>
             <Separator className="my-2" />
-
             <div className="space-y-4">
               <h2 className="text-2xl font-semibold tracking-tight">You might also like</h2>
               <p className="text-sm text-muted-foreground mb-6">
@@ -676,16 +268,13 @@ export default async function MarketplaceItemPage({
             </div>
           </>
         )}
+
         {!isEmbed && (
           <>
             <Separator className="my-2" />
-
             <p className="text-center text-sm text-muted-foreground">
               Want to contribute?{' '}
-              <Link
-                href="https://github.com/mue"
-                className="font-medium text-primary hover:underline"
-              >
+              <Link href="https://github.com/mue" className="font-medium text-primary hover:underline">
                 Visit Mue on GitHub
               </Link>
             </p>

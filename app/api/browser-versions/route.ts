@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { ChromeWebStore } from 'webextension-store-meta';
+import { ChromeWebStore, Amo } from 'webextension-store-meta';
 
 interface BrowserVersions {
   chrome: string | null;
@@ -10,19 +10,8 @@ interface BrowserVersions {
 
 async function fetchFirefoxVersion(): Promise<string | null> {
   try {
-    const res = await fetch('https://addons.mozilla.org/api/v5/addons/addon/mue/', {
-      headers: {
-        'User-Agent': 'Mue Website/1.0',
-      },
-    });
-
-    if (!res.ok) {
-      console.error('Firefox API error:', res.status);
-      return null;
-    }
-
-    const data = await res.json();
-    return data.current_version?.version || null;
+    const store = await Amo.load({ id: 'mue' });
+    return store.version();
   } catch (error) {
     console.error('Error fetching Firefox version:', error);
     return null;

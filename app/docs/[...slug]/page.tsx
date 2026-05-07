@@ -62,6 +62,7 @@ export async function generateMetadata({ params }: DocPageProps): Promise<Metada
   if (!doc) {
     const { tree } = await getDocsNavigation();
     const section = findNode(tree, slug.filter(Boolean));
+
     if (section) {
       const title = section.title;
       const topicCount = section.children?.length ?? 0;
@@ -94,6 +95,7 @@ function flattenTree(tree: DocTreeNode[]): DocTreeNode[] {
   const walk = (items: DocTreeNode[]) => {
     items.forEach((item) => {
       nodes.push(item);
+
       if (item.children) {
         walk(item.children);
       }
@@ -160,6 +162,7 @@ function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
     { label: 'Documentation', href: '/docs' },
     ...doc.slug.slice(0, -1).map((_, index) => {
       const segments = doc.slug.slice(0, index + 1);
+
       return {
         label: findTitle(tree, segments) ?? segments[index],
         href: `/docs/${segments.join('/')}`,
@@ -210,6 +213,7 @@ function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
             </span>
           </Link>
         )}
+
         {next && (
           <Link
             href={next.href}
@@ -230,6 +234,7 @@ function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
         <p className="mt-2 text-sm text-muted-foreground">
           If you can see an area tha needs more detail, feel free to improve it!
         </p>
+
         <div className="mt-4 flex justify-center gap-3">
           <Link
             href="https://github.com/mue/docs"

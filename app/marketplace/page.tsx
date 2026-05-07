@@ -7,7 +7,7 @@ import { MarketplaceLoadingSkeleton } from '@/components/marketplace/marketplace
 
 import { getMarketplaceCollections, getMarketplaceItems } from '@/lib/marketplace';
 
-// Simple string hash (FNV-1a variant) for deterministic seeding
+// simple string hash (FNV-1a variant) for deterministic seeding
 function hashString(str: string) {
   let h = 2166136261 >>> 0;
   for (let i = 0; i < str.length; i++) {
@@ -17,7 +17,7 @@ function hashString(str: string) {
   return h >>> 0;
 }
 
-// Deterministic Fisher-Yates shuffle using a linear congruential generator (LCG)
+// Fisher-Yates shuffle using a linear congruential generator (LCG)
 function seededShuffle<T>(arr: T[], seed: number): T[] {
   const a = [...arr];
 
@@ -54,15 +54,12 @@ export default async function MarketplacePage({
 
   const highlightCandidates = collections.filter((collection) => collection.img);
 
-  // Rotate hourly: seed based on current UTC date + hour so all users see the same
-  // set within the hour, and it changes predictably each hour.
   const now = new Date();
   const seedKey = `${now.getUTCFullYear()}-${now.getUTCMonth()}-${now.getUTCDate()}-${now.getUTCHours()}`;
   const seed = hashString(seedKey);
   const shuffled = seededShuffle(highlightCandidates, seed);
   const randomCollections = shuffled.slice(0, 3);
 
-  // Calculate content types for each collection
   const collectionsWithTypes = randomCollections.map((collection) => {
     const collectionItems = items.filter((item) => item.in_collections.includes(collection.name));
     const types = [...new Set(collectionItems.map((item) => item.type))];
@@ -82,7 +79,6 @@ export default async function MarketplacePage({
             key={c.name}
             rel="preload"
             as="image"
-            // Using raw URL; if remote domains need config ensure they're in next.config
             href={c.img}
           />
         ) : null,

@@ -92,7 +92,7 @@ export default function Home() {
       <div className="pointer-events-none fixed inset-x-0 top-0 -z-10 h-[100vh] bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.15)_0%,_transparent_60%)] blur-3xl dark:bg-[radial-gradient(ellipse_at_top,_rgba(255,92,37,0.25)_0%,_transparent_65%)]" />
       <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-transparent dark:to-black/80" />
 
-      {/* Hero */}
+      {/* hero */}
       <section className="relative pb-16 pt-12 sm:pb-24 sm:pt-16">
         <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-10 px-6 text-center">
           <h1 className="font-heading font-light text-balance text-4xl tracking-wide text-foreground sm:text-5xl lg:text-6xl animate-fade-up animate-delay-200">
@@ -169,7 +169,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features */}
+      {/* features */}
       <section className="border-t border-border py-28">
         <div className="mx-auto flex w-full max-w-5xl flex-col gap-24 px-6">
           <div className="mx-auto max-w-2xl text-center">
@@ -195,7 +195,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Community */}
+      {/* community */}
       <section className="border-t border-border py-24">
         <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-10 px-6 text-center">
           <div className="flex flex-col items-center gap-4">

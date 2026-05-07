@@ -3,7 +3,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function DocsArticleLoading() {
   return (
     <div className="space-y-10">
-      {/* Header */}
+      {/* header */}
       <div className="border-b pb-6 space-y-6">
         <div className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
@@ -23,7 +23,7 @@ export default function DocsArticleLoading() {
         </div>
       </div>
 
-      {/* Content + TOC */}
+      {/* content + contents */}
       <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_240px] xl:items-start gap-10">
         <div className="space-y-12">
           <div className="space-y-8">
@@ -38,17 +38,17 @@ export default function DocsArticleLoading() {
             ))}
           </div>
 
-          {/* Prev/next nav */}
+          {/* prev/next nav */}
           <div className="grid gap-4 border-t pt-6 md:grid-cols-2">
             <Skeleton className="h-16 w-full rounded-xl" />
             <Skeleton className="h-16 w-full rounded-xl" />
           </div>
 
-          {/* CTA card */}
+          {/* cta */}
           <Skeleton className="h-28 w-full rounded-2xl" />
         </div>
 
-        {/* TOC */}
+        {/* contents */}
         <div className="hidden xl:block space-y-3">
           <Skeleton className="h-4 w-28" />
           {[...Array(5)].map((_, i) => (

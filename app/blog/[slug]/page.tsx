@@ -16,7 +16,6 @@ import { SITE_URL } from '@/lib/constants/site';
 import { formatDate } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 
-
 type BlogPostParams = {
   slug: string;
 };
@@ -84,8 +83,10 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
 
 export default async function BlogPostPage({ params, searchParams }: BlogPostProps) {
   const { slug } = await params;
+
   const { embed } = await searchParams;
   const isEmbed = embed === 'true';
+
   const [post, allPosts] = await Promise.all([getBlogPostBySlug(slug), getAllBlogPosts()]);
 
   if (!post) {

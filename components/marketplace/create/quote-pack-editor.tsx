@@ -55,6 +55,7 @@ export function QuotePackEditor({ quotes, onChange, onDeleteAll }: QuotePackEdit
             <CardTitle>Quotes</CardTitle>
             <CardDescription>Add quotes to your quote pack</CardDescription>
           </div>
+
           {quotes.length > 1 && (
             <Button
               variant="outline"

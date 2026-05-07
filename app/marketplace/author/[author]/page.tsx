@@ -20,6 +20,7 @@ export const dynamicParams = false;
 export async function generateStaticParams() {
   const items = await getMarketplaceItems();
   const authors = new Set(items.map((item) => item.author).filter(Boolean));
+
   return Array.from(authors).map((author) => ({
     author: slugifyAuthor(author!),
   }));
@@ -34,7 +35,7 @@ type AuthorPageProps = {
 
 async function getAuthorItems(authorSlug: string): Promise<MarketplaceItemSummary[]> {
   const allItems = await getMarketplaceItems();
-  // Match by comparing slugified versions (handles special chars, hyphens, spaces)
+  // compare slugs
   return allItems.filter(
     (item) => item.author && slugifyAuthor(item.author) === authorSlug.toLowerCase(),
   );
@@ -62,10 +63,10 @@ export default async function AuthorPage({ params, searchParams }: AuthorPagePro
   const isEmbed = sp?.embed === 'true';
   const isPreview = sp?.preview === 'true';
 
-  // Helper to build URLs with embed/preview params preserved
   const buildEmbedUrl = (path: string) => {
     if (!isEmbed) return path;
     const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
+
     return `${path}?${params}`;
   };
 
@@ -75,10 +76,8 @@ export default async function AuthorPage({ params, searchParams }: AuthorPagePro
     notFound();
   }
 
-  // Get actual author name from first item (preserves original capitalization and hyphens)
   const authorName = items[0]?.author || deslugifyAuthor(author);
 
-  // Create a simple collection name map for the grid
   const collectionNameMap = new Map<string, string>();
 
   return (
@@ -101,6 +100,7 @@ export default async function AuthorPage({ params, searchParams }: AuthorPagePro
           <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
             <User className="h-8 w-8 text-primary" />
           </div>
+
           <div>
             <h1 className="text-3xl font-bold tracking-tight">{authorName}</h1>
             <p className="text-muted-foreground">

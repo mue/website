@@ -137,8 +137,8 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
         reader.onload = (event) => {
           try {
             const imported = JSON.parse(event.target?.result as string);
-            imported.id = crypto.randomUUID(); // Generate new ID
-            imported.timestamp = Date.now(); // Update timestamp
+            imported.id = crypto.randomUUID(); // generate new ID
+            imported.timestamp = Date.now(); // update timestamp
             const updatedDrafts = [...drafts, imported];
             saveDrafts(updatedDrafts);
           } catch {
@@ -149,6 +149,7 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
         reader.readAsText(file);
       }
     };
+
     input.click();
   };
 
@@ -305,6 +306,7 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
                             </Badge>
                           )}
                         </div>
+
                         <div className="flex items-center gap-2 text-sm text-muted-foreground">
                           <Clock className="h-3 w-3" />
                           {formatTimestamp(draft.timestamp)}
@@ -323,6 +325,7 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
                         >
                           <Download className="h-4 w-4" />
                         </Button>
+
                         <Button
                           variant="ghost"
                           size="sm"
@@ -343,9 +346,11 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
                       {draft.addonType && (
                         <Badge variant="outline">{getMarketplaceTypeLabel(draft.addonType)}</Badge>
                       )}
+
                       {draft.metadata.name && (
                         <Badge variant="secondary">{draft.metadata.name}</Badge>
                       )}
+
                       <Badge variant="secondary" className="text-xs">
                         {getContentSummary(draft)}
                       </Badge>

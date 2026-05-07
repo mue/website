@@ -45,6 +45,7 @@ function SidebarSkeleton() {
       <div className="mb-6 lg:hidden">
         <Skeleton className="h-10 w-full" />
       </div>
+
       <aside className="hidden w-64 shrink-0 lg:block">
         <Skeleton className="h-10 w-full" />
         <div className="mt-6 space-y-2">

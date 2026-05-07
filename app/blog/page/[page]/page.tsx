@@ -119,6 +119,7 @@ export default async function BlogPagePaginated({ params }: { params: Promise<Pa
 
 function PaginationNav({ current, total }: { current: number; total: number }) {
   if (total <= 1) return null;
+
   const prev = current > 1 ? current - 1 : null;
   const next = current < total ? current + 1 : null;
 
@@ -133,9 +134,11 @@ function PaginationNav({ current, total }: { current: number; total: number }) {
           <ChevronLeft className="h-4 w-4" /> Previous
         </Link>
       )}
+
       <span className="text-sm text-muted-foreground">
         Page {current} of {total}
       </span>
+
       {next && (
         <Link
           href={`/blog/page/${next}`}

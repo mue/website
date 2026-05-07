@@ -22,6 +22,7 @@ export function StepIndicator({ currentStep, onStepClick, canNavigateToStep }: S
     if (!onStepClick) return false;
     if (stepNumber === currentStep) return false;
     if (canNavigateToStep) return canNavigateToStep(stepNumber);
+
     return stepNumber < currentStep;
   };
 
@@ -44,6 +45,7 @@ export function StepIndicator({ currentStep, onStepClick, canNavigateToStep }: S
               )}
             />
           )}
+
           <button
             key={step.number}
             onClick={() => handleStepClick(step.number)}
@@ -67,6 +69,7 @@ export function StepIndicator({ currentStep, onStepClick, canNavigateToStep }: S
                 <span className="text-xs font-semibold">{step.number}</span>
               )}
             </div>
+
             <span
               className={cn(
                 'hidden text-xs transition-colors sm:block',

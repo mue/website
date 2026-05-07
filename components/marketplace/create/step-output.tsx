@@ -145,11 +145,13 @@ export function StepOutput({
                 unoptimized
               />
             )}
+
             <div className="flex-1 space-y-2">
               <div className="flex items-center gap-2">
                 <h3 className="text-xl font-semibold">{metadata.name}</h3>
                 <Badge variant="outline">{getTypeLabel()}</Badge>
               </div>
+
               <p className="text-sm text-muted-foreground">{metadata.description}</p>
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
@@ -187,6 +189,7 @@ export function StepOutput({
                 </span>
               </div>
             )}
+
             {addonType === 'quotes' && (
               <div className="flex items-center gap-2">
                 <FileJson className="h-4 w-4 text-muted-foreground" />
@@ -196,6 +199,7 @@ export function StepOutput({
                 </span>
               </div>
             )}
+
             {addonType === 'settings' && (
               <div className="flex items-center gap-2">
                 <FileJson className="h-4 w-4 text-muted-foreground" />
@@ -213,6 +217,7 @@ export function StepOutput({
             <span className="font-semibold">1.</span>
             <span>Download your addon as a JSON file to save it locally</span>
           </li>
+
           <li className="flex gap-2">
             <span className="font-semibold">2.</span>
             <span>
@@ -220,6 +225,7 @@ export function StepOutput({
               request)
             </span>
           </li>
+
           <li className="flex gap-2">
             <span className="font-semibold">3.</span>
             <span>Once approved, your addon will be available for everyone to use in Mue Tab!</span>
@@ -231,6 +237,7 @@ export function StepOutput({
         <Button variant="outline" onClick={onBack}>
           Back
         </Button>
+
         <div className="flex flex-col gap-3 sm:flex-row">
           <Button variant="outline" onClick={onStartOver}>
             Create Another

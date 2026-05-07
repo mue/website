@@ -158,6 +158,7 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
             <Layers className="h-4 w-4" />
             <span className="hidden sm:inline">Carousel</span>
           </Button>
+
           <Button
             variant={viewMode === 'grid' ? 'secondary' : 'ghost'}
             size="sm"
@@ -218,6 +219,7 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
               );
             })}
           </CarouselContent>
+
           {photos.length > 1 && (
             <>
               <CarouselPrevious className="left-2 bg-background/80 backdrop-blur-sm border-border/60 hover:bg-background" />
@@ -245,6 +247,7 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
                   className="object-cover transition group-hover:scale-105"
                   unoptimized
                 />
+
                 {(photo.photographer || photo.location) && (
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 transition group-hover:opacity-100">
                     <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
@@ -253,6 +256,7 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
                           <Camera className="h-3 w-3 flex-shrink-0" /> {photo.photographer}
                         </p>
                       )}
+
                       {photo.location && (
                         <p className="text-xs truncate flex items-center gap-1.5">
                           <MapPin className="h-3 w-3 flex-shrink-0" /> {photo.location}
@@ -335,6 +339,7 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
                   <Camera className="h-3.5 w-3.5 flex-shrink-0" /> {currentPhoto.photographer}
                 </p>
               )}
+
               {currentPhoto.location && (
                 <p className="text-xs sm:text-sm truncate flex items-center justify-center gap-1.5">
                   <MapPin className="h-3.5 w-3.5 flex-shrink-0" /> {currentPhoto.location}

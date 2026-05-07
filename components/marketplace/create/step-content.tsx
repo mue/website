@@ -138,6 +138,7 @@ export function StepContent({
           <Sparkles className="h-4 w-4" />
           Use Template
         </Button>
+
         <Input
           id="addon-upload-step"
           type="file"
@@ -153,6 +154,7 @@ export function StepContent({
           <Upload className="h-4 w-4" />
           Import Addon
         </Button>
+
         <Button
           variant="outline"
           onClick={() => setShowValidation(!showValidation)}
@@ -205,6 +207,7 @@ export function StepContent({
         <Button variant="outline" onClick={onBack}>
           Back
         </Button>
+
         <Button onClick={onNext} disabled={!canContinue()} className="gap-2">
           Continue
           <ArrowRight className="h-4 w-4" />

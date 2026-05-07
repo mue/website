@@ -160,6 +160,7 @@ export default function Navbar() {
                                   )}
                                 />
                               </div>
+
                               <div>
                                 <div
                                   className={cn(
@@ -223,6 +224,7 @@ export default function Navbar() {
                   <Logo width={100} height={100} className="h-8 w-8" />
                 </Link>
               </SheetClose>
+
               <SheetTitle
                 className="absolute left-1/2 -translate-x-1/2 text-base font-bold"
                 style={{ fontFamily: 'var(--font-lexend-deca)' }}
@@ -244,6 +246,7 @@ export default function Navbar() {
                   Docs
                 </Link>
               </SheetClose>
+
               {navLinks.map(({ href, label, isActive }) => (
                 <SheetClose asChild key={href}>
                   <Link
@@ -268,6 +271,7 @@ export default function Navbar() {
                   </Link>
                 </Button>
               </SheetClose>
+
               <SheetClose asChild>
                 <Button className="w-full" variant="outline" size="sm" asChild>
                   <Link href="https://github.com/mue/mue" target="_blank" rel="noreferrer">

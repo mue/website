@@ -39,6 +39,7 @@ export function BlogContentLightbox({ contentHtml }: BlogContentLightboxProps) {
         setLightboxSrc(img.src);
         setLightboxAlt(img.alt || '');
         setCurrentIndex(index);
+
         if (closeTimer.current) clearTimeout(closeTimer.current);
         setLightboxOpen(true);
         openTimer.current = setTimeout(() => setLightboxVisible(true), 16);

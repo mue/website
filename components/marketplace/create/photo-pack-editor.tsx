@@ -74,7 +74,7 @@ function SortablePhotoItem({
     id: index.toString(),
   });
 
-  // Highlight matching search terms
+  // highlight matching search terms
   const isMatch =
     !searchTerm ||
     photo.photographer?.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -328,6 +328,7 @@ export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEdit
               Drag to reorder, search, and manage your photo collection
             </CardDescription>
           </div>
+
           <div className="flex gap-2">
             <Button variant="outline" size="sm" onClick={shufflePhotos} className="gap-2">
               <Shuffle className="h-4 w-4" />
@@ -365,6 +366,7 @@ export function PhotoPackEditor({ photos, onChange, onDeleteAll }: PhotoPackEdit
           <Button variant="outline" size="sm" onClick={collapseAll}>
             Collapse All
           </Button>
+
           <Button
             variant="outline"
             size="sm"

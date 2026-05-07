@@ -25,11 +25,13 @@ export function DocsToc({ toc }: DocsTocProps) {
 
     const updateActive = () => {
       let current = headingEls[0];
+
       for (const el of headingEls) {
         if (el.getBoundingClientRect().top <= SCROLL_OFFSET) {
           current = el;
         }
       }
+
       setActiveId(current.id);
     };
 
@@ -38,9 +40,10 @@ export function DocsToc({ toc }: DocsTocProps) {
     return () => window.removeEventListener('scroll', updateActive);
   }, [toc]);
 
-  // Scroll the active TOC item into view within the list
+  // scroll the active TOC item into view within the list
   useEffect(() => {
     if (!activeId) return;
+
     const el = itemRefs.current.get(activeId);
     el?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
   }, [activeId]);
@@ -52,6 +55,7 @@ export function DocsToc({ toc }: DocsTocProps) {
       <h2 className="text-xs font-semibold uppercase tracking-widest text-muted-foreground/60">
         On this page
       </h2>
+
       <ul
         ref={listRef}
         className="mt-4 max-h-[calc(100vh-11rem)] space-y-1 overflow-y-auto pr-2 text-sm"

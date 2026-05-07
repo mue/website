@@ -36,6 +36,7 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
           text: description,
           url,
         });
+
         setOpen(false);
       } catch (error) {
         if ((error as Error).name !== 'AbortError') {
@@ -159,7 +160,7 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
                 size="sm"
               >
                 <FaXTwitter className="h-3.5 w-3.5" />
-                X (Twitter)
+                X
               </Button>
               <Button
                 onClick={() => shareToSocial('facebook')}

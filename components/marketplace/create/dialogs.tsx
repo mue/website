@@ -72,6 +72,7 @@ export function SubmitDialog({ open, onOpenChange, submitUrl }: SubmitDialogProp
           <Button variant="outline" onClick={() => onOpenChange(false)}>
             Cancel
           </Button>
+
           <Button
             onClick={() => {
               window.open(submitUrl, '_blank');

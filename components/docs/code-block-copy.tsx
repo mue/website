@@ -7,7 +7,7 @@ import { Check, Copy } from 'lucide-react';
 
 export function CodeBlockCopy() {
   useEffect(() => {
-    // Add copy buttons to code blocks
+    // add copy buttons to code blocks
     const codeBlocks = document.querySelectorAll('.docs-prose pre');
 
     codeBlocks.forEach((block) => {

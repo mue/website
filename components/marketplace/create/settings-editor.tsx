@@ -42,6 +42,7 @@ export function SettingsEditor({ settingsJson, onChange, onFileUpload }: Setting
         <CardTitle>Settings</CardTitle>
         <CardDescription>Upload your Mue Settings JSON file exported from Mue.</CardDescription>
       </CardHeader>
+
       <CardContent className="space-y-4">
         <div>
           <Input

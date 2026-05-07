@@ -23,6 +23,7 @@ export function MetadataForm({ metadata, onChange, onReset }: MetadataFormProps)
             <CardTitle>Metadata</CardTitle>
             <CardDescription>Basic information about your addon</CardDescription>
           </div>
+
           <Button variant="outline" size="sm" onClick={onReset} className="gap-2">
             <RotateCcw className="h-4 w-4" />
             Reset

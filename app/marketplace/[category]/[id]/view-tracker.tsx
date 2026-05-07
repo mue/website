@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+
 import { Eye, Download } from 'lucide-react';
+
 import { useEmbed } from '@/lib/embed-context';
 
 interface ViewTrackerProps {
@@ -21,12 +23,14 @@ export function ViewTracker({
 }: ViewTrackerProps) {
   const [views, setViews] = useState<number | null>(initialViews || null);
   const [downloads, setDownloads] = useState<number | null>(initialDownloads || null);
+
   const [isLoading, setIsLoading] = useState(true);
   const [hasTracked, setHasTracked] = useState(false);
+
   const { isEmbed, sendMessage } = useEmbed();
 
   useEffect(() => {
-    // Only track once per page load
+    // only track once per page load
     if (hasTracked) return;
 
     const trackView = async () => {
@@ -41,16 +45,16 @@ export function ViewTracker({
 
         if (response.ok) {
           const data = await response.json();
-          // API returns {"views": number}
+
           if (data.views !== undefined) {
             setViews(data.views);
           }
+
           if (data.downloads !== undefined) {
             setDownloads(data.downloads);
           }
         }
       } catch (error) {
-        // Silently fail - view tracking is not critical
         console.debug('View tracking unavailable:', error);
       } finally {
         setIsLoading(false);
@@ -60,7 +64,7 @@ export function ViewTracker({
     trackView();
     setHasTracked(true);
 
-    // Send postMessage event in embed mode
+    // send postMessage event in embed mode
     if (isEmbed && itemType && itemDisplayName) {
       sendMessage('marketplace:item:view', {
         id: itemId,
@@ -70,7 +74,6 @@ export function ViewTracker({
     }
   }, [itemId, hasTracked, isEmbed, sendMessage, itemType, itemDisplayName]);
 
-  // Show skeleton while loading
   if (isLoading) {
     return (
       <div className="flex flex-col gap-3 text-sm text-muted-foreground">
@@ -78,6 +81,7 @@ export function ViewTracker({
           <Eye className="h-4 w-4" />
           <div className="h-4 w-16 animate-pulse rounded bg-muted" />
         </div>
+
         <div className="flex items-center gap-3">
           <Download className="h-4 w-4" />
           <div className="h-4 w-16 animate-pulse rounded bg-muted" />
@@ -86,7 +90,6 @@ export function ViewTracker({
     );
   }
 
-  // Don't show if we don't have any data
   if (views === null && downloads === null) return null;
 
   return (
@@ -99,6 +102,7 @@ export function ViewTracker({
           </span>
         </div>
       )}
+
       {downloads !== null && (
         <div className="flex items-center gap-3">
           <Download className="h-4 w-4" />

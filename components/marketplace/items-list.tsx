@@ -1,7 +1,12 @@
 'use client';
+
+import { useState } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+import { Library as LibraryIcon, Heart } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 import {
@@ -11,11 +16,6 @@ import {
   slugifyAuthor,
   MarketplaceItemSummary,
 } from '@/lib/marketplace';
-
-import { Library as LibraryIcon, Heart } from 'lucide-react';
-
-import { useRouter } from 'next/navigation';
-
 import { useFavoritesContext } from '@/lib/favorites-context';
 import { useEmbed } from '@/lib/embed-context';
 
@@ -144,6 +144,7 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
                     {collectionNameMap.get(collection) ?? collection.replace(/_/g, ' ')}
                   </button>
                 ))}
+
                 {item.in_collections.length > 2 && (
                   <span className="text-xs text-muted-foreground">
                     +{item.in_collections.length - 2} more

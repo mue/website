@@ -71,6 +71,7 @@ export function TemplatePicker({
                       </Badge>
                     </div>
                   )}
+
                   {template.content.quotes && (
                     <div className="flex items-center justify-between">
                       <span>Quotes:</span>
@@ -79,6 +80,7 @@ export function TemplatePicker({
                       </Badge>
                     </div>
                   )}
+
                   {template.content.settingsJson && (
                     <div className="flex items-center justify-between">
                       <span>Settings:</span>

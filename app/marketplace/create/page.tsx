@@ -202,7 +202,7 @@ export default function CreateAddonPage() {
     };
     reader.readAsText(file);
 
-    // Reset input so the same file can be uploaded again
+    // reset input so the same file can be uploaded again
     event.target.value = '';
   };
 
@@ -218,7 +218,7 @@ export default function CreateAddonPage() {
         const parsed = JSON.parse(settingsJson);
         const ignoredKeys = ['language', 'statsdata', 'nextquote', 'installed', 'nextImage'];
 
-        // Filter out ignored keys
+        // filter out ignored keys
         const filteredSettings = Object.fromEntries(
           Object.entries(parsed).filter(([key]) => !ignoredKeys.includes(key)),
         );
@@ -264,6 +264,7 @@ export default function CreateAddonPage() {
       setShowErrorDialog(true);
       return false;
     }
+
     return true;
   };
 
@@ -315,7 +316,6 @@ export default function CreateAddonPage() {
     const encodedContent = encodeURIComponent(jsonString);
     const encodedFileName = encodeURIComponent(`${fileName}.json`);
 
-    // GitHub URL to create a new file in a fork with PR
     const githubUrl = `https://github.com/mue/marketplace/new/main/data/${folder}?filename=${encodedFileName}&value=${encodedContent}`;
 
     setSubmitUrl(githubUrl);
@@ -328,10 +328,12 @@ export default function CreateAddonPage() {
     setCurrentStep(1);
     setAddonType('photos');
     resetMetadata();
+
     setPhotos([{ photographer: '', location: '', url: { default: '' } }]);
     setQuotes([{ quote: '', author: '' }]);
     setSettingsJson('');
-    clearDraft(); // Clear the saved draft
+
+    clearDraft();
   };
 
   const renderStep = () => {

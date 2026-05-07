@@ -86,11 +86,11 @@ export default async function MarketplaceCollectionPage({
   const isEmbed = sp?.embed === 'true';
   const isPreview = sp?.preview === 'true';
 
-  // Helper to build URLs with embed/preview params preserved
   const buildEmbedUrl = (path: string, hasExistingParams = false) => {
     if (!isEmbed) return path;
     const separator = hasExistingParams ? '&' : '?';
     const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
+
     return `${path}${separator}${params}`;
   };
 
@@ -99,7 +99,6 @@ export default async function MarketplaceCollectionPage({
   const items = data.items ?? [];
   const hasItems = items.length > 0;
 
-  // Create collection name map for the grid
   const collectionNameMap = new Map<string, string>();
 
   return (

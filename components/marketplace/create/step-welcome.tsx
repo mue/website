@@ -117,6 +117,7 @@ export function StepWelcome({ onNext }: StepWelcomeProps) {
                     Your current draft will be permanently deleted and cannot be recovered.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
+
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
                   <AlertDialogAction onClick={confirmStartFresh}>Delete Draft</AlertDialogAction>

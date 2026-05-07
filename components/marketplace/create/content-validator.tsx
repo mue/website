@@ -27,11 +27,12 @@ export function ContentValidator({
 }: ContentValidatorProps) {
   const issues: ValidationIssue[] = [];
 
-  // Validate photos
+  // validate photos
   if (addonType === 'photos' && photos) {
-    // Check for duplicates
+    // check for duplicates
     const photoUrls = photos.map((p) => p.url.default).filter(Boolean);
     const duplicates = photoUrls.filter((url, index) => photoUrls.indexOf(url) !== index);
+
     if (duplicates.length > 0) {
       issues.push({
         type: 'warning',
@@ -40,10 +41,11 @@ export function ContentValidator({
       });
     }
 
-    // Check for invalid URLs
+    // check for invalid URLs
     const invalidUrls = photos.filter((photo) => {
       const url = photo.url.default;
       if (!url) return false;
+
       try {
         new URL(url);
         return !url.match(/\.(jpg|jpeg|png|webp|gif)$/i);
@@ -51,6 +53,7 @@ export function ContentValidator({
         return true;
       }
     });
+
     if (invalidUrls.length > 0) {
       issues.push({
         type: 'error',
@@ -59,7 +62,7 @@ export function ContentValidator({
       });
     }
 
-    // Check for missing metadata
+    // check for missing metadata
     const missingMetadata = photos.filter((photo) => !photo.photographer || !photo.location);
     if (missingMetadata.length > 0 && photos.some((p) => p.url.default)) {
       issues.push({
@@ -69,7 +72,7 @@ export function ContentValidator({
       });
     }
 
-    // Info about photo count
+    // photo count
     const validPhotos = photos.filter((p) => p.url.default).length;
     if (validPhotos > 0) {
       issues.push({
@@ -80,9 +83,9 @@ export function ContentValidator({
     }
   }
 
-  // Validate quotes
+  // validate quotes
   if (addonType === 'quotes' && quotes) {
-    // Check for duplicates
+    // check for duplicates
     const quoteTexts = quotes.map((q) => q.quote?.trim().toLowerCase()).filter(Boolean);
     const duplicates = quoteTexts.filter((text, index) => quoteTexts.indexOf(text) !== index);
     if (duplicates.length > 0) {
@@ -93,7 +96,7 @@ export function ContentValidator({
       });
     }
 
-    // Check quote length
+    // check quote length
     const tooShort = quotes.filter((q) => q.quote && q.quote.trim().length < 10);
     if (tooShort.length > 0) {
       issues.push({
@@ -112,7 +115,7 @@ export function ContentValidator({
       });
     }
 
-    // Check for missing authors
+    // check for missing authors
     const missingAuthors = quotes.filter((q) => q.quote && q.quote.trim() && !q.author?.trim());
     if (missingAuthors.length > 0) {
       issues.push({
@@ -122,7 +125,7 @@ export function ContentValidator({
       });
     }
 
-    // Info about quote count
+    // quote count
     const validQuotes = quotes.filter((q) => q.quote && q.quote.trim()).length;
     if (validQuotes > 0) {
       issues.push({
@@ -133,7 +136,7 @@ export function ContentValidator({
     }
   }
 
-  // Validate settings JSON
+  // validate settings JSON
   if (addonType === 'settings' && settingsJson) {
     try {
       const parsed = JSON.parse(settingsJson);
@@ -153,7 +156,7 @@ export function ContentValidator({
         });
       }
 
-      // Check for common required settings
+      // check for common required settings
       const recommendedKeys = ['backgroundType', 'language', 'timezone'];
       const missingRecommended = recommendedKeys.filter((key) => !keys.includes(key));
       if (missingRecommended.length > 0 && keys.length > 0) {
@@ -212,6 +215,7 @@ export function ContentValidator({
             {errors.length} Error{errors.length > 1 ? 's' : ''}
           </Badge>
         )}
+
         {warnings.length > 0 && (
           <Badge variant="outline" className="border-yellow-500/60 text-yellow-500">
             {warnings.length} Warning{warnings.length > 1 ? 's' : ''}

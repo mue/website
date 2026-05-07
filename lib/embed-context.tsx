@@ -28,34 +28,41 @@ export function EmbedProvider({ children }: { children: ReactNode }) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+
   const isEmbed = searchParams?.get('embed') === 'true';
   const isPreview = searchParams?.get('preview') === 'true';
+
   const themeParam = searchParams?.get('theme') as 'light' | 'dark' | 'system' | null;
   const [config, setConfig] = useState<EmbedConfig>({});
+
   const previousPathRef = useRef(pathname);
 
-  // Helper to build URLs with embed/preview/theme params preserved
+  // helper to build URLs with embed/preview/theme params preserved
   const buildEmbedUrl = (path: string, hasExistingParams = false) => {
     if (!isEmbed) return path;
+
     const separator = hasExistingParams ? '&' : '?';
     const params = [];
+
     params.push('embed=true');
     if (isPreview) params.push('preview=true');
     if (themeParam) params.push(`theme=${themeParam}`);
+
     return `${path}${separator}${params.join('&')}`;
   };
 
-  // Apply theme from URL parameter on mount
+  // apply theme from URL parameter on mount
   useEffect(() => {
     if (isEmbed && themeParam && typeof window !== 'undefined') {
       const themeEvent = new CustomEvent('embed-theme-change', {
         detail: { theme: themeParam },
       });
+
       window.dispatchEvent(themeEvent);
     }
   }, [isEmbed, themeParam]);
 
-  // Send ready message when embed mode is initialized
+  // send ready message when embed mode is initialized
   useEffect(() => {
     if (isEmbed && typeof window !== 'undefined') {
       window.parent.postMessage({ type: 'marketplace:ready', payload: null }, '*');
@@ -72,7 +79,7 @@ export function EmbedProvider({ children }: { children: ReactNode }) {
       if (type === 'marketplace:config') {
         setConfig(payload);
 
-        // Apply theme if provided
+        // apply theme if provided
         if (payload.theme && typeof window !== 'undefined') {
           const themeEvent = new CustomEvent('embed-theme-change', {
             detail: { theme: payload.theme },
@@ -80,9 +87,10 @@ export function EmbedProvider({ children }: { children: ReactNode }) {
           window.dispatchEvent(themeEvent);
         }
       } else if (type === 'marketplace:navigate') {
-        // Handle navigation command from parent
+        // handle navigation command from parent
         if (payload?.path) {
           const embedParams = new URLSearchParams();
+
           embedParams.set('embed', 'true');
           if (isPreview) embedParams.set('preview', 'true');
           if (themeParam) embedParams.set('theme', themeParam);
@@ -97,7 +105,7 @@ export function EmbedProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener('message', handleMessage);
   }, [isEmbed, router, isPreview, themeParam]);
 
-  // Track navigation changes and send to parent
+  // track navigation changes and send to parent
   useEffect(() => {
     if (isEmbed && pathname !== previousPathRef.current) {
       const search = searchParams?.toString();
@@ -128,6 +136,7 @@ export function EmbedProvider({ children }: { children: ReactNode }) {
 
 export function useEmbed() {
   const context = useContext(EmbedContext);
+
   if (!context) {
     throw new Error('useEmbed must be used within EmbedProvider');
   }

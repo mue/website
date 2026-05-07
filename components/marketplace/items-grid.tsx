@@ -1,7 +1,9 @@
 'use client';
+
+import { useState } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
 
 import { cn } from '@/lib/utils';
 import {
@@ -136,6 +138,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
             >
               {getMarketplaceTypeLabel(item.type)}
             </button>
+
             {item.in_collections.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {item.in_collections.slice(0, 3).map((collection) => (
@@ -158,6 +161,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
                     {collectionNameMap.get(collection) ?? formatCollectionName(collection)}
                   </button>
                 ))}
+
                 {item.in_collections.length > 3 && (
                   <span className="text-xs text-muted-foreground">
                     +{item.in_collections.length - 3} more

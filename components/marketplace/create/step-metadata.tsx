@@ -38,6 +38,7 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
           <Label htmlFor="name">
             Name <span className="text-destructive">*</span>
           </Label>
+
           <Input
             id="name"
             value={metadata.name}
@@ -51,6 +52,7 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
           <Label htmlFor="description">
             Description <span className="text-destructive">*</span>
           </Label>
+
           <Textarea
             id="description"
             value={metadata.description}
@@ -66,6 +68,7 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
             <Label htmlFor="version">
               Version <span className="text-destructive">*</span>
             </Label>
+
             <Input
               id="version"
               value={metadata.version}
@@ -79,6 +82,7 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
             <Label htmlFor="author">
               Author <span className="text-destructive">*</span>
             </Label>
+
             <Input
               id="author"
               value={metadata.author}
@@ -93,6 +97,7 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
           <Label htmlFor="icon_url">
             Icon URL <span className="text-destructive">*</span>
           </Label>
+
           <ImageUrlInput
             id="icon_url"
             value={metadata.icon_url}
@@ -107,6 +112,7 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
 
         <div className="flex flex-col gap-2">
           <Label htmlFor="screenshot_url">Screenshot URL (Optional)</Label>
+
           <ImageUrlInput
             id="screenshot_url"
             value={metadata.screenshot_url}
@@ -132,6 +138,7 @@ export function StepMetadata({ metadata, onChange, onNext, onBack }: StepMetadat
         <Button variant="outline" onClick={onBack}>
           Back
         </Button>
+
         <Button onClick={onNext} disabled={!canContinue} className="gap-2">
           Continue
           <ArrowRight className="h-4 w-4" />

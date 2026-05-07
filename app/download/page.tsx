@@ -230,6 +230,7 @@ export default function DownloadPage() {
 
         <div className="mt-16 flex flex-col items-center gap-4 text-sm text-muted-foreground">
           <p>Need help getting started?</p>
+
           <Button variant="outline" asChild>
             <Link href="/docs/introduction">
               View Documentation

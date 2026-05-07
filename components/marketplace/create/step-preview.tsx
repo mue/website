@@ -181,6 +181,7 @@ export function StepPreview({
                       unoptimized
                     />
                   )}
+
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100">
                     <div className="absolute bottom-2 left-2 text-xs text-white">
                       <p className="font-medium">{photo.location}</p>

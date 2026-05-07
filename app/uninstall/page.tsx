@@ -53,6 +53,7 @@ export default function UninstallPage() {
             Mue is always improving. If you&apos;d like to give it another shot, you can reinstall
             it in seconds.
           </p>
+
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild>
               <Link href="/download" className="flex items-center gap-2">

@@ -1,7 +1,9 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+
+import { useCallback, useEffect, useMemo, useState } from 'react';
+
 import {
   Command,
   CommandDialog,
@@ -13,6 +15,7 @@ import {
 } from '@/components/ui/command';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+
 import { cn } from '@/lib/utils';
 import type { DocMeta } from '@/lib/docs';
 
@@ -43,6 +46,7 @@ export function DocsSearch({ docs }: DocsSearchProps) {
         setOpen((prev) => !prev);
       }
     };
+
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, []);
@@ -70,6 +74,7 @@ export function DocsSearch({ docs }: DocsSearchProps) {
       <CommandDialog open={open} onOpenChange={setOpen} className="sm:max-w-xl">
         <Command>
           <CommandInput placeholder="Search documentation..." />
+
           <CommandList>
             <CommandEmpty>No results found.</CommandEmpty>
             <CommandGroup heading="Pages">

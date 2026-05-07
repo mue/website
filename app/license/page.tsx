@@ -138,6 +138,7 @@ export default function LicensePage() {
               collaboration, and empowering developers to create and contribute. All of our code is
               publicly available on GitHub, and we welcome contributions from everyone.
             </p>
+
             <div className="mt-6 grid gap-4 sm:grid-cols-2">
               <div className="rounded-xl border border-border bg-background/40 p-4">
                 <h4 className="font-semibold text-foreground">Transparent</h4>
@@ -145,6 +146,7 @@ export default function LicensePage() {
                   Every line of code is open for inspection and improvement.
                 </p>
               </div>
+
               <div className="rounded-xl border border-border bg-background/40 p-4">
                 <h4 className="font-semibold text-foreground">Community-Driven</h4>
                 <p className="mt-1.5 text-sm text-muted-foreground">

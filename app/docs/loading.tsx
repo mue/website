@@ -3,7 +3,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 export default function DocsLoading() {
   return (
     <div className="space-y-10">
-      {/* Header */}
+      {/* header */}
       <div className="border-b pb-6 space-y-6">
         <Skeleton className="h-4 w-28" />
 
@@ -17,14 +17,14 @@ export default function DocsLoading() {
         </div>
       </div>
 
-      {/* Content */}
+      {/* content */}
       <div className="space-y-12">
-        {/* "Pick a storyline" */}
         <div className="space-y-4">
           <div className="space-y-1">
             <Skeleton className="h-6 w-40" />
             <Skeleton className="h-4 w-80" />
           </div>
+
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {[...Array(3)].map((_, i) => (
               <div key={i} className="flex flex-col gap-4 rounded-2xl border bg-card/70 p-6">
@@ -40,12 +40,13 @@ export default function DocsLoading() {
           </div>
         </div>
 
-        {/* "All documentation" */}
+        {/* all docs */}
         <div className="space-y-4">
           <div className="space-y-1">
             <Skeleton className="h-6 w-40" />
             <Skeleton className="h-4 w-64" />
           </div>
+
           <div className="grid gap-6 lg:grid-cols-2">
             {[...Array(4)].map((_, i) => (
               <div key={i} className="flex flex-col rounded-2xl border bg-card/70 p-6">
@@ -56,6 +57,7 @@ export default function DocsLoading() {
                   </div>
                   <Skeleton className="h-4 w-14" />
                 </div>
+
                 <div className="space-y-2">
                   {[...Array(3)].map((_, j) => (
                     <Skeleton key={j} className="h-9 w-full rounded-lg" />

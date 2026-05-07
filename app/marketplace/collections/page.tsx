@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
 import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
+
 import {
   getMarketplaceCollections,
   getMarketplaceItems,
@@ -37,19 +38,19 @@ export default async function CollectionsPage({
   const isEmbed = sp?.embed === 'true';
   const isPreview = sp?.preview === 'true';
 
-  // Helper to build URLs with embed/preview params preserved
   const buildEmbedUrl = (path: string) => {
     if (!isEmbed) return path;
     const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
 
     return `${path}?${params}`;
   };
+
   const [collections, items] = await Promise.all([
     getMarketplaceCollections(),
     getMarketplaceItems(),
   ]);
 
-  // Calculate content types and item count for each collection
+  // calculate content types and item count for each collection
   const collectionsWithMetadata = collections.map((collection) => {
     const collectionItems = items.filter((item) => item.in_collections.includes(collection.name));
     const types = [...new Set(collectionItems.map((item) => item.type))];
@@ -60,7 +61,7 @@ export default async function CollectionsPage({
     };
   });
 
-  // Filter out collections with no items and sort by item count (most items first), then alphabetically
+  // filter out collections with no items and sort by item count (most items first), then alphabetically
   const sortedCollections = collectionsWithMetadata
     .filter((collection) => collection.itemCount > 0)
     .sort((a, b) => {

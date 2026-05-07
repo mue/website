@@ -11,6 +11,7 @@ export const BLOG_IMAGE_GRADIENTS = [
 
 export function blogImageGradientIndex(key: string): number {
   let hash = 0;
+
   for (let i = 0; i < key.length; i++) {
     hash = (hash * 33 + key.charCodeAt(i)) >>> 0;
   }

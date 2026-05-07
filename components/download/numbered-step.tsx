@@ -14,6 +14,7 @@ export function NumberedStep({ number, title, description, isLast }: NumberedSte
         </span>
         {!isLast && <div className="mt-1 w-px flex-1 bg-border" />}
       </div>
+
       <div className={!isLast ? 'pb-8' : ''}>
         <h3 className="font-semibold text-foreground">{title}</h3>
         <p className="mt-1 text-sm text-muted-foreground">{description}</p>

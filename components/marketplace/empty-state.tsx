@@ -41,6 +41,7 @@ export function MarketplaceEmptyState({
               <Link href={action.href}>{action.label}</Link>
             </Button>
           )}
+
           {secondaryAction && (
             <Button asChild variant="outline">
               <Link href={secondaryAction.href}>{secondaryAction.label}</Link>
@@ -75,7 +76,7 @@ export function NoCollectionItemsEmptyState() {
     <MarketplaceEmptyState
       icon={Library}
       title="No items in this collection yet"
-      description="This collection doesn't currently have any downloadable items. Check back later or explore other collections."
+      description="This collection doesn't currently have any items. Check back later or explore other collections."
       action={{
         label: 'Browse Collections',
         href: '/marketplace#collections',

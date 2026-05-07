@@ -1,10 +1,14 @@
 'use client';
 
-import Image from 'next/image';
 import { useEffect, useCallback, useState, useRef } from 'react';
+
+import Image from 'next/image';
+
 import { X, ChevronLeft, ChevronRight, User, Calendar, Tag } from 'lucide-react';
-import { type ShowcaseItem } from '@/lib/showcase';
+
 import { Badge } from '@/components/ui/badge';
+
+import { type ShowcaseItem } from '@/lib/showcase';
 
 type ShowcaseLightboxProps = {
   item: ShowcaseItem | null;
@@ -25,6 +29,7 @@ export function ShowcaseLightbox({
 }: ShowcaseLightboxProps) {
   const [visible, setVisible] = useState(false);
   const [displayItem, setDisplayItem] = useState<ShowcaseItem | null>(null);
+
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -33,12 +38,15 @@ export function ShowcaseLightbox({
       if (closeTimer.current) clearTimeout(closeTimer.current);
       setVisible(false);
       setDisplayItem(item);
+
       openTimer.current = setTimeout(() => setVisible(true), 16);
     } else {
       if (openTimer.current) clearTimeout(openTimer.current);
       setVisible(false);
+
       closeTimer.current = setTimeout(() => setDisplayItem(null), 250);
     }
+
     return () => {
       if (openTimer.current) clearTimeout(openTimer.current);
       if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -57,6 +65,7 @@ export function ShowcaseLightbox({
   useEffect(() => {
     if (!item) return;
     window.addEventListener('keydown', handleKeyDown);
+
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [item, handleKeyDown]);
 

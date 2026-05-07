@@ -18,7 +18,7 @@ interface ItemActionsProps {
   description?: string;
   category: string;
   itemType?: string;
-  itemData?: any; // Full item data for postMessage
+  itemData?: any; // full item data for postMessage
   isPreview?: boolean;
 }
 
@@ -36,7 +36,7 @@ export function ItemActions({
   const isItemFavorited = isFavorite(category, itemId);
   const [isInstalled, setIsInstalled] = useState(false);
 
-  // Listen for installation status updates from parent
+  // listen for installation status updates from parent
   useEffect(() => {
     if (!isEmbed) return;
 
@@ -50,7 +50,7 @@ export function ItemActions({
 
     window.addEventListener('message', handleMessage);
 
-    // Request current installation status
+    // request current installation status
     sendMessage('marketplace:item:check-installed', {
       id: itemId,
       type: itemType,
@@ -88,7 +88,7 @@ export function ItemActions({
     window.open(reportUrl, '_blank', 'noopener,noreferrer');
   };
 
-  // Get the current page URL (client-side only), stripping embed parameter for sharing
+  // get the current page URL (client-side only), stripping embed parameter for sharing
   const url =
     typeof window !== 'undefined'
       ? (() => {

@@ -35,7 +35,6 @@ export default async function AuthorsPage({
   const isEmbed = sp?.embed === 'true';
   const items = await getMarketplaceItems();
 
-  // Group items by author
   const authorMap = new Map<string, { items: typeof items; types: Set<string> }>();
 
   items.forEach((item) => {
@@ -50,7 +49,7 @@ export default async function AuthorsPage({
     authorData.types.add(item.type);
   });
 
-  // Convert to array and calculate metadata
+  // convert to array and calculate metadata
   const authorsWithMetadata = Array.from(authorMap.entries()).map(([name, data]) => ({
     name,
     slug: slugifyAuthor(name),
@@ -58,11 +57,12 @@ export default async function AuthorsPage({
     contentTypes: Array.from(data.types),
   }));
 
-  // Sort by item count (most items first), then alphabetically
+  // sort by item count (most items first), then alphabetically
   const sortedAuthors = authorsWithMetadata.sort((a, b) => {
     if (b.itemCount !== a.itemCount) {
       return b.itemCount - a.itemCount;
     }
+
     return a.name.localeCompare(b.name);
   });
 

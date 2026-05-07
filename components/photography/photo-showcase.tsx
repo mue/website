@@ -93,7 +93,7 @@ export function PhotoShowcase() {
 
   const currentPhoto = filteredPhotos[lightboxIndex];
 
-  // Keyboard navigation for lightbox
+  // keyboard navigation for lightbox
   useEffect(() => {
     if (!lightboxOpen) return;
 
@@ -135,7 +135,7 @@ export function PhotoShowcase() {
 
   return (
     <div className="space-y-8">
-      {/* Category Filter */}
+      {/* category filter */}
       <div className="flex flex-wrap items-center justify-center gap-2">
         <Button
           variant={selectedCategory === 'all' ? 'default' : 'outline'}
@@ -144,6 +144,7 @@ export function PhotoShowcase() {
         >
           All Categories
         </Button>
+
         {categories.slice(0, 8).map((category) => (
           <Button
             key={category}
@@ -156,7 +157,7 @@ export function PhotoShowcase() {
         ))}
       </div>
 
-      {/* Stats */}
+      {/* stats */}
       <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
         <div className="flex items-center gap-2">
           <Camera className="h-4 w-4 text-primary" />
@@ -164,6 +165,7 @@ export function PhotoShowcase() {
             <strong className="text-foreground">{photographers.length}+</strong> photographers
           </span>
         </div>
+
         <div className="flex items-center gap-2">
           <MapPin className="h-4 w-4 text-primary" />
           <span>
@@ -172,7 +174,7 @@ export function PhotoShowcase() {
         </div>
       </div>
 
-      {/* Photo Grid */}
+      {/* photo grid */}
       {filteredPhotos.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filteredPhotos.map((photo, index) => (
@@ -189,10 +191,12 @@ export function PhotoShowcase() {
                 className="object-cover transition duration-300 group-hover:scale-105"
                 unoptimized
               />
+
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                 <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
                   <div className="flex items-start gap-2">
                     <Camera className="mt-0.5 h-4 w-4 flex-shrink-0" />
+
                     <div className="min-w-0 flex-1 text-left">
                       <p className="truncate text-sm font-medium">{photo.photographer}</p>
                       {photo.location && (
@@ -201,6 +205,7 @@ export function PhotoShowcase() {
                           <span className="truncate">{photo.location}</span>
                         </p>
                       )}
+
                       <p className="mt-1 text-xs opacity-75">{photo.category}</p>
                     </div>
                   </div>
@@ -218,7 +223,7 @@ export function PhotoShowcase() {
         </div>
       )}
 
-      {/* Lightbox Modal */}
+      {/* lightbox */}
       {lightboxOpen && currentPhoto && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 p-2 sm:p-4"
@@ -275,7 +280,7 @@ export function PhotoShowcase() {
             </div>
           </div>
 
-          {/* Photo Details */}
+          {/* details */}
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 max-w-[90vw] rounded-lg bg-black/80 px-4 py-3 text-white backdrop-blur">
             <div className="flex items-start gap-3">
               <Camera className="mt-0.5 h-5 w-5 flex-shrink-0" />
@@ -288,6 +293,7 @@ export function PhotoShowcase() {
                       {currentPhoto.location}
                     </span>
                   )}
+
                   <span className="text-xs opacity-75">{currentPhoto.category}</span>
                   {currentPhoto.camera && (
                     <span className="text-xs opacity-75">{currentPhoto.camera}</span>

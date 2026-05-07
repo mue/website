@@ -33,7 +33,7 @@ function SidebarSection({
   depth?: number;
 }) {
   const normalizedActiveHref = activeHref.replace(/\/$/, '');
-  // Use the node's actual href instead of reconstructing the path
+  // use the node's actual href instead of reconstructing the path
   const normalizedNodeHref = node.href.replace(/\/$/, '');
 
   const isActive = normalizedNodeHref === normalizedActiveHref;

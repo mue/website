@@ -20,7 +20,7 @@ export interface ContentTemplate {
 }
 
 export const templates: ContentTemplate[] = [
-  // Photo Pack Templates
+  // photo packs
   {
     id: 'nature-photography',
     name: 'Nature Photography',
@@ -110,7 +110,7 @@ export const templates: ContentTemplate[] = [
     },
   },
 
-  // Quote Pack Templates
+  // quote packs
   {
     id: 'motivational-quotes',
     name: 'Motivational Quotes',
@@ -221,7 +221,7 @@ export const templates: ContentTemplate[] = [
     },
   },
 
-  // Settings Templates
+  // preset settings
   {
     id: 'minimal-theme',
     name: 'Minimal Theme',

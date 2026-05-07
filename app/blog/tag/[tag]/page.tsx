@@ -19,6 +19,7 @@ interface Params {
 export async function generateStaticParams() {
   const posts = await getAllBlogPosts();
   const tagSet = new Set<string>();
+
   posts.forEach((p) => p.frontmatter.tags?.forEach((t) => tagSet.add(t.toLowerCase())));
   return Array.from(tagSet).map((tag) => ({ tag }));
 }
@@ -26,6 +27,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { tag } = await params;
   const readable = tag.replace(/-/g, ' ');
+
   const title = readable.charAt(0).toUpperCase() + readable.slice(1);
   const description = `Articles tagged with ${readable} on the Mue Blog.`;
 

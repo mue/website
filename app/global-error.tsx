@@ -33,7 +33,7 @@ export default function GlobalError({
                 Application Error
               </h1>
               <p className="max-w-xl text-pretty text-base text-muted-foreground sm:text-lg">
-                A critical error occurred in the application. Please refresh the page to continue.
+                A critical error occurred on the website. Please refresh the page to continue.
               </p>
             </div>
 
@@ -42,6 +42,7 @@ export default function GlobalError({
                 <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-destructive/80">
                   Development Error Details
                 </p>
+
                 <div className="space-y-2">
                   <pre className="overflow-x-auto text-xs text-muted-foreground">
                     {error.message}
@@ -75,6 +76,7 @@ export default function GlobalError({
               <p className="mb-3 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                 If the problem persists
               </p>
+
               <ul className="space-y-2 text-muted-foreground">
                 <li className="flex items-start gap-2">
                   <span className="mt-1 inline-flex h-1.5 w-6 shrink-0 rounded-full bg-gradient-to-r from-[#FF5C25] to-[#FF456E]" />

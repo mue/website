@@ -32,6 +32,7 @@ export function PresetSettingsTable({ settings }: PresetSettingsTableProps) {
       const jsonString = JSON.stringify(value, null, 2);
       return <pre className="whitespace-pre-wrap break-words overflow-hidden">{jsonString}</pre>;
     }
+
     return <span className="break-all">{String(value)}</span>;
   };
 

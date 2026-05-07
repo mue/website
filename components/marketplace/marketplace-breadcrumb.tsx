@@ -48,6 +48,7 @@ export function MarketplaceBreadcrumb(props: BreadcrumbProps) {
             <Link href="/marketplace">Marketplace</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
+
         <BreadcrumbSeparator />
 
         {props.type === 'collections' && (
@@ -63,7 +64,9 @@ export function MarketplaceBreadcrumb(props: BreadcrumbProps) {
                 <Link href="/marketplace/collections">Collections</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
+
             <BreadcrumbSeparator />
+
             <BreadcrumbItem>
               <BreadcrumbPage>{props.collectionName}</BreadcrumbPage>
             </BreadcrumbItem>
@@ -79,7 +82,9 @@ export function MarketplaceBreadcrumb(props: BreadcrumbProps) {
                 </Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
+
             <BreadcrumbSeparator />
+
             <BreadcrumbItem>
               <BreadcrumbPage>{props.itemName}</BreadcrumbPage>
             </BreadcrumbItem>
@@ -99,7 +104,9 @@ export function MarketplaceBreadcrumb(props: BreadcrumbProps) {
                 <Link href="/marketplace/authors">Authors</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
+
             <BreadcrumbSeparator />
+
             <BreadcrumbItem>
               <BreadcrumbPage>{props.authorName}</BreadcrumbPage>
             </BreadcrumbItem>

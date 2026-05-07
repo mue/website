@@ -226,5 +226,6 @@ export async function getMarketplaceCollection(name: string): Promise<Marketplac
   const payload = await fetchMarketplace<MarketplaceResponse<MarketplaceCollectionDetail>>(
     `collection/${name}`,
   );
+
   return payload.data;
 }
