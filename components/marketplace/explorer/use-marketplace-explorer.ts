@@ -58,7 +58,7 @@ export function useMarketplaceExplorer(
     if (stored && storedHour && parseInt(storedHour, 10) === currentHour) {
       return parseInt(stored, 10);
     }
-  
+
     const newSeed = currentHour % 10000;
 
     sessionStorage.setItem('mkt_random_seed', String(newSeed));
@@ -75,7 +75,6 @@ export function useMarketplaceExplorer(
     const p = parseInt(searchParams?.get('page') ?? '1', 10) || 1;
     const ppParam = parseInt(searchParams?.get('pp') ?? '0', 10) || 0;
     return { s, t, c, so, p, ppParam };
-
   }, [searchParams]);
 
   const [query, setQuery] = useState(initialParams.s);
@@ -234,7 +233,16 @@ export function useMarketplaceExplorer(
           return stableHash(a.name, randomSeed) - stableHash(b.name, randomSeed);
       }
     });
-  }, [collectionFilter, items, query, typeFilter, sortBy, randomSeed, showFavoritesOnly, isFavorite]);
+  }, [
+    collectionFilter,
+    items,
+    query,
+    typeFilter,
+    sortBy,
+    randomSeed,
+    showFavoritesOnly,
+    isFavorite,
+  ]);
 
   useEffect(() => {
     if (isEmbed && query) {
@@ -269,8 +277,7 @@ export function useMarketplaceExplorer(
       if (startTime === null) startTime = ts;
 
       const progress = Math.min(1, (ts - startTime) / duration);
-      const eased =
-        progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
+      const eased = progress < 0.5 ? 2 * progress * progress : -1 + (4 - 2 * progress) * progress;
       window.scrollTo(0, startY + distance * eased);
 
       if (progress < 1) requestAnimationFrame(step);

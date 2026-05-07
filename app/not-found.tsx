@@ -19,7 +19,8 @@ export default function NotFound() {
         </h1>
 
         <p className="max-w-md text-pretty text-base text-muted-foreground">
-          The page you are looking for does not exist. Double-check the URL or return to the homepage to explore Mue.
+          The page you are looking for does not exist. Double-check the URL or return to the
+          homepage to explore Mue.
         </p>
 
         <div className="flex flex-wrap items-center justify-center gap-3">

@@ -12,7 +12,6 @@ import { getAllBlogPosts, getBlogPostBySlug, type BlogPost } from '@/lib/blog';
 import { formatDate } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 
-
 export const metadata: Metadata = {
   title: 'Latest Changelog',
   description: 'View the latest release notes and updates for Mue.',

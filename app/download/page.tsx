@@ -75,7 +75,8 @@ const steps = [
   {
     number: 1,
     title: 'Install the extension',
-    description: 'Click the download buttons above to add Mue to your browser from the official store.',
+    description:
+      'Click the download buttons above to add Mue to your browser from the official store.',
   },
   {
     number: 2,
@@ -85,8 +86,7 @@ const steps = [
   {
     number: 3,
     title: 'Customise your space',
-    description:
-      'Explore settings to tailor backgrounds, widgets, and more to make the tab yours!',
+    description: 'Explore settings to tailor backgrounds, widgets, and more to make the tab yours!',
   },
 ];
 
@@ -141,7 +141,8 @@ export default function DownloadPage() {
             <AlertTriangle className="mx-auto mb-3 h-8 w-8 text-yellow-500" />
             <p className="text-base font-semibold text-foreground">Desktop only</p>
             <p className="mt-1.5 text-sm text-muted-foreground">
-              Mue is a browser extension for desktop computers. Visit this page on your computer to install.
+              Mue is a browser extension for desktop computers. Visit this page on your computer to
+              install.
             </p>
           </div>
         )}
@@ -151,8 +152,8 @@ export default function DownloadPage() {
         </h1>
 
         <p className="mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-          Currently available for Chrome, Edge, Firefox, and Whale. Get started in less than a minute
-          and begin customising your new tab experience!
+          Currently available for Chrome, Edge, Firefox, and Whale. Get started in less than a
+          minute and begin customising your new tab experience!
         </p>
 
         <div className="mt-16 grid w-full gap-6 grid-cols-1 sm:grid-cols-2">
@@ -214,7 +215,9 @@ export default function DownloadPage() {
             What happens next?
           </h2>
 
-          <p className="mt-2 text-sm text-muted-foreground">Get up and running in under a minute.</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Get up and running in under a minute.
+          </p>
           <div className="mt-8">
             {steps.map((step, i) => (
               <NumberedStep

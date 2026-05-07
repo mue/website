@@ -40,9 +40,7 @@ export function FilterChips({
           variant={showFavoritesOnly ? 'default' : 'outline'}
           className={cn(
             'cursor-pointer transition flex items-center gap-1',
-            showFavoritesOnly
-              ? 'hover:bg-primary/80'
-              : 'hover:bg-primary/10 hover:text-primary',
+            showFavoritesOnly ? 'hover:bg-primary/80' : 'hover:bg-primary/10 hover:text-primary',
           )}
           onClick={onToggleFavorites}
         >

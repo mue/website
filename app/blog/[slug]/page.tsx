@@ -130,7 +130,10 @@ export default async function BlogPostPage({ params, searchParams }: BlogPostPro
               <div className="flex flex-wrap gap-2">
                 {post.frontmatter.tags.map((tag) => (
                   <Link key={tag} href={`/blog?filter=${tag.toLowerCase()}`}>
-                    <Badge variant="secondary" className="rounded-full cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors">
+                    <Badge
+                      variant="secondary"
+                      className="rounded-full cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+                    >
                       {tag}
                     </Badge>
                   </Link>

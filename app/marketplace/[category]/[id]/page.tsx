@@ -274,7 +274,10 @@ export default async function MarketplaceItemPage({
             <Separator className="my-2" />
             <p className="text-center text-sm text-muted-foreground">
               Want to contribute?{' '}
-              <Link href="https://github.com/mue" className="font-medium text-primary hover:underline">
+              <Link
+                href="https://github.com/mue"
+                className="font-medium text-primary hover:underline"
+              >
                 Visit Mue on GitHub
               </Link>
             </p>

@@ -23,15 +23,15 @@ const FeaturedCollectionsLazy = dynamic(
   { ssr: false, loading: () => <FeaturedCollectionsSkeleton /> },
 );
 
-const ItemsGridLazy = dynamic(
-  () => import(/* webpackChunkName: "items-grid" */ './items-grid'),
-  { ssr: false, loading: () => <ItemsGridSkeleton /> },
-);
+const ItemsGridLazy = dynamic(() => import(/* webpackChunkName: "items-grid" */ './items-grid'), {
+  ssr: false,
+  loading: () => <ItemsGridSkeleton />,
+});
 
-const ItemsListLazy = dynamic(
-  () => import(/* webpackChunkName: "items-list" */ './items-list'),
-  { ssr: false, loading: () => <ItemsGridSkeleton /> },
-);
+const ItemsListLazy = dynamic(() => import(/* webpackChunkName: "items-list" */ './items-list'), {
+  ssr: false,
+  loading: () => <ItemsGridSkeleton />,
+});
 
 type CollectionWithTypes = MarketplaceCollection & {
   contentTypes: string[];

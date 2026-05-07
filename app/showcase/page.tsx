@@ -19,7 +19,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default function ShowcasePage() {
   const items = getShowcaseItems();
 
@@ -34,8 +33,8 @@ export default function ShowcasePage() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            Explore creative setups from our users. Each tab is a unique expression of how
-            Mue can be customised to fit different aesthetics and workflows.
+            Explore creative setups from our users. Each tab is a unique expression of how Mue can
+            be customised to fit different aesthetics and workflows.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">

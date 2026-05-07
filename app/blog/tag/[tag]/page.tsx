@@ -11,7 +11,6 @@ import { getAllBlogPosts } from '@/lib/blog';
 import { SITE_URL } from '@/lib/constants/site';
 import { cn } from '@/lib/utils';
 
-
 interface Params {
   tag: string;
 }

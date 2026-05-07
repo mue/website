@@ -159,8 +159,7 @@ export function ShareModal({ url, title, description, trigger, isEmbed = false }
                 className="gap-1.5 text-xs h-9"
                 size="sm"
               >
-                <FaXTwitter className="h-3.5 w-3.5" />
-                X
+                <FaXTwitter className="h-3.5 w-3.5" />X
               </Button>
               <Button
                 onClick={() => shareToSocial('facebook')}

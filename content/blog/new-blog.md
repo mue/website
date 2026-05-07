@@ -14,4 +14,4 @@ Hugo is cool. Ghost is also cool and has an awesome default theme. We mixed them
 
 Mue version 5.0 will be coming soon, but Spring is already here (in the UK anyway), so enjoy looking at this cute little lamb whilst you wait.
 
-*Photo by Daniel Sandvik / Unsplash*
+_Photo by Daniel Sandvik / Unsplash_

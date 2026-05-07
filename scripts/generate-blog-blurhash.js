@@ -35,7 +35,7 @@ async function processBlogFile(file) {
     if (placeholder) {
       data.imagePlaceholder = placeholder;
       const newRaw = matter.stringify(content, data);
-  
+
       await fs.writeFile(filePath, newRaw, 'utf8');
       console.log('Updated', file);
     }

@@ -168,7 +168,10 @@ export default function LicensePage() {
                 Ask us on Discord
               </Link>{' '}
               or{' '}
-              <Link href="/contact" className="text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-foreground">
+              <Link
+                href="/contact"
+                className="text-foreground underline decoration-transparent underline-offset-4 transition-colors hover:decoration-foreground"
+              >
                 get in touch.
               </Link>
             </p>

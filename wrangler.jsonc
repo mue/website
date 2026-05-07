@@ -8,7 +8,7 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS",
   },
-"images": {
+  "images": {
     // Enable image optimization
     // see https://opennext.js.org/cloudflare/howtos/image
     "binding": "IMAGES",

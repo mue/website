@@ -38,7 +38,8 @@ const communityStats: { label: string; value: string; icon: LucideIcon }[] = [
 const scrollFeatures = [
   {
     title: 'Beautiful backgrounds that inspire',
-    description: 'Pick from our selection of exclusive library, choose your own, or explore the Marketplace for community packs.',
+    description:
+      'Pick from our selection of exclusive library, choose your own, or explore the Marketplace for community packs.',
     bullets: [
       'Hand-picked selection from our in-house photography team',
       'Community submitted packs available in the Marketplace',
@@ -85,7 +86,6 @@ const browsers = [
 ];
 
 export default function Home() {
-
   return (
     <div className="relative overflow-hidden">
       <SoftwareApplicationJsonLd />
@@ -100,8 +100,8 @@ export default function Home() {
           </h1>
 
           <p className="max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg animate-fade-up animate-delay-300">
-            Improve your new tab experience with Mue. Unique backgrounds, motivational quotes, and 
-            a ton of features. All for free, and open-source too.
+            Improve your new tab experience with Mue. Unique backgrounds, motivational quotes, and a
+            ton of features. All for free, and open-source too.
           </p>
 
           <div className="flex flex-row flex-wrap justify-center gap-3 sm:items-center animate-fade-up animate-delay-400">
@@ -128,7 +128,6 @@ export default function Home() {
               </Link>
             </Button>
           </div>
-
 
           <div className="w-full animate-fade-zoom animate-delay-300">
             <Image
@@ -203,8 +202,9 @@ export default function Home() {
               Built by you, for you.
             </h2>
             <p className="max-w-3xl text-pretty text-base text-muted-foreground sm:text-lg">
-              Developed in the open with a passionate community of users from around the world. Join 
-              us on GitHub - whether that be contributing code, suggesting ideas or reporting issues!
+              Developed in the open with a passionate community of users from around the world. Join
+              us on GitHub - whether that be contributing code, suggesting ideas or reporting
+              issues!
             </p>
           </div>
 

@@ -9,7 +9,6 @@ import { buttonVariants } from '@/components/ui/button';
 
 import { cn } from '@/lib/utils';
 
-
 export const metadata: Metadata = {
   title: 'Documentation',
   description:
@@ -24,13 +23,15 @@ export const metadata: Metadata = {
 const featureHighlights = [
   {
     title: 'Marketplace',
-    description: 'Create photo packs, quote packs and preset settings for the Mue community to enjoy.',
+    description:
+      'Create photo packs, quote packs and preset settings for the Mue community to enjoy.',
     icon: Layers3,
     href: '/docs/marketplace/introduction',
   },
   {
     title: 'API',
-    description: "Build applications based on Mue's open REST API, the same one the extension uses.",
+    description:
+      "Build applications based on Mue's open REST API, the same one the extension uses.",
     icon: PlugZap,
     href: '/docs/api/introduction',
   },
@@ -63,10 +64,7 @@ export default async function DocsIndexPage() {
                 Get started
                 <ArrowRight className="size-4" />
               </Link>
-              <Link
-                href="/demo"
-                className={cn(buttonVariants({ variant: 'ghost', size: 'lg' }))}
-              >
+              <Link href="/demo" className={cn(buttonVariants({ variant: 'ghost', size: 'lg' }))}>
                 View live demo
               </Link>
             </div>

@@ -93,7 +93,9 @@ export function ItemContentTabs({
                 <div className="flex flex-1 items-center gap-3 px-5 py-4">
                   <Images className="h-4 w-4 shrink-0 text-muted-foreground" />
                   <div>
-                    <div className="text-xl font-semibold text-foreground">{data.photos.length}</div>
+                    <div className="text-xl font-semibold text-foreground">
+                      {data.photos.length}
+                    </div>
                     <div className="text-xs text-muted-foreground">
                       Total {data.photos.length === 1 ? 'Photo' : 'Photos'}
                     </div>
@@ -151,7 +153,9 @@ export function ItemContentTabs({
                 <div className="flex flex-1 items-center gap-3 px-5 py-4">
                   <MessageSquareQuote className="h-4 w-4 shrink-0 text-muted-foreground" />
                   <div>
-                    <div className="text-xl font-semibold text-foreground">{data.quotes.length}</div>
+                    <div className="text-xl font-semibold text-foreground">
+                      {data.quotes.length}
+                    </div>
                     <div className="text-xs text-muted-foreground">
                       Total {data.quotes.length === 1 ? 'Quote' : 'Quotes'}
                     </div>
@@ -177,7 +181,8 @@ export function ItemContentTabs({
                   <div>
                     <div className="text-xl font-semibold text-foreground">
                       {Math.round(
-                        data.quotes.reduce((acc, q) => acc + q.quote.length, 0) / data.quotes.length,
+                        data.quotes.reduce((acc, q) => acc + q.quote.length, 0) /
+                          data.quotes.length,
                       )}
                     </div>
                     <div className="text-xs text-muted-foreground">Avg. Characters</div>
@@ -225,7 +230,8 @@ export function ItemContentTabs({
             </div>
           )}
 
-          {isPhotoPack && (!data.photos || data.photos.length === 0) &&
+          {isPhotoPack &&
+            (!data.photos || data.photos.length === 0) &&
             (data.api_enabled ? (
               <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
                 <Images className="h-10 w-10 mb-3 opacity-40" />

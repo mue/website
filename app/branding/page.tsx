@@ -12,7 +12,8 @@ export const metadata: Metadata = {
   description: 'Download Mue logos, learn about our brand colours, and discover usage guidelines.',
   openGraph: {
     title: 'Branding | Mue',
-    description: 'Download Mue logos, learn about our brand colours, and discover usage guidelines.',
+    description:
+      'Download Mue logos, learn about our brand colours, and discover usage guidelines.',
   },
 };
 

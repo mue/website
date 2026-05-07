@@ -34,9 +34,7 @@ export function ContactCard({
 
       <div className="mt-auto flex items-center justify-between pt-6">
         <div className="flex flex-col gap-1">
-          {handle && (
-            <p className="font-mono text-sm text-foreground/70">{handle}</p>
-          )}
+          {handle && <p className="font-mono text-sm text-foreground/70">{handle}</p>}
           {badge && (
             <span className="rounded-full border border-border bg-muted/50 px-2.5 py-1 text-xs text-muted-foreground">
               {badge}

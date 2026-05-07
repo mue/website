@@ -86,7 +86,11 @@ export default function FeaturedCollections({
                   <div className={cn('space-y-1.5 lg:space-y-2', isEmbed && 'space-y-1')}>
                     <div className="flex flex-wrap gap-1.5">
                       {collection.contentTypes.map((type) => (
-                        <Badge key={type} variant="secondary" className={cn('text-xs', isEmbed && 'text-xs')}>
+                        <Badge
+                          key={type}
+                          variant="secondary"
+                          className={cn('text-xs', isEmbed && 'text-xs')}
+                        >
                           {getMarketplaceTypeLabel(type)}
                         </Badge>
                       ))}

@@ -215,7 +215,13 @@ export function DraftManager({ currentDraft, onLoadDraft }: DraftManagerProps) {
           )}
         </Button>
 
-        <Button variant="outline" size="sm" onClick={handleImportDraft} className="gap-2" aria-label="Import">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={handleImportDraft}
+          className="gap-2"
+          aria-label="Import"
+        >
           <Upload className="h-4 w-4" />
           <span className="hidden sm:inline">Import</span>
         </Button>

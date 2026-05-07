@@ -85,7 +85,6 @@ export default function Navbar() {
     },
   ];
 
-
   return (
     <nav className="bg-background/60 backdrop-blur-md flex w-full items-center gap-3 rounded-xl border border-foreground/20 px-4 py-3 shadow-lg sm:px-6 lg:px-12">
       <div className="flex flex-1 items-center">

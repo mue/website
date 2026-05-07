@@ -36,13 +36,10 @@ export function FeatureCard({ index, title, description, bullets }: FeatureCardP
         </ul>
       </div>
 
-      <div className={`h-64 rounded-2xl lg:h-80 flex items-center justify-center overflow-hidden ${visualColors[index % visualColors.length]}`}>
-        <img
-          src={imageSrc}
-          alt={title}
-          className="object-cover h-full w-full"
-          loading="lazy"
-        />
+      <div
+        className={`h-64 rounded-2xl lg:h-80 flex items-center justify-center overflow-hidden ${visualColors[index % visualColors.length]}`}
+      >
+        <img src={imageSrc} alt={title} className="object-cover h-full w-full" loading="lazy" />
       </div>
     </div>
   );

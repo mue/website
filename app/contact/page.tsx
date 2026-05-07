@@ -79,7 +79,10 @@ export default function ContactPage() {
           <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:gap-0">
             <p className="text-sm leading-relaxed text-muted-foreground sm:pr-8">
               Check the{' '}
-              <Link href="/docs" className="text-foreground no-underline hover:underline underline-offset-2">
+              <Link
+                href="/docs"
+                className="text-foreground no-underline hover:underline underline-offset-2"
+              >
                 documentation
               </Link>{' '}
               for answers to common questions.

@@ -142,7 +142,9 @@ export default async function MarketplaceCollectionPage({
                   {data.display_name}
                 </h1>
                 {data.description && (
-                  <p className="text-muted-foreground text-sm line-clamp-2 lg:text-base lg:line-clamp-none lg:md:text-lg">{data.description}</p>
+                  <p className="text-muted-foreground text-sm line-clamp-2 lg:text-base lg:line-clamp-none lg:md:text-lg">
+                    {data.description}
+                  </p>
                 )}
               </div>
 

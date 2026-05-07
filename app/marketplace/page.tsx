@@ -74,14 +74,7 @@ export default async function MarketplacePage({
     >
       {/* preload featured */}
       {collectionsWithTypes.map((c) =>
-        c.img ? (
-          <link
-            key={c.name}
-            rel="preload"
-            as="image"
-            href={c.img}
-          />
-        ) : null,
+        c.img ? <link key={c.name} rel="preload" as="image" href={c.img} /> : null,
       )}
 
       <Suspense fallback={<MarketplaceLoadingSkeleton />}>

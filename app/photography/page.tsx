@@ -17,7 +17,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 export default async function PhotographyPage() {
   return (
     <div className="relative min-h-screen overflow-hidden">

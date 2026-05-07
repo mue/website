@@ -14,7 +14,6 @@ import type { DocTreeNode } from '@/lib/docs';
 import { getAllDocsMeta, getDocBySlug } from '@/lib/docs';
 import { cn } from '@/lib/utils';
 
-
 type DocPageParams = {
   slug?: string[];
 };
