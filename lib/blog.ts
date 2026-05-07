@@ -61,6 +61,14 @@ function createProcessor() {
     .use(rehypeStringify, { allowDangerousHtml: true });
 }
 
+export function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
+
 export async function getAllBlogPosts(): Promise<BlogPostPreview[]> {
   let entries;
 

@@ -1,6 +1,3 @@
-'use client';
-
-
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -31,7 +28,7 @@ const stats = ['Maintained since 2018', '10,000+ monthly active users', '10,000,
 
 const communityStats: { label: string; value: string; icon: LucideIcon }[] = [
   { label: 'Collaborators', value: '50+', icon: Users },
-  { label: 'GitHub Stars', value: '600+', icon: Star },
+  { label: 'GitHub Stars', value: '700+', icon: Star },
   { label: 'Forks', value: '70+', icon: GitFork },
   { label: 'Users', value: '5K+ Monthly', icon: UserCheck },
   { label: 'Tabs Opened', value: '10M+', icon: LayoutDashboard },

@@ -8,6 +8,7 @@ import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-brea
 import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
 
 import { getMarketplaceItems, getMarketplaceTypeLabel, slugifyAuthor } from '@/lib/marketplace';
+import { SITE_URL } from '@/lib/constants/site';
 
 export const metadata: Metadata = {
   title: 'Authors – Marketplace',
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     title: 'Authors – Marketplace',
     description: 'Browse all authors in the Mue marketplace.',
     type: 'website',
-    url: 'https://muetab.com/marketplace/authors',
+    url: `${SITE_URL}/marketplace/authors`,
   },
   twitter: {
     card: 'summary_large_image',
@@ -24,8 +25,6 @@ export const metadata: Metadata = {
     description: 'Browse all authors in the Mue marketplace.',
   },
 };
-
-export const revalidate = 60; // every minute
 
 export default async function AuthorsPage({
   searchParams,

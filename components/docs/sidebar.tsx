@@ -12,17 +12,12 @@ type DocsSidebarProps = {
 };
 
 export function DocsSidebar({ tree }: DocsSidebarProps) {
-  // Always use pathname from client-side for accurate current page detection
   const pathname = usePathname();
-  const currentPath = pathname;
-
-  // Debug log the current path
-  console.log('🔍 Sidebar current path:', currentPath);
 
   return (
     <nav className="space-y-4 text-sm">
       {tree.map((item) => (
-        <SidebarSection key={item.slug.join('/')} node={item} activeHref={currentPath} />
+        <SidebarSection key={item.slug.join('/')} node={item} activeHref={pathname} />
       ))}
     </nav>
   );
@@ -43,16 +38,6 @@ function SidebarSection({
 
   const isActive = normalizedNodeHref === normalizedActiveHref;
   const isAncestor = isActive || normalizedActiveHref.startsWith(`${normalizedNodeHref}/`);
-
-  // Debug log for "Creating Add-ons" specifically
-  if (node.title === 'Creating Add-ons') {
-    console.log('📄 Creating Add-ons:', {
-      nodeHref: normalizedNodeHref,
-      activeHref: normalizedActiveHref,
-      isActive,
-      match: normalizedNodeHref === normalizedActiveHref,
-    });
-  }
 
   const hasChildren = node.children && node.children.length > 0;
 

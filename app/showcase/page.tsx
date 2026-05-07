@@ -19,9 +19,8 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 3600; // hourly
 
-export default async function ShowcasePage() {
+export default function ShowcasePage() {
   const items = getShowcaseItems();
 
   return (

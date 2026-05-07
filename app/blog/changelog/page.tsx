@@ -8,7 +8,7 @@ import { BlogContentLightbox } from '@/components/blog/blog-content-lightbox';
 import { Badge } from '@/components/ui/badge';
 
 import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
-import { getAllBlogPosts, getBlogPostBySlug, type BlogPost } from '@/lib/blog';
+import { getAllBlogPosts, getBlogPostBySlug, formatDate, type BlogPost } from '@/lib/blog';
 import { cn } from '@/lib/utils';
 
 
@@ -35,14 +35,6 @@ async function getLatestReleasePost(): Promise<BlogPost | null> {
   }
 
   return await getBlogPostBySlug(releasePost.slug);
-}
-
-function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
 }
 
 export default async function ChangelogPage({ searchParams }: ChangelogPageProps) {

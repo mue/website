@@ -25,6 +25,7 @@ import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-brea
 import {
   getMarketplaceItem,
   getMarketplaceItems,
+  getItemCategory,
   slugifyAuthor,
   type MarketplaceItemDetail,
   type MarketplaceItemSummary,
@@ -39,8 +40,17 @@ import { NoContentEmptyState } from '@/components/marketplace/empty-state';
 import ItemsGrid from '@/components/marketplace/items-grid';
 import { FavoritesProvider } from '@/lib/favorites-context';
 import { ProductJsonLd, BreadcrumbJsonLd } from '@/components/json-ld';
+import { SITE_URL } from '@/lib/constants/site';
 
-export const revalidate = 60; // Revalidate every minute (ISR)
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const items = await getMarketplaceItems();
+  return items.map((item) => ({
+    category: getItemCategory(item.type),
+    id: item.id,
+  }));
+}
 
 const PROVIDER_NAMES: Record<string, string> = {
   mue: 'MUE',
@@ -110,7 +120,7 @@ export async function generateMetadata({ params }: MarketplaceItemPageProps): Pr
         description:
           data.description ?? `Learn more about ${data.display_name} on the Mue marketplace.`,
         type: 'website',
-        url: `https://muetab.com/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
+        url: `${SITE_URL}/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
           data.id,
         )}`,
       },
@@ -253,7 +263,7 @@ export default async function MarketplaceItemPage({
           name={data.display_name}
           description={data.description}
           image={data.icon_url || data.screenshot_url}
-          url={`https://muetab.com/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
+          url={`${SITE_URL}/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
             data.id,
           )}`}
           brand={data.author}
@@ -263,17 +273,17 @@ export default async function MarketplaceItemPage({
         />
         <BreadcrumbJsonLd
           items={[
-            { position: 1, name: 'Home', item: 'https://muetab.com/' },
-            { position: 2, name: 'Marketplace', item: 'https://muetab.com/marketplace' },
+            { position: 1, name: 'Home', item: `${SITE_URL}/` },
+            { position: 2, name: 'Marketplace', item: `${SITE_URL}/marketplace` },
             {
               position: 3,
               name: data.type?.replace(/_/g, ' ') || 'Item',
-              item: `https://muetab.com/marketplace?type=${data.type}`,
+              item: `${SITE_URL}/marketplace?type=${data.type}`,
             },
             {
               position: 4,
               name: data.display_name,
-              item: `https://muetab.com/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
+              item: `${SITE_URL}/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(
                 data.id,
               )}`,
             },

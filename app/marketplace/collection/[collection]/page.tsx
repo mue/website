@@ -10,10 +10,22 @@ import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
 import { NoCollectionItemsEmptyState } from '@/components/marketplace/empty-state';
 import ItemsGrid from '@/components/marketplace/items-grid';
 
-import { getMarketplaceCollection, type MarketplaceCollectionDetail } from '@/lib/marketplace';
+import {
+  getMarketplaceCollection,
+  getMarketplaceCollections,
+  type MarketplaceCollectionDetail,
+} from '@/lib/marketplace';
 import { FavoritesProvider } from '@/lib/favorites-context';
+import { SITE_URL } from '@/lib/constants/site';
 
-export const revalidate = 60; // every minute
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const collections = await getMarketplaceCollections();
+  return collections.map((collection) => ({
+    collection: collection.name,
+  }));
+}
 
 type MarketplaceCollectionPageProps = {
   params: Promise<{
@@ -48,7 +60,7 @@ export async function generateMetadata({
           data.description ??
           `Browse all items inside the ${data.display_name} collection on the Mue marketplace.`,
         type: 'website',
-        url: `https://muetab.com/marketplace/collection/${encodeURIComponent(data.name)}`,
+        url: `${SITE_URL}/marketplace/collection/${encodeURIComponent(data.name)}`,
       },
       twitter: {
         card: 'summary_large_image',

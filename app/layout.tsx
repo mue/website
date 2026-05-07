@@ -10,6 +10,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/json-ld';
 
 import { EmbedProvider, EmbedLayoutWrapper } from '@/lib/embed-context';
+import { SITE_URL } from '@/lib/constants/site';
 
 const lexendDeca = Lexend_Deca({
   variable: '--font-lexend-deca',
@@ -28,7 +29,7 @@ const alfaSlabOne = Alfa_Slab_One({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://muetab.com'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'Mue - Modifiable. User-centric. Experience.',
     template: '%s | Mue',
@@ -45,12 +46,12 @@ export const metadata: Metadata = {
     'firefox',
     'edge',
   ],
-  authors: [{ name: 'Mue Team', url: 'https://muetab.com' }],
+  authors: [{ name: 'Mue Team', url: SITE_URL }],
   creator: 'Mue Team',
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://muetab.com',
+    url: SITE_URL,
     title: 'Mue - Modifiable. User-centric. Experience.',
     description:
       'A fast, open and free-to-use browser extension that gives a new, fresh and customisable tab page to modern browsers.',

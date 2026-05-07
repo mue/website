@@ -3,7 +3,6 @@ type FeatureCardProps = {
   title: string;
   description: string;
   bullets: string[];
-  image?: string;
 };
 
 const visualColors = ['bg-[#FF5C25]/8', 'bg-[#FF456E]/8', 'bg-amber-500/8'];

@@ -8,6 +8,7 @@ import { BlogCard } from '@/components/blog/blog-card';
 import { buttonVariants } from '@/components/ui/button';
 
 import { getAllBlogPosts } from '@/lib/blog';
+import { SITE_URL } from '@/lib/constants/site';
 import { cn } from '@/lib/utils';
 
 
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   return {
     title,
     description,
-    alternates: { canonical: `https://muetab.com/blog/tag/${tag}` },
+    alternates: { canonical: `${SITE_URL}/blog/tag/${tag}` },
     openGraph: { title, description },
   };
 }
@@ -61,13 +62,13 @@ export default async function TagPage({ params }: { params: Promise<Params> }) {
               '@context': 'https://schema.org',
               '@type': 'BreadcrumbList',
               itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://muetab.com/' },
-                { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://muetab.com/blog' },
+                { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+                { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
                 {
                   '@type': 'ListItem',
                   position: 3,
                   name: readable,
-                  item: `https://muetab.com/blog/tag/${tag}`,
+                  item: `${SITE_URL}/blog/tag/${tag}`,
                 },
               ],
             }),

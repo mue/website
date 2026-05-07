@@ -15,7 +15,15 @@ import {
 } from '@/lib/marketplace';
 import { FavoritesProvider } from '@/lib/favorites-context';
 
-export const revalidate = 60; // every minute
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const items = await getMarketplaceItems();
+  const authors = new Set(items.map((item) => item.author).filter(Boolean));
+  return Array.from(authors).map((author) => ({
+    author: slugifyAuthor(author!),
+  }));
+}
 
 type AuthorPageProps = {
   params: Promise<{

@@ -39,19 +39,18 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 60; // every minute
-
 export default async function MarketplacePage({
   searchParams,
 }: {
-  searchParams?: { embed?: string };
+  searchParams?: Promise<{ embed?: string }>;
 }) {
-  const [collections, items] = await Promise.all([
+  const [collections, items, sp] = await Promise.all([
     getMarketplaceCollections(),
     getMarketplaceItems(true),
+    searchParams,
   ]);
 
-  const isEmbed = searchParams?.embed === 'true';
+  const isEmbed = sp?.embed === 'true';
 
   const highlightCandidates = collections.filter((collection) => collection.img);
 

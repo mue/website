@@ -10,6 +10,7 @@ import {
   getMarketplaceItems,
   getMarketplaceTypeLabel,
 } from '@/lib/marketplace';
+import { SITE_URL } from '@/lib/constants/site';
 
 export const metadata: Metadata = {
   title: 'Collections – Marketplace',
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Collections – Marketplace',
     description: 'Browse all collections in the Mue marketplace.',
     type: 'website',
-    url: 'https://muetab.com/marketplace/collections',
+    url: `${SITE_URL}/marketplace/collections`,
   },
   twitter: {
     card: 'summary_large_image',
@@ -26,8 +27,6 @@ export const metadata: Metadata = {
     description: 'Browse all collections in the Mue marketplace.',
   },
 };
-
-export const revalidate = 60; // every minute
 
 export default async function CollectionsPage({
   searchParams,

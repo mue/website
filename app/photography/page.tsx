@@ -15,7 +15,6 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 3600; // Revalidate every hour (ISR)
 
 export default async function PhotographyPage() {
   return (

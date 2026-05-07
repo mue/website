@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-import { ArrowLeft, ArrowRight, Calendar, ChevronLeft, User, Clock } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Calendar, User, Clock } from 'lucide-react';
 
 import { BlogImage } from '@/components/blog/blog-image';
 import { BlogContentLightbox } from '@/components/blog/blog-content-lightbox';
@@ -11,7 +11,8 @@ import { buttonVariants } from '@/components/ui/button';
 import { ArticleJsonLd as ArticleJsonLdComponent, BreadcrumbJsonLd } from '@/components/json-ld';
 
 import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
-import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
+import { getAllBlogPosts, getBlogPostBySlug, formatDate } from '@/lib/blog';
+import { SITE_URL } from '@/lib/constants/site';
 import { cn } from '@/lib/utils';
 
 
@@ -44,7 +45,7 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
   const title = post.frontmatter.title;
   const description =
     post.excerpt || post.frontmatter.description || 'Read the latest from the Mue blog.';
-  const url = `https://muetab.com/blog/${slug}`;
+  const url = `${SITE_URL}/blog/${slug}`;
   const image = post.frontmatter.image;
   const tags = post.frontmatter.tags || [];
   const modified = post.frontmatter.dateModified;
@@ -78,14 +79,6 @@ export async function generateMetadata({ params }: BlogPostProps): Promise<Metad
         }
       : undefined,
   };
-}
-
-function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
 }
 
 export default async function BlogPostPage({ params, searchParams }: BlogPostProps) {
@@ -182,7 +175,7 @@ export default async function BlogPostPage({ params, searchParams }: BlogPostPro
         <ArticleJsonLdComponent
           headline={post.frontmatter.title}
           description={post.frontmatter.description || post.excerpt}
-          url={`https://muetab.com/blog/${post.slug}`}
+          url={`${SITE_URL}/blog/${post.slug}`}
           datePublished={post.frontmatter.date}
           dateModified={post.frontmatter.dateModified}
           author={post.frontmatter.author}
@@ -196,12 +189,12 @@ export default async function BlogPostPage({ params, searchParams }: BlogPostPro
 
         <BreadcrumbJsonLd
           items={[
-            { position: 1, name: 'Home', item: 'https://muetab.com/' },
-            { position: 2, name: 'Blog', item: 'https://muetab.com/blog' },
+            { position: 1, name: 'Home', item: `${SITE_URL}/` },
+            { position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
             {
               position: 3,
               name: post.frontmatter.title,
-              item: `https://muetab.com/blog/${post.slug}`,
+              item: `${SITE_URL}/blog/${post.slug}`,
             },
           ]}
         />

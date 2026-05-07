@@ -100,7 +100,7 @@ export type MarketplaceItemDetail = {
 async function fetchMarketplace<T>(path: string, init?: RequestInit): Promise<T> {
   const response = await fetch(`${MARKETPLACE_BASE_URL}/${path}`, {
     ...init,
-    next: { revalidate: 60 },
+    cache: 'force-cache',
   });
 
   if (!response.ok) {
@@ -135,6 +135,12 @@ export function getCategoryTypes(category: string): string[] {
   if (category === 'packs') return ['photo_packs', 'quote_packs'];
 
   return [];
+}
+
+export function getInitials(name: string): string {
+  const words = name.trim().split(/\s+/);
+  if (words.length === 1) return words[0][0].toUpperCase();
+  return (words[0][0] + words[1][0]).toUpperCase();
 }
 
 export function getCategoryLabel(category: string): string {
@@ -209,7 +215,7 @@ export async function getTrendingItems(
 }
 
 export async function getMarketplaceItem(
-  category: 'packs' | 'presets',
+  _category: 'packs' | 'presets',
   id: string,
 ): Promise<MarketplaceItemDetail> {
   const payload = await fetchMarketplace<MarketplaceResponse<MarketplaceItemDetail>>(`item/${id}`);

@@ -14,23 +14,10 @@ import {
 } from '@/components/ui/select';
 
 import { cn } from '@/lib/utils';
-
-interface Frontmatter {
-  title: string;
-  date: string;
-  author?: string;
-  image?: string;
-  tags?: string[];
-  imagePlaceholder?: string;
-}
-interface BlogPost {
-  slug: string;
-  excerpt?: string;
-  frontmatter: Frontmatter;
-}
+import type { BlogPostPreview } from '@/lib/blog';
 
 interface BlogFilterProps {
-  initialPosts: BlogPost[];
+  initialPosts: BlogPostPreview[];
   initialFilter?: string;
 }
 
@@ -121,6 +108,7 @@ export function BlogFilter({ initialPosts, initialFilter }: BlogFilterProps) {
               <SelectTrigger size="sm" className="min-w-[7rem]">
                 <SelectValue placeholder="Sort by" />
               </SelectTrigger>
+
               <SelectContent>
                 <SelectItem value="newest">Newest</SelectItem>
                 <SelectItem value="oldest">Oldest</SelectItem>

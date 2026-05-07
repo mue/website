@@ -8,6 +8,7 @@ import { BlogImage } from '@/components/blog/blog-image';
 import { Badge } from '@/components/ui/badge';
 
 import { cn } from '@/lib/utils';
+import { formatDate } from '@/lib/blog';
 
 export interface BlogCardPostLike {
   slug: string;
@@ -26,14 +27,6 @@ interface BlogCardProps {
   post: BlogCardPostLike;
   sizes?: string;
   className?: string;
-}
-
-function formatDate(dateString: string) {
-  return new Date(dateString).toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  });
 }
 
 export function BlogCard({ post, sizes, className }: BlogCardProps) {

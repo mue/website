@@ -7,6 +7,7 @@ import { BlogCard } from '@/components/blog/blog-card';
 import { buttonVariants } from '@/components/ui/button';
 
 import { getAllBlogPosts } from '@/lib/blog';
+import { SITE_URL } from '@/lib/constants/site';
 import { cn } from '@/lib/utils';
 
 
@@ -29,17 +30,17 @@ export async function generateMetadata({ params }: { params: Promise<Params> }):
   const description =
     'Product updates, technical deep-dives, and thoughts on building mindful browser experiences.';
   const canonical =
-    pageNum === 1 ? 'https://muetab.com/blog' : `https://muetab.com/blog/page/${pageNum}`;
+    pageNum === 1 ? `${SITE_URL}/blog` : `${SITE_URL}/blog/page/${pageNum}`;
 
   const posts = await getAllBlogPosts();
   const totalPages = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
   const prev =
     pageNum > 1
       ? pageNum - 1 === 1
-        ? 'https://muetab.com/blog'
-        : `https://muetab.com/blog/page/${pageNum - 1}`
+        ? `${SITE_URL}/blog`
+        : `${SITE_URL}/blog/page/${pageNum - 1}`
       : undefined;
-  const next = pageNum < totalPages ? `https://muetab.com/blog/page/${pageNum + 1}` : undefined;
+  const next = pageNum < totalPages ? `${SITE_URL}/blog/page/${pageNum + 1}` : undefined;
 
   return {
     title,
@@ -75,13 +76,13 @@ export default async function BlogPagePaginated({ params }: { params: Promise<Pa
               '@context': 'https://schema.org',
               '@type': 'BreadcrumbList',
               itemListElement: [
-                { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://muetab.com/' },
-                { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://muetab.com/blog' },
+                { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+                { '@type': 'ListItem', position: 2, name: 'Blog', item: `${SITE_URL}/blog` },
                 {
                   '@type': 'ListItem',
                   position: 3,
                   name: `Page ${pageNum}`,
-                  item: `https://muetab.com/blog/page/${pageNum}`,
+                  item: `${SITE_URL}/blog/page/${pageNum}`,
                 },
               ],
             }),

@@ -42,8 +42,6 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
-  console.log('[PhotoGallery] isEmbed:', isEmbed);
-
   const openLightbox = (index: number) => {
     if (isEmbed) {
       const photo = photos[index];

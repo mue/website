@@ -9,8 +9,6 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 
 import { getAllDocsMeta, getDocsTree } from '@/lib/docs';
 
-export const revalidate = 3600;
-
 export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-background via-background to-muted/40">
