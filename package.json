@@ -11,6 +11,7 @@
     "lint:fix": "eslint --fix .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "blog:blurhash": "node scripts/generate-blog-blurhash.js",
     "analyze": "cross-env ANALYZE=true next build",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",

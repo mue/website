@@ -1,10 +1,14 @@
 ---
-title: 'Version 7.6.0'
+title: Version 7.6.0
 date: '2026-01-27'
-author: 'David Ralph'
+author: David Ralph
 description: 'UI polish, a new font, improved storage, and a new quotes experience.'
-image: '/blog/version-7-6.webp'
-tags: ['release', 'update']
+image: /blog/version-7-6.webp
+tags:
+  - release
+  - update
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAACQAQCdASoIAAQAAUAmJZwAAp1HI1AA/v0otX49OqrgVBEf1Ip4gTM+AAA=
 ---
 
 This update brings a range of UI refinements across form components and modals, a switch from Montserrat to Inter as the default font, improvements to custom background handling, and a new default quotes experience. We've also introduced a three-branch release workflow to allow for more structured beta testing going forward.

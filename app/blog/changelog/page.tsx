@@ -8,7 +8,8 @@ import { BlogContentLightbox } from '@/components/blog/blog-content-lightbox';
 import { Badge } from '@/components/ui/badge';
 
 import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
-import { getAllBlogPosts, getBlogPostBySlug, formatDate, type BlogPost } from '@/lib/blog';
+import { getAllBlogPosts, getBlogPostBySlug, type BlogPost } from '@/lib/blog';
+import { formatDate } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 
 

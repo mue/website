@@ -1,10 +1,16 @@
 ---
-title: 'Version 3.0 - Settings release'
+title: Version 3.0 - Settings release
 date: '2020-07-20'
-author: 'David Ralph'
-description: 'Introducing settings to Mue, allowing for lots of customisation to make Mue yours.'
-image: '/blog/version-3-0-settings-release.webp'
-tags: ['release', 'update']
+author: David Ralph
+description: >-
+  Introducing settings to Mue, allowing for lots of customisation to make Mue
+  yours.
+image: /blog/version-3-0-settings-release.webp
+tags:
+  - release
+  - update
+imagePlaceholder: >-
+  data:image/webp;base64,UklGRjwAAABXRUJQVlA4IDAAAACwAQCdASoIAAQAAUAmJQBOgCHe1QMAAP7791V/5CT4fyYgafvKNho+MGwrGMtgAAA=
 ---
 
 It has been a long time since we announced that settings were coming to Mue. We had some roadblocks along the way, but we're happy to announce that the day has finally come. Mue settings is now out!

@@ -11,8 +11,9 @@ import { buttonVariants } from '@/components/ui/button';
 import { ArticleJsonLd as ArticleJsonLdComponent, BreadcrumbJsonLd } from '@/components/json-ld';
 
 import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
-import { getAllBlogPosts, getBlogPostBySlug, formatDate } from '@/lib/blog';
+import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
 import { SITE_URL } from '@/lib/constants/site';
+import { formatDate } from '@/lib/utils';
 import { cn } from '@/lib/utils';
 
 
