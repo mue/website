@@ -1,8 +1,4 @@
-'use client';
-
-import { useState, useEffect, useCallback } from 'react';
-
-import Image from 'next/image';
+import { useState, useEffect, useCallback } from 'react'
 
 import { Camera, MapPin, X, ChevronLeft, ChevronRight, Loader2, AlertCircle } from 'lucide-react';
 
@@ -183,13 +179,10 @@ export function PhotoShowcase() {
               onClick={() => openLightbox(index)}
               className="group relative aspect-[4/3] overflow-hidden rounded-xl border border-border/60 shadow-sm transition hover:shadow-lg cursor-zoom-in"
             >
-              <Image
+              <img
                 src={photo.file}
                 alt={photo.location || `Photo by ${photo.photographer}`}
-                fill
-                sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover transition duration-300 group-hover:scale-105"
-                unoptimized
+                className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-105"
               />
 
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -268,14 +261,10 @@ export function PhotoShowcase() {
 
           <div className="relative max-h-[90vh] max-w-[90vw] w-full h-full flex items-center justify-center">
             <div className="relative w-full h-full" onClick={(e) => e.stopPropagation()}>
-              <Image
+              <img
                 src={currentPhoto.file}
                 alt={currentPhoto.location || `Photo by ${currentPhoto.photographer}`}
-                fill
-                sizes="(max-width: 640px) 100vw, 90vw"
-                className="object-contain"
-                unoptimized
-                priority
+                className="absolute inset-0 h-full w-full object-contain"
               />
             </div>
           </div>

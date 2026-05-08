@@ -1,35 +1,33 @@
-'use client';
+import { Link } from '@tanstack/react-router'
 
-import Link from 'next/link';
+import { Calendar, User, ArrowRight } from 'lucide-react'
 
-import { Calendar, User, ArrowRight } from 'lucide-react';
+import { BlogImage } from '@/components/blog/blog-image'
+import { Badge } from '@/components/ui/badge'
 
-import { BlogImage } from '@/components/blog/blog-image';
-import { Badge } from '@/components/ui/badge';
-
-import { cn, formatDate } from '@/lib/utils';
+import { cn, formatDate } from '@/lib/utils'
 
 export interface BlogCardPostLike {
-  slug: string;
-  excerpt?: string;
+  slug: string
+  excerpt?: string
   frontmatter: {
-    title: string;
-    date: string;
-    author?: string;
-    image?: string;
-    tags?: string[];
-    imagePlaceholder?: string;
-  };
+    title: string
+    date: string
+    author?: string
+    image?: string
+    tags?: string[]
+    imagePlaceholder?: string
+  }
 }
 
 interface BlogCardProps {
-  post: BlogCardPostLike;
-  sizes?: string;
-  className?: string;
+  post: BlogCardPostLike
+  sizes?: string
+  className?: string
 }
 
 export function BlogCard({ post, sizes, className }: BlogCardProps) {
-  const { frontmatter } = post;
+  const { frontmatter } = post
   return (
     <article
       itemScope
@@ -40,7 +38,7 @@ export function BlogCard({ post, sizes, className }: BlogCardProps) {
       )}
     >
       <Link
-        href={`/blog/${post.slug}`}
+        to={`/blog/${post.slug}`}
         aria-label={`Read post: ${frontmatter.title}`}
         className="absolute inset-0 z-10"
         tabIndex={0}
@@ -113,5 +111,5 @@ export function BlogCard({ post, sizes, className }: BlogCardProps) {
         </div>
       </div>
     </article>
-  );
+  )
 }

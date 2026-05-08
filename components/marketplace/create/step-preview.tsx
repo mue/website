@@ -1,4 +1,3 @@
-import Image from 'next/image';
 
 import { ArrowRight, Eye, Lightbulb } from 'lucide-react';
 
@@ -8,7 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { getMarketplaceTypeLabel } from '@/lib/marketplace';
 
-import { AddonMetadata, AddonType, Photo, Quote } from './types';
+import type { AddonMetadata, AddonType, Photo, Quote } from './types';
 
 interface StepPreviewProps {
   addonType: AddonType;
@@ -85,13 +84,10 @@ export function StepPreview({
           <div className="flex items-center justify-center lg:justify-start">
             <div className="relative h-16 w-16 lg:h-14 lg:w-14 flex-shrink-0 overflow-hidden rounded-xl border border-border/60 bg-muted">
               {metadata.icon_url ? (
-                <Image
+                <img
                   src={metadata.icon_url}
                   alt={metadata.name}
-                  fill
-                  sizes="64px"
-                  className="object-cover"
-                  unoptimized
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
               ) : (
                 <div className="flex h-full w-full items-center justify-center text-xs font-semibold uppercase text-muted-foreground/80">
@@ -173,12 +169,10 @@ export function StepPreview({
               {(getContentPreview() as Photo[]).map((photo, idx) => (
                 <div key={idx} className="group relative aspect-square overflow-hidden rounded-lg">
                   {photo.url.default && (
-                    <Image
+                    <img
                       src={photo.url.default}
                       alt={photo.location}
-                      fill
-                      className="object-cover transition-transform group-hover:scale-105"
-                      unoptimized
+                      className="absolute inset-0 w-full h-full object-cover transition-transform group-hover:scale-105"
                     />
                   )}
 

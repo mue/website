@@ -1,8 +1,4 @@
-'use client';
-
 import { useState } from 'react';
-
-import Image from 'next/image';
 
 import {
   ChevronDown,
@@ -24,8 +20,8 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
-  DragEndEvent,
 } from '@dnd-kit/core';
+import type { DragEndEvent } from '@dnd-kit/core';
 import {
   arrayMove,
   SortableContext,
@@ -41,7 +37,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 
-import { Photo } from './types';
+import type { Photo } from './types';
 
 type PhotoPackEditorProps = {
   photos: Photo[];
@@ -109,12 +105,10 @@ function SortablePhotoItem({
           {/* preview */}
           {photo.url.default && (
             <div className="relative h-10 w-10 overflow-hidden rounded">
-              <Image
+              <img
                 src={photo.url.default}
                 alt={photo.location || `Photo ${index + 1}`}
-                fill
-                className="object-cover"
-                unoptimized
+                className="absolute inset-0 w-full h-full object-cover"
               />
             </div>
           )}
@@ -199,12 +193,10 @@ function SortablePhotoItem({
             <div className="flex flex-col gap-2">
               <Label>Preview</Label>
               <div className="relative h-48 w-full overflow-hidden rounded-lg border">
-                <Image
+                <img
                   src={photo.url.default}
                   alt={photo.location || 'Preview'}
-                  fill
-                  className="object-cover"
-                  unoptimized
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
             </div>

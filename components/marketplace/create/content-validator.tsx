@@ -4,7 +4,7 @@ import { Badge } from '@/components/ui/badge';
 
 import { cn } from '@/lib/utils';
 
-import { AddonType, Photo, Quote } from './types';
+import type { AddonType, Photo, Quote } from './types';
 
 export interface ValidationIssue {
   type: 'error' | 'warning' | 'info';

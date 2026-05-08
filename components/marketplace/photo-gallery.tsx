@@ -1,8 +1,4 @@
-'use client';
-
 import { useState, useEffect, useCallback, useRef } from 'react';
-
-import Image from 'next/image';
 
 import { LayoutGrid, Layers, X, ChevronLeft, ChevronRight, Camera, MapPin } from 'lucide-react';
 
@@ -191,15 +187,13 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
                       onClick={() => openLightbox(index)}
                       className="relative h-64 w-full max-w-4xl overflow-hidden rounded-xl border border-border/60 shadow-md md:h-96 mx-auto cursor-zoom-in hover:opacity-90 transition"
                     >
-                      <Image
+                      <img
                         src={photoUrl}
                         alt={photo.location ?? photo.photographer ?? itemName}
-                        fill
-                        sizes="(min-width: 1024px) 60vw, 100vw"
-                        className="object-cover"
-                        unoptimized
+                        className="absolute inset-0 w-full h-full object-cover"
                       />
                     </button>
+
                     {(photo.photographer || photo.location) && (
                       <div className="text-center space-y-1">
                         {photo.photographer && (
@@ -239,13 +233,10 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
                 onClick={() => openLightbox(index)}
                 className="group relative aspect-square overflow-hidden rounded-xl border border-border/60 shadow-sm transition hover:shadow-md cursor-zoom-in"
               >
-                <Image
+                <img
                   src={photoUrl}
                   alt={photo.location ?? photo.photographer ?? itemName}
-                  fill
-                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-                  className="object-cover transition group-hover:scale-105"
-                  unoptimized
+                  className="absolute inset-0 w-full h-full object-cover transition group-hover:scale-105"
                 />
 
                 {(photo.photographer || photo.location) && (
@@ -320,14 +311,10 @@ export function PhotoGallery({ photos, itemName }: PhotoGalleryProps) {
             className={`relative max-h-[90vh] max-w-[90vw] w-full h-full flex items-center justify-center transition-all duration-250 ${lightboxVisible ? 'scale-100 opacity-100' : 'scale-[0.97] opacity-0'}`}
           >
             <div className="relative w-full h-full" onClick={(e) => e.stopPropagation()}>
-              <Image
+              <img
                 src={currentPhotoUrl}
                 alt={currentPhoto?.location ?? currentPhoto?.photographer ?? itemName}
-                fill
-                sizes="(max-width: 640px) 100vw, 90vw"
-                className="object-contain"
-                unoptimized
-                priority
+                className="absolute inset-0 w-full h-full object-contain"
               />
             </div>
           </div>

@@ -12,10 +12,10 @@ import { SettingsEditor } from './settings-editor';
 import { TemplatePicker } from './template-picker';
 import { ValidationSummary } from './validation-summary';
 
-import { ContentTemplate } from '@/lib/content-templates';
+import type { ContentTemplate } from '@/lib/content-templates';
 import { validatePhotos, validateQuotes, validateSettings } from '@/lib/content-validator';
 
-import { AddonType, Photo, Quote } from './types';
+import type { AddonType, Photo, Quote } from './types';
 
 interface StepContentProps {
   addonType: AddonType;

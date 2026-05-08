@@ -1,11 +1,8 @@
-'use client';
-
 import React from 'react';
 
 import Logo from './logo';
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { Link, useLocation } from '@tanstack/react-router';
 
 import { Download, Menu, BookOpen, Package, Code2, ArrowRight } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa6';
@@ -59,42 +56,42 @@ const docsQuickLinks: {
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
-  const isDocsActive = pathname?.startsWith('/docs') ?? false;
+  const { pathname } = useLocation();
+  const isDocsActive = pathname.startsWith('/docs');
 
   const navLinks = [
     {
       href: '/marketplace',
       label: 'Marketplace',
-      isActive: pathname?.startsWith('/marketplace') ?? false,
+      isActive: pathname.startsWith('/marketplace'),
     },
     {
       href: '/showcase',
       label: 'Showcase',
-      isActive: pathname?.startsWith('/showcase') ?? false,
+      isActive: pathname.startsWith('/showcase'),
     },
     {
       href: '/blog',
       label: 'Blog',
-      isActive: pathname?.startsWith('/blog') ?? false,
+      isActive: pathname.startsWith('/blog'),
     },
     {
       href: '/contact',
       label: 'Contact',
-      isActive: pathname?.startsWith('/contact') ?? false,
+      isActive: pathname.startsWith('/contact'),
     },
   ];
 
   return (
     <nav className="bg-background/60 backdrop-blur-md flex w-full items-center gap-3 rounded-xl border border-foreground/20 px-4 py-3 shadow-lg sm:px-6 lg:px-12">
       <div className="flex flex-1 items-center">
-        <Link href={'/'} className="cursor-pointer shrink-0" aria-label="Mue home">
+        <Link to="/" className="cursor-pointer shrink-0" aria-label="Mue home">
           <Logo width={100} height={100} className="h-10 w-10" />
         </Link>
       </div>
 
       <div className="flex lg:hidden">
-        <Link href={'/'} className="cursor-pointer" aria-label="Mue home">
+        <Link to="/" className="cursor-pointer" aria-label="Mue home">
           <span className="text-xl font-bold" style={{ fontFamily: 'var(--font-lexend-deca)' }}>
             Mue
           </span>
@@ -112,7 +109,7 @@ export default function Navbar() {
                 <div className="grid md:w-[440px] lg:w-[520px] lg:grid-cols-[1fr_1.4fr]">
                   <NavigationMenuLink asChild>
                     <Link
-                      href="/docs"
+                      to="/docs"
                       className="flex flex-col justify-between rounded-l-md bg-linear-to-b from-[#FF5C25]/20 to-[#b02048]/20 px-4 py-6 no-underline outline-hidden select-none transition-colors hover:from-[#FF5C25]/30 hover:to-[#b02048]/30 focus:shadow-md"
                     >
                       <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#FF5C25]/80">
@@ -134,13 +131,13 @@ export default function Navbar() {
 
                   <ul className="flex flex-col gap-1 p-3">
                     {docsQuickLinks.map((item) => {
-                      const isActive = pathname?.startsWith(item.href) ?? false;
+                      const isActive = pathname.startsWith(item.href);
                       const Icon = item.icon;
                       return (
                         <li key={item.title}>
                           <NavigationMenuLink asChild active={isActive}>
                             <Link
-                              href={item.href}
+                              to={item.href}
                               className={cn(
                                 'flex items-start gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-muted/60',
                                 isActive && 'bg-muted/60',
@@ -190,7 +187,7 @@ export default function Navbar() {
                   className={navigationMenuTriggerStyle()}
                   active={isActive}
                 >
-                  <Link href={href}>{label}</Link>
+                  <Link to={href}>{label}</Link>
                 </NavigationMenuLink>
               </NavigationMenuItem>
             ))}
@@ -200,7 +197,7 @@ export default function Navbar() {
 
       <div className="flex flex-1 items-center justify-end gap-2">
         <Button variant="default" className="hidden lg:inline-flex" asChild>
-          <Link href="/download">
+          <Link to="/download">
             <Download className="mr-2 h-4 w-4" /> Download
           </Link>
         </Button>
@@ -219,7 +216,7 @@ export default function Navbar() {
           >
             <SheetHeader className="relative flex flex-row items-center border-b border-border px-4 py-3">
               <SheetClose asChild>
-                <Link href="/" aria-label="Mue home">
+                <Link to="/" aria-label="Mue home">
                   <Logo width={100} height={100} className="h-8 w-8" />
                 </Link>
               </SheetClose>
@@ -235,7 +232,7 @@ export default function Navbar() {
             <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto px-3 py-3">
               <SheetClose asChild>
                 <Link
-                  href="/docs"
+                  to="/docs"
                   aria-current={isDocsActive ? 'page' : undefined}
                   className={cn(
                     'flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted',
@@ -249,7 +246,7 @@ export default function Navbar() {
               {navLinks.map(({ href, label, isActive }) => (
                 <SheetClose asChild key={href}>
                   <Link
-                    href={href}
+                    to={href}
                     aria-current={isActive ? 'page' : undefined}
                     className={cn(
                       'flex items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted',
@@ -265,7 +262,7 @@ export default function Navbar() {
             <div className="flex flex-col gap-2 border-t border-border px-3 py-3">
               <SheetClose asChild>
                 <Button className="w-full" size="sm" asChild>
-                  <Link href="/download">
+                  <Link to="/download">
                     <Download className="h-4 w-4" /> Download
                   </Link>
                 </Button>
@@ -273,9 +270,9 @@ export default function Navbar() {
 
               <SheetClose asChild>
                 <Button className="w-full" variant="outline" size="sm" asChild>
-                  <Link href="https://github.com/mue/mue" target="_blank" rel="noreferrer">
+                  <a href="https://github.com/mue/mue" target="_blank" rel="noreferrer">
                     <FaGithub className="h-4 w-4" /> GitHub
-                  </Link>
+                  </a>
                 </Button>
               </SheetClose>
             </div>

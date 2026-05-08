@@ -1,9 +1,6 @@
-'use client';
-
 import { useState } from 'react';
 
-import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@tanstack/react-router';
 
 import { cn } from '@/lib/utils';
 import {
@@ -12,12 +9,12 @@ import {
   getInitials,
   slugifyAuthor,
   formatCollectionName,
-  MarketplaceItemSummary,
 } from '@/lib/marketplace';
+import type { MarketplaceItemSummary } from '@/lib/marketplace';
 
 import { Library as LibraryIcon, Heart } from 'lucide-react';
 
-import { useRouter } from 'next/navigation';
+import { useNavigate } from '@tanstack/react-router';
 
 import { useFavoritesContext } from '@/lib/favorites-context';
 import { useEmbed } from '@/lib/embed-context';
@@ -28,7 +25,7 @@ interface ItemsGridProps {
 }
 
 export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) {
-  const router = useRouter();
+  const navigate = useNavigate();
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 
   const { toggleFavorite, isFavorite } = useFavoritesContext();
@@ -44,9 +41,9 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
       {items.map((item) => (
         <Link
           key={item.id || `${item.type}-${item.name}`}
-          href={buildEmbedUrl(
+          to={buildEmbedUrl(
             `/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`,
-          )}
+          ) as any}
           className={cn(
             'group relative flex h-full cursor-pointer flex-col gap-3 overflow-hidden rounded-2xl border border-border bg-card/70 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md',
             isEmbed ? 'p-3 lg:p-4' : 'p-4 lg:gap-4 lg:p-6',
@@ -80,13 +77,10 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
               )}
             >
               {item.icon_url && !failedImages.has(item.id) ? (
-                <Image
+                <img
                   src={item.icon_url}
                   alt={item.display_name}
-                  fill
-                  sizes="64px"
-                  className="object-cover"
-                  unoptimized
+                  className="absolute inset-0 w-full h-full object-cover"
                   onError={() => setFailedImages((prev) => new Set(prev).add(item.id))}
                 />
               ) : (
@@ -110,9 +104,9 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
                     event.preventDefault();
                     event.stopPropagation();
                     if (item.author) {
-                      router.push(
-                        buildEmbedUrl(`/marketplace/author/${slugifyAuthor(item.author)}`),
-                      );
+                      navigate({
+                        to: buildEmbedUrl(`/marketplace/author/${slugifyAuthor(item.author)}`) as any,
+                      });
                     }
                   }}
                   className="hover:text-primary hover:underline transition cursor-pointer"
@@ -129,7 +123,7 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
               onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                router.push(buildEmbedUrl(`/marketplace?type=${item.type}`, true));
+                navigate({ to: buildEmbedUrl(`/marketplace?type=${item.type}`, true) as any });
               }}
               className={cn(
                 'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
@@ -148,9 +142,9 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
                     onClick={(event) => {
                       event.preventDefault();
                       event.stopPropagation();
-                      router.push(
-                        buildEmbedUrl(`/marketplace/collection/${encodeURIComponent(collection)}`),
-                      );
+                      navigate({
+                        to: buildEmbedUrl(`/marketplace/collection/${encodeURIComponent(collection)}`) as any,
+                      });
                     }}
                     className={cn(
                       'flex cursor-pointer flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',

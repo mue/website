@@ -1,8 +1,6 @@
-'use client';
+import { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { usePathname, useRouter } from 'next/navigation';
-
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useNavigate, useLocation } from '@tanstack/react-router'
 
 import {
   Command,
@@ -12,48 +10,48 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/components/ui/command';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
+} from '@/components/ui/command'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 
-import { cn } from '@/lib/utils';
-import type { DocMeta } from '@/lib/docs';
+import { cn } from '@/lib/utils'
+import type { DocMeta } from '@/lib/docs'
 
 type DocsSearchProps = {
-  docs: DocMeta[];
-};
+  docs: DocMeta[]
+}
 
 export function DocsSearch({ docs }: DocsSearchProps) {
-  const router = useRouter();
-  const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const items = useMemo(() => [...docs].sort((a, b) => a.title.localeCompare(b.title)), [docs]);
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+  const [open, setOpen] = useState(false)
+  const items = useMemo(() => [...docs].sort((a, b) => a.title.localeCompare(b.title)), [docs])
 
-  const handleOpen = useCallback(() => setOpen(true), []);
+  const handleOpen = useCallback(() => setOpen(true), [])
 
   const handleSelect = useCallback(
     (href: string) => {
-      setOpen(false);
-      router.push(href);
+      setOpen(false)
+      navigate({ to: href as any })
     },
-    [router],
-  );
+    [navigate],
+  )
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
-        event.preventDefault();
-        setOpen((prev) => !prev);
+        event.preventDefault()
+        setOpen((prev) => !prev)
       }
-    };
+    }
 
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, []);
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [])
 
   useEffect(() => {
-    setOpen(false);
-  }, [pathname]);
+    setOpen(false)
+  }, [pathname])
 
   return (
     <>
@@ -101,5 +99,5 @@ export function DocsSearch({ docs }: DocsSearchProps) {
         </Command>
       </CommandDialog>
     </>
-  );
+  )
 }

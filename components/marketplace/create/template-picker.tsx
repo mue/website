@@ -11,7 +11,8 @@ import {
 } from '@/components/ui/dialog';
 import { Badge } from '@/components/ui/badge';
 
-import { ContentTemplate, getTemplatesByType } from '@/lib/content-templates';
+import { getTemplatesByType } from '@/lib/content-templates';
+import type { ContentTemplate } from '@/lib/content-templates';
 
 interface TemplatePickerProps {
   addonType: 'photos' | 'quotes' | 'settings';

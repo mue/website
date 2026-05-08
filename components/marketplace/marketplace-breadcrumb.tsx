@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from '@tanstack/react-router';
 
 import {
   Breadcrumb,
@@ -45,7 +45,7 @@ export function MarketplaceBreadcrumb(props: BreadcrumbProps) {
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <Link href="/marketplace">Marketplace</Link>
+            <Link to={"/marketplace" as any}>Marketplace</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
 
@@ -61,7 +61,7 @@ export function MarketplaceBreadcrumb(props: BreadcrumbProps) {
           <>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href="/marketplace/collections">Collections</Link>
+                <Link to={"/marketplace/collections" as any}>Collections</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
 
@@ -77,7 +77,7 @@ export function MarketplaceBreadcrumb(props: BreadcrumbProps) {
           <>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href={`/marketplace?type=${normalizeTypeForFilter(props.itemType)}`}>
+                <Link to={`/marketplace?type=${normalizeTypeForFilter(props.itemType)}` as any}>
                   {getMarketplaceTypeLabel(props.itemType)}
                 </Link>
               </BreadcrumbLink>
@@ -101,7 +101,7 @@ export function MarketplaceBreadcrumb(props: BreadcrumbProps) {
           <>
             <BreadcrumbItem>
               <BreadcrumbLink asChild>
-                <Link href="/marketplace/authors">Authors</Link>
+                <Link to={"/marketplace/authors" as any}>Authors</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
 

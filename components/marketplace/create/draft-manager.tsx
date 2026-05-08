@@ -1,5 +1,3 @@
-'use client';
-
 import { useState, useEffect } from 'react';
 
 import { Save, FolderOpen, Trash2, Download, Upload, Clock, FileText } from 'lucide-react';

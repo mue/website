@@ -1,7 +1,6 @@
-'use client';
-
 import type { ReactNode } from 'react';
 import { List } from 'lucide-react';
+import { Link } from '@tanstack/react-router';
 
 import { DocsToc } from '@/components/docs/toc';
 import {
@@ -37,7 +36,9 @@ export function DocsShell({ toc = [], breadcrumb, children, header }: DocsShellP
                 <BreadcrumbItem key={`${item.label}-${index}`}>
                   {item.href && index !== breadcrumb.length - 1 ? (
                     <>
-                      <BreadcrumbLink href={item.href}>{item.label}</BreadcrumbLink>
+                      <BreadcrumbLink asChild>
+                        <Link to={item.href as any}>{item.label}</Link>
+                      </BreadcrumbLink>
                       <BreadcrumbSeparator />
                     </>
                   ) : (

@@ -1,7 +1,4 @@
-'use client';
-
-import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@tanstack/react-router';
 
 import { Badge } from '@/components/ui/badge';
 import {
@@ -14,7 +11,8 @@ import {
 
 import Autoplay from 'embla-carousel-autoplay';
 
-import { getMarketplaceTypeLabel, MarketplaceCollection } from '@/lib/marketplace';
+import { getMarketplaceTypeLabel } from '@/lib/marketplace';
+import type { MarketplaceCollection } from '@/lib/marketplace';
 
 import { cn } from '@/lib/utils';
 import { useEmbed } from '@/lib/embed-context';
@@ -63,14 +61,10 @@ export default function FeaturedCollections({
                   )}
                 >
                   {collection.img ? (
-                    <Image
+                    <img
                       src={collection.img}
                       alt={collection.display_name}
-                      fill
-                      sizes="(min-width: 1024px) 40vw, 100vw"
-                      className="object-cover"
-                      priority
-                      unoptimized
+                      className="absolute inset-0 w-full h-full object-cover"
                     />
                   ) : (
                     <div className="h-full w-full bg-muted" />
@@ -117,9 +111,9 @@ export default function FeaturedCollections({
 
                   <div className="mt-auto flex items-center gap-3">
                     <Link
-                      href={buildEmbedUrl(
+                      to={buildEmbedUrl(
                         `/marketplace/collection/${encodeURIComponent(collection.name)}`,
-                      )}
+                      ) as any}
                       className={cn(
                         'cursor-pointer rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90 lg:px-4 lg:py-2 lg:text-sm',
                         isEmbed && 'px-3 py-1.5 text-xs',

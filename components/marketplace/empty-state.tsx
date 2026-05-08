@@ -1,6 +1,7 @@
-import Link from 'next/link';
+import { Link } from '@tanstack/react-router';
 
-import { LucideIcon, PackageOpen, Library, Search, Sparkles } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import { PackageOpen, Library, Search, Sparkles } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
@@ -38,13 +39,13 @@ export function MarketplaceEmptyState({
         <div className="flex flex-wrap items-center justify-center gap-3">
           {action && (
             <Button asChild>
-              <Link href={action.href}>{action.label}</Link>
+              <Link to={action.href as any}>{action.label}</Link>
             </Button>
           )}
 
           {secondaryAction && (
             <Button asChild variant="outline">
-              <Link href={secondaryAction.href}>{secondaryAction.label}</Link>
+              <Link to={secondaryAction.href as any}>{secondaryAction.label}</Link>
             </Button>
           )}
         </div>

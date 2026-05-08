@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import Image from 'next/image';
 
 import { Download, CheckCircle2, FileJson, Package, Copy, Check } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa6';
@@ -11,7 +10,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 
-import { AddonMetadata, AddonType, Photo, Quote } from './types';
+import type { AddonMetadata, AddonType, Photo, Quote } from './types';
 
 interface StepOutputProps {
   addonType: AddonType;
@@ -136,13 +135,10 @@ export function StepOutput({
         <div className="space-y-4">
           <div className="flex items-start gap-4">
             {metadata.icon_url && (
-              <Image
+              <img
                 src={metadata.icon_url}
                 alt={metadata.name}
-                width={64}
-                height={64}
                 className="h-16 w-16 rounded-lg object-cover"
-                unoptimized
               />
             )}
 
@@ -165,13 +161,10 @@ export function StepOutput({
 
           {metadata.screenshot_url && (
             <div className="overflow-hidden rounded-lg border">
-              <Image
+              <img
                 src={metadata.screenshot_url}
                 alt="Screenshot"
-                width={800}
-                height={450}
                 className="w-full object-cover"
-                unoptimized
               />
             </div>
           )}

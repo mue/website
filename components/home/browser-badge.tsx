@@ -1,6 +1,4 @@
-import Link from 'next/link';
-
-import { IconType } from 'react-icons';
+import type { IconType } from 'react-icons';
 
 type BrowserBadgeProps = {
   name: string;
@@ -10,7 +8,7 @@ type BrowserBadgeProps = {
 
 export function BrowserBadge({ name, icon: Icon, url }: BrowserBadgeProps) {
   return (
-    <Link
+    <a
       href={url}
       target="_blank"
       rel="noreferrer"
@@ -18,6 +16,6 @@ export function BrowserBadge({ name, icon: Icon, url }: BrowserBadgeProps) {
     >
       <Icon className="h-3.5 w-3.5 shrink-0" />
       {name}
-    </Link>
+    </a>
   );
 }

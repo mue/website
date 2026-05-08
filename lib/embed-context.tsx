@@ -1,156 +1,111 @@
-'use client';
-
-import { createContext, useContext, useEffect, useState, ReactNode, useRef } from 'react';
-
-import { useSearchParams, usePathname, useRouter } from 'next/navigation';
-
-import { ScrollToTop } from '@/components/scroll-to-top';
-import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
+import { createContext, useContext, useEffect, useState, useRef, type ReactNode } from 'react'
+import { useNavigate, useLocation, useSearch } from '@tanstack/react-router'
+import { ScrollToTop } from '@/components/scroll-to-top'
+import Navbar from '@/components/navbar'
+import Footer from '@/components/footer'
 
 type EmbedContextType = {
-  isEmbed: boolean;
-  isPreview: boolean;
-  sendMessage: (type: string, payload: any) => void;
-  config: EmbedConfig;
-  buildEmbedUrl: (path: string, hasExistingParams?: boolean) => string;
-};
+  isEmbed: boolean
+  isPreview: boolean
+  sendMessage: (type: string, payload: unknown) => void
+  config: EmbedConfig
+  buildEmbedUrl: (path: string, hasExistingParams?: boolean) => string
+}
 
 type EmbedConfig = {
-  theme?: 'light' | 'dark' | 'system';
-  filters?: { type?: string; collection?: string };
-  viewMode?: 'grid' | 'list';
-};
+  theme?: 'light' | 'dark' | 'system'
+  filters?: { type?: string; collection?: string }
+  viewMode?: 'grid' | 'list'
+}
 
-const EmbedContext = createContext<EmbedContextType | undefined>(undefined);
+const EmbedContext = createContext<EmbedContextType | undefined>(undefined)
 
 export function EmbedProvider({ children }: { children: ReactNode }) {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const router = useRouter();
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+  const search = useSearch({ strict: false }) as Record<string, string>
 
-  const isEmbed = searchParams?.get('embed') === 'true';
-  const isPreview = searchParams?.get('preview') === 'true';
+  const isEmbed = search?.embed === 'true'
+  const isPreview = search?.preview === 'true'
+  const themeParam = (search?.theme ?? null) as 'light' | 'dark' | 'system' | null
+  const [config, setConfig] = useState<EmbedConfig>({})
+  const previousPathRef = useRef(pathname)
 
-  const themeParam = searchParams?.get('theme') as 'light' | 'dark' | 'system' | null;
-  const [config, setConfig] = useState<EmbedConfig>({});
-
-  const previousPathRef = useRef(pathname);
-
-  // helper to build URLs with embed/preview/theme params preserved
   const buildEmbedUrl = (path: string, hasExistingParams = false) => {
-    if (!isEmbed) return path;
+    if (!isEmbed) return path
+    const separator = hasExistingParams ? '&' : '?'
+    const params: string[] = ['embed=true']
+    if (isPreview) params.push('preview=true')
+    if (themeParam) params.push(`theme=${themeParam}`)
+    return `${path}${separator}${params.join('&')}`
+  }
 
-    const separator = hasExistingParams ? '&' : '?';
-    const params = [];
-
-    params.push('embed=true');
-    if (isPreview) params.push('preview=true');
-    if (themeParam) params.push(`theme=${themeParam}`);
-
-    return `${path}${separator}${params.join('&')}`;
-  };
-
-  // apply theme from URL parameter on mount
-  useEffect(() => {
-    if (isEmbed && themeParam && typeof window !== 'undefined') {
-      const themeEvent = new CustomEvent('embed-theme-change', {
-        detail: { theme: themeParam },
-      });
-
-      window.dispatchEvent(themeEvent);
-    }
-  }, [isEmbed, themeParam]);
-
-  // send ready message when embed mode is initialized
-  useEffect(() => {
+  const sendMessage = (type: string, payload: unknown) => {
     if (isEmbed && typeof window !== 'undefined') {
-      window.parent.postMessage({ type: 'marketplace:ready', payload: null }, '*');
+      window.parent.postMessage({ type, payload }, '*')
     }
-  }, [isEmbed]);
+  }
 
-  // Listen for messages from parent
   useEffect(() => {
-    if (!isEmbed) return;
+    if (isEmbed && themeParam) {
+      window.dispatchEvent(new CustomEvent('embed-theme-change', { detail: { theme: themeParam } }))
+    }
+  }, [isEmbed, themeParam])
 
+  useEffect(() => {
+    if (isEmbed) window.parent.postMessage({ type: 'marketplace:ready', payload: null }, '*')
+  }, [isEmbed])
+
+  useEffect(() => {
+    if (!isEmbed) return
     const handleMessage = (event: MessageEvent) => {
-      const { type, payload } = event.data;
-
+      const { type, payload } = event.data
       if (type === 'marketplace:config') {
-        setConfig(payload);
-
-        // apply theme if provided
-        if (payload.theme && typeof window !== 'undefined') {
-          const themeEvent = new CustomEvent('embed-theme-change', {
-            detail: { theme: payload.theme },
-          });
-          window.dispatchEvent(themeEvent);
+        setConfig(payload)
+        if (payload.theme) {
+          window.dispatchEvent(
+            new CustomEvent('embed-theme-change', { detail: { theme: payload.theme } }),
+          )
         }
-      } else if (type === 'marketplace:navigate') {
-        // handle navigation command from parent
-        if (payload?.path) {
-          const embedParams = new URLSearchParams();
-
-          embedParams.set('embed', 'true');
-          if (isPreview) embedParams.set('preview', 'true');
-          if (themeParam) embedParams.set('theme', themeParam);
-
-          const fullPath = `${payload.path}?${embedParams.toString()}`;
-          router.push(fullPath);
-        }
+      } else if (type === 'marketplace:navigate' && payload?.path) {
+        const params = new URLSearchParams({ embed: 'true' })
+        if (isPreview) params.set('preview', 'true')
+        if (themeParam) params.set('theme', themeParam)
+        navigate({ to: `${payload.path}?${params.toString()}` })
       }
-    };
+    }
+    window.addEventListener('message', handleMessage)
+    return () => window.removeEventListener('message', handleMessage)
+  }, [isEmbed, navigate, isPreview, themeParam])
 
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
-  }, [isEmbed, router, isPreview, themeParam]);
-
-  // track navigation changes and send to parent
   useEffect(() => {
     if (isEmbed && pathname !== previousPathRef.current) {
-      const search = searchParams?.toString();
-      const fullPath = search ? `${pathname}?${search}` : pathname;
-
+      const searchStr = new URLSearchParams(search as Record<string, string>).toString()
       sendMessage('marketplace:navigation', {
         path: pathname,
-        fullPath,
-        search: search || '',
-      });
-
-      previousPathRef.current = pathname;
+        fullPath: searchStr ? `${pathname}?${searchStr}` : pathname,
+        search: searchStr,
+      })
+      previousPathRef.current = pathname
     }
-  }, [pathname, searchParams, isEmbed]);
-
-  const sendMessage = (type: string, payload: any) => {
-    if (isEmbed && typeof window !== 'undefined') {
-      window.parent.postMessage({ type, payload }, '*');
-    }
-  };
+  }, [pathname, search, isEmbed])
 
   return (
     <EmbedContext.Provider value={{ isEmbed, isPreview, sendMessage, config, buildEmbedUrl }}>
       {children}
     </EmbedContext.Provider>
-  );
+  )
 }
 
 export function useEmbed() {
-  const context = useContext(EmbedContext);
-
-  if (!context) {
-    throw new Error('useEmbed must be used within EmbedProvider');
-  }
-
-  return context;
+  const ctx = useContext(EmbedContext)
+  if (!ctx) throw new Error('useEmbed must be used within EmbedProvider')
+  return ctx
 }
 
 export function EmbedLayoutWrapper({ children }: { children: ReactNode }) {
-  const { isEmbed } = useEmbed();
-
-  if (isEmbed) {
-    return <main className="flex-1">{children}</main>;
-  }
-
+  const { isEmbed } = useEmbed()
+  if (isEmbed) return <main className="flex-1">{children}</main>
   return (
     <>
       <ScrollToTop />
@@ -164,5 +119,5 @@ export function EmbedLayoutWrapper({ children }: { children: ReactNode }) {
         <Footer />
       </div>
     </>
-  );
+  )
 }

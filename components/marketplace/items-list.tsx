@@ -1,10 +1,7 @@
-'use client';
-
 import { useState } from 'react';
 
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { Link } from '@tanstack/react-router';
+import { useNavigate } from '@tanstack/react-router';
 
 import { Library as LibraryIcon, Heart } from 'lucide-react';
 
@@ -14,8 +11,8 @@ import {
   getItemCategory,
   getInitials,
   slugifyAuthor,
-  MarketplaceItemSummary,
 } from '@/lib/marketplace';
+import type { MarketplaceItemSummary } from '@/lib/marketplace';
 import { useFavoritesContext } from '@/lib/favorites-context';
 import { useEmbed } from '@/lib/embed-context';
 
@@ -25,7 +22,7 @@ interface ItemsListProps {
 }
 
 export default function ItemsList({ items, collectionNameMap }: ItemsListProps) {
-  const router = useRouter();
+  const navigate = useNavigate();
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 
   const { toggleFavorite, isFavorite } = useFavoritesContext();
@@ -36,9 +33,9 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
       {items.map((item) => (
         <Link
           key={item.id || `${item.type}-${item.name}`}
-          href={buildEmbedUrl(
+          to={buildEmbedUrl(
             `/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`,
-          )}
+          ) as any}
           className="group relative flex cursor-pointer flex-row items-center gap-4 overflow-hidden rounded-xl border border-border bg-card/70 p-4 shadow-sm transition hover:border-primary/40 hover:shadow-md"
         >
           <button
@@ -63,13 +60,10 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
 
           <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-lg border border-border/60 bg-muted">
             {item.icon_url && !failedImages.has(item.id) ? (
-              <Image
+              <img
                 src={item.icon_url}
                 alt={item.display_name}
-                fill
-                sizes="64px"
-                className="object-cover"
-                unoptimized
+                className="absolute inset-0 w-full h-full object-cover"
                 onError={() => setFailedImages((prev) => new Set(prev).add(item.id))}
               />
             ) : (
@@ -93,9 +87,9 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
                     event.preventDefault();
                     event.stopPropagation();
                     if (item.author) {
-                      router.push(
-                        buildEmbedUrl(`/marketplace/author/${slugifyAuthor(item.author)}`),
-                      );
+                      navigate({
+                        to: buildEmbedUrl(`/marketplace/author/${slugifyAuthor(item.author)}`) as any,
+                      });
                     }
                   }}
                   className="hover:text-primary hover:underline transition"
@@ -112,7 +106,7 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
               onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                router.push(buildEmbedUrl(`/marketplace?type=${item.type}`, true));
+                navigate({ to: buildEmbedUrl(`/marketplace?type=${item.type}`, true) as any });
               }}
               className={cn(
                 'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
@@ -131,9 +125,9 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
                     onClick={(event) => {
                       event.preventDefault();
                       event.stopPropagation();
-                      router.push(
-                        buildEmbedUrl(`/marketplace/collection/${encodeURIComponent(collection)}`),
-                      );
+                      navigate({
+                        to: buildEmbedUrl(`/marketplace/collection/${encodeURIComponent(collection)}`) as any,
+                      });
                     }}
                     className={cn(
                       'flex cursor-pointer flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',

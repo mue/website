@@ -1,8 +1,4 @@
-'use client';
-
-import { useEffect, useCallback, useState, useRef } from 'react';
-
-import Image from 'next/image';
+import { useEffect, useCallback, useState, useRef } from 'react'
 
 import { X, ChevronLeft, ChevronRight, User, Calendar, Tag } from 'lucide-react';
 
@@ -117,15 +113,10 @@ export function ShowcaseLightbox({
       >
         <div className="w-full max-w-7xl" onClick={(e) => e.stopPropagation()}>
           <div className="relative aspect-video w-full overflow-hidden rounded-xl">
-            <Image
+            <img
               src={displayItem.imageUrl}
               alt={`Mue setup by ${displayItem.author}`}
-              fill
-              className="object-contain"
-              sizes="(max-width: 1536px) 100vw, 1536px"
-              priority
-              placeholder={displayItem.blurDataURL ? 'blur' : 'empty'}
-              blurDataURL={displayItem.blurDataURL}
+              className="absolute inset-0 h-full w-full object-contain"
             />
           </div>
 

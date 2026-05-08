@@ -1,7 +1,6 @@
-import Link from 'next/link';
 
 import { ArrowRight } from 'lucide-react';
-import { IconType } from 'react-icons';
+import type { IconType } from 'react-icons';
 
 import { Button } from '@/components/ui/button';
 
@@ -62,10 +61,10 @@ export function BrowserCard({
           className="mt-8 w-full shadow-[0_20px_50px_-25px_var(--tw-shadow-color)] shadow-primary/40"
           asChild
         >
-          <Link href={url} target="_blank" rel="noreferrer">
+          <a href={url} target="_blank" rel="noreferrer">
             Add to {name}
             <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
+          </a>
         </Button>
       </div>
     </div>

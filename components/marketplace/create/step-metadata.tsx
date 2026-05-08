@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card } from '@/components/ui/card';
 import { ImageUrlInput } from '@/components/ui/image-url-input';
 
-import { AddonMetadata } from './types';
+import type { AddonMetadata } from './types';
 
 interface StepMetadataProps {
   metadata: AddonMetadata;

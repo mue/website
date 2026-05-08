@@ -1,8 +1,4 @@
-'use client';
-
-import { useState } from 'react';
-
-import Image from 'next/image';
+import { useState } from 'react'
 
 import { User } from 'lucide-react';
 
@@ -29,14 +25,10 @@ export function ShowcaseGallery({ items }: ShowcaseGalleryProps) {
             className={`group relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-card/70 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md ${index === items.length - 1 && items.length % 3 === 1 ? 'lg:col-start-2' : ''}`}
           >
             <div className="relative aspect-video w-full overflow-hidden">
-              <Image
+              <img
                 src={item.thumbnailUrl || item.imageUrl}
                 alt={`Mue setup by ${item.author}`}
-                fill
-                className="object-cover transition duration-300 group-hover:scale-105"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                placeholder={item.blurDataURL ? 'blur' : 'empty'}
-                blurDataURL={item.blurDataURL}
+                className="absolute inset-0 h-full w-full object-cover transition duration-300 group-hover:scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
             </div>

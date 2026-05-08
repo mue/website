@@ -3,7 +3,7 @@ import { Image, MessageSquareQuote, Settings, ArrowRight } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 
-import { AddonType } from './types';
+import type { AddonType } from './types';
 
 interface StepTypeSelectionProps {
   value: AddonType;

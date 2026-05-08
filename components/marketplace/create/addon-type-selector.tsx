@@ -7,7 +7,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-import { AddonType } from './types';
+import type { AddonType } from './types';
 
 type AddonTypeSelectorProps = {
   value: AddonType;

@@ -1,12 +1,12 @@
-'use client';
+import { useMemo, useRef, useState, useEffect } from 'react'
 
-import { useMemo, useRef, useState, useEffect } from 'react';
-
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
+import { useNavigate, useLocation, useSearch } from '@tanstack/react-router'
 import {
+  getMarketplaceTypeLabel,
+} from '@/lib/marketplace';
+import type {
   MarketplaceCollection,
   MarketplaceItemSummary,
-  getMarketplaceTypeLabel,
 } from '@/lib/marketplace';
 
 import { useFavoritesContext } from '@/lib/favorites-context';
@@ -41,9 +41,9 @@ export function useMarketplaceExplorer(
   items: MarketplaceItemSummary[],
   collections: MarketplaceCollection[],
 ) {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
+  const navigate = useNavigate()
+  const search = useSearch({ strict: false }) as Record<string, string | undefined>
+  const { pathname } = useLocation()
 
   const { favorites, isFavorite, loaded: favoritesLoaded } = useFavoritesContext();
   const { isEmbed, isPreview, sendMessage, config } = useEmbed();
@@ -68,14 +68,14 @@ export function useMarketplaceExplorer(
   }, []);
 
   const initialParams = useMemo(() => {
-    const s = searchParams?.get('q') ?? searchParams?.get('search') ?? '';
-    const t = searchParams?.get('type') ?? 'all';
-    const c = searchParams?.get('collection') ?? null;
-    const so = migrateSort(searchParams?.get('sort') ?? null);
-    const p = parseInt(searchParams?.get('page') ?? '1', 10) || 1;
-    const ppParam = parseInt(searchParams?.get('pp') ?? '0', 10) || 0;
-    return { s, t, c, so, p, ppParam };
-  }, [searchParams]);
+    const s = search.q ?? search.search ?? ''
+    const t = search.type ?? 'all'
+    const c = search.collection ?? null
+    const so = migrateSort(search.sort ?? null)
+    const p = parseInt(search.page ?? '1', 10) || 1
+    const ppParam = parseInt(search.pp ?? '0', 10) || 0
+    return { s, t, c, so, p, ppParam }
+  }, [search])
 
   const [query, setQuery] = useState(initialParams.s);
   const [typeFilter, setTypeFilter] = useState<string>(() => {
@@ -130,19 +130,19 @@ export function useMarketplaceExplorer(
       : false;
 
   useEffect(() => {
-    const urlType = searchParams?.get('type') ?? 'all';
-    const urlCollection = searchParams?.get('collection') ?? null;
-    const urlQuery = searchParams?.get('q') ?? searchParams?.get('search') ?? '';
-    const urlSort = searchParams?.get('sort');
-    const urlPage = parseInt(searchParams?.get('page') ?? '1', 10) || 1;
+    const urlType = search.type ?? 'all'
+    const urlCollection = search.collection ?? null
+    const urlQuery = search.q ?? search.search ?? ''
+    const urlSort = search.sort
+    const urlPage = parseInt(search.page ?? '1', 10) || 1
 
-    setTypeFilter(urlType);
-    setCollectionFilter(urlCollection);
-    setQuery(urlQuery);
+    setTypeFilter(urlType)
+    setCollectionFilter(urlCollection)
+    setQuery(urlQuery)
 
-    if (urlSort) setSortBy(urlSort);
-    setCurrentPage(urlPage);
-  }, [searchParams]);
+    if (urlSort) setSortBy(urlSort)
+    setCurrentPage(urlPage)
+  }, [search])
 
   useEffect(() => {
     if (typeof window !== 'undefined' && !isEmbed) {
@@ -367,9 +367,9 @@ export function useMarketplaceExplorer(
     if (isPreview) params.set('preview', 'true');
 
     const qs = params.toString();
-    const url = qs ? `${pathname}?${qs}` : pathname;
+    const url = qs ? `${pathname}?${qs}` : pathname
     try {
-      router.replace(url);
+      navigate({ to: url as any, replace: true })
     } catch {
       /* ignore */
     }
@@ -381,10 +381,10 @@ export function useMarketplaceExplorer(
     currentPage,
     itemsPerPage,
     pathname,
-    router,
+    navigate,
     isEmbed,
     isPreview,
-  ]);
+  ])
 
   // reset to page 1 when filter results change
   const prevFilteredLength = useMemo(() => filteredItems.length, [filteredItems.length]);

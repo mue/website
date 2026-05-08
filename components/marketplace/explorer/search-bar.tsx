@@ -1,9 +1,6 @@
-'use client';
+import type { RefObject } from 'react';
 
-import { RefObject } from 'react';
-
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+import { useNavigate } from '@tanstack/react-router';
 
 import { Search, X } from 'lucide-react';
 
@@ -14,8 +11,8 @@ import { cn } from '@/lib/utils';
 import {
   getMarketplaceTypeLabel,
   getItemCategory,
-  MarketplaceItemSummary,
 } from '@/lib/marketplace';
+import type { MarketplaceItemSummary } from '@/lib/marketplace';
 import { useEmbed } from '@/lib/embed-context';
 
 type SearchBarProps = {
@@ -41,12 +38,12 @@ export function SearchBar({
   filteredCount,
   searchInputRef,
 }: SearchBarProps) {
-  const router = useRouter();
+  const navigate = useNavigate();
   const { buildEmbedUrl } = useEmbed();
 
   const navigateTo = (suggestion: MarketplaceItemSummary) => {
     const category = getItemCategory(suggestion.type);
-    router.push(buildEmbedUrl(`/marketplace/${category}/${encodeURIComponent(suggestion.id)}`));
+    navigate({ to: buildEmbedUrl(`/marketplace/${category}/${encodeURIComponent(suggestion.id)}`) as any });
   };
 
   return (
@@ -131,13 +128,10 @@ export function SearchBar({
             >
               <div className="relative h-10 w-10 flex-shrink-0 overflow-hidden rounded-lg border border-border/60 bg-muted">
                 {suggestion.icon_url ? (
-                  <Image
+                  <img
                     src={suggestion.icon_url}
                     alt={suggestion.display_name}
-                    fill
-                    sizes="40px"
-                    className="object-cover"
-                    unoptimized
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center text-xs font-semibold uppercase text-muted-foreground/80">

@@ -1,11 +1,8 @@
-'use client';
-
-import Link from 'next/link';
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
+import { Link } from '@tanstack/react-router';
+import { Suspense, lazy } from 'react';
 import { Plus, Search, FunnelX } from 'lucide-react';
 
-import { MarketplaceCollection, MarketplaceItemSummary } from '@/lib/marketplace';
+import type { MarketplaceCollection, MarketplaceItemSummary } from '@/lib/marketplace';
 import { FavoritesProvider } from '@/lib/favorites-context';
 import { Button } from '@/components/ui/button';
 
@@ -18,20 +15,9 @@ import { FilterChips } from './explorer/filter-chips';
 import { ExplorerControls } from './explorer/explorer-controls';
 import { ExplorerPagination } from './explorer/pagination';
 
-const FeaturedCollectionsLazy = dynamic(
-  () => import(/* webpackChunkName: "featured-collections" */ './featured-collections'),
-  { ssr: false, loading: () => <FeaturedCollectionsSkeleton /> },
-);
-
-const ItemsGridLazy = dynamic(() => import(/* webpackChunkName: "items-grid" */ './items-grid'), {
-  ssr: false,
-  loading: () => <ItemsGridSkeleton />,
-});
-
-const ItemsListLazy = dynamic(() => import(/* webpackChunkName: "items-list" */ './items-list'), {
-  ssr: false,
-  loading: () => <ItemsGridSkeleton />,
-});
+const FeaturedCollectionsLazy = lazy(() => import('./featured-collections'));
+const ItemsGridLazy = lazy(() => import('./items-grid'));
+const ItemsListLazy = lazy(() => import('./items-list'));
 
 type CollectionWithTypes = MarketplaceCollection & {
   contentTypes: string[];
@@ -123,7 +109,7 @@ function MarketplaceExplorerContent({
             searchInputRef={searchInputRef}
           />
           <Link
-            href="/marketplace/create"
+            to={"/marketplace/create" as any}
             className="shrink-0"
             {...(isEmbed ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           >
@@ -162,7 +148,7 @@ function MarketplaceExplorerContent({
                 <h2 className="text-xl font-semibold text-foreground">Featured Collections</h2>
                 {!isEmbed && (
                   <Link
-                    href="/marketplace/collections"
+                    to={"/marketplace/collections" as any}
                     className="text-sm text-primary hover:underline underline-offset-4 transition"
                   >
                     View all
@@ -177,7 +163,7 @@ function MarketplaceExplorerContent({
               <div className="mt-16 flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-foreground">Browse by Author</h2>
                 <Link
-                  href="/marketplace/authors"
+                  to={"/marketplace/authors" as any}
                   className="text-sm text-primary hover:underline underline-offset-4 transition"
                 >
                   View all

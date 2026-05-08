@@ -1,13 +1,11 @@
-'use client';
+import { useEffect, useState } from 'react'
 
-import { useEffect, useState } from 'react';
+import { Link } from '@tanstack/react-router'
 
-import Link from 'next/link';
+import { FaXTwitter, FaGithub } from 'react-icons/fa6'
+import Logo from './logo'
 
-import { FaXTwitter, FaGithub } from 'react-icons/fa6';
-import Logo from './logo';
-
-import { ThemeToggle } from './theme-toggle';
+import { ThemeToggle } from './theme-toggle'
 
 const footerLinks = {
   Product: [
@@ -35,54 +33,43 @@ const footerLinks = {
     { name: 'License', href: '/license' },
     { name: 'DMCA', href: '/dmca' },
   ],
-};
+}
 
-type SystemStatus = 'operational' | 'degraded' | 'loading';
+type SystemStatus = 'operational' | 'degraded' | 'loading'
 
 export default function Footer() {
-  const [systemStatus, setSystemStatus] = useState<SystemStatus>('loading');
+  const [systemStatus, setSystemStatus] = useState<SystemStatus>('loading')
 
   useEffect(() => {
     const fetchStatus = async () => {
       try {
         const response = await fetch(
           'https://raw.githubusercontent.com/mue/status/master/history/summary.json',
-        );
-        const data = await response.json();
-
-        const allUp = data.every((service: { status: string }) => service.status === 'up');
-        setSystemStatus(allUp ? 'operational' : 'degraded');
+        )
+        const data = await response.json()
+        const allUp = data.every((service: { status: string }) => service.status === 'up')
+        setSystemStatus(allUp ? 'operational' : 'degraded')
       } catch {
-        setSystemStatus('degraded');
+        setSystemStatus('degraded')
       }
-    };
-
-    fetchStatus();
-  }, []);
+    }
+    fetchStatus()
+  }, [])
 
   const statusConfig = {
-    operational: {
-      text: 'All systems are operational',
-      dotColor: 'bg-emerald-500',
-    },
-    degraded: {
-      text: 'Degraded performance',
-      dotColor: 'bg-yellow-500',
-    },
-    loading: {
-      text: 'Checking status...',
-      dotColor: 'bg-gray-500',
-    },
-  };
+    operational: { text: 'All systems are operational', dotColor: 'bg-emerald-500' },
+    degraded: { text: 'Degraded performance', dotColor: 'bg-yellow-500' },
+    loading: { text: 'Checking status...', dotColor: 'bg-gray-500' },
+  }
 
-  const status = statusConfig[systemStatus];
+  const status = statusConfig[systemStatus]
 
   return (
     <footer className="border-t border-border bg-background/80 backdrop-blur">
       <div className="mx-auto w-full max-w-7xl px-6 py-12 lg:px-12">
         <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
           <div>
-            <Link href="/" className="inline-block">
+            <Link to="/" className="inline-block">
               <Logo className="h-12 w-12" />
             </Link>
 
@@ -103,7 +90,7 @@ export default function Footer() {
             </a>
 
             <div className="mt-6 flex items-center gap-4">
-              <Link
+              <a
                 href="https://github.com/mue/mue"
                 target="_blank"
                 rel="noreferrer"
@@ -111,8 +98,8 @@ export default function Footer() {
               >
                 <FaGithub className="h-4 w-4" />
                 <span className="sr-only">GitHub</span>
-              </Link>
-              <Link
+              </a>
+              <a
                 href="https://x.com/getmue"
                 target="_blank"
                 rel="noreferrer"
@@ -120,7 +107,7 @@ export default function Footer() {
               >
                 <FaXTwitter className="h-4 w-4" />
                 <span className="sr-only">X (formerly Twitter)</span>
-              </Link>
+              </a>
               <ThemeToggle />
             </div>
           </div>
@@ -131,18 +118,26 @@ export default function Footer() {
                 <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
                   {category}
                 </h3>
-
                 <ul className="mt-4 space-y-3">
                   {links.map((link) => (
                     <li key={link.name}>
-                      <Link
-                        href={link.href}
-                        className="cursor-pointer text-sm text-muted-foreground transition hover:text-foreground"
-                        target={link.href.startsWith('http') ? '_blank' : undefined}
-                        rel={link.href.startsWith('http') ? 'noreferrer' : undefined}
-                      >
-                        {link.name}
-                      </Link>
+                      {link.href.startsWith('http') ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="cursor-pointer text-sm text-muted-foreground transition hover:text-foreground"
+                        >
+                          {link.name}
+                        </a>
+                      ) : (
+                        <Link
+                          to={link.href as any}
+                          className="cursor-pointer text-sm text-muted-foreground transition hover:text-foreground"
+                        >
+                          {link.name}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
@@ -155,7 +150,7 @@ export default function Footer() {
           <p>
             © 2019-{new Date().getFullYear()} The Mue Authors. Licensed under{' '}
             <Link
-              href="/license"
+              to="/license"
               className="cursor-pointer underline underline-offset-4 decoration-muted-foreground/50 hover:text-foreground hover:decoration-foreground transition-colors"
             >
               BSD-3-Clause
@@ -165,5 +160,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }
