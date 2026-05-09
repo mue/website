@@ -1,40 +1,37 @@
-import { createFileRoute, Link, notFound } from '@tanstack/react-router'
+import { createFileRoute, Link, notFound } from '@tanstack/react-router';
 
-import { ArrowLeft, ArrowRight, Calendar, User, Clock } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Calendar, User, Clock } from 'lucide-react';
 
-import { BlogImage } from '@/components/blog/blog-image'
-import { BlogContentLightbox } from '@/components/blog/blog-content-lightbox'
-import { BlogProse } from '@/components/blog/blog-prose'
-import { Badge } from '@/components/ui/badge'
-import { buttonVariants } from '@/components/ui/button'
-import { ArticleJsonLd as ArticleJsonLdComponent, BreadcrumbJsonLd } from '@/components/json-ld'
+import { BlogImage } from '@/components/blog/blog-image';
+import { BlogContentLightbox } from '@/components/blog/blog-content-lightbox';
+import { BlogProse } from '@/components/blog/blog-prose';
+import { Badge } from '@/components/ui/badge';
+import { buttonVariants } from '@/components/ui/button';
+import { ArticleJsonLd as ArticleJsonLdComponent, BreadcrumbJsonLd } from '@/components/json-ld';
 
-import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients'
-import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog'
-import { SITE_URL } from '@/lib/constants/site'
-import { formatDate, cn } from '@/lib/utils'
+import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
+import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
+import { SITE_URL } from '@/lib/constants/site';
+import { formatDate, cn } from '@/lib/utils';
 
 export const Route = createFileRoute('/blog/$slug')({
   validateSearch: (search: Record<string, unknown>) => ({
     embed: search.embed as string | undefined,
   }),
   loader: async ({ params }) => {
-    const [post, allPosts] = await Promise.all([
-      getBlogPostBySlug(params.slug),
-      getAllBlogPosts(),
-    ])
-    if (!post) throw notFound()
-    return { post, allPosts }
+    const [post, allPosts] = await Promise.all([getBlogPostBySlug(params.slug), getAllBlogPosts()]);
+    if (!post) throw notFound();
+    return { post, allPosts };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return {}
-    const { post } = loaderData
-    const title = post.frontmatter.title
+    if (!loaderData) return {};
+    const { post } = loaderData;
+    const title = post.frontmatter.title;
     const description =
-      post.excerpt || post.frontmatter.description || 'Read the latest from the Mue blog.'
-    const url = `${SITE_URL}/blog/${post.slug}`
-    const image = post.frontmatter.image
-    const tags = post.frontmatter.tags || []
+      post.excerpt || post.frontmatter.description || 'Read the latest from the Mue blog.';
+    const url = `${SITE_URL}/blog/${post.slug}`;
+    const image = post.frontmatter.image;
+    const tags = post.frontmatter.tags || [];
 
     return {
       meta: [
@@ -55,28 +52,28 @@ export const Route = createFileRoute('/blog/$slug')({
         ...(tags.length ? [{ name: 'keywords', content: tags.join(', ') }] : []),
       ],
       links: [{ rel: 'canonical', href: url }],
-    }
+    };
   },
   component: BlogPostPage,
-})
+});
 
 function extractReadingMinutes(readingTime: string | undefined): string {
-  if (!readingTime) return '5'
-  const match = readingTime.match(/\d+/)
-  return match ? match[0] : '5'
+  if (!readingTime) return '5';
+  const match = readingTime.match(/\d+/);
+  return match ? match[0] : '5';
 }
 
 function BlogPostPage() {
-  const { post, allPosts } = Route.useLoaderData()
-  const { embed } = Route.useSearch()
-  const isEmbed = embed === 'true'
+  const { post, allPosts } = Route.useLoaderData();
+  const { embed } = Route.useSearch();
+  const isEmbed = embed === 'true';
 
-  const currentIndex = allPosts.findIndex((p) => p.slug === post.slug)
-  const previousPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null
-  const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null
+  const currentIndex = allPosts.findIndex((p) => p.slug === post.slug);
+  const previousPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
+  const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 
   const hasUpdate =
-    post.frontmatter.dateModified && post.frontmatter.dateModified !== post.frontmatter.date
+    post.frontmatter.dateModified && post.frontmatter.dateModified !== post.frontmatter.date;
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -240,12 +237,12 @@ function BlogPostPage() {
         </div>
       </article>
     </div>
-  )
+  );
 }
 
 function GradientHero({ title }: { title: string }) {
-  const gradientClass = BLOG_IMAGE_GRADIENTS[blogImageGradientIndex(title)]
-  const initial = (title?.trim()?.[0] || '?').toUpperCase()
+  const gradientClass = BLOG_IMAGE_GRADIENTS[blogImageGradientIndex(title)];
+  const initial = (title?.trim()?.[0] || '?').toUpperCase();
 
   return (
     <div
@@ -260,5 +257,5 @@ function GradientHero({ title }: { title: string }) {
       </span>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
     </div>
-  )
+  );
 }

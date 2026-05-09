@@ -1,47 +1,63 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router';
 
-import { Palette, CheckCircle2, XCircle } from 'lucide-react'
+import { Palette, CheckCircle2, XCircle } from 'lucide-react';
 
-import { Button } from '@/components/ui/button'
-import { BrandColorCard } from '@/components/branding/brand-color-card'
-import { BrandAssetCard } from '@/components/branding/brand-asset-card'
+import { Button } from '@/components/ui/button';
+import { BrandColorCard } from '@/components/branding/brand-color-card';
+import { BrandAssetCard } from '@/components/branding/brand-asset-card';
 
 const brandColors = [
-  { name: 'Primary Orange', hex: '#FF5C25', description: 'Main brand colour for primary actions and highlights' },
+  {
+    name: 'Primary Orange',
+    hex: '#FF5C25',
+    description: 'Main brand colour for primary actions and highlights',
+  },
   { name: 'Deep Red', hex: '#D21A11', description: 'Gradient middle, used for depth and emphasis' },
   { name: 'Pink Accent', hex: '#FF456E', description: 'Gradient end, used for vibrant accents' },
   { name: 'Light Coral', hex: '#F18D91', description: 'Secondary colour for lighter backgrounds' },
   { name: 'Warm Beige', hex: '#FBD3C6', description: 'Tertiary colour for subtle backgrounds' },
-]
+];
 
 const logoVariants = [
-  { title: 'Full Color Logo', description: 'Primary logo with gradient. Use on light backgrounds.', isDark: false },
-  { title: 'Logo on Dark', description: 'Optimized for dark backgrounds with adjusted contrast.', isDark: true },
-]
+  {
+    title: 'Full Color Logo',
+    description: 'Primary logo with gradient. Use on light backgrounds.',
+    isDark: false,
+  },
+  {
+    title: 'Logo on Dark',
+    description: 'Optimized for dark backgrounds with adjusted contrast.',
+    isDark: true,
+  },
+];
 
 const dos = [
   'Use the logo with adequate spacing around it',
   "Maintain the logo's aspect ratio when scaling",
   'Use the provided colour palette consistently',
   'Credit Mue when featuring our brand',
-]
+];
 
 const donts = [
   'Modify the logo colours or gradient',
   'Distort, rotate, or alter the logo in any way',
   'Use the logo on busy or conflicting backgrounds',
   'Recreate or modify the logo yourself',
-]
+];
 
 export const Route = createFileRoute('/branding')({
   head: () => ({
     meta: [
       { title: 'Branding | Mue' },
-      { name: 'description', content: 'Download Mue logos, learn about our brand colours, and discover usage guidelines.' },
+      {
+        name: 'description',
+        content:
+          'Download Mue logos, learn about our brand colours, and discover usage guidelines.',
+      },
     ],
   }),
   component: BrandingPage,
-})
+});
 
 function BrandingPage() {
   return (
@@ -59,7 +75,8 @@ function BrandingPage() {
             Brand Guidelines
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            Logos, colors, and usage guidelines for representing Mue consistently across all contexts.
+            Logos, colors, and usage guidelines for representing Mue consistently across all
+            contexts.
           </p>
         </header>
 
@@ -67,12 +84,18 @@ function BrandingPage() {
           <section>
             <h2 className="mb-2 text-2xl font-semibold text-foreground">Logo</h2>
             <p className="mb-8 text-muted-foreground">
-              Our logo represents Mue&apos;s core philosophy of customisation. The layered design symbolizes
-              multiple elements coming together to create your perfect new tab experience.
+              Our logo represents Mue&apos;s core philosophy of customisation. The layered design
+              symbolizes multiple elements coming together to create your perfect new tab
+              experience.
             </p>
             <div className="grid gap-4 md:grid-cols-2">
               {logoVariants.map((variant) => (
-                <BrandAssetCard key={variant.title} title={variant.title} description={variant.description} isDark={variant.isDark} />
+                <BrandAssetCard
+                  key={variant.title}
+                  title={variant.title}
+                  description={variant.description}
+                  isDark={variant.isDark}
+                />
               ))}
             </div>
           </section>
@@ -86,7 +109,12 @@ function BrandingPage() {
             </p>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
               {brandColors.map((color) => (
-                <BrandColorCard key={color.hex} name={color.name} hex={color.hex} description={color.description} />
+                <BrandColorCard
+                  key={color.hex}
+                  name={color.name}
+                  hex={color.hex}
+                  description={color.description}
+                />
               ))}
             </div>
           </section>
@@ -100,12 +128,21 @@ function BrandingPage() {
             </p>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="rounded-2xl border border-border bg-background/60 p-6">
-                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Primary font</p>
-                <p className="mt-3 text-3xl font-semibold" style={{ fontFamily: 'var(--font-lexend-deca)' }}>Lexend Deca</p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                  Primary font
+                </p>
+                <p
+                  className="mt-3 text-3xl font-semibold"
+                  style={{ fontFamily: 'var(--font-lexend-deca)' }}
+                >
+                  Lexend Deca
+                </p>
                 <p className="mt-2 text-sm text-muted-foreground">Headings and display text</p>
               </div>
               <div className="rounded-2xl border border-border bg-background/60 p-6">
-                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Body font</p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                  Body font
+                </p>
                 <p className="mt-3 text-3xl font-semibold">Inter</p>
                 <p className="mt-2 text-sm text-muted-foreground">Body copy and UI elements</p>
               </div>
@@ -154,7 +191,8 @@ function BrandingPage() {
           <div className="rounded-2xl border border-border bg-muted/30 p-8 text-center">
             <h3 className="text-xl font-semibold text-foreground">Need something else?</h3>
             <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
-              If you need additional brand assets or have questions about using our brand, reach out.
+              If you need additional brand assets or have questions about using our brand, reach
+              out.
             </p>
             <Button asChild className="mt-6">
               <Link to="/contact">Contact Us</Link>
@@ -163,5 +201,5 @@ function BrandingPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

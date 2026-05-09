@@ -1,16 +1,12 @@
-import { createFileRoute, notFound } from '@tanstack/react-router'
-import { User, Info } from 'lucide-react'
+import { createFileRoute, notFound } from '@tanstack/react-router';
+import { User, Info } from 'lucide-react';
 
-import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb'
-import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker'
-import ItemsGrid from '@/components/marketplace/items-grid'
+import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
+import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
+import ItemsGrid from '@/components/marketplace/items-grid';
 
-import {
-  getMarketplaceItems,
-  slugifyAuthor,
-  deslugifyAuthor,
-} from '@/lib/marketplace'
-import { FavoritesProvider } from '@/lib/favorites-context'
+import { getMarketplaceItems, slugifyAuthor, deslugifyAuthor } from '@/lib/marketplace';
+import { FavoritesProvider } from '@/lib/favorites-context';
 
 export const Route = createFileRoute('/marketplace/author/$author')({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -18,19 +14,19 @@ export const Route = createFileRoute('/marketplace/author/$author')({
     preview: search.preview as string | undefined,
   }),
   loader: async ({ params }) => {
-    const allItems = await getMarketplaceItems()
+    const allItems = await getMarketplaceItems();
     const items = allItems.filter(
       (item) => item.author && slugifyAuthor(item.author) === params.author.toLowerCase(),
-    )
+    );
 
-    if (items.length === 0) throw notFound()
+    if (items.length === 0) throw notFound();
 
-    const authorName = items[0]?.author || deslugifyAuthor(params.author)
-    return { items, authorName }
+    const authorName = items[0]?.author || deslugifyAuthor(params.author);
+    return { items, authorName };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return {}
-    const { authorName } = loaderData
+    if (!loaderData) return {};
+    const { authorName } = loaderData;
     return {
       meta: [
         { title: `${authorName} – Marketplace | Mue` },
@@ -41,24 +37,24 @@ export const Route = createFileRoute('/marketplace/author/$author')({
           content: `Browse all marketplace items created by ${authorName}.`,
         },
       ],
-    }
+    };
   },
   component: AuthorPage,
-})
+});
 
 function AuthorPage() {
-  const { items, authorName } = Route.useLoaderData()
-  const { embed, preview } = Route.useSearch()
-  const isEmbed = embed === 'true'
-  const isPreview = preview === 'true'
+  const { items, authorName } = Route.useLoaderData();
+  const { embed, preview } = Route.useSearch();
+  const isEmbed = embed === 'true';
+  const isPreview = preview === 'true';
 
   const buildEmbedUrl = (path: string) => {
-    if (!isEmbed) return path
-    const params = isPreview ? 'embed=true&preview=true' : 'embed=true'
-    return `${path}?${params}`
-  }
+    if (!isEmbed) return path;
+    const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
+    return `${path}?${params}`;
+  };
 
-  const collectionNameMap = new Map<string, string>()
+  const collectionNameMap = new Map<string, string>();
 
   return (
     <FavoritesProvider>
@@ -92,7 +88,8 @@ function AuthorPage() {
           <Info className="h-5 w-5 text-muted-foreground flex-shrink-0 mt-0.5" />
           <p className="text-sm text-muted-foreground">
             This page is automatically generated based on the author name. Items are grouped by
-            matching author names, which may occasionally include unrelated items with similar names.
+            matching author names, which may occasionally include unrelated items with similar
+            names.
           </p>
         </div>
 
@@ -101,5 +98,5 @@ function AuthorPage() {
         </div>
       </div>
     </FavoritesProvider>
-  )
+  );
 }

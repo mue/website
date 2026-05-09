@@ -1,15 +1,15 @@
-import { createFileRoute, notFound, Link } from '@tanstack/react-router'
+import { createFileRoute, notFound, Link } from '@tanstack/react-router';
 
-import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
-import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb'
-import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker'
-import { NoCollectionItemsEmptyState } from '@/components/marketplace/empty-state'
-import ItemsGrid from '@/components/marketplace/items-grid'
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
+import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
+import { NoCollectionItemsEmptyState } from '@/components/marketplace/empty-state';
+import ItemsGrid from '@/components/marketplace/items-grid';
 
-import { getMarketplaceCollection } from '@/lib/marketplace'
-import { FavoritesProvider } from '@/lib/favorites-context'
-import { SITE_URL } from '@/lib/constants/site'
+import { getMarketplaceCollection } from '@/lib/marketplace';
+import { FavoritesProvider } from '@/lib/favorites-context';
+import { SITE_URL } from '@/lib/constants/site';
 
 export const Route = createFileRoute('/marketplace/collection/$collection')({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -18,18 +18,18 @@ export const Route = createFileRoute('/marketplace/collection/$collection')({
   }),
   loader: async ({ params }) => {
     try {
-      const data = await getMarketplaceCollection(params.collection)
-      return { data }
+      const data = await getMarketplaceCollection(params.collection);
+      return { data };
     } catch {
-      throw notFound()
+      throw notFound();
     }
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return {}
-    const { data } = loaderData
+    if (!loaderData) return {};
+    const { data } = loaderData;
     const description =
       data.description ??
-      `Browse all items inside the ${data.display_name} collection on the Mue marketplace.`
+      `Browse all items inside the ${data.display_name} collection on the Mue marketplace.`;
     return {
       meta: [
         { title: `${data.display_name} – Marketplace collection | Mue` },
@@ -42,27 +42,27 @@ export const Route = createFileRoute('/marketplace/collection/$collection')({
           content: `${SITE_URL}/marketplace/collection/${encodeURIComponent(data.name)}`,
         },
       ],
-    }
+    };
   },
   component: CollectionPage,
-})
+});
 
 function CollectionPage() {
-  const { data } = Route.useLoaderData()
-  const { embed, preview } = Route.useSearch()
-  const isEmbed = embed === 'true'
-  const isPreview = preview === 'true'
+  const { data } = Route.useLoaderData();
+  const { embed, preview } = Route.useSearch();
+  const isEmbed = embed === 'true';
+  const isPreview = preview === 'true';
 
   const buildEmbedUrl = (path: string, hasExistingParams = false) => {
-    if (!isEmbed) return path
-    const separator = hasExistingParams ? '&' : '?'
-    const params = isPreview ? 'embed=true&preview=true' : 'embed=true'
-    return `${path}${separator}${params}`
-  }
+    if (!isEmbed) return path;
+    const separator = hasExistingParams ? '&' : '?';
+    const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
+    return `${path}${separator}${params}`;
+  };
 
-  const items = data.items ?? []
-  const hasItems = items.length > 0
-  const collectionNameMap = new Map<string, string>()
+  const items = data.items ?? [];
+  const hasItems = items.length > 0;
+  const collectionNameMap = new Map<string, string>();
 
   return (
     <FavoritesProvider>
@@ -71,9 +71,7 @@ function CollectionPage() {
           isEmbed ? 'px-4 py-6' : 'px-6 py-12 lg:px-8'
         }`}
       >
-        {!isEmbed && (
-          <MarketplaceBreadcrumb type="collection" collectionName={data.display_name} />
-        )}
+        {!isEmbed && <MarketplaceBreadcrumb type="collection" collectionName={data.display_name} />}
         <BreadcrumbTracker
           breadcrumbs={[
             { label: 'Marketplace', href: '/marketplace' },
@@ -160,5 +158,5 @@ function CollectionPage() {
         </div>
       </div>
     </FavoritesProvider>
-  )
+  );
 }

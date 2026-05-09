@@ -1,61 +1,57 @@
-import { createFileRoute, Link, notFound } from '@tanstack/react-router'
+import { createFileRoute, Link, notFound } from '@tanstack/react-router';
 
-import { ArrowRight, ChevronLeft } from 'lucide-react'
+import { ArrowRight, ChevronLeft } from 'lucide-react';
 
-import { BlogCard } from '@/components/blog/blog-card'
-import { buttonVariants } from '@/components/ui/button'
+import { BlogCard } from '@/components/blog/blog-card';
+import { buttonVariants } from '@/components/ui/button';
 
-import { getAllBlogPosts } from '@/lib/blog'
-import { SITE_URL } from '@/lib/constants/site'
-import { cn } from '@/lib/utils'
+import { getAllBlogPosts } from '@/lib/blog';
+import { SITE_URL } from '@/lib/constants/site';
+import { cn } from '@/lib/utils';
 
-const PAGE_SIZE = 9
+const PAGE_SIZE = 9;
 
 export const Route = createFileRoute('/blog/page/$page')({
   loader: async ({ params }) => {
-    const pageNum = Math.max(1, Number(params.page) || 1)
-    const posts = await getAllBlogPosts()
-    const totalPages = Math.max(1, Math.ceil(posts.length / PAGE_SIZE))
-    if (pageNum > totalPages) throw notFound()
+    const pageNum = Math.max(1, Number(params.page) || 1);
+    const posts = await getAllBlogPosts();
+    const totalPages = Math.max(1, Math.ceil(posts.length / PAGE_SIZE));
+    if (pageNum > totalPages) throw notFound();
 
-    const start = (pageNum - 1) * PAGE_SIZE
-    const pagePosts = posts.slice(start, start + PAGE_SIZE)
+    const start = (pageNum - 1) * PAGE_SIZE;
+    const pagePosts = posts.slice(start, start + PAGE_SIZE);
 
-    return { pageNum, pagePosts, totalPages }
+    return { pageNum, pagePosts, totalPages };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return {}
-    const { pageNum, totalPages } = loaderData
-    const title = pageNum === 1 ? 'Blog | Mue' : `Page ${pageNum} | Blog | Mue`
+    if (!loaderData) return {};
+    const { pageNum, totalPages } = loaderData;
+    const title = pageNum === 1 ? 'Blog | Mue' : `Page ${pageNum} | Blog | Mue`;
     const description =
-      'Product updates, technical deep-dives, and thoughts on building mindful browser experiences.'
-    const canonical =
-      pageNum === 1 ? `${SITE_URL}/blog` : `${SITE_URL}/blog/page/${pageNum}`
+      'Product updates, technical deep-dives, and thoughts on building mindful browser experiences.';
+    const canonical = pageNum === 1 ? `${SITE_URL}/blog` : `${SITE_URL}/blog/page/${pageNum}`;
     const prev =
       pageNum > 1
         ? pageNum - 1 === 1
           ? `${SITE_URL}/blog`
           : `${SITE_URL}/blog/page/${pageNum - 1}`
-        : undefined
-    const next = pageNum < totalPages ? `${SITE_URL}/blog/page/${pageNum + 1}` : undefined
+        : undefined;
+    const next = pageNum < totalPages ? `${SITE_URL}/blog/page/${pageNum + 1}` : undefined;
 
     return {
-      meta: [
-        { title },
-        { name: 'description', content: description },
-      ],
+      meta: [{ title }, { name: 'description', content: description }],
       links: [
         { rel: 'canonical', href: canonical },
         ...(prev ? [{ rel: 'prev', href: prev }] : []),
         ...(next ? [{ rel: 'next', href: next }] : []),
       ],
-    }
+    };
   },
   component: BlogPagePaginated,
-})
+});
 
 function BlogPagePaginated() {
-  const { pageNum, pagePosts, totalPages } = Route.useLoaderData()
+  const { pageNum, pagePosts, totalPages } = Route.useLoaderData();
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -88,14 +84,14 @@ function BlogPagePaginated() {
         <PaginationNav current={pageNum} total={totalPages} />
       </div>
     </div>
-  )
+  );
 }
 
 function PaginationNav({ current, total }: { current: number; total: number }) {
-  if (total <= 1) return null
+  if (total <= 1) return null;
 
-  const prev = current > 1 ? current - 1 : null
-  const next = current < total ? current + 1 : null
+  const prev = current > 1 ? current - 1 : null;
+  const next = current < total ? current + 1 : null;
 
   return (
     <nav className="mt-16 flex items-center justify-center gap-4" aria-label="Pagination">
@@ -123,5 +119,5 @@ function PaginationNav({ current, total }: { current: number; total: number }) {
         </Link>
       )}
     </nav>
-  )
+  );
 }

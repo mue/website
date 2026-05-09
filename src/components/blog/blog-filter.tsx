@@ -1,22 +1,22 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo } from 'react';
 
-import { Search } from 'lucide-react'
+import { Search } from 'lucide-react';
 
-import { BlogCard } from '@/components/blog/blog-card'
+import { BlogCard } from '@/components/blog/blog-card';
 import {
   Select,
   SelectTrigger,
   SelectContent,
   SelectItem,
   SelectValue,
-} from '@/components/ui/select'
+} from '@/components/ui/select';
 
-import { cn } from '@/lib/utils'
-import type { BlogPostPreview } from '@/lib/blog'
+import { cn } from '@/lib/utils';
+import type { BlogPostPreview } from '@/lib/blog';
 
 interface BlogFilterProps {
-  initialPosts: BlogPostPreview[]
-  initialFilter?: string
+  initialPosts: BlogPostPreview[];
+  initialFilter?: string;
 }
 
 const FILTER_TAGS = [
@@ -28,37 +28,37 @@ const FILTER_TAGS = [
   { label: 'Features', value: 'features' },
   { label: 'Documentation', value: 'documentation' },
   { label: 'Website', value: 'website' },
-]
+];
 
 export function BlogFilter({ initialPosts, initialFilter }: BlogFilterProps) {
-  const validFilter = FILTER_TAGS.some((t) => t.value === initialFilter) ? initialFilter! : 'all'
-  const [filter, setFilter] = useState<string>(validFilter)
-  const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest')
-  const [searchQuery, setSearchQuery] = useState<string>('')
+  const validFilter = FILTER_TAGS.some((t) => t.value === initialFilter) ? initialFilter! : 'all';
+  const [filter, setFilter] = useState<string>(validFilter);
+  const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   const filtered = useMemo(() => {
-    let list = initialPosts
+    let list = initialPosts;
 
     if (filter !== 'all') {
-      list = list.filter((p) => p.frontmatter.tags?.map((t) => t.toLowerCase()).includes(filter))
+      list = list.filter((p) => p.frontmatter.tags?.map((t) => t.toLowerCase()).includes(filter));
     }
 
     if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase()
+      const query = searchQuery.toLowerCase();
       list = list.filter(
         (p) =>
           p.frontmatter.title.toLowerCase().includes(query) ||
           p.excerpt?.toLowerCase().includes(query) ||
           p.frontmatter.author?.toLowerCase().includes(query),
-      )
+      );
     }
 
     return [...list].sort((a, b) => {
-      const da = new Date(a.frontmatter.date).getTime()
-      const db = new Date(b.frontmatter.date).getTime()
-      return sortOrder === 'newest' ? db - da : da - db
-    })
-  }, [filter, initialPosts, sortOrder, searchQuery])
+      const da = new Date(a.frontmatter.date).getTime();
+      const db = new Date(b.frontmatter.date).getTime();
+      return sortOrder === 'newest' ? db - da : da - db;
+    });
+  }, [filter, initialPosts, sortOrder, searchQuery]);
 
   return (
     <div className="flex flex-col gap-10">
@@ -77,7 +77,7 @@ export function BlogFilter({ initialPosts, initialFilter }: BlogFilterProps) {
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap items-center gap-3">
             {FILTER_TAGS.map((tag) => {
-              const active = filter === tag.value
+              const active = filter === tag.value;
               return (
                 <button
                   key={tag.value}
@@ -93,7 +93,7 @@ export function BlogFilter({ initialPosts, initialFilter }: BlogFilterProps) {
                 >
                   {tag.label}
                 </button>
-              )
+              );
             })}
           </div>
 
@@ -130,5 +130,5 @@ export function BlogFilter({ initialPosts, initialFilter }: BlogFilterProps) {
         </div>
       )}
     </div>
-  )
+  );
 }

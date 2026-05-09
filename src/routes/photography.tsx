@@ -1,19 +1,22 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router';
 
-import { Camera, Upload, Heart, Globe, Users, Image as ImageIcon } from 'lucide-react'
+import { Camera, Upload, Heart, Globe, Users, Image as ImageIcon } from 'lucide-react';
 
-import { Button } from '@/components/ui/button'
-import { PhotoShowcase } from '@/components/photography/photo-showcase'
+import { Button } from '@/components/ui/button';
+import { PhotoShowcase } from '@/components/photography/photo-showcase';
 
 export const Route = createFileRoute('/photography')({
   head: () => ({
     meta: [
       { title: 'Photography Showcase | Mue' },
-      { name: 'description', content: 'Discover stunning photography from talented creators around the world.' },
+      {
+        name: 'description',
+        content: 'Discover stunning photography from talented creators around the world.',
+      },
     ],
   }),
   component: PhotographyPage,
-})
+});
 
 function PhotographyPage() {
   return (
@@ -35,7 +38,8 @@ function PhotographyPage() {
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-base text-muted-foreground sm:text-lg">
-            Behind every beautiful Mue background is a talented photographer capturing the world through their lens.
+            Behind every beautiful Mue background is a talented photographer capturing the world
+            through their lens.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
@@ -46,7 +50,11 @@ function PhotographyPage() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <a href="https://docs.muetab.com/api/endpoints#images" target="_blank" rel="noreferrer">
+              <a
+                href="https://docs.muetab.com/api/endpoints#images"
+                target="_blank"
+                rel="noreferrer"
+              >
                 <ImageIcon className="mr-2 h-4 w-4" />
                 API Documentation
               </a>
@@ -60,7 +68,9 @@ function PhotographyPage() {
               <Globe className="h-6 w-6 text-primary" />
             </div>
             <p className="text-2xl font-semibold text-foreground">Worldwide</p>
-            <p className="mt-1 text-sm text-muted-foreground">From photographers across the globe</p>
+            <p className="mt-1 text-sm text-muted-foreground">
+              From photographers across the globe
+            </p>
           </div>
 
           <div className="rounded-2xl border border-border bg-card/50 p-6 text-center backdrop-blur">
@@ -95,52 +105,94 @@ function PhotographyPage() {
               </h2>
 
               <p className="mt-4 text-base text-muted-foreground sm:text-lg">
-                We&apos;re always looking for talented photographers to contribute to Mue&apos;s background
-                collection.
+                We&apos;re always looking for talented photographers to contribute to Mue&apos;s
+                background collection.
               </p>
 
               <div className="mt-8 space-y-6">
                 <div className="grid gap-4 text-left sm:grid-cols-2">
                   <div className="rounded-xl border border-border bg-background/60 p-5">
-                    <h3 className="mb-2 font-semibold text-foreground">What we&apos;re looking for</h3>
+                    <h3 className="mb-2 font-semibold text-foreground">
+                      What we&apos;re looking for
+                    </h3>
                     <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">•</span><span>High-resolution images (minimum 1920x1080)</span></li>
-                      <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">•</span><span>Original photography you own the rights to</span></li>
-                      <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">•</span><span>Landscapes, nature, urban scenes, and more</span></li>
-                      <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">•</span><span>Images that inspire focus and creativity</span></li>
+                      <li className="flex items-start gap-2">
+                        <span className="mt-0.5 text-primary">•</span>
+                        <span>High-resolution images (minimum 1920x1080)</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="mt-0.5 text-primary">•</span>
+                        <span>Original photography you own the rights to</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="mt-0.5 text-primary">•</span>
+                        <span>Landscapes, nature, urban scenes, and more</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="mt-0.5 text-primary">•</span>
+                        <span>Images that inspire focus and creativity</span>
+                      </li>
                     </ul>
                   </div>
 
                   <div className="rounded-xl border border-border bg-background/60 p-5">
                     <h3 className="mb-2 font-semibold text-foreground">What you get</h3>
                     <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">•</span><span>Full photographer credit on every image</span></li>
-                      <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">•</span><span>Exposure to thousands of daily users</span></li>
-                      <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">•</span><span>Listed in our public API and documentation</span></li>
-                      <li className="flex items-start gap-2"><span className="mt-0.5 text-primary">•</span><span>Join a community of creative contributors</span></li>
+                      <li className="flex items-start gap-2">
+                        <span className="mt-0.5 text-primary">•</span>
+                        <span>Full photographer credit on every image</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="mt-0.5 text-primary">•</span>
+                        <span>Exposure to thousands of daily users</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="mt-0.5 text-primary">•</span>
+                        <span>Listed in our public API and documentation</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <span className="mt-0.5 text-primary">•</span>
+                        <span>Join a community of creative contributors</span>
+                      </li>
                     </ul>
                   </div>
                 </div>
 
                 <div className="rounded-xl border border-border bg-muted/50 p-5">
                   <p className="text-sm text-muted-foreground">
-                    <span className="font-semibold text-foreground">Ready to contribute?</span> Get in touch with us on{' '}
-                    <a href="https://discord.gg/zv8C9F8" target="_blank" rel="noreferrer" className="text-primary underline-offset-4 hover:underline">
+                    <span className="font-semibold text-foreground">Ready to contribute?</span> Get
+                    in touch with us on{' '}
+                    <a
+                      href="https://discord.gg/zv8C9F8"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-primary underline-offset-4 hover:underline"
+                    >
                       Discord
                     </a>{' '}
                     or{' '}
-                    <a href="https://github.com/mue/mue" target="_blank" rel="noreferrer" className="text-primary underline-offset-4 hover:underline">
+                    <a
+                      href="https://github.com/mue/mue"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-primary underline-offset-4 hover:underline"
+                    >
                       GitHub
-                    </a>.
+                    </a>
+                    .
                   </p>
                 </div>
 
                 <div className="flex flex-wrap items-center justify-center gap-4">
                   <Button asChild size="lg">
-                    <a href="https://discord.gg/zv8C9F8" target="_blank" rel="noreferrer">Join Discord Community</a>
+                    <a href="https://discord.gg/zv8C9F8" target="_blank" rel="noreferrer">
+                      Join Discord Community
+                    </a>
                   </Button>
                   <Button asChild size="lg" variant="outline">
-                    <a href="https://github.com/mue/mue" target="_blank" rel="noreferrer">View on GitHub</a>
+                    <a href="https://github.com/mue/mue" target="_blank" rel="noreferrer">
+                      View on GitHub
+                    </a>
                   </Button>
                 </div>
               </div>
@@ -150,12 +202,14 @@ function PhotographyPage() {
 
         <div className="mt-16 text-center">
           <h2 className="text-2xl font-semibold text-foreground">Experience these photos in Mue</h2>
-          <p className="mt-2 text-muted-foreground">Download Mue and see beautiful photography with every new tab.</p>
+          <p className="mt-2 text-muted-foreground">
+            Download Mue and see beautiful photography with every new tab.
+          </p>
           <Button asChild size="lg" className="mt-6">
             <Link to="/download">Download Mue</Link>
           </Button>
         </div>
       </div>
     </div>
-  )
+  );
 }

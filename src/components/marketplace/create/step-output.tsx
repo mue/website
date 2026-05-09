@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-
 import { Download, CheckCircle2, FileJson, Package, Copy, Check } from 'lucide-react';
 import { FaGithub } from 'react-icons/fa6';
 
@@ -161,11 +160,7 @@ export function StepOutput({
 
           {metadata.screenshot_url && (
             <div className="overflow-hidden rounded-lg border">
-              <img
-                src={metadata.screenshot_url}
-                alt="Screenshot"
-                className="w-full object-cover"
-              />
+              <img src={metadata.screenshot_url} alt="Screenshot" className="w-full object-cover" />
             </div>
           )}
         </div>

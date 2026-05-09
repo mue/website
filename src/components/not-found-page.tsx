@@ -1,8 +1,8 @@
-import { Link } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router';
 
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft } from 'lucide-react';
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 
 export function NotFoundPage() {
   return (
@@ -38,12 +38,16 @@ export function NotFoundPage() {
             { label: 'Marketplace', href: '/marketplace' },
             { label: 'Contact', href: '/contact' },
           ].map((item) => (
-            <Link key={item.href} to={item.href as any} className="transition hover:text-foreground">
+            <Link
+              key={item.href}
+              to={item.href as any}
+              className="transition hover:text-foreground"
+            >
               {item.label}
             </Link>
           ))}
         </div>
       </div>
     </div>
-  )
+  );
 }

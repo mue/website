@@ -1,22 +1,19 @@
-import { createFileRoute, notFound } from '@tanstack/react-router'
-import { AlertCircle, Key } from 'lucide-react'
+import { createFileRoute, notFound } from '@tanstack/react-router';
+import { AlertCircle, Key } from 'lucide-react';
 
-import { Skeleton } from '@/components/ui/skeleton'
-import { Separator } from '@/components/ui/separator'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
-import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb'
-import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker'
-import ItemsGrid from '@/components/marketplace/items-grid'
-import { ItemSidebar } from '@/components/marketplace/item-sidebar'
-import { ItemContentTabs } from '@/components/marketplace/item-content-tabs'
-import { ProductJsonLd, BreadcrumbJsonLd } from '@/components/json-ld'
+import { Skeleton } from '@/components/ui/skeleton';
+import { Separator } from '@/components/ui/separator';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
+import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
+import ItemsGrid from '@/components/marketplace/items-grid';
+import { ItemSidebar } from '@/components/marketplace/item-sidebar';
+import { ItemContentTabs } from '@/components/marketplace/item-content-tabs';
+import { ProductJsonLd, BreadcrumbJsonLd } from '@/components/json-ld';
 
-import {
-  getMarketplaceItem,
-  getMarketplaceItems,
-} from '@/lib/marketplace'
-import { FavoritesProvider } from '@/lib/favorites-context'
-import { SITE_URL } from '@/lib/constants/site'
+import { getMarketplaceItem, getMarketplaceItems } from '@/lib/marketplace';
+import { FavoritesProvider } from '@/lib/favorites-context';
+import { SITE_URL } from '@/lib/constants/site';
 
 const PROVIDER_NAMES: Record<string, string> = {
   mue: 'MUE',
@@ -24,7 +21,7 @@ const PROVIDER_NAMES: Record<string, string> = {
   pexels: 'Pexels',
   pixabay: 'Pixabay',
   flickr: 'Flickr',
-}
+};
 
 export const Route = createFileRoute('/marketplace/$category/$id')({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -32,39 +29,37 @@ export const Route = createFileRoute('/marketplace/$category/$id')({
     preview: search.preview as string | undefined,
   }),
   loader: async ({ params }) => {
-    const { category, id } = params
+    const { category, id } = params;
 
-    let data
+    let data;
     try {
-      data = await getMarketplaceItem(category as 'packs' | 'presets', id)
+      data = await getMarketplaceItem(category as 'packs' | 'presets', id);
     } catch {
-      throw notFound()
+      throw notFound();
     }
 
-    const collectionNames = data.in_collections?.map((c) =>
-      typeof c === 'string' ? c : c.name,
-    )
+    const collectionNames = data.in_collections?.map((c) => (typeof c === 'string' ? c : c.name));
 
-    const allItems = await getMarketplaceItems()
+    const allItems = await getMarketplaceItems();
     const relatedItems = allItems
       .filter((item) => {
-        if (item.name === data.name) return false
-        if (data.author && item.author?.toLowerCase() === data.author.toLowerCase()) return true
+        if (item.name === data.name) return false;
+        if (data.author && item.author?.toLowerCase() === data.author.toLowerCase()) return true;
         if (collectionNames && collectionNames.length > 0) {
-          return item.in_collections.some((col) => collectionNames.includes(col))
+          return item.in_collections.some((col) => collectionNames.includes(col));
         }
-        return false
+        return false;
       })
       .sort(() => Math.random() - 0.5)
-      .slice(0, 6)
+      .slice(0, 6);
 
-    return { data, relatedItems, category, id }
+    return { data, relatedItems, category, id };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return {}
-    const { data, category, id } = loaderData
+    if (!loaderData) return {};
+    const { data, category, id } = loaderData;
     const description =
-      data.description ?? `Learn more about ${data.display_name} on the Mue marketplace.`
+      data.description ?? `Learn more about ${data.display_name} on the Mue marketplace.`;
     return {
       meta: [
         { title: `${data.display_name} – Marketplace | Mue` },
@@ -86,24 +81,24 @@ export const Route = createFileRoute('/marketplace/$category/$id')({
           href: `${SITE_URL}/marketplace/${encodeURIComponent(category)}/${encodeURIComponent(id)}`,
         },
       ],
-    }
+    };
   },
   pendingComponent: MarketplaceItemLoading,
   component: MarketplaceItemPage,
-})
+});
 
 function MarketplaceItemPage() {
-  const { data, relatedItems, category, id } = Route.useLoaderData()
-  const { embed, preview } = Route.useSearch()
-  const isEmbed = embed === 'true'
-  const isPreview = preview === 'true'
+  const { data, relatedItems, category, id } = Route.useLoaderData();
+  const { embed, preview } = Route.useSearch();
+  const isEmbed = embed === 'true';
+  const isPreview = preview === 'true';
 
   const buildEmbedUrl = (path: string, hasExistingParams = false) => {
-    if (!isEmbed) return path
-    const sep = hasExistingParams ? '&' : '?'
-    const qs = isPreview ? 'embed=true&preview=true' : 'embed=true'
-    return `${path}${sep}${qs}`
-  }
+    if (!isEmbed) return path;
+    const sep = hasExistingParams ? '&' : '?';
+    const qs = isPreview ? 'embed=true&preview=true' : 'embed=true';
+    return `${path}${sep}${qs}`;
+  };
 
   const formattedUpdatedAt = data.updated_at
     ? new Date(data.updated_at).toLocaleDateString(undefined, {
@@ -111,7 +106,7 @@ function MarketplaceItemPage() {
         month: 'long',
         day: 'numeric',
       })
-    : null
+    : null;
 
   const formattedCreatedAt = data.created_at
     ? new Date(data.created_at).toLocaleDateString(undefined, {
@@ -119,11 +114,11 @@ function MarketplaceItemPage() {
         month: 'long',
         day: 'numeric',
       })
-    : null
+    : null;
 
-  const isPhotoPack = data.type === 'photo_packs' || data.type === 'photos'
-  const isQuotePack = data.type === 'quote_packs' || data.type === 'quotes'
-  const isPresetSettings = data.type === 'preset_settings' || data.type === 'settings'
+  const isPhotoPack = data.type === 'photo_packs' || data.type === 'photos';
+  const isQuotePack = data.type === 'quote_packs' || data.type === 'quotes';
+  const isPresetSettings = data.type === 'preset_settings' || data.type === 'settings';
 
   const presetSettings = isPresetSettings
     ? (() => {
@@ -143,13 +138,13 @@ function MarketplaceItemPage() {
           'updated_at',
           'created_at',
           'in_collections',
-        ]
+        ];
         if (data.settings && typeof data.settings === 'object') {
-          return Object.entries(data.settings)
+          return Object.entries(data.settings);
         }
-        return Object.entries(data).filter(([key]) => !excluded.includes(key))
+        return Object.entries(data).filter(([key]) => !excluded.includes(key));
       })()
-    : []
+    : [];
 
   return (
     <FavoritesProvider>
@@ -258,10 +253,7 @@ function MarketplaceItemPage() {
             <Separator className="my-2" />
             <p className="text-center text-sm text-muted-foreground">
               Want to contribute?{' '}
-              <a
-                href="https://github.com/mue"
-                className="font-medium text-primary hover:underline"
-              >
+              <a href="https://github.com/mue" className="font-medium text-primary hover:underline">
                 Visit Mue on GitHub
               </a>
             </p>
@@ -269,7 +261,7 @@ function MarketplaceItemPage() {
         )}
       </div>
     </FavoritesProvider>
-  )
+  );
 }
 
 function MarketplaceItemLoading() {
@@ -338,5 +330,5 @@ function MarketplaceItemLoading() {
         </main>
       </div>
     </div>
-  )
+  );
 }

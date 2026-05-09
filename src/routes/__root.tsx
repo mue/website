@@ -4,22 +4,22 @@ import {
   ScrollRestoration,
   HeadContent,
   Scripts,
-} from '@tanstack/react-router'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { Suspense } from 'react'
+} from '@tanstack/react-router';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { Suspense } from 'react';
 
-import { ThemeProvider } from '@/components/theme-provider'
-import { NotFoundPage } from '@/components/not-found-page'
-import { EmbedProvider, EmbedLayoutWrapper } from '@/lib/embed-context'
-import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/json-ld'
-import { SITE_URL } from '@/lib/constants/site'
+import { ThemeProvider } from '@/components/theme-provider';
+import { NotFoundPage } from '@/components/not-found-page';
+import { EmbedProvider, EmbedLayoutWrapper } from '@/lib/embed-context';
+import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/json-ld';
+import { SITE_URL } from '@/lib/constants/site';
 
-import styles from '../styles.css?url'
+import styles from '../styles.css?url';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 // Prevents flash of wrong theme before React hydrates
-const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem('theme');var d=(t==='light'||t==='dark')?t:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',d==='dark')}catch(e){}})();`
+const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem('theme');var d=(t==='light'||t==='dark')?t:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',d==='dark')}catch(e){}})();`;
 
 export const Route = createRootRoute({
   head: () => ({
@@ -60,7 +60,7 @@ export const Route = createRootRoute({
   }),
   component: RootComponent,
   notFoundComponent: NotFoundPage,
-})
+});
 
 function RootComponent() {
   return (
@@ -92,5 +92,5 @@ function RootComponent() {
         />
       </body>
     </html>
-  )
+  );
 }

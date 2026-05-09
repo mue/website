@@ -1,8 +1,8 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
 
-import { BlogFilter } from '@/components/blog/blog-filter'
+import { BlogFilter } from '@/components/blog/blog-filter';
 
-import { getAllBlogPosts } from '@/lib/blog'
+import { getAllBlogPosts } from '@/lib/blog';
 
 export const Route = createFileRoute('/blog/')({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -26,11 +26,11 @@ export const Route = createFileRoute('/blog/')({
     ],
   }),
   component: BlogPage,
-})
+});
 
 function BlogPage() {
-  const posts = Route.useLoaderData()
-  const { filter } = Route.useSearch()
+  const posts = Route.useLoaderData();
+  const { filter } = Route.useSearch();
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -50,5 +50,5 @@ function BlogPage() {
         <BlogFilter initialPosts={posts} initialFilter={filter} />
       </div>
     </div>
-  )
+  );
 }

@@ -1,19 +1,22 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router';
 
-import { Scale } from 'lucide-react'
+import { Scale } from 'lucide-react';
 
-import { ContentSection } from '@/components/shared/content-section'
-import { BulletList } from '@/components/shared/bullet-list'
+import { ContentSection } from '@/components/shared/content-section';
+import { BulletList } from '@/components/shared/bullet-list';
 
 export const Route = createFileRoute('/dmca')({
   head: () => ({
     meta: [
       { title: 'DMCA | Mue' },
-      { name: 'description', content: 'Digital Millennium Copyright Act (DMCA) policy and takedown procedures for Mue.' },
+      {
+        name: 'description',
+        content: 'Digital Millennium Copyright Act (DMCA) policy and takedown procedures for Mue.',
+      },
     ],
   }),
   component: DMCAPage,
-})
+});
 
 function DMCAPage() {
   return (
@@ -30,7 +33,9 @@ function DMCAPage() {
           <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
             DMCA Policy
           </h1>
-          <p className="mx-auto mt-4 text-sm text-muted-foreground">Last updated: October 1, 2025</p>
+          <p className="mx-auto mt-4 text-sm text-muted-foreground">
+            Last updated: October 1, 2025
+          </p>
         </header>
 
         <div className="space-y-10">
@@ -47,8 +52,8 @@ function DMCAPage() {
           <ContentSection title="Filing a DMCA Notice">
             <p>
               If you believe that your copyrighted work has been copied in a way that constitutes
-              copyright infringement and is accessible via the Mue service, please notify our copyright
-              agent. Your DMCA notice must include:
+              copyright infringement and is accessible via the Mue service, please notify our
+              copyright agent. Your DMCA notice must include:
             </p>
             <BulletList
               items={[
@@ -67,11 +72,18 @@ function DMCAPage() {
           <ContentSection title="How to Submit">
             <p>Please submit your DMCA notice to our designated copyright agent:</p>
             <div className="mt-4 rounded-2xl border border-border bg-muted/30 p-5">
-              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Email</p>
-              <a href="mailto:hello@muetab.com" className="mt-1 block font-mono text-foreground underline underline-offset-2">
+              <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                Email
+              </p>
+              <a
+                href="mailto:hello@muetab.com"
+                className="mt-1 block font-mono text-foreground underline underline-offset-2"
+              >
                 hello@muetab.com
               </a>
-              <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Subject line</p>
+              <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                Subject line
+              </p>
               <p className="mt-1 font-mono text-sm text-foreground">DMCA Takedown Request</p>
             </div>
           </ContentSection>
@@ -105,8 +117,9 @@ function DMCAPage() {
 
           <ContentSection title="Marketplace Content">
             <p>
-              All content submitted to the Mue marketplace must respect intellectual property rights.
-              Content found to be infringing will be removed promptly upon receipt of a valid DMCA notice.
+              All content submitted to the Mue marketplace must respect intellectual property
+              rights. Content found to be infringing will be removed promptly upon receipt of a
+              valid DMCA notice.
             </p>
           </ContentSection>
 
@@ -126,5 +139,5 @@ function DMCAPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

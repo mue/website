@@ -109,7 +109,7 @@ function MarketplaceExplorerContent({
             searchInputRef={searchInputRef}
           />
           <Link
-            to={"/marketplace/create" as any}
+            to={'/marketplace/create' as any}
             className="shrink-0"
             {...(isEmbed ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           >
@@ -148,7 +148,7 @@ function MarketplaceExplorerContent({
                 <h2 className="text-xl font-semibold text-foreground">Featured Collections</h2>
                 {!isEmbed && (
                   <Link
-                    to={"/marketplace/collections" as any}
+                    to={'/marketplace/collections' as any}
                     className="text-sm text-primary hover:underline underline-offset-4 transition"
                   >
                     View all
@@ -163,7 +163,7 @@ function MarketplaceExplorerContent({
               <div className="mt-16 flex items-center justify-between">
                 <h2 className="text-xl font-semibold text-foreground">Browse by Author</h2>
                 <Link
-                  to={"/marketplace/authors" as any}
+                  to={'/marketplace/authors' as any}
                   className="text-sm text-primary hover:underline underline-offset-4 transition"
                 >
                   View all

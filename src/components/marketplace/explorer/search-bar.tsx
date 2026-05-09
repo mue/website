@@ -8,10 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 
 import { cn } from '@/lib/utils';
-import {
-  getMarketplaceTypeLabel,
-  getItemCategory,
-} from '@/lib/marketplace';
+import { getMarketplaceTypeLabel, getItemCategory } from '@/lib/marketplace';
 import type { MarketplaceItemSummary } from '@/lib/marketplace';
 import { useEmbed } from '@/lib/embed-context';
 
@@ -43,7 +40,9 @@ export function SearchBar({
 
   const navigateTo = (suggestion: MarketplaceItemSummary) => {
     const category = getItemCategory(suggestion.type);
-    navigate({ to: buildEmbedUrl(`/marketplace/${category}/${encodeURIComponent(suggestion.id)}`) as any });
+    navigate({
+      to: buildEmbedUrl(`/marketplace/${category}/${encodeURIComponent(suggestion.id)}`) as any,
+    });
   };
 
   return (

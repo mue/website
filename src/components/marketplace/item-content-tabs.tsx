@@ -1,29 +1,29 @@
-import { Images, Camera, MapPin, MessageSquareQuote, Users, Type } from 'lucide-react'
+import { Images, Camera, MapPin, MessageSquareQuote, Users, Type } from 'lucide-react';
 
-import { Badge } from '@/components/ui/badge'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { PresetSettingsTable } from '@/components/marketplace/preset-settings-table'
-import { QuotesTable } from '@/components/marketplace/quotes-table'
-import { PhotoGallery } from '@/components/marketplace/photo-gallery'
-import { NoContentEmptyState } from '@/components/marketplace/empty-state'
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { PresetSettingsTable } from '@/components/marketplace/preset-settings-table';
+import { QuotesTable } from '@/components/marketplace/quotes-table';
+import { PhotoGallery } from '@/components/marketplace/photo-gallery';
+import { NoContentEmptyState } from '@/components/marketplace/empty-state';
 
-import { type MarketplaceItemDetail } from '@/lib/marketplace'
+import { type MarketplaceItemDetail } from '@/lib/marketplace';
 
 type ItemContentTabsProps = {
-  data: MarketplaceItemDetail
-  isPhotoPack: boolean
-  isQuotePack: boolean
-  isPresetSettings: boolean
-  presetSettings: [string, unknown][]
-  providerNames: Record<string, string>
-}
+  data: MarketplaceItemDetail;
+  isPhotoPack: boolean;
+  isQuotePack: boolean;
+  isPresetSettings: boolean;
+  presetSettings: [string, unknown][];
+  providerNames: Record<string, string>;
+};
 
 function parseDescription(description: string) {
-  const lines = description.split(/\\n|\n/)
+  const lines = description.split(/\\n|\n/);
 
   return lines.map((line, lineIndex) => {
-    const urlRegex = /(https?:\/\/[^\s]+)/g
-    const parts = line.split(urlRegex)
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = line.split(urlRegex);
 
     return (
       <span key={lineIndex}>
@@ -49,8 +49,8 @@ function parseDescription(description: string) {
           </>
         )}
       </span>
-    )
-  })
+    );
+  });
 }
 
 export function ItemContentTabs({
@@ -91,7 +91,9 @@ export function ItemContentTabs({
                 <div className="flex flex-1 items-center gap-3 px-5 py-4">
                   <Images className="h-4 w-4 shrink-0 text-muted-foreground" />
                   <div>
-                    <div className="text-xl font-semibold text-foreground">{data.photos.length}</div>
+                    <div className="text-xl font-semibold text-foreground">
+                      {data.photos.length}
+                    </div>
                     <div className="text-xs text-muted-foreground">
                       Total {data.photos.length === 1 ? 'Photo' : 'Photos'}
                     </div>
@@ -144,7 +146,9 @@ export function ItemContentTabs({
                 <div className="flex flex-1 items-center gap-3 px-5 py-4">
                   <MessageSquareQuote className="h-4 w-4 shrink-0 text-muted-foreground" />
                   <div>
-                    <div className="text-xl font-semibold text-foreground">{data.quotes.length}</div>
+                    <div className="text-xl font-semibold text-foreground">
+                      {data.quotes.length}
+                    </div>
                     <div className="text-xs text-muted-foreground">
                       Total {data.quotes.length === 1 ? 'Quote' : 'Quotes'}
                     </div>
@@ -168,7 +172,8 @@ export function ItemContentTabs({
                   <div>
                     <div className="text-xl font-semibold text-foreground">
                       {Math.round(
-                        data.quotes.reduce((acc, q) => acc + q.quote.length, 0) / data.quotes.length,
+                        data.quotes.reduce((acc, q) => acc + q.quote.length, 0) /
+                          data.quotes.length,
                       )}
                     </div>
                     <div className="text-xs text-muted-foreground">Avg. Characters</div>
@@ -236,5 +241,5 @@ export function ItemContentTabs({
         </TabsContent>
       </Tabs>
     </main>
-  )
+  );
 }

@@ -1,11 +1,11 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router';
 
-import { Upload } from 'lucide-react'
+import { Upload } from 'lucide-react';
 
-import { ShowcaseGallery } from '@/components/showcase/showcase-gallery'
-import { Button } from '@/components/ui/button'
+import { ShowcaseGallery } from '@/components/showcase/showcase-gallery';
+import { Button } from '@/components/ui/button';
 
-import { getShowcaseItems } from '@/lib/showcase'
+import { getShowcaseItems } from '@/lib/showcase';
 
 export const Route = createFileRoute('/showcase')({
   loader: () => getShowcaseItems(),
@@ -16,10 +16,10 @@ export const Route = createFileRoute('/showcase')({
     ],
   }),
   component: ShowcasePage,
-})
+});
 
 function ShowcasePage() {
-  const items = Route.useLoaderData()
+  const items = Route.useLoaderData();
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -68,5 +68,5 @@ function ShowcasePage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

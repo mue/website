@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react';
 
 import { Camera, MapPin, X, ChevronLeft, ChevronRight, Loader2, AlertCircle } from 'lucide-react';
 

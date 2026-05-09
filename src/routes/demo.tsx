@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react'
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { useEffect, useState } from 'react';
+import { createFileRoute, Link } from '@tanstack/react-router';
 
-import { ArrowLeft, ExternalLink, Lock, Monitor } from 'lucide-react'
+import { ArrowLeft, ExternalLink, Lock, Monitor } from 'lucide-react';
 
-import { Button } from '@/components/ui/button'
-import { Tooltip, TooltipProvider } from '@/components/ui/tooltip'
+import { Button } from '@/components/ui/button';
+import { Tooltip, TooltipProvider } from '@/components/ui/tooltip';
 
 function isMobileDevice(): boolean {
-  if (typeof window === 'undefined') return false
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  if (typeof window === 'undefined') return false;
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
 export const Route = createFileRoute('/demo')({
@@ -19,14 +19,14 @@ export const Route = createFileRoute('/demo')({
     ],
   }),
   component: DemoPage,
-})
+});
 
 function DemoPage() {
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    setIsMobile(isMobileDevice())
-  }, [])
+    setIsMobile(isMobileDevice());
+  }, []);
 
   return (
     <div className="relative flex min-h-[calc(100vh-80px)] flex-col overflow-hidden">
@@ -66,7 +66,12 @@ function DemoPage() {
                     className="h-7 w-7 rounded-full text-muted-foreground hover:bg-muted hover:text-foreground dark:text-white/40 dark:hover:bg-white/10 dark:hover:text-white/70"
                     asChild
                   >
-                    <a href="https://demo.muetab.com?nointro=true" target="_blank" rel="noreferrer" aria-label="Open demo in new tab">
+                    <a
+                      href="https://demo.muetab.com?nointro=true"
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Open demo in new tab"
+                    >
                       <ExternalLink className="h-3.5 w-3.5" />
                     </a>
                   </Button>
@@ -123,5 +128,5 @@ function DemoPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

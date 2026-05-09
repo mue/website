@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router';
 
 import {
   ArrowRight,
@@ -10,19 +10,19 @@ import {
   LayoutDashboard,
   CalendarDays,
   type LucideIcon,
-} from 'lucide-react'
-import { FaChrome, FaFirefoxBrowser, FaEdge, FaGithub } from 'react-icons/fa'
-import { SiNaver } from 'react-icons/si'
+} from 'lucide-react';
+import { FaChrome, FaFirefoxBrowser, FaEdge, FaGithub } from 'react-icons/fa';
+import { SiNaver } from 'react-icons/si';
 
-import { Button } from '@/components/ui/button'
-import { FeatureCard } from '@/components/home/feature-card'
-import { CommunityStatCard } from '@/components/home/community-stat-card'
-import { BrowserBadge } from '@/components/home/browser-badge'
-import { StatItem } from '@/components/home/stat-item'
-import { SoftwareApplicationJsonLd } from '@/components/json-ld'
-import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links'
+import { Button } from '@/components/ui/button';
+import { FeatureCard } from '@/components/home/feature-card';
+import { CommunityStatCard } from '@/components/home/community-stat-card';
+import { BrowserBadge } from '@/components/home/browser-badge';
+import { StatItem } from '@/components/home/stat-item';
+import { SoftwareApplicationJsonLd } from '@/components/json-ld';
+import { BROWSER_STORE_URLS } from '@/lib/constants/browser-links';
 
-const stats = ['Maintained since 2018', '10,000+ monthly active users', '10,000,000+ tabs']
+const stats = ['Maintained since 2018', '10,000+ monthly active users', '10,000,000+ tabs'];
 
 const communityStats: { label: string; value: string; icon: LucideIcon }[] = [
   { label: 'Collaborators', value: '50+', icon: Users },
@@ -31,7 +31,7 @@ const communityStats: { label: string; value: string; icon: LucideIcon }[] = [
   { label: 'Users', value: '5K+ Monthly', icon: UserCheck },
   { label: 'Tabs Opened', value: '10M+', icon: LayoutDashboard },
   { label: 'First Version', value: '2018', icon: CalendarDays },
-]
+];
 
 const scrollFeatures = [
   {
@@ -58,21 +58,21 @@ const scrollFeatures = [
       'Mue is open-source and contains no tracking. All data is stored on device and is never shared without your consent.',
     bullets: ['No personal data collection', 'Fully open source on GitHub'],
   },
-]
+];
 
 const browsers = [
   { name: 'Chrome', Icon: FaChrome, url: BROWSER_STORE_URLS.chrome },
   { name: 'Edge', Icon: FaEdge, url: BROWSER_STORE_URLS.edge },
   { name: 'Firefox', Icon: FaFirefoxBrowser, url: BROWSER_STORE_URLS.firefox },
   { name: 'Whale', Icon: SiNaver, url: BROWSER_STORE_URLS.whale },
-]
+];
 
 export const Route = createFileRoute('/')({
   head: () => ({
     meta: [{ title: 'Mue - Modifiable. User-centric. Experience.' }],
   }),
   component: HomePage,
-})
+});
 
 function HomePage() {
   return (
@@ -238,5 +238,5 @@ function HomePage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

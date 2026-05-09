@@ -1,19 +1,22 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router';
 
-import { Shield } from 'lucide-react'
+import { Shield } from 'lucide-react';
 
-import { ContentSection } from '@/components/shared/content-section'
-import { BulletList } from '@/components/shared/bullet-list'
+import { ContentSection } from '@/components/shared/content-section';
+import { BulletList } from '@/components/shared/bullet-list';
 
 export const Route = createFileRoute('/privacy')({
   head: () => ({
     meta: [
       { title: 'Privacy Policy | Mue' },
-      { name: 'description', content: 'Learn how Mue handles your data and protects your privacy.' },
+      {
+        name: 'description',
+        content: 'Learn how Mue handles your data and protects your privacy.',
+      },
     ],
   }),
   component: PrivacyPage,
-})
+});
 
 function PrivacyPage() {
   return (
@@ -30,7 +33,9 @@ function PrivacyPage() {
           <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
             Privacy Policy
           </h1>
-          <p className="mx-auto mt-4 text-sm text-muted-foreground">Last updated: September 8, 2024</p>
+          <p className="mx-auto mt-4 text-sm text-muted-foreground">
+            Last updated: September 8, 2024
+          </p>
         </header>
 
         <div className="space-y-10">
@@ -57,17 +62,17 @@ function PrivacyPage() {
 
           <ContentSection title="Weather Widget" titleSize="md">
             <p>
-              The weather feature of Mue only stores your inputted location (or estimated when clicking
-              on &apos;Auto&apos;) locally, and it is only sent in a request to get the current weather in
-              your area through our opensource proxy server (proxy.muetab.com).
+              The weather feature of Mue only stores your inputted location (or estimated when
+              clicking on &apos;Auto&apos;) locally, and it is only sent in a request to get the
+              current weather in your area through our opensource proxy server (proxy.muetab.com).
             </p>
           </ContentSection>
 
           <ContentSection title="Background Widget" titleSize="md">
             <p>
-              The photo map location feature of Mue will send a request with the information of the photo
-              shown to Mapbox. The background feature requests to our API for a random image — only the
-              background category and resolution are sent.
+              The photo map location feature of Mue will send a request with the information of the
+              photo shown to Mapbox. The background feature requests to our API for a random image —
+              only the background category and resolution are sent.
             </p>
           </ContentSection>
 
@@ -80,20 +85,23 @@ function PrivacyPage() {
 
           <ContentSection title="Quick Links Widget" titleSize="md">
             <p>
-              When Quick Links is enabled, favicons are obtained from the DuckDuckGo favicon API. The
-              only information sent is the URL you specified and this cannot be linked to you.
+              When Quick Links is enabled, favicons are obtained from the DuckDuckGo favicon API.
+              The only information sent is the URL you specified and this cannot be linked to you.
             </p>
           </ContentSection>
 
           <ContentSection title="Marketplace" titleSize="md">
             <p>
-              The Marketplace tab requests to our API (marketplace.muetab.com) to get a list of products.
-              No information apart from this is sent.
+              The Marketplace tab requests to our API (marketplace.muetab.com) to get a list of
+              products. No information apart from this is sent.
             </p>
           </ContentSection>
 
           <ContentSection title="Offline Mode" titleSize="md">
-            <p>Offline mode can be utilised to prevent requests to any of the services mentioned in this privacy policy.</p>
+            <p>
+              Offline mode can be utilised to prevent requests to any of the services mentioned in
+              this privacy policy.
+            </p>
           </ContentSection>
 
           <div className="h-px bg-border" />
@@ -112,5 +120,5 @@ function PrivacyPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,31 +1,31 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Link } from '@tanstack/react-router'
-import { User } from 'lucide-react'
+import { createFileRoute } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
+import { User } from 'lucide-react';
 
-import { Badge } from '@/components/ui/badge'
-import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb'
-import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker'
+import { Badge } from '@/components/ui/badge';
+import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
+import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
 
-import { getMarketplaceItems, getMarketplaceTypeLabel, slugifyAuthor } from '@/lib/marketplace'
-import { SITE_URL } from '@/lib/constants/site'
+import { getMarketplaceItems, getMarketplaceTypeLabel, slugifyAuthor } from '@/lib/marketplace';
+import { SITE_URL } from '@/lib/constants/site';
 
 export const Route = createFileRoute('/marketplace/authors')({
   validateSearch: (search: Record<string, unknown>) => ({
     embed: search.embed as string | undefined,
   }),
   loader: async () => {
-    const items = await getMarketplaceItems()
+    const items = await getMarketplaceItems();
 
-    const authorMap = new Map<string, { items: typeof items; types: Set<string> }>()
+    const authorMap = new Map<string, { items: typeof items; types: Set<string> }>();
     items.forEach((item) => {
-      if (!item.author) return
+      if (!item.author) return;
       if (!authorMap.has(item.author)) {
-        authorMap.set(item.author, { items: [], types: new Set() })
+        authorMap.set(item.author, { items: [], types: new Set() });
       }
-      const authorData = authorMap.get(item.author)!
-      authorData.items.push(item)
-      authorData.types.add(item.type)
-    })
+      const authorData = authorMap.get(item.author)!;
+      authorData.items.push(item);
+      authorData.types.add(item.type);
+    });
 
     const sortedAuthors = Array.from(authorMap.entries())
       .map(([name, data]) => ({
@@ -35,11 +35,11 @@ export const Route = createFileRoute('/marketplace/authors')({
         contentTypes: Array.from(data.types),
       }))
       .sort((a, b) => {
-        if (b.itemCount !== a.itemCount) return b.itemCount - a.itemCount
-        return a.name.localeCompare(b.name)
-      })
+        if (b.itemCount !== a.itemCount) return b.itemCount - a.itemCount;
+        return a.name.localeCompare(b.name);
+      });
 
-    return { sortedAuthors }
+    return { sortedAuthors };
   },
   head: () => ({
     meta: [
@@ -52,12 +52,12 @@ export const Route = createFileRoute('/marketplace/authors')({
     ],
   }),
   component: AuthorsPage,
-})
+});
 
 function AuthorsPage() {
-  const { sortedAuthors } = Route.useLoaderData()
-  const { embed } = Route.useSearch()
-  const isEmbed = embed === 'true'
+  const { sortedAuthors } = Route.useLoaderData();
+  const { embed } = Route.useSearch();
+  const isEmbed = embed === 'true';
 
   return (
     <div
@@ -122,5 +122,5 @@ function AuthorsPage() {
         ))}
       </div>
     </div>
-  )
+  );
 }

@@ -1,13 +1,13 @@
-import { Link } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router';
 
-import { ArrowLeft, RefreshCw } from 'lucide-react'
+import { ArrowLeft, RefreshCw } from 'lucide-react';
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 
 type ErrorPageProps = {
-  error: Error & { digest?: string }
-  reset: () => void
-}
+  error: Error & { digest?: string };
+  reset: () => void;
+};
 
 export function ErrorPage({ error, reset }: ErrorPageProps) {
   return (
@@ -59,12 +59,16 @@ export function ErrorPage({ error, reset }: ErrorPageProps) {
             { label: 'Marketplace', href: '/marketplace' },
             { label: 'Contact', href: '/contact' },
           ].map((item) => (
-            <Link key={item.href} to={item.href as any} className="transition hover:text-foreground">
+            <Link
+              key={item.href}
+              to={item.href as any}
+              className="transition hover:text-foreground"
+            >
               {item.label}
             </Link>
           ))}
         </div>
       </div>
     </div>
-  )
+  );
 }

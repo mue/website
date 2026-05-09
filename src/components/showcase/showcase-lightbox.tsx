@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState, useRef } from 'react'
+import { useEffect, useCallback, useState, useRef } from 'react';
 
 import { X, ChevronLeft, ChevronRight, User, Calendar, Tag } from 'lucide-react';
 

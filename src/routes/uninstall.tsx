@@ -1,8 +1,8 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router';
 
-import { ArrowRight, RefreshCcw } from 'lucide-react'
+import { ArrowRight, RefreshCcw } from 'lucide-react';
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/button';
 
 export const Route = createFileRoute('/uninstall')({
   head: () => ({
@@ -12,7 +12,7 @@ export const Route = createFileRoute('/uninstall')({
     ],
   }),
   component: UninstallPage,
-})
+});
 
 function UninstallPage() {
   return (
@@ -49,7 +49,8 @@ function UninstallPage() {
           </div>
           <h2 className="mt-4 text-xl font-semibold text-foreground">Changed your mind?</h2>
           <p className="mt-2 text-sm text-muted-foreground">
-            Mue is always improving. If you&apos;d like to give it another shot, you can reinstall it in seconds.
+            Mue is always improving. If you&apos;d like to give it another shot, you can reinstall
+            it in seconds.
           </p>
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button asChild>
@@ -65,5 +66,5 @@ function UninstallPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

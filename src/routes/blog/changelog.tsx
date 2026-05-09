@@ -1,27 +1,27 @@
-import { createFileRoute, notFound } from '@tanstack/react-router'
+import { createFileRoute, notFound } from '@tanstack/react-router';
 
-import { Calendar, Clock, User } from 'lucide-react'
+import { Calendar, Clock, User } from 'lucide-react';
 
-import { BlogImage } from '@/components/blog/blog-image'
-import { BlogContentLightbox } from '@/components/blog/blog-content-lightbox'
-import { BlogProse } from '@/components/blog/blog-prose'
-import { Badge } from '@/components/ui/badge'
+import { BlogImage } from '@/components/blog/blog-image';
+import { BlogContentLightbox } from '@/components/blog/blog-content-lightbox';
+import { BlogProse } from '@/components/blog/blog-prose';
+import { Badge } from '@/components/ui/badge';
 
-import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients'
-import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog'
-import { formatDate, cn } from '@/lib/utils'
+import { BLOG_IMAGE_GRADIENTS, blogImageGradientIndex } from '@/lib/gradients';
+import { getAllBlogPosts, getBlogPostBySlug } from '@/lib/blog';
+import { formatDate, cn } from '@/lib/utils';
 
 export const Route = createFileRoute('/blog/changelog')({
   validateSearch: (search: Record<string, unknown>) => ({
     embed: search.embed as string | undefined,
   }),
   loader: async () => {
-    const allPosts = await getAllBlogPosts()
-    const releasePost = allPosts.find((post) => post.frontmatter.tags?.includes('release'))
-    if (!releasePost) throw notFound()
-    const post = await getBlogPostBySlug(releasePost.slug)
-    if (!post) throw notFound()
-    return { post }
+    const allPosts = await getAllBlogPosts();
+    const releasePost = allPosts.find((post) => post.frontmatter.tags?.includes('release'));
+    if (!releasePost) throw notFound();
+    const post = await getBlogPostBySlug(releasePost.slug);
+    if (!post) throw notFound();
+    return { post };
   },
   head: () => ({
     meta: [
@@ -32,15 +32,15 @@ export const Route = createFileRoute('/blog/changelog')({
     ],
   }),
   component: ChangelogPage,
-})
+});
 
 function ChangelogPage() {
-  const { post } = Route.useLoaderData()
-  const { embed } = Route.useSearch()
-  const isEmbed = embed === 'true'
+  const { post } = Route.useLoaderData();
+  const { embed } = Route.useSearch();
+  const isEmbed = embed === 'true';
 
   const hasUpdate =
-    post.frontmatter.dateModified && post.frontmatter.dateModified !== post.frontmatter.date
+    post.frontmatter.dateModified && post.frontmatter.dateModified !== post.frontmatter.date;
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -117,12 +117,12 @@ function ChangelogPage() {
         <BlogContentLightbox contentHtml={post.content} />
       </article>
     </div>
-  )
+  );
 }
 
 function GradientHero({ title }: { title: string }) {
-  const gradientClass = BLOG_IMAGE_GRADIENTS[blogImageGradientIndex(title)]
-  const initial = (title?.trim()?.[0] || '?').toUpperCase()
+  const gradientClass = BLOG_IMAGE_GRADIENTS[blogImageGradientIndex(title)];
+  const initial = (title?.trim()?.[0] || '?').toUpperCase();
 
   return (
     <div
@@ -137,5 +137,5 @@ function GradientHero({ title }: { title: string }) {
       </span>
       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
     </div>
-  )
+  );
 }

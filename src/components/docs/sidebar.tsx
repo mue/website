@@ -1,15 +1,15 @@
-import { Link, useLocation } from '@tanstack/react-router'
+import { Link, useLocation } from '@tanstack/react-router';
 
-import type { DocTreeNode } from '@/lib/docs'
-import { cn } from '@/lib/utils'
+import type { DocTreeNode } from '@/lib/docs';
+import { cn } from '@/lib/utils';
 
 type DocsSidebarProps = {
-  tree: DocTreeNode[]
-  activeHref?: string
-}
+  tree: DocTreeNode[];
+  activeHref?: string;
+};
 
 export function DocsSidebar({ tree }: DocsSidebarProps) {
-  const { pathname } = useLocation()
+  const { pathname } = useLocation();
 
   return (
     <nav className="space-y-4 text-sm">
@@ -17,7 +17,7 @@ export function DocsSidebar({ tree }: DocsSidebarProps) {
         <SidebarSection key={item.slug.join('/')} node={item} activeHref={pathname} />
       ))}
     </nav>
-  )
+  );
 }
 
 function SidebarSection({
@@ -25,17 +25,17 @@ function SidebarSection({
   activeHref,
   depth = 0,
 }: {
-  node: DocTreeNode
-  activeHref: string
-  depth?: number
+  node: DocTreeNode;
+  activeHref: string;
+  depth?: number;
 }) {
-  const normalizedActiveHref = activeHref.replace(/\/$/, '')
-  const normalizedNodeHref = node.href.replace(/\/$/, '')
+  const normalizedActiveHref = activeHref.replace(/\/$/, '');
+  const normalizedNodeHref = node.href.replace(/\/$/, '');
 
-  const isActive = normalizedNodeHref === normalizedActiveHref
-  const isAncestor = isActive || normalizedActiveHref.startsWith(`${normalizedNodeHref}/`)
+  const isActive = normalizedNodeHref === normalizedActiveHref;
+  const isAncestor = isActive || normalizedActiveHref.startsWith(`${normalizedNodeHref}/`);
 
-  const hasChildren = node.children && node.children.length > 0
+  const hasChildren = node.children && node.children.length > 0;
 
   return (
     <div
@@ -91,5 +91,5 @@ function SidebarSection({
         </div>
       )}
     </div>
-  )
+  );
 }

@@ -78,9 +78,6 @@
     ],
     "deny": [],
     "ask": [],
-    "additionalDirectories": [
-      "f:\\Code\\Mue\\new\\tanstack\\src\\routes",
-      "\\tmp"
-    ]
+    "additionalDirectories": ["f:\\Code\\Mue\\new\\tanstack\\src\\routes", "\\tmp"]
   }
 }

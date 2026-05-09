@@ -1,24 +1,24 @@
-import { createFileRoute, Outlet } from '@tanstack/react-router'
-import { Suspense } from 'react'
+import { createFileRoute, Outlet } from '@tanstack/react-router';
+import { Suspense } from 'react';
 
-import { DocsSearch } from '@/components/docs/search'
-import { DocsSidebar } from '@/components/docs/sidebar'
-import { DocsMobileMenu } from '@/components/docs/mobile-menu'
-import { ScrollArea } from '@/components/ui/scroll-area'
-import { Skeleton } from '@/components/ui/skeleton'
+import { DocsSearch } from '@/components/docs/search';
+import { DocsSidebar } from '@/components/docs/sidebar';
+import { DocsMobileMenu } from '@/components/docs/mobile-menu';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Skeleton } from '@/components/ui/skeleton';
 
-import { getAllDocsMeta, getDocsTree } from '@/lib/docs'
+import { getAllDocsMeta, getDocsTree } from '@/lib/docs';
 
 export const Route = createFileRoute('/docs')({
   loader: async () => {
-    const [tree, docsMeta] = await Promise.all([getDocsTree(), getAllDocsMeta()])
-    return { tree, docsMeta }
+    const [tree, docsMeta] = await Promise.all([getDocsTree(), getAllDocsMeta()]);
+    return { tree, docsMeta };
   },
   component: DocsLayout,
-})
+});
 
 function DocsLayout() {
-  const { tree, docsMeta } = Route.useLoaderData()
+  const { tree, docsMeta } = Route.useLoaderData();
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-background via-background to-muted/40">
@@ -39,7 +39,7 @@ function DocsLayout() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function SidebarSkeleton() {
@@ -57,5 +57,5 @@ function SidebarSkeleton() {
         </div>
       </aside>
     </>
-  )
+  );
 }

@@ -1,16 +1,16 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Link } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 
-import { Badge } from '@/components/ui/badge'
-import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb'
-import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker'
+import { Badge } from '@/components/ui/badge';
+import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
+import { BreadcrumbTracker } from '@/components/marketplace/breadcrumb-tracker';
 
 import {
   getMarketplaceCollections,
   getMarketplaceItems,
   getMarketplaceTypeLabel,
-} from '@/lib/marketplace'
-import { SITE_URL } from '@/lib/constants/site'
+} from '@/lib/marketplace';
+import { SITE_URL } from '@/lib/constants/site';
 
 export const Route = createFileRoute('/marketplace/collections')({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -21,22 +21,22 @@ export const Route = createFileRoute('/marketplace/collections')({
     const [collections, items] = await Promise.all([
       getMarketplaceCollections(),
       getMarketplaceItems(),
-    ])
+    ]);
 
     const collectionsWithMetadata = collections.map((collection) => {
-      const collectionItems = items.filter((item) => item.in_collections.includes(collection.name))
-      const types = [...new Set(collectionItems.map((item) => item.type))]
-      return { ...collection, contentTypes: types, itemCount: collectionItems.length }
-    })
+      const collectionItems = items.filter((item) => item.in_collections.includes(collection.name));
+      const types = [...new Set(collectionItems.map((item) => item.type))];
+      return { ...collection, contentTypes: types, itemCount: collectionItems.length };
+    });
 
     const sortedCollections = collectionsWithMetadata
       .filter((c) => c.itemCount > 0)
       .sort((a, b) => {
-        if (b.itemCount !== a.itemCount) return b.itemCount - a.itemCount
-        return a.display_name.localeCompare(b.display_name)
-      })
+        if (b.itemCount !== a.itemCount) return b.itemCount - a.itemCount;
+        return a.display_name.localeCompare(b.display_name);
+      });
 
-    return { sortedCollections }
+    return { sortedCollections };
   },
   head: () => ({
     meta: [
@@ -49,19 +49,19 @@ export const Route = createFileRoute('/marketplace/collections')({
     ],
   }),
   component: CollectionsPage,
-})
+});
 
 function CollectionsPage() {
-  const { sortedCollections } = Route.useLoaderData()
-  const { embed, preview } = Route.useSearch()
-  const isEmbed = embed === 'true'
-  const isPreview = preview === 'true'
+  const { sortedCollections } = Route.useLoaderData();
+  const { embed, preview } = Route.useSearch();
+  const isEmbed = embed === 'true';
+  const isPreview = preview === 'true';
 
   const buildEmbedUrl = (path: string) => {
-    if (!isEmbed) return path
-    const params = isPreview ? 'embed=true&preview=true' : 'embed=true'
-    return `${path}?${params}`
-  }
+    if (!isEmbed) return path;
+    const params = isPreview ? 'embed=true&preview=true' : 'embed=true';
+    return `${path}?${params}`;
+  };
 
   return (
     <div
@@ -87,7 +87,9 @@ function CollectionsPage() {
         {sortedCollections.map((collection) => (
           <Link
             key={collection.name}
-            to={buildEmbedUrl(`/marketplace/collection/${encodeURIComponent(collection.name)}`) as any}
+            to={
+              buildEmbedUrl(`/marketplace/collection/${encodeURIComponent(collection.name)}`) as any
+            }
             className="group relative flex h-full cursor-pointer flex-col overflow-hidden rounded-2xl border border-border bg-card/70 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md"
           >
             <div className="relative aspect-[4/3] w-full overflow-hidden">
@@ -137,5 +139,5 @@ function CollectionsPage() {
         ))}
       </div>
     </div>
-  )
+  );
 }

@@ -1,12 +1,12 @@
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router';
 
-import { ArrowRight, BookOpen, Layers3, PlugZap, FileEdit } from 'lucide-react'
+import { ArrowRight, BookOpen, Layers3, PlugZap, FileEdit } from 'lucide-react';
 
-import { DocsShell } from '@/components/docs/docs-shell'
-import { buttonVariants } from '@/components/ui/button'
+import { DocsShell } from '@/components/docs/docs-shell';
+import { buttonVariants } from '@/components/ui/button';
 
-import { getAllDocsMeta, getDocsTree } from '@/lib/docs'
-import { cn } from '@/lib/utils'
+import { getAllDocsMeta, getDocsTree } from '@/lib/docs';
+import { cn } from '@/lib/utils';
 
 const featureHighlights = [
   {
@@ -18,7 +18,8 @@ const featureHighlights = [
   },
   {
     title: 'API',
-    description: "Build applications based on Mue's open REST API, the same one the extension uses.",
+    description:
+      "Build applications based on Mue's open REST API, the same one the extension uses.",
     icon: PlugZap,
     href: '/docs/api/introduction',
   },
@@ -28,12 +29,12 @@ const featureHighlights = [
     icon: BookOpen,
     href: '/docs/translations',
   },
-]
+];
 
 export const Route = createFileRoute('/docs/')({
   loader: async () => {
-    const [tree, docsMeta] = await Promise.all([getDocsTree(), getAllDocsMeta()])
-    return { tree, docsMeta }
+    const [tree, docsMeta] = await Promise.all([getDocsTree(), getAllDocsMeta()]);
+    return { tree, docsMeta };
   },
   head: () => ({
     meta: [
@@ -52,10 +53,10 @@ export const Route = createFileRoute('/docs/')({
     ],
   }),
   component: DocsIndexPage,
-})
+});
 
 function DocsIndexPage() {
-  const { tree } = Route.useLoaderData()
+  const { tree } = Route.useLoaderData();
 
   return (
     <DocsShell
@@ -195,5 +196,5 @@ function DocsIndexPage() {
         </div>
       </section>
     </DocsShell>
-  )
+  );
 }

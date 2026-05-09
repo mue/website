@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
 
-import { Link } from '@tanstack/react-router'
+import { Link } from '@tanstack/react-router';
 
-import { FaXTwitter, FaGithub } from 'react-icons/fa6'
-import Logo from './logo'
+import { FaXTwitter, FaGithub } from 'react-icons/fa6';
+import Logo from './logo';
 
-import { ThemeToggle } from './theme-toggle'
+import { ThemeToggle } from './theme-toggle';
 
 const footerLinks = {
   Product: [
@@ -33,36 +33,36 @@ const footerLinks = {
     { name: 'License', href: '/license' },
     { name: 'DMCA', href: '/dmca' },
   ],
-}
+};
 
-type SystemStatus = 'operational' | 'degraded' | 'loading'
+type SystemStatus = 'operational' | 'degraded' | 'loading';
 
 export default function Footer() {
-  const [systemStatus, setSystemStatus] = useState<SystemStatus>('loading')
+  const [systemStatus, setSystemStatus] = useState<SystemStatus>('loading');
 
   useEffect(() => {
     const fetchStatus = async () => {
       try {
         const response = await fetch(
           'https://raw.githubusercontent.com/mue/status/master/history/summary.json',
-        )
-        const data = await response.json()
-        const allUp = data.every((service: { status: string }) => service.status === 'up')
-        setSystemStatus(allUp ? 'operational' : 'degraded')
+        );
+        const data = await response.json();
+        const allUp = data.every((service: { status: string }) => service.status === 'up');
+        setSystemStatus(allUp ? 'operational' : 'degraded');
       } catch {
-        setSystemStatus('degraded')
+        setSystemStatus('degraded');
       }
-    }
-    fetchStatus()
-  }, [])
+    };
+    fetchStatus();
+  }, []);
 
   const statusConfig = {
     operational: { text: 'All systems are operational', dotColor: 'bg-emerald-500' },
     degraded: { text: 'Degraded performance', dotColor: 'bg-yellow-500' },
     loading: { text: 'Checking status...', dotColor: 'bg-gray-500' },
-  }
+  };
 
-  const status = statusConfig[systemStatus]
+  const status = statusConfig[systemStatus];
 
   return (
     <footer className="border-t border-border bg-background/80 backdrop-blur">
@@ -160,5 +160,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

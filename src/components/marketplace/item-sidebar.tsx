@@ -1,28 +1,28 @@
-import { Link } from '@tanstack/react-router'
-import { Calendar, User, Globe, Package } from 'lucide-react'
+import { Link } from '@tanstack/react-router';
+import { Calendar, User, Globe, Package } from 'lucide-react';
 
-import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
-import { slugifyAuthor, type MarketplaceItemDetail } from '@/lib/marketplace'
+import { Badge } from '@/components/ui/badge';
+import { Separator } from '@/components/ui/separator';
+import { slugifyAuthor, type MarketplaceItemDetail } from '@/lib/marketplace';
 
-import { ItemActions } from './item-actions'
-import { ViewTracker } from './view-tracker'
+import { ItemActions } from './item-actions';
+import { ViewTracker } from './view-tracker';
 
 type ItemSidebarProps = {
-  data: MarketplaceItemDetail
-  id: string
-  category: string
-  isEmbed: boolean
-  isPreview: boolean
-  formattedCreatedAt: string | null
-  formattedUpdatedAt: string | null
-}
+  data: MarketplaceItemDetail;
+  id: string;
+  category: string;
+  isEmbed: boolean;
+  isPreview: boolean;
+  formattedCreatedAt: string | null;
+  formattedUpdatedAt: string | null;
+};
 
 function embedUrl(path: string, isEmbed: boolean, isPreview: boolean, hasExistingParams = false) {
-  if (!isEmbed) return path
-  const sep = hasExistingParams ? '&' : '?'
-  const qs = isPreview ? 'embed=true&preview=true' : 'embed=true'
-  return `${path}${sep}${qs}`
+  if (!isEmbed) return path;
+  const sep = hasExistingParams ? '&' : '?';
+  const qs = isPreview ? 'embed=true&preview=true' : 'embed=true';
+  return `${path}${sep}${qs}`;
 }
 
 export function ItemSidebar({
@@ -56,7 +56,9 @@ export function ItemSidebar({
             <div className="space-y-2">
               <h1 className="text-2xl font-bold tracking-tight">{data.display_name}</h1>
               {!isEmbed && (
-                <Link to={embedUrl(`/marketplace?type=${data.type}`, isEmbed, isPreview, true) as any}>
+                <Link
+                  to={embedUrl(`/marketplace?type=${data.type}`, isEmbed, isPreview, true) as any}
+                >
                   <Badge
                     variant="secondary"
                     className="cursor-pointer text-xs capitalize transition hover:bg-primary/10 hover:text-primary"
@@ -75,7 +77,13 @@ export function ItemSidebar({
               <div className="flex items-center gap-3 text-muted-foreground">
                 <User className="h-4 w-4" />
                 <Link
-                  to={embedUrl(`/marketplace/author/${slugifyAuthor(data.author)}`, isEmbed, isPreview) as any}
+                  to={
+                    embedUrl(
+                      `/marketplace/author/${slugifyAuthor(data.author)}`,
+                      isEmbed,
+                      isPreview,
+                    ) as any
+                  }
                   className="hover:text-primary hover:underline transition"
                 >
                   {data.author}
@@ -153,7 +161,13 @@ export function ItemSidebar({
               {data.in_collections.map((collection) => (
                 <Link
                   key={collection.name}
-                  to={embedUrl(`/marketplace/collection/${encodeURIComponent(collection.name)}`, isEmbed, isPreview) as any}
+                  to={
+                    embedUrl(
+                      `/marketplace/collection/${encodeURIComponent(collection.name)}`,
+                      isEmbed,
+                      isPreview,
+                    ) as any
+                  }
                 >
                   <Badge
                     variant="outline"
@@ -168,5 +182,5 @@ export function ItemSidebar({
         )}
       </div>
     </aside>
-  )
+  );
 }

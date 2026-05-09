@@ -1,138 +1,138 @@
-import { createFileRoute, Link, notFound } from '@tanstack/react-router'
+import { createFileRoute, Link, notFound } from '@tanstack/react-router';
 
-import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 
-import { DocsShell } from '@/components/docs/docs-shell'
-import { CodeBlockCopy } from '@/components/docs/code-block-copy'
-import { DocsSearch } from '@/components/docs/search'
-import { BlogProse } from '@/components/blog/blog-prose'
-import { buttonVariants } from '@/components/ui/button'
+import { DocsShell } from '@/components/docs/docs-shell';
+import { CodeBlockCopy } from '@/components/docs/code-block-copy';
+import { DocsSearch } from '@/components/docs/search';
+import { BlogProse } from '@/components/blog/blog-prose';
+import { buttonVariants } from '@/components/ui/button';
 
-import type { DocTreeNode } from '@/lib/docs'
-import { getAllDocsMeta, getDocBySlug, getDocsTree } from '@/lib/docs'
-import { cn } from '@/lib/utils'
-import { SITE_URL } from '@/lib/constants/site'
+import type { DocTreeNode } from '@/lib/docs';
+import { getAllDocsMeta, getDocBySlug, getDocsTree } from '@/lib/docs';
+import { cn } from '@/lib/utils';
+import { SITE_URL } from '@/lib/constants/site';
 
 export const Route = createFileRoute('/docs/$')({
   loader: async ({ params }) => {
-    const slug = params._splat ? params._splat.split('/').filter(Boolean) : []
+    const slug = params._splat ? params._splat.split('/').filter(Boolean) : [];
     const [doc, tree, docsMeta] = await Promise.all([
       getDocBySlug(slug),
       getDocsTree(),
       getAllDocsMeta(),
-    ])
-    return { doc, tree, docsMeta, slug }
+    ]);
+    return { doc, tree, docsMeta, slug };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return {}
-    const { doc, tree, slug } = loaderData
+    if (!loaderData) return {};
+    const { doc, tree, slug } = loaderData;
 
     if (!doc) {
-      const section = findNode(tree, slug)
+      const section = findNode(tree, slug);
       if (section) {
-        const topicCount = section.children?.length ?? 0
+        const topicCount = section.children?.length ?? 0;
         const description =
           topicCount > 0
             ? `Explore ${topicCount} ${topicCount === 1 ? 'topic' : 'topics'} in ${section.title}.`
-            : `Learn about ${section.title} in the Mue documentation.`
+            : `Learn about ${section.title} in the Mue documentation.`;
         return {
           meta: [
             { title: `${section.title} | Mue Docs` },
             { name: 'description', content: description },
           ],
-        }
+        };
       }
-      return { meta: [{ title: 'Documentation | Mue' }] }
+      return { meta: [{ title: 'Documentation | Mue' }] };
     }
 
     const description =
       doc.frontmatter.description ??
-      `Learn about ${doc.frontmatter.title} in the Mue documentation.`
+      `Learn about ${doc.frontmatter.title} in the Mue documentation.`;
     return {
       meta: [
         { title: `${doc.frontmatter.title} | Mue Docs` },
         { name: 'description', content: description },
       ],
       links: [{ rel: 'canonical', href: `${SITE_URL}/docs/${slug.join('/')}` }],
-    }
+    };
   },
   component: DocsArticlePage,
-})
+});
 
 function flattenTree(tree: DocTreeNode[]): DocTreeNode[] {
-  const nodes: DocTreeNode[] = []
+  const nodes: DocTreeNode[] = [];
   const walk = (items: DocTreeNode[]) => {
     items.forEach((item) => {
-      nodes.push(item)
-      if (item.children) walk(item.children)
-    })
-  }
-  walk(tree)
-  return nodes
+      nodes.push(item);
+      if (item.children) walk(item.children);
+    });
+  };
+  walk(tree);
+  return nodes;
 }
 
 function findNode(tree: DocTreeNode[], slug: string[]) {
-  if (slug.length === 0) return null
-  const flattened = flattenTree(tree)
-  return flattened.find((node) => node.slug.join('/') === slug.join('/')) ?? null
+  if (slug.length === 0) return null;
+  const flattened = flattenTree(tree);
+  return flattened.find((node) => node.slug.join('/') === slug.join('/')) ?? null;
 }
 
 function findTitle(tree: DocTreeNode[], slug: string[]) {
-  return findNode(tree, slug)?.title
+  return findNode(tree, slug)?.title;
 }
 
 function computeReadingTime(markdown: string) {
-  const words = markdown.split(/\s+/).filter(Boolean).length
-  const minutes = Math.max(1, Math.round(words / 180))
-  return `${minutes} min read`
+  const words = markdown.split(/\s+/).filter(Boolean).length;
+  const minutes = Math.max(1, Math.round(words / 180));
+  return `${minutes} min read`;
 }
 
 function DocsArticlePage() {
-  const { doc, tree, docsMeta, slug } = Route.useLoaderData()
+  const { doc, tree, docsMeta, slug } = Route.useLoaderData();
 
-  const normalizedSlug = slug.filter(Boolean)
-  const section = findNode(tree, normalizedSlug)
+  const normalizedSlug = slug.filter(Boolean);
+  const section = findNode(tree, normalizedSlug);
 
   if (!doc && section) {
-    return <DocsSectionContent section={section} tree={tree} docsMeta={docsMeta} />
+    return <DocsSectionContent section={section} tree={tree} docsMeta={docsMeta} />;
   }
 
   if (!doc) {
-    throw notFound()
+    throw notFound();
   }
 
-  return <DocsArticleContent doc={doc} tree={tree} docsMeta={docsMeta} />
+  return <DocsArticleContent doc={doc} tree={tree} docsMeta={docsMeta} />;
 }
 
-type LoadedDoc = NonNullable<Awaited<ReturnType<typeof getDocBySlug>>>
+type LoadedDoc = NonNullable<Awaited<ReturnType<typeof getDocBySlug>>>;
 
 type DocsArticleContentProps = {
-  doc: LoadedDoc
-  tree: DocTreeNode[]
-  docsMeta: Awaited<ReturnType<typeof getAllDocsMeta>>
-}
+  doc: LoadedDoc;
+  tree: DocTreeNode[];
+  docsMeta: Awaited<ReturnType<typeof getAllDocsMeta>>;
+};
 
 function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
   const sortedMeta = [...docsMeta].sort((a, b) => {
-    if (a.order !== b.order) return a.order - b.order
-    return a.slug.join('/').localeCompare(b.slug.join('/'))
-  })
+    if (a.order !== b.order) return a.order - b.order;
+    return a.slug.join('/').localeCompare(b.slug.join('/'));
+  });
 
-  const currentIndex = sortedMeta.findIndex((item) => item.slug.join('/') === doc.slug.join('/'))
-  const previous = currentIndex > 0 ? sortedMeta[currentIndex - 1] : null
-  const next = currentIndex < sortedMeta.length - 1 ? sortedMeta[currentIndex + 1] : null
+  const currentIndex = sortedMeta.findIndex((item) => item.slug.join('/') === doc.slug.join('/'));
+  const previous = currentIndex > 0 ? sortedMeta[currentIndex - 1] : null;
+  const next = currentIndex < sortedMeta.length - 1 ? sortedMeta[currentIndex + 1] : null;
 
   const breadcrumb = [
     { label: 'Documentation', href: '/docs' },
     ...doc.slug.slice(0, -1).map((_, index) => {
-      const segments = doc.slug.slice(0, index + 1)
+      const segments = doc.slug.slice(0, index + 1);
       return {
         label: findTitle(tree, segments) ?? segments[index],
         href: `/docs/${segments.join('/')}`,
-      }
+      };
     }),
     { label: doc.frontmatter.title },
-  ]
+  ];
 
   return (
     <DocsShell
@@ -210,31 +210,31 @@ function DocsArticleContent({ doc, tree, docsMeta }: DocsArticleContentProps) {
         </div>
       </div>
     </DocsShell>
-  )
+  );
 }
 
 type DocsSectionContentProps = {
-  section: DocTreeNode
-  tree: DocTreeNode[]
-  docsMeta: Awaited<ReturnType<typeof getAllDocsMeta>>
-}
+  section: DocTreeNode;
+  tree: DocTreeNode[];
+  docsMeta: Awaited<ReturnType<typeof getAllDocsMeta>>;
+};
 
 function DocsSectionContent({ section, tree, docsMeta }: DocsSectionContentProps) {
   const breadcrumb = [
     { label: 'Documentation', href: '/docs' },
     ...section.slug.slice(0, -1).map((_, index) => {
-      const segments = section.slug.slice(0, index + 1)
+      const segments = section.slug.slice(0, index + 1);
       return {
         label: findTitle(tree, segments) ?? segments[index],
         href: `/docs/${segments.join('/')}`,
-      }
+      };
     }),
     { label: section.title },
-  ]
+  ];
 
-  const children = section.children ?? []
+  const children = section.children ?? [];
   const getMetaDescription = (slug: string[]) =>
-    docsMeta.find((item) => item.slug.join('/') === slug.join('/'))?.description
+    docsMeta.find((item) => item.slug.join('/') === slug.join('/'))?.description;
 
   return (
     <DocsShell
@@ -272,8 +272,8 @@ function DocsSectionContent({ section, tree, docsMeta }: DocsSectionContentProps
         ) : (
           <div className="grid gap-6 md:grid-cols-2">
             {children.map((child) => {
-              const description = getMetaDescription(child.slug)
-              const subtopics = child.children ?? []
+              const description = getMetaDescription(child.slug);
+              const subtopics = child.children ?? [];
               return (
                 <Link
                   key={child.slug.join('/')}
@@ -312,11 +312,11 @@ function DocsSectionContent({ section, tree, docsMeta }: DocsSectionContentProps
                     <ArrowRight className="size-4" />
                   </div>
                 </Link>
-              )
+              );
             })}
           </div>
         )}
       </section>
     </DocsShell>
-  )
+  );
 }

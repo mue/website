@@ -1,7 +1,7 @@
-import { createRouter as createTanStackRouter } from '@tanstack/react-router'
-import { routeTree } from './routeTree.gen'
+import { createRouter as createTanStackRouter } from '@tanstack/react-router';
+import { routeTree } from './routeTree.gen';
 
-import { ErrorPage } from '@/components/error-page'
+import { ErrorPage } from '@/components/error-page';
 
 export function getRouter() {
   const router = createTanStackRouter({
@@ -9,14 +9,14 @@ export function getRouter() {
     scrollRestoration: true,
     defaultPreload: 'intent',
     defaultPreloadStaleTime: 0,
-    defaultErrorComponent: ({ error, reset }) => <ErrorPage error={error} reset={reset} />, 
-  })
+    defaultErrorComponent: ({ error, reset }) => <ErrorPage error={error} reset={reset} />,
+  });
 
-  return router
+  return router;
 }
 
 declare module '@tanstack/react-router' {
   interface Register {
-    router: ReturnType<typeof getRouter>
+    router: ReturnType<typeof getRouter>;
   }
 }

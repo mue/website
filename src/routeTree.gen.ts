@@ -8,261 +8,260 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as UninstallRouteImport } from './routes/uninstall'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
-import { Route as ShowcaseRouteImport } from './routes/showcase'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as PhotographyRouteImport } from './routes/photography'
-import { Route as LicenseRouteImport } from './routes/license'
-import { Route as DownloadRouteImport } from './routes/download'
-import { Route as DocsRouteImport } from './routes/docs'
-import { Route as DmcaRouteImport } from './routes/dmca'
-import { Route as DemoRouteImport } from './routes/demo'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as BrandingRouteImport } from './routes/branding'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as MarketplaceIndexRouteImport } from './routes/marketplace/index'
-import { Route as DocsIndexRouteImport } from './routes/docs/index'
-import { Route as BlogIndexRouteImport } from './routes/blog/index'
-import { Route as MarketplaceCreateRouteImport } from './routes/marketplace/create'
-import { Route as MarketplaceCollectionsRouteImport } from './routes/marketplace/collections'
-import { Route as MarketplaceAuthorsRouteImport } from './routes/marketplace/authors'
-import { Route as DocsSplatRouteImport } from './routes/docs/$'
-import { Route as BlogChangelogRouteImport } from './routes/blog/changelog'
-import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
-import { Route as MarketplaceCollectionCollectionRouteImport } from './routes/marketplace/collection/$collection'
-import { Route as MarketplaceAuthorAuthorRouteImport } from './routes/marketplace/author/$author'
-import { Route as MarketplaceCategoryIdRouteImport } from './routes/marketplace/$category/$id'
-import { Route as BlogTagTagRouteImport } from './routes/blog/tag/$tag'
-import { Route as BlogPagePageRouteImport } from './routes/blog/page/$page'
+import { Route as rootRouteImport } from './routes/__root';
+import { Route as UninstallRouteImport } from './routes/uninstall';
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml';
+import { Route as ShowcaseRouteImport } from './routes/showcase';
+import { Route as PrivacyRouteImport } from './routes/privacy';
+import { Route as PhotographyRouteImport } from './routes/photography';
+import { Route as LicenseRouteImport } from './routes/license';
+import { Route as DownloadRouteImport } from './routes/download';
+import { Route as DocsRouteImport } from './routes/docs';
+import { Route as DmcaRouteImport } from './routes/dmca';
+import { Route as DemoRouteImport } from './routes/demo';
+import { Route as ContactRouteImport } from './routes/contact';
+import { Route as BrandingRouteImport } from './routes/branding';
+import { Route as IndexRouteImport } from './routes/index';
+import { Route as MarketplaceIndexRouteImport } from './routes/marketplace/index';
+import { Route as DocsIndexRouteImport } from './routes/docs/index';
+import { Route as BlogIndexRouteImport } from './routes/blog/index';
+import { Route as MarketplaceCreateRouteImport } from './routes/marketplace/create';
+import { Route as MarketplaceCollectionsRouteImport } from './routes/marketplace/collections';
+import { Route as MarketplaceAuthorsRouteImport } from './routes/marketplace/authors';
+import { Route as DocsSplatRouteImport } from './routes/docs/$';
+import { Route as BlogChangelogRouteImport } from './routes/blog/changelog';
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug';
+import { Route as MarketplaceCollectionCollectionRouteImport } from './routes/marketplace/collection/$collection';
+import { Route as MarketplaceAuthorAuthorRouteImport } from './routes/marketplace/author/$author';
+import { Route as MarketplaceCategoryIdRouteImport } from './routes/marketplace/$category/$id';
+import { Route as BlogTagTagRouteImport } from './routes/blog/tag/$tag';
+import { Route as BlogPagePageRouteImport } from './routes/blog/page/$page';
 
 const UninstallRoute = UninstallRouteImport.update({
   id: '/uninstall',
   path: '/uninstall',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ShowcaseRoute = ShowcaseRouteImport.update({
   id: '/showcase',
   path: '/showcase',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const PhotographyRoute = PhotographyRouteImport.update({
   id: '/photography',
   path: '/photography',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const LicenseRoute = LicenseRouteImport.update({
   id: '/license',
   path: '/license',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const DownloadRoute = DownloadRouteImport.update({
   id: '/download',
   path: '/download',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const DocsRoute = DocsRouteImport.update({
   id: '/docs',
   path: '/docs',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const DmcaRoute = DmcaRouteImport.update({
   id: '/dmca',
   path: '/dmca',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const DemoRoute = DemoRouteImport.update({
   id: '/demo',
   path: '/demo',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const BrandingRoute = BrandingRouteImport.update({
   id: '/branding',
   path: '/branding',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const MarketplaceIndexRoute = MarketplaceIndexRouteImport.update({
   id: '/marketplace/',
   path: '/marketplace/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const DocsIndexRoute = DocsIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => DocsRoute,
-} as any)
+} as any);
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const MarketplaceCreateRoute = MarketplaceCreateRouteImport.update({
   id: '/marketplace/create',
   path: '/marketplace/create',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const MarketplaceCollectionsRoute = MarketplaceCollectionsRouteImport.update({
   id: '/marketplace/collections',
   path: '/marketplace/collections',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const MarketplaceAuthorsRoute = MarketplaceAuthorsRouteImport.update({
   id: '/marketplace/authors',
   path: '/marketplace/authors',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const DocsSplatRoute = DocsSplatRouteImport.update({
   id: '/$',
   path: '/$',
   getParentRoute: () => DocsRoute,
-} as any)
+} as any);
 const BlogChangelogRoute = BlogChangelogRouteImport.update({
   id: '/blog/changelog',
   path: '/blog/changelog',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog/$slug',
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
-} as any)
-const MarketplaceCollectionCollectionRoute =
-  MarketplaceCollectionCollectionRouteImport.update({
-    id: '/marketplace/collection/$collection',
-    path: '/marketplace/collection/$collection',
-    getParentRoute: () => rootRouteImport,
-  } as any)
+} as any);
+const MarketplaceCollectionCollectionRoute = MarketplaceCollectionCollectionRouteImport.update({
+  id: '/marketplace/collection/$collection',
+  path: '/marketplace/collection/$collection',
+  getParentRoute: () => rootRouteImport,
+} as any);
 const MarketplaceAuthorAuthorRoute = MarketplaceAuthorAuthorRouteImport.update({
   id: '/marketplace/author/$author',
   path: '/marketplace/author/$author',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const MarketplaceCategoryIdRoute = MarketplaceCategoryIdRouteImport.update({
   id: '/marketplace/$category/$id',
   path: '/marketplace/$category/$id',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const BlogTagTagRoute = BlogTagTagRouteImport.update({
   id: '/blog/tag/$tag',
   path: '/blog/tag/$tag',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 const BlogPagePageRoute = BlogPagePageRouteImport.update({
   id: '/blog/page/$page',
   path: '/blog/page/$page',
   getParentRoute: () => rootRouteImport,
-} as any)
+} as any);
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/branding': typeof BrandingRoute
-  '/contact': typeof ContactRoute
-  '/demo': typeof DemoRoute
-  '/dmca': typeof DmcaRoute
-  '/docs': typeof DocsRouteWithChildren
-  '/download': typeof DownloadRoute
-  '/license': typeof LicenseRoute
-  '/photography': typeof PhotographyRoute
-  '/privacy': typeof PrivacyRoute
-  '/showcase': typeof ShowcaseRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/uninstall': typeof UninstallRoute
-  '/blog/$slug': typeof BlogSlugRoute
-  '/blog/changelog': typeof BlogChangelogRoute
-  '/docs/$': typeof DocsSplatRoute
-  '/marketplace/authors': typeof MarketplaceAuthorsRoute
-  '/marketplace/collections': typeof MarketplaceCollectionsRoute
-  '/marketplace/create': typeof MarketplaceCreateRoute
-  '/blog/': typeof BlogIndexRoute
-  '/docs/': typeof DocsIndexRoute
-  '/marketplace/': typeof MarketplaceIndexRoute
-  '/blog/page/$page': typeof BlogPagePageRoute
-  '/blog/tag/$tag': typeof BlogTagTagRoute
-  '/marketplace/$category/$id': typeof MarketplaceCategoryIdRoute
-  '/marketplace/author/$author': typeof MarketplaceAuthorAuthorRoute
-  '/marketplace/collection/$collection': typeof MarketplaceCollectionCollectionRoute
+  '/': typeof IndexRoute;
+  '/branding': typeof BrandingRoute;
+  '/contact': typeof ContactRoute;
+  '/demo': typeof DemoRoute;
+  '/dmca': typeof DmcaRoute;
+  '/docs': typeof DocsRouteWithChildren;
+  '/download': typeof DownloadRoute;
+  '/license': typeof LicenseRoute;
+  '/photography': typeof PhotographyRoute;
+  '/privacy': typeof PrivacyRoute;
+  '/showcase': typeof ShowcaseRoute;
+  '/sitemap.xml': typeof SitemapDotxmlRoute;
+  '/uninstall': typeof UninstallRoute;
+  '/blog/$slug': typeof BlogSlugRoute;
+  '/blog/changelog': typeof BlogChangelogRoute;
+  '/docs/$': typeof DocsSplatRoute;
+  '/marketplace/authors': typeof MarketplaceAuthorsRoute;
+  '/marketplace/collections': typeof MarketplaceCollectionsRoute;
+  '/marketplace/create': typeof MarketplaceCreateRoute;
+  '/blog/': typeof BlogIndexRoute;
+  '/docs/': typeof DocsIndexRoute;
+  '/marketplace/': typeof MarketplaceIndexRoute;
+  '/blog/page/$page': typeof BlogPagePageRoute;
+  '/blog/tag/$tag': typeof BlogTagTagRoute;
+  '/marketplace/$category/$id': typeof MarketplaceCategoryIdRoute;
+  '/marketplace/author/$author': typeof MarketplaceAuthorAuthorRoute;
+  '/marketplace/collection/$collection': typeof MarketplaceCollectionCollectionRoute;
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/branding': typeof BrandingRoute
-  '/contact': typeof ContactRoute
-  '/demo': typeof DemoRoute
-  '/dmca': typeof DmcaRoute
-  '/download': typeof DownloadRoute
-  '/license': typeof LicenseRoute
-  '/photography': typeof PhotographyRoute
-  '/privacy': typeof PrivacyRoute
-  '/showcase': typeof ShowcaseRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/uninstall': typeof UninstallRoute
-  '/blog/$slug': typeof BlogSlugRoute
-  '/blog/changelog': typeof BlogChangelogRoute
-  '/docs/$': typeof DocsSplatRoute
-  '/marketplace/authors': typeof MarketplaceAuthorsRoute
-  '/marketplace/collections': typeof MarketplaceCollectionsRoute
-  '/marketplace/create': typeof MarketplaceCreateRoute
-  '/blog': typeof BlogIndexRoute
-  '/docs': typeof DocsIndexRoute
-  '/marketplace': typeof MarketplaceIndexRoute
-  '/blog/page/$page': typeof BlogPagePageRoute
-  '/blog/tag/$tag': typeof BlogTagTagRoute
-  '/marketplace/$category/$id': typeof MarketplaceCategoryIdRoute
-  '/marketplace/author/$author': typeof MarketplaceAuthorAuthorRoute
-  '/marketplace/collection/$collection': typeof MarketplaceCollectionCollectionRoute
+  '/': typeof IndexRoute;
+  '/branding': typeof BrandingRoute;
+  '/contact': typeof ContactRoute;
+  '/demo': typeof DemoRoute;
+  '/dmca': typeof DmcaRoute;
+  '/download': typeof DownloadRoute;
+  '/license': typeof LicenseRoute;
+  '/photography': typeof PhotographyRoute;
+  '/privacy': typeof PrivacyRoute;
+  '/showcase': typeof ShowcaseRoute;
+  '/sitemap.xml': typeof SitemapDotxmlRoute;
+  '/uninstall': typeof UninstallRoute;
+  '/blog/$slug': typeof BlogSlugRoute;
+  '/blog/changelog': typeof BlogChangelogRoute;
+  '/docs/$': typeof DocsSplatRoute;
+  '/marketplace/authors': typeof MarketplaceAuthorsRoute;
+  '/marketplace/collections': typeof MarketplaceCollectionsRoute;
+  '/marketplace/create': typeof MarketplaceCreateRoute;
+  '/blog': typeof BlogIndexRoute;
+  '/docs': typeof DocsIndexRoute;
+  '/marketplace': typeof MarketplaceIndexRoute;
+  '/blog/page/$page': typeof BlogPagePageRoute;
+  '/blog/tag/$tag': typeof BlogTagTagRoute;
+  '/marketplace/$category/$id': typeof MarketplaceCategoryIdRoute;
+  '/marketplace/author/$author': typeof MarketplaceAuthorAuthorRoute;
+  '/marketplace/collection/$collection': typeof MarketplaceCollectionCollectionRoute;
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/branding': typeof BrandingRoute
-  '/contact': typeof ContactRoute
-  '/demo': typeof DemoRoute
-  '/dmca': typeof DmcaRoute
-  '/docs': typeof DocsRouteWithChildren
-  '/download': typeof DownloadRoute
-  '/license': typeof LicenseRoute
-  '/photography': typeof PhotographyRoute
-  '/privacy': typeof PrivacyRoute
-  '/showcase': typeof ShowcaseRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
-  '/uninstall': typeof UninstallRoute
-  '/blog/$slug': typeof BlogSlugRoute
-  '/blog/changelog': typeof BlogChangelogRoute
-  '/docs/$': typeof DocsSplatRoute
-  '/marketplace/authors': typeof MarketplaceAuthorsRoute
-  '/marketplace/collections': typeof MarketplaceCollectionsRoute
-  '/marketplace/create': typeof MarketplaceCreateRoute
-  '/blog/': typeof BlogIndexRoute
-  '/docs/': typeof DocsIndexRoute
-  '/marketplace/': typeof MarketplaceIndexRoute
-  '/blog/page/$page': typeof BlogPagePageRoute
-  '/blog/tag/$tag': typeof BlogTagTagRoute
-  '/marketplace/$category/$id': typeof MarketplaceCategoryIdRoute
-  '/marketplace/author/$author': typeof MarketplaceAuthorAuthorRoute
-  '/marketplace/collection/$collection': typeof MarketplaceCollectionCollectionRoute
+  __root__: typeof rootRouteImport;
+  '/': typeof IndexRoute;
+  '/branding': typeof BrandingRoute;
+  '/contact': typeof ContactRoute;
+  '/demo': typeof DemoRoute;
+  '/dmca': typeof DmcaRoute;
+  '/docs': typeof DocsRouteWithChildren;
+  '/download': typeof DownloadRoute;
+  '/license': typeof LicenseRoute;
+  '/photography': typeof PhotographyRoute;
+  '/privacy': typeof PrivacyRoute;
+  '/showcase': typeof ShowcaseRoute;
+  '/sitemap.xml': typeof SitemapDotxmlRoute;
+  '/uninstall': typeof UninstallRoute;
+  '/blog/$slug': typeof BlogSlugRoute;
+  '/blog/changelog': typeof BlogChangelogRoute;
+  '/docs/$': typeof DocsSplatRoute;
+  '/marketplace/authors': typeof MarketplaceAuthorsRoute;
+  '/marketplace/collections': typeof MarketplaceCollectionsRoute;
+  '/marketplace/create': typeof MarketplaceCreateRoute;
+  '/blog/': typeof BlogIndexRoute;
+  '/docs/': typeof DocsIndexRoute;
+  '/marketplace/': typeof MarketplaceIndexRoute;
+  '/blog/page/$page': typeof BlogPagePageRoute;
+  '/blog/tag/$tag': typeof BlogTagTagRoute;
+  '/marketplace/$category/$id': typeof MarketplaceCategoryIdRoute;
+  '/marketplace/author/$author': typeof MarketplaceAuthorAuthorRoute;
+  '/marketplace/collection/$collection': typeof MarketplaceCollectionCollectionRoute;
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath
+  fileRoutesByFullPath: FileRoutesByFullPath;
   fullPaths:
     | '/'
     | '/branding'
@@ -290,8 +289,8 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/marketplace/$category/$id'
     | '/marketplace/author/$author'
-    | '/marketplace/collection/$collection'
-  fileRoutesByTo: FileRoutesByTo
+    | '/marketplace/collection/$collection';
+  fileRoutesByTo: FileRoutesByTo;
   to:
     | '/'
     | '/branding'
@@ -318,7 +317,7 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/marketplace/$category/$id'
     | '/marketplace/author/$author'
-    | '/marketplace/collection/$collection'
+    | '/marketplace/collection/$collection';
   id:
     | '__root__'
     | '/'
@@ -347,242 +346,242 @@ export interface FileRouteTypes {
     | '/blog/tag/$tag'
     | '/marketplace/$category/$id'
     | '/marketplace/author/$author'
-    | '/marketplace/collection/$collection'
-  fileRoutesById: FileRoutesById
+    | '/marketplace/collection/$collection';
+  fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  BrandingRoute: typeof BrandingRoute
-  ContactRoute: typeof ContactRoute
-  DemoRoute: typeof DemoRoute
-  DmcaRoute: typeof DmcaRoute
-  DocsRoute: typeof DocsRouteWithChildren
-  DownloadRoute: typeof DownloadRoute
-  LicenseRoute: typeof LicenseRoute
-  PhotographyRoute: typeof PhotographyRoute
-  PrivacyRoute: typeof PrivacyRoute
-  ShowcaseRoute: typeof ShowcaseRoute
-  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
-  UninstallRoute: typeof UninstallRoute
-  BlogSlugRoute: typeof BlogSlugRoute
-  BlogChangelogRoute: typeof BlogChangelogRoute
-  MarketplaceAuthorsRoute: typeof MarketplaceAuthorsRoute
-  MarketplaceCollectionsRoute: typeof MarketplaceCollectionsRoute
-  MarketplaceCreateRoute: typeof MarketplaceCreateRoute
-  BlogIndexRoute: typeof BlogIndexRoute
-  MarketplaceIndexRoute: typeof MarketplaceIndexRoute
-  BlogPagePageRoute: typeof BlogPagePageRoute
-  BlogTagTagRoute: typeof BlogTagTagRoute
-  MarketplaceCategoryIdRoute: typeof MarketplaceCategoryIdRoute
-  MarketplaceAuthorAuthorRoute: typeof MarketplaceAuthorAuthorRoute
-  MarketplaceCollectionCollectionRoute: typeof MarketplaceCollectionCollectionRoute
+  IndexRoute: typeof IndexRoute;
+  BrandingRoute: typeof BrandingRoute;
+  ContactRoute: typeof ContactRoute;
+  DemoRoute: typeof DemoRoute;
+  DmcaRoute: typeof DmcaRoute;
+  DocsRoute: typeof DocsRouteWithChildren;
+  DownloadRoute: typeof DownloadRoute;
+  LicenseRoute: typeof LicenseRoute;
+  PhotographyRoute: typeof PhotographyRoute;
+  PrivacyRoute: typeof PrivacyRoute;
+  ShowcaseRoute: typeof ShowcaseRoute;
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute;
+  UninstallRoute: typeof UninstallRoute;
+  BlogSlugRoute: typeof BlogSlugRoute;
+  BlogChangelogRoute: typeof BlogChangelogRoute;
+  MarketplaceAuthorsRoute: typeof MarketplaceAuthorsRoute;
+  MarketplaceCollectionsRoute: typeof MarketplaceCollectionsRoute;
+  MarketplaceCreateRoute: typeof MarketplaceCreateRoute;
+  BlogIndexRoute: typeof BlogIndexRoute;
+  MarketplaceIndexRoute: typeof MarketplaceIndexRoute;
+  BlogPagePageRoute: typeof BlogPagePageRoute;
+  BlogTagTagRoute: typeof BlogTagTagRoute;
+  MarketplaceCategoryIdRoute: typeof MarketplaceCategoryIdRoute;
+  MarketplaceAuthorAuthorRoute: typeof MarketplaceAuthorAuthorRoute;
+  MarketplaceCollectionCollectionRoute: typeof MarketplaceCollectionCollectionRoute;
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/uninstall': {
-      id: '/uninstall'
-      path: '/uninstall'
-      fullPath: '/uninstall'
-      preLoaderRoute: typeof UninstallRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/uninstall';
+      path: '/uninstall';
+      fullPath: '/uninstall';
+      preLoaderRoute: typeof UninstallRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/sitemap.xml';
+      path: '/sitemap.xml';
+      fullPath: '/sitemap.xml';
+      preLoaderRoute: typeof SitemapDotxmlRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/showcase': {
-      id: '/showcase'
-      path: '/showcase'
-      fullPath: '/showcase'
-      preLoaderRoute: typeof ShowcaseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/showcase';
+      path: '/showcase';
+      fullPath: '/showcase';
+      preLoaderRoute: typeof ShowcaseRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/privacy';
+      path: '/privacy';
+      fullPath: '/privacy';
+      preLoaderRoute: typeof PrivacyRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/photography': {
-      id: '/photography'
-      path: '/photography'
-      fullPath: '/photography'
-      preLoaderRoute: typeof PhotographyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/photography';
+      path: '/photography';
+      fullPath: '/photography';
+      preLoaderRoute: typeof PhotographyRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/license': {
-      id: '/license'
-      path: '/license'
-      fullPath: '/license'
-      preLoaderRoute: typeof LicenseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/license';
+      path: '/license';
+      fullPath: '/license';
+      preLoaderRoute: typeof LicenseRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/download': {
-      id: '/download'
-      path: '/download'
-      fullPath: '/download'
-      preLoaderRoute: typeof DownloadRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/download';
+      path: '/download';
+      fullPath: '/download';
+      preLoaderRoute: typeof DownloadRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/docs': {
-      id: '/docs'
-      path: '/docs'
-      fullPath: '/docs'
-      preLoaderRoute: typeof DocsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/docs';
+      path: '/docs';
+      fullPath: '/docs';
+      preLoaderRoute: typeof DocsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/dmca': {
-      id: '/dmca'
-      path: '/dmca'
-      fullPath: '/dmca'
-      preLoaderRoute: typeof DmcaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/dmca';
+      path: '/dmca';
+      fullPath: '/dmca';
+      preLoaderRoute: typeof DmcaRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/demo': {
-      id: '/demo'
-      path: '/demo'
-      fullPath: '/demo'
-      preLoaderRoute: typeof DemoRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/demo';
+      path: '/demo';
+      fullPath: '/demo';
+      preLoaderRoute: typeof DemoRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/contact';
+      path: '/contact';
+      fullPath: '/contact';
+      preLoaderRoute: typeof ContactRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/branding': {
-      id: '/branding'
-      path: '/branding'
-      fullPath: '/branding'
-      preLoaderRoute: typeof BrandingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/branding';
+      path: '/branding';
+      fullPath: '/branding';
+      preLoaderRoute: typeof BrandingRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/';
+      path: '/';
+      fullPath: '/';
+      preLoaderRoute: typeof IndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/marketplace/': {
-      id: '/marketplace/'
-      path: '/marketplace'
-      fullPath: '/marketplace/'
-      preLoaderRoute: typeof MarketplaceIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/marketplace/';
+      path: '/marketplace';
+      fullPath: '/marketplace/';
+      preLoaderRoute: typeof MarketplaceIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/docs/': {
-      id: '/docs/'
-      path: '/'
-      fullPath: '/docs/'
-      preLoaderRoute: typeof DocsIndexRouteImport
-      parentRoute: typeof DocsRoute
-    }
+      id: '/docs/';
+      path: '/';
+      fullPath: '/docs/';
+      preLoaderRoute: typeof DocsIndexRouteImport;
+      parentRoute: typeof DocsRoute;
+    };
     '/blog/': {
-      id: '/blog/'
-      path: '/blog'
-      fullPath: '/blog/'
-      preLoaderRoute: typeof BlogIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/blog/';
+      path: '/blog';
+      fullPath: '/blog/';
+      preLoaderRoute: typeof BlogIndexRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/marketplace/create': {
-      id: '/marketplace/create'
-      path: '/marketplace/create'
-      fullPath: '/marketplace/create'
-      preLoaderRoute: typeof MarketplaceCreateRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/marketplace/create';
+      path: '/marketplace/create';
+      fullPath: '/marketplace/create';
+      preLoaderRoute: typeof MarketplaceCreateRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/marketplace/collections': {
-      id: '/marketplace/collections'
-      path: '/marketplace/collections'
-      fullPath: '/marketplace/collections'
-      preLoaderRoute: typeof MarketplaceCollectionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/marketplace/collections';
+      path: '/marketplace/collections';
+      fullPath: '/marketplace/collections';
+      preLoaderRoute: typeof MarketplaceCollectionsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/marketplace/authors': {
-      id: '/marketplace/authors'
-      path: '/marketplace/authors'
-      fullPath: '/marketplace/authors'
-      preLoaderRoute: typeof MarketplaceAuthorsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/marketplace/authors';
+      path: '/marketplace/authors';
+      fullPath: '/marketplace/authors';
+      preLoaderRoute: typeof MarketplaceAuthorsRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/docs/$': {
-      id: '/docs/$'
-      path: '/$'
-      fullPath: '/docs/$'
-      preLoaderRoute: typeof DocsSplatRouteImport
-      parentRoute: typeof DocsRoute
-    }
+      id: '/docs/$';
+      path: '/$';
+      fullPath: '/docs/$';
+      preLoaderRoute: typeof DocsSplatRouteImport;
+      parentRoute: typeof DocsRoute;
+    };
     '/blog/changelog': {
-      id: '/blog/changelog'
-      path: '/blog/changelog'
-      fullPath: '/blog/changelog'
-      preLoaderRoute: typeof BlogChangelogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/blog/changelog';
+      path: '/blog/changelog';
+      fullPath: '/blog/changelog';
+      preLoaderRoute: typeof BlogChangelogRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/blog/$slug': {
-      id: '/blog/$slug'
-      path: '/blog/$slug'
-      fullPath: '/blog/$slug'
-      preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/blog/$slug';
+      path: '/blog/$slug';
+      fullPath: '/blog/$slug';
+      preLoaderRoute: typeof BlogSlugRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/marketplace/collection/$collection': {
-      id: '/marketplace/collection/$collection'
-      path: '/marketplace/collection/$collection'
-      fullPath: '/marketplace/collection/$collection'
-      preLoaderRoute: typeof MarketplaceCollectionCollectionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/marketplace/collection/$collection';
+      path: '/marketplace/collection/$collection';
+      fullPath: '/marketplace/collection/$collection';
+      preLoaderRoute: typeof MarketplaceCollectionCollectionRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/marketplace/author/$author': {
-      id: '/marketplace/author/$author'
-      path: '/marketplace/author/$author'
-      fullPath: '/marketplace/author/$author'
-      preLoaderRoute: typeof MarketplaceAuthorAuthorRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/marketplace/author/$author';
+      path: '/marketplace/author/$author';
+      fullPath: '/marketplace/author/$author';
+      preLoaderRoute: typeof MarketplaceAuthorAuthorRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/marketplace/$category/$id': {
-      id: '/marketplace/$category/$id'
-      path: '/marketplace/$category/$id'
-      fullPath: '/marketplace/$category/$id'
-      preLoaderRoute: typeof MarketplaceCategoryIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/marketplace/$category/$id';
+      path: '/marketplace/$category/$id';
+      fullPath: '/marketplace/$category/$id';
+      preLoaderRoute: typeof MarketplaceCategoryIdRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/blog/tag/$tag': {
-      id: '/blog/tag/$tag'
-      path: '/blog/tag/$tag'
-      fullPath: '/blog/tag/$tag'
-      preLoaderRoute: typeof BlogTagTagRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/blog/tag/$tag';
+      path: '/blog/tag/$tag';
+      fullPath: '/blog/tag/$tag';
+      preLoaderRoute: typeof BlogTagTagRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
     '/blog/page/$page': {
-      id: '/blog/page/$page'
-      path: '/blog/page/$page'
-      fullPath: '/blog/page/$page'
-      preLoaderRoute: typeof BlogPagePageRouteImport
-      parentRoute: typeof rootRouteImport
-    }
+      id: '/blog/page/$page';
+      path: '/blog/page/$page';
+      fullPath: '/blog/page/$page';
+      preLoaderRoute: typeof BlogPagePageRouteImport;
+      parentRoute: typeof rootRouteImport;
+    };
   }
 }
 
 interface DocsRouteChildren {
-  DocsSplatRoute: typeof DocsSplatRoute
-  DocsIndexRoute: typeof DocsIndexRoute
+  DocsSplatRoute: typeof DocsSplatRoute;
+  DocsIndexRoute: typeof DocsIndexRoute;
 }
 
 const DocsRouteChildren: DocsRouteChildren = {
   DocsSplatRoute: DocsSplatRoute,
   DocsIndexRoute: DocsIndexRoute,
-}
+};
 
-const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
+const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren);
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -610,16 +609,16 @@ const rootRouteChildren: RootRouteChildren = {
   MarketplaceCategoryIdRoute: MarketplaceCategoryIdRoute,
   MarketplaceAuthorAuthorRoute: MarketplaceAuthorAuthorRoute,
   MarketplaceCollectionCollectionRoute: MarketplaceCollectionCollectionRoute,
-}
+};
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>()
+  ._addFileTypes<FileRouteTypes>();
 
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
+import type { getRouter } from './router.tsx';
+import type { createStart } from '@tanstack/react-start';
 declare module '@tanstack/react-start' {
   interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
+    ssr: true;
+    router: Awaited<ReturnType<typeof getRouter>>;
   }
 }

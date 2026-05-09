@@ -111,9 +111,11 @@ export default function FeaturedCollections({
 
                   <div className="mt-auto flex items-center gap-3">
                     <Link
-                      to={buildEmbedUrl(
-                        `/marketplace/collection/${encodeURIComponent(collection.name)}`,
-                      ) as any}
+                      to={
+                        buildEmbedUrl(
+                          `/marketplace/collection/${encodeURIComponent(collection.name)}`,
+                        ) as any
+                      }
                       className={cn(
                         'cursor-pointer rounded-md bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground shadow-sm transition hover:bg-primary/90 lg:px-4 lg:py-2 lg:text-sm',
                         isEmbed && 'px-3 py-1.5 text-xs',

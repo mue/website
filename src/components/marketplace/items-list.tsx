@@ -33,9 +33,11 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
       {items.map((item) => (
         <Link
           key={item.id || `${item.type}-${item.name}`}
-          to={buildEmbedUrl(
-            `/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`,
-          ) as any}
+          to={
+            buildEmbedUrl(
+              `/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`,
+            ) as any
+          }
           className="group relative flex cursor-pointer flex-row items-center gap-4 overflow-hidden rounded-xl border border-border bg-card/70 p-4 shadow-sm transition hover:border-primary/40 hover:shadow-md"
         >
           <button
@@ -88,7 +90,9 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
                     event.stopPropagation();
                     if (item.author) {
                       navigate({
-                        to: buildEmbedUrl(`/marketplace/author/${slugifyAuthor(item.author)}`) as any,
+                        to: buildEmbedUrl(
+                          `/marketplace/author/${slugifyAuthor(item.author)}`,
+                        ) as any,
                       });
                     }
                   }}
@@ -126,7 +130,9 @@ export default function ItemsList({ items, collectionNameMap }: ItemsListProps) 
                       event.preventDefault();
                       event.stopPropagation();
                       navigate({
-                        to: buildEmbedUrl(`/marketplace/collection/${encodeURIComponent(collection)}`) as any,
+                        to: buildEmbedUrl(
+                          `/marketplace/collection/${encodeURIComponent(collection)}`,
+                        ) as any,
                       });
                     }}
                     className={cn(

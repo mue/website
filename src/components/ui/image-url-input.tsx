@@ -2,7 +2,7 @@ import { Input } from '@/components/ui/input';
 import { useImageValidation } from '@/lib/hooks/use-image-validation';
 import { CheckCircle2, XCircle, Loader2, AlertCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useState } from 'react'
+import { useState } from 'react';
 
 interface ImageUrlInputProps {
   value: string;
@@ -78,7 +78,11 @@ export function ImageUrlInput({
             className="relative h-20 w-20 cursor-pointer overflow-hidden rounded-lg border"
             onClick={() => setShowFullPreview(!showFullPreview)}
           >
-            <img src={value} alt="Preview" className="absolute inset-0 h-full w-full object-cover" />
+            <img
+              src={value}
+              alt="Preview"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
           </div>
           {showFullPreview && (
             <div

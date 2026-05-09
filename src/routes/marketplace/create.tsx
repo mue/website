@@ -1,24 +1,24 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { useState, useEffect } from 'react'
+import { createFileRoute } from '@tanstack/react-router';
+import { useState, useEffect } from 'react';
 
-import { Input } from '@/components/ui/input'
-import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb'
-import type { AddonMetadata, AddonType, Photo, Quote } from '@/components/marketplace/create/types'
+import { Input } from '@/components/ui/input';
+import { MarketplaceBreadcrumb } from '@/components/marketplace/marketplace-breadcrumb';
+import type { AddonMetadata, AddonType, Photo, Quote } from '@/components/marketplace/create/types';
 import {
   DeleteConfirmDialog,
   ErrorDialog,
   SubmitDialog,
-} from '@/components/marketplace/create/dialogs'
-import { StepIndicator } from '@/components/marketplace/create/step-indicator'
-import { StepWelcome } from '@/components/marketplace/create/step-welcome'
-import { StepTypeSelection } from '@/components/marketplace/create/step-type-selection'
-import { StepMetadata } from '@/components/marketplace/create/step-metadata'
-import { StepContent } from '@/components/marketplace/create/step-content'
-import { StepPreview } from '@/components/marketplace/create/step-preview'
-import { StepOutput } from '@/components/marketplace/create/step-output'
-import { DraftManager } from '@/components/marketplace/create/draft-manager'
-import type { SavedDraft } from '@/components/marketplace/create/draft-manager'
-import { CreateAddonSkeleton } from '@/components/marketplace/create/create-skeleton'
+} from '@/components/marketplace/create/dialogs';
+import { StepIndicator } from '@/components/marketplace/create/step-indicator';
+import { StepWelcome } from '@/components/marketplace/create/step-welcome';
+import { StepTypeSelection } from '@/components/marketplace/create/step-type-selection';
+import { StepMetadata } from '@/components/marketplace/create/step-metadata';
+import { StepContent } from '@/components/marketplace/create/step-content';
+import { StepPreview } from '@/components/marketplace/create/step-preview';
+import { StepOutput } from '@/components/marketplace/create/step-output';
+import { DraftManager } from '@/components/marketplace/create/draft-manager';
+import type { SavedDraft } from '@/components/marketplace/create/draft-manager';
+import { CreateAddonSkeleton } from '@/components/marketplace/create/create-skeleton';
 
 export const Route = createFileRoute('/marketplace/create')({
   head: () => ({
@@ -26,17 +26,18 @@ export const Route = createFileRoute('/marketplace/create')({
       { title: 'Create – Marketplace | Mue' },
       {
         name: 'description',
-        content: 'Create and submit your own photo packs, quote packs, and preset settings to the Mue marketplace.',
+        content:
+          'Create and submit your own photo packs, quote packs, and preset settings to the Mue marketplace.',
       },
     ],
   }),
   component: CreateAddonPage,
-})
+});
 
 function CreateAddonPage() {
-  const [mounted, setMounted] = useState(false)
-  const [currentStep, setCurrentStep] = useState(1)
-  const [addonType, setAddonType] = useState<AddonType>('photos')
+  const [mounted, setMounted] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
+  const [addonType, setAddonType] = useState<AddonType>('photos');
 
   const [metadata, setMetadata] = useState<AddonMetadata>({
     name: '',
@@ -46,38 +47,38 @@ function CreateAddonPage() {
     author: '',
     icon_url: '',
     screenshot_url: '',
-  })
+  });
 
   const [photos, setPhotos] = useState<Photo[]>([
     { photographer: '', location: '', url: { default: '' } },
-  ])
-  const [quotes, setQuotes] = useState<Quote[]>([{ quote: '', author: '' }])
-  const [settingsJson, setSettingsJson] = useState('')
+  ]);
+  const [quotes, setQuotes] = useState<Quote[]>([{ quote: '', author: '' }]);
+  const [settingsJson, setSettingsJson] = useState('');
 
-  const [showSubmitDialog, setShowSubmitDialog] = useState(false)
-  const [showErrorDialog, setShowErrorDialog] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
-  const [showDeletePhotosDialog, setShowDeletePhotosDialog] = useState(false)
-  const [showDeleteQuotesDialog, setShowDeleteQuotesDialog] = useState(false)
-  const [submitUrl, setSubmitUrl] = useState('')
+  const [showSubmitDialog, setShowSubmitDialog] = useState(false);
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showDeletePhotosDialog, setShowDeletePhotosDialog] = useState(false);
+  const [showDeleteQuotesDialog, setShowDeleteQuotesDialog] = useState(false);
+  const [submitUrl, setSubmitUrl] = useState('');
 
   useEffect(() => {
     try {
-      const savedDraft = localStorage.getItem('mue-addon-draft')
+      const savedDraft = localStorage.getItem('mue-addon-draft');
       if (savedDraft) {
-        const draft = JSON.parse(savedDraft)
-        if (draft.currentStep) setCurrentStep(draft.currentStep)
-        if (draft.addonType) setAddonType(draft.addonType)
-        if (draft.metadata) setMetadata(draft.metadata)
-        if (draft.photos) setPhotos(draft.photos)
-        if (draft.quotes) setQuotes(draft.quotes)
-        if (draft.settingsJson) setSettingsJson(draft.settingsJson)
+        const draft = JSON.parse(savedDraft);
+        if (draft.currentStep) setCurrentStep(draft.currentStep);
+        if (draft.addonType) setAddonType(draft.addonType);
+        if (draft.metadata) setMetadata(draft.metadata);
+        if (draft.photos) setPhotos(draft.photos);
+        if (draft.quotes) setQuotes(draft.quotes);
+        if (draft.settingsJson) setSettingsJson(draft.settingsJson);
       }
     } catch (error) {
-      console.error('Failed to load draft:', error)
+      console.error('Failed to load draft:', error);
     }
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (currentStep > 1) {
@@ -90,51 +91,55 @@ function CreateAddonPage() {
           quotes,
           settingsJson,
           lastSaved: new Date().toISOString(),
-        }
-        localStorage.setItem('mue-addon-draft', JSON.stringify(draft))
+        };
+        localStorage.setItem('mue-addon-draft', JSON.stringify(draft));
       } catch (error) {
-        console.error('Failed to save draft:', error)
+        console.error('Failed to save draft:', error);
       }
     }
-  }, [currentStep, addonType, metadata, photos, quotes, settingsJson])
+  }, [currentStep, addonType, metadata, photos, quotes, settingsJson]);
 
   const clearDraft = () => {
     try {
-      localStorage.removeItem('mue-addon-draft')
+      localStorage.removeItem('mue-addon-draft');
     } catch (error) {
-      console.error('Failed to clear draft:', error)
+      console.error('Failed to clear draft:', error);
     }
-  }
+  };
 
   const handleLoadDraft = (draft: SavedDraft) => {
-    setAddonType(draft.metadata.type)
-    setMetadata(draft.metadata)
-    if (draft.content.photos) setPhotos(draft.content.photos)
-    if (draft.content.quotes) setQuotes(draft.content.quotes)
-    if (draft.content.settingsJson) setSettingsJson(draft.content.settingsJson)
-    setCurrentStep(2)
-  }
+    setAddonType(draft.metadata.type);
+    setMetadata(draft.metadata);
+    if (draft.content.photos) setPhotos(draft.content.photos);
+    if (draft.content.quotes) setQuotes(draft.content.quotes);
+    if (draft.content.settingsJson) setSettingsJson(draft.content.settingsJson);
+    setCurrentStep(2);
+  };
 
   const handleNewDraft = () => {
-    if (confirm('Start a new draft? This will clear your current progress (unless you save it first).')) {
-      setCurrentStep(1)
-      setAddonType('photos')
-      resetMetadata()
-      setPhotos([{ photographer: '', location: '', url: { default: '' } }])
-      setQuotes([{ quote: '', author: '' }])
-      setSettingsJson('')
-      clearDraft()
+    if (
+      confirm(
+        'Start a new draft? This will clear your current progress (unless you save it first).',
+      )
+    ) {
+      setCurrentStep(1);
+      setAddonType('photos');
+      resetMetadata();
+      setPhotos([{ photographer: '', location: '', url: { default: '' } }]);
+      setQuotes([{ quote: '', author: '' }]);
+      setSettingsJson('');
+      clearDraft();
     }
-  }
+  };
 
   const handleMetadataChange = (field: keyof AddonMetadata, value: string) => {
-    setMetadata((prev) => ({ ...prev, [field]: value, type: addonType }))
-  }
+    setMetadata((prev) => ({ ...prev, [field]: value, type: addonType }));
+  };
 
   const handleTypeChange = (type: AddonType) => {
-    setAddonType(type)
-    setMetadata((prev) => ({ ...prev, type }))
-  }
+    setAddonType(type);
+    setMetadata((prev) => ({ ...prev, type }));
+  };
 
   const resetMetadata = () => {
     setMetadata({
@@ -145,79 +150,79 @@ function CreateAddonPage() {
       author: '',
       icon_url: '',
       screenshot_url: '',
-    })
-  }
+    });
+  };
 
   const confirmDeletePhotos = () => {
-    setPhotos([{ photographer: '', location: '', url: { default: '' } }])
-    setShowDeletePhotosDialog(false)
-  }
+    setPhotos([{ photographer: '', location: '', url: { default: '' } }]);
+    setShowDeletePhotosDialog(false);
+  };
 
   const confirmDeleteQuotes = () => {
-    setQuotes([{ quote: '', author: '' }])
-    setShowDeleteQuotesDialog(false)
-  }
+    setQuotes([{ quote: '', author: '' }]);
+    setShowDeleteQuotesDialog(false);
+  };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>, isSettings = false) => {
-    const file = event.target.files?.[0]
-    if (!file) return
+    const file = event.target.files?.[0];
+    if (!file) return;
 
-    const reader = new FileReader()
+    const reader = new FileReader();
     reader.onload = (e) => {
       try {
-        const json = JSON.parse(e.target?.result as string)
+        const json = JSON.parse(e.target?.result as string);
 
         if (isSettings) {
-          setSettingsJson(JSON.stringify(json, null, 2))
+          setSettingsJson(JSON.stringify(json, null, 2));
         } else {
-          if (json.name) setMetadata((prev) => ({ ...prev, name: json.name }))
-          if (json.description) setMetadata((prev) => ({ ...prev, description: json.description }))
+          if (json.name) setMetadata((prev) => ({ ...prev, name: json.name }));
+          if (json.description) setMetadata((prev) => ({ ...prev, description: json.description }));
           if (json.type) {
-            setAddonType(json.type)
-            setMetadata((prev) => ({ ...prev, type: json.type }))
+            setAddonType(json.type);
+            setMetadata((prev) => ({ ...prev, type: json.type }));
           }
-          if (json.version) setMetadata((prev) => ({ ...prev, version: json.version }))
-          if (json.author) setMetadata((prev) => ({ ...prev, author: json.author }))
-          if (json.icon_url) setMetadata((prev) => ({ ...prev, icon_url: json.icon_url }))
+          if (json.version) setMetadata((prev) => ({ ...prev, version: json.version }));
+          if (json.author) setMetadata((prev) => ({ ...prev, author: json.author }));
+          if (json.icon_url) setMetadata((prev) => ({ ...prev, icon_url: json.icon_url }));
           if (json.screenshot_url)
-            setMetadata((prev) => ({ ...prev, screenshot_url: json.screenshot_url }))
-          if (json.type === 'photos' && json.photos) setPhotos(json.photos)
-          else if (json.type === 'quotes' && json.quotes) setQuotes(json.quotes)
+            setMetadata((prev) => ({ ...prev, screenshot_url: json.screenshot_url }));
+          if (json.type === 'photos' && json.photos) setPhotos(json.photos);
+          else if (json.type === 'quotes' && json.quotes) setQuotes(json.quotes);
           else if (json.type === 'settings' && json.settings)
-            setSettingsJson(JSON.stringify(json.settings, null, 2))
+            setSettingsJson(JSON.stringify(json.settings, null, 2));
         }
       } catch {
-        setErrorMessage('Invalid JSON file. Please check your file and try again.')
-        setShowErrorDialog(true)
+        setErrorMessage('Invalid JSON file. Please check your file and try again.');
+        setShowErrorDialog(true);
       }
-    }
-    reader.readAsText(file)
-    event.target.value = ''
-  }
+    };
+    reader.readAsText(file);
+    event.target.value = '';
+  };
 
   const generateAddonData = () => {
-    const addonData: Record<string, unknown> = { ...metadata }
+    const addonData: Record<string, unknown> = { ...metadata };
 
     if (addonType === 'photos') {
-      addonData.photos = photos.filter((p) => p.photographer && p.location && p.url.default)
+      addonData.photos = photos.filter((p) => p.photographer && p.location && p.url.default);
     } else if (addonType === 'quotes') {
-      addonData.quotes = quotes.filter((q) => q.quote && q.author)
+      addonData.quotes = quotes.filter((q) => q.quote && q.author);
     } else if (addonType === 'settings') {
       try {
-        const parsed = JSON.parse(settingsJson)
-        const ignoredKeys = ['language', 'statsdata', 'nextquote', 'installed', 'nextImage']
+        const parsed = JSON.parse(settingsJson);
+        const ignoredKeys = ['language', 'statsdata', 'nextquote', 'installed', 'nextImage'];
         addonData.settings = Object.fromEntries(
           Object.entries(parsed).filter(([key]) => !ignoredKeys.includes(key)),
-        )
+        );
       } catch {
-        setErrorMessage('Invalid JSON in settings. Please check your input.')
-        setShowErrorDialog(true)
-        return null
+        setErrorMessage('Invalid JSON in settings. Please check your input.');
+        setShowErrorDialog(true);
+        return null;
       }
     }
 
-    return addonData
-  }
+    return addonData;
+  };
 
   const validateMetadata = () => {
     const checks: [string, string][] = [
@@ -226,67 +231,73 @@ function CreateAddonPage() {
       [metadata.version.trim(), 'Please enter a version for your addon.'],
       [metadata.author.trim(), 'Please enter an author for your addon.'],
       [metadata.icon_url.trim(), 'Please enter an icon URL for your addon.'],
-    ]
+    ];
     for (const [value, message] of checks) {
       if (!value) {
-        setErrorMessage(message)
-        setShowErrorDialog(true)
-        return false
+        setErrorMessage(message);
+        setShowErrorDialog(true);
+        return false;
       }
     }
-    return true
-  }
+    return true;
+  };
 
   const downloadJson = () => {
-    if (!validateMetadata()) return
-    const addonData = generateAddonData()
-    if (!addonData) return
+    if (!validateMetadata()) return;
+    const addonData = generateAddonData();
+    if (!addonData) return;
 
-    const jsonString = JSON.stringify(addonData, null, 2)
-    const blob = new Blob([jsonString], { type: 'application/json' })
-    const url = URL.createObjectURL(blob)
-    const fileName = metadata.name.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '')
-    const link = document.createElement('a')
-    link.href = url
-    link.download = `${fileName || 'addon'}.json`
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-    URL.revokeObjectURL(url)
-  }
+    const jsonString = JSON.stringify(addonData, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const fileName = metadata.name
+      .toLowerCase()
+      .replace(/\s+/g, '_')
+      .replace(/[^a-z0-9_]/g, '');
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `${fileName || 'addon'}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
 
   const submitToMarketplace = () => {
-    if (!validateMetadata()) return
-    const addonData = generateAddonData()
-    if (!addonData) return
+    if (!validateMetadata()) return;
+    const addonData = generateAddonData();
+    if (!addonData) return;
 
-    const fileName = metadata.name.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '')
-    const folderMap = { photos: 'photo_packs', quotes: 'quote_packs', settings: 'preset_settings' }
-    const folder = folderMap[addonType]
-    const jsonString = JSON.stringify(addonData, null, 2)
-    const encodedContent = encodeURIComponent(jsonString)
-    const encodedFileName = encodeURIComponent(`${fileName}.json`)
-    const githubUrl = `https://github.com/mue/marketplace/new/main/data/${folder}?filename=${encodedFileName}&value=${encodedContent}`
-    setSubmitUrl(githubUrl)
-    setShowSubmitDialog(true)
-  }
+    const fileName = metadata.name
+      .toLowerCase()
+      .replace(/\s+/g, '_')
+      .replace(/[^a-z0-9_]/g, '');
+    const folderMap = { photos: 'photo_packs', quotes: 'quote_packs', settings: 'preset_settings' };
+    const folder = folderMap[addonType];
+    const jsonString = JSON.stringify(addonData, null, 2);
+    const encodedContent = encodeURIComponent(jsonString);
+    const encodedFileName = encodeURIComponent(`${fileName}.json`);
+    const githubUrl = `https://github.com/mue/marketplace/new/main/data/${folder}?filename=${encodedFileName}&value=${encodedContent}`;
+    setSubmitUrl(githubUrl);
+    setShowSubmitDialog(true);
+  };
 
-  const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, 6))
-  const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1))
+  const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, 6));
+  const prevStep = () => setCurrentStep((prev) => Math.max(prev - 1, 1));
   const resetWizard = () => {
-    setCurrentStep(1)
-    setAddonType('photos')
-    resetMetadata()
-    setPhotos([{ photographer: '', location: '', url: { default: '' } }])
-    setQuotes([{ quote: '', author: '' }])
-    setSettingsJson('')
-    clearDraft()
-  }
+    setCurrentStep(1);
+    setAddonType('photos');
+    resetMetadata();
+    setPhotos([{ photographer: '', location: '', url: { default: '' } }]);
+    setQuotes([{ quote: '', author: '' }]);
+    setSettingsJson('');
+    clearDraft();
+  };
 
   const renderStep = () => {
     switch (currentStep) {
       case 1:
-        return <StepWelcome onNext={nextStep} />
+        return <StepWelcome onNext={nextStep} />;
       case 2:
         return (
           <StepTypeSelection
@@ -295,7 +306,7 @@ function CreateAddonPage() {
             onNext={nextStep}
             onBack={prevStep}
           />
-        )
+        );
       case 3:
         return (
           <StepMetadata
@@ -304,7 +315,7 @@ function CreateAddonPage() {
             onNext={nextStep}
             onBack={prevStep}
           />
-        )
+        );
       case 4:
         return (
           <StepContent
@@ -322,7 +333,7 @@ function CreateAddonPage() {
             onNext={nextStep}
             onBack={prevStep}
           />
-        )
+        );
       case 5:
         return (
           <StepPreview
@@ -334,7 +345,7 @@ function CreateAddonPage() {
             onNext={nextStep}
             onBack={prevStep}
           />
-        )
+        );
       case 6:
         return (
           <StepOutput
@@ -347,13 +358,13 @@ function CreateAddonPage() {
             onBack={prevStep}
             onStartOver={resetWizard}
           />
-        )
+        );
       default:
-        return null
+        return null;
     }
-  }
+  };
 
-  if (!mounted) return <CreateAddonSkeleton />
+  if (!mounted) return <CreateAddonSkeleton />;
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-5xl flex-col gap-8 px-6 py-12 lg:px-8">
@@ -414,5 +425,5 @@ function CreateAddonPage() {
         description="Are you sure you want to delete all quotes? This action cannot be undone."
       />
     </div>
-  )
+  );
 }

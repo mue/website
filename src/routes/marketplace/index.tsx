@@ -1,28 +1,28 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { Suspense } from 'react'
+import { createFileRoute } from '@tanstack/react-router';
+import { Suspense } from 'react';
 
-import { MarketplaceExplorer } from '@/components/marketplace/explorer'
-import { MarketplaceLoadingSkeleton } from '@/components/marketplace/marketplace-loading-skeleton'
+import { MarketplaceExplorer } from '@/components/marketplace/explorer';
+import { MarketplaceLoadingSkeleton } from '@/components/marketplace/marketplace-loading-skeleton';
 
-import { getMarketplaceCollections, getMarketplaceItems } from '@/lib/marketplace'
+import { getMarketplaceCollections, getMarketplaceItems } from '@/lib/marketplace';
 
 function hashString(str: string) {
-  let h = 2166136261 >>> 0
+  let h = 2166136261 >>> 0;
   for (let i = 0; i < str.length; i++) {
-    h ^= str.charCodeAt(i)
-    h = Math.imul(h, 16777619)
+    h ^= str.charCodeAt(i);
+    h = Math.imul(h, 16777619);
   }
-  return h >>> 0
+  return h >>> 0;
 }
 
 function seededShuffle<T>(arr: T[], seed: number): T[] {
-  const a = [...arr]
+  const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
-    seed = (seed * 1664525 + 1013904223) % 4294967296
-    const j = seed % (i + 1)
-    ;[a[i], a[j]] = [a[j], a[i]]
+    seed = (seed * 1664525 + 1013904223) % 4294967296;
+    const j = seed % (i + 1);
+    [a[i], a[j]] = [a[j], a[i]];
   }
-  return a
+  return a;
 }
 
 export const Route = createFileRoute('/marketplace/')({
@@ -33,20 +33,20 @@ export const Route = createFileRoute('/marketplace/')({
     const [collections, items] = await Promise.all([
       getMarketplaceCollections(),
       getMarketplaceItems(true),
-    ])
+    ]);
 
-    const highlightCandidates = collections.filter((c) => c.img)
-    const now = new Date()
-    const seedKey = `${now.getUTCFullYear()}-${now.getUTCMonth()}-${now.getUTCDate()}-${now.getUTCHours()}`
-    const seed = hashString(seedKey)
-    const shuffled = seededShuffle(highlightCandidates, seed)
+    const highlightCandidates = collections.filter((c) => c.img);
+    const now = new Date();
+    const seedKey = `${now.getUTCFullYear()}-${now.getUTCMonth()}-${now.getUTCDate()}-${now.getUTCHours()}`;
+    const seed = hashString(seedKey);
+    const shuffled = seededShuffle(highlightCandidates, seed);
     const randomCollections = shuffled.slice(0, 3).map((collection) => {
-      const collectionItems = items.filter((item) => item.in_collections.includes(collection.name))
-      const types = [...new Set(collectionItems.map((item) => item.type))]
-      return { ...collection, contentTypes: types }
-    })
+      const collectionItems = items.filter((item) => item.in_collections.includes(collection.name));
+      const types = [...new Set(collectionItems.map((item) => item.type))];
+      return { ...collection, contentTypes: types };
+    });
 
-    return { collections, items, randomCollections }
+    return { collections, items, randomCollections };
   },
   head: () => ({
     meta: [
@@ -63,12 +63,12 @@ export const Route = createFileRoute('/marketplace/')({
     ],
   }),
   component: MarketplacePage,
-})
+});
 
 function MarketplacePage() {
-  const { collections, items, randomCollections } = Route.useLoaderData()
-  const { embed } = Route.useSearch()
-  const isEmbed = embed === 'true'
+  const { collections, items, randomCollections } = Route.useLoaderData();
+  const { embed } = Route.useSearch();
+  const isEmbed = embed === 'true';
 
   return (
     <div
@@ -87,5 +87,5 @@ function MarketplacePage() {
         />
       </Suspense>
     </div>
-  )
+  );
 }

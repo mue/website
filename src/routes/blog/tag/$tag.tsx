@@ -1,29 +1,29 @@
-import { createFileRoute, Link, notFound } from '@tanstack/react-router'
+import { createFileRoute, Link, notFound } from '@tanstack/react-router';
 
-import { ChevronLeft } from 'lucide-react'
+import { ChevronLeft } from 'lucide-react';
 
-import { BlogCard } from '@/components/blog/blog-card'
-import { buttonVariants } from '@/components/ui/button'
+import { BlogCard } from '@/components/blog/blog-card';
+import { buttonVariants } from '@/components/ui/button';
 
-import { getAllBlogPosts } from '@/lib/blog'
-import { SITE_URL } from '@/lib/constants/site'
-import { cn } from '@/lib/utils'
+import { getAllBlogPosts } from '@/lib/blog';
+import { SITE_URL } from '@/lib/constants/site';
+import { cn } from '@/lib/utils';
 
 export const Route = createFileRoute('/blog/tag/$tag')({
   loader: async ({ params }) => {
-    const posts = await getAllBlogPosts()
+    const posts = await getAllBlogPosts();
     const filtered = posts.filter((p) =>
       p.frontmatter.tags?.map((t) => t.toLowerCase()).includes(params.tag.toLowerCase()),
-    )
-    if (filtered.length === 0) throw notFound()
-    return { filtered, tag: params.tag }
+    );
+    if (filtered.length === 0) throw notFound();
+    return { filtered, tag: params.tag };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return {}
-    const { tag } = loaderData
-    const readable = tag.replace(/-/g, ' ')
-    const title = readable.charAt(0).toUpperCase() + readable.slice(1)
-    const description = `Articles tagged with ${readable} on the Mue Blog.`
+    if (!loaderData) return {};
+    const { tag } = loaderData;
+    const readable = tag.replace(/-/g, ' ');
+    const title = readable.charAt(0).toUpperCase() + readable.slice(1);
+    const description = `Articles tagged with ${readable} on the Mue Blog.`;
 
     return {
       meta: [
@@ -33,14 +33,14 @@ export const Route = createFileRoute('/blog/tag/$tag')({
         { property: 'og:description', content: description },
       ],
       links: [{ rel: 'canonical', href: `${SITE_URL}/blog/tag/${tag}` }],
-    }
+    };
   },
   component: TagPage,
-})
+});
 
 function TagPage() {
-  const { filtered, tag } = Route.useLoaderData()
-  const readable = tag.replace(/-/g, ' ')
+  const { filtered, tag } = Route.useLoaderData();
+  const readable = tag.replace(/-/g, ' ');
 
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -69,5 +69,5 @@ function TagPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
