@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite';
 
+import { fileURLToPath } from 'node:url';
+
 import { devtools } from '@tanstack/devtools-vite';
 import { tanstackStart } from '@tanstack/react-start/plugin/vite';
 
@@ -8,7 +10,12 @@ import tailwindcss from '@tailwindcss/vite';
 import { cloudflare } from '@cloudflare/vite-plugin';
 
 const config = defineConfig({
-  resolve: { tsconfigPaths: true },
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
+    tsconfigPaths: true,
+  },
   plugins: [
     devtools(),
     cloudflare({ viteEnvironment: { name: 'ssr' } }),
