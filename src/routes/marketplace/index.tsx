@@ -57,7 +57,7 @@ export const Route = createFileRoute('/marketplace/')({
 
     return { collections, items, randomCollections };
   },
-  head: () => ({
+  head: ({ loaderData }) => ({
     meta: [
       { title: 'Marketplace | Mue' },
       {
@@ -70,6 +70,9 @@ export const Route = createFileRoute('/marketplace/')({
         content: 'Browse the full catalogue of Mue marketplace packs, presets, and quotes.',
       },
     ],
+    links: loaderData?.randomCollections
+      .filter((c): c is typeof c & { img: string } => Boolean(c.img))
+      .map((c) => ({ rel: 'preload', as: 'image', href: c.img })) ?? [],
   }),
   component: MarketplacePage,
 });
@@ -85,9 +88,6 @@ function MarketplacePage() {
         isEmbed ? 'h-screen gap-6 px-4 py-6' : 'min-h-screen gap-12 px-6 py-12 lg:px-8'
       }`}
     >
-      {randomCollections.map((c) =>
-        c.img ? <link key={c.name} rel="preload" as="image" href={c.img} /> : null,
-      )}
       <Suspense fallback={<MarketplaceLoadingSkeleton />}>
         <MarketplaceExplorer
           items={items}

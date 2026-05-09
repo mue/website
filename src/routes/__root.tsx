@@ -5,7 +5,6 @@ import {
   HeadContent,
   Scripts,
 } from '@tanstack/react-router';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Suspense } from 'react';
 
 import { ThemeProvider } from '@/components/theme-provider';
@@ -15,8 +14,6 @@ import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/json-ld';
 import { SITE_URL } from '@/lib/constants/site';
 
 import styles from '../styles.css?url';
-
-const queryClient = new QueryClient();
 
 // Prevents flash of wrong theme before React hydrates
 const THEME_INIT_SCRIPT = `(function(){try{var t=localStorage.getItem('theme');var d=(t==='light'||t==='dark')?t:(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.classList.toggle('dark',d==='dark')}catch(e){}})();`;
@@ -72,17 +69,15 @@ function RootComponent() {
         <WebSiteJsonLd />
       </head>
       <body className="antialiased">
-        <QueryClientProvider client={queryClient}>
-          <ThemeProvider>
-            <Suspense fallback={null}>
-              <EmbedProvider>
-                <EmbedLayoutWrapper>
-                  <Outlet />
-                </EmbedLayoutWrapper>
-              </EmbedProvider>
-            </Suspense>
-          </ThemeProvider>
-        </QueryClientProvider>
+        <ThemeProvider>
+          <Suspense fallback={null}>
+            <EmbedProvider>
+              <EmbedLayoutWrapper>
+                <Outlet />
+              </EmbedLayoutWrapper>
+            </EmbedProvider>
+          </Suspense>
+        </ThemeProvider>
         <ScrollRestoration />
         <Scripts />
         <script

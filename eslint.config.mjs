@@ -3,7 +3,7 @@ import typescriptParser from '@typescript-eslint/parser';
 
 const eslintConfig = [
   {
-    ignores: ['node_modules/**', '.next/**', 'out/**', 'build/**', 'next-env.d.ts'],
+    ignores: ['node_modules/**', 'dist/**', 'build/**'],
   },
   {
     files: ['**/*.{js,jsx}'],

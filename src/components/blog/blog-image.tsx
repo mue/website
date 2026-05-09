@@ -25,8 +25,11 @@ export function BlogImage({
   sizes,
   shape = 'rounded',
   aspectRatio,
+  blurDataURL,
+  placeholder,
 }: BlogImageProps) {
   const [error, setError] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const identifier = alt || src;
   const gradClass = useMemo(
@@ -51,9 +54,12 @@ export function BlogImage({
     fill ? 'absolute inset-0' : 'block',
   );
 
+  const showBlur = placeholder === 'blur' && blurDataURL && !loaded && !error;
+
   return (
     <div
       className={cn(baseWrapper, ratioClass, gradClass, 'bg-cover bg-center')}
+      style={showBlur ? { backgroundImage: `url(${blurDataURL})` } : undefined}
       aria-label={error ? `Image placeholder for ${alt}` : undefined}
       data-state={error ? 'error' : 'loaded'}
     >
@@ -62,8 +68,14 @@ export function BlogImage({
           src={src}
           alt={alt}
           loading={priority ? 'eager' : 'lazy'}
-          className={cn('absolute inset-0 h-full w-full object-cover', radiusClass, className)}
+          className={cn(
+            'absolute inset-0 h-full w-full object-cover transition-opacity duration-300',
+            radiusClass,
+            className,
+            !loaded && 'opacity-0',
+          )}
           sizes={sizes}
+          onLoad={() => setLoaded(true)}
           onError={() => setError(true)}
         />
       )}
