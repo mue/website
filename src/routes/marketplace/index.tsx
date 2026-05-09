@@ -28,6 +28,15 @@ function seededShuffle<T>(arr: T[], seed: number): T[] {
 export const Route = createFileRoute('/marketplace/')({
   validateSearch: (search: Record<string, unknown>) => ({
     embed: search.embed as string | undefined,
+    preview: search.preview as string | undefined,
+    theme: search.theme as string | undefined,
+    q: search.q as string | undefined,
+    search: search.search as string | undefined,
+    type: search.type as string | undefined,
+    collection: search.collection as string | undefined,
+    sort: search.sort as string | undefined,
+    page: search.page as string | undefined,
+    pp: search.pp as string | undefined,
   }),
   loader: async () => {
     const [collections, items] = await Promise.all([

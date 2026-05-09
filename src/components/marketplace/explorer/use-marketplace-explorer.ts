@@ -44,22 +44,26 @@ export function useMarketplaceExplorer(
   const { isEmbed, isPreview, sendMessage, config } = useEmbed();
 
   const randomSeed = useMemo(() => {
-    if (typeof window === 'undefined') return 0;
-
     const currentHour = Math.floor(Date.now() / (1000 * 60 * 60));
-    const stored = sessionStorage.getItem('mkt_random_seed');
-    const storedHour = sessionStorage.getItem('mkt_random_seed_hour');
+    const baseSeed = currentHour % 10000;
 
-    if (stored && storedHour && parseInt(storedHour, 10) === currentHour) {
-      return parseInt(stored, 10);
+    if (typeof window === 'undefined') return baseSeed;
+
+    try {
+      const stored = sessionStorage.getItem('mkt_random_seed');
+      const storedHour = sessionStorage.getItem('mkt_random_seed_hour');
+
+      if (stored && storedHour && parseInt(storedHour, 10) === currentHour) {
+        return parseInt(stored, 10);
+      }
+
+      sessionStorage.setItem('mkt_random_seed', String(baseSeed));
+      sessionStorage.setItem('mkt_random_seed_hour', String(currentHour));
+    } catch {
+      /* ignore */
     }
 
-    const newSeed = currentHour % 10000;
-
-    sessionStorage.setItem('mkt_random_seed', String(newSeed));
-    sessionStorage.setItem('mkt_random_seed_hour', String(currentHour));
-
-    return newSeed;
+    return baseSeed;
   }, []);
 
   const initialParams = useMemo(() => {
