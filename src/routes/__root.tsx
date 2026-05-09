@@ -9,6 +9,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { Suspense } from 'react'
 
 import { ThemeProvider } from '@/components/theme-provider'
+import { NotFoundPage } from '@/components/not-found-page'
 import { EmbedProvider, EmbedLayoutWrapper } from '@/lib/embed-context'
 import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/json-ld'
 import { SITE_URL } from '@/lib/constants/site'
@@ -56,15 +57,16 @@ export const Route = createRootRoute({
       { rel: 'stylesheet', href: styles },
       { rel: 'icon', href: '/favicon.ico' },
     ],
-    scripts: [{ id: 'theme-init', innerHTML: THEME_INIT_SCRIPT }],
   }),
   component: RootComponent,
+  notFoundComponent: NotFoundPage,
 })
 
 function RootComponent() {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <script id="theme-init" dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <HeadContent />
         <OrganizationJsonLd />
         <WebSiteJsonLd />

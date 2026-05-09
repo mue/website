@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { getBrowserVersions } from '#/server/api/browser-versions'
+import { getBrowserVersions } from '@/server/api/browser-versions'
 
 import { AlertTriangle, ArrowRight } from 'lucide-react'
 import { FaChrome, FaEdge, FaFirefoxBrowser } from 'react-icons/fa'

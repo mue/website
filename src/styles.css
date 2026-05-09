@@ -1,13 +1,13 @@
-@import '@fontsource-variable/lexend-deca/index.css';
-@import '@fontsource-variable/inter/index.css';
+@import '@fontsource/lexend-deca/index.css';
+@import '@fontsource/inter/index.css';
 @import '@fontsource/alfa-slab-one/index.css';
 
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
 :root {
-  --font-lexend-deca: 'Lexend Deca Variable', sans-serif;
-  --font-inter: 'Inter Variable', sans-serif;
+  --font-lexend-deca: 'Lexend Deca', sans-serif;
+  --font-inter: 'Inter', sans-serif;
   --font-alfa-slab-one: 'Alfa Slab One', serif;
 }
 
@@ -127,8 +127,12 @@
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    font-family: var(--font-inter);
+  }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-inter);
   }
   h1,
   h2,

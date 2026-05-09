@@ -1,43 +1,163 @@
+import { useEffect, useState } from 'react'
+
+import { Link } from '@tanstack/react-router'
+
+import { FaXTwitter, FaGithub } from 'react-icons/fa6'
+import Logo from './logo'
+
+import { ThemeToggle } from './theme-toggle'
+
+const footerLinks = {
+  Product: [
+    { name: 'Download', href: '/download' },
+    { name: 'Demo', href: '/demo' },
+    { name: 'Marketplace', href: '/marketplace' },
+    { name: 'Blog', href: '/blog' },
+  ],
+  Resources: [
+    { name: 'Documentation', href: '/docs' },
+    { name: 'API', href: '/docs/api/introduction' },
+    { name: 'FAQ', href: '/docs/faq' },
+    { name: 'Status', href: 'https://status.muetab.com' },
+    { name: 'Changelog', href: 'https://github.com/mue/mue/releases' },
+    { name: 'GitHub', href: 'https://github.com/mue/mue' },
+  ],
+  Community: [
+    { name: 'Join Discord', href: 'https://discord.gg/zv8C9F8' },
+    { name: 'Showcase', href: '/showcase' },
+    { name: 'Contribute Addon', href: '/marketplace/create' },
+    { name: 'Contact', href: '/contact' },
+  ],
+  Legal: [
+    { name: 'Privacy', href: '/privacy' },
+    { name: 'License', href: '/license' },
+    { name: 'DMCA', href: '/dmca' },
+  ],
+}
+
+type SystemStatus = 'operational' | 'degraded' | 'loading'
+
 export default function Footer() {
-  const year = new Date().getFullYear()
+  const [systemStatus, setSystemStatus] = useState<SystemStatus>('loading')
+
+  useEffect(() => {
+    const fetchStatus = async () => {
+      try {
+        const response = await fetch(
+          'https://raw.githubusercontent.com/mue/status/master/history/summary.json',
+        )
+        const data = await response.json()
+        const allUp = data.every((service: { status: string }) => service.status === 'up')
+        setSystemStatus(allUp ? 'operational' : 'degraded')
+      } catch {
+        setSystemStatus('degraded')
+      }
+    }
+    fetchStatus()
+  }, [])
+
+  const statusConfig = {
+    operational: { text: 'All systems are operational', dotColor: 'bg-emerald-500' },
+    degraded: { text: 'Degraded performance', dotColor: 'bg-yellow-500' },
+    loading: { text: 'Checking status...', dotColor: 'bg-gray-500' },
+  }
+
+  const status = statusConfig[systemStatus]
 
   return (
-    <footer className="mt-20 border-t border-[var(--line)] px-4 pb-14 pt-10 text-[var(--sea-ink-soft)]">
-      <div className="page-wrap flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
-        <p className="m-0 text-sm">
-          &copy; {year} Your name here. All rights reserved.
-        </p>
-        <p className="island-kicker m-0">Built with TanStack Start</p>
-      </div>
-      <div className="mt-4 flex justify-center gap-4">
-        <a
-          href="https://x.com/tan_stack"
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-xl p-2 text-[var(--sea-ink-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)]"
-        >
-          <span className="sr-only">Follow TanStack on X</span>
-          <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32">
-            <path
-              fill="currentColor"
-              d="M12.6 1h2.2L10 6.48 15.64 15h-4.41L7.78 9.82 3.23 15H1l5.14-5.84L.72 1h4.52l3.12 4.73L12.6 1zm-.77 12.67h1.22L4.57 2.26H3.26l8.57 11.41z"
-            />
-          </svg>
-        </a>
-        <a
-          href="https://github.com/TanStack"
-          target="_blank"
-          rel="noreferrer"
-          className="rounded-xl p-2 text-[var(--sea-ink-soft)] transition hover:bg-[var(--link-bg-hover)] hover:text-[var(--sea-ink)]"
-        >
-          <span className="sr-only">Go to TanStack GitHub</span>
-          <svg viewBox="0 0 16 16" aria-hidden="true" width="32" height="32">
-            <path
-              fill="currentColor"
-              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-            />
-          </svg>
-        </a>
+    <footer className="border-t border-border bg-background/80 backdrop-blur">
+      <div className="mx-auto w-full max-w-7xl px-6 py-12 lg:px-12">
+        <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
+          <div>
+            <Link to="/" className="inline-block">
+              <Logo className="h-12 w-12" />
+            </Link>
+
+            <p className="mt-4 max-w-xs text-sm text-muted-foreground">
+              <span className="font-bold">M</span>odifiable. <span className="font-bold">U</span>
+              ser-centric. <span className="font-bold">E</span>xperience.
+              <br />
+              That&apos;s Mue.
+            </p>
+            <a
+              href="https://status.muetab.com"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="mt-4 inline-flex cursor-pointer items-center gap-2 rounded-lg border border-border bg-muted/50 px-3 py-2 text-xs text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
+            >
+              <span className={`inline-flex h-2 w-2 rounded-full ${status.dotColor}`} />
+              <span>{status.text}</span>
+            </a>
+
+            <div className="mt-6 flex items-center gap-4">
+              <a
+                href="https://github.com/mue/mue"
+                target="_blank"
+                rel="noreferrer"
+                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border bg-muted/50 text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
+              >
+                <FaGithub className="h-4 w-4" />
+                <span className="sr-only">GitHub</span>
+              </a>
+              <a
+                href="https://x.com/getmue"
+                target="_blank"
+                rel="noreferrer"
+                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-border bg-muted/50 text-muted-foreground transition hover:border-[#FF5C25]/40 hover:text-foreground"
+              >
+                <FaXTwitter className="h-4 w-4" />
+                <span className="sr-only">X (formerly Twitter)</span>
+              </a>
+              <ThemeToggle />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
+            {Object.entries(footerLinks).map(([category, links]) => (
+              <div key={category}>
+                <h3 className="text-sm font-semibold uppercase tracking-wider text-foreground">
+                  {category}
+                </h3>
+                <ul className="mt-4 space-y-3">
+                  {links.map((link) => (
+                    <li key={link.name}>
+                      {link.href.startsWith('http') ? (
+                        <a
+                          href={link.href}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="cursor-pointer text-sm text-muted-foreground transition hover:text-foreground"
+                        >
+                          {link.name}
+                        </a>
+                      ) : (
+                        <Link
+                          to={link.href as any}
+                          className="cursor-pointer text-sm text-muted-foreground transition hover:text-foreground"
+                        >
+                          {link.name}
+                        </Link>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-12 border-t border-border pt-8 text-center text-sm text-muted-foreground">
+          <p>
+            © 2019-{new Date().getFullYear()} The Mue Authors. Licensed under{' '}
+            <Link
+              to="/license"
+              className="cursor-pointer underline underline-offset-4 decoration-muted-foreground/50 hover:text-foreground hover:decoration-foreground transition-colors"
+            >
+              BSD-3-Clause
+            </Link>
+            . All rights reserved.
+          </p>
+        </div>
       </div>
     </footer>
   )

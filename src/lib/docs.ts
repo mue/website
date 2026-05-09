@@ -1,4 +1,3 @@
-import matter from 'gray-matter'
 import { remark } from 'remark'
 import remarkGfm from 'remark-gfm'
 import remarkRehype from 'remark-rehype'
@@ -9,6 +8,8 @@ import rehypeStringify from 'rehype-stringify'
 import { visit } from 'unist-util-visit'
 import { toString } from 'hast-util-to-string'
 import type { Element, Root } from 'hast'
+
+import { parseFrontmatter } from '@/lib/frontmatter'
 
 const docsFiles = import.meta.glob('/content/docs/**/*.md', {
   eager: true,
@@ -62,8 +63,8 @@ function formatTitleFromSlug(slug: string) {
 
 function buildDocEntries(): DocEntry[] {
   return Object.entries(docsFiles).map(([filePath, raw]) => {
-    const { data } = matter(raw)
-    const frontmatter = data as DocFrontmatter
+    const { data } = parseFrontmatter<DocFrontmatter>(raw)
+    const frontmatter = data
     // /content/docs/foo/bar.md -> ['foo', 'bar']
     const relative = filePath.replace(/^\/content\/docs\//, '').replace(/\.(md|mdx)$/i, '')
     const segments = relative.split('/')
@@ -155,8 +156,8 @@ export async function getDocBySlug(slugSegments: string[]): Promise<LoadedDoc | 
   const entry = buildDocEntries().find((e) => e.slug.join('/') === normalized.join('/'))
   if (!entry) return null
 
-  const { content, data } = matter(entry.raw)
-  const frontmatter = data as DocFrontmatter
+  const { content, data } = parseFrontmatter<DocFrontmatter>(entry.raw)
+  const frontmatter = data
   const toc: TocItem[] = []
   const html = await createProcessor(toc).process(content)
   const title = frontmatter.title ?? formatTitleFromSlug(normalized.at(-1) ?? 'Document')

@@ -1,11 +1,31 @@
 const fs = require('fs/promises');
 const path = require('path');
 
-const matter = require('gray-matter');
+const YAML = require('yaml');
 const sharp = require('sharp');
 
 const BLOG_DIR = path.join(__dirname, '..', 'content', 'blog');
 const PUBLIC_DIR = path.join(__dirname, '..', 'public');
+
+function parseFrontmatter(raw) {
+  const normalized = raw.replace(/\r\n/g, '\n');
+  const match = normalized.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+  if (!match) return { data: {}, content: raw };
+
+  const [, yamlSource, content] = match;
+  try {
+    const data = yamlSource?.trim() ? YAML.parse(yamlSource) : {};
+    return { data: data ?? {}, content };
+  } catch {
+    return { data: {}, content: raw };
+  }
+}
+
+function stringifyFrontmatter(content, data) {
+  const yamlText = YAML.stringify(data ?? {}).trimEnd();
+  const body = content.replace(/^\s+/, '');
+  return `---\n${yamlText}\n---\n\n${body}`;
+}
 
 async function generateBlurDataURL(imagePath) {
   if (!imagePath?.startsWith('/')) return undefined;
@@ -27,14 +47,14 @@ async function generateBlurDataURL(imagePath) {
 async function processBlogFile(file) {
   const filePath = path.join(BLOG_DIR, file);
   const raw = await fs.readFile(filePath, 'utf8');
-  const { data, content } = matter(raw);
+  const { data, content } = parseFrontmatter(raw);
 
   if (data.image && !data.imagePlaceholder) {
     const placeholder = await generateBlurDataURL(data.image);
 
     if (placeholder) {
       data.imagePlaceholder = placeholder;
-      const newRaw = matter.stringify(content, data);
+      const newRaw = stringifyFrontmatter(content, data);
 
       await fs.writeFile(filePath, newRaw, 'utf8');
       console.log('Updated', file);

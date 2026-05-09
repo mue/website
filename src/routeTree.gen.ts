@@ -21,7 +21,6 @@ import { Route as DmcaRouteImport } from './routes/dmca'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BrandingRouteImport } from './routes/branding'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as MarketplaceIndexRouteImport } from './routes/marketplace/index'
 import { Route as DocsIndexRouteImport } from './routes/docs/index'
@@ -96,11 +95,6 @@ const ContactRoute = ContactRouteImport.update({
 const BrandingRoute = BrandingRouteImport.update({
   id: '/branding',
   path: '/branding',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -182,7 +176,6 @@ const BlogPagePageRoute = BlogPagePageRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/branding': typeof BrandingRoute
   '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
@@ -212,7 +205,6 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/branding': typeof BrandingRoute
   '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
@@ -242,7 +234,6 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/about': typeof AboutRoute
   '/branding': typeof BrandingRoute
   '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
@@ -274,7 +265,6 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/about'
     | '/branding'
     | '/contact'
     | '/demo'
@@ -304,7 +294,6 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/about'
     | '/branding'
     | '/contact'
     | '/demo'
@@ -333,7 +322,6 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
-    | '/about'
     | '/branding'
     | '/contact'
     | '/demo'
@@ -364,7 +352,6 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
   BrandingRoute: typeof BrandingRoute
   ContactRoute: typeof ContactRoute
   DemoRoute: typeof DemoRoute
@@ -475,13 +462,6 @@ declare module '@tanstack/react-router' {
       path: '/branding'
       fullPath: '/branding'
       preLoaderRoute: typeof BrandingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -606,7 +586,6 @@ const DocsRouteWithChildren = DocsRoute._addFileChildren(DocsRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
   BrandingRoute: BrandingRoute,
   ContactRoute: ContactRoute,
   DemoRoute: DemoRoute,

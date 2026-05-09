@@ -1,4 +1,3 @@
-import matter from 'gray-matter'
 import { remark } from 'remark'
 import remarkGfm from 'remark-gfm'
 import remarkRehype from 'remark-rehype'
@@ -6,6 +5,8 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeRaw from 'rehype-raw'
 import rehypeStringify from 'rehype-stringify'
+
+import { parseFrontmatter } from '@/lib/frontmatter'
 
 const blogFiles = import.meta.glob('/content/blog/*.md', {
   eager: true,
@@ -59,8 +60,8 @@ export async function getAllBlogPosts(): Promise<BlogPostPreview[]> {
 
   for (const [filePath, raw] of Object.entries(blogFiles)) {
     const fileName = filePath.split('/').pop()!
-    const { data, content } = matter(raw)
-    const frontmatter = data as BlogFrontmatter
+    const { data, content } = parseFrontmatter<BlogFrontmatter>(raw)
+    const frontmatter = data
     const slug = fileName.replace(/\.(mdx|md)$/i, '')
     const excerpt =
       frontmatter.description ||
@@ -83,8 +84,8 @@ export async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> 
   if (!entry) return null
 
   const [, raw] = entry
-  const { content, data } = matter(raw)
-  const frontmatter = data as BlogFrontmatter
+  const { content, data } = parseFrontmatter<BlogFrontmatter>(raw)
+  const frontmatter = data
   const html = await createProcessor().process(content)
   const excerpt =
     frontmatter.description ||

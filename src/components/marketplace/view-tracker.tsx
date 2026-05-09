@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { Eye, Download } from 'lucide-react'
 
 import { useEmbed } from '@/lib/embed-context'
-import { trackMarketplaceView } from '#/server/api/marketplace-view'
+import { trackMarketplaceView } from '@/server/api/marketplace-view'
 
 interface ViewTrackerProps {
   itemId: string
