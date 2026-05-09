@@ -20,7 +20,18 @@ const config = defineConfig({
     devtools(),
     cloudflare({ viteEnvironment: { name: 'ssr' } }),
     tailwindcss(),
-    tanstackStart(),
+    tanstackStart({
+      prerender: {
+        enabled: true,
+        crawlLinks: true,
+        concurrency: 8,
+        // Keep SSR for routes with live external data or special response types
+        filter: ({ path }) =>
+          !path.startsWith('/marketplace') &&
+          path !== '/download' &&
+          path !== '/sitemap.xml',
+      },
+    }),
     viteReact(),
   ],
 });
