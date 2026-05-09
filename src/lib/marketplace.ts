@@ -98,10 +98,7 @@ export type MarketplaceItemDetail = {
 };
 
 async function fetchMarketplace<T>(path: string, init?: RequestInit): Promise<T> {
-  const response = await fetch(`${MARKETPLACE_BASE_URL}/${path}`, {
-    ...init,
-    cache: 'force-cache',
-  });
+  const response = await fetch(`${MARKETPLACE_BASE_URL}/${path}`, init);
 
   if (!response.ok) {
     throw new Error(`Marketplace request failed: ${response.status} ${response.statusText}`);
