@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState, useRef, type ReactNode 
 import { useNavigate, useLocation, useSearch } from '@tanstack/react-router';
 import { ScrollToTop } from '@/components/scroll-to-top';
 import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
+import Footer from '@/components/Footer';
 
 type EmbedContextType = {
   isEmbed: boolean;
