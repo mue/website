@@ -1,14 +1,12 @@
-node_modules
-.next
-.DS_Store
-dist
-dist-ssr
-*.local
+# Directories
+dist/
+.DS_Store/
+.wrangler/
+.tanstack/
+node_modules/
+
+# Files
 .env
-.nitro
-.tanstack
-.wrangler
-.output
-.vinxi
-__unconfig*
-todos.json
+*.local
+yarn.lock
+package-lock.json
