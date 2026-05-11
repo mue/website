@@ -38,140 +38,205 @@ export default function ItemsGrid({ items, collectionNameMap }: ItemsGridProps) 
         isEmbed ? 'lg:grid-cols-4' : 'lg:grid-cols-3',
       )}
     >
-      {items.map((item) => (
-        <Link
-          key={item.id || `${item.type}-${item.name}`}
-          to={
-            buildEmbedUrl(
-              `/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`,
-            ) as any
-          }
-          className={cn(
-            'group relative flex h-full cursor-pointer flex-col gap-3 overflow-hidden rounded-2xl border border-border bg-card/70 shadow-sm transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-md',
-            isEmbed ? 'p-3 lg:p-4' : 'p-4 lg:gap-4 lg:p-6',
-          )}
-        >
-          <button
-            type="button"
-            onClick={(event) => {
-              event.preventDefault();
-              event.stopPropagation();
-              toggleFavorite(item.type, item.name);
-            }}
-            className="absolute top-3 right-3 z-10 cursor-pointer rounded-full bg-background/80 backdrop-blur-sm p-2 transition hover:bg-background hover:scale-110"
-            aria-label="Toggle favorite"
-          >
-            <Heart
-              className={cn(
-                'h-4 w-4 transition',
-                isFavorite(item.type, item.name)
-                  ? 'fill-red-500 text-red-500'
-                  : 'text-muted-foreground hover:text-red-500',
-              )}
-            />
-          </button>
-
-          <div className="flex items-center justify-center lg:justify-start">
-            <div
-              className={cn(
-                'relative flex-shrink-0 overflow-hidden rounded-xl border border-border/60 bg-muted aspect-square',
-                isEmbed ? 'h-12 w-12 lg:h-16 lg:w-16' : 'h-16 w-16 lg:h-20 lg:w-20',
-              )}
-            >
-              {item.icon_url && !failedImages.has(item.id) ? (
-                <img
-                  src={item.icon_url}
-                  alt={item.display_name}
-                  className="absolute inset-0 w-full h-full object-cover"
-                  onError={() => setFailedImages((prev) => new Set(prev).add(item.id))}
-                />
-              ) : (
-                <div className="flex h-full w-full items-center justify-center text-xl font-bold text-foreground">
-                  {getInitials(item.display_name)}
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="space-y-1 text-center lg:text-left">
-            <h3 className="text-sm lg:text-xl font-semibold leading-tight text-foreground line-clamp-2">
-              {item.display_name}
-            </h3>
-            {item.author && (
-              <p className="text-xs lg:text-sm text-muted-foreground line-clamp-1">
-                By{' '}
-                <button
-                  type="button"
-                  onClick={(event) => {
-                    event.preventDefault();
-                    event.stopPropagation();
-                    if (item.author) {
-                      navigate({
-                        to: buildEmbedUrl(
-                          `/marketplace/author/${slugifyAuthor(item.author)}`,
-                        ) as any,
-                      });
-                    }
-                  }}
-                  className="hover:text-primary hover:underline transition cursor-pointer"
-                >
-                  {item.author}
-                </button>
-              </p>
+      {items.map((item) => {
+        const gradient_var_0 = `--item-${item.name.replaceAll('_', '-')}-gradient0`;
+        const gradient_var_10 = `--item-${item.name.replaceAll('_', '-')}-gradient10`;
+        const gradient_var_75 = `--item-${item.name.replaceAll('_', '-')}-gradient75`;
+        const gradient_var_100 = `--item-${item.name.replaceAll('_', '-')}-gradient100`;
+        const initial_colour_0 = item.colour + '60';
+        const initial_colour_10 = item.colour + '58'; // 10% between 96(0x60) and 15(0x0F), only needed for hover
+        const initial_colour_75 = item.colour + '23'; // 75% between 96(0x60) and 15(0x0F), only needed for hover
+        const initial_colour_100 = item.colour + '0F';
+        const hover_colour_0 = item.colour + '40'; // 66 looks good only when hidden behind the icon
+        const hover_colour_10 = item.colour + '30';
+        const hover_colour_75 = item.colour + '00';
+        const hover_colour_100 = item.colour + '00'; // only needed for initial
+        try {
+          window.CSS.registerProperty({
+            name: gradient_var_0,
+            syntax: '<color>',
+            initialValue: initial_colour_0,
+            inherits: false,
+          });
+          window.CSS.registerProperty({
+            name: gradient_var_10,
+            syntax: '<color>',
+            initialValue: initial_colour_10,
+            inherits: false,
+          });
+          window.CSS.registerProperty({
+            name: gradient_var_75,
+            syntax: '<color>',
+            initialValue: initial_colour_75,
+            inherits: false,
+          });
+          window.CSS.registerProperty({
+            name: gradient_var_100,
+            syntax: '<color>',
+            initialValue: initial_colour_100,
+            inherits: false,
+          });
+        } catch (error) {
+          // don't throw on rerenders (names can only be registered once before refresh)
+        }
+        return (
+          <Link
+            key={item.id || `${item.type}-${item.name}`}
+            to={
+              buildEmbedUrl(
+                `/marketplace/${getItemCategory(item.type)}/${encodeURIComponent(item.id)}`,
+              ) as any
+            }
+            className={cn(
+              'group relative flex h-full cursor-pointer flex-col gap-3 overflow-hidden rounded-2xl bg-card/70 shadow-sm hover:-translate-y-1 hover:shadow-md',
+              isEmbed ? 'p-3 lg:p-4' : 'p-4 lg:gap-4 lg:p-6',
             )}
-          </div>
-
-          <div className="hidden lg:flex items-center flex-wrap gap-2">
+            style={{
+              [gradient_var_0]: initial_colour_0,
+              [gradient_var_10]: initial_colour_10,
+              [gradient_var_75]: initial_colour_75,
+              [gradient_var_100]: initial_colour_100,
+              transition: `all 300ms cubic-bezier(0.4, 0, 0.2, 1), ${gradient_var_0} 300ms ease-in-out, ${gradient_var_10} 300ms ease-in-out, ${gradient_var_75} 300ms ease-in-out, ${gradient_var_100} 300ms ease-in-out`,
+              // backgroundImage: `radial-gradient(circle at center 25%, var(${gradient_var_0}) 0%, var(${gradient_var_10}) 10%, var(${gradient_var_75}) 75%, var(${gradient_var_100}) 100%)`,
+              backgroundImage: `radial-gradient(circle at top left, var(${gradient_var_0}) 0%, var(${gradient_var_10}) 10%, var(${gradient_var_75}) 75%, var(${gradient_var_100}) 100%)`,
+              border: `1px solid var(${gradient_var_10})`,
+            }}
+            onMouseEnter={({ currentTarget }) => {
+              currentTarget.style.setProperty(gradient_var_0, hover_colour_0);
+              currentTarget.style.setProperty(gradient_var_10, hover_colour_10);
+              currentTarget.style.setProperty(gradient_var_75, hover_colour_75);
+              currentTarget.style.setProperty(gradient_var_100, hover_colour_100);
+            }}
+            onMouseLeave={({ currentTarget }) => {
+              currentTarget.style.setProperty(gradient_var_0, initial_colour_0);
+              currentTarget.style.setProperty(gradient_var_10, initial_colour_10);
+              currentTarget.style.setProperty(gradient_var_75, initial_colour_75);
+              currentTarget.style.setProperty(gradient_var_100, initial_colour_100);
+            }}
+          >
             <button
               type="button"
               onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
-                navigate({ to: buildEmbedUrl(`/marketplace?type=${item.type}`, true) as any });
+                toggleFavorite(item.type, item.name);
               }}
-              className={cn(
-                'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
-                'hover:bg-primary/10 hover:text-primary cursor-pointer',
-              )}
+              className="absolute top-3 right-3 z-10 cursor-pointer rounded-full bg-background/80 backdrop-blur-sm p-2 transition hover:bg-background hover:scale-110"
+              aria-label="Toggle favorite"
             >
-              {getMarketplaceTypeLabel(item.type)}
+              <Heart
+                className={cn(
+                  'h-4 w-4 transition',
+                  isFavorite(item.type, item.name)
+                    ? 'fill-red-500 text-red-500'
+                    : 'text-muted-foreground hover:text-red-500',
+                )}
+              />
             </button>
 
-            {item.in_collections.length > 0 && (
-              <div className="flex flex-wrap gap-2">
-                {item.in_collections.slice(0, 3).map((collection) => (
+            <div className="flex items-center justify-center lg:justify-start">
+              <div
+                className={cn(
+                  'relative flex-shrink-0 overflow-hidden rounded-xl aspect-square',
+                  isEmbed ? 'h-12 w-12 lg:h-16 lg:w-16' : 'h-16 w-16 lg:h-20 lg:w-20',
+                  (!item.icon_url || failedImages.has(item.id)) && 'border border-border/60 bg-muted',
+                )}
+              >
+                {item.icon_url && !failedImages.has(item.id) ? (
+                  <img
+                    src={item.icon_url}
+                    alt={item.display_name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onError={() => setFailedImages((prev) => new Set(prev).add(item.id))}
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center text-xl font-bold text-foreground">
+                    {getInitials(item.display_name)}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="space-y-1 text-center lg:text-left">
+              <h3 className="text-sm lg:text-xl font-semibold leading-tight text-foreground line-clamp-2">
+                {item.display_name}
+              </h3>
+              {item.author && (
+                <p className="text-xs lg:text-sm text-muted-foreground line-clamp-1">
+                  By{' '}
                   <button
-                    key={collection}
                     type="button"
                     onClick={(event) => {
                       event.preventDefault();
                       event.stopPropagation();
-                      navigate({
-                        to: buildEmbedUrl(
-                          `/marketplace/collection/${encodeURIComponent(collection)}`,
-                        ) as any,
-                      });
+                      if (item.author) {
+                        navigate({
+                          to: buildEmbedUrl(
+                            `/marketplace/author/${slugifyAuthor(item.author)}`,
+                          ) as any,
+                        });
+                      }
                     }}
-                    className={cn(
-                      'flex cursor-pointer flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
-                      'hover:bg-primary/10 hover:text-primary',
-                    )}
+                    className="hover:text-primary hover:underline transition cursor-pointer"
                   >
-                    <LibraryIcon className="h-4 w-4" />
-                    {collectionNameMap.get(collection) ?? formatCollectionName(collection)}
+                    {item.author}
                   </button>
-                ))}
+                </p>
+              )}
+            </div>
 
-                {item.in_collections.length > 3 && (
-                  <span className="text-xs text-muted-foreground">
-                    +{item.in_collections.length - 3} more
-                  </span>
+            <div className="hidden lg:flex items-center flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={(event) => {
+                  event.preventDefault();
+                  event.stopPropagation();
+                  navigate({ to: buildEmbedUrl(`/marketplace?type=${item.type}`, true) as any });
+                }}
+                className={cn(
+                  'flex flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
+                  'hover:bg-primary/10 hover:text-primary cursor-pointer',
                 )}
-              </div>
-            )}
-          </div>
-        </Link>
-      ))}
+              >
+                {getMarketplaceTypeLabel(item.type)}
+              </button>
+
+              {item.in_collections.length > 0 && (
+                <div className="flex flex-wrap gap-2">
+                  {item.in_collections.slice(0, 3).map((collection) => (
+                    <button
+                      key={collection}
+                      type="button"
+                      onClick={(event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        navigate({
+                          to: buildEmbedUrl(
+                            `/marketplace/collection/${encodeURIComponent(collection)}`,
+                          ) as any,
+                        });
+                      }}
+                      className={cn(
+                        'flex cursor-pointer flex-row gap-2 rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground transition',
+                        'hover:bg-primary/10 hover:text-primary',
+                      )}
+                    >
+                      <LibraryIcon className="h-4 w-4" />
+                      {collectionNameMap.get(collection) ?? formatCollectionName(collection)}
+                    </button>
+                  ))}
+
+                  {item.in_collections.length > 3 && (
+                    <span className="text-xs text-muted-foreground">
+                      +{item.in_collections.length - 3} more
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+          </Link>
+        )
+      })}
     </div>
   );
 }
