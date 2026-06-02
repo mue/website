@@ -23,10 +23,12 @@ const EmbedContext = createContext<EmbedContextType | undefined>(undefined);
 export function EmbedProvider({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const search = useSearch({ strict: false }) as Record<string, string>;
+  const search = useSearch({ strict: false }) as Record<string, string | boolean>;
 
-  const isEmbed = search?.embed === 'true';
-  const isPreview = search?.preview === 'true';
+  // TanStack Router JSON-parses search values, so `?embed=true` arrives as the
+  // boolean `true` rather than the string 'true'. Accept both forms.
+  const isEmbed = search?.embed === 'true' || search?.embed === true;
+  const isPreview = search?.preview === 'true' || search?.preview === true;
   const themeParam = (search?.theme ?? null) as 'light' | 'dark' | 'system' | null;
   const [config, setConfig] = useState<EmbedConfig>({});
   const previousPathRef = useRef(pathname);
